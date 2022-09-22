@@ -3,7 +3,7 @@
 *This document was created by Group B of the Multiple Non-Profits and Health/Wellness Project to outline a set of general guidelines all team members are expected to follow for the duration of this project.*
 
 Created: September 16, 2022  
-Last updated: Sepetember 22, 2022
+Last updated: September 22, 2022
 
 ---
 
