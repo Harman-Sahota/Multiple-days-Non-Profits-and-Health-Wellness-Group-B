@@ -1,6 +1,6 @@
 ## FRIDAY 12 SEPTEMBER 2022
 
-### [Heal The Now Website](healthenow.com)
+### [Heal The Now Website](https://www.healthenow.com/)
 
 ### TASKS
 
