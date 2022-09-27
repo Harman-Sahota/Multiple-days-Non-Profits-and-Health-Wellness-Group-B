@@ -10,6 +10,7 @@
   - Also such that she can send us an article she had written on **some systems.**
 - [ ] Install the latest MySQL v8.0.3.
 - [ ] Install MySQL version of WorkBench.
+- [ ] Install Maria Databases.
 - [ ] Designate weekly meeting times [preferrably beginning of week and mid-week].
 - [ ] Choose who will be in charge of different programming phase roles such as Quality Assurance, Databases.
 - [ ] Choose a Q/A bug-tool.
