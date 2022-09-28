@@ -54,6 +54,6 @@ Flask is also a Python-based microframework that is used for web application dev
 | Structure  | Django framework structure is more conventional. | Flask web framework structure is random.  |
 | HTML  | Django supports dynamic HTML pages  | Flask framework does not support dynamic HTML pages  |
 
-## which is better ? 
+## Which is better ? 
 
 There are tradeoffs to both so its upto the client and developers as to  what to use. Django provides ease and is more suitable for building a multi page website , you have a lot of inbuilt features however you are only allowed to use inbuilt features no outside api's/libraries. However, it provides better security. In Flask , you have to start from scratch but you can use outside libaries, however it has less security, it is  not as suitable for building multi page sites. Moreover, Django supports HTML and Mysql but flask does not. So as long as the client is okay with using in built in django features and developers agree to spend more time learning since its more tougher than Flask, Django is overall a better option with its advantages outweighing those of Flask. 
