@@ -59,8 +59,9 @@ Cons:
 Trelo is similar to Asana, the user is offered a vast range of configurable features and it is free.
 
 Pros:
-- Highly configurable
+- Highly configurable- Trello offers various bug tracking templates
 - Free
+- collaboration is encouraged as multiple users are able to make changes simulataneously
 
 Cons:
 - It can be confusing at the beginning
