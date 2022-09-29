@@ -49,6 +49,16 @@ Pros:
 Cons:
 - Reporting a bug can take up to 10 steps and is extremely tedious
 
+### (5) Trello
+
+Trelo is similar to Asana, the user is offered a vast range of configurable features and it is free.
+
+Pros:
+- Highly configurable
+- Free
+
+Cons:
+- It can be confusing at the beginning
 
 
 
