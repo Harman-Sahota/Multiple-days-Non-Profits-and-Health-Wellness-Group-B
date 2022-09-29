@@ -64,7 +64,7 @@ FastAPI is a modern, fast (high-performance), web framework for building APIs wi
 
 
 | Parameter     | Django        | Flask | FastAPI |
-| ------------- | ------------- | ------------- |
+| ------------- | ------------- | ------------- | | ------------- |
 | Type of Framework | Django is a full-stack web framework that enables ready to use solutions with its batteries-included approach.  | Flask is a lightweight framework that gives abundant features without external libraries and minimalist features.  |
 | Working of Framework/Data Model  | Django follows an object-oriented approach that enables object-relational mapping (linking databases and tables with classes) | Flask works on a modular approach that enables working through outsourced libraries and extensions.  | FastAPI is mainly only used to write API's, it can be used to develop for the web but its too complex.|
 | Project Layout | Django is suitable for multiple page applications.  | Flask is suitable for only single-page applications.  |
