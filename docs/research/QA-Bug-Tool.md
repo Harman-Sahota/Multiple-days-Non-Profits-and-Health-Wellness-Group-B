@@ -1,0 +1,1 @@
+For a software development project to be successful, a bug tracking tool is extremely important. The higher the quality of the bug tracking tool, the higher the quality of the product created. It is worthy to mention that most bug tracking tools contain both the open source/free version as well as the commercial version.
