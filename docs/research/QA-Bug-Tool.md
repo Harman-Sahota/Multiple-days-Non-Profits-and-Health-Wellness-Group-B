@@ -16,6 +16,22 @@ Pros:
 
 Cons: It is not free
 
+### (2) SpiraTeam
+
+SpiraTeam is considered as an integrated application lifecycle management. It contains integrated bug tracking functionality. It allows the user to manage the entire testing process with end to end traceability built in.
+
+Pros:
+- Test cycles are easy to maintain
+- Good defect tracking system
+- Highly configurable
+- Integrations to various editors such as Visual Studio
+
+Cons:
+- Users are complaining about some of the functionalities as they tend to not always be intuitive
+- You have to pay to get the features
+
+
+
 
 
 
