@@ -1,5 +1,7 @@
 # Multiple Non-Profits and Health/Wellness
 
+*Created: September 29, 2022*
+
 *Last updated: September 29, 2022*
 
 ## Overview
@@ -21,6 +23,6 @@ This team (Group B) consists of four fourth-year Computer Science students from 
 
 |Week #|Summary|Resources|
 |------|-------|---------|
-|0|Formation of team|
-|1|First meeting with client|[Team Agreement](docs/team-minutes/team_agreement.md) <br/> [Client Meeting Minutes](docs/client-minutes/client-meeting-sept23-12pm.md)|
-|2|*to be updated* | [Team Meeting Minutes](docs/team-minutes/minutes_sept28.md) <br/> [Client Meeting Minutes](client-meeting-sept29.md) <br/> [IP Agreement](docs/client-minutes/ip_agreement.pdf)|
+|1-2|Formation of team|[Team Agreement](docs/team-minutes/team_agreement.md)
+|3|First meeting with client|[Client Meeting Minutes](docs/client-minutes/client-meeting-sept23-12pm.md)|
+|4| Comparison between Django, Flask, and FastAPI <br/> QA Tools Suggestions <br/> Charting Tools Suggestions | [Team Meeting Minutes](docs/team-minutes/minutes_sept28.md) <br/> [Client Meeting Minutes](docs/client-minutes/) <br/> [IP Agreement](docs/client-minutes/)|
