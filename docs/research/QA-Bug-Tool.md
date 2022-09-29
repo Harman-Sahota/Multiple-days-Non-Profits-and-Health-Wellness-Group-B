@@ -64,7 +64,7 @@ Pros:
 - collaboration is encouraged as multiple users are able to make changes simulataneously
 
 Cons:
-- It can be confusing at the beginning
+- It can be confusing at the beginning as there can be many processes to register a bug. Once you get the hang of it, it tends to get easier.
 
 
 
