@@ -35,6 +35,11 @@ Cons:
 
 Jira is one of those commercial products that helps capture and organize the team issues. It can also be used as a bug-tracking tool. It supports a vast range of programming languages like Java, HTML, JS, Python and many more. It also allows up to 10 users to use it features simultaneously.
 
+Pros:
+- Cost effective
+- Easy workflow
+- Extremely configurable
+
 Cons:
 - Set up and user interface can be somewhat confusing(from personal experience)
 - It is not free
@@ -59,6 +64,8 @@ Pros:
 
 Cons:
 - It can be confusing at the beginning
+
+
 
 
 
