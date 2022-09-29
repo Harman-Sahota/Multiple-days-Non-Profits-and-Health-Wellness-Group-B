@@ -24,8 +24,8 @@ Meeting Agenda:
 
 - *Client liaison* will be responsible for recording client meeting minutes, communicating with the client and between the team and client, and undestanding/defining the client's expectations.
 - *Project manager* will be responsible for recording team meeting minutes and ensuring all team members are on the same page and understand what their assigned tasks and deadlines are.
-- *Technical leader* will be responsible for organizing the Github repository and helping team members with technical issues or issues with coding/ unit testing.
-- *Quality analysis leader* will be responsible for ensuring the project meets quality standards by finding areas that need improvement.
+- *Technical lead* will be responsible for organizing the Github repository and helping team members with technical issues or issues with coding/ unit testing.
+- *Quality assurance lead* will be responsible for ensuring the project meets quality standards by finding areas that need improvement.
 
 - When there are tasks that are not specific to each role, the tasks will be divided between the team members as equally as possible. If there is unequal task division (i.e. more role-specific tasks), then team members can discuss to distribute role-specific tasks to even out the workload.
 
