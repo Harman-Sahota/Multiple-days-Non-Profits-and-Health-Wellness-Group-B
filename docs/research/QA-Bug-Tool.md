@@ -31,13 +31,25 @@ Cons:
 - You have to pay to get the features
 
 
-### Jira
+### (3) Jira
 
 Jira is one of those commercial products that helps capture and organize the team issues. It can also be used as a bug-tracking tool. It supports a vast range of programming languages like Java, HTML, JS, Python and many more. It also allows up to 10 users to use it features simultaneously.
 
 Cons:
 - Set up and user interface can be somewhat confusing(from personal experience)
 - It is not free
+
+### (4) Asana
+
+Asana is a task management software that also has a vast range of bug tracking templates. It has been used for a long time. However, many people have their complains on it and it should not be out first option. 
+
+Pros:
+- Highly configurable
+
+Cons:
+- Reporting a bug can take up to 10 steps and is extremely tedious
+
+
 
 
 
