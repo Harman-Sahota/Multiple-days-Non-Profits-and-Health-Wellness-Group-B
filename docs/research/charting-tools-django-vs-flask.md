@@ -4,6 +4,7 @@
 
 - [ ] Chart.JS
 - [ ] D3.JS
+- [ ] Google Charts
 - [ ] wq.app
 - [ ] wq.db
 
@@ -13,6 +14,7 @@
 
 - [ ] Chart.JS
 - [ ] D3.JS
+- [ ] Google Charts
 - [ ] Chartist.JS
 - [ ] Matplotlib
 - [ ] Plotly.py - Powered by Plotly.JS
@@ -38,27 +40,29 @@
 
 #### 1. Time - Urgency
 
-- > **Ample Time** - D3.js
-  > Since it takes more time to learn D3.js and to code the logic that generates the graphs
+- **Ample Time** - D3.js
+  - > Since it takes more time to learn D3.js and to code the logic that generates the graphs
 
-- > **Less Time** - Chart.js / Google Charts
-  > Since it takes less time to learn the ins and outs of Chart.js or Google Charts
+- **Less Time** - Chart.js / Google Charts
+  - > Since it takes less time to learn the ins and outs of Chart.js or Google Charts
 
 #### 2. Variety
 
-- > **Less Variety** - Chart.js / Google Charts
-  > If all someone needs to do is generate general graph types: bar, line, area, scatter, radar, and pie
+- **Less Variety** - Chart.js / Google Charts
 
-- > **More Variety** - D3.js
-  > These are some graph types that can not be done with Chart.js or Google Charts: violin, boxplot, ridgeline, heatmap, correlogram, bubble (2D), wordcloud, lollipop, treemap, dendogram, maps, sankey, and edge bundling
-  > **This list is not exhaustive**
+  - > If all someone needs to do is generate general graph types: bar, line, area, scatter, radar, and pie
+
+- **More Variety** - D3.js
+  - > These are some graph types that can not be done with Chart.js or Google Charts: violin, boxplot, ridgeline, heatmap, correlogram, bubble (2D), wordcloud, lollipop, treemap, dendogram, maps, sankey, and edge bundling
+    > -> **This list is not exhaustive**
 
 #### 3. Customization - Control
 
-- > **Less Customization** - Chart.js / Google Charts
-  > Here all one has to do is paste the code from the official documentation for the required chart type, into their HTML or React render function. After this, add the data to the given fields
+- **Less Customization** - Chart.js / Google Charts
 
-- > **More Customization** - D3.js
-  > Things like creating the x-axis, the y-axis, the path, the legend, the labels, responsiveness and interactivity are all up to the user. After this, ensuring all these work well together is another part of the battle. Thankfully, there is ample documentation and support for all of this
+  - > Here all one has to do is paste the code from the official documentation for the required chart type, into their HTML or React render function. After this, add the data to the given fields
+
+- **More Customization** - D3.js
+  - > Things like creating the x-axis, the y-axis, the path, the legend, the labels, responsiveness and interactivity are all up to the user. After this, ensuring all these work well together is another part of the battle. Thankfully, there is ample documentation and support for all of this
 
 ---
