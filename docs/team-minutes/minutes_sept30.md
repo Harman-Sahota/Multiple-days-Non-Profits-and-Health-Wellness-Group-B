@@ -32,6 +32,21 @@
 
 6. Discuss the problems we've been facing up till now and discuss some potential solutions.
 
+    - It has not been a problem yet, but it is anticipated in the future that we'll need quick responses from team members.
+        - To prepare for this, we need everyone's phone number saved.
+    - Merge conflicts due to `.DS_Store`
+        - As suggested by Maysey, Harman will look into creating a `.gitignore` file
+
 7. Discuss about the gitstats report we have to submit today.
+    - Current gitstats report show:
+
+      |user|score|
+      |----|-----|
+      |AbdulazizAlmutlaq0| 108.40
+      |Harman Sahota     |121.18
+      |Maysey Lu         |100.32
+      |Uchej-coder       |120.48
+
+      Everyone's gitstats score looks good. Maysey's score should increase slightly after she uploads the team meeting minutes and IP agreement.
 
 8. What we have to discuss with Barb next meeting.
