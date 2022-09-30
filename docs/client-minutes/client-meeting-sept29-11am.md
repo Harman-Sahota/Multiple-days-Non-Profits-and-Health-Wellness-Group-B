@@ -1,4 +1,4 @@
-## FRIDAY 12 SEPTEMBER 2022
+## THURSDAY 29 SEPTEMBER 2022 - 11am
 
 ### [Heal The Now Website](https://www.healthenow.com/)
 
