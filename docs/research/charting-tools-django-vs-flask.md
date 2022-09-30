@@ -41,7 +41,7 @@
 #### 1. Time - Urgency
 
 - **Ample Time** - D3.js
-- > Since it takes more time to learn D3.js and to code the logic that generates the graphs
+  - > Since it takes more time to learn D3.js and to code the logic that generates the graphs
 
 - **Less Time** - Chart.js / Google Charts
   - > Since it takes less time to learn the ins and outs of Chart.js or Google Charts
