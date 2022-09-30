@@ -2,7 +2,7 @@
 
 *Created: September 29, 2022*
 
-*Last updated: September 29, 2022*
+*Last updated: September 30, 2022*
 
 ## Overview
 
@@ -24,5 +24,5 @@ This team (Group B) consists of four fourth-year Computer Science students from 
 |Week #|Summary|Resources|
 |------|-------|---------|
 |1-2|Formation of team|[Team Agreement](docs/team-minutes/team_agreement.md)
-|3|First meeting with client|[Client Meeting Minutes](docs/client-minutes/client-meeting-sept23-12pm.md)|
-|4| [Comparison](docs/research/djangoVsFlaskVsFastAPI.md) between Django, Flask, and FastAPI <br/> [QA Tools](docs/research/QA-Bug-Tool.md) Suggestions <br/> [Charting Tools](docs/research/charting-tools-django-vs-flask.md) Suggestions| [Team Meeting Minutes](docs/team-minutes/minutes_sept28.md) <br/> [Client Meeting Minutes](docs/client-minutes/) <br/> [IP Agreement](docs/client-minutes/)|
+|3|First meeting with client|[Client Meeting Minutes (Sept. 23)](docs/client-minutes/client-meeting-sept23-12pm.md)|
+|4| [Comparison](docs/research/djangoVsFlaskVsFastAPI.md) between Django, Flask, and FastAPI <br/> [QA Tools](docs/research/QA-Bug-Tool.md) Suggestions <br/> [Charting Tools](docs/research/charting-tools-django-vs-flask.md) Suggestions| [Team Meeting Minutes (Sept. 28)](docs/team-minutes/minutes_sept28.md) <br/> [Team Meeting Minutes (Sept. 30)](docs/team-minutes/minutes_sept30.md) <br/> [Client Meeting Minutes](docs/client-minutes/client-meeting-sept29-11am.md) <br/> IP Agreement|
