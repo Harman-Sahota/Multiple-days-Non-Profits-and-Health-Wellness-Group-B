@@ -67,6 +67,13 @@ Cons:
 - It can be confusing at the beginning as there can be many processes to register a bug. Once you get the hang of it, it tends to get easier.
 
 
+### Prices:
+
+ClickUp: this tool is from if one member is using it. However, it will cost 5$ per member per month in the case that more than one person is using the tool.
+
+Jira: the features that we are interested in using are always free for up to 10 users. There is however a premium membership that costs 14.50$ per user
+
+
 
 
 
