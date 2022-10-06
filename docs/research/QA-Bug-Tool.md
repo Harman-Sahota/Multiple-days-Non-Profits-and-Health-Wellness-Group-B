@@ -69,9 +69,13 @@ Cons:
 
 ### Prices:
 
-ClickUp: this tool is from if one member is using it. However, it will cost 5$ per member per month in the case that more than one person is using the tool.
+ClickUp: This tool is from if one member is using it. However, it will cost 5$ per member per month in the case that more than one person is using the tool.
 
-Jira: the features that we are interested in using are always free for up to 10 users. There is however a premium membership that costs 14.50$ per user
+Jira: The features that we are interested in using are always free for up to 10 users. There is however a premium membership that costs 14.50$ per user.
+
+Asana: This tool has a free version for up to 15 people. Additionally, it also has a premium membership that costs 10.99$ per user per month when billed annually and 13.49$ when billed monthly.
+
+Trello: This bug tracking tools comes in different plans. Free, standard (5$ per user per month) and premium (10$ per user per month).
 
 
 
