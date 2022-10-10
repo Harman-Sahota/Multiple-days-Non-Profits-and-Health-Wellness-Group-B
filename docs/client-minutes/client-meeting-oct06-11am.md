@@ -11,7 +11,7 @@
 - [ ] Use [Putty](https://www.putty.org/) to generate SSH Key-pairs and then put the public key in a folder on GitHub. Store private key on your drive.
   - Have SSH keys setup by Wednesday - 12.30pm - The day we're setting up the virtual machine.
 - [ ] Get [VPN](https://it.ubc.ca/services/email-voice-internet/myvpn/how-access-myvpn) provided by UBC while working on the project.
-- [ ] Should we install Django or not - finding out from Barbara currently?
+- [ ] Install Django and FastAPI
 - [ ] Design web pages using Figma (We can use Figma to collaborate with other groups throughout the project as well)
   - Should be done by next Thursday meeting.
   - Should have a page for homeless people from where we can access the contact info of the people that are providing the services on ground.
