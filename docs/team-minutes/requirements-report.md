@@ -40,4 +40,14 @@ The Okanagan Rail Trail is supported by Friends of the Okanagan Rail Trail (FORT
 
 In addition, this website will also allow health professionals such as doctors, nurses, and dieticians from Dr. Robert Petrella’s Lifestyle Prevention Program to oversee the progress and statistics of the wellness challenge participants to provide free consultations to Lake Country users.
 
+## Functional Requirements
 
+|Page|Functions|Completed by Milestone|
+|----|---------|---------|
+|Homepage|- Users are able to login or create an account <br/> - Users can request to change password if they forget it* <br/> - Access to general information <br/> - News and announcements* <br/> - FAQ page* <br/> Contact page <br/> - Can view contact information of people involved <br/> - Able to send a message and select who to direct the message to*|2|
+|Public|Able to input data for the weekly challenges (i.e. exercise duration/distance, steps, blood pressure, etc.) <br/> - Can convert inputted data into graphics and display it back <br/> - Can register teams for the weekly challenges <br/> - System creates team and generates invite code to send to friends|2 & 3|
+|Trail Ambassadors|- Able to view calendar of scheduled events <br/> - Can create new events, update current events, or delete upcoming events <br/> - Able to view statistics <br/> - Number of people participating in the challenge <br/> - Overall progress of the challenge <br/> - Able to view and reply to messages from public directed to them*|3|
+|Health Professional|- Able to view a list of participants in the wellness challenge <br/> - Able to view the participants’ health statistics <br/> - Able to give feedback to the participants|3|
+|Patients|- Able to access a list of resources and contact information <br/> - Able to send a message to health professionals <br/> - Able to submit help forms|3|
+
+*Note: If there is a * next to it, it is not a key feature.*
