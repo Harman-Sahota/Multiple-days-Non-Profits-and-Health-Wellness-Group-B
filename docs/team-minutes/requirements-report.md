@@ -158,6 +158,26 @@ FastAPI is a modern, fast (high-performance), web framework for building APIs wi
 
 *Note: If there is a * next to it, it is not a key feature.*
 
+<<<<<<< HEAD
+
+
+
+
+## Testing Strategy
+
+Throughout the project there are a vast range of tests that we need to run to run to ensure that the website is functioning how we intend it to function.
+
+<Strong>Functionality & Usability Testing:</strong> This will ensure that the website is in its correct behavior and that it does what is intended from it to do. Moreover, this will also help us verify the behind the scenes such as the connection to the database.
+
+<Strong>Compatibality Testing:</strong> To ensure that the website is reliable and functional, and that is runs on its intended devices such as the clients device as well as the target audience as a whole.
+
+<Strong>Performance Testing:</strong> Performance testing are extremely important. This will ensure that the system performs well under different user stress and load.
+
+we will have to perform stress and load tests.
+
+
+
+=======
 ## Environmental Constraints
 
 *Environmental constraints are the characteristics in the environment that change the level of difficulty of a task or activity when it is performed in that environment.*
@@ -179,3 +199,4 @@ FastAPI is a modern, fast (high-performance), web framework for building APIs wi
 **Weather Fluctuations**
 
       - Dangerous weather conditions such as forest fires can have negative health repercussions. This encourages a low turnout to the various activities organized to fundraise other activities.
+>>>>>>> 82fd769346a326f95254ddf733cd1f76cb2e6fbf
