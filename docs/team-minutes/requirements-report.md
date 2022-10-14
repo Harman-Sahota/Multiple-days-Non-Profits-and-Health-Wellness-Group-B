@@ -51,3 +51,16 @@ In addition, this website will also allow health professionals such as doctors, 
 |Patients|- Able to access a list of resources and contact information <br/> - Able to send a message to health professionals <br/> - Able to submit help forms|3|
 
 *Note: If there is a * next to it, it is not a key feature.*
+
+
+
+
+
+## Testing Strategy
+
+Throughout the project there are a vast range of tests that we need to run to run to ensure that the website is functioning how we intend it to function.
+
+<Strong>Functionality & Usability Testing:</strong> This will ensure that the website is in its correct behavior and that it does what is intended from it to do. Moreover, this will also help us verify the behind the scenes such as the connection to the database.
+
+<Strong>Compatibality Testing:</strong> To ensure that the website is reliable and functional, and that is runs on its intended devices such as the clients device as well as the target audience as a whole.
+
