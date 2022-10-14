@@ -64,3 +64,9 @@ Throughout the project there are a vast range of tests that we need to run to ru
 
 <Strong>Compatibality Testing:</strong> To ensure that the website is reliable and functional, and that is runs on its intended devices such as the clients device as well as the target audience as a whole.
 
+<Strong>Performance Testing:</strong> Performance testing are extremely important. This will ensure that the system performs well under different user stress and load.
+
+we will have to perform stress and load tests.
+
+
+
