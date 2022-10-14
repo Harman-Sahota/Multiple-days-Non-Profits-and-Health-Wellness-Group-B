@@ -28,7 +28,7 @@
 - Each team will have a folder in her repo for their work
 - Great quality Q/A tools are paid for, not free, such as SpiraTeam, JIRA
 - D3.js is preferred to Chart.js and Google Charts at the moment, but still looking into Google Charts
-- There's a good server support present on campus
+- There's a good server support present on campus - Wade
 - An admin dashboard will be setup to manage the server
 - Next time we'll get a demo of the site
 - We can either use Bootstrap.CSS or React.js for the mobile development

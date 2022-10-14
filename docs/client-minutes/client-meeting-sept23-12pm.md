@@ -1,4 +1,4 @@
-## FRIDAY 12 SEPTEMBER 2022
+## FRIDAY 23 SEPTEMBER 2022
 
 ### [Heal The Now Website](https://www.healthenow.com/)
 
