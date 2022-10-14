@@ -40,6 +40,50 @@ The Okanagan Rail Trail is supported by Friends of the Okanagan Rail Trail (FORT
 
 In addition, this website will also allow health professionals such as doctors, nurses, and dieticians from Dr. Robert Petrella’s Lifestyle Prevention Program to oversee the progress and statistics of the wellness challenge participants to provide free consultations to Lake Country users.
 
+## Target User Groups
+
+> The project will serve six user groups:
+
+**New website users**
+
+      - These users will be able to easily find all information regarding the trails and the city. The information will include different landmarks that discuss not only the trail but significant facts and information regarding the city at large. 
+      - Website visitors could also get access to a virtual walkthrough of the entire trail. This will enable potential trail travelers to know more about the trail before they even start their wonderful journey.
+      - This information will be frequently updated to reflect what is on ground hence ensuring users are viewing up to date information.
+       - The best part is all this will be accessible through a website URL that is easily conceivable.
+
+
+**Working professional users that want to raise funds**
+
+      - Various working professionals in the community that are looking to raise funds will be able to do so through organizing weekly event challenges.
+      - The Okanagan Rail Trail Ambassadors will be able to create events that are later on posted onto pages that are specially designated to showcasing upcoming community events.
+      - The website will also display these events on a calendar. Ambassadors will be able to create and edit events on the calendar interface.
+      - Using data collected from the organized events, the website will provide different challenge statistics such as the number of people participating in the challenge and the progress they’ve made in that challenge.
+      - Authorized Okanagan Rail Trail Ambassadors and other authorized parties will be able to securely login into their accounts and review records of donations that have been securely transacted through the website. These records will be displayed on a page specially designated for that purpose.
+      - Finally, the website will ensure ambassadors are able to communicate with the public through a public discussion forum.
+
+
+**Trail explorers**
+
+      - The website will display a map of the trail containing various features. These features will help users visualize what the map actually looks like on ground. These features will include icons that mark locations of history boards, landmarks, interesting facts, and alerts.
+      - The website will be able to log various data from participants engaging in the weekly challenges such as their number of steps taken, exercise duration, and exercise frequency.
+      - The website will also be able to organize the trail explorers into teams of their choices. The website will be able to generate invite links that other users can use to join the groups and weekly challenges.
+      - The website will make ranked scoreboards of the participants using the logged information from the weekly challenges.
+
+
+**Health-care professionals**
+
+      - Health-care professionals will have a dashboard presenting well organized user health data submitted by various website users.
+      - The website will allow health-care professionals to view the wellness challenge participants and their health information.
+      - The website will present this data in a fashion that enables the professionals to make relevant inferences and feedback that helps improve the community.
+      - The website will ensure that this health information is only accessed by publicly authorized personnel through ensuring only authorized users are securely logged in to the health-care professional dashboard.
+
+
+**Homeless people**
+
+      - Homeless people will be able to access various information on resources offered by the community and the contact information of the people in charge of directly providing these resources.
+      - They will be able to do this through the landing page which will contain links directing these people in need to the help they deserve.
+      - Homeless people will also be able to send messages to health professionals as well as community officers through submitting help forms on the website.
+
 ## Tech Stack
 
 **Front-End:**
@@ -114,3 +158,45 @@ FastAPI is a modern, fast (high-performance), web framework for building APIs wi
 
 *Note: If there is a * next to it, it is not a key feature.*
 
+<<<<<<< HEAD
+
+
+
+
+## Testing Strategy
+
+Throughout the project there are a vast range of tests that we need to run to run to ensure that the website is functioning how we intend it to function.
+
+<Strong>Functionality & Usability Testing:</strong> This will ensure that the website is in its correct behavior and that it does what is intended from it to do. Moreover, this will also help us verify the behind the scenes such as the connection to the database.
+
+<Strong>Compatibality Testing:</strong> To ensure that the website is reliable and functional, and that is runs on its intended devices such as the clients device as well as the target audience as a whole.
+
+<Strong>Performance Testing:</strong> Performance testing are extremely important. This will ensure that the system performs well under different user stress and load.
+
+we will have to perform stress and load tests.
+
+
+
+=======
+## Environmental Constraints
+
+*Environmental constraints are the characteristics in the environment that change the level of difficulty of a task or activity when it is performed in that environment.*
+
+> A detailed list of environmental constraints:
+
+**Programming Languages**
+
+      - We have to make sure that we use programming languages that can be used across old as well as new technology, different devices.
+
+**Maintenance Accessibility**
+
+      - Finding qualified personnel for maintenance consultation in a timely manner will be a constraint that we have to work around. We can book the personnel on campus ahead of time for maintenance checks.
+
+**Health Pandemic**
+
+      - A pandemic will get health policies imposed that hinder people from attending various organized events such as the health challenges.
+
+**Weather Fluctuations**
+
+      - Dangerous weather conditions such as forest fires can have negative health repercussions. This encourages a low turnout to the various activities organized to fundraise other activities.
+>>>>>>> 82fd769346a326f95254ddf733cd1f76cb2e6fbf
