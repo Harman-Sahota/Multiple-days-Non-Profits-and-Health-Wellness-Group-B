@@ -144,7 +144,38 @@ FastAPI is a modern, fast (high-performance), web framework for building APIs wi
 
 8. Standards-based: Based on (and fully compatible with) the open standards for APIs: OpenAPI (previously known as Swagger) and JSON Schema.
 
+## DFD level 0 
 
+![](../images/dfd-level0.png?raw=true)
+
+**Description:** 
+
+This is a high-level representation of what our project will look like. The user will be able to scan a QR-Code or visit a link to access the website, which will lead them to the home-page, the home-page will provide them with an option to visit the various dashboards in the website, each dashboard has a login to ensure the correct type of user is getting access to it. 
+
+There are 4 dashboards - Public, Health Professional, Patients and Trail Ambassadors, further in the dfd each dashboard has subcategories which represent the features each will have. 
+
+Public dashboard will provide users with Trackers for getting stats for example steps, it will also include an interactive map of the trail which allows users to locate different landmarks along the trail and finally this dashboard allows users to form teams in order to compete with each other which is a part of the wellness challenge.
+
+Health Professional dashboard is for health professionals like dietitians to monitor users stats and provide feedback.
+
+Patients dashboard is for the homeless people who are looking for resources, it gives them a contact list as well as a form where they can request resources as they need them.
+
+Finally, the Trail Ambassadors dashboard is for the people who are working in the trail itself to fundraise for events and such, this dashboard gives them a contact list to contact the small businesses and their colleagues alike as well a calendar so they can schedule events.  
+
+## DFD level 1 
+
+![](../images/dfd-level1.png?raw=true)
+
+**Description:**
+
+
+In this level of the dfd, the system process can be seen in a slightly more deeper level than the level 0 dfd.
+
+The login process involves the user entering the username and password, this data is then queried in the database, the authentication process involves checking if the user exists in the database, if it does a success is returned and the user can successfully login to the dashboard their credentials give them access to, however if the user does not exist in the database, the user returns to the homepage and an error message is returned and displayed.
+
+Further, the Trackers data, is stored in the database and can be accessed by the medical professionals in the Health Stats page of the health professional dashboard.
+
+Similarly, the help form in the patients dashboard is validated and the data is stored in the database and the calendar events in the trail ambassadors dashboard are also stored in the database, all this data is viewable to authorized and appropriate user groups. ha
 
 ## Functional Requirements
 
@@ -157,10 +188,6 @@ FastAPI is a modern, fast (high-performance), web framework for building APIs wi
 |Patients|- Able to access a list of resources and contact information <br/> - Able to send a message to health professionals <br/> - Able to submit help forms|3|
 
 *Note: If there is a * next to it, it is not a key feature.*
-
-<<<<<<< HEAD
-
-
 
 
 ## Testing Strategy
@@ -175,9 +202,6 @@ Throughout the project there are a vast range of tests that we need to run to ru
 
 we will have to perform stress and load tests.
 
-
-
-=======
 ## Environmental Constraints
 
 *Environmental constraints are the characteristics in the environment that change the level of difficulty of a task or activity when it is performed in that environment.*
