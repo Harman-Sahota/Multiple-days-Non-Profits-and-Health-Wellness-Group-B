@@ -2,7 +2,7 @@
 
 *Created: September 29, 2022*
 
-*Last updated: September 30, 2022*
+*Last updated: October 25, 2022*
 
 ## Overview
 
@@ -26,3 +26,6 @@ This team (Group B) consists of four fourth-year Computer Science students from 
 |1-2|Formation of team|[Team Agreement](docs/team-minutes/team_agreement.md)
 |3|First meeting with client|[Client Meeting Minutes (Sept. 23)](docs/client-minutes/client-meeting-sept23-12pm.md)|
 |4| [Comparison](docs/research/djangoVsFlaskVsFastAPI.md) between Django, Flask, and FastAPI <br/> [QA Tools](docs/research/QA-Bug-Tool.md) Suggestions <br/> [Charting Tools](docs/research/charting-tools-django-vs-flask.md) Suggestions| [Team Meeting Minutes (Sept. 28)](docs/team-minutes/minutes_sept28.md) <br/> [Team Meeting Minutes (Sept. 30)](docs/team-minutes/minutes_sept30.md) <br/> [Client Meeting Minutes](docs/client-minutes/client-meeting-sept29-11am.md) <br/> [IP Agreement](docs/client-minutes/COSC%20499%20-%20Group%20B%20IP%20AGREEMENT.pdf)|
+|5|[User Stories](docs/research/user-stories.md) <br/> [Trello vs. Asana](docs/research/TrelloVsAsana.md) |[Client Meeting Minutes (Oct. 6)](docs/client-minutes/client-meeting-oct06-11am.md) [Team Meeting Minutes (Oct. 7)](docs/team-minutes/minutes_oct7.md)|
+|6|[Requirements Presentation](https://docs.google.com/presentation/d/1ZBuYxJ1_MdIXGVB9ME57mjh6R-ctPyZvQR8E6mpL3nk/edit?usp=sharing) [(Written Ver.)](docs/team-minutes/requirements-report.md) <br/> [Design Mockups](https://www.figma.com/file/1GtlA1QMreahkvaFInVySp/designs_nonprofits) <br/> [Group Evaluations](https://docs.google.com/document/d/1G8Tt8dZQHG25BAoh8cOBN9_vo4rNqBjgcqqRwxsTzZc/edit?usp=sharing)|[Virtual Machine Setup Meeting Minutes](docs/client-minutes/client-meeting-oct12-1230pm.md) <br/> [Client Meeting Minutes (Oct.13)](docs/client-minutes/client-meeting-oct13-11am.md) <br/> [Team Meeting Minutes (Oct. 15)](docs/team-minutes/minutes_oct15.md)|
+|7| [Design Mockups Con't](https://www.figma.com/file/1GtlA1QMreahkvaFInVySp/designs_nonprofits) <br/> [Requirements Report](https://docs.google.com/document/d/1wXmmcDLQsWbwINS62WcMyQR099KUNOAbO11OxAFsQoA/edit?usp=sharing) <br/> Peer Evaluations |[Client Meeting Minutes (Oct. 20)]() <br/> [Team Meeting Minutes (Oct.21)]()|
