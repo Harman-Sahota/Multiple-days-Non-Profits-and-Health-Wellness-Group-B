@@ -88,19 +88,21 @@ In addition, this website will also allow health professionals such as doctors, 
 
 **Front-End:**
 
-&nbsp; 1. HTML
-&nbsp; 2. CSS with Bootstrap
-&nbsp; 3. Java script
-&nbsp; 4. Django**
+&nbsp; 1. HTML <br>
+&nbsp; 2. CSS with Bootstrap <br>
+&nbsp; 3. Java script <br>
+&nbsp; 4. Django CMS <br>
 
 **Back-end and Database**
 
-&nbsp; 1. MySQL database integrated in MariaDB.
-&nbsp; 2. FastAPI**
+&nbsp; 1. MySQL database integrated in MariaDB. <br>
+&nbsp; 2. Django <br>
 
 **Testing and Bug Tracking**
 
-&nbsp; 1. Github issues for bug tracking.
+&nbsp; 1. Github issues for bug tracking. <br>
+&nbsp; 2. Pytest for code testing. <br>
+&nbsp; 3. MS-Excel for keeping a code testing record. <br>
 
 **Django and FastAPI:
 
