@@ -92,6 +92,7 @@ In addition, this website will also allow health professionals such as doctors, 
 &nbsp; 2. CSS with Bootstrap <br>
 &nbsp; 3. Java script <br>
 &nbsp; 4. Django CMS <br>
+&nbsp; 5. Figma for designing <br>
 
 **Back-end and Database**
 
@@ -103,48 +104,6 @@ In addition, this website will also allow health professionals such as doctors, 
 &nbsp; 1. Github issues for bug tracking. <br>
 &nbsp; 2. Pytest for code testing. <br>
 &nbsp; 3. MS-Excel for keeping a code testing record. <br>
-
-**Django and FastAPI:
-
-**What is Django ?**
-
-Django is a python-based open-source framework to design web applications. It is a high-level web framework that is built to make the web development process faster and more efficient. Developers choose Django for it enables them to use it for the standard functionalities with a limited interference of systems, protocols, and management. Django's framework encourages rapid development and clean, pragmatic design. The agile development process of the framework aims solely on providing quality with rapidness and efficiency. Django deals with some of the basic development functions quickly like site maps, content organization, client information, and, so many more. It just focuses on finishing the application as quickly as possible. 
-
-**Key Features : Django**
-
-1. Fast: it is insanely Fast. Without any thought, the Django working process from concept to completion is extremely fast.
-
-2. Versatile: Django is a versatile framework that enables developers to work on different platforms varying from content management systems like WordPress, etc, to social network sites like LinkedIn, Youtube, etc, to news sites like The New York Times, CNN, etc.
-
-3. Adaptable: Django is adaptable to different formats like JSON, HTML, XML, and many more.
-
-4. Scalable: It is a framework that ensures scalability ( a system that allows making changes in different layers and updations without much cost and effort i.e., every layer is independent) and maintenance (the design and code are not susceptible to duplications and, hence, the code can be reused and maintained properly)
-
-5. Secure: Django guarantees security with powerful authentication systems and protocols to avoid clickjacking, unauthorized access, cyberattacks, etc.
-
-6. Portable: Django is a python-based framework and, therefore, portable. 
-
-**What is FastAPI ?**
-
-FastAPI is a modern, fast (high-performance), web framework for building APIs with Python 3.7+ based on standard Python type hints.
-
-**Key Features : FastAPI**
-
-1. Fast:  Very high performance, on par with NodeJS and Go (thanks to Starlette and Pydantic). One of the fastest Python frameworks available.
-
-2. Fast to code:  Increase the speed to develop features by about 200% to 300%. 
-
-3. Fewer bugs: Reduce about 40% of human (developer) induced errors. 
-
-4. Intuitive: Great editor support. Completion everywhere. Less time debugging.
-
-5. Easy: Designed to be easy to use and learn. Less time reading docs.
-
-6. Short: Minimize code duplication. Multiple features from each parameter declaration. Fewer bugs.
-
-7. Robust: Get production-ready code. With automatic interactive documentation.
-
-8. Standards-based: Based on (and fully compatible with) the open standards for APIs: OpenAPI (previously known as Swagger) and JSON Schema.
 
 ## DFD level 0 
 
