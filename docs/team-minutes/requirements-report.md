@@ -154,6 +154,39 @@ In case any errors are found while validating any of the forms, an error code is
 
 *Note: If there is a * next to it, it is not a key feature.*
 
+## Functional Requirements
+
+### Milestone #1 : Requirements Report:
+
+The following is expected to be completed by this milestone: 
+
+1. Install Virtual Machine and setup linux, this helps **secure** our actual device as linux os provides better security as well as the virtual machine provides a separate environment.<br>
+
+2. Install mysql setup mysql localhost, the database is **scalable** by using mysql as this allows the size of the data set to be flexible.<br>
+
+3. Install and setup putty; generate ssh keys, this helps us **secure** our code once we start coding.<br>
+
+4. Install and setup CISCO vpn, this ensures that we are working in a safe environment and **secures** our code.<br>
+
+5. Create designs for webpages using figma, keeping in mind that the graphic are able to handle the traffic on the website, by doing this we make sure our design is **adaptable** to different devices - responsive design.<br>
+
+
+### Milestone #2 Peer Testing #1:
+
+1. Finish making the prototype, we have to make sure the prototype has good **usability** ie. it is easy to navigate and does not have any lags, we also have to make it **robust** so that it degrades gracefully under stress.<br>
+
+2. The finished prototypes have to undergo user tests to ensure our design is optimal. <br>
+
+### Milestone #3 Peer Testing #2:
+
+1. We have to ensure that the code is **efficient**, taking into consideration the performance aspect (execution speed, response time and throughput). Moreover, the code needs to be **reliable** (fault-tolerant, meant-time to failure, data backups). Additionally, it also should be **adaptable** in a sense that adding functionalities is simple. Lastly, a well written program contributes to the overall **security**. <br>
+
+### Milestone #4 Product Delivery: 
+
+1. We have to make sure the final product is **efficient**, such that it uses limited amount of resources on a device while providing a good experience to the user. <br>
+
+2. Mitigate any final remaining bugs and test our final code. <br>
+
 
 ## Testing Strategy
 
@@ -188,4 +221,4 @@ we will have to perform stress and load tests.
 **Weather Fluctuations**
 
       - Dangerous weather conditions such as forest fires can have negative health repercussions. This encourages a low turnout to the various activities organized to fundraise other activities.
->>>>>>> 82fd769346a326f95254ddf733cd1f76cb2e6fbf
+
