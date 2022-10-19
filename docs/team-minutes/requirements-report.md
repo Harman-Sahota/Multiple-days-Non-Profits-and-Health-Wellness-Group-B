@@ -111,17 +111,19 @@ In addition, this website will also allow health professionals such as doctors, 
 
 **Description:** 
 
-This is a high-level representation of what our project will look like. The user will be able to scan a QR-Code or visit a link to access the website, which will lead them to the home-page, the home-page will provide them with an option to visit the various dashboards in the website, each dashboard has a login to ensure the correct type of user is getting access to it. 
+This is a high-level representation of what our project will look like. The user will be able to scan a QR-Code or visit a link to access the website, which will lead them to the home-page, the home-page will provide them with an option to visit the various dashboards in the website, each dashboard has a login to ensure the correct type of user is getting access to it.
+
+When Users visit the website, they will be shown the home page which provides the options to see a basic contact list of the trail staff,  as well as view a interactive map of the trail which will allow users to locate different landmarks along the trail . Users will also be able to view an about page which will provide information of the team organizing events on the trail.
 
 There are 4 dashboards - Public, Health Professional, Patients and Trail Ambassadors, further in the dfd each dashboard has subcategories which represent the features each will have. 
 
-Public dashboard will provide users with Trackers for getting stats for example steps, it will also include an interactive map of the trail which allows users to locate different landmarks along the trail and finally this dashboard allows users to form teams in order to compete with each other which is a part of the wellness challenge.
+Public dashboard will provide users with trackers for getting stats for example steps - users will have to provide consent in order for this data to be saved on the database, this dashboard allows users to form teams in order to compete with each other which is a part of the wellness challenge, this page also provides users with a calender to view the upcoming events being organized on the trail.
 
-Health Professional dashboard is for health professionals like dietitians to monitor users stats and provide feedback.
+Health Professional dashboard is for health professionals like dietitians to monitor users stats and provide feedback, they will be able to view teams that people have made for the wellness challenge and be able to directly provide feedback to the whole team or an individual.
 
 Patients dashboard is for the homeless people who are looking for resources, it gives them a contact list as well as a form where they can request resources as they need them.
 
-Finally, the Trail Ambassadors dashboard is for the people who are working in the trail itself to fundraise for events and such, this dashboard gives them a contact list to contact the small businesses and their colleagues alike as well a calendar so they can schedule events.  
+Finally, the Trail Ambassadors dashboard is for the people who are working in the trail itself to fundraise for events and such, this dashboard gives them a contact list to contact the small businesses and their colleagues alike as well as emergency services.it also provides them with  a calendar so they can schedule events.  
 
 ## DFD level 1 
 
@@ -134,9 +136,11 @@ In this level of the dfd, the system process can be seen in a slightly more deep
 
 The login process involves the user entering the username and password, this data is then queried in the database, the authentication process involves checking if the user exists in the database, if it does a success is returned and the user can successfully login to the dashboard their credentials give them access to, however if the user does not exist in the database, the user returns to the homepage and an error message is returned and displayed.
 
-Further, the Trackers data, is stored in the database and can be accessed by the medical professionals in the Health Stats page of the health professional dashboard.
+Further, the Trackers data, is stored in the database, provided the users have consented and can be accessed by the medical professionals in the Health Stats page of the health professional dashboard, where they can provide feedback to users based on this data, this feedback form is validated as well to ensure security of the data.
 
-Similarly, the help form in the patients dashboard is validated and the data is stored in the database and the calendar events in the trail ambassadors dashboard are also stored in the database, all this data is viewable to authorized and appropriate user groups. ha
+Similarly, the help form in the patients dashboard is validated and the data is stored in the database and the calendar events in the trail ambassadors dashboard are also stored in the database, all this data is viewable to authorized and appropriate user groups. 
+
+In case any errors are found while validating any of the forms, an error code is generated and the user is redirected to the previous page and the generated error message is shown to the user.
 
 ## Functional Requirements
 
