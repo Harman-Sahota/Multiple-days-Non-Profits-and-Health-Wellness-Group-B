@@ -88,61 +88,22 @@ In addition, this website will also allow health professionals such as doctors, 
 
 **Front-End:**
 
-&nbsp; 1. HTML
-&nbsp; 2. CSS with Bootstrap
-&nbsp; 3. Java script
-&nbsp; 4. Django**
+&nbsp; 1. HTML <br>
+&nbsp; 2. CSS with Bootstrap <br>
+&nbsp; 3. Java script <br>
+&nbsp; 4. Django CMS <br>
+&nbsp; 5. Figma for designing <br>
 
 **Back-end and Database**
 
-&nbsp; 1. MySQL database integrated in MariaDB.
-&nbsp; 2. FastAPI**
+&nbsp; 1. MySQL database integrated in MariaDB. <br>
+&nbsp; 2. Django <br>
 
 **Testing and Bug Tracking**
 
-&nbsp; 1. Github issues for bug tracking.
-
-**Django and FastAPI:
-
-**What is Django ?**
-
-Django is a python-based open-source framework to design web applications. It is a high-level web framework that is built to make the web development process faster and more efficient. Developers choose Django for it enables them to use it for the standard functionalities with a limited interference of systems, protocols, and management. Django's framework encourages rapid development and clean, pragmatic design. The agile development process of the framework aims solely on providing quality with rapidness and efficiency. Django deals with some of the basic development functions quickly like site maps, content organization, client information, and, so many more. It just focuses on finishing the application as quickly as possible. 
-
-**Key Features : Django**
-
-1. Fast: it is insanely Fast. Without any thought, the Django working process from concept to completion is extremely fast.
-
-2. Versatile: Django is a versatile framework that enables developers to work on different platforms varying from content management systems like WordPress, etc, to social network sites like LinkedIn, Youtube, etc, to news sites like The New York Times, CNN, etc.
-
-3. Adaptable: Django is adaptable to different formats like JSON, HTML, XML, and many more.
-
-4. Scalable: It is a framework that ensures scalability ( a system that allows making changes in different layers and updations without much cost and effort i.e., every layer is independent) and maintenance (the design and code are not susceptible to duplications and, hence, the code can be reused and maintained properly)
-
-5. Secure: Django guarantees security with powerful authentication systems and protocols to avoid clickjacking, unauthorized access, cyberattacks, etc.
-
-6. Portable: Django is a python-based framework and, therefore, portable. 
-
-**What is FastAPI ?**
-
-FastAPI is a modern, fast (high-performance), web framework for building APIs with Python 3.7+ based on standard Python type hints.
-
-**Key Features : FastAPI**
-
-1. Fast:  Very high performance, on par with NodeJS and Go (thanks to Starlette and Pydantic). One of the fastest Python frameworks available.
-
-2. Fast to code:  Increase the speed to develop features by about 200% to 300%. 
-
-3. Fewer bugs: Reduce about 40% of human (developer) induced errors. 
-
-4. Intuitive: Great editor support. Completion everywhere. Less time debugging.
-
-5. Easy: Designed to be easy to use and learn. Less time reading docs.
-
-6. Short: Minimize code duplication. Multiple features from each parameter declaration. Fewer bugs.
-
-7. Robust: Get production-ready code. With automatic interactive documentation.
-
-8. Standards-based: Based on (and fully compatible with) the open standards for APIs: OpenAPI (previously known as Swagger) and JSON Schema.
+&nbsp; 1. Github issues for bug tracking. <br>
+&nbsp; 2. Pytest for code testing. <br>
+&nbsp; 3. MS-Excel for keeping a code testing record. <br>
 
 ## DFD level 0 
 
@@ -150,17 +111,19 @@ FastAPI is a modern, fast (high-performance), web framework for building APIs wi
 
 **Description:** 
 
-This is a high-level representation of what our project will look like. The user will be able to scan a QR-Code or visit a link to access the website, which will lead them to the home-page, the home-page will provide them with an option to visit the various dashboards in the website, each dashboard has a login to ensure the correct type of user is getting access to it. 
+This is a high-level representation of what our project will look like. The user will be able to scan a QR-Code or visit a link to access the website, which will lead them to the home-page, the home-page will provide them with an option to visit the various dashboards in the website, each dashboard has a login to ensure the correct type of user is getting access to it.
+
+When Users visit the website, they will be shown the home page which provides the options to see a basic contact list of the trail staff,  as well as view a interactive map of the trail which will allow users to locate different landmarks along the trail . Users will also be able to view an about page which will provide information of the team organizing events on the trail.
 
 There are 4 dashboards - Public, Health Professional, Patients and Trail Ambassadors, further in the dfd each dashboard has subcategories which represent the features each will have. 
 
-Public dashboard will provide users with Trackers for getting stats for example steps, it will also include an interactive map of the trail which allows users to locate different landmarks along the trail and finally this dashboard allows users to form teams in order to compete with each other which is a part of the wellness challenge.
+Public dashboard will provide users with trackers for getting stats for example steps - users will have to provide consent in order for this data to be saved on the database, this dashboard allows users to form teams in order to compete with each other which is a part of the wellness challenge, this page also provides users with a calender to view the upcoming events being organized on the trail.
 
-Health Professional dashboard is for health professionals like dietitians to monitor users stats and provide feedback.
+Health Professional dashboard is for health professionals like dietitians to monitor users stats and provide feedback, they will be able to view teams that people have made for the wellness challenge and be able to directly provide feedback to the whole team or an individual.
 
 Patients dashboard is for the homeless people who are looking for resources, it gives them a contact list as well as a form where they can request resources as they need them.
 
-Finally, the Trail Ambassadors dashboard is for the people who are working in the trail itself to fundraise for events and such, this dashboard gives them a contact list to contact the small businesses and their colleagues alike as well a calendar so they can schedule events.  
+Finally, the Trail Ambassadors dashboard is for the people who are working in the trail itself to fundraise for events and such, this dashboard gives them a contact list to contact the small businesses and their colleagues alike as well as emergency services.it also provides them with  a calendar so they can schedule events.  
 
 ## DFD level 1 
 
@@ -173,9 +136,11 @@ In this level of the dfd, the system process can be seen in a slightly more deep
 
 The login process involves the user entering the username and password, this data is then queried in the database, the authentication process involves checking if the user exists in the database, if it does a success is returned and the user can successfully login to the dashboard their credentials give them access to, however if the user does not exist in the database, the user returns to the homepage and an error message is returned and displayed.
 
-Further, the Trackers data, is stored in the database and can be accessed by the medical professionals in the Health Stats page of the health professional dashboard.
+Further, the Trackers data, is stored in the database, provided the users have consented and can be accessed by the medical professionals in the Health Stats page of the health professional dashboard, where they can provide feedback to users based on this data, this feedback form is validated as well to ensure security of the data.
 
-Similarly, the help form in the patients dashboard is validated and the data is stored in the database and the calendar events in the trail ambassadors dashboard are also stored in the database, all this data is viewable to authorized and appropriate user groups. ha
+Similarly, the help form in the patients dashboard is validated and the data is stored in the database and the calendar events in the trail ambassadors dashboard are also stored in the database, all this data is viewable to authorized and appropriate user groups. 
+
+In case any errors are found while validating any of the forms, an error code is generated and the user is redirected to the previous page and the generated error message is shown to the user.
 
 ## Functional Requirements
 
