@@ -42,47 +42,36 @@ In addition, this website will also allow health professionals such as doctors, 
 
 ## Target User Groups
 
-> The project will serve six user groups:
+> The final product of this project is designed to serve **four** main user groups: individuals, consented individuals, working professionals, and trail ambassadors. :
 
-**New website users**
+**Individuals**
 
-      - These users will be able to easily find all information regarding the trails and the city. The information will include different landmarks that discuss not only the trail but significant facts and information regarding the city at large. 
-      - Website visitors could also get access to a virtual walkthrough of the entire trail. This will enable potential trail travelers to know more about the trail before they even start their wonderful journey.
-      - This information will be frequently updated to reflect what is on ground hence ensuring users are viewing up to date information.
-       - The best part is all this will be accessible through a website URL that is easily conceivable.
+      - This user group represents the members of Lake Country. For this group, the website will display a map of the trail with markings. These marks are utilized to demonstrate the relative locations of different features that are placed on the trail by the management team. These features could be history boards, landmarks, interesting facts, and alerts.
+      - These individuals will grant consent to the Okanagan Rail Trail to have their activity data stored on the organization database.
+      - If the individuals grant another consent regarding the health professionals, the website could then provide new functionality that is described in the next user group.
+      - Nonetheless, the individuals will still be able to participate in organized weekly challenge activities.
 
+**Consented Individuals**
 
-**Working professional users that want to raise funds**
-
-      - Various working professionals in the community that are looking to raise funds will be able to do so through organizing weekly event challenges.
-      - The Okanagan Rail Trail Ambassadors will be able to create events that are later on posted onto pages that are specially designated to showcasing upcoming community events.
-      - The website will also display these events on a calendar. Ambassadors will be able to create and edit events on the calendar interface.
-      - Using data collected from the organized events, the website will provide different challenge statistics such as the number of people participating in the challenge and the progress they’ve made in that challenge.
-      - Authorized Okanagan Rail Trail Ambassadors and other authorized parties will be able to securely login into their accounts and review records of donations that have been securely transacted through the website. These records will be displayed on a page specially designated for that purpose.
-      - Finally, the website will ensure ambassadors are able to communicate with the public through a public discussion forum.
-
-
-**Trail explorers**
-
-      - The website will display a map of the trail containing various features. These features will help users visualize what the map actually looks like on ground. These features will include icons that mark locations of history boards, landmarks, interesting facts, and alerts.
-      - The website will be able to log various data from participants engaging in the weekly challenges such as their number of steps taken, exercise duration, and exercise frequency.
+      - If the residents of Lake Country agree to let the Okanagan Rail Trail management collect their data, the website will be able to log various data from them.
+      - They will be able to record their activity data from participating in organized weekly challenge activities, such as but not limited to the number of steps taken, exercise duration, and exercise frequency.
+      - Such data will be utilized by Dr. Petrella’s team of health individuals as described in the next user group.
       - The website will also be able to organize the trail explorers into teams of their choices. The website will be able to generate invite links that other users can use to join the groups and weekly challenges.
       - The website will make ranked scoreboards of the participants using the logged information from the weekly challenges.
 
-
-**Health-care professionals**
+**Professionals**
 
       - Health-care professionals will have a dashboard presenting well organized user health data submitted by various website users.
       - The website will allow health-care professionals to view the wellness challenge participants and their health information.
       - The website will present this data in a fashion that enables the professionals to make relevant inferences and feedback that helps improve the community.
       - The website will ensure that this health information is only accessed by publicly authorized personnel through ensuring only authorized users are securely logged in to the health-care professional dashboard.
 
+**Trail Ambassadors**
 
-**Homeless people**
-
-      - Homeless people will be able to access various information on resources offered by the community and the contact information of the people in charge of directly providing these resources.
-      - They will be able to do this through the landing page which will contain links directing these people in need to the help they deserve.
-      - Homeless people will also be able to send messages to health professionals as well as community officers through submitting help forms on the website.
+      - Various working professionals in the community that are looking to raise funds will be able to do so through organizing weekly event challenges.
+      - The Okanagan Rail Trail Ambassadors will be able to create events that are later on posted onto pages that are specially designated to showcasing upcoming community events.
+      - The website will also display these events on a calendar. Ambassadors will be able to create and edit events on the calendar interface.
+      - Using data collected from the organized events, the website will provide different challenge statistics such as the number of people participating in the challenge and the progress they’ve made in that challenge.
 
 ## Tech Stack
 
@@ -115,6 +104,29 @@ This is a high-level representation of what our project will look like. The user
 
 When Users visit the website, they will be shown the home page which provides the options to see a basic contact list of the trail staff,  as well as view a interactive map of the trail which will allow users to locate different landmarks along the trail . Users will also be able to view an about page which will provide information of the team organizing events on the trail.
 
+<<<<<<< HEAD
+## Functional Requirements
+
+> There are **six** dashboard cartegories - Homepage, Individual, Trail Ambassador, Administrator, Professional and Patient dashboards. further in the dfd, each dashboard has subcategories which represent the features each will have. 
+
+**Professional Dashboard**
+
+- The professional dashboard is where the data is turned into relevant information by different personnel. But before this process can begin, the users must first consent to the utility of their information for different purposes explained in the privacy policy.
+- Through this dashboard, the professionals that work in Dr. Robert Petrella’s Lifestyle Prevention Program will be able to retrieve various user data collected such as physical activities, foods consumed, blood pressure, weight, and even average cigarettes smoked. The physical data will be tabulated to reflect program progress and will be presented alongside graphs, hence enhancing readability and understanding. Different kinds of graphs will be available to select from given varying preferences. Furthermore, users will be categorized into groups and given a rating of poor, good, etc. to compare the progress between other groups. 
+- Using the various data collected, the professional will be able to perform specialized diagnoses for each consented user and come to relevant conclusions that will benefit the user. This feedback could contain recommendations on lifestyle changes that can act as targets that the user should try to attain. These changes could have something to do with sleeping, smoking, or physical activity habits. Once the professional has generated feedback, it will be displayed back to the user with the appropriate graphs.
+- We aim to begin building this dashboard at the beginning of February and have it completed by mid-March.
+
+**Patient Dashboard**
+
+- The patient dashboard is accessed by the consented individuals user group and consists of pages where graphs will be displayed to visualize physical activity data, health data, and dietary data.The health data could include number of hours slept in a day and the number of cigarettes smoked in a given time period. Dietary information visualized could include the average fruit and vegetable servings consumed per time period specified and the number of servings consumed during breakfast. The different kinds of data graphically rendered on the dashboards will be utilized by Dr. Petrella’s health professionals team to provide relevant health feedback to the community members of Lake Country. 
+- What makes this different from the individual dashboard is that there will be a box next to these graphs where the user can see the comments relevant to that graph that the certified professionals made. In addition, there will be a to-do list where users can easily view the advice the professionals have given them for the week to follow at a glance. 
+- We aim to start working on this project in mid February and have it completed by mid March.  
+
+## DFD level 1 
+
+![](../images/dfd-level1.png?raw=true)
+
+=======
 There are 4 dashboards - Public, Health Professional, Patients and Trail Ambassadors, further in the dfd each dashboard has subcategories which represent the features each will have. 
 
 Public dashboard will provide users with trackers for getting stats for example steps - users will have to provide consent in order for this data to be saved on the database, this dashboard allows users to form teams in order to compete with each other which is a part of the wellness challenge, this page also provides users with a calender to view the upcoming events being organized on the trail.
@@ -129,6 +141,7 @@ Finally, the Trail Ambassadors dashboard is for the people who are working in th
 
 ![](../images/dfd-level1.png?raw=true)
 
+>>>>>>> 754767ac0761ebb42772e471c34ef33c97c6c788
 **Description:**
 
 
@@ -175,17 +188,17 @@ we will have to perform stress and load tests.
 
 **Programming Languages**
 
-      - We have to make sure that we use programming languages that can be used across old as well as new technology, different devices.
+- We have to make sure that we use programming languages that can be used across old as well as new technology, different devices, and operating systems. This means that the technologies used should possess versatility and portability characteristics. This presents us with a challenge whose solutions we have fortunately derived. These technologies might have to be updated given the rapidly changing technology landscape.
 
 **Maintenance Accessibility**
 
-      - Finding qualified personnel for maintenance consultation in a timely manner will be a constraint that we have to work around. We can book the personnel on campus ahead of time for maintenance checks.
+- The project currently faces two main constraints in this regard. The first is finding qualified personnel for maintenance consultation in a timely manner. A solution the team has come up with is to book qualified personnel on campus ahead of time for maintenance checks. The second maintenance constraint is to ensure the software is left in a structural state that is easily grasped by any other qualified personnel and also sustainable for the longest time possible. This is why the team has chosen the Django content management system whose structural infrastructure fits the goals of the project.
 
-**Health Pandemic**
+**Health Tragedies**
 
-      - A pandemic will get health policies imposed that hinder people from attending various organized events such as the health challenges.
+- In this day and age, we face increasing unprecedented health tragedies of various scales with the most recent being the global Coronavirus pandemic. If another pandemic or similar health tragedy arises , the Lake Country and Okanagan community could witness identical health protection policies imposed on them. These policies could inhibit them from hosting and participating in outdoor, physical activities and events.
 
 **Weather Fluctuations**
 
-      - Dangerous weather conditions such as forest fires can have negative health repercussions. This encourages a low turnout to the various activities organized to fundraise other activities.
+- Similarly, we face increasing unprecedented weather calamities on increasing scales. The Okanagan area has recently been a host to increasing forest fires and heat waves. To fan the flames, the proximity to the United States and the valley landscape make the Okanagan a suitable host to the traversing smoky winds. These dangerous weather conditions such as forest fires can have extremely detrimental health repercussions. Thus, these risks could heavily influence low participation in weekly challenges that involve outdoor activities.
 >>>>>>> 82fd769346a326f95254ddf733cd1f76cb2e6fbf
