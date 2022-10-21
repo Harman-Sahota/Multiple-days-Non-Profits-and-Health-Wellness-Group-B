@@ -171,17 +171,17 @@ we will have to perform stress and load tests.
 
 **Programming Languages**
 
-      - We have to make sure that we use programming languages that can be used across old as well as new technology, different devices.
+- We have to make sure that we use programming languages that can be used across old as well as new technology, different devices, and operating systems. This means that the technologies used should possess versatility and portability characteristics. This presents us with a challenge whose solutions we have fortunately derived. These technologies might have to be updated given the rapidly changing technology landscape.
 
 **Maintenance Accessibility**
 
-      - Finding qualified personnel for maintenance consultation in a timely manner will be a constraint that we have to work around. We can book the personnel on campus ahead of time for maintenance checks.
+- The project currently faces two main constraints in this regard. The first is finding qualified personnel for maintenance consultation in a timely manner. A solution the team has come up with is to book qualified personnel on campus ahead of time for maintenance checks. The second maintenance constraint is to ensure the software is left in a structural state that is easily grasped by any other qualified personnel and also sustainable for the longest time possible. This is why the team has chosen the Django content management system whose structural infrastructure fits the goals of the project.
 
-**Health Pandemic**
+**Health Tragedies**
 
-      - A pandemic will get health policies imposed that hinder people from attending various organized events such as the health challenges.
+- In this day and age, we face increasing unprecedented health tragedies of various scales with the most recent being the global Coronavirus pandemic. If another pandemic or similar health tragedy arises , the Lake Country and Okanagan community could witness identical health protection policies imposed on them. These policies could inhibit them from hosting and participating in outdoor, physical activities and events.
 
 **Weather Fluctuations**
 
-      - Dangerous weather conditions such as forest fires can have negative health repercussions. This encourages a low turnout to the various activities organized to fundraise other activities.
+- Similarly, we face increasing unprecedented weather calamities on increasing scales. The Okanagan area has recently been a host to increasing forest fires and heat waves. To fan the flames, the proximity to the United States and the valley landscape make the Okanagan a suitable host to the traversing smoky winds. These dangerous weather conditions such as forest fires can have extremely detrimental health repercussions. Thus, these risks could heavily influence low participation in weekly challenges that involve outdoor activities.
 >>>>>>> 82fd769346a326f95254ddf733cd1f76cb2e6fbf
