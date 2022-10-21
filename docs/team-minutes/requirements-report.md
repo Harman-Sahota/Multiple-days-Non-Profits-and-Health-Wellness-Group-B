@@ -134,7 +134,7 @@ Similarly, the events that the trail ambassadors create and add to the calendar 
 
 ![](../images/dfd-level1.png?raw=true)
 
-=======
+
 There are 4 dashboards - Public, Health Professional, Patients and Trail Ambassadors, further in the dfd each dashboard has subcategories which represent the features each will have. 
 
 Public dashboard will provide users with trackers for getting stats for example steps - users will have to provide consent in order for this data to be saved on the database, this dashboard allows users to form teams in order to compete with each other which is a part of the wellness challenge, this page also provides users with a calender to view the upcoming events being organized on the trail.
@@ -145,20 +145,7 @@ Patients dashboard is for the homeless people who are looking for resources, it 
 
 Finally, the Trail Ambassadors dashboard is for the people who are working in the trail itself to fundraise for events and such, this dashboard gives them a contact list to contact the small businesses and their colleagues alike as well as emergency services.it also provides them with  a calendar so they can schedule events.  
 
-## DFD level 1 
 
-![](../images/dfd-level1.png?raw=true)
-
-
-**Description:**
-
-
-The login process involves the user entering their email and password. This data is then queried in the database where it is authenticated to check if the user exists in the database. If the account exists and the correct email-password combination was entered, a success message is returned and the user can login to the dashboard their credentials give them access to. However, if the user does not exist in the database, or the incorrect credentials were entered, an error message is displayed and the user is prompted to enter the account credentials again. This will be completed along with the homepage by Milestone #2
-The tracker data is stored in the database, provided the users have consented to doing so. This data is then used to generate graphs to provide the user with a visual representation of their data. Ideally, this would be completed by Milestone #2, but will definitely be done by Milestone #3 if there were any issues. 
-
-If the user has given permission to the professionals to view this data, they will also be able to view these graphs in the heath statistics page. When the professionals give feedback to the user, it is stored in the database and validated to ensure security of the data. This will be completed by Milestone #3 with the professional dashboard. 
-
-Similarly, the events that the trail ambassadors create and add to the calendar will also be stored in a database. In case any errors are found while validating or attempting to store any of the data, an error code is generated and the user is redirected to the previous page where they are prompted to try again. This should be completed by Milestone #3 with the trail ambassador dashboard.
 
 
 ## Functional Requirements
