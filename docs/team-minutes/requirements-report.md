@@ -104,22 +104,15 @@ This is a high-level representation of what our project will look like. The user
 
 When Users visit the website, they will be shown the home page which provides the options to see a basic contact list of the trail staff,  as well as view a interactive map of the trail which will allow users to locate different landmarks along the trail . Users will also be able to view an about page which will provide information of the team organizing events on the trail.
 
-## Functional Requirements
+There are 4 dashboards - Public, Health Professional, Patients and Trail Ambassadors, further in the dfd each dashboard has subcategories which represent the features each will have. 
 
-> There are **six** dashboard cartegories - Homepage, Individual, Trail Ambassador, Administrator, Professional and Patient dashboards. further in the dfd, each dashboard has subcategories which represent the features each will have. 
+Public dashboard will provide users with trackers for getting stats for example steps - users will have to provide consent in order for this data to be saved on the database, this dashboard allows users to form teams in order to compete with each other which is a part of the wellness challenge, this page also provides users with a calender to view the upcoming events being organized on the trail.
 
-**Professional Dashboard**
+Health Professional dashboard is for health professionals like dietitians to monitor users stats and provide feedback, they will be able to view teams that people have made for the wellness challenge and be able to directly provide feedback to the whole team or an individual.
 
-- The professional dashboard is where the data is turned into relevant information by different personnel. But before this process can begin, the users must first consent to the utility of their information for different purposes explained in the privacy policy.
-- Through this dashboard, the professionals that work in Dr. Robert Petrella’s Lifestyle Prevention Program will be able to retrieve various user data collected such as physical activities, foods consumed, blood pressure, weight, and even average cigarettes smoked. The physical data will be tabulated to reflect program progress and will be presented alongside graphs, hence enhancing readability and understanding. Different kinds of graphs will be available to select from given varying preferences. Furthermore, users will be categorized into groups and given a rating of poor, good, etc. to compare the progress between other groups. 
-- Using the various data collected, the professional will be able to perform specialized diagnoses for each consented user and come to relevant conclusions that will benefit the user. This feedback could contain recommendations on lifestyle changes that can act as targets that the user should try to attain. These changes could have something to do with sleeping, smoking, or physical activity habits. Once the professional has generated feedback, it will be displayed back to the user with the appropriate graphs.
-- We aim to begin building this dashboard at the beginning of February and have it completed by mid-March.
+Patients dashboard is for the homeless people who are looking for resources, it gives them a contact list as well as a form where they can request resources as they need them.
 
-**Patient Dashboard**
-
-- The patient dashboard is accessed by the consented individuals user group and consists of pages where graphs will be displayed to visualize physical activity data, health data, and dietary data.The health data could include number of hours slept in a day and the number of cigarettes smoked in a given time period. Dietary information visualized could include the average fruit and vegetable servings consumed per time period specified and the number of servings consumed during breakfast. The different kinds of data graphically rendered on the dashboards will be utilized by Dr. Petrella’s health professionals team to provide relevant health feedback to the community members of Lake Country. 
-- What makes this different from the individual dashboard is that there will be a box next to these graphs where the user can see the comments relevant to that graph that the certified professionals made. In addition, there will be a to-do list where users can easily view the advice the professionals have given them for the week to follow at a glance. 
-- We aim to start working on this project in mid February and have it completed by mid March.
+Finally, the Trail Ambassadors dashboard is for the people who are working in the trail itself to fundraise for events and such, this dashboard gives them a contact list to contact the small businesses and their colleagues alike as well as emergency services.it also provides them with  a calendar so they can schedule events.  
 
 ## DFD level 1 
 
@@ -171,17 +164,17 @@ we will have to perform stress and load tests.
 
 **Programming Languages**
 
-- We have to make sure that we use programming languages that can be used across old as well as new technology, different devices, and operating systems. This means that the technologies used should possess versatility and portability characteristics. This presents us with a challenge whose solutions we have fortunately derived. These technologies might have to be updated given the rapidly changing technology landscape.
+      - We have to make sure that we use programming languages that can be used across old as well as new technology, different devices.
 
 **Maintenance Accessibility**
 
-- The project currently faces two main constraints in this regard. The first is finding qualified personnel for maintenance consultation in a timely manner. A solution the team has come up with is to book qualified personnel on campus ahead of time for maintenance checks. The second maintenance constraint is to ensure the software is left in a structural state that is easily grasped by any other qualified personnel and also sustainable for the longest time possible. This is why the team has chosen the Django content management system whose structural infrastructure fits the goals of the project.
+      - Finding qualified personnel for maintenance consultation in a timely manner will be a constraint that we have to work around. We can book the personnel on campus ahead of time for maintenance checks.
 
-**Health Tragedies**
+**Health Pandemic**
 
-- In this day and age, we face increasing unprecedented health tragedies of various scales with the most recent being the global Coronavirus pandemic. If another pandemic or similar health tragedy arises , the Lake Country and Okanagan community could witness identical health protection policies imposed on them. These policies could inhibit them from hosting and participating in outdoor, physical activities and events.
+      - A pandemic will get health policies imposed that hinder people from attending various organized events such as the health challenges.
 
 **Weather Fluctuations**
 
-- Similarly, we face increasing unprecedented weather calamities on increasing scales. The Okanagan area has recently been a host to increasing forest fires and heat waves. To fan the flames, the proximity to the United States and the valley landscape make the Okanagan a suitable host to the traversing smoky winds. These dangerous weather conditions such as forest fires can have extremely detrimental health repercussions. Thus, these risks could heavily influence low participation in weekly challenges that involve outdoor activities.
+      - Dangerous weather conditions such as forest fires can have negative health repercussions. This encourages a low turnout to the various activities organized to fundraise other activities.
 >>>>>>> 82fd769346a326f95254ddf733cd1f76cb2e6fbf
