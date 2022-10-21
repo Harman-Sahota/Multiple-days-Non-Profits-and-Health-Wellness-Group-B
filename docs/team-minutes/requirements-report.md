@@ -42,47 +42,36 @@ In addition, this website will also allow health professionals such as doctors, 
 
 ## Target User Groups
 
-> The project will serve six user groups:
+> The final product of this project is designed to serve **four** main user groups: individuals, consented individuals, working professionals, and trail ambassadors. :
 
-**New website users**
+**Individuals**
 
-      - These users will be able to easily find all information regarding the trails and the city. The information will include different landmarks that discuss not only the trail but significant facts and information regarding the city at large. 
-      - Website visitors could also get access to a virtual walkthrough of the entire trail. This will enable potential trail travelers to know more about the trail before they even start their wonderful journey.
-      - This information will be frequently updated to reflect what is on ground hence ensuring users are viewing up to date information.
-       - The best part is all this will be accessible through a website URL that is easily conceivable.
+      - This user group represents the members of Lake Country. For this group, the website will display a map of the trail with markings. These marks are utilized to demonstrate the relative locations of different features that are placed on the trail by the management team. These features could be history boards, landmarks, interesting facts, and alerts.
+      - These individuals will grant consent to the Okanagan Rail Trail to have their activity data stored on the organization database.
+      - If the individuals grant another consent regarding the health professionals, the website could then provide new functionality that is described in the next user group.
+      - Nonetheless, the individuals will still be able to participate in organized weekly challenge activities.
 
+**Consented Individuals**
 
-**Working professional users that want to raise funds**
-
-      - Various working professionals in the community that are looking to raise funds will be able to do so through organizing weekly event challenges.
-      - The Okanagan Rail Trail Ambassadors will be able to create events that are later on posted onto pages that are specially designated to showcasing upcoming community events.
-      - The website will also display these events on a calendar. Ambassadors will be able to create and edit events on the calendar interface.
-      - Using data collected from the organized events, the website will provide different challenge statistics such as the number of people participating in the challenge and the progress they’ve made in that challenge.
-      - Authorized Okanagan Rail Trail Ambassadors and other authorized parties will be able to securely login into their accounts and review records of donations that have been securely transacted through the website. These records will be displayed on a page specially designated for that purpose.
-      - Finally, the website will ensure ambassadors are able to communicate with the public through a public discussion forum.
-
-
-**Trail explorers**
-
-      - The website will display a map of the trail containing various features. These features will help users visualize what the map actually looks like on ground. These features will include icons that mark locations of history boards, landmarks, interesting facts, and alerts.
-      - The website will be able to log various data from participants engaging in the weekly challenges such as their number of steps taken, exercise duration, and exercise frequency.
+      - If the residents of Lake Country agree to let the Okanagan Rail Trail management collect their data, the website will be able to log various data from them.
+      - They will be able to record their activity data from participating in organized weekly challenge activities, such as but not limited to the number of steps taken, exercise duration, and exercise frequency.
+      - Such data will be utilized by Dr. Petrella’s team of health individuals as described in the next user group.
       - The website will also be able to organize the trail explorers into teams of their choices. The website will be able to generate invite links that other users can use to join the groups and weekly challenges.
       - The website will make ranked scoreboards of the participants using the logged information from the weekly challenges.
 
-
-**Health-care professionals**
+**Professionals**
 
       - Health-care professionals will have a dashboard presenting well organized user health data submitted by various website users.
       - The website will allow health-care professionals to view the wellness challenge participants and their health information.
       - The website will present this data in a fashion that enables the professionals to make relevant inferences and feedback that helps improve the community.
       - The website will ensure that this health information is only accessed by publicly authorized personnel through ensuring only authorized users are securely logged in to the health-care professional dashboard.
 
+**Trail Ambassadors**
 
-**Homeless people**
-
-      - Homeless people will be able to access various information on resources offered by the community and the contact information of the people in charge of directly providing these resources.
-      - They will be able to do this through the landing page which will contain links directing these people in need to the help they deserve.
-      - Homeless people will also be able to send messages to health professionals as well as community officers through submitting help forms on the website.
+      - Various working professionals in the community that are looking to raise funds will be able to do so through organizing weekly event challenges.
+      - The Okanagan Rail Trail Ambassadors will be able to create events that are later on posted onto pages that are specially designated to showcasing upcoming community events.
+      - The website will also display these events on a calendar. Ambassadors will be able to create and edit events on the calendar interface.
+      - Using data collected from the organized events, the website will provide different challenge statistics such as the number of people participating in the challenge and the progress they’ve made in that challenge.
 
 ## Tech Stack
 
