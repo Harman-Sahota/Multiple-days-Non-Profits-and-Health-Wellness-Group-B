@@ -115,6 +115,12 @@ When Users visit the website, they will be shown the home page which provides th
 - Using the various data collected, the professional will be able to perform specialized diagnoses for each consented user and come to relevant conclusions that will benefit the user. This feedback could contain recommendations on lifestyle changes that can act as targets that the user should try to attain. These changes could have something to do with sleeping, smoking, or physical activity habits. Once the professional has generated feedback, it will be displayed back to the user with the appropriate graphs.
 - We aim to begin building this dashboard at the beginning of February and have it completed by mid-March.
 
+**Patient Dashboard**
+
+- The patient dashboard is accessed by the consented individuals user group and consists of pages where graphs will be displayed to visualize physical activity data, health data, and dietary data.The health data could include number of hours slept in a day and the number of cigarettes smoked in a given time period. Dietary information visualized could include the average fruit and vegetable servings consumed per time period specified and the number of servings consumed during breakfast. The different kinds of data graphically rendered on the dashboards will be utilized by Dr. Petrella’s health professionals team to provide relevant health feedback to the community members of Lake Country. 
+- What makes this different from the individual dashboard is that there will be a box next to these graphs where the user can see the comments relevant to that graph that the certified professionals made. In addition, there will be a to-do list where users can easily view the advice the professionals have given them for the week to follow at a glance. 
+- We aim to start working on this project in mid February and have it completed by mid March.
+
 ## DFD level 1 
 
 ![](../images/dfd-level1.png?raw=true)
