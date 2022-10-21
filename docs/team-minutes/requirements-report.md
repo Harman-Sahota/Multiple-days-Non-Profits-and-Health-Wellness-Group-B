@@ -83,16 +83,27 @@ In addition, this website will also allow health professionals such as doctors, 
 &nbsp; 4. Django CMS <br>
 &nbsp; 5. Figma for designing <br>
 
+We decided to use HTML and CSS as these are the building blocks of any website. In addition, we are using Bootstrap with CSS as this helps our website be responsive enough to run on any device regardless the screen width. Javascript will be used for validating form inputs to prevent data attacks like SQL injections. <br>
+We decided to use Django against other frameworks like FastAPI and Flask because of the ease of coding, updated documentation, and its compatibility with HTML. The client believes that Django has all the functionality that is needed for the website she wants us to build while other frameworks are lacking in some areas. It also provides a lot of built-in libraries and APIs which will help us in our project.<br>
+We are using Figma for designing as this tool helps us work on the designs together collaboratively. Moreover, we can create design prototypes in Figma which is helpful when showing these designs to the client as they can interact with the prototype rather than imagine how navigating through the pages would work.<br>
+
+
 **Back-end and Database**
 
 &nbsp; 1. MySQL database integrated in MariaDB. <br>
 &nbsp; 2. Django <br>
+
+The backend was provided to us by the client as she already has a database made in MySQL and wants to integrate it with MariaDB.
+<br>
 
 **Testing and Bug Tracking**
 
 &nbsp; 1. Github issues for bug tracking. <br>
 &nbsp; 2. Pytest for code testing. <br>
 &nbsp; 3. MS-Excel for keeping a code testing record. <br>
+
+The client requested us to use GitHub issues for bug tracking since all of our code will be put into a GitHub repository and that way, she will be able to view our progress. In addition, using GitHub issues reduces the number of softwares and programs that will need to be installed onto our personal computers. This tool is also beneficial because we have integrated GitHub notifications to our group’s Discord server, so all members are notified immediately once an issue has been created so that we can rectify them in a timely manner. <br>
+
 
 ## DFD level 0 
 
@@ -104,7 +115,7 @@ This is a high-level representation of what our project will look like. The user
 
 When Users visit the website, they will be shown the home page which provides the options to see a basic contact list of the trail staff,  as well as view a interactive map of the trail which will allow users to locate different landmarks along the trail . Users will also be able to view an about page which will provide information of the team organizing events on the trail.
 
-<<<<<<< HEAD
+
 ## Functional Requirements
 
 > There are **six** dashboard cartegories - Homepage, Individual, Trail Ambassador, Administrator, Professional and Patient dashboards. further in the dfd, each dashboard has subcategories which represent the features each will have. 
@@ -141,7 +152,7 @@ Finally, the Trail Ambassadors dashboard is for the people who are working in th
 
 ![](../images/dfd-level1.png?raw=true)
 
->>>>>>> 754767ac0761ebb42772e471c34ef33c97c6c788
+
 **Description:**
 
 
