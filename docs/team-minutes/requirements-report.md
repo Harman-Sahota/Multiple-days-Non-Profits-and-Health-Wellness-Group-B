@@ -186,13 +186,13 @@ Regression testing is a type of software testing that runs after every change ma
 
 For our initial features, we will be running unit tests for every code addition. We do so to ensure that we have a solid base, a code that lacks bugs. Doing so will allow us to perform regression testing for the additional features we add as we move on. We have to be selective with the tests we run as it may not feasible to test every single code addition added to our repository.
 
-<Strong>Functionality & Usability Testing:</strong> This will ensure that the website is in its correct behavior and that it does what is intended from it to do. Moreover, this will also help us verify the behind the scenes such as the connection to the database.
+<strong>Testing Tools</strong>
 
-<Strong>Compatibality Testing:</strong> To ensure that the website is reliable and functional, and that is runs on its intended devices such as the clients device as well as the target audience as a whole.
+For our unit testing, we will be using Pytest as our software testing framework, this will be extremely useful and compatible since we are using Django for both frontend and backend. Pytest is also extremely efficient in the sense that it will allow us to execute multiple tests parallely.
 
-<Strong>Performance Testing:</strong> Performance testing are extremely important. This will ensure that the system performs well under different user stress and load.
+Finally, we will be conducting some usability testing to ensure that our dashboard designs do what we intend them to do. To do that, we have to develop the mock designs of our different dashboards on Figma and then run some usability testing to gather feedback from different users. This will allow us to identify the most ideal placement and format for the features in our dashboards.
 
-we will have to perform stress and load tests.
+
 
 ## Environmental Constraints
 
