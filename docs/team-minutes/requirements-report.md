@@ -21,9 +21,10 @@ Harman Sahota - 28337426 <br>
 2. System Architecure 	<br>
 &nbsp;  2.1 Data Flow Diagrams (DFDs) <br>
 3. Requirements <br>
-&nbsp;   3.1 Functional Requirements <br>
-&nbsp;   3.2 Non-functional Requirements <br>
-&nbsp;   3.3 Environmental Constraints <br>
+&nbsp;   3.1 Estimated Timeline <br>
+&nbsp;   3.2 Functional Requirements <br>
+&nbsp;   3.3 Non-functional Requirements <br>
+&nbsp;   3.4 Environmental Constraints <br>
 4. Testing Strategy <br>
 &nbsp;   4.1 Testing Tool <br>
 &nbsp;   4.2 Testing Techniques
@@ -34,44 +35,31 @@ Harman Sahota - 28337426 <br>
 
 ## Overview
 
-Alongside Dr. Barbara Marcolin and two other groups from this course, we are designing and refining the online community platform, HEALTHENOW.com, that was created by Dr. Marcolin and her team before the pandemic. The purpose of this website is to allow small businesses and non-profit organizations to use this technology who otherwise would not have access to it due to insufficient funding.
+Alongside Dr. Barbara Marcolin and two other groups from this course, we are designing and refining the online community platform, HEALTHENOW.com, that was created by Dr. Marcolin and her team before the pandemic. The inspiration for this website was to allow small businesses and non-profit organizations to use this technology who otherwise would not have access to it due to insufficient funding. 
 
-The Okanagan Rail Trail is supported by Friends of the Okanagan Rail Trail (FORT), which is a non-profit organization that consists of local volunteers. They are the ones that organize activities and fundraisers and increase user experience on the trail. To support this group, the online platform we are creating will be used to host their wellness challenge, which is one of their annual fundraising events. In addition, this website will include information about the Okanagan Rail Trail to help promote and spread awareness of the efforts FORT has done to increase user trail experience, such as storyboards placed along the trail that tell the origins, history, and stories of the Okanagan Rail Trail.
+The Okanagan Rail Trail is supported by Friends of the Okanagan Rail Trail (FORT), which is a non-profit organization that consists of local volunteers. They are the ones that organize activities and fundraisers and increase user experience on the trail. To support this group, the online platform we are redesigning will be used to host their wellness challenge, which is one of their annual fundraising events. In addition, this website will include information about the Okanagan Rail Trail to help promote and spread awareness of the efforts FORT has done to increase user trail experiences, such as storyboards placed along the trail that tell the origins, history, and stories of the Okanagan Rail Trail. In addition, this website will also allow professionals such as doctors, nurses, dieticians, wellness coaches, and more from Dr. Robert Petrella’s Lifestyle Prevention Program to oversee the progress and statistics of the wellness challenge participants to provide free consultations to Lake Country users. 
 
-In addition, this website will also allow health professionals such as doctors, nurses, and dieticians from Dr. Robert Petrella’s Lifestyle Prevention Program to oversee the progress and statistics of the wellness challenge participants to provide free consultations to Lake Country users.
 
 ## Target User Groups
 
-> The final product of this project is designed to serve **four** main user groups: individuals, consented individuals, working professionals, and trail ambassadors. :
+The final product of this project is designed to serve **four** main user groups: individuals, consented individuals, working professionals, and trail ambassadors.
 
 **Individuals**
 
-      - This user group represents the members of Lake Country. For this group, the website will display a map of the trail with markings. These marks are utilized to demonstrate the relative locations of different features that are placed on the trail by the management team. These features could be history boards, landmarks, interesting facts, and alerts.
-      - These individuals will grant consent to the Okanagan Rail Trail to have their activity data stored on the organization database.
-      - If the individuals grant another consent regarding the health professionals, the website could then provide new functionality that is described in the next user group.
-      - Nonetheless, the individuals will still be able to participate in organized weekly challenge activities.
+*Individuals* refer to the community members of Lake Country and the Okanagan. These users can access the website to view an interactive map of the Okanagan Rail Trail or view announcements and alerts made by the ORT trail ambassadors. In addition, if the *individuals* create an account and consent to having their data collected and stored in our database, they will gain access to many more features. These features include the ability to enter tracker data and have it converted into visual graphics and participate in weekly challenges.
 
 **Consented Individuals**
 
-      - If the residents of Lake Country agree to let the Okanagan Rail Trail management collect their data, the website will be able to log various data from them.
-      - They will be able to record their activity data from participating in organized weekly challenge activities, such as but not limited to the number of steps taken, exercise duration, and exercise frequency.
-      - Such data will be utilized by Dr. Petrella’s team of health individuals as described in the next user group.
-      - The website will also be able to organize the trail explorers into teams of their choices. The website will be able to generate invite links that other users can use to join the groups and weekly challenges.
-      - The website will make ranked scoreboards of the participants using the logged information from the weekly challenges.
+*Consented individuals* have access to all the functionality of the *individual* user group but vary slightly such that they are able to have professionals analyze their tracker data and provide feedback on how to improve and reach their wellness goals and can interact with other *consenting individuals*. *Individuals* can become *consented individuals* by giving permission to the *professionals* to view their data or giving permission to the system to generate progress comparison graphics between *consented individuals*. When giving permission, they are able to limit what type of data is shared and always have the option to revoke their permission as well. Furthermore, *consented individuals* have the ability to join or form teams to create friendly competition between users while completing the challenges, as well as discuss amongst one another using the discussion board.
+
 
 **Professionals**
 
-      - Health-care professionals will have a dashboard presenting well organized user health data submitted by various website users.
-      - The website will allow health-care professionals to view the wellness challenge participants and their health information.
-      - The website will present this data in a fashion that enables the professionals to make relevant inferences and feedback that helps improve the community.
-      - The website will ensure that this health information is only accessed by publicly authorized personnel through ensuring only authorized users are securely logged in to the health-care professional dashboard.
+*Professionals* refer to people who are certified and authorized to provide feedback and advice to the *consented individuals*. This group is not limited to healthcare workers such as doctors, nurses, and dieticians, but also includes other professionals such as health and wellness coaches. Using the data that the *consented individuals* have allowed them to view, the professionals are able to analyze the graphs and make comments on what they have done well for the week, and what they can improve on for the following week to help them reach their goals. Furthermore, the data that can be viewed by a *professional* is dependent on what type of role they have, such that they can only view data that is relevant to their profession or area of expertise.
 
 **Trail Ambassadors**
 
-      - Various working professionals in the community that are looking to raise funds will be able to do so through organizing weekly event challenges.
-      - The Okanagan Rail Trail Ambassadors will be able to create events that are later on posted onto pages that are specially designated to showcasing upcoming community events.
-      - The website will also display these events on a calendar. Ambassadors will be able to create and edit events on the calendar interface.
-      - Using data collected from the organized events, the website will provide different challenge statistics such as the number of people participating in the challenge and the progress they’ve made in that challenge.
+*Trail ambassadors* are workers and volunteers of the Okanagan Rail Trail that are responsible for organizing events and weekly challenges. This user group will have administrative access to the website, such that they will be the ones to authorize and assign the roles to the professionals. In addition, the *trail ambassadors* will be able to create, update, or delete events in a calendar for all *individuals* to see, post alerts and announcements on the home page, and have access to a list of emergency and non-emergency contacts.
 
 ## Tech Stack
 
@@ -83,8 +71,10 @@ In addition, this website will also allow health professionals such as doctors, 
 &nbsp; 4. Django CMS <br>
 &nbsp; 5. Figma for designing <br>
 
-We decided to use HTML and CSS as these are the building blocks of any website. In addition, we are using Bootstrap with CSS as this helps our website be responsive enough to run on any device regardless the screen width. Javascript will be used for validating form inputs to prevent data attacks like SQL injections. <br>
-We decided to use Django against other frameworks like FastAPI and Flask because of the ease of coding, updated documentation, and its compatibility with HTML. The client believes that Django has all the functionality that is needed for the website she wants us to build while other frameworks are lacking in some areas. It also provides a lot of built-in libraries and APIs which will help us in our project.<br>
+We decided to use HTML and CSS as these are the building blocks of any website. In addition, we are using Bootstrap with CSS as this helps our website be responsive enough to run on any device regardless the screen width. Javascript will be used for validating form inputs to prevent data attacks like SQL injections.
+
+We decided to use Django against other frameworks like FastAPI and Flask because of the ease of coding, updated documentation, and its compatibility with HTML. The client believes that Django has all the functionality that is needed for the website she wants us to build while other frameworks are lacking in some areas. It also provides a lot of built-in libraries and APIs which will help us in our project.
+
 We are using Figma for designing as this tool helps us work on the designs together collaboratively. Moreover, we can create design prototypes in Figma which is helpful when showing these designs to the client as they can interact with the prototype rather than imagine how navigating through the pages would work.<br>
 
 
@@ -104,51 +94,51 @@ The backend was provided to us by the client as she already has a database made 
 
 The client requested us to use GitHub issues for bug tracking since all of our code will be put into a GitHub repository and that way, she will be able to view our progress. In addition, using GitHub issues reduces the number of softwares and programs that will need to be installed onto our personal computers. This tool is also beneficial because we have integrated GitHub notifications to our group’s Discord server, so all members are notified immediately once an issue has been created so that we can rectify them in a timely manner. <br>
 
+## Data Flow Diagrams (DFDs)
 
-## DFD level 0 
+![](../images/dfd-0.png)
 
-![](../images/dfd-level0.png?raw=true)
+HEALTHENOW users will interact with the HEALTHENOW system to perform different actions. These actions are dependent on what type of user they are. 
 
-**Description:** 
+As an individual, they will interact with the system by giving consent to having their data stored into the database, and then use the website to enter tracker data and have that data converted into visual graphics. Similarly, a consented individual will have access to all the functionality of an individual, but also be able to create teams for the weekly challenges and view their team members progress to form a leaderboard. In addition, consented individuals are able to receive feedback from the professionals. As a professional, they are able to view the data of the consented individuals both numerically and graphically, and provide feedback as to what was done well and what can be improved so that the consented individual can reach their goals. Lastly, as a trail ambassador, they are able to assign roles, view the overall progress of the challenge, and create/edit/delete events from the calendar. All of these functionalities require querying the database in order to validate credentials, create teams and events, generate graphs and rankings, and retrieve information, and much more. 
 
-This is a high-level representation of what our project will look like. When users visit the website by either scanning a QR code or typing in the URL, they will be directed to the home page which has content pages containing messages from the trail ambassadors of the Okanagan Rail Trail, the contact information of the affiliates, and an interactive map created by the Okanagan Rail Trail which will allow users to locate different landmarks along the trail. In addition, users will be able to log in or create an account to access the specific dashboards, depending on what type of user group they are in and what role they have been assigned. This will be completed by Milestone #2 in time for round one of peer testing.
+![](../images/dfd-1.png)
 
-There are five dashboards available on this website: Individual, Patient, Professional, Trail Ambassador, and Administrator. Within each dashboard, there are various subcategories that contain different features of the website that are unique to the dashboard. All five dashboards should be completed and fully functional by the time we reach Milestone #4. 
-
-The *individual* dashboard contains a tracker page that will allow users to enter data such as the number of steps taken in a day, the number of hours slept, etc. Prior to being able to access the tracker page, the user must provide consent in order for this data to be saved into the database. From this data that they enter into the database, the users will be able to view graphs that have been generated automatically by the system. In addition, these users will be able to view a calendar with upcoming events entered into the system by the trail ambassadors. Lastly, users will be able to access a weekly challenge page where users can form teams in order to compete with each other in the wellness challenge, view a leaderboard, and communicate with other participants. This dashboard will be mostly completed by Milestone #2 for the first round of peer testing, however, it is not confirmed if it will be fully completed in time as there are many features to implement.
-
-*Patients* dashboard is part of the individual dashboard, it will display the data from the database which the professionals have provided for different teams/individuals. This dashboard will be completed by Milestone #3 for the second round of peer testing. We can only begin working on this dashboard once the individual dashboard is completed. 
-
-The *professional view* dashboard is for working professionals like doctors and dietitians to monitor users’ statistics through the graphs generated from the tracker data they enter and provide feedback. They will also be able to group users together to provide feedback to the group as a whole. If the project is on track, we hope to have this dashboard completed by Milestone #3.
-
-The *trail ambassador* dashboard is for the people who are working with the Okanagan Rail Trail to fundraise for events. This dashboard gives them a contact list to the affiliates and their colleagues as well as emergency and non-emergency services. It also provides them with the functionality to schedule events into the calendar which all users have access to viewing. This dashboard should be completed by Milestone #3 along with the professional dashboard.
-
-The *admin* dashboard is used by the trail ambassadors and our client to approve new user accounts, this allows them to ensure that the correct people are joining different categories of users and have access to the necessary dashboards. As this dashboard only has one feature at the moment and is used by the trail ambassadors, it will be implemented after the trail ambassador dashboard. If there are no issues with implementing the other dashboards, this should be completed by Milestone #3, but can also be pushed a little later without affecting our progress too much as there is not too much functionality associated with it.
-
-professionals to view this data, they will also be able to view these graphs in the heath statistics page. When the professionals give feedback to the user, it is stored in the database and validated to ensure security of the data. This will be completed by Milestone #3 with the professional dashboard. 
-Similarly, the events that the trail ambassadors create and add to the calendar will also be stored in a database. In case any errors are found while validating or attempting to store any of the data, an error code is generated and the user is redirected to the previous page where they are prompted to try again. This should be completed by Milestone #3 with the trail ambassador dashboard.
-
- 
-
-## DFD level 1 
-
-![](../images/dfd-level1.png?raw=true)
-
-
-The login process involves the user entering their email and password. This data is then queried in the database where it is authenticated to check if the user exists in the database. If the account exists and the correct email-password combination was entered, a success message is returned and the user can login to the dashboard their credentials give them access to. However, if the user does not exist in the database, or the incorrect credentials were entered, an error message is displayed and the user is prompted to enter the account credentials again. This will be completed along with the homepage by Milestone #2.
+The login process involves the user entering their email and password. This data is then queried in the database where it is authenticated to check if the user exists in the database. If the account exists and the correct email-password combination was entered, the user can log into the dashboard their credentials give them access to. However, if the incorrect credentials were entered, the user is prompted to enter the account credentials again. If the account does not exist, the user can create a new account and those account credentials will be stored into the database. This will be completed with the homepage by Milestone #2.
 
 The tracker data is stored in the database, provided the users have consented to doing so. This data is then used to generate graphs to provide the user with a visual representation of their data. Ideally, this would be completed by Milestone #2, but will definitely be done by Milestone #3 if there were any issues. 
 
-If the user has given permission to the professionals to view this data, they will also be able to view these graphs in the heath statistics page. When the professionals give feedback to the user, it is stored in the database and validated to ensure security of the data. This will be completed by Milestone #3 with the professional dashboard. 
+If the user has given permission to the professionals to view this data, they will also be able to view these graphs. When the professionals give feedback to the user, it is stored in the database and displayed back to the user alongside the appropriate graph(s). This will be completed by Milestone #3 with the professional dashboard. 
 
-Similarly, the events that the trail ambassadors create and add to the calendar will also be stored in a database. In case any errors are found while validating or attempting to store any of the data, an error code is generated and the user is redirected to the previous page where they are prompted to try again. This should be completed by Milestone #3 with the trail ambassador dashboard.
+When forming teams, a form must be submitted into the database so that it can assign users to a team. Once the teams are formed, the database is queried to generate a leaderboard by comparing all the team members' statistics. Graphs can also be generated and displayed using this data. As these functionalities are associated with the individual dashboard, it should be completed by Milestone #3 at the latest. 
 
+As trail ambassadors, they have the ability to assign roles to ensure that each user is able to access the appropriate dashboard. To do so, a list of active accounts is retrieved from the database and displayed back to them where they can search through the list to assign certain accounts to have access to the professional dashboard and trail ambassador dashboard. In addition, trail ambassadors have the ability to edit and add events to the calendar. Once they have entered the event details and saved it, it will be stored in the database. There is also the functionality to delete an event which is done by removing the event details data from the database. This features should be completed by Milestone #3 with the trail ambassador dashboard.
+
+## Timeline
+
+![Estimated Timeline](../images/estimated-timeline.jpg)
+
+The client has yet to define the milestones and deliverables she wishes for us to accomplish. Thus, we have created our own visualization of the timeline, based on the COSC 499 milestones, that we hope to follow for the duration of this project. Currently, we are in the process of designing mockups of all the web pages. Once we have finalized the design and received approval from the client, we will begin coding. 
+
+As seen above in Figure 3, we’ve divided the timeline based on each dashboard. We believe this is the most logical and efficient way to approach this project as most of the dashboards are dependent on each other. Thus, it would make sense to complete one dashboard before moving on to the next one to ensure that all features are working as expected. In addition, the individual dashboard contains the most content because not only does it need to record data, but it also needs to be able to convert that data into various types of graphs and display it back to the user. Hence, more time is allocated to complete this dashboard as all the other dashboards are dependent on it. We’ve also decided to work on the patient dashboard while we complete the individual dashboard because their contents overlap with each other. 
+
+Ideally, we hope to have all the dashboards completed by mid-March so that we can focus on testing the website as a whole to ensure that all features are functioning as expected. This will also allow us time to fix the code if any issues arise during this testing and refine it to be cleaner and more professional so that the client is able to understand and maintain it even after the project is completed. If time permits and the client approves, we hope to add additional features that the client has currently not yet implemented to further enhance the website. 
 
 ## Functional Requirements
 
-> There are **five** dashboard cartegories - Individual, Trail Ambassador, Administrator, Professional and Patient dashboards. further in the dfd, each dashboard has subcategories which represent the features each will have, we also have a landing page.. 
+**Homepage**
+
+When users navigate to the HEALTHENOW.com website, they will first see the homepage. At the moment, we are still in discussion with the client as to what kind of information she wants to be presented on this page. However, it has been confirmed that the user can create an account or log into an existing one from here. 
+
+Thus, it is important that our homepage is intuitive such that it is easy for users to tell where to click to log in or register an account. In addition, it is crucial that the system is able to validate these account credentials. When the user logs into their account, the system should be able to verify that the account exists and that the email-password combination is correct. If the user is creating an account, the system should be able to check if there is an account associated with the entered email already, ensure the password created is valid and secure by checking to make sure it meets the password criteria, and send a confirmation email to the user once the account has been successfully created. If there are any issues, the system should be able to alert the user and provide steps as to how to resolve them. 
+
+Since our client has not defined what she wants on the homepage, our team has come up with a few potential features for her to consider implementing on the homepage. This includes a section that explains the details of the wellness challenge, such as what it is, what is the duration of the challenge, and the reason why the Okanagan Rail Trail is hosting such an event. We have also thought of including an ‘About’ section where users can learn more about the Okanagan Rail Trail and Dr. Robert Petrella’s Lifestyle Prevention Program. Lastly, we are thinking of embedding the Google Map that the Okanagan Rail Trail has modified that highlights specific spots on the trail, such as where garbage cans and washrooms are located and scenic spots to take photos. Because this may cause the webpage to become very long, we may split these features across multiple pages but still make them accessible to all users without needing to log in or create an account. 
+
+As these are all content pages, we must ensure that all page links are up-to-date and not broken and provide the administrator access and the ability to update these page contents when necessary. Furthermore, the information should be presented in a way that is understandable, organized, and aesthetically pleasing to engage users. 
+The development of this page will begin once we have finalized a design with the client, which we hope will be by the end of October. And since these pages are relatively simple, it should not take us very long to code so we hope to have it completed by mid-November.
 
 **Individual Dashboard**
+
 The individual dashboard includes a tracker page where the user can input their weekly tracker data from the challenge. This dashboard will be programmed to check and ensure the validity of the user's input, convert the data into graphical illustrations, and display those graphs back to the user where they see a visual representation of their progress. The users of this dashboard will also have the ability to set up weekly goals, this encourages them to chase their goals and achieve better results from the weekly challenges. Additionally, there will be a discussion board where team members will be able to communicate with one another, this ensures that everyone is on the same page and is in sync with everything related to the challenge.
 
 Through the individual dashboard, the users will also have the ability to register into teams for the weekly challenges. Moreover, once teams have been formed, the system will have the ability to generate graphs that include all the team members' data so that they can compare their progress among themselves. Additionally, participants within the same team will be able to view the rankings of each team member; this further increases the competitiveness within the team and encourages the participants to be more involved in the weekly challenges. This means the system must be able to compare data between users within a team and sort them based on what data is considered good (high-ranking) and bad (low-ranking). 
@@ -164,16 +154,30 @@ In addition, it is important for the trail ambassador to be able to view how wel
 
 **Professional Dashboard**
 
-- The professional dashboard is where the data is turned into relevant information by different personnel. But before this process can begin, the users must first consent to the utility of their information for different purposes explained in the privacy policy.
-- Through this dashboard, the professionals that work in Dr. Robert Petrella’s Lifestyle Prevention Program will be able to retrieve various user data collected such as physical activities, foods consumed, blood pressure, weight, and even average cigarettes smoked. The physical data will be tabulated to reflect program progress and will be presented alongside graphs, hence enhancing readability and understanding. Different kinds of graphs will be available to select from given varying preferences. Furthermore, users will be categorized into groups and given a rating of poor, good, etc. to compare the progress between other groups. 
-- Using the various data collected, the professional will be able to perform specialized diagnoses for each consented user and come to relevant conclusions that will benefit the user. This feedback could contain recommendations on lifestyle changes that can act as targets that the user should try to attain. These changes could have something to do with sleeping, smoking, or physical activity habits. Once the professional has generated feedback, it will be displayed back to the user with the appropriate graphs.
-- We aim to begin building this dashboard at the beginning of February and have it completed by mid-March.
+The professional dashboard is where the data is turned into relevant information by different personnel. But before this process can begin, the users must first consent to the utility of their information for different purposes explained in the privacy policy.
+
+Through this dashboard, the professionals that work in Dr. Robert Petrella’s Lifestyle Prevention Program will be able to retrieve various user data collected such as physical activities, foods consumed, blood pressure, weight, and even average cigarettes smoked. The physical data will be tabulated to reflect program progress and will be presented alongside graphs, hence enhancing readability and understanding. Different kinds of graphs will be available to select from given varying preferences. Furthermore, users will be categorized into groups and given a rating of poor, good, etc. to compare the progress between other groups. 
+
+Using the various data collected, the professional will be able to perform specialized diagnoses for each consented user and come to relevant conclusions that will benefit the user. This feedback could contain recommendations on lifestyle changes that can act as targets that the user should try to attain. These changes could have something to do with sleeping, smoking, or physical activity habits. Once the professional has generated feedback, it will be displayed back to the user with the appropriate graphs.
+
+We aim to begin building this dashboard at the beginning of February and have it completed by the beginning of March.
+
 
 **Patient Dashboard**
 
-- The patient dashboard is accessed by the consented individuals user group and consists of pages where graphs will be displayed to visualize physical activity data, health data, and dietary data.The health data could include number of hours slept in a day and the number of cigarettes smoked in a given time period. Dietary information visualized could include the average fruit and vegetable servings consumed per time period specified and the number of servings consumed during breakfast. The different kinds of data graphically rendered on the dashboards will be utilized by Dr. Petrella’s health professionals team to provide relevant health feedback to the community members of Lake Country. 
-- What makes this different from the individual dashboard is that there will be a box next to these graphs where the user can see the comments relevant to that graph that the certified professionals made. In addition, there will be a to-do list where users can easily view the advice the professionals have given them for the week to follow at a glance. 
-- We aim to start working on this project in mid February and have it completed by mid March. 
+The patient dashboard is accessed by the consented individuals user group and consists of pages where graphs will be displayed to visualize physical activity data, health data, and dietary data.The health data could include number of hours slept in a day and the number of cigarettes smoked in a given time period. Dietary information visualized could include the average fruit and vegetable servings consumed per time period specified and the number of servings consumed during breakfast. The different kinds of data graphically rendered on the dashboards will be utilized by Dr. Petrella’s health professionals team to provide relevant health feedback to the community members of Lake Country. 
+
+What makes this different from the individual dashboard is that there will be a box next to these graphs where the user can see the comments relevant to that graph that the certified professionals made. In addition, there will be a to-do list where users can easily view the advice the professionals have given them for the week to follow at a glance. 
+
+We aim to start working on this dashboard in January and have it completed by mid February.
+
+**Administrator Dashboard**
+
+At the moment, the administrator dashboard is used to view a list of all the accounts created and assign roles and authorize certain accounts to gain access to specific dashboards. This is necessary to ensure that any newly added trail ambassadors and working professionals can access certain features to perform their tasks and responsibilities. Thus, it is crucial that the system is able to assign roles and give access to the correct accounts, as well as be able to generate an easy-to-read table of all the accounts registered in the database. 
+
+This dashboard will be worked on once all the other dashboards are mostly completed (if not all) so that we can test whether its functionality works with all the user groups and dashboards, which will hopefully be by the end of February so that it is completed in time for Milestone 3, which is the second round of peer testing scheduled in mid-March. 
+
+
 
 ## Non-functional Requirements
 
@@ -199,9 +203,29 @@ In addition, it is important for the trail ambassador to be able to view how wel
 **Milestone #4 Product Delivery:**
 
 1. The final product must meet all of the previous non-functional requirements <br>
-2. We have to also make sure the final product is efficient (it has no bugs and runs as expected), such that it uses a limited amount of resources on a device while providing a good experience to the user.<br>
+2. We have to also make sure the final product is efficient (it has no bugs and runs as expected), such that it uses a limited amount of resources on a device while providing a good experience to the user.
+
+## Environmental Constraints
+
+**Programming Languages**
+
+We have to make sure that we use programming languages that can be used across old as well as new technology, different devices, and operating systems. This means that the technologies used should possess versatility and portability characteristics. This presents us with a challenge whose solutions we have fortunately derived. These technologies might have to be updated given the rapidly changing technology landscape.
+
+**Maintenance Accessibility**
+
+The project currently faces two main constraints in this regard. The first is finding qualified personnel for maintenance consultation in a timely manner. A solution the team has come up with is to book qualified personnel on campus ahead of time for maintenance checks. The second maintenance constraint is to ensure the software is left in a structural state that is easily grasped by any other qualified personnel and also sustainable for the longest time possible. This is why the team has chosen the Django content management system whose structural infrastructure fits the goals of the project.
+
+**Health Tragedies**
+
+In this day and age, we face increasing unprecedented health tragedies of various scales with the most recent being the global Coronavirus pandemic. If another pandemic or similar health tragedy arises , the Lake Country and Okanagan community could witness identical health protection policies imposed on them. These policies could inhibit them from hosting and participating in outdoor, physical activities and events.
+
+**Weather Fluctuations**
+
+Similarly, we face increasing unprecedented weather calamities on increasing scales. The Okanagan area has recently been a host to increasing forest fires and heat waves. To fan the flames, the proximity to the United States and the valley landscape make the Okanagan a suitable host to the traversing smoky winds. These dangerous weather conditions such as forest fires can have extremely detrimental health repercussions. Thus, these risks could heavily influence low participation in weekly challenges that involve outdoor activities.
 
 ## Testing Strategy
+
+**Testing Technique**
 
 Testing is extremely important. Therefore, the right testing strategy can aid in identifying any possible defect with the code while also ensuring continuous integration of new features is being adopted with no issues. We have decided to test our code using a regression testing approach.
 
@@ -209,33 +233,55 @@ Regression testing is a type of software testing that runs after every change ma
 
 For our initial features, we will be running unit tests for every code addition. We do so to ensure that we have a solid base, a code that lacks bugs. Doing so will allow us to perform regression testing for the additional features we add as we move on. We have to be selective with the tests we run as it may not feasible to test every single code addition added to our repository.
 
-<strong>Testing Tools</strong>
+**Testing Tools**
 
 For our unit testing, we will be using Pytest as our software testing framework, this will be extremely useful and compatible since we are using Django for both frontend and backend. Pytest is also extremely efficient in the sense that it will allow us to execute multiple tests parallely.
 
 Finally, we will be conducting some usability testing to ensure that our dashboard designs do what we intend them to do. To do that, we have to develop the mock designs of our different dashboards on Figma and then run some usability testing to gather feedback from different users. This will allow us to identify the most ideal placement and format for the features in our dashboards.
 
+## Questions
 
+How will the homeless access the application?
+> After speaking with the client again, the homeless will not be one of the target user groups right now due to the lack of information we have and the complexity of organizing a way for them to get access. Once we have formed the foundation of the website, we may consider adding them back into the user groups again. 
 
-## Environmental Constraints
+Does the client have experience in Linux systems?
+> No, however, there is IT Support on campus which the client plans to utilize.
 
-*Environmental constraints are the characteristics in the environment that change the level of difficulty of a task or activity when it is performed in that environment.*
+What security standards will you be using?
+> We will be using a VPN to hide our web activity and create a secure connection as well as using wired networks and avoiding unsafe network pathways. We will also be coding within a virtual machine. In the later phases of development, we will also look into encryption and other security practices since we will be dealing with personal user data. 
 
-> A detailed list of environmental constraints:
+Will Vanilla Javascript be enough for your front end? Do you believe you will need to use any other frameworks?
+> Vanilla Javascript is not enough for the frontend, which is why we will also be using the Django framework which has the functionality that we need for this application.
 
-**Programming Languages**
+What about users that fall under multiple groups? Will they need to manage multiple accounts or can they switch between profiles?
+> In the database, there is a category for assigning roles to each account. This role will then allow them to access the specific dashboards. One user can have access to numerous dashboards, given that they are authorized to have access. These roles are assigned by those who have admin access. At the moment, this is the client, however, in the future, this access will be given to the trail ambassadors. 
 
-- We have to make sure that we use programming languages that can be used across old as well as new technology, different devices, and operating systems. This means that the technologies used should possess versatility and portability characteristics. This presents us with a challenge whose solutions we have fortunately derived. These technologies might have to be updated given the rapidly changing technology landscape.
+Can a user chat with Trail Ambassadors or health professionals?
+> As of right now, we haven’t thought of implementing this chat functionality yet since we are focused on implementing the key features first. However, this is something that we can consider and bring it up to the client once we have completed the minimal requirements. 
 
-**Maintenance Accessibility**
+Load testing was included in your testing part during the presentation, how will it be performed exactly?
+> This was part of the initial testing strategy planned. We have developed that testing strategy while lacking some key information. After re-developing the testing strategy, load testing is not part of the testing plan as it may not be feasible; time will be the main constraint.
 
-- The project currently faces two main constraints in this regard. The first is finding qualified personnel for maintenance consultation in a timely manner. A solution the team has come up with is to book qualified personnel on campus ahead of time for maintenance checks. The second maintenance constraint is to ensure the software is left in a structural state that is easily grasped by any other qualified personnel and also sustainable for the longest time possible. This is why the team has chosen the Django content management system whose structural infrastructure fits the goals of the project.
+Why do you choose to do a server for the storage?
+> This is provided by the client, she has an SQL database which she wants to use. 
 
-**Health Tragedies**
+Why are there two separate databases instead of one database with different tables?
+> Our initial data flow diagrams had two databases: one for account credentials and one for tracker and feedback data. We’ve now revised that so that those variables are in the same database since they are related to each other.
 
-- In this day and age, we face increasing unprecedented health tragedies of various scales with the most recent being the global Coronavirus pandemic. If another pandemic or similar health tragedy arises , the Lake Country and Okanagan community could witness identical health protection policies imposed on them. These policies could inhibit them from hosting and participating in outdoor, physical activities and events.
+Will the administrators or volunteers be able to update links without the help of a developer?
+> Yes, the trail ambassadors will be given admin access to update information on the website once our client has handed over the application to them.
 
-**Weather Fluctuations**
+If there are environmental constraints that cancel or postpone an event, do you have a notification plan in place? (e.g., email all users involved, the dashboard is a brighter colour, alert at the top of the page)
+> There will be a content box where users can view notifications posted by the trail ambassadors. 
 
-- Similarly, we face increasing unprecedented weather calamities on increasing scales. The Okanagan area has recently been a host to increasing forest fires and heat waves. To fan the flames, the proximity to the United States and the valley landscape make the Okanagan a suitable host to the traversing smoky winds. These dangerous weather conditions such as forest fires can have extremely detrimental health repercussions. Thus, these risks could heavily influence low participation in weekly challenges that involve outdoor activities.
+What is the benefit of posting weekly challenges via this service rather than an existing one such as Strava?
+> While Strava is a great application, what we are creating goes beyond Strava’s functionality because we are not only tracking physical activity data, but also data regarding the users’ eating and lifestyle habits, and then using that data to provide personalized advice from certified professionals on how to improve their health and wellbeing. 
 
+Are both dashboards accessible via the same portal?
+> Yes, all the dashboards are accessible within the same website. The user has the ability to navigate between different dashboards depending on what kind of access their roles gives them.
+
+What security will be implemented for health information
+> Security is such a sensitive matter which will be dealt with by the client. What we can do is program efficiently to avoid any possible vulnerabilities. The better we write the code, the lower the chance of any vulnerabilities appearing.
+
+Will confidential health information be stored? If so, would you be encrypting the files & data for security? Or will you have another method to handle that?
+> This functionality will be introduced later into the development as for now we’re just focusing on the required important functionality that the client wants. This is something we will definitely look into, however, because we are still in the beginning works of the project, we haven’t gotten to it yet. 
