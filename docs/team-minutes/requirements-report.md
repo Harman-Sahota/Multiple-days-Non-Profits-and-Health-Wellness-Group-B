@@ -162,7 +162,6 @@ The trail ambassador dashboard is mainly concerned with the calendar where the t
 In addition, it is important for the trail ambassador to be able to view how well the challenge is doing in terms of participation. Hence, this dashboard will allow the trail ambassadors to view a visual representation of the challenge statistics such as the number of participants in the weekly challenge and the overall progress of the challenge. Moreover, the trail ambassador dashboard will contain a list of emergency and non-emergency contacts and affiliates contacts so that they are easy to access in case they are needed.
 
 
-
 **Professional Dashboard**
 
 - The professional dashboard is where the data is turned into relevant information by different personnel. But before this process can begin, the users must first consent to the utility of their information for different purposes explained in the privacy policy.
@@ -190,7 +189,31 @@ For our unit testing, we will be using Pytest as our software testing framework,
 
 Finally, we will be conducting some usability testing to ensure that our dashboard designs do what we intend them to do. To do that, we have to develop the mock designs of our different dashboards on Figma and then run some usability testing to gather feedback from different users. This will allow us to identify the most ideal placement and format for the features in our dashboards.
 
+## Non-functional Requirements
 
+**Milestone #1: Requirements Report** <br>
+1. Install the Virtual Machine and set up Linux, this helps secure our actual device as Linux os provides better security, as well as the virtual machine, provides a separate environment. <br>
+2. Install MySQL setup MySQL localhost. The database is scalable by using MySQL as this allows the size of the data set to be flexible. <br>
+3. Install and set up PuTTY and generate SSH key pairs. This helps us secure our code once we start coding.<br>
+4. Install and set up CISCO VPN. This ensures that we are working in a safe environment and secures our code.<br>
+5. Create designs for webpages using Figma, keeping in mind that the graphics are able to handle the traffic on the website. By doing this, we make sure our design is adaptable to different devices.<br>
+
+**Milestone #2 Peer Testing #1:**
+
+1. To finish making the prototype, we have to make sure the prototype has good usability (i.e. is easy to navigate and does not have any lags). <br>
+2. We also have to make it robust so that it degrades under stress.<br>
+
+**Milestone #3 Peer Testing #2:**
+
+1. We have to ensure that the code is efficient (code has the most optimal run time and space), taking into consideration the performance aspect (execution speed, response time, and throughput). <br>
+2. The code needs to be reliable (fault-tolerant, meant-time to failure, data backups).<br> 
+3. The code should also be adaptable in the sense that adding functionalities is simple.<br>
+4. A well-written program that contributes to overall security.<br>
+
+**Milestone #4 Product Delivery:**
+
+1. The final product must meet all of the previous non-functional requirements <br>
+2. We have to also make sure the final product is efficient (it has no bugs and runs as expected), such that it uses a limited amount of resources on a device while providing a good experience to the user.<br>
 
 ## Environmental Constraints
 
