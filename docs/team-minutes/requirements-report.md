@@ -172,6 +172,14 @@ Through the individual dashboard, the users will also have the ability to regist
 
 As this dashboard is accessed by the most users, we hope to start working on it as soon as we can, which is potentially at the beginning of November when the designs for this dashboard have been mostly finalized and complete most of the functionality of this dashboard by the beginning of December in order to meet the Milestone 2 deadline for the first round of peer testing.
 
+**Trail Ambassador Dashboard**
+
+The trail ambassador dashboard is mainly concerned with the calendar where the trail ambassadors can enter important dates and scheduled events. Thus, it is important that the system we create allows the trail ambassadors to create, update or delete the events in the calendar with ease. To ensure that the trail ambassadors do not accidentally delete an event, the system will generate an alert to confirm the action before completing it. In addition, the system will send a reminder message to save changes in case the trail ambassador tries to exit the page without saving.
+
+In addition, it is important for the trail ambassador to be able to view how well the challenge is doing in terms of participation. Hence, this dashboard will allow the trail ambassadors to view a visual representation of the challenge statistics such as the number of participants in the weekly challenge and the overall progress of the challenge. Moreover, the trail ambassador dashboard will contain a list of emergency and non-emergency contacts and affiliates contacts so that they are easy to access in case they are needed.
+
+
+
 **Professional Dashboard**
 
 - The professional dashboard is where the data is turned into relevant information by different personnel. But before this process can begin, the users must first consent to the utility of their information for different purposes explained in the privacy policy.
