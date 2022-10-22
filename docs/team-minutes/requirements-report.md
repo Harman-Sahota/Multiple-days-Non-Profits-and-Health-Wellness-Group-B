@@ -225,7 +225,7 @@ Similarly, we face increasing unprecedented weather calamities on increasing sca
 
 ## Testing Strategy
 
-<strong>Testing Technique</strong>
+**Testing Technique**
 
 Testing is extremely important. Therefore, the right testing strategy can aid in identifying any possible defect with the code while also ensuring continuous integration of new features is being adopted with no issues. We have decided to test our code using a regression testing approach.
 
@@ -233,8 +233,55 @@ Regression testing is a type of software testing that runs after every change ma
 
 For our initial features, we will be running unit tests for every code addition. We do so to ensure that we have a solid base, a code that lacks bugs. Doing so will allow us to perform regression testing for the additional features we add as we move on. We have to be selective with the tests we run as it may not feasible to test every single code addition added to our repository.
 
-<strong>Testing Tools</strong>
+**Testing Tools**
 
 For our unit testing, we will be using Pytest as our software testing framework, this will be extremely useful and compatible since we are using Django for both frontend and backend. Pytest is also extremely efficient in the sense that it will allow us to execute multiple tests parallely.
 
 Finally, we will be conducting some usability testing to ensure that our dashboard designs do what we intend them to do. To do that, we have to develop the mock designs of our different dashboards on Figma and then run some usability testing to gather feedback from different users. This will allow us to identify the most ideal placement and format for the features in our dashboards.
+
+**Questions**
+
+How will the homeless access the application?
+> After speaking with the client again, the homeless will not be one of the target user groups right now due to the lack of information we have and the complexity of organizing a way for them to get access. Once we have formed the foundation of the website, we may consider adding them back into the user groups again. 
+
+Does the client have experience in Linux systems?
+> No, however, there is IT Support on campus which the client plans to utilize.
+
+What security standards will you be using?
+> We will be using a VPN to hide our web activity and create a secure connection as well as using wired networks and avoiding unsafe network pathways. We will also be coding within a virtual machine. In the later phases of development, we will also look into encryption and other security practices since we will be dealing with personal user data. 
+
+Will Vanilla Javascript be enough for your front end? Do you believe you will need to use any other frameworks?
+> Vanilla Javascript is not enough for the frontend, which is why we will also be using the Django framework which has the functionality that we need for this application.
+
+What about users that fall under multiple groups? Will they need to manage multiple accounts or can they switch between profiles?
+> In the database, there is a category for assigning roles to each account. This role will then allow them to access the specific dashboards. One user can have access to numerous dashboards, given that they are authorized to have access. These roles are assigned by those who have admin access. At the moment, this is the client, however, in the future, this access will be given to the trail ambassadors. 
+
+Can a user chat with Trail Ambassadors or health professionals?
+> As of right now, we haven’t thought of implementing this chat functionality yet since we are focused on implementing the key features first. However, this is something that we can consider and bring it up to the client once we have completed the minimal requirements. 
+
+Load testing was included in your testing part during the presentation, how will it be performed exactly?
+> This was part of the initial testing strategy planned. We have developed that testing strategy while lacking some key information. After re-developing the testing strategy, load testing is not part of the testing plan as it may not be feasible; time will be the main constraint.
+
+Why do you choose to do a server for the storage?
+> This is provided by the client, she has an SQL database which she wants to use. 
+
+Why are there two separate databases instead of one database with different tables?
+> Our initial data flow diagrams had two databases: one for account credentials and one for tracker and feedback data. We’ve now revised that so that those variables are in the same database since they are related to each other.
+
+Will the administrators or volunteers be able to update links without the help of a developer?
+> Yes, the trail ambassadors will be given admin access to update information on the website once our client has handed over the application to them.
+
+If there are environmental constraints that cancel or postpone an event, do you have a notification plan in place? (e.g., email all users involved, the dashboard is a brighter colour, alert at the top of the page)
+> There will be a content box where users can view notifications posted by the trail ambassadors. 
+
+What is the benefit of posting weekly challenges via this service rather than an existing one such as Strava?
+> While Strava is a great application, what we are creating goes beyond Strava’s functionality because we are not only tracking physical activity data, but also data regarding the users’ eating and lifestyle habits, and then using that data to provide personalized advice from certified professionals on how to improve their health and wellbeing. 
+
+Are both dashboards accessible via the same portal?
+> Yes, all the dashboards are accessible within the same website. The user has the ability to navigate between different dashboards depending on what kind of access their roles gives them.
+
+What security will be implemented for health information
+> Security is such a sensitive matter which will be dealt with by the client. What we can do is program efficiently to avoid any possible vulnerabilities. The better we write the code, the lower the chance of any vulnerabilities appearing.
+
+Will confidential health information be stored? If so, would you be encrypting the files & data for security? Or will you have another method to handle that?
+> This functionality will be introduced later into the development as for now we’re just focusing on the required important functionality that the client wants. This is something we will definitely look into, however, because we are still in the beginning works of the project, we haven’t gotten to it yet. 
