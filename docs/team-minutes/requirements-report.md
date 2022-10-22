@@ -175,20 +175,6 @@ In addition, it is important for the trail ambassador to be able to view how wel
 - What makes this different from the individual dashboard is that there will be a box next to these graphs where the user can see the comments relevant to that graph that the certified professionals made. In addition, there will be a to-do list where users can easily view the advice the professionals have given them for the week to follow at a glance. 
 - We aim to start working on this project in mid February and have it completed by mid March. 
 
-## Testing Strategy
-
-Testing is extremely important. Therefore, the right testing strategy can aid in identifying any possible defect with the code while also ensuring continuous integration of new features is being adopted with no issues. We have decided to test our code using a regression testing approach.
-
-Regression testing is a type of software testing that runs after every change made to the code; This is done to ensure that any additional change (additional features) is integrated without any unintended breaks. Essentially, we are avoiding the possibility of an old bug breaking the code in the later stages of the project.
-
-For our initial features, we will be running unit tests for every code addition. We do so to ensure that we have a solid base, a code that lacks bugs. Doing so will allow us to perform regression testing for the additional features we add as we move on. We have to be selective with the tests we run as it may not feasible to test every single code addition added to our repository.
-
-<strong>Testing Tools</strong>
-
-For our unit testing, we will be using Pytest as our software testing framework, this will be extremely useful and compatible since we are using Django for both frontend and backend. Pytest is also extremely efficient in the sense that it will allow us to execute multiple tests parallely.
-
-Finally, we will be conducting some usability testing to ensure that our dashboard designs do what we intend them to do. To do that, we have to develop the mock designs of our different dashboards on Figma and then run some usability testing to gather feedback from different users. This will allow us to identify the most ideal placement and format for the features in our dashboards.
-
 ## Non-functional Requirements
 
 **Milestone #1: Requirements Report** <br>
@@ -214,6 +200,22 @@ Finally, we will be conducting some usability testing to ensure that our dashboa
 
 1. The final product must meet all of the previous non-functional requirements <br>
 2. We have to also make sure the final product is efficient (it has no bugs and runs as expected), such that it uses a limited amount of resources on a device while providing a good experience to the user.<br>
+
+## Testing Strategy
+
+Testing is extremely important. Therefore, the right testing strategy can aid in identifying any possible defect with the code while also ensuring continuous integration of new features is being adopted with no issues. We have decided to test our code using a regression testing approach.
+
+Regression testing is a type of software testing that runs after every change made to the code; This is done to ensure that any additional change (additional features) is integrated without any unintended breaks. Essentially, we are avoiding the possibility of an old bug breaking the code in the later stages of the project.
+
+For our initial features, we will be running unit tests for every code addition. We do so to ensure that we have a solid base, a code that lacks bugs. Doing so will allow us to perform regression testing for the additional features we add as we move on. We have to be selective with the tests we run as it may not feasible to test every single code addition added to our repository.
+
+<strong>Testing Tools</strong>
+
+For our unit testing, we will be using Pytest as our software testing framework, this will be extremely useful and compatible since we are using Django for both frontend and backend. Pytest is also extremely efficient in the sense that it will allow us to execute multiple tests parallely.
+
+Finally, we will be conducting some usability testing to ensure that our dashboard designs do what we intend them to do. To do that, we have to develop the mock designs of our different dashboards on Figma and then run some usability testing to gather feedback from different users. This will allow us to identify the most ideal placement and format for the features in our dashboards.
+
+
 
 ## Environmental Constraints
 
