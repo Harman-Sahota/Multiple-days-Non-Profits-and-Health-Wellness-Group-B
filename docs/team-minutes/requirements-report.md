@@ -165,6 +165,13 @@ Similarly, the events that the trail ambassadors create and add to the calendar 
 
 > There are **five** dashboard cartegories - Individual, Trail Ambassador, Administrator, Professional and Patient dashboards. further in the dfd, each dashboard has subcategories which represent the features each will have, we also have a landing page.. 
 
+**Individual Dashboard**
+The individual dashboard includes a tracker page where the user can input their weekly tracker data from the challenge. This dashboard will be programmed to check and ensure the validity of the user's input, convert the data into graphical illustrations, and display those graphs back to the user where they see a visual representation of their progress. The users of this dashboard will also have the ability to set up weekly goals, this encourages them to chase their goals and achieve better results from the weekly challenges. Additionally, there will be a discussion board where team members will be able to communicate with one another, this ensures that everyone is on the same page and is in sync with everything related to the challenge.
+
+Through the individual dashboard, the users will also have the ability to register into teams for the weekly challenges. Moreover, once teams have been formed, the system will have the ability to generate graphs that include all the team members' data so that they can compare their progress among themselves. Additionally, participants within the same team will be able to view the rankings of each team member; this further increases the competitiveness within the team and encourages the participants to be more involved in the weekly challenges. This means the system must be able to compare data between users within a team and sort them based on what data is considered good (high-ranking) and bad (low-ranking). 
+
+As this dashboard is accessed by the most users, we hope to start working on it as soon as we can, which is potentially at the beginning of November when the designs for this dashboard have been mostly finalized and complete most of the functionality of this dashboard by the beginning of December in order to meet the Milestone 2 deadline for the first round of peer testing.
+
 **Professional Dashboard**
 
 - The professional dashboard is where the data is turned into relevant information by different personnel. But before this process can begin, the users must first consent to the utility of their information for different purposes explained in the privacy policy.
