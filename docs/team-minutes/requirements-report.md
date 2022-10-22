@@ -239,7 +239,7 @@ For our unit testing, we will be using Pytest as our software testing framework,
 
 Finally, we will be conducting some usability testing to ensure that our dashboard designs do what we intend them to do. To do that, we have to develop the mock designs of our different dashboards on Figma and then run some usability testing to gather feedback from different users. This will allow us to identify the most ideal placement and format for the features in our dashboards.
 
-**Questions**
+## Questions
 
 How will the homeless access the application?
 > After speaking with the client again, the homeless will not be one of the target user groups right now due to the lack of information we have and the complexity of organizing a way for them to get access. Once we have formed the foundation of the website, we may consider adding them back into the user groups again. 
