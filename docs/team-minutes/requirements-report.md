@@ -96,36 +96,23 @@ The client requested us to use GitHub issues for bug tracking since all of our c
 
 ## Data Flow Diagrams (DFDs)
 
-![](../images/dfd-level0.png?raw=true)
+![](../images/dfd-0.png)
 
-This is a high-level representation of what our project will look like. When users visit the website by either scanning a QR code or typing in the URL, they will be directed to the home page which has content pages containing messages from the trail ambassadors of the Okanagan Rail Trail, the contact information of the affiliates, and an interactive map created by the Okanagan Rail Trail which will allow users to locate different landmarks along the trail. In addition, users will be able to log in or create an account to access the specific dashboards, depending on what type of user group they are in and what role they have been assigned. This will be completed by Milestone #2 in time for round one of peer testing.
+HEALTHENOW users will interact with the HEALTHENOW system to perform different actions. These actions are dependent on what type of user they are. 
 
-There are five dashboards available on this website: Individual, Patient, Professional, Trail Ambassador, and Administrator. Within each dashboard, there are various subcategories that contain different features of the website that are unique to the dashboard. All five dashboards should be completed and fully functional by the time we reach Milestone #4. 
+As an individual, they will interact with the system by giving consent to having their data stored into the database, and then use the website to enter tracker data and have that data converted into visual graphics. Similarly, a consented individual will have access to all the functionality of an individual, but also be able to create teams for the weekly challenges and view their team members progress to form a leaderboard. In addition, consented individuals are able to receive feedback from the professionals. As a professional, they are able to view the data of the consented individuals both numerically and graphically, and provide feedback as to what was done well and what can be improved so that the consented individual can reach their goals. Lastly, as a trail ambassador, they are able to assign roles, view the overall progress of the challenge, and create/edit/delete events from the calendar. All of these functionalities require querying the database in order to validate credentials, create teams and events, generate graphs and rankings, and retrieve information, and much more. 
 
-The *individual* dashboard contains a tracker page that will allow users to enter data such as the number of steps taken in a day, the number of hours slept, etc. Prior to being able to access the tracker page, the user must provide consent in order for this data to be saved into the database. From this data that they enter into the database, the users will be able to view graphs that have been generated automatically by the system. In addition, these users will be able to view a calendar with upcoming events entered into the system by the trail ambassadors. Lastly, users will be able to access a weekly challenge page where users can form teams in order to compete with each other in the wellness challenge, view a leaderboard, and communicate with other participants. This dashboard will be mostly completed by Milestone #2 for the first round of peer testing, however, it is not confirmed if it will be fully completed in time as there are many features to implement.
+![](../images/dfd-1.png)
 
-*Patients* dashboard is part of the individual dashboard, it will display the data from the database which the professionals have provided for different teams/individuals. This dashboard will be completed by Milestone #3 for the second round of peer testing. We can only begin working on this dashboard once the individual dashboard is completed. 
-
-The *professional view* dashboard is for working professionals like doctors and dietitians to monitor users’ statistics through the graphs generated from the tracker data they enter and provide feedback. They will also be able to group users together to provide feedback to the group as a whole. If the project is on track, we hope to have this dashboard completed by Milestone #3.
-
-The *trail ambassador* dashboard is for the people who are working with the Okanagan Rail Trail to fundraise for events. This dashboard gives them a contact list to the affiliates and their colleagues as well as emergency and non-emergency services. It also provides them with the functionality to schedule events into the calendar which all users have access to viewing. This dashboard should be completed by Milestone #3 along with the professional dashboard.
-
-The *admin* dashboard is used by the trail ambassadors and our client to approve new user accounts, this allows them to ensure that the correct people are joining different categories of users and have access to the necessary dashboards. As this dashboard only has one feature at the moment and is used by the trail ambassadors, it will be implemented after the trail ambassador dashboard. If there are no issues with implementing the other dashboards, this should be completed by Milestone #3, but can also be pushed a little later without affecting our progress too much as there is not too much functionality associated with it.
-
-professionals to view this data, they will also be able to view these graphs in the heath statistics page. When the professionals give feedback to the user, it is stored in the database and validated to ensure security of the data. This will be completed by Milestone #3 with the professional dashboard. 
-Similarly, the events that the trail ambassadors create and add to the calendar will also be stored in a database. In case any errors are found while validating or attempting to store any of the data, an error code is generated and the user is redirected to the previous page where they are prompted to try again. This should be completed by Milestone #3 with the trail ambassador dashboard.
-
-
-![](../images/dfd-level1.png?raw=true)
-
-
-The login process involves the user entering their email and password. This data is then queried in the database where it is authenticated to check if the user exists in the database. If the account exists and the correct email-password combination was entered, a success message is returned and the user can login to the dashboard their credentials give them access to. However, if the user does not exist in the database, or the incorrect credentials were entered, an error message is displayed and the user is prompted to enter the account credentials again. This will be completed along with the homepage by Milestone #2.
+The login process involves the user entering their email and password. This data is then queried in the database where it is authenticated to check if the user exists in the database. If the account exists and the correct email-password combination was entered, the user can log into the dashboard their credentials give them access to. However, if the incorrect credentials were entered, the user is prompted to enter the account credentials again. If the account does not exist, the user can create a new account and those account credentials will be stored into the database. This will be completed with the homepage by Milestone #2.
 
 The tracker data is stored in the database, provided the users have consented to doing so. This data is then used to generate graphs to provide the user with a visual representation of their data. Ideally, this would be completed by Milestone #2, but will definitely be done by Milestone #3 if there were any issues. 
 
-If the user has given permission to the professionals to view this data, they will also be able to view these graphs in the heath statistics page. When the professionals give feedback to the user, it is stored in the database and validated to ensure security of the data. This will be completed by Milestone #3 with the professional dashboard. 
+If the user has given permission to the professionals to view this data, they will also be able to view these graphs. When the professionals give feedback to the user, it is stored in the database and displayed back to the user alongside the appropriate graph(s). This will be completed by Milestone #3 with the professional dashboard. 
 
-Similarly, the events that the trail ambassadors create and add to the calendar will also be stored in a database. In case any errors are found while validating or attempting to store any of the data, an error code is generated and the user is redirected to the previous page where they are prompted to try again. This should be completed by Milestone #3 with the trail ambassador dashboard.
+When forming teams, a form must be submitted into the database so that it can assign users to a team. Once the teams are formed, the database is queried to generate a leaderboard by comparing all the team members' statistics. Graphs can also be generated and displayed using this data. As these functionalities are associated with the individual dashboard, it should be completed by Milestone #3 at the latest. 
+
+As trail ambassadors, they have the ability to assign roles to ensure that each user is able to access the appropriate dashboard. To do so, a list of active accounts is retrieved from the database and displayed back to them where they can search through the list to assign certain accounts to have access to the professional dashboard and trail ambassador dashboard. In addition, trail ambassadors have the ability to edit and add events to the calendar. Once they have entered the event details and saved it, it will be stored in the database. There is also the functionality to delete an event which is done by removing the event details data from the database. This features should be completed by Milestone #3 with the trail ambassador dashboard.
 
 ## Timeline
 
@@ -167,16 +154,30 @@ In addition, it is important for the trail ambassador to be able to view how wel
 
 **Professional Dashboard**
 
-- The professional dashboard is where the data is turned into relevant information by different personnel. But before this process can begin, the users must first consent to the utility of their information for different purposes explained in the privacy policy.
-- Through this dashboard, the professionals that work in Dr. Robert Petrella’s Lifestyle Prevention Program will be able to retrieve various user data collected such as physical activities, foods consumed, blood pressure, weight, and even average cigarettes smoked. The physical data will be tabulated to reflect program progress and will be presented alongside graphs, hence enhancing readability and understanding. Different kinds of graphs will be available to select from given varying preferences. Furthermore, users will be categorized into groups and given a rating of poor, good, etc. to compare the progress between other groups. 
-- Using the various data collected, the professional will be able to perform specialized diagnoses for each consented user and come to relevant conclusions that will benefit the user. This feedback could contain recommendations on lifestyle changes that can act as targets that the user should try to attain. These changes could have something to do with sleeping, smoking, or physical activity habits. Once the professional has generated feedback, it will be displayed back to the user with the appropriate graphs.
-- We aim to begin building this dashboard at the beginning of February and have it completed by mid-March.
+The professional dashboard is where the data is turned into relevant information by different personnel. But before this process can begin, the users must first consent to the utility of their information for different purposes explained in the privacy policy.
+
+Through this dashboard, the professionals that work in Dr. Robert Petrella’s Lifestyle Prevention Program will be able to retrieve various user data collected such as physical activities, foods consumed, blood pressure, weight, and even average cigarettes smoked. The physical data will be tabulated to reflect program progress and will be presented alongside graphs, hence enhancing readability and understanding. Different kinds of graphs will be available to select from given varying preferences. Furthermore, users will be categorized into groups and given a rating of poor, good, etc. to compare the progress between other groups. 
+
+Using the various data collected, the professional will be able to perform specialized diagnoses for each consented user and come to relevant conclusions that will benefit the user. This feedback could contain recommendations on lifestyle changes that can act as targets that the user should try to attain. These changes could have something to do with sleeping, smoking, or physical activity habits. Once the professional has generated feedback, it will be displayed back to the user with the appropriate graphs.
+
+We aim to begin building this dashboard at the beginning of February and have it completed by the beginning of March.
+
 
 **Patient Dashboard**
 
-- The patient dashboard is accessed by the consented individuals user group and consists of pages where graphs will be displayed to visualize physical activity data, health data, and dietary data.The health data could include number of hours slept in a day and the number of cigarettes smoked in a given time period. Dietary information visualized could include the average fruit and vegetable servings consumed per time period specified and the number of servings consumed during breakfast. The different kinds of data graphically rendered on the dashboards will be utilized by Dr. Petrella’s health professionals team to provide relevant health feedback to the community members of Lake Country. 
-- What makes this different from the individual dashboard is that there will be a box next to these graphs where the user can see the comments relevant to that graph that the certified professionals made. In addition, there will be a to-do list where users can easily view the advice the professionals have given them for the week to follow at a glance. 
-- We aim to start working on this project in mid February and have it completed by mid March. 
+The patient dashboard is accessed by the consented individuals user group and consists of pages where graphs will be displayed to visualize physical activity data, health data, and dietary data.The health data could include number of hours slept in a day and the number of cigarettes smoked in a given time period. Dietary information visualized could include the average fruit and vegetable servings consumed per time period specified and the number of servings consumed during breakfast. The different kinds of data graphically rendered on the dashboards will be utilized by Dr. Petrella’s health professionals team to provide relevant health feedback to the community members of Lake Country. 
+
+What makes this different from the individual dashboard is that there will be a box next to these graphs where the user can see the comments relevant to that graph that the certified professionals made. In addition, there will be a to-do list where users can easily view the advice the professionals have given them for the week to follow at a glance. 
+
+We aim to start working on this dashboard in January and have it completed by mid February.
+
+**Administrator Dashboard**
+
+At the moment, the administrator dashboard is used to view a list of all the accounts created and assign roles and authorize certain accounts to gain access to specific dashboards. This is necessary to ensure that any newly added trail ambassadors and working professionals can access certain features to perform their tasks and responsibilities. Thus, it is crucial that the system is able to assign roles and give access to the correct accounts, as well as be able to generate an easy-to-read table of all the accounts registered in the database. 
+
+This dashboard will be worked on once all the other dashboards are mostly completed (if not all) so that we can test whether its functionality works with all the user groups and dashboards, which will hopefully be by the end of February so that it is completed in time for Milestone 3, which is the second round of peer testing scheduled in mid-March. 
+
+
 
 ## Non-functional Requirements
 
