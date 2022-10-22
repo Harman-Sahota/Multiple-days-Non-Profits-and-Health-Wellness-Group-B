@@ -148,6 +148,21 @@ Similarly, the events that the trail ambassadors create and add to the calendar 
 
 > There are **five** dashboard cartegories - Individual, Trail Ambassador, Administrator, Professional and Patient dashboards. further in the dfd, each dashboard has subcategories which represent the features each will have, we also have a landing page.. 
 
+**Individual Dashboard**
+The individual dashboard includes a tracker page where the user can input their weekly tracker data from the challenge. This dashboard will be programmed to check and ensure the validity of the user's input, convert the data into graphical illustrations, and display those graphs back to the user where they see a visual representation of their progress. The users of this dashboard will also have the ability to set up weekly goals, this encourages them to chase their goals and achieve better results from the weekly challenges. Additionally, there will be a discussion board where team members will be able to communicate with one another, this ensures that everyone is on the same page and is in sync with everything related to the challenge.
+
+Through the individual dashboard, the users will also have the ability to register into teams for the weekly challenges. Moreover, once teams have been formed, the system will have the ability to generate graphs that include all the team members' data so that they can compare their progress among themselves. Additionally, participants within the same team will be able to view the rankings of each team member; this further increases the competitiveness within the team and encourages the participants to be more involved in the weekly challenges. This means the system must be able to compare data between users within a team and sort them based on what data is considered good (high-ranking) and bad (low-ranking). 
+
+As this dashboard is accessed by the most users, we hope to start working on it as soon as we can, which is potentially at the beginning of November when the designs for this dashboard have been mostly finalized and complete most of the functionality of this dashboard by the beginning of December in order to meet the Milestone 2 deadline for the first round of peer testing.
+
+**Trail Ambassador Dashboard**
+
+The trail ambassador dashboard is mainly concerned with the calendar where the trail ambassadors can enter important dates and scheduled events. Thus, it is important that the system we create allows the trail ambassadors to create, update or delete the events in the calendar with ease. To ensure that the trail ambassadors do not accidentally delete an event, the system will generate an alert to confirm the action before completing it. In addition, the system will send a reminder message to save changes in case the trail ambassador tries to exit the page without saving.
+
+In addition, it is important for the trail ambassador to be able to view how well the challenge is doing in terms of participation. Hence, this dashboard will allow the trail ambassadors to view a visual representation of the challenge statistics such as the number of participants in the weekly challenge and the overall progress of the challenge. Moreover, the trail ambassador dashboard will contain a list of emergency and non-emergency contacts and affiliates contacts so that they are easy to access in case they are needed.
+
+
+
 **Professional Dashboard**
 
 - The professional dashboard is where the data is turned into relevant information by different personnel. But before this process can begin, the users must first consent to the utility of their information for different purposes explained in the privacy policy.
@@ -163,15 +178,19 @@ Similarly, the events that the trail ambassadors create and add to the calendar 
 
 ## Testing Strategy
 
-Throughout the project there are a vast range of tests that we need to run to run to ensure that the website is functioning how we intend it to function.
+Testing is extremely important. Therefore, the right testing strategy can aid in identifying any possible defect with the code while also ensuring continuous integration of new features is being adopted with no issues. We have decided to test our code using a regression testing approach.
 
-<Strong>Functionality & Usability Testing:</strong> This will ensure that the website is in its correct behavior and that it does what is intended from it to do. Moreover, this will also help us verify the behind the scenes such as the connection to the database.
+Regression testing is a type of software testing that runs after every change made to the code; This is done to ensure that any additional change (additional features) is integrated without any unintended breaks. Essentially, we are avoiding the possibility of an old bug breaking the code in the later stages of the project.
 
-<Strong>Compatibality Testing:</strong> To ensure that the website is reliable and functional, and that is runs on its intended devices such as the clients device as well as the target audience as a whole.
+For our initial features, we will be running unit tests for every code addition. We do so to ensure that we have a solid base, a code that lacks bugs. Doing so will allow us to perform regression testing for the additional features we add as we move on. We have to be selective with the tests we run as it may not feasible to test every single code addition added to our repository.
 
-<Strong>Performance Testing:</strong> Performance testing are extremely important. This will ensure that the system performs well under different user stress and load.
+<strong>Testing Tools</strong>
 
-we will have to perform stress and load tests.
+For our unit testing, we will be using Pytest as our software testing framework, this will be extremely useful and compatible since we are using Django for both frontend and backend. Pytest is also extremely efficient in the sense that it will allow us to execute multiple tests parallely.
+
+Finally, we will be conducting some usability testing to ensure that our dashboard designs do what we intend them to do. To do that, we have to develop the mock designs of our different dashboards on Figma and then run some usability testing to gather feedback from different users. This will allow us to identify the most ideal placement and format for the features in our dashboards.
+
+
 
 ## Environmental Constraints
 
