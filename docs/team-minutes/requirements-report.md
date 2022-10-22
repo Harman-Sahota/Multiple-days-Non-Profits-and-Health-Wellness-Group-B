@@ -68,10 +68,11 @@ In addition, this website will also allow health professionals such as doctors, 
 
 **Trail Ambassadors**
 
-      - Various working professionals in the community that are looking to raise funds will be able to do so through organizing weekly event challenges.
-      - The Okanagan Rail Trail Ambassadors will be able to create events that are later on posted onto pages that are specially designated to showcasing upcoming community events.
-      - The website will also display these events on a calendar. Ambassadors will be able to create and edit events on the calendar interface.
-      - Using data collected from the organized events, the website will provide different challenge statistics such as the number of people participating in the challenge and the progress they’ve made in that challenge.
+The trail ambassador dashboard is mainly concerned with the calendar where the trail ambassadors can enter important dates and scheduled events. Thus, it is important that the system we create allows the trail ambassadors to create, update or delete the events in the calendar with ease. To ensure that the trail ambassadors do not accidentally delete an event, the system will generate an alert to confirm the action before completing it. In addition, the system will send a reminder message to save changes in case the trail ambassador tries to exit the page without saving.
+
+In addition, it is important for the trail ambassador to be able to view how well the challenge is doing in terms of participation. Hence, this dashboard will allow the trail ambassadors to view a visual representation of the challenge statistics such as the number of participants in the weekly challenge and the overall progress of the challenge. Moreover, the trail ambassador dashboard will contain a list of emergency and non-emergency contacts and affiliates contacts so that they are easy to access in case they are needed.
+
+      
 
 ## Tech Stack
 
