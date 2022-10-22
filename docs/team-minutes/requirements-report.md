@@ -21,9 +21,10 @@ Harman Sahota - 28337426 <br>
 2. System Architecure 	<br>
 &nbsp;  2.1 Data Flow Diagrams (DFDs) <br>
 3. Requirements <br>
-&nbsp;   3.1 Functional Requirements <br>
-&nbsp;   3.2 Non-functional Requirements <br>
-&nbsp;   3.3 Environmental Constraints <br>
+&nbsp;   3.1 Estimated Timeline <br>
+&nbsp;   3.2 Functional Requirements <br>
+&nbsp;   3.3 Non-functional Requirements <br>
+&nbsp;   3.4 Environmental Constraints <br>
 4. Testing Strategy <br>
 &nbsp;   4.1 Testing Tool <br>
 &nbsp;   4.2 Testing Techniques
@@ -41,36 +42,24 @@ The Okanagan Rail Trail is supported by Friends of the Okanagan Rail Trail (FORT
 
 ## Target User Groups
 
-> The final product of this project is designed to serve **four** main user groups: individuals, consented individuals, working professionals, and trail ambassadors. :
+The final product of this project is designed to serve **four** main user groups: individuals, consented individuals, working professionals, and trail ambassadors.
 
 **Individuals**
 
-      - This user group represents the members of Lake Country. For this group, the website will display a map of the trail with markings. These marks are utilized to demonstrate the relative locations of different features that are placed on the trail by the management team. These features could be history boards, landmarks, interesting facts, and alerts.
-      - These individuals will grant consent to the Okanagan Rail Trail to have their activity data stored on the organization database.
-      - If the individuals grant another consent regarding the health professionals, the website could then provide new functionality that is described in the next user group.
-      - Nonetheless, the individuals will still be able to participate in organized weekly challenge activities.
+*Individuals* refer to the community members of Lake Country and the Okanagan. These users can access the website to view an interactive map of the Okanagan Rail Trail or view announcements and alerts made by the ORT trail ambassadors. In addition, if the *individuals* create an account and consent to having their data collected and stored in our database, they will gain access to many more features. These features include the ability to enter tracker data and have it converted into visual graphics and participate in weekly challenges.
 
 **Consented Individuals**
 
-      - If the residents of Lake Country agree to let the Okanagan Rail Trail management collect their data, the website will be able to log various data from them.
-      - They will be able to record their activity data from participating in organized weekly challenge activities, such as but not limited to the number of steps taken, exercise duration, and exercise frequency.
-      - Such data will be utilized by Dr. Petrella’s team of health individuals as described in the next user group.
-      - The website will also be able to organize the trail explorers into teams of their choices. The website will be able to generate invite links that other users can use to join the groups and weekly challenges.
-      - The website will make ranked scoreboards of the participants using the logged information from the weekly challenges.
+*Consented individuals* have access to all the functionality of the *individual* user group but vary slightly such that they are able to have professionals analyze their tracker data and provide feedback on how to improve and reach their wellness goals and can interact with other *consenting individuals*. *Individuals* can become *consented individuals* by giving permission to the *professionals* to view their data or giving permission to the system to generate progress comparison graphics between *consented individuals*. When giving permission, they are able to limit what type of data is shared and always have the option to revoke their permission as well. Furthermore, *consented individuals* have the ability to join or form teams to create friendly competition between users while completing the challenges, as well as discuss amongst one another using the discussion board.
+
 
 **Professionals**
 
-      - Health-care professionals will have a dashboard presenting well organized user health data submitted by various website users.
-      - The website will allow health-care professionals to view the wellness challenge participants and their health information.
-      - The website will present this data in a fashion that enables the professionals to make relevant inferences and feedback that helps improve the community.
-      - The website will ensure that this health information is only accessed by publicly authorized personnel through ensuring only authorized users are securely logged in to the health-care professional dashboard.
+*Professionals* refer to people who are certified and authorized to provide feedback and advice to the *consented individuals*. This group is not limited to healthcare workers such as doctors, nurses, and dieticians, but also includes other professionals such as health and wellness coaches. Using the data that the *consented individuals* have allowed them to view, the professionals are able to analyze the graphs and make comments on what they have done well for the week, and what they can improve on for the following week to help them reach their goals. Furthermore, the data that can be viewed by a *professional* is dependent on what type of role they have, such that they can only view data that is relevant to their profession or area of expertise.
 
 **Trail Ambassadors**
 
-      - Various working professionals in the community that are looking to raise funds will be able to do so through organizing weekly event challenges.
-      - The Okanagan Rail Trail Ambassadors will be able to create events that are later on posted onto pages that are specially designated to showcasing upcoming community events.
-      - The website will also display these events on a calendar. Ambassadors will be able to create and edit events on the calendar interface.
-      - Using data collected from the organized events, the website will provide different challenge statistics such as the number of people participating in the challenge and the progress they’ve made in that challenge.
+*Trail ambassadors* are workers and volunteers of the Okanagan Rail Trail that are responsible for organizing events and weekly challenges. This user group will have administrative access to the website, such that they will be the ones to authorize and assign the roles to the professionals. In addition, the *trail ambassadors* will be able to create, update, or delete events in a calendar for all *individuals* to see, post alerts and announcements on the home page, and have access to a list of emergency and non-emergency contacts.
 
 ## Tech Stack
 
@@ -82,8 +71,10 @@ The Okanagan Rail Trail is supported by Friends of the Okanagan Rail Trail (FORT
 &nbsp; 4. Django CMS <br>
 &nbsp; 5. Figma for designing <br>
 
-We decided to use HTML and CSS as these are the building blocks of any website. In addition, we are using Bootstrap with CSS as this helps our website be responsive enough to run on any device regardless the screen width. Javascript will be used for validating form inputs to prevent data attacks like SQL injections. <br>
-We decided to use Django against other frameworks like FastAPI and Flask because of the ease of coding, updated documentation, and its compatibility with HTML. The client believes that Django has all the functionality that is needed for the website she wants us to build while other frameworks are lacking in some areas. It also provides a lot of built-in libraries and APIs which will help us in our project.<br>
+We decided to use HTML and CSS as these are the building blocks of any website. In addition, we are using Bootstrap with CSS as this helps our website be responsive enough to run on any device regardless the screen width. Javascript will be used for validating form inputs to prevent data attacks like SQL injections.
+
+We decided to use Django against other frameworks like FastAPI and Flask because of the ease of coding, updated documentation, and its compatibility with HTML. The client believes that Django has all the functionality that is needed for the website she wants us to build while other frameworks are lacking in some areas. It also provides a lot of built-in libraries and APIs which will help us in our project.
+
 We are using Figma for designing as this tool helps us work on the designs together collaboratively. Moreover, we can create design prototypes in Figma which is helpful when showing these designs to the client as they can interact with the prototype rather than imagine how navigating through the pages would work.<br>
 
 
@@ -103,12 +94,9 @@ The backend was provided to us by the client as she already has a database made 
 
 The client requested us to use GitHub issues for bug tracking since all of our code will be put into a GitHub repository and that way, she will be able to view our progress. In addition, using GitHub issues reduces the number of softwares and programs that will need to be installed onto our personal computers. This tool is also beneficial because we have integrated GitHub notifications to our group’s Discord server, so all members are notified immediately once an issue has been created so that we can rectify them in a timely manner. <br>
 
-
-## DFD level 0 
+## Data Flow Diagrams (DFDs)
 
 ![](../images/dfd-level0.png?raw=true)
-
-**Description:** 
 
 This is a high-level representation of what our project will look like. When users visit the website by either scanning a QR code or typing in the URL, they will be directed to the home page which has content pages containing messages from the trail ambassadors of the Okanagan Rail Trail, the contact information of the affiliates, and an interactive map created by the Okanagan Rail Trail which will allow users to locate different landmarks along the trail. In addition, users will be able to log in or create an account to access the specific dashboards, depending on what type of user group they are in and what role they have been assigned. This will be completed by Milestone #2 in time for round one of peer testing.
 
@@ -127,9 +115,6 @@ The *admin* dashboard is used by the trail ambassadors and our client to approve
 professionals to view this data, they will also be able to view these graphs in the heath statistics page. When the professionals give feedback to the user, it is stored in the database and validated to ensure security of the data. This will be completed by Milestone #3 with the professional dashboard. 
 Similarly, the events that the trail ambassadors create and add to the calendar will also be stored in a database. In case any errors are found while validating or attempting to store any of the data, an error code is generated and the user is redirected to the previous page where they are prompted to try again. This should be completed by Milestone #3 with the trail ambassador dashboard.
 
- 
-
-## DFD level 1 
 
 ![](../images/dfd-level1.png?raw=true)
 
@@ -142,7 +127,7 @@ If the user has given permission to the professionals to view this data, they wi
 
 Similarly, the events that the trail ambassadors create and add to the calendar will also be stored in a database. In case any errors are found while validating or attempting to store any of the data, an error code is generated and the user is redirected to the previous page where they are prompted to try again. This should be completed by Milestone #3 with the trail ambassador dashboard.
 
-**Timeline**
+## Timeline
 
 ![Estimated Timeline](../images/estimated-timeline.jpg)
 
@@ -217,9 +202,29 @@ In addition, it is important for the trail ambassador to be able to view how wel
 **Milestone #4 Product Delivery:**
 
 1. The final product must meet all of the previous non-functional requirements <br>
-2. We have to also make sure the final product is efficient (it has no bugs and runs as expected), such that it uses a limited amount of resources on a device while providing a good experience to the user.<br>
+2. We have to also make sure the final product is efficient (it has no bugs and runs as expected), such that it uses a limited amount of resources on a device while providing a good experience to the user.
+
+## Environmental Constraints
+
+**Programming Languages**
+
+We have to make sure that we use programming languages that can be used across old as well as new technology, different devices, and operating systems. This means that the technologies used should possess versatility and portability characteristics. This presents us with a challenge whose solutions we have fortunately derived. These technologies might have to be updated given the rapidly changing technology landscape.
+
+**Maintenance Accessibility**
+
+The project currently faces two main constraints in this regard. The first is finding qualified personnel for maintenance consultation in a timely manner. A solution the team has come up with is to book qualified personnel on campus ahead of time for maintenance checks. The second maintenance constraint is to ensure the software is left in a structural state that is easily grasped by any other qualified personnel and also sustainable for the longest time possible. This is why the team has chosen the Django content management system whose structural infrastructure fits the goals of the project.
+
+**Health Tragedies**
+
+In this day and age, we face increasing unprecedented health tragedies of various scales with the most recent being the global Coronavirus pandemic. If another pandemic or similar health tragedy arises , the Lake Country and Okanagan community could witness identical health protection policies imposed on them. These policies could inhibit them from hosting and participating in outdoor, physical activities and events.
+
+**Weather Fluctuations**
+
+Similarly, we face increasing unprecedented weather calamities on increasing scales. The Okanagan area has recently been a host to increasing forest fires and heat waves. To fan the flames, the proximity to the United States and the valley landscape make the Okanagan a suitable host to the traversing smoky winds. These dangerous weather conditions such as forest fires can have extremely detrimental health repercussions. Thus, these risks could heavily influence low participation in weekly challenges that involve outdoor activities.
 
 ## Testing Strategy
+
+<strong>Testing Technique</strong>
 
 Testing is extremely important. Therefore, the right testing strategy can aid in identifying any possible defect with the code while also ensuring continuous integration of new features is being adopted with no issues. We have decided to test our code using a regression testing approach.
 
@@ -232,28 +237,3 @@ For our initial features, we will be running unit tests for every code addition.
 For our unit testing, we will be using Pytest as our software testing framework, this will be extremely useful and compatible since we are using Django for both frontend and backend. Pytest is also extremely efficient in the sense that it will allow us to execute multiple tests parallely.
 
 Finally, we will be conducting some usability testing to ensure that our dashboard designs do what we intend them to do. To do that, we have to develop the mock designs of our different dashboards on Figma and then run some usability testing to gather feedback from different users. This will allow us to identify the most ideal placement and format for the features in our dashboards.
-
-
-
-## Environmental Constraints
-
-*Environmental constraints are the characteristics in the environment that change the level of difficulty of a task or activity when it is performed in that environment.*
-
-> A detailed list of environmental constraints:
-
-**Programming Languages**
-
-- We have to make sure that we use programming languages that can be used across old as well as new technology, different devices, and operating systems. This means that the technologies used should possess versatility and portability characteristics. This presents us with a challenge whose solutions we have fortunately derived. These technologies might have to be updated given the rapidly changing technology landscape.
-
-**Maintenance Accessibility**
-
-- The project currently faces two main constraints in this regard. The first is finding qualified personnel for maintenance consultation in a timely manner. A solution the team has come up with is to book qualified personnel on campus ahead of time for maintenance checks. The second maintenance constraint is to ensure the software is left in a structural state that is easily grasped by any other qualified personnel and also sustainable for the longest time possible. This is why the team has chosen the Django content management system whose structural infrastructure fits the goals of the project.
-
-**Health Tragedies**
-
-- In this day and age, we face increasing unprecedented health tragedies of various scales with the most recent being the global Coronavirus pandemic. If another pandemic or similar health tragedy arises , the Lake Country and Okanagan community could witness identical health protection policies imposed on them. These policies could inhibit them from hosting and participating in outdoor, physical activities and events.
-
-**Weather Fluctuations**
-
-- Similarly, we face increasing unprecedented weather calamities on increasing scales. The Okanagan area has recently been a host to increasing forest fires and heat waves. To fan the flames, the proximity to the United States and the valley landscape make the Okanagan a suitable host to the traversing smoky winds. These dangerous weather conditions such as forest fires can have extremely detrimental health repercussions. Thus, these risks could heavily influence low participation in weekly challenges that involve outdoor activities.
-
