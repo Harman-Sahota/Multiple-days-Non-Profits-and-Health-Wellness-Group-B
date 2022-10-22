@@ -142,8 +142,20 @@ If the user has given permission to the professionals to view this data, they wi
 
 Similarly, the events that the trail ambassadors create and add to the calendar will also be stored in a database. In case any errors are found while validating or attempting to store any of the data, an error code is generated and the user is redirected to the previous page where they are prompted to try again. This should be completed by Milestone #3 with the trail ambassador dashboard.
 
+**Timeline**
+
+![Estimated Timeline](../images/estimated-timeline.jpg)
+
+The client has yet to define the milestones and deliverables she wishes for us to accomplish. Thus, we have created our own visualization of the timeline, based on the COSC 499 milestones, that we hope to follow for the duration of this project. Currently, we are in the process of designing mockups of all the web pages. Once we have finalized the design and received approval from the client, we will begin coding. 
+
+As seen above in Figure 3, we’ve divided the timeline based on each dashboard. We believe this is the most logical and efficient way to approach this project as most of the dashboards are dependent on each other. Thus, it would make sense to complete one dashboard before moving on to the next one to ensure that all features are working as expected. In addition, the individual dashboard contains the most content because not only does it need to record data, but it also needs to be able to convert that data into various types of graphs and display it back to the user. Hence, more time is allocated to complete this dashboard as all the other dashboards are dependent on it. We’ve also decided to work on the patient dashboard while we complete the individual dashboard because their contents overlap with each other. 
+
+Ideally, we hope to have all the dashboards completed by mid-March so that we can focus on testing the website as a whole to ensure that all features are functioning as expected. This will also allow us time to fix the code if any issues arise during this testing and refine it to be cleaner and more professional so that the client is able to understand and maintain it even after the project is completed. If time permits and the client approves, we hope to add additional features that the client has currently not yet implemented to further enhance the website. 
 
 ## Functional Requirements
+
+
+
 
 > There are **five** dashboard cartegories - Individual, Trail Ambassador, Administrator, Professional and Patient dashboards. further in the dfd, each dashboard has subcategories which represent the features each will have, we also have a landing page.. 
 
