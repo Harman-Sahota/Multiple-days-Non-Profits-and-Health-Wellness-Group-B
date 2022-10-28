@@ -15,4 +15,10 @@
 ![](../images/figma/Login.png?raw=true)
 
 ### Login page:
-This page was approved by the client.
+- This page was approved by the client.
+
+![](../images/figma/Register.png?raw=true)
+
+### Registration page:
+- This registration page was partially approved by the client. However, we need to include an option where the users can select their roles.
+- A consent form should also be added.
