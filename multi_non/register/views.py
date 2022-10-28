@@ -4,5 +4,5 @@ from django.http import HttpResponse
 
 
 def register(request):
-    return HttpResponse("<h1>test</h1>")
+    return render(request, 'healthenow/register.html')
     
