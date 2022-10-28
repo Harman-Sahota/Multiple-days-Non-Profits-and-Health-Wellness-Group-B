@@ -34,3 +34,10 @@
 ### Selective Graphs : Health Measures
 
 - figure out how to add one big feedback message in that box. 
+
+
+![](../images/figma/Healthy-Eating.png?raw=true)
+
+### Selective Graphs : Healthy Eating
+
+- figure out how to add one big feedback message in that box. 
