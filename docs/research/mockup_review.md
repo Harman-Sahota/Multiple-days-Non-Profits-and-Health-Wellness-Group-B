@@ -11,3 +11,8 @@
 ### Individual graphs:
 
 - The feedbacks are not meant to be on this page. They are meant to be on a complete different page. Therefore, remove the feedback text box.
+
+![](../images/figma/Login.png?raw=true)
+
+### Login page:
+This page was approved by the client.
