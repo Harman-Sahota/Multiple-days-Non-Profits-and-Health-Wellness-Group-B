@@ -22,3 +22,9 @@
 ### Registration page:
 - This registration page was partially approved by the client. However, we need to include an option where the users can select their roles.
 - A consent form should also be added.
+
+![](../images/figma/Physical-Activity.png?raw=true)
+
+### Selective Graphs : Physical Activity
+
+- figure out how to add one big feedback message in that box. 
