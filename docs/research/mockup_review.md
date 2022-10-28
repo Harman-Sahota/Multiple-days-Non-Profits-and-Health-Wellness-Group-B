@@ -28,3 +28,9 @@
 ### Selective Graphs : Physical Activity
 
 - figure out how to add one big feedback message in that box. 
+
+![](../images/figma/Health-Measures.png?raw=true)
+
+### Selective Graphs : Health Measures
+
+- figure out how to add one big feedback message in that box. 
