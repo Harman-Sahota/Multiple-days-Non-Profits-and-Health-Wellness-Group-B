@@ -22,3 +22,29 @@
 ### Registration page:
 - This registration page was partially approved by the client. However, we need to include an option where the users can select their roles.
 - A consent form should also be added.
+
+![](../images/figma/Physical-Activity.png?raw=true)
+
+### Selective Graphs : Physical Activity
+
+- figure out how to add one big feedback message in that box. 
+
+![](../images/figma/Health-Measures.png?raw=true)
+
+### Selective Graphs : Health Measures
+
+- figure out how to add one big feedback message in that box. 
+
+
+![](../images/figma/Healthy-Eating.png?raw=true)
+
+### Selective Graphs : Healthy Eating
+
+- figure out how to add one big feedback message in that box. 
+
+![](../images/figma/Profile.png?raw=true)
+
+### Profile 
+
+- add height
+- this page should display all available information about the user for example their role, weight, name, email etc.
