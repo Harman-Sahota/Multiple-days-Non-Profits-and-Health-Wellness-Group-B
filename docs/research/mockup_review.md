@@ -48,3 +48,32 @@
 
 - add height
 - this page should display all available information about the user for example their role, weight, name, email etc.
+
+![](../images/figma/Tracker.png)
+
+### Tracker
+
+- Switch the placement of "My Goals" and "To-Do List"
+- Do not divide data into categories 
+- Data entry should be in boxes instead of lines to make it easier to distinguish between data entries
+- Cannot use checkboxes for consent, permission, privacy due to it not being a simple yes or no answer
+
+![](../images/figma/Tracker%20with%20hover%20menu.png)
+
+### Hover Menu
+
+- Do not use a hover menu option because there is a group of retired users that will be using this website and they do not know what "hovering" means
+- Be sure to list out the full name of the page; do not use acronyms (i.e. Trail Ambassador instead of TA)
+
+
+![](../images/figma/Weekly%20Challenge.png)
+
+### Weekly Challenge
+
+- Main focus of this page are the graphs and the discussion board
+- Move Discussion Board to be on the right side and vertical instead of horizontal
+- Move Leaderboard underneath Discussion Board
+- Leaderboard should contain the team names, not the users
+- Figure out a way to label the data so that the user knows which bar is theirs and a way to display the team members
+- Graphs should be labeled so users know which data is used
+- This page is used to compare progress between **teams** not team members. Adjust design to work with that
