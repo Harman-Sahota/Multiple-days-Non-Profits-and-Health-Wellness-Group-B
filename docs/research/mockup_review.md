@@ -6,3 +6,8 @@
 
 - There should be four icons on this page that helps the user navigate where they want to navigate to after they login.
 
+![](../images/figma/Individual%20Graphs.png?raw=true)
+
+### Individual graphs:
+
+- The feedbacks are not meant to be on this page. They are meant to be on a complete different page. Therefore, remove the feedback text box.
