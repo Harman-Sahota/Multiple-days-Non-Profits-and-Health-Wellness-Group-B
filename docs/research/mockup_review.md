@@ -82,9 +82,11 @@
 
 ### Trail Map
 
-- Trail Ambassadors are mostly retired people.
-- Every TA will be an admin
+- Map should be placed on landing page with flexible resolution
 
 ![Trail Ambassador Page](../images/figma/Trail%20Ambassador%20v2.png)
 
 ### Trail Ambassador Page
+
+- Trail Ambassadors are mostly retired people.
+- Every TA will be an admin
