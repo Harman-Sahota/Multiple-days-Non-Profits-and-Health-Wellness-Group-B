@@ -68,14 +68,6 @@
 
 ![](../images/figma/Weekly%20Challenge.png)
 
-### Map
-
-![Trail Map](../images/figma/Map-1.png)
-
-### Trail Ambassador Page
-
-![Trail Ambassador Page](../images/figma/Trail%20Ambassador%20v2.png)
-
 ### Weekly Challenge
 
 - Main focus of this page are the graphs and the discussion board
@@ -85,3 +77,11 @@
 - Figure out a way to label the data so that the user knows which bar is theirs and a way to display the team members
 - Graphs should be labeled so users know which data is used
 - This page is used to compare progress between **teams** not team members. Adjust design to work with that
+
+### Map
+
+![Trail Map](../images/figma/Map-1.png)
+
+### Trail Ambassador Page
+
+![Trail Ambassador Page](../images/figma/Trail%20Ambassador%20v2.png)
