@@ -72,6 +72,10 @@
 
 ![Trail Map](../images/figma/Map-1.png)
 
+### Trail Ambassador Page
+
+![Trail Ambassador Page](../images/figma/Trail%20Ambassador%20v2.png)
+
 ### Weekly Challenge
 
 - Main focus of this page are the graphs and the discussion board
