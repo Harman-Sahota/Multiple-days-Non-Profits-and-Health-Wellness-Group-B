@@ -89,4 +89,4 @@
 ### Trail Ambassador Page
 
 - Trail Ambassadors are mostly retired people.
-- Every TA will be an admin
+- Some TAs will be an admin
