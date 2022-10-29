@@ -77,3 +77,16 @@
 - Figure out a way to label the data so that the user knows which bar is theirs and a way to display the team members
 - Graphs should be labeled so users know which data is used
 - This page is used to compare progress between **teams** not team members. Adjust design to work with that
+
+![Trail Map](../images/figma/Map-1.png)
+
+### Trail Map
+
+- Map should be placed on landing page with flexible resolution
+
+![Trail Ambassador Page](../images/figma/Trail%20Ambassador%20v2.png)
+
+### Trail Ambassador Page
+
+- Trail Ambassadors are mostly retired people.
+- Some TAs will be an admin
