@@ -68,6 +68,10 @@
 
 ![](../images/figma/Weekly%20Challenge.png)
 
+### Map
+
+![Trail Map](../images/figma/Map-1.png)
+
 ### Weekly Challenge
 
 - Main focus of this page are the graphs and the discussion board
