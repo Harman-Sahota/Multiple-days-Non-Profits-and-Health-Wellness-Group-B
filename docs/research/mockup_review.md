@@ -78,10 +78,13 @@
 - Graphs should be labeled so users know which data is used
 - This page is used to compare progress between **teams** not team members. Adjust design to work with that
 
-### Map
-
 ![Trail Map](../images/figma/Map-1.png)
 
-### Trail Ambassador Page
+### Trail Map
+
+- Trail Ambassadors are mostly retired people.
+- Every TA will be an admin
 
 ![Trail Ambassador Page](../images/figma/Trail%20Ambassador%20v2.png)
+
+### Trail Ambassador Page
