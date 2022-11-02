@@ -8,5 +8,5 @@ def register(request):
     return render(request, 'foodsaviour/register.html', {'title': 'Register'})
 
 def home(request):
-    return render(home, 'foodsaviour/home.html', {'title': 'Home'})
+    return render(request, 'foodsaviour/home.html', {'title': 'Home'})
     
