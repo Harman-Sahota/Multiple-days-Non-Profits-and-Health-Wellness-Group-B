@@ -10,3 +10,5 @@ def register(request):
 def home(request):
     return render(request, 'foodsaviour/home.html', {'title': 'Home'})
     
+def login(request):
+    return render(request, 'foodsaviour/login.html', {'title': 'Login'})
