@@ -6,4 +6,7 @@ from django.http import HttpResponse
 
 def register(request):
     return render(request, 'foodsaviour/register.html', {'title': 'Register'})
+
+def home(request):
+    return render(home, 'foodsaviour/home.html', {'title': 'Home'})
     
