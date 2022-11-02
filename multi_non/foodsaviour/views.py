@@ -5,5 +5,5 @@ from django.http import HttpResponse
 
 
 def register(request):
-    return render(request, 'healthenow/register.html', {'title': 'register'})
+    return render(request, 'foodsaviour/register.html', {'title': 'Register'})
     
