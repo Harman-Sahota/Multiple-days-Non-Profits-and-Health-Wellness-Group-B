@@ -1,0 +1,109 @@
+* { 
+    margin: 0; 
+    padding: 0; 
+  }
+body {
+    margin: 0;
+    background: url('/static/foodsaviour/login_bg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+
+}
+.navbar{
+    z-index: 1;
+    background-color: transparent !important;
+    position: relative;
+}
+.contain{
+    width: 45%;
+    height: 65%;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    text-align: center;
+    align-items: center;
+   -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    border-radius: 5px;
+    background: #FFFFFF;
+    box-shadow: -4px -4px 8px rgba(193, 171, 168, 0.34), inset 4px 4px 8px #FFFFFF;
+    padding: 2em;
+}
+.progress-container{
+    background: #FFFFFF;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin-left: 4%;
+    max-width: 100%;
+    width: 90%;
+    padding: 2em;
+}
+
+.progress-container::before{
+    content: "";
+    position: absolute;
+    background-color: grey;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    height: 4px;
+    width: 100%;
+    z-index: 0;
+    transition: 0.4s ease;
+}
+.progress{
+    content: "";
+    position: absolute;
+    background-color: #CEE4CF;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    height: 4px;
+    width: 0%;
+    z-index: 0;
+    transition: 0.4s ease;
+}
+.circle{
+    z-index: 1;
+    background-color: #FFFFFF;
+    color: black;
+    border-radius: 50%;
+    height: 3.125rem;
+    width: 3.125rem;
+    padding: 1em;
+    border: 3px solid grey;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.4s ease;
+}
+.circle.active{
+    border-color: #CEE4CF;
+}
+.buttons{
+    display: flex;
+    margin-left: -5%;
+    margin-top: 200%;
+}
+.btn{
+    margin-left: 5%;
+    font-family: inherit;
+}
+.btn:focus{
+    outline: 0;
+}
+.btn:active{
+transform: scale(0.97);
+}
+/*.btn:disabled{
+    cursor: pointer;
+}*/
+.form-inside{
+    width: 20%;
+    display: inline-block;
+
+}

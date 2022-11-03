@@ -1,4 +1,32 @@
 {% extends "foodsaviour/base.html" %}
-{% block content %}
+{% load static %}
 
+{% block content %}
+<!-- link css file -->
+<link rel="stylesheet" type="text/css" href="{% static 'foodsaviour/register.css'%}">
+
+<!-- main content container-->
+<div class="contain">
+<h3>Create An Account</h3>
+<!-- progress bar-->
+<div class="progress-container">
+    <div class="progress" id="progress"> </div>
+    <div class="circle active"><i class="fa-solid fa-1"></i></div>
+    <div class="circle"><i class="fa-solid fa-2"></i></div>
+    <div class="circle "><i class="fa-solid fa-3"></i></div>
+    <div class="circle"><i class="fa-solid fa-4"></i></div>
+</div>
+
+<!-- form -->
+<form class="form-inside" onsubmit="return false;">
+    <div class="form-group">
+     
+  </form>
+
+<div class="buttons">
+  <button class="btn btn-success" id="prev" disabled>Prev</button>
+  <button class="btn btn-success" id="next">Next</button>
+  </div>
+  </div>
+  <script src = "{% static 'foodsaviour/register.js'%}"></script>
  {% endblock content%}
