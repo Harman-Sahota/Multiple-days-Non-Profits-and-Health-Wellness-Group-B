@@ -1,0 +1,13 @@
+body {
+    margin: 0;
+    background: url('/static/foodsaviour/login_bg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+.navbar{
+    z-index: 1;
+    background-color: transparent !important;
+    position: relative;
+}
