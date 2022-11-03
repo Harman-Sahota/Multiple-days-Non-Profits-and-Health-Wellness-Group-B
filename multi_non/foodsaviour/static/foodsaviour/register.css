@@ -18,7 +18,7 @@ body {
 }
 .contain{
     width: 45%;
-    height: 65%;
+    height: 70%;
     margin: 0;
     position: absolute;
     top: 50%;
@@ -86,8 +86,12 @@ body {
 }
 .buttons{
     display: flex;
-    margin-left: -5%;
-    margin-top: 200%;
+    align-items: center;
+    justify-content: center;
+    margin-left: 190%;
+    margin-top: 250%;
+   
+  
 }
 .btn{
     margin-left: 5%;
@@ -107,3 +111,30 @@ transform: scale(0.97);
     display: inline-block;
 
 }
+.text-input{
+width: 147%;
+margin-left: -20%;
+margin-bottom: 4%;
+}
+.form-check{
+    margin-top: 4%;
+}
+
+.card{
+    border: none !important;
+    position: absolute;
+    width: 90%;
+    display: inline-block;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    transition: transform 400ms ease;
+}
+.card[data-status="unknown"]{
+    transform: scale(0);
+} 
+
+.card[data-status="after"]{
+    transform: translateX(50%)scale(0);
+} 
+

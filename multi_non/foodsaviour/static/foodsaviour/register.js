@@ -1,3 +1,4 @@
+// progress bar
 const progress = document.getElementById("progress");
 const prev = document.getElementById("prev");
 const next = document.getElementById("next");
@@ -45,4 +46,25 @@ function update(){
         prev.disabled=false;
         next.disabled=false;
     }
+}
+
+
+// form
+let activeIndex =0;
+const cards = document.getElementsByClassName("card");
+
+const handlenextcard = () =>{
+
+    const nextIndex = activeIndex + 1 <= cards.length - 1 ? activeIndex + 1 : 0;
+    
+    const currentGroup = document.querySelectorAll('[data-index="${activeIndex}"]');
+    const nextGroup = document.querySelectorAll('[data-index="${nextIndex}"]');
+    console.log(nextIndex);
+
+    currentGroup.dataset.status = "after";
+    
+    nextGroup.dataset.status = "active";
+
+    activeIndex = nextIndex;
+
 }
