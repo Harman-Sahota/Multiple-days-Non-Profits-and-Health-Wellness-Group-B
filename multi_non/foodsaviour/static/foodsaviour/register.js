@@ -8,8 +8,19 @@ const circles = document.querySelectorAll(".circle");
 let currentActive = 1;
 
 next.addEventListener("click",()=>{
+
+c = `card-${currentActive}`;
+if(currentActive+1 < circles.length)
+d = `card-${currentActive+1}`;
+else
+d = "card-3"
+a = document.getElementById(c);
+e = document.getElementById(d);
+a.style.display = "none";
+e.style.display = "block";
+
+
 currentActive++;
-console.log(circles.length)
 if(currentActive> circles.length){
     currentActive = circles.length;
 }
@@ -17,12 +28,27 @@ update();
 });
 
 prev.addEventListener("click",()=>{
+
+
+    c = `card-${currentActive}`;
+    if(currentActive-1 > 1)
+    d = `card-${currentActive-1}`;
+    else
+    d = "card-1"
+    a = document.getElementById(c);
+    e = document.getElementById(d);
+    console.log(a.id);
+    a.style.display = "none";
+    e.style.display = "block";
+
     currentActive--;
     
     if(currentActive < 1){
         currentActive = 1;
     }
-    update();
+
+update();
+
 });
 
 function update(){
@@ -50,21 +76,5 @@ function update(){
 
 
 // form
-let activeIndex =0;
-const cards = document.getElementsByClassName("card");
 
-const handlenextcard = () =>{
 
-    const nextIndex = activeIndex + 1 <= cards.length - 1 ? activeIndex + 1 : 0;
-    
-    const currentGroup = document.querySelectorAll('[data-index="${activeIndex}"]');
-    const nextGroup = document.querySelectorAll('[data-index="${nextIndex}"]');
-    console.log(nextIndex);
-
-    currentGroup.dataset.status = "after";
-    
-    nextGroup.dataset.status = "active";
-
-    activeIndex = nextIndex;
-
-}
