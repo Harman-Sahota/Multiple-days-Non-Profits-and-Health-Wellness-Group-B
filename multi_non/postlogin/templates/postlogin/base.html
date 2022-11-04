@@ -28,15 +28,14 @@
                         Saviour</b></a>
                 <div class="navbar-collapse collapse" id="navigation">
                     <div class="navbar-nav me-auto">
-                        <a class="nav-link px-4" href="#">Overview</a>
-                        <a class="nav-link px-4 " href="#">Profile</a>
-                        <a class="nav-link px-4 " href="#">Tracker</a>
-                        <a class="nav-link px-4 " href="#">Network</a>
+                        <a href="{% url 'overview' %}" class="nav-link px-3" href="#">Overview</a>
+                        <a class="nav-link px-3" href="#">Tracker</a>
+                        <a class="nav-link px-3" href="#">Network</a>
                     </div>
                     <div class="navbar-nav ms-auto">
-                        <a class="nav-link px-4" href="{% url 'login' %}">Logout</a>
-                        <a href="{% url 'register' %}" class="px-4 "><button class="btn btn-outline-success"
-                                type="button">Register</button></a>
+                        <a class="nav-link px-3" href="#"><i class="fa-solid fa-user"></i> Profile</a>
+                        <a href="{% url 'home' %}" class="px-3"><button class="btn btn-outline-success"
+                                type="button">Logout</button></a>
                     </div>
                     <a href="javascript:void(0);" class="icon" onclick="myFunction()">
                         <i class="fa fa-bars"></i>
