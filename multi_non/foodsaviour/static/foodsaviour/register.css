@@ -112,14 +112,29 @@ transform: scale(0.97);
 
 }
 .text-input{
-width: 147%;
-margin-left: -20%;
-margin-bottom: 4%;
-}
-.form-check{
-    margin-top: 4%;
+width: 250%;
+margin: 4% -80%;
+display: flex;
+align-items: center;
+justify-content: center;
+position: relative;
 }
 
+.form-check{
+    text-align:center;
+    margin-top: 2%;
+    width: 55%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2% auto;
+    position: relative;
+    
+  }
+.form-check-label{
+    margin-left: 5%;
+}
+  
 .card{
     border: none !important;
     position: absolute;
@@ -128,13 +143,27 @@ margin-bottom: 4%;
     display: flex;
     align-items: center;
     justify-content: center; 
+    position: absolute;
     transition: transform 400ms ease;
 }
-.card[data-status="unknown"]{
-    transform: scale(0);
-} 
 
-.card[data-status="after"]{
-    transform: translateX(50%)scale(0);
-} 
-
+#card-1{
+    display: block;
+    transition: transform 10100ms ease;
+}
+#card-2{
+    display: none;
+    transition: transform 1000ms ease;
+}
+#card-3{
+    display: none;
+    transition: transform 1000ms ease;
+}
+textarea{
+    margin-top: 2%;
+    resize: none;
+width: 60%;
+border: 2px solid rgba(0, 0, 0, 0.2);
+border-radius: 10px;
+padding: 4%;
+}
