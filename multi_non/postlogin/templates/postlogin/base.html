@@ -29,11 +29,11 @@
                 <div class="navbar-collapse collapse" id="navigation">
                     <div class="navbar-nav me-auto">
                         <a href="{% url 'overview' %}" class="nav-link px-3" href="#">Overview</a>
-                        <a class="nav-link px-3" href="#">Tracker</a>
-                        <a class="nav-link px-3" href="#">Network</a>
+                        <a href="{% url 'tracker' %}"class="nav-link px-3" href="#">Tracker</a>
+                        <a href="{% url 'network' %}"class="nav-link px-3" href="#">Network</a>
                     </div>
                     <div class="navbar-nav ms-auto">
-                        <a class="nav-link px-3" href="#"><i class="fa-solid fa-user"></i> Profile</a>
+                        <a href="{% url 'profile' %}"class="nav-link px-3" href="#"><i class="fa-solid fa-user"></i> Profile</a>
                         <a href="{% url 'home' %}" class="px-3"><button class="btn btn-outline-success"
                                 type="button">Logout</button></a>
                     </div>
