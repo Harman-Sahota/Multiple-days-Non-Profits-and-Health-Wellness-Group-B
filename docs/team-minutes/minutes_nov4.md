@@ -105,3 +105,13 @@ What still needs to be done ASAP:
     - This would include the overall layout of the page
     - How users can post on the board and what information/fields are needed to make a post
     - How users can interact on this board
+3. Someone has to make all the pages coded so far responsive.
+4. Javascript validation of the login and register forms. 
+
+
+Some more tasks that Harman will do - 
+1. Add the consent for registration form 
+2. left-align the roles to give them a cleaner look (center alignment is not ideal)
+3. Add an 'I disagree' option in the consent
+
+Maysey can try to add content to the homepage. 
