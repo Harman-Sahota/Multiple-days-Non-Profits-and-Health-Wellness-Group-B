@@ -1,0 +1,94 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  /* font-size: 62.5%; */
+}
+
+.body {
+  /* font-size: 1.6rem; */
+  height: 100vh;
+  background-image: url("login_bg.png");
+}
+
+.navbar {
+  z-index: 1;
+  background-color: transparent !important;
+  position: relative;
+  /* font-size: 2rem; */
+}
+
+.navbar-brand {
+  /* font-size: 2rem; */
+}
+
+.register-button {
+  /* font-size: 2rem; */
+}
+
+.card {
+  top: 45%;
+  transform: translate(0, -50%);
+  width: 30rem;
+  box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2.1rem;
+  padding: 3rem;
+}
+
+.card-title {
+  /* font-size: 2rem; */
+  font-weight: 700;
+}
+
+.name-form {
+  width: 20rem;
+}
+
+.trouble {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.trouble-text {
+  display: block;
+}
+
+.trouble-reset {
+  display: block;
+}
+
+.btn {
+  width: 20rem;
+}
+
+.sign-in {
+  font-weight: 500;
+}
+
+.new-account {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.new-account-link {
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.mg--small {
+  margin-bottom: 2rem;
+}
