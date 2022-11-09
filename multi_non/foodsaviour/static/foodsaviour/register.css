@@ -88,11 +88,11 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 190%;
-    margin-top: 250%;
-   
-  
+    margin-left: 100%;
+    margin-top: 157%;
+    
 }
+
 .btn{
     margin-left: 5%;
     font-family: inherit;

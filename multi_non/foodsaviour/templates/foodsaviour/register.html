@@ -2,6 +2,31 @@
 {% load static %}
 
 {% block content %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+
+$(document).ready(function(){
+
+  $('.flexCheckDefault').click(function(){
+
+    var text = "";
+    $('.flexCheckDefault:checked').each(function(){
+
+      text+=$(this).val()+','
+
+    });
+
+    $('#roles').val(text);
+
+  });
+
+
+});
+
+</script>
+
+
 <!-- link css file -->
 <link rel="stylesheet" type="text/css" href="{% static 'foodsaviour/register.css'%}">
 
@@ -23,11 +48,12 @@
 <div class="card-group">
   <div class="card card-1" id="card-1">
     <div class="card-body">
-<form class="form-inside" onsubmit="return false;">
-  <input type="text" class="form-control text-input" id="firstname" placeholder="First Name">
-  <input type="text" class="form-control text-input" id="lastname" placeholder="Last Name">
-  <input type="email" class="form-control text-input" id="email" placeholder="Email">
-  <input type="password" class="form-control text-input" id="password" placeholder="Password">
+<form class="form-inside" action ="" method="post" id="register">
+  {% csrf_token %}
+  <input type="text" class="form-control text-input" id="firstname" name="firstname"  placeholder="First Name">
+  <input type="text" class="form-control text-input" id="lastname" name="lastname" placeholder="Last Name">
+  <input type="email" class="form-control text-input" id="email"  name="email" placeholder="Email">
+  <input type="password" class="form-control text-input" id="password" name="password" placeholder="Password">
   <input type="password" class="form-control text-input" id="confirm-password" placeholder="Confirm Password">
 </div>
 </div>
@@ -39,40 +65,41 @@
     <div class="card-body">
       <h5>Choose your roles:</h5>
       <div class="form-check ">
-  <input class="form-check-input" type="checkbox" id="flexCheckDefault" value="option1">
+  <input class="form-check-input" type="checkbox" id="flexCheckDefault" class="flexCheckDefault" value="user non-profit managers/CEO">
   <label class="form-check-label" for="flexCheckDefault">
     user non-profit managers/CEO
   </label>
   </div>
 <div class="form-check" >
-  <input class="form-check-input" type="checkbox" id="flexCheckDefault2" value="option2">
+  <input class="form-check-input" type="checkbox" id="flexCheckDefault" class="flexCheckDefault" value="user non-profit warehouse boss">
   <label class="form-check-label" for="flexCheckDefault2">
     user non-profit warehouse boss
   </label>
 </div>
 <div class="form-check">
-  <input class="form-check-input" type="checkbox" id="flexCheckDefault3" value="option3">
+  <input class="form-check-input" type="checkbox" id="flexCheckDefault" class="flexCheckDefault" value="user non-profit volunteer">
   <label class="form-check-label" for="flexCheckDefault3">
     user non-profit volunteer
   </label>
 </div>
 <div class="form-check ">
-  <input class="form-check-input" type="checkbox" id="flexCheckDefault4" value="option4">
+  <input class="form-check-input" type="checkbox" id="flexCheckDefault" class="flexCheckDefault" value="sponsors">
   <label class="form-check-label" for="flexCheckDefault4">
     sponsors
   </label>
   </div>
   <div class="form-check">
-    <input class="form-check-input" type="checkbox" id="flexCheckDefault5" value="option5">
+    <input class="form-check-input" type="checkbox" id="flexCheckDefault" class="flexCheckDefault" value="admin">
     <label class="form-check-label" for="flexCheckDefault5">
       admin
     </label>
 </div>
 <div class="form-check">
-  <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option6">
-  <label class="form-check-label" for="inlineCheckbox6">
+  <input class="form-check-input" type="checkbox" id="flexCheckDefault" class="flexCheckDefault"  value="experts ">
+  <label class="form-check-label" for="flexCheckDefault6">
     experts 
   </label>
+  <input type="text" name="roles" class="roles" id="roles">
 </div>
 </div>
 </div>
@@ -81,7 +108,6 @@
 <div class="card-group">
   <div class="card card-3" id="card-3">
     <div class="card-body">
-<form class="form-inside" onsubmit="return false;">
   <h5>Consent:</h5>
   <textarea readonly rows="4" cols="auto">
     At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.  At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies. 
@@ -89,7 +115,7 @@
     At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.  At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies. 
     </textarea>
     <div class="form-check">
-      <input class="form-check-input" type="checkbox" id="flexCheckDefault5" value="option5">
+      <input class="form-check-input" type="checkbox" id="flexCheckDefault5" name="consent" value="consented">
       <label class="form-check-label" for="flexCheckDefault5">
         I accept
       </label>
@@ -98,8 +124,9 @@
 </div>
 
 <div class="buttons">
-  <button class="btn btn-success" id="prev" disabled >Prev</button>
-  <button class="btn btn-success" id="next">Next</button>
+  <button class="btn btn-success" id="prev" disabled type="button">Prev</button>
+  <button class="btn btn-success" id="next" type="button">Next</button>
+  <button class="btn btn-primary" id="submit" type="submit" form="register" disabled>Submit</button>
   </div>
 </form>
   </div>
