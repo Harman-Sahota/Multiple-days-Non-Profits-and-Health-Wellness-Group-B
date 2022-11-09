@@ -3,28 +3,6 @@
 
 {% block content %}
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-<script>
-
-$(document).ready(function(){
-
-  $('.flexCheckDefault').click(function(){
-
-    var text = "";
-    $('.flexCheckDefault:checked').each(function(){
-
-      text+=$(this).val()+','
-
-    });
-
-    $('#roles').val(text);
-
-  });
-
-
-});
-
-</script>
 
 
 <!-- link css file -->
@@ -64,14 +42,15 @@ $(document).ready(function(){
   <div class="card card-2" id="card-2">
     <div class="card-body">
       <h5>Choose your roles:</h5>
+      
       <div class="form-check ">
-  <input class="form-check-input" type="checkbox" id="flexCheckDefault" class="flexCheckDefault" value="user non-profit managers/CEO">
+<input class="form-check-input" type="checkbox" id="flexCheckDefault" class="flexCheckDefault" value="user non-profit managers/CEO">
   <label class="form-check-label" for="flexCheckDefault">
     user non-profit managers/CEO
   </label>
   </div>
 <div class="form-check" >
-  <input class="form-check-input" type="checkbox" id="flexCheckDefault" class="flexCheckDefault" value="user non-profit warehouse boss">
+  <input class="form-check-input" type="checkbox" id="flexCheckDefault" class="flexCheckDefault" value="user non-profit warehouse boss"> 
   <label class="form-check-label" for="flexCheckDefault2">
     user non-profit warehouse boss
   </label>
@@ -99,7 +78,7 @@ $(document).ready(function(){
   <label class="form-check-label" for="flexCheckDefault6">
     experts 
   </label>
-  <input type="text" name="roles" class="roles" id="roles">
+  
 </div>
 </div>
 </div>
@@ -109,14 +88,14 @@ $(document).ready(function(){
   <div class="card card-3" id="card-3">
     <div class="card-body">
   <h5>Consent:</h5>
-  <textarea readonly rows="4" cols="auto">
+  <textarea readonly rows="5" cols="auto">
     At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.  At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies. 
     At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.  At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies. 
     At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.  At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies. 
     </textarea>
-    <div class="form-check">
+    <div class="form-check consent">
       <input class="form-check-input" type="checkbox" id="flexCheckDefault5" name="consent" value="consented">
-      <label class="form-check-label" for="flexCheckDefault5">
+      <label class="form-check-label consent-text" for="flexCheckDefault5">
         I accept
       </label>
   </div>
@@ -126,7 +105,7 @@ $(document).ready(function(){
 <div class="buttons">
   <button class="btn btn-success" id="prev" disabled type="button">Prev</button>
   <button class="btn btn-success" id="next" type="button">Next</button>
-  <button class="btn btn-primary" id="submit" type="submit" form="register" disabled>Submit</button>
+  <button class="btn btn-primary" id="submit" type="submit" form="register" disabled>Register</button>
   </div>
 </form>
   </div>

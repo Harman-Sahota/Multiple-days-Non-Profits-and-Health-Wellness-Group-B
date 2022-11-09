@@ -18,7 +18,7 @@ body {
 }
 .contain{
     width: 45%;
-    height: 70%;
+    height: 80%;
     margin: 0;
     position: absolute;
     top: 50%;
@@ -88,11 +88,18 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 100%;
-    margin-top: 157%;
+    margin-left: 82%;
+    margin-top: 130%;
     
 }
-
+#submit{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50%;
+    margin-left: -50%;
+ 
+}
 .btn{
     margin-left: 5%;
     font-family: inherit;
@@ -113,7 +120,7 @@ transform: scale(0.97);
 }
 .text-input{
 width: 250%;
-margin: 4% -80%;
+margin: 10% -80%;
 display: flex;
 align-items: center;
 justify-content: center;
@@ -127,14 +134,20 @@ position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 2% auto;
+    margin: 2% 25%;
     position: relative;
-    
   }
-.form-check-label{
-    margin-left: 5%;
+  .consent{
+    margin: 2% 23%;
+
+  }
+  .consent .consent-text{
+    
+    width: 30%;
+  }
+  label{  
+    width: calc(100%);
 }
-  
 .card{
     border: none !important;
     position: absolute;
