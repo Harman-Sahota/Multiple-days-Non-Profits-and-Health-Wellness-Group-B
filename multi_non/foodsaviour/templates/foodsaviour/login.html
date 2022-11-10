@@ -1,47 +1,14 @@
 {% extends "foodsaviour/base.html" %} {% block content %}
-<!-- Linking Bootstrap -->
-<link
-  href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
-  rel="stylesheet"
-  integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
-  crossorigin="anonymous"
-/>
 
 <!-- LInking CSS File -->
-<link href="../../static/foodsaviour/login.css" rel="stylesheet" />
+<link
+  href="{% static 'foodsaviour/login.css'%}"
+  rel="stylesheet"
+  type="text/css"
+/>
 
 <!-- HTML BODY CONTENT -->
 <div class="body">
-  <div class="container-fluid nav-container mg--small">
-    <!--NavBar-->
-    <nav class="navbar navbar-expand bg-light">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#"
-          ><i class="fa-solid fa-leaf" style="color: #415d34"></i>
-          <b>Food Saviour</b></a
-        >
-        <div class="navbar-collapse collapse" id="navigation">
-          <div class="navbar-nav ms-auto">
-            <a class="nav-link px-3" href="#">About</a>
-            <a class="nav-link px-3" href="#">Contact</a>
-            <a class="nav-link px-3" href="{% url 'login' %}">Login</a>
-            <a href="{% url 'register' %}" class="px-3 register-button-link"
-              ><button
-                class="btn btn-outline-success register-button"
-                type="button"
-              >
-                Register
-              </button></a
-            >
-          </div>
-          <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-            <i class="fa fa-bars"></i>
-          </a>
-        </div>
-      </div>
-    </nav>
-  </div>
-
   <!-- Login Card -->
   <div class="card mx-auto">
     <div class="card-body">
@@ -89,17 +56,6 @@
 </div>
 
 <!-- Linking JS File -->
-<script src="../../static/foodsaviour/login.js"></script>
+<script src="{% static 'foodsaviour/login.js'%}"></script>
 
-<!-- Linking Bootstrap -->
-<script
-  src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-  integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
-  crossorigin="anonymous"
-></script>
-<script
-  src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"
-  integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk"
-  crossorigin="anonymous"
-></script>
 {% endblock content%}
