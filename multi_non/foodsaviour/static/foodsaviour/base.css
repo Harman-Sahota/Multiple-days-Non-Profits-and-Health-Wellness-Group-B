@@ -7,7 +7,6 @@
 }
 
 body {
-  background-color: #ffffea;
   color: rgb(0, 0, 0);
   font-family: "Poppins", sans-serif;
 }
@@ -33,7 +32,7 @@ header {
 }
 
 #brand a {
-  color: #415D34;
+  color: #415d34;
 }
 
 ul {
@@ -43,7 +42,6 @@ ul {
   display: flex;
   align-items: center;
   justify-content: space-around;
-
 }
 
 ul a {
@@ -55,10 +53,10 @@ ul li {
   margin-left: 10px;
 }
 
-ul li a:hover, #signup a:hover {
-  color: #A1C298;
+ul li a:hover,
+#signup a:hover {
+  color: #a1c298;
 }
-
 
 #login,
 #signup {
@@ -67,11 +65,11 @@ ul li a:hover, #signup a:hover {
 }
 
 #signup {
-  border: 1px solid #415D34;
+  border: 1px solid #415d34;
 }
 
 #signup a {
-  color: #415D34;
+  color: #415d34;
 }
 
 #hamburger-icon {

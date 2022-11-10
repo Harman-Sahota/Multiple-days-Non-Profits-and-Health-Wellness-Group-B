@@ -12,22 +12,23 @@ html {
   /* font-size: 1.6rem; */
   height: 100vh;
   background-image: url("login_bg.png");
+  overflow: hidden;
 }
 
-.navbar {
+/* .navbar {
   z-index: 1;
   background-color: transparent !important;
   position: relative;
-  /* font-size: 2rem; */
-}
+  /* font-size: 2rem;
+} */
 
-.navbar-brand {
-  /* font-size: 2rem; */
-}
+/* .navbar-brand {
+  /* font-size: 2rem; 
+} */
 
-.register-button {
-  /* font-size: 2rem; */
-}
+/* .register-button {
+  /* font-size: 2rem; 
+} */
 
 .card {
   top: 45%;
