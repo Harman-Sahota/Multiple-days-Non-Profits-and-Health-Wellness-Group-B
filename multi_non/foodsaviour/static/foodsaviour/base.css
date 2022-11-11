@@ -35,7 +35,7 @@ header {
   color: #415d34;
 }
 
-ul {
+.nav ul {
   padding: 0;
   list-style: none;
   height: 100%;
@@ -43,31 +43,31 @@ ul {
   align-items: center;
 }
 
-ul a {
+.nav ul a {
   color: rgb(0, 0, 0);
 }
 
-ul li {
+.nav ul li {
   padding: 5px;
   margin-left: 10px;
 }
 
-ul li a:hover,
-#signup a:hover {
+.nav ul li a:hover,
+.nav #signup a:hover {
   color: #a1c298;
 }
 
-#login,
-#signup {
+.nav #login,
+.nav #signup {
   border-radius: 5px;
   padding: 5px 8px;
 }
 
-#signup {
+.nav #signup {
   border: 1px solid #415d34;
 }
 
-#signup a {
+.nav #signup a {
   color: #415d34;
 }
 
@@ -99,28 +99,29 @@ ul li a:hover,
   transform: rotate(45deg) translate(-6px, -8px);
 }
 
-.open .mobile-menu {
+.open .nav .mobile-menu {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
 }
 
-.mobile-menu {
+.nav .mobile-menu {
   display: none;
   position: absolute;
   top: 50px;
   left: 0;
   height: calc(100vh - 50px);
   width: 100%;
+  z-index: 2;
 }
 
-.mobile-menu li {
+.nav .mobile-menu li {
   margin-bottom: 10px;
 }
 
 @media only screen and (max-width: 605px) {
-  header nav {
+  header #desktop-menu {
     display: none;
   }
 
@@ -134,11 +135,20 @@ footer a {
   color: grey;
 }
 
+footer .nav {
+  margin: auto;
+  width: 100%;
+  justify-content: center;
+}
+
 footer {
-  padding: 0 20px;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+   margin: auto auto;
+  padding: 20px 0;
   background-color: #ffffff;
   display: table;
   text-align: center;
-  margin-left: auto;
-  margin-right: auto;
 }
+
