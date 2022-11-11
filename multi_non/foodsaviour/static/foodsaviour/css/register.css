@@ -5,7 +5,7 @@
   }
 body {
     margin: 0;
-    background: url('/static/foodsaviour/login_bg.png');
+    background: url('/static/foodsaviour/images/login_bg.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
