@@ -27,3 +27,9 @@ def home(request):
     
 def login(request):
     return render(request, 'foodsaviour/login.html', {'title': 'Login'})
+
+def about(request):
+    return render(request, 'foodsaviour/about.html', {'title': 'About'})
+
+def contact(request):
+    return render(request, 'foodsaviour/contact.html', {'title': 'Contact'})
