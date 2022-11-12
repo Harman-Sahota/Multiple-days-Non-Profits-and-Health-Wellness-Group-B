@@ -2,7 +2,7 @@
 const progress = document.getElementById("progress");
 const prev = document.getElementById("prev");
 const next = document.getElementById("next");
-
+const consent = document.getElementById("consent-check");
 const circles = document.querySelectorAll(".circle");
 
 let currentActive = 1;
@@ -69,7 +69,8 @@ function update(){
         submit.disabled = true;
     } else if(currentActive===circles.length){
        next.disabled=true;
-       submit.disabled = false;
+       checked();
+
     }else{
         prev.disabled=false;
         next.disabled=false;
@@ -77,7 +78,16 @@ function update(){
     }
 }
 
+ function CheckboxChecked(){
+if(consent.checked == true){
+    submit.disabled = false;
+    console.log('checked');
+ }else{
+     submit.disabled = true;
+     console.log('unchecked');
+ }
+}
 
-// form
+
 
 
