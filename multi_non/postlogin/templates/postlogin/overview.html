@@ -1,4 +1,142 @@
 {% extends "postlogin/base.html" %}
 {% block content %}
-<h4>This is the overview page</h4>
+<section>
+    <!--Welcome User-->
+    <div class="container p-2">
+        <h5 id="welcome">Welcome back, [User's full name]!</h5>
+    </div>
+
+    <!--Progress Dashboard-->
+    <div class="container p-2 text-center">
+        <div class="row">
+            <div class="col-8">
+                <div class="five-metrics">
+                    <div class="card-group">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5>-- lbs</h5>
+                                <h6>Fresh Produce</h6>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <h5>-- lbs</h5>
+                                <h6>2nd Metric</h6>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-body">
+                                <h5>-- lbs</h5>
+                                <h6>3rd Metric</h6>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-body">
+                                <h5>-- lbs</h5>
+                                <h6>4th Metric</h6>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-body">
+                                <h5>-- lbs</h5>
+                                <h6>6th Metric</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="waste-saved">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5>-- lbs</h5>
+                                <h6>Food Waste Saved</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container p-2">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center border-0">
+                <h4 class="card-title">Inventory</h4>
+                <div class="dropdown">
+                    <a href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false" class="dropset">
+                        <i class="fa fa-ellipsis-v" style="color: #000000;"></i>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <li>
+                            <a href="#" class="dropdown-item">Manage</a>
+                        </li>
+                        <li>
+                            <a href="#" class="dropdown-item">Add</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive dataview">
+                    <table class="table datatable ">
+                        <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th>Category</th>
+                                <th>Quantity (lbs)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Apples</td>
+                                <td>Fresh Produce</td>
+                                <td>1000</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container p-2">
+        <div class="card d-flex">
+            <div class="card-header border-0">
+                <h4 class="card-title">Food Saving Techniques</h4>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-4 text-center">
+                    <select name="category" id="categoryList">
+                      <option value="metric1">Fresh Produce</option>
+                      <option value="metric2">Metric #2</option>
+                      <option value="metric3">Metric #3</option>
+                      <option value="metric 4">Metric #4</option>
+                      <option value="metric 4">Metric #5</option>
+                    </select>
+                </div>
+                <div class="col-8 p-4">
+                    <div class="row">
+                    <h6 id="method-number">Method #1</h6>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud...</p>
+                    <a href="#">Learn More</a>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <h6 id="method-number">Method #2</h6>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud...</p>
+                            <a href="#">Learn More</a>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
 {% endblock content%}
