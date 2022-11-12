@@ -3,13 +3,16 @@
     margin: 0; 
     padding: 0; 
   }
+  html,body{
+    height:100%;
+  }
 body {
     margin: 0;
     background: url('/static/foodsaviour/images/login_bg.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    height: 100vh;
+   
 
 }
 .navbar{
@@ -19,10 +22,9 @@ body {
 }
 .contain{
     width: 45%;
-    height: 80%;
-    margin: 0;
-    position: absolute;
-    top: 50%;
+    height:fit-content;
+    max-height: fit-content;
+    margin-top: 25%;
     left: 50%;
     text-align: center;
     align-items: center;
@@ -187,6 +189,11 @@ padding: 4%;
 }
 
 footer{
-    margin-top: 10%;
+  margin-top: -15%;
+    height: auto !important;
+    max-height: 2%;
+    height: 2%;
+    position: relative;
+    overflow: hidden;
   
 }
