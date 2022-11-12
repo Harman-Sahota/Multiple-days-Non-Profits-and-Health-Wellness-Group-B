@@ -6,6 +6,18 @@
     z-index: 1;
 }
 
+
+@keyframes hue {
+
+    0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 0.5;
+      }
+    
+}
+
 .carousel-item::before {
     content: "";
     display: block;
@@ -16,6 +28,22 @@
     left: 0;
     right: 0;
     opacity: 0.5;
+    animation: 500ms ease-out 0ms 1 hue;
+
+}
+
+@keyframes appear {
+
+    0% {
+        opacity: 0;
+      }
+      50% {
+        opacity: .5;
+      }
+      100% {
+        opacity: 100%;
+      }
+    
 }
 
 .carousel-caption {
@@ -24,7 +52,11 @@
     bottom: initial;
 }
 
-
 .carousel-caption h5 {
     font-size: 80px;
+    animation: 500ms ease-out 2ms 1 appear;
+}
+
+.carousel-caption p{
+    animation: 500ms ease-out 8ms 1 appear;
 }
