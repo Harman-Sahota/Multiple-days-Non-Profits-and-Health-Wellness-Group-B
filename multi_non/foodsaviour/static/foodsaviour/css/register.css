@@ -1,34 +1,38 @@
+* {
+    margin: 0;
+    padding: 0;
+}
 
-* { 
-    margin: 0; 
-    padding: 0; 
-  }
-  html,body{
-    height:100%;
-  }
+html,
+body {
+    height: 100%;
+}
+
 body {
     margin: 0;
     background: url('/static/foodsaviour/images/login_bg.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-   
+
 
 }
-.navbar{
+
+.navbar {
     z-index: 1;
     background-color: transparent !important;
     position: relative;
 }
-.contain{
-    width: 45%;
-    height:fit-content;
+
+.contain {
+    width: 55%;
+    height: fit-content;
     max-height: fit-content;
     margin-top: 25%;
     left: 50%;
     text-align: center;
     align-items: center;
-   -ms-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     border-radius: 5px;
     background: #FFFFFF;
@@ -36,7 +40,8 @@ body {
     padding: 2em;
     position: relative;
 }
-.progress-container{
+
+.progress-container {
     background: #FFFFFF;
     display: flex;
     justify-content: space-between;
@@ -47,7 +52,7 @@ body {
     padding: 2em;
 }
 
-.progress-container::before{
+.progress-container::before {
     content: "";
     position: absolute;
     background-color: grey;
@@ -59,7 +64,8 @@ body {
     z-index: 0;
     transition: 0.4s ease;
 }
-.progress{
+
+.progress {
     content: "";
     position: absolute;
     background-color: #CEE4CF;
@@ -71,7 +77,8 @@ body {
     z-index: 0;
     transition: 0.4s ease;
 }
-.circle{
+
+.circle {
     z-index: 1;
     background-color: #FFFFFF;
     color: black;
@@ -85,24 +92,30 @@ body {
     justify-content: center;
     transition: 0.4s ease;
 }
-.circle.active{
+
+.circle.active {
     border-color: #CEE4CF;
 }
-.buttons{
- width: 50%;
+
+.buttons {
+    width: 50%;
     height: 50%;
     overflow: auto;
     margin: auto;
     position: relative;
-    top: 50%; left: 0; bottom: 0; right: 0;
-    
+    top: 50%;
+    left: 0;
+    bottom: 0;
+    right: 0;
+
 }
-#wrapper{
-    margin-left:auto;
-    margin-right:auto;
+
+#wrapper {
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 50%;
 }
- 
+
 /*# submit{
     display: flex;
     align-items: center;
@@ -110,34 +123,37 @@ body {
     margin-top: 24%;
     margin-left: -24%;
 }*/
-.btn{
+.btn {
     margin-top: 4%;
     margin-left: 2%;
     font-family: inherit;
     width: 7rem;
 }
-.btn:focus{
+
+.btn:focus {
     outline: 0;
 }
-.btn:active{
-transform: scale(0.97); 
-z-index: 1000;
+
+.btn:active {
+    transform: scale(0.97);
+    z-index: 1000;
 }
+
 /*.btn:disabled{
     cursor: pointer;
 }*/
 
-.text-input{
-width: 50%;
-margin: 2% 25%;
-display: flex;
-align-items: center;
-justify-content: center;
-position: relative;
+.text-input {
+    width: 50%;
+    margin: 2% 25%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
 }
 
-.form-check{
-    text-align:center;
+.form-check {
+    text-align: center;
     margin-top: 2%;
     width: 55%;
     display: flex;
@@ -145,55 +161,62 @@ position: relative;
     justify-content: center;
     margin: 2% 25%;
     position: relative;
-  }
-  .consent{
+}
+
+.consent {
     margin: 2% 23%;
-  }
-  .consent .consent-text{
-    
+}
+
+.consent .consent-text {
+
     width: 30%;
-  }
-  label{  
+}
+
+label {
     width: calc(100%);
 }
-.card{
+
+.card {
     border: none !important;
     position: absolute;
     width: 90%;
     display: inline-block;
     display: flex;
     align-items: center;
-    justify-content: center; 
+    justify-content: center;
     transition: transform 400ms ease;
 }
 
-#card-1{
+#card-1 {
     display: block;
     transition: transform 10100ms ease;
 }
-#card-2{
+
+#card-2 {
     display: none;
     transition: transform 1000ms ease;
-}
-#card-3{
-    display: none;
-    transition: transform 1000ms ease;
-}
-textarea{
-    margin-top: 2%;
-    resize: none;
-width: 60%;
-border: 2px solid rgba(0, 0, 0, 0.2);
-border-radius: 10px;
-padding: 4%;
 }
 
-footer{
-  margin-top: -15%;
+#card-3 {
+    display: none;
+    transition: transform 1000ms ease;
+}
+
+textarea {
+    margin-top: 2%;
+    resize: none;
+    width: 60%;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 4%;
+}
+
+footer {
+    margin-top: -15%;
     height: auto !important;
     max-height: 2%;
     height: 2%;
     position: relative;
     overflow: hidden;
-  
+
 }
