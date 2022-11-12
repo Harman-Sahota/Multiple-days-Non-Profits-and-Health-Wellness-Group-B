@@ -2,106 +2,118 @@
 {% load static %}
 
 {% block content %}
+
+
+
 <!-- link css file -->
-<link rel="stylesheet" type="text/css" href="{% static 'foodsaviour/register.css'%}">
+<link rel="stylesheet" type="text/css" href="{% static 'foodsaviour/css/register.css'%}">
 
 <!-- main content container-->
 <div class="contain">
-<h3>Create An Account</h3>
-<!-- progress bar-->
-<div class="progress-container">
+  <h3>Create An Account</h3>
+  <!-- progress bar-->
+  <div class="progress-container">
     <div class="progress" id="progress"> </div>
     <div class="circle active"><i class="fa-solid fa-1"></i></div>
     <div class="circle"><i class="fa-solid fa-2"></i></div>
     <div class="circle "><i class="fa-solid fa-3"></i></div>
-</div>
-
-
-<!-- form -->
-
-<!-- card 1 -->
-<div class="card-group">
-  <div class="card card-1" id="card-1">
-    <div class="card-body">
-<form class="form-inside" onsubmit="return false;">
-  <input type="text" class="form-control text-input" id="firstname" placeholder="First Name">
-  <input type="text" class="form-control text-input" id="lastname" placeholder="Last Name">
-  <input type="email" class="form-control text-input" id="email" placeholder="Email">
-  <input type="password" class="form-control text-input" id="password" placeholder="Password">
-  <input type="password" class="form-control text-input" id="confirm-password" placeholder="Confirm Password">
-</div>
-</div>
-</div>
-
-<!-- card 2 -->
-<div class="card-group">
-  <div class="card card-2" id="card-2">
-    <div class="card-body">
-      <h5>Choose your roles:</h5>
-      <div class="form-check ">
-  <input class="form-check-input" type="checkbox" id="flexCheckDefault" value="option1">
-  <label class="form-check-label" for="flexCheckDefault">
-    user non-profit managers/CEO
-  </label>
   </div>
-<div class="form-check" >
-  <input class="form-check-input" type="checkbox" id="flexCheckDefault2" value="option2">
-  <label class="form-check-label" for="flexCheckDefault2">
-    user non-profit warehouse boss
-  </label>
-</div>
-<div class="form-check">
-  <input class="form-check-input" type="checkbox" id="flexCheckDefault3" value="option3">
-  <label class="form-check-label" for="flexCheckDefault3">
-    user non-profit volunteer
-  </label>
-</div>
-<div class="form-check ">
-  <input class="form-check-input" type="checkbox" id="flexCheckDefault4" value="option4">
-  <label class="form-check-label" for="flexCheckDefault4">
-    sponsors
-  </label>
-  </div>
-  <div class="form-check">
-    <input class="form-check-input" type="checkbox" id="flexCheckDefault5" value="option5">
-    <label class="form-check-label" for="flexCheckDefault5">
-      admin
-    </label>
-</div>
-<div class="form-check">
-  <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option6">
-  <label class="form-check-label" for="inlineCheckbox6">
-    experts 
-  </label>
-</div>
-</div>
-</div>
 
-<!--card 3-->
-<div class="card-group">
-  <div class="card card-3" id="card-3">
-    <div class="card-body">
-<form class="form-inside" onsubmit="return false;">
-  <h5>Consent:</h5>
-  <textarea readonly rows="4" cols="auto">
+
+  <!-- form -->
+
+  <!-- card 1 -->
+  <div class="card-group">
+    <div class="card card-1" id="card-1">
+      <div class="card-body">
+        <form class="form-inside" action="" method="post" id="register">
+          {% csrf_token %}
+          <input type="text" class="form-control text-input form-floating name-formt" id="firstname" name="firstname" placeholder="First Name">
+          <input type="text" class="form-control text-input form-floating name-form" id="lastname" name="lastname" placeholder="Last Name">
+          <input type="email" class="form-control text-input form-floating name-form" id="email" name="email" placeholder="Email">
+          <input type="password" class="form-control text-input form-floating name-form" id="password" name="password" placeholder="Password">
+          <input type="password" class="form-control text-input form-floating name-form" id="confirm-password" placeholder="Confirm Password">
+      </div>
+    </div>
+  </div>
+
+  <!-- card 2 -->
+  <div class="card-group">
+    <div class="card card-2" id="card-2">
+      <div class="card-body">
+        <h5>Choose your roles:</h5>
+
+        <div class="form-check ">
+          <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="roles[]" class="flexCheckDefault"
+            value="user non-profit managers/CEO">
+          <label class="form-check-label" for="flexCheckDefault">
+            user non-profit managers/CEO
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="roles[]" class="flexCheckDefault"
+            value="user non-profit warehouse boss">
+          <label class="form-check-label" for="flexCheckDefault2">
+            user non-profit warehouse boss
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="roles[]" class="flexCheckDefault"
+            value="user non-profit volunteer">
+          <label class="form-check-label" for="flexCheckDefault3">
+            user non-profit volunteer
+          </label>
+        </div>
+        <div class="form-check ">
+          <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="roles[]" class="flexCheckDefault"
+            value="sponsors">
+          <label class="form-check-label" for="flexCheckDefault4">
+            sponsors
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="roles[]" class="flexCheckDefault"
+            value="admin">
+          <label class="form-check-label" for="flexCheckDefault5">
+            admin
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="roles[]" class="flexCheckDefault"
+            value="experts ">
+          <label class="form-check-label" for="flexCheckDefault6">
+            experts
+          </label>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--card 3-->
+  <div class="card-group">
+    <div class="card card-3" id="card-3">
+      <div class="card-body">
+        <h5>Consent:</h5>
+        <textarea readonly rows="5" cols="auto">
     At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.  At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies. 
     At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.  At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies. 
     At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.  At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies. 
     </textarea>
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" id="flexCheckDefault5" value="option5">
-      <label class="form-check-label" for="flexCheckDefault5">
-        I accept
-      </label>
+        <div class="form-check consent">
+          <input class="form-check-input" type="checkbox" id="flexCheckDefault5" name="consent" value="consented">
+          <label class="form-check-label consent-text" for="flexCheckDefault5">
+            I accept
+          </label>
+        </div>
+      </div>
+    </div>
   </div>
+  <div class="buttons">
+    <button class="btn btn-success form-floating name-form" id="prev" disabled type="button">Prev</button>
+    <button class="btn btn-success form-floating name-form" id="next" type="button">Next</button>
+    <button class="btn btn-primary form-floating name-form" id="submit" type="submit" form="register" disabled>Register</button>
+  </div>
+  </form>
 </div>
-</div>
-
-<div class="buttons">
-  <button class="btn btn-success" id="prev" disabled >Prev</button>
-  <button class="btn btn-success" id="next">Next</button>
-  </div>
-</form>
-  </div>
-  <script src = "{% static 'foodsaviour/register.js'%}"></script>
- {% endblock content%}
+<script src="{% static 'foodsaviour/js/register.js'%}"></script>
+{% endblock content%}
