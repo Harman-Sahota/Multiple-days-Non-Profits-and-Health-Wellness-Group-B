@@ -67,11 +67,11 @@ header {
   border-radius: 5px;
   padding: 5px 8px;
 }
-.btn{
+.register{
   color: #415d34 !important;
   border-color: #415d34 !important ;
 }
-.btn:hover{
+.register:hover{
   background-color: #415d34 !important;
   color: white !important;
 }
