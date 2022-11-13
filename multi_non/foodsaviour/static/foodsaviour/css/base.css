@@ -58,23 +58,22 @@ header {
   margin-left: 10px;
 }
 
-.nav ul li a:hover,
-.nav #signup a:hover {
+.nav ul li a:hover
+ {
   color: #a1c298;
 }
 
-.nav #login,
-.nav #signup {
+.nav #login{
   border-radius: 5px;
   padding: 5px 8px;
 }
-
-.nav #signup {
-  border: 1px solid #415d34;
+.btn{
+  color: #415d34 !important;
+  border-color: #415d34 !important ;
 }
-
-.nav #signup a {
-  color: #415d34;
+.btn:hover{
+  background-color: #415d34 !important;
+  color: white !important;
 }
 
 #hamburger-icon {
