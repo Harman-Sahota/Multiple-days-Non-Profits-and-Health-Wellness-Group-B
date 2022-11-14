@@ -9,6 +9,7 @@
 <link rel="stylesheet" type="text/css" href="{% static 'foodsaviour/css/register.css'%}">
 
 <!-- main content container-->
+
 <div class="contain">
   <h3>Create An Account</h3>
   <!-- progress bar-->
@@ -100,18 +101,20 @@
     At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.  At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies. 
     </textarea>
         <div class="form-check consent">
-          <input class="form-check-input" type="checkbox" id="flexCheckDefault5" name="consent" value="consented">
-          <label class="form-check-label consent-text" for="flexCheckDefault5">
+          <input class="form-check-input" type="checkbox" id="consent-check" onchange="CheckboxChecked()" name="consent" value="consented">
+          <label class="form-check-label consent-text" for="consent-check">
             I accept
           </label>
         </div>
       </div>
     </div>
   </div>
+  <div id="wrapper">
   <div class="buttons">
     <button class="btn btn-success form-floating name-form" id="prev" disabled type="button">Prev</button>
     <button class="btn btn-success form-floating name-form" id="next" type="button">Next</button>
     <button class="btn btn-primary form-floating name-form" id="submit" type="submit" form="register" disabled>Register</button>
+  </div>
   </div>
   </form>
 </div>

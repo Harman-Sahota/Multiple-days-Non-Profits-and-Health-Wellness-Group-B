@@ -1,4 +1,144 @@
 {% extends "postlogin/base.html" %}
 {% block content %}
-<h4>This is the overview page</h4>
+<section>
+    <!--Welcome User-->
+    <div class="container p-2">
+        <h5 id="welcome">Welcome back, [User's full name]!</h5>
+    </div>
+
+    <!--Progress Dashboard-->
+    <div class="container p-2 text-center">
+        <div class="row">
+            <div class="col-8">
+                <div class="five-metrics">
+                    <div class="card-group">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5>-- lbs</h5> <!--The -- needs to be replaced with data from db-->
+                                <h6>Fresh Produce</h6>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <h5>-- lbs</h5> <!--The -- needs to be replaced with data from db-->
+                                <h6>2nd Metric</h6>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-body">
+                                <h5>-- lbs</h5> <!--The -- needs to be replaced with data from db-->
+                                <h6>3rd Metric</h6>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-body">
+                                <h5>-- lbs</h5> <!--The -- needs to be replaced with data from db-->
+                                <h6>4th Metric</h6>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-body">
+                                <h5>-- lbs</h5> <!--The -- needs to be replaced with data from db-->
+                                <h6>6th Metric</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="waste-saved">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5>-- lbs</h5> <!--The -- needs to be replaced with data from db-->
+                                <h6>Food Waste Saved</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Inventory-->
+    <div class="container p-2">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center border-0">
+                <h5 class="card-title"><b>Inventory</b></h5>
+                <div class="dropdown">
+                    <a href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false" class="dropset">
+                        <i class="fa fa-ellipsis-v" style="color: #000000;"></i>
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <li>
+                            <a href="#" class="dropdown-item">Manage</a> <!--Need to create page that shows full inventory list with options to delete and edit data entries-->
+                        </li>
+                        <li>
+                            <a href="#" class="dropdown-item">Add</a> <!--Need to create a page that allows user to add inventory item to db-->
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive dataview">
+                    <table class="table datatable ">
+                        <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th>Category</th>
+                                <th>Quantity (lbs)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Apples</td> <!--The -- needs to be replaced with data from db-->
+                                <td>Fresh Produce</td> <!--The -- needs to be replaced with data from db-->
+                                <td>1000</td> <!--The -- needs to be replaced with data from db-->
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Food Saving Methods-->
+    <div class="container p-2">
+        <div class="card d-flex">
+            <div class="card-header border-0">
+                <h5 class="card-title"><b>Food Saving Techniques</b></h5> <!--We need to create a list of techniques for each metric-->
+            </div>
+            <div class="row align-items-center">
+                <div class="col-4 text-center">
+                    <select name="category" id="categoryList">
+                      <option value="metric1">Fresh Produce</option>
+                      <option value="metric2">Metric #2</option>
+                      <option value="metric3">Metric #3</option>
+                      <option value="metric 4">Metric #4</option>
+                      <option value="metric 4">Metric #5</option>
+                    </select>
+                </div>
+                <div class="col-8 p-4">
+                    <div class="row">
+                    <h6 id="method-number">Method #1</h6> <!--This needs to be replaced with data from db-->
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud...</p> 
+                    <a href="#">Learn More</a> <!--We need a page for each technique with full information-->
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <h6 id="method-number">Method #2</h6> <!--This needs to be replaced with data from db-->
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud...</p>
+                            <a href="#">Learn More</a> <!--We need a page for each technique with full information-->
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
 {% endblock content%}
