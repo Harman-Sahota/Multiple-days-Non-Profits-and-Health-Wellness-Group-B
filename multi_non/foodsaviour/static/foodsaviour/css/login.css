@@ -7,39 +7,27 @@
 html {
   /* font-size: 62.5%; */
   height: 100%;
-
 }
 
 .body {
   /* font-size: 1.6rem; */
-  height: 100vh;
-  background-image: url('/static/foodsaviour/images/login_bg.png');
+  height: 84vh;
+  background-image: url("/static/foodsaviour/images/login_bg.png");
 
+  /* Disabling scroll */
+  overflow: hidden;
 }
 
-/* .navbar {
-  z-index: 1;
-  background-color: transparent !important;
-  position: relative;
-  /* font-size: 2rem;
-} */
+.form-container {
+  transform: translate(0, 20%);
+}
 
-/* .navbar-brand {
-  /* font-size: 2rem; 
-} */
-
-/* .register-button {
-  /* font-size: 2rem; 
-} */
-
-.card {
-  top: 45%;
-  transform: translate(0, -50%);
+.form {
+  /* top: 45%; */
+  /* transform: translate(0, -50%); */
   width: 30rem;
   box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.1);
-}
 
-.card-body {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -48,13 +36,18 @@ html {
   padding: 3rem;
 }
 
-.card-title {
+.form-title {
   /* font-size: 2rem; */
   font-weight: 700;
 }
 
-.name-form {
+.email-form,
+.password-form {
   width: 20rem;
+}
+
+.input-text {
+  font-weight: 400;
 }
 
 .trouble {
@@ -95,3 +88,7 @@ html {
 .mg--small {
   margin-bottom: 2rem;
 }
+
+/* .text-test {
+  font-size: 10rem;
+} */
