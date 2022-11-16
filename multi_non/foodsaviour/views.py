@@ -33,3 +33,6 @@ def about(request):
 
 def contact(request):
     return render(request, 'foodsaviour/contact.html', {'title': 'Contact'})
+
+def resetPassword(request):
+    return render(request, 'foodsaviour/resetPassword.html', {'title': 'Reset Password'})

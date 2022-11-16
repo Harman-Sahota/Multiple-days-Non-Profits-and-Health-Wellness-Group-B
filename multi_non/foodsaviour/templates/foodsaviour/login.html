@@ -12,7 +12,11 @@
 <!-- USER LOGIN FORM -->
 <div class="body">
   <div class="form-container">
-    <form class="form mx-auto">
+    <form
+      class="form mx-auto bg-white"
+      action="{static '<overview page url>'}"
+      method="post"
+    >
       <!-- Form Title -->
       <h5 class="form-title">User Login</h5>
 
@@ -49,7 +53,9 @@
       </div>
 
       <!-- Sign in Button -->
-      <a href="#" class="btn btn-outline-success sign-in">Sign in</a>
+      <a href="#" class="btn btn-outline-success sign-in" type="submit"
+        >Sign in</a
+      >
 
       <!-- New Account -->
       <div class="new-account">
@@ -61,6 +67,6 @@
 </div>
 
 <!-- Linking JS File -->
-<script src="{% static 'foodsaviour/js/login.js'%}"></script>
+<!-- <script src="{% static 'foodsaviour/js/login.js'%}"></script> -->
 
 {% endblock content%}
