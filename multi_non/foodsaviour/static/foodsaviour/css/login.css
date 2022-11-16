@@ -11,11 +11,9 @@ html {
 
 body {
   /* font-size: 1.6rem; */
-  height: 84vh;
+  height: vh;
   background: url("/static/foodsaviour/images/login_bg.png");
-
-  /* Disabling scroll */
-  overflow: hidden;
+  
 }
 
 /* .body {
@@ -67,7 +65,7 @@ body {
 
 .trouble-text {
   display: block;
-  font-size: 1000rem;
+  font-size: 1rem;
 }
 
 .trouble-reset {
@@ -98,3 +96,13 @@ body {
 /* .text-test {
   font-size: 10rem;
 } */
+
+footer {
+  margin-top: 20%;
+  height: auto !important;
+  max-height: 2%;
+  height: 2%;
+  position: relative;
+  overflow: hidden;
+
+}

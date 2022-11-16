@@ -1,62 +1,39 @@
 {% extends "foodsaviour/base.html" %} {% load static %} {% block content %}
 
 <!-- LInking CSS File -->
-<link
-  href="{% static 'foodsaviour/css/login.css'%}"
-  rel="stylesheet"
-  type="text/css"
-/>
+<link href="{% static 'foodsaviour/css/login.css'%}" rel="stylesheet" type="text/css" />
 
 <!-- PROJECT -->
 <!-- HTML BODY CONTENT -->
 <!-- USER LOGIN FORM -->
 <div class="body">
   <div class="form-container">
-    <form
-      class="form mx-auto bg-white"
-      action="{static '<overview page url>'}"
-      method="post"
-    >
+    <form class="form mx-auto bg-white" action="{static '<overview page url>'}" method="post">
       <!-- Form Title -->
       <h5 class="form-title">User Login</h5>
 
       <!-- Email Form -->
       <div class="form-floating email-form">
-        <input
-          type="email"
-          id="exampleInputEmail1"
-          class="form-control input-text"
-          placeholder="jordan@gmail.com"
-        />
-        <label for="exampleInputEmail1" class="form-label input-text"
-          >Email:</label
-        >
+        <input type="email" id="exampleInputEmail1" class="form-control input-text" placeholder="jordan@gmail.com" />
+        <label for="exampleInputEmail1" class="form-label input-text">Email:</label>
       </div>
 
       <!-- Password Form -->
       <div class="form-floating password-form">
-        <input
-          type="password"
-          id="exampleInputPassword1"
-          class="form-control input-text"
-          placeholder="e.g. Kiwanuka"
-        />
-        <label for="exampleInputPassword1" class="form-label input-text"
-          >Password:</label
-        >
+        <input type="password" id="exampleInputPassword1" class="form-control input-text" placeholder="e.g. Kiwanuka" />
+        <label for="exampleInputPassword1" class="form-label input-text">Password:</label>
       </div>
 
-      <!-- Signin Trouble -->
-      <div class="trouble">
+      <!-- Sign in Button -->
+      <a href="#" class="btn btn-outline-success sign-in" type="submit">Sign in</a>
+
+       <!-- Signin Trouble -->
+       <div class="trouble">
         <span class="trouble-text text-muted">Having trouble signing in?</span>
         <a class="trouble-reset text-danger" href="#">Reset password</a>
       </div>
 
-      <!-- Sign in Button -->
-      <a href="#" class="btn btn-outline-success sign-in" type="submit"
-        >Sign in</a
-      >
-
+      
       <!-- New Account -->
       <div class="new-account">
         <span class="new-account-text text-muted">Don't have an account?</span>
