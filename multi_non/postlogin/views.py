@@ -16,3 +16,6 @@ def network(request):
 
 def profile(request):
     return render(request, 'postlogin/profile.html', {'title': 'Profile'})
+
+def admin(request):
+     return render(request, 'postlogin/admin.html', {'title': 'Admin'})
