@@ -3,7 +3,8 @@
 <section>
     <!--Welcome User-->
     <div class="container p-2">
-        <h5 id="welcome">Welcome back, [User's full name]!</h5>
+        <h5 id="welcome"><b>Welcome back, [User's full name]!</b></h5>
+        <p>Viewing as: [User's Role]</p>
     </div>
 
     <!--Progress Dashboard-->
@@ -14,35 +15,40 @@
                     <div class="card-group">
                         <div class="card">
                             <div class="card-body">
-                                <h5>-- lbs</h5> <!--The -- needs to be replaced with data from db-->
+                                <h5>-- lbs</h5>
+                                <!--The -- needs to be replaced with data from db-->
                                 <h6>Fresh Produce</h6>
                             </div>
                         </div>
                         <div class="card">
                             <div class="card-body">
-                                <h5>-- lbs</h5> <!--The -- needs to be replaced with data from db-->
+                                <h5>-- lbs</h5>
+                                <!--The -- needs to be replaced with data from db-->
                                 <h6>2nd Metric</h6>
                             </div>
                         </div>
 
                         <div class="card">
                             <div class="card-body">
-                                <h5>-- lbs</h5> <!--The -- needs to be replaced with data from db-->
+                                <h5>-- lbs</h5>
+                                <!--The -- needs to be replaced with data from db-->
                                 <h6>3rd Metric</h6>
                             </div>
                         </div>
 
                         <div class="card">
                             <div class="card-body">
-                                <h5>-- lbs</h5> <!--The -- needs to be replaced with data from db-->
+                                <h5>-- lbs</h5>
+                                <!--The -- needs to be replaced with data from db-->
                                 <h6>4th Metric</h6>
                             </div>
                         </div>
 
                         <div class="card">
                             <div class="card-body">
-                                <h5>-- lbs</h5> <!--The -- needs to be replaced with data from db-->
-                                <h6>6th Metric</h6>
+                                <h5>-- lbs</h5>
+                                <!--The -- needs to be replaced with data from db-->
+                                <h6>5th Metric</h6>
                             </div>
                         </div>
                     </div>
@@ -53,7 +59,8 @@
                     <div class="col">
                         <div class="card">
                             <div class="card-body">
-                                <h5>-- lbs</h5> <!--The -- needs to be replaced with data from db-->
+                                <h5>-- lbs</h5>
+                                <!--The -- needs to be replaced with data from db-->
                                 <h6>Food Waste Saved</h6>
                             </div>
                         </div>
@@ -67,17 +74,20 @@
     <div class="container p-2">
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center border-0">
-                <h5 class="card-title"><b>Inventory</b></h5>
+                <h5 class="card-title"><i class="fa-solid fa-boxes-stacked"></i><b> Inventory</b></h5>
                 <div class="dropdown">
                     <a href="javascript:void(0);" data-bs-toggle="dropdown" aria-expanded="false" class="dropset">
                         <i class="fa fa-ellipsis-v" style="color: #000000;"></i>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <li>
-                            <a href="#" class="dropdown-item">Manage</a> <!--Need to create page that shows full inventory list with options to delete and edit data entries-->
+                            <a href="#" class="dropdown-item">Manage</a>
+                            <!--Need to create page that shows full inventory list with options to delete and edit data entries-->
                         </li>
                         <li>
-                            <a href="#" class="dropdown-item">Add</a> <!--Need to create a page that allows user to add inventory item to db-->
+                            <a href="#" class="dropdown-item" data-bs-toggle="modal"
+                                data-bs-target="#staticBackdrop">Add</a>
+                            <!--Need to create a page that allows user to add inventory item to db-->
                         </li>
                     </ul>
                 </div>
@@ -94,9 +104,8 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Apples</td> <!--The -- needs to be replaced with data from db-->
-                                <td>Fresh Produce</td> <!--The -- needs to be replaced with data from db-->
-                                <td>1000</td> <!--The -- needs to be replaced with data from db-->
+                                <!--Needs to be replaced with data from db-->
+                                <!--If no data, display "No inventory"-->
                             </tr>
                         </tbody>
                     </table>
@@ -105,36 +114,69 @@
         </div>
     </div>
 
-    <!--Food Saving Methods-->
+    <!--Recent-->
     <div class="container p-2">
-        <div class="card d-flex">
-            <div class="card-header border-0">
-                <h5 class="card-title"><b>Food Saving Techniques</b></h5> <!--We need to create a list of techniques for each metric-->
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center border-0">
+                <h5 class="card-title"><i class="fa-regular fa-clock"></i><b> Recent</b></h5>
             </div>
-            <div class="row align-items-center">
-                <div class="col-4 text-center">
-                    <select name="category" id="categoryList">
-                      <option value="metric1">Fresh Produce</option>
-                      <option value="metric2">Metric #2</option>
-                      <option value="metric3">Metric #3</option>
-                      <option value="metric 4">Metric #4</option>
-                      <option value="metric 4">Metric #5</option>
-                    </select>
+            <div class="card-body">
+                <div class="table-responsive dataview">
+                    <table class="table datatable">
+                        <thead>
+                            <tr>
+                                <th>Session</th>
+                                <th>Date</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <!--Needs to be replaced with data from db-->
+                                <!--If no data, display "No inventory"-->
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="col-8 p-4">
-                    <div class="row">
-                    <h6 id="method-number">Method #1</h6> <!--This needs to be replaced with data from db-->
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud...</p> 
-                    <a href="#">Learn More</a> <!--We need a page for each technique with full information-->
+            </div>
+        </div>
+    </div>
+
+    <!--Add Inventory Modal-->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Add Inventory</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-form">
+                        <label for="inputDescription" class="form-label">Description</label>
+                        <input type="text" class="form-control text-input form-floating" id="description"
+                            name="description">
+                            <br>
+                            <div class="form-group">
+                                <label for="inputCategory" class="form-label">Category (select one)</label>
+                                <select class="form-control" id="sel1">
+                                  <option>Fresh Produce</option>
+                                  <option>Metric #2</option>
+                                  <option>Metric #3</option>
+                                  <option>Metric #4</option>
+                                  <option>Metric #5</option>
+                                </select>
+                              </div>
+                        <br>
+                        <label for="inputQuantity" class="form-label">Quantity (in lbs)</label>
+                        <br>
+                        <input type="text" class="form-control text-input form-floating" id="quantity"
+                            name="quantity">
                     </div>
-                    <hr>
-                    <div class="row">
-                        <h6 id="method-number">Method #2</h6> <!--This needs to be replaced with data from db-->
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud...</p>
-                            <a href="#">Learn More</a> <!--We need a page for each technique with full information-->
-                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Discard</button>
+                    <button type="button" class="btn btn-primary">Save</button>
                 </div>
             </div>
         </div>

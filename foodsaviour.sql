@@ -1,5 +1,6 @@
 CREATE SCHEMA foodsaviour;
 USE foodsaviour;
+
 CREATE TABLE users (
  FirstName varchar(255),
  LastName varchar(255),
@@ -11,3 +12,9 @@ CREATE TABLE users (
 CREATE USER 'admin'@'localhost' IDENTIFIED BY 'groupb@2022!';
 GRANT ALL PRIVILEGES ON foodsaviour.* TO 'admin'@'localhost';
 FLUSH PRIVILEGES;
+
+CREATE TABLE inventory (
+Description varchar(255),
+Category	varchar(255),
+Quantity	Int(55)
+);

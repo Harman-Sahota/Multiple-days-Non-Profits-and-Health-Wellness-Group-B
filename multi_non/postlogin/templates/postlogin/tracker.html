@@ -1,4 +1,42 @@
 {% extends "postlogin/base.html" %}
 {% block content %}
-<h4>This is the tracker page</h4>
+<!--Food Saving Methods-->
+<div class="container p-2">
+    <div class="card d-flex">
+        <div class="card-header border-0">
+            <h5 class="card-title"><b>Food Saving Techniques</b></h5>
+            <!--We need to create a list of techniques for each metric-->
+        </div>
+        <div class="row align-items-center">
+            <div class="col-4 text-center">
+                <select name="category" id="categoryList">
+                    <option value="metric1">Fresh Produce</option>
+                    <option value="metric2">Metric #2</option>
+                    <option value="metric3">Metric #3</option>
+                    <option value="metric 4">Metric #4</option>
+                    <option value="metric 4">Metric #5</option>
+                </select>
+            </div>
+            <div class="col-8 p-4">
+                <div class="row">
+                    <h6 id="method-number">Method #1</h6>
+                    <!--This needs to be replaced with data from db-->
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud...</p>
+                    <a href="#">Learn More</a>
+                    <!--We need a page for each technique with full information-->
+                </div>
+                <hr>
+                <div class="row">
+                    <h6 id="method-number">Method #2</h6>
+                    <!--This needs to be replaced with data from db-->
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud...</p>
+                    <a href="#">Learn More</a>
+                    <!--We need a page for each technique with full information-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock content%}
