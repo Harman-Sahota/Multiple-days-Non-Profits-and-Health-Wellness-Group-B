@@ -1,6 +1,5 @@
 CREATE SCHEMA foodsaviour;
 USE foodsaviour;
-
 CREATE TABLE users (
  FirstName varchar(255),
  LastName varchar(255),
