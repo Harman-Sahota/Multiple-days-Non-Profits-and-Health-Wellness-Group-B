@@ -9,4 +9,5 @@ class users(models.Model):
     Password = models.CharField(max_length=255)
     Roles = models.CharField(max_length=255)
     Consent = models.CharField(max_length=50)
+    Organization = models.CharField(max_length=255)
     
