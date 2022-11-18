@@ -4,12 +4,13 @@ const prev = document.getElementById("prev");
 const next = document.getElementById("next");
 const consent1 = document.getElementById("consent-check1");
 const consent2 = document.getElementById("consent-check2");
+const consent3 = document.getElementById("consent-check3");
 const circles = document.querySelectorAll(".circle");
 const confirmpassword = document.getElementById("confirm-password");
 const password = document.getElementById("password");
-
+const submit = document.getElementById("submit")
 let currentActive = 1;
-
+var result = false;
 next.addEventListener("click",()=>{
 
 c = `card-${currentActive}`;
@@ -17,8 +18,29 @@ if(currentActive+1 < circles.length)
 d = `card-${currentActive+1}`;
 else
 d = "card-3"
+
+if(c == 'card-1'){
+    validateFirstName();
+    validateLastName();
+    ValidateEmail();
+    validatePassword();
+    validateConfirmPassword();
+    validateOrg();
+    result =  validateFirstName() && validateLastName() && ValidateEmail() && validatePassword() && validateConfirmPassword() && validateOrg();
+}
+if(c == 'card-2'){
+    validateRoles();
+     result =   validateRoles() ;
+ }
+
+ if(c == 'card-3'){
+    CheckboxChecked();
+    result =   CheckboxChecked();
+}
+if(result){
 a = document.getElementById(c);
 e = document.getElementById(d);
+
 a.style.display = "none";
 e.style.display = "block";
 
@@ -28,6 +50,17 @@ if(currentActive> circles.length){
     currentActive = circles.length;
 }
 update();
+}else{
+    if(c == 'card-1'){
+    window.alert('Please Fill in all the fields correctly');
+    }
+    if(c == 'card-2'){
+        window.alert('Please choose a role');
+        }
+}
+
+
+
 });
 
 prev.addEventListener("click",()=>{
@@ -64,38 +97,59 @@ function update(){
     });
 
     const actives = document.querySelectorAll(".active");
-    var submit = document.getElementById("submit");
-    progress.style.width = ((actives.length-1)/(circles.length-1))*100+"%";
+
+    progress.style.width = ((actives.length-2)/(circles.length-1))*100+"%";
 
     if(currentActive===1){
         prev.disabled=true;
-        //submit.disabled = true;
+        submit.disabled = true;
     } else if(currentActive===circles.length){
        next.disabled=true;
-      // checked();
+       //checked();
 
     }else{
         prev.disabled=false;
         next.disabled=false;
-        //submit.disabled = true;
+        submit.disabled = true;
     }
 }
 
  function CheckboxChecked(){
 if(consent1.checked == false){
     consent1.style.border = "red 2px solid";
+   submit.disabled = true;
+   
 }
 if(consent2.checked == false){
     consent2.style.border = "red 2px solid";
 }
+if(consent3.checked == false){
+    consent3.style.border = "red 2px solid";
+}
+
+if(consent1.checked == true || consent2.checked == true || consent3.checked == true){
+    return true;
+}else{
+    return false;
+}
+
 }
 
 function changeconsent1() {
     if(consent1.checked == true){
         consent1.style.border = "green 2px solid";
         consent2.style.border = "grey 1px solid";
-        consent2.checked = false;
+        consent2.checked = false;   
+        consent3.style.border = "grey 1px solid";
+        consent3.checked = false;   
     }
+    if(consent1.checked == true){
+        submit.disabled = false;
+        console.log('checked');
+     }else{
+         submit.disabled = true;
+         console.log('unchecked');
+     }
 }
 
 function changeconsent2() {
@@ -103,23 +157,20 @@ function changeconsent2() {
         consent2.style.border = "green 2px solid";
         consent1.style.border = "grey 1px solid";
         consent1.checked = false;
+        consent3.style.border = "grey 1px solid";
+        consent3.checked = false;
     }
 }
 
-const sub = document.getElementById("submit");
-
- sub.addEventListener("click", (e) => {
-  e.preventDefault();
-  console.log("submitting.");
-  CheckboxChecked();
- validateFirstName();
- validateLastName();
- ValidateEmail();
- validatePassword();
- validateConfirmPassword();
- validateOrg();
- validateRoles();
-})
+function changeconsent3() {
+    if(consent3.checked == true){
+        consent3.style.border = "green 2px solid";
+        consent1.style.border = "grey 1px solid";
+        consent1.checked = false;
+        consent2.style.border = "grey 1px solid";
+        consent2.checked = false;
+    }
+}
 
 function validateRoles() {
     const role1 = document.getElementById("flexCheckDefault1");
@@ -136,6 +187,7 @@ function validateRoles() {
         role4.style.border = "grey 1px solid";
         role5.style.border = "grey 1px solid";
         role6.style.border = "grey 1px solid";
+        return true;
     }else {
         role1.style.border = "red 1px solid";
         role2.style.border = "red 1px solid";
@@ -143,6 +195,7 @@ function validateRoles() {
         role4.style.border = "red 1px solid";
         role5.style.border = "red 1px solid";
         role6.style.border = "red 1px solid";
+        return false;
     }
 }
 
@@ -152,8 +205,10 @@ function validateOrg() {
     const organization = document.getElementById("organization");
     if(organization.value.trim() =="") {
         organization.style.border = "red 2px solid";
+        return false;
     }else {
         organization.style.border = "green 1px solid";
+        return true;
     }
 }
 
@@ -162,16 +217,20 @@ function validateConfirmPassword() {
    
     var regex = /^[A-Za-z]\w{7,14}$/;
     if(confirmpassword.value.trim() =="") {
-        confirmpassword.style.border = "red 2px solid";     
+        confirmpassword.style.border = "red 2px solid"; 
+        return false;    
     }else if ( !confirmpassword.value.match(regex)){
         confirmpassword.style.border = "red 2px solid";
         document.getElementById("passerror2").style.display= "block";  
+        return false;
     }else if(password.value != confirmpassword.value) {
         document.getElementById("passerror3").style.display= "block";  
+         return false;
     } else {
         confirmpassword.style.border = "green 1px solid";
         document.getElementById("passerror2").style.display= "none";
-        document.getElementById("passerror3").style.display= "none";  
+        document.getElementById("passerror3").style.display= "none"; 
+        return true; 
     }
    
 }
@@ -184,9 +243,11 @@ function validatePassword() {
     }else if ( !password.value.match(regex)) {
         password.style.border = "red 2px solid";
         document.getElementById("passerror1").style.display= "block";
+        return false;
     }else {
         password.style.border = "green 1px solid";
         document.getElementById("passerror1").style.display= "none";
+        return true;
     }
 }
 
@@ -195,8 +256,10 @@ function ValidateEmail() {
     const email = document.getElementById("email");
     if(email.value.trim() =="" || !email.value.match(validRegex)) {
         email.style.border = "red 2px solid";
+        return false;
     }else {
         email.style.border = "green 1px solid";
+        return true;
     }
 }
 
@@ -205,8 +268,10 @@ function validateLastName() {
     const lastNameControl = document.getElementById("lastname");
     if(lastNameControl.value.trim() =="" || !lastNameControl.value.match(regex)) {
         lastNameControl.style.border = "red 2px solid";
+        return false;
     }else {
         lastNameControl.style.border = "green 1px solid";
+        return true;
     }
 }
 
@@ -215,8 +280,10 @@ function validateFirstName() {
     const firstnameControl = document.getElementById("firstname");
     if(firstnameControl.value.trim() =="" || !firstnameControl.value.match(regex)) {
         firstnameControl.style.border = "red 2px solid";
+        return false;
     }else {
         firstnameControl.style.border = "green 1px solid";
+        return true;
     }
 }
 
