@@ -17,7 +17,7 @@ def register(request):
         newUser.Consent = request.POST.get("consent",False)
         newUser.Organization = request.POST.get("organization")
         cursor = connection.cursor()
-        sql = "INSERT INTO users (FirstName,LastName,Email,Password,Roles,Consent) VALUES (%s, %s,%s, %s,%s, %s,%s )"
+        sql = "INSERT INTO users (FirstName,LastName,Email,Password,Roles,Consent,Organization) VALUES (%s, %s,%s, %s,%s, %s,%s )"
         val = (newUser.FirstName,newUser.LastName,newUser.Email,newUser.Password,newUser.Roles,newUser.Consent,newUser.Organization)
         cursor.execute(sql,val)
 

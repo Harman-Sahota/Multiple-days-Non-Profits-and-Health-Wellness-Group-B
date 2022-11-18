@@ -18,6 +18,13 @@ def profile(request):
     return render(request, 'postlogin/profile.html', {'title': 'Profile'})
 
 def admin(request):
-    
-    
-     return render(request,'postlogin/admin.html', {'title': 'Admin'})
+     cursor = connection.cursor()
+     sql = "SELECT CONCAT(FirstName, ' ', LastName) AS FirstName,Email AS Email,Roles AS Roles FROM users"
+     cursor.execute(sql)
+     rows = cursor.fetchall()
+     context = {
+        'title': 'Admin',
+        'Object': rows
+     } 
+     
+     return render(request,'postlogin/admin.html',context)
