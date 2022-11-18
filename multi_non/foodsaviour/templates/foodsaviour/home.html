@@ -5,58 +5,23 @@
 
 <link rel="stylesheet" type="text/css" href="{% static 'foodsaviour/css/home.css'%}">
 
-<section id="carousel">
-    <!--Carousel Template-->
-    <div class="container-fluid">
-        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
-                    aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
-                    aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
-                    aria-label="Slide 3"></button>
+<section>
+    <div class="container">
+        <div class="row d-flex h-100 align-items-center justify-content-center text-center">
+            <div class="col">
+                <img src="../../static/foodsaviour/images/ORT_logo.svg" height="200px"/>
             </div>
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img class="carousel-img bd-placeholder-img-lg d-block w-100"
-                        src="../../static/foodsaviour/images/pexels-pixabay-255501.jpg" alt="Slide 1">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>Food Saviour</h5>
-                        <p>Some representative placeholder content for the first slide.</p>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img class="carousel-img bd-placeholder-img-lg d-block w-100" src="../../static/foodsaviour/images/pexels-anca-dorneanu-7912902.jpg" alt="Slide 2"></img>
-                        <title>Placeholder</title>
-                        <rect width="100%" height="100%" fill="#aafffe"></rect>
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>Calculate</h5>
-                        <p>An easy way to calculate and visualize how much food you have saved.</p>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" src="../../static/foodsaviour/images/pexels-pixabay-414837.jpg" alt="Slide 3"></img>
-                        <title>Placeholder</title>
-                        <rect width="100%" height="100%" fill="#a7ffe1"></rect>
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>Connect</h5>
-                        <p>Connect with other organizations and join the trend to track and reduce food waste. </p>
-                    </div>
-                </div>
+            <div class="col">
+                <a href="{% url 'login' %}"><img class="tracker_img" src="../../static/foodsaviour/images/calendar.png" height="100px"/></a>
+                <p>Login to access tracker</p>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
-                data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
-                data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
+            <div class="col">
+                <a href="{% url 'register' %}"><img class="tracker_img" src="../../static/foodsaviour/images/abstract-user-flat-4.png" height="100px"/></a>
+                <p>Create an account</p>
+            </div>
         </div>
     </div>
 </section>
+
 
 {% endblock content%}
