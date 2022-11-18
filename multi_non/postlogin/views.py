@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import render
 from django.http import HttpResponse
-
+from django.db import connection
 
 
 # Create your views here.
@@ -18,4 +18,6 @@ def profile(request):
     return render(request, 'postlogin/profile.html', {'title': 'Profile'})
 
 def admin(request):
-     return render(request, 'postlogin/admin.html', {'title': 'Admin'})
+    
+    
+     return render(request,'postlogin/admin.html', {'title': 'Admin'})
