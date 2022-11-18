@@ -182,5 +182,97 @@
         </div>
     </div>
 
+    <div class="container p-2">
+        <div class="card d-flex">
+            <div class="card-header border-0">
+                <h5 class="card-title"><b>Food Saving Techniques</b></h5>
+                <!--We need to create a list of techniques for each metric-->
+            </div>
+            <div class="row align-items-center">
+                <div class="col-4 text-center">
+                    <select name="category" id="categoryList">
+                        <option value="metric1">Fresh Produce</option>
+                        <option value="metric2">Metric #2</option>
+                        <option value="metric3">Metric #3</option>
+                        <option value="metric 4">Metric #4</option>
+                        <option value="metric 4">Metric #5</option>
+                    </select>
+                </div>
+                <div class="col-8 p-4">
+                    <div class="row">
+                        <h6 id="method-number">Method #1</h6>
+                        <!--This needs to be replaced with data from db-->
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud...</p>
+                        <a href="#">Learn More</a>
+                        <!--We need a page for each technique with full information-->
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <h6 id="method-number">Method #2</h6>
+                        <!--This needs to be replaced with data from db-->
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud...</p>
+                        <a href="#">Learn More</a>
+                        <!--We need a page for each technique with full information-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section id="carousel">
+        <!--Carousel Template-->
+        <div class="container-fluid">
+            <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                        aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                        aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                        aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img class="carousel-img bd-placeholder-img-lg d-block w-100"
+                            src="../../static/foodsaviour/images/pexels-pixabay-255501.jpg" alt="Slide 1">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Food Saviour</h5>
+                            <p>Some representative placeholder content for the first slide.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img class="carousel-img bd-placeholder-img-lg d-block w-100" src="../../static/foodsaviour/images/pexels-anca-dorneanu-7912902.jpg" alt="Slide 2"></img>
+                            <title>Placeholder</title>
+                            <rect width="100%" height="100%" fill="#aafffe"></rect>
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Calculate</h5>
+                            <p>An easy way to calculate and visualize how much food you have saved.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" src="../../static/foodsaviour/images/pexels-pixabay-414837.jpg" alt="Slide 3"></img>
+                            <title>Placeholder</title>
+                            <rect width="100%" height="100%" fill="#a7ffe1"></rect>
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Connect</h5>
+                            <p>Connect with other organizations and join the trend to track and reduce food waste. </p>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </section>
 </section>
 {% endblock content%}

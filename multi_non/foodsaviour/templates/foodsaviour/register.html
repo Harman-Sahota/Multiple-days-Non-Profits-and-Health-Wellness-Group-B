@@ -33,7 +33,13 @@
           <input type="text" class="form-control text-input form-floating name-form" id="lastname" name="lastname" placeholder="Last Name">
           <input type="email" class="form-control text-input form-floating name-form" id="email" name="email" placeholder="Email">
           <input type="password" class="form-control text-input form-floating name-form" id="password" name="password" placeholder="Password">
+          <span id="passerror1" style="font-size:10px;color:red;display: none;">[7 to 16 chars which contain only characters, numerics, underscore & first character must be a letter]</span>
           <input type="password" class="form-control text-input form-floating name-form" id="confirm-password" placeholder="Confirm Password">
+          <span id="passerror2" style="font-size:10px;color:red;display: none;">[7 to 16 chars which contain only characters, numerics, underscore & first character must be a letter]</span>
+          <span id="passerror3" style="font-size:10px;color:red;display: none;">Password and Confirm password not matched.</span>
+
+          <input type="text" class="form-control text-input form-floating name-form" id="organization" name="organization" placeholder="Organization Name">
+         
       </div>
     </div>
   </div>
@@ -45,42 +51,42 @@
         <h5>Choose your roles:</h5>
 
         <div class="form-check ">
-          <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="roles[]" class="flexCheckDefault"
+          <input class="form-check-input" type="checkbox" id="flexCheckDefault1" onchange="validateRoles()" name="roles[]" class="flexCheckDefault"
             value="user non-profit managers/CEO">
-          <label class="form-check-label" for="flexCheckDefault">
+          <label class="form-check-label" for="flexCheckDefault1">
             user non-profit managers/CEO
           </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="roles[]" class="flexCheckDefault"
+          <input class="form-check-input" type="checkbox" id="flexCheckDefault2" onchange="validateRoles()" name="roles[]" class="flexCheckDefault"
             value="user non-profit warehouse boss">
           <label class="form-check-label" for="flexCheckDefault2">
             user non-profit warehouse boss
           </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="roles[]" class="flexCheckDefault"
+          <input class="form-check-input" type="checkbox" id="flexCheckDefault3"onchange="validateRoles()" name="roles[]" class="flexCheckDefault"
             value="user non-profit volunteer">
           <label class="form-check-label" for="flexCheckDefault3">
             user non-profit volunteer
           </label>
         </div>
         <div class="form-check ">
-          <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="roles[]" class="flexCheckDefault"
+          <input class="form-check-input" type="checkbox" id="flexCheckDefault4" onchange="validateRoles()" name="roles[]" class="flexCheckDefault"
             value="sponsors">
           <label class="form-check-label" for="flexCheckDefault4">
             sponsors
           </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="roles[]" class="flexCheckDefault"
+          <input class="form-check-input" type="checkbox" id="flexCheckDefault5" onchange="validateRoles()" name="roles[]" class="flexCheckDefault"
             value="admin">
           <label class="form-check-label" for="flexCheckDefault5">
             admin
           </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="roles[]" class="flexCheckDefault"
+          <input class="form-check-input" type="checkbox" id="flexCheckDefault6" onchange="validateRoles()" name="roles[]" class="flexCheckDefault"
             value="experts ">
           <label class="form-check-label" for="flexCheckDefault6">
             experts
@@ -101,11 +107,18 @@
     At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.  At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies. 
     </textarea>
         <div class="form-check consent">
-          <input class="form-check-input" type="checkbox" id="consent-check" onchange="CheckboxChecked()" name="consent" value="consented">
-          <label class="form-check-label consent-text" for="consent-check">
+          <input class="form-check-input" type="checkbox" id="consent-check1"  onchange="changeconsent1()" name="consent" value="consented">
+          <label class="form-check-label consent-text" for="consent-check1">
             I accept
           </label>
         </div>
+        <div class="form-check consent">
+          <input class="form-check-input" type="checkbox" id="consent-check2" onchange="changeconsent2()" name="consent-disagree" value="consented">
+          <label class="form-check-label consent-text" for="consent-check2">
+            I refuse
+          </label>
+        </div>
+        <a href="#">more info</a>
       </div>
     </div>
   </div>
@@ -113,7 +126,7 @@
   <div class="buttons">
     <button class="btn btn-success form-floating name-form" id="prev" disabled type="button">Prev</button>
     <button class="btn btn-success form-floating name-form" id="next" type="button">Next</button>
-    <button class="btn btn-primary form-floating name-form" id="submit" type="submit" form="register" disabled>Register</button>
+    <button class="btn btn-primary form-floating name-form" id="submit" type="submit" form="register">Register</button>
   </div>
   </div>
   </form>

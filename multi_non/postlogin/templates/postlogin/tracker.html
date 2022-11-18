@@ -2,40 +2,64 @@
 {% block content %}
 <!--Food Saving Methods-->
 <div class="container p-2">
-    <div class="card d-flex">
-        <div class="card-header border-0">
-            <h5 class="card-title"><b>Food Saving Techniques</b></h5>
-            <!--We need to create a list of techniques for each metric-->
-        </div>
-        <div class="row align-items-center">
-            <div class="col-4 text-center">
-                <select name="category" id="categoryList">
-                    <option value="metric1">Fresh Produce</option>
-                    <option value="metric2">Metric #2</option>
-                    <option value="metric3">Metric #3</option>
-                    <option value="metric 4">Metric #4</option>
-                    <option value="metric 4">Metric #5</option>
-                </select>
-            </div>
-            <div class="col-8 p-4">
+    <div class="card">
+        <div class="card-body">
+            <form>
                 <div class="row">
-                    <h6 id="method-number">Method #1</h6>
-                    <!--This needs to be replaced with data from db-->
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud...</p>
-                    <a href="#">Learn More</a>
-                    <!--We need a page for each technique with full information-->
+                    <div class="col-md-auto">
+                        <label for="description">Description</label><br>
+                        <input type="text" class="form-control" style="width: 500px;">
+                    </div>
+                    <div class="col-md-auto">
+                        <label for="quantity">Quantity</label><br>
+                        <input type="text" class="form-control" style="width: 75px;">
+                    </div>
+                    <div class="col-md-auto">
+                        <label for="qunits">Units</label><br>
+                        <select class="form-select" id="qunits">
+                            <option>lbs</option>
+                            <option>kgs</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-auto">
+                                <label for="percent">% Deviated to:</label><br>
+                            </div>
+                        </div>
+                        <div class="row pb-2">
+                            <div class="col-auto" id="percentcol">
+                                <input type="text" class="form-control" id="clients" style="width: 75px;">
+                            </div>
+                            <div class="col d-flex align-items-center">Clients</div>
+                        </div>
+                        <div class="row pb-2">
+                            <div class="col-auto">
+                                <input type="text" class="form-control" id="animalfeed" style="width: 75px;">
+                            </div>
+                            <div class="col d-flex align-items-center">Animal Feed</div>
+                        </div>
+                        <div class="row pb-2">
+                            <div class="col-auto">
+                                <input type="text" class="form-control" id="compost/fert" style="width: 75px;">
+                            </div>
+                            <div class="col d-flex align-items-center">Compost/Fertilizer</div>
+                        </div>
+                        <div class="row pb-2">
+                            <div class="col-auto">
+                                <input type="text" class="form-control" id="partnet" style="width: 75px;">
+                            </div>
+                            <div class="col d-flex align-items-center">Partner Network</div>
+                        </div>
+                        <div class="row pb-2">
+                            <div class="col-auto">
+                                <input type="text" class="form-control" id="landfill" style="width: 75px;">
+                            </div>
+                            <div class="col d-flex align-items-center">Landfill</div>
+                        </div>
+                    </div>
                 </div>
-                <hr>
-                <div class="row">
-                    <h6 id="method-number">Method #2</h6>
-                    <!--This needs to be replaced with data from db-->
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud...</p>
-                    <a href="#">Learn More</a>
-                    <!--We need a page for each technique with full information-->
-                </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>

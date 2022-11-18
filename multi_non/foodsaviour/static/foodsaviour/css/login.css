@@ -106,3 +106,6 @@ footer {
   overflow: hidden;
 
 }
+.error{
+  border-color: red !important;
+}

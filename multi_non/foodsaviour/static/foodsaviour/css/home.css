@@ -60,3 +60,7 @@
 .carousel-caption p{
     animation: 500ms ease-out 8ms 1 appear;
 }
+
+.tracker_img {
+  clip-path: circle();
+}

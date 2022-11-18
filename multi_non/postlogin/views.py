@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import render
 from django.http import HttpResponse
-
+from django.db import connection
 
 
 # Create your views here.
@@ -16,3 +16,15 @@ def network(request):
 
 def profile(request):
     return render(request, 'postlogin/profile.html', {'title': 'Profile'})
+
+def admin(request):
+     cursor = connection.cursor()
+     sql = "SELECT CONCAT(FirstName, ' ', LastName) AS FirstName,Email AS Email,Roles AS Roles FROM users"
+     cursor.execute(sql)
+     rows = cursor.fetchall()
+     context = {
+        'title': 'Admin',
+        'Object': rows
+     } 
+     
+     return render(request,'postlogin/admin.html',context)

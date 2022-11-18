@@ -15,9 +15,10 @@ def register(request):
         newUser.Email = request.POST.get("email")
         newUser.Password = request.POST.get("password")
         newUser.Consent = request.POST.get("consent",False)
+        newUser.Organization = request.POST.get("organization")
         cursor = connection.cursor()
-        sql = "INSERT INTO users (FirstName,LastName,Email,Password,Roles,Consent) VALUES (%s, %s,%s, %s,%s, %s)"
-        val = (newUser.FirstName,newUser.LastName,newUser.Email,newUser.Password,newUser.Roles,newUser.Consent)
+        sql = "INSERT INTO users (FirstName,LastName,Email,Password,Roles,Consent,Organization) VALUES (%s, %s,%s, %s,%s, %s,%s )"
+        val = (newUser.FirstName,newUser.LastName,newUser.Email,newUser.Password,newUser.Roles,newUser.Consent,newUser.Organization)
         cursor.execute(sql,val)
 
     return render(request, 'foodsaviour/register.html', {'title': 'Register'})

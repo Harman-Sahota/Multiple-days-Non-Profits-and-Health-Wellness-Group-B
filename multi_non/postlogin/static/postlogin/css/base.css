@@ -15,7 +15,7 @@ html{
 body {
   color: rgb(0, 0, 0);
   font-family: "Poppins", sans-serif;
-  background: url("/static/foodsaviour/images/login_bg.png");
+  background-color: #e7f5e4;
 }
 
 header a {
@@ -163,5 +163,9 @@ footer {
 
 #welcome{
   padding-top: 16px;
+}
+
+.card {
+  background-color: #fbfffa;
 }
 
