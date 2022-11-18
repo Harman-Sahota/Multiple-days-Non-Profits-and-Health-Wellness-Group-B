@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from foodsaviour.models import users
 from django.db import connection
-
+from django.contrib.auth.hashers import make_password
 
 def register(request):
     if request.method == "POST":
