@@ -36,7 +36,7 @@
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.26);
 }
-p{
+.card-text{
   margin-top: 4% !important;
   animation: 160ms ease-out 0ms 1 hue;
  
