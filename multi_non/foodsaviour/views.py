@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from foodsaviour.models import users
 from django.db import connection
 from django.contrib.auth.hashers import make_password
+from django.shortcuts import redirect
 
 def register(request):
     if request.method == "POST":
@@ -21,6 +22,15 @@ def register(request):
         val = (newUser.FirstName, newUser.LastName, newUser.Email,
                newUser.Password, newUser.Roles, newUser.Consent, newUser.Organization)
         cursor.execute(sql, val)
+        details = {
+            'FirstName': newUser.FirstName,
+            "LastName": newUser.LastName,
+            'Roles': newUser.Roles,
+            'Email':  newUser.Email,
+            "Organization": newUser.Organization
+
+        }
+        return redirect('../../postlogin/tracker',details)
 
     return render(request, 'foodsaviour/register.html', {'title': 'Register'})
 

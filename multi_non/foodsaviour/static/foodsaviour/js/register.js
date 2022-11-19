@@ -118,13 +118,19 @@ function update(){
 if(consent1.checked == false){
     consent1.style.border = "red 2px solid";
    submit.disabled = true;
+  
+  
    
 }
 if(consent2.checked == false){
     consent2.style.border = "red 2px solid";
+ 
+   
 }
 if(consent3.checked == false){
     consent3.style.border = "red 2px solid";
+     
+     
 }
 
 if(consent1.checked == true || consent2.checked == true || consent3.checked == true){
@@ -142,13 +148,13 @@ function changeconsent1() {
         consent2.checked = false;   
         consent3.style.border = "grey 1px solid";
         consent3.checked = false;   
-    }
-    if(consent1.checked == true){
         submit.disabled = false;
-        console.log('checked');
-     }else{
+     
+
+    }else{
          submit.disabled = true;
-         console.log('unchecked');
+ 
+         
      }
 }
 
@@ -159,6 +165,7 @@ function changeconsent2() {
         consent1.checked = false;
         consent3.style.border = "grey 1px solid";
         consent3.checked = false;
+        submit.disabled = true;
     }
 }
 
@@ -169,6 +176,7 @@ function changeconsent3() {
         consent1.checked = false;
         consent2.style.border = "grey 1px solid";
         consent2.checked = false;
+        submit.disabled = true;
     }
 }
 
@@ -221,14 +229,13 @@ function validateConfirmPassword() {
         return false;    
     }else if ( !confirmpassword.value.match(regex)){
         confirmpassword.style.border = "red 2px solid";
-        document.getElementById("passerror2").style.display= "block";  
+        document.getElementById("passerror3").style.display= "block";  
         return false;
     }else if(password.value != confirmpassword.value) {
         document.getElementById("passerror3").style.display= "block";  
          return false;
     } else {
         confirmpassword.style.border = "green 1px solid";
-        document.getElementById("passerror2").style.display= "none";
         document.getElementById("passerror3").style.display= "none"; 
         return true; 
     }
