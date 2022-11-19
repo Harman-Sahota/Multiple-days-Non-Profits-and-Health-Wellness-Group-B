@@ -2,9 +2,9 @@
 {% load static %}
 {% block content %}
 <link rel="stylesheet" type="text/css" href="{% static 'postlogin/css/admin.css'%}">
-<div id="role-settings-container" class="container-fluid">
-    <h3>Data Permissions:</h3>
-    <h5>Inside Organization: </h5>
+<div id="role-settings-container" class="container-lg col-md-auto">
+    <h3 class="h3">Data Permissions:</h3>
+    <h5 class="h5">Inside Organization: </h5>
     <table class="table">
         <thead>
             <tr>
@@ -321,7 +321,7 @@
     </table>
 
 
-    <h5>Outside Organization: </h5>
+    <h5 class="h5">Outside Organization: </h5>
     <table class="table">
         <thead>
             <tr>
@@ -491,10 +491,8 @@
 </div>
 
 
-
-
-<div id="role-settings-container" class="container-fluid">
-    <h3>Approve Accounts:</h3>
+<div id="role-settings-container" class="container-lg col-md-auto">
+    <h3 class="h3">Approve Accounts:</h3>
     <table class="table">
         <thead>
             <tr>
