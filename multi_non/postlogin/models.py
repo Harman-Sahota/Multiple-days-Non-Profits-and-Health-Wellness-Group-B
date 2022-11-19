@@ -9,3 +9,4 @@ class users(models.Model):
     Roles = models.CharField(max_length=255)
     Consent = models.CharField(max_length=50)
     Organization = models.CharField(max_length=255,null=True)
+    Approve = models.CharField(max_length=50,null=True)

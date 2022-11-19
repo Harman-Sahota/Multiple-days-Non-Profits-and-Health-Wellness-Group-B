@@ -31,4 +31,8 @@ def admin(request):
         'Object': rows
     }
 
+    if request.method == "POST":
+        newUser = users()
+        newUser.Approve = request.POST.getlist("approve")
+
     return render(request, 'postlogin/admin.html', context)
