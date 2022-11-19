@@ -7,7 +7,9 @@ CREATE TABLE users (
  Email varchar(255),
  Password varchar(255),
  Roles varchar(255),
- Consent varchar(50)
+ Consent varchar(50),
+id  int NOT NULL AUTO_INCREMENT,
+Organization varchar(255)
 );
 CREATE USER 'admin'@'localhost' IDENTIFIED BY 'groupb@2022!';
 GRANT ALL PRIVILEGES ON foodsaviour.* TO 'admin'@'localhost';

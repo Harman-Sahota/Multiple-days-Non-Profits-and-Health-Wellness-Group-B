@@ -19,23 +19,24 @@
   border-radius: 16px;
   height: 80%;
 }
+
 .card{
   padding: 4% !important;
+  margin-right: 5%;
   margin-left: 5%;
-  width: 20%;
-  height: 40%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   animation: 160ms ease-out 0s 1 hue;
   background: rgba(255, 255, 255, 0.3);
-  border-radius: 16px;
+  border-radius: 1em !important;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.26);
 }
-p{
+.card-text{
   margin-top: 4% !important;
   animation: 160ms ease-out 0ms 1 hue;
  
