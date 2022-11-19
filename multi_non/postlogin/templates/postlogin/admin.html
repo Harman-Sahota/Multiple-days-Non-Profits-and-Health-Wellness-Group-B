@@ -509,31 +509,34 @@
                 {% csrf_token %}
 
                 {% for i in Object %}
+                {% if i.3 == Null %}
                 <tr>
-                    <th scope="row">{{forloop.counter}}</th>
+                    <th scope="row">
+                        <div class="form-check ">
+                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="id[]"
+                                class="flexCheckDefault" value="approve">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                {{forloop.counter}}
+                            </label>
+                        </div>
+                    </th>
 
                     <td>{{i.0}}</td>
 
-                    <td>{{i.1}}</input></td>
+                    <td>{{i.1}}</td>
 
-                    <td>
-
-                        <div class="form-check ">
-                            {{i.2}}
-                        </div>
-
-                    </td>
+                    <td>{{i.2}}</td>
 
                     <td>
                         <div class="form-check ">
-                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="approve"
+                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="approve[]"
                                 class="flexCheckDefault" value="approve">
                             <label class="form-check-label" for="flexCheckDefault">
                                 Approve
                             </label>
                         </div>
                         <div class="form-check ">
-                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="approve"
+                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="approve[]"
                                 class="flexCheckDefault" value="disapprove">
                             <label class="form-check-label" for="flexCheckDefault">
                                 Disapprove
@@ -541,6 +544,7 @@
                         </div>
                     </td>
                 </tr>
+                {% endif %}
                 {% endfor %}
 
 

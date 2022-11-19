@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.db import connection
-
+from .models import users
 
 # Create your views here.
 def overview(request):
@@ -23,7 +23,7 @@ def profile(request):
 
 def admin(request):
     cursor = connection.cursor()
-    sql = "SELECT CONCAT(FirstName, ' ', LastName) AS FirstName,Email AS Email,Roles AS Roles FROM users"
+    sql = "SELECT CONCAT(FirstName, ' ', LastName) AS FirstName,Email AS Email,Roles AS Roles,Approve FROM users"
     cursor.execute(sql)
     rows = cursor.fetchall()
     context = {
@@ -33,6 +33,9 @@ def admin(request):
 
     if request.method == "POST":
         newUser = users()
-        newUser.Approve = request.POST.getlist("approve")
+        newUser.Approve = str(request.POST.getlist("approve[]"))
+        newUser.Email = str(request.POST.getlist("id[]"))
+       
+       
 
     return render(request, 'postlogin/admin.html', context)
