@@ -18,5 +18,7 @@ FLUSH PRIVILEGES;
 CREATE TABLE inventory (
 Description varchar(255),
 Category	varchar(255),
-Quantity	Int(55)
+Quantity	Int(55).
+Qunits      varchar(255),
+DivertTo    Int(55)
 );

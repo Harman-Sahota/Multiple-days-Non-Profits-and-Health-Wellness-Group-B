@@ -1,0 +1,21 @@
+.save {
+    color: #415d34 !important;
+    border-color: #415d34 !important;
+    margin-right: 1em;
+}
+
+.save:hover {
+    background-color: #415d34 !important;
+    color: white !important;
+}
+
+.delete {
+    color: #5d3434 !important;
+    border-color: #5d3434 !important;
+    margin-right: 1em;
+}
+
+.delete:hover {
+    background-color: #5d3434 !important;
+    color: white !important;
+}
