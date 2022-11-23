@@ -8,5 +8,5 @@ function calculateLandfill(){
   const sum = Number(clients.value) + Number(afeed.value) + Number(compost.value) + Number(partNet.value);
   const diff = 100 - Number(sum);
 
-  landfill.value = diff;
+  landfill.value = Number(diff);
 }
