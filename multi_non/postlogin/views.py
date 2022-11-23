@@ -35,7 +35,6 @@ def tracker(request):
     sql = "SELECT Description AS Description,Category AS Category,CONCAT(Quantity, ' ', '(', Qunits, ')') AS Quantity,DivertClients,DivertAFeed,DivertCompost,DivertPartNet,DivertLandfill FROM inventory"
     cursor.execute(sql)
     rows = cursor.fetchall()
-    print(rows)
     context = {
         'title': 'Tracker',
         'Object': rows
