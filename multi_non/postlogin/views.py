@@ -62,9 +62,18 @@ def admin(request):
 
     if request.method == "POST":
         newUser = users()
-        newUser.Approve = str(request.POST.getlist("approve[]"))
-        newUser.Email = str(request.POST.getlist("id[]"))
-       
+        newUser.Approve = request.POST.getlist("approve[]")
+        newUser.Email = request.POST.getlist("id[]")
+        for i, j in zip(newUser.Approve, newUser.Email):
+            if(i == 'approve' or i == 'disapprove'):
+                 cursor = connection.cursor()
+                 sql2 = "UPDATE users SET Approve = %s WHERE id = %s"
+                 val = (i,j)
+                 cursor.execute(sql2,val)
+                 return redirect('../../postlogin/admin')
+
+            
+
        
 
     return render(request, 'postlogin/admin.html', context)
