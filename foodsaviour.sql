@@ -20,5 +20,9 @@ Description varchar(255),
 Category	varchar(255),
 Quantity	Int(55).
 Qunits      varchar(255),
-DivertTo    Int(55)
+DivertClients    Int(55), 
+DivertAFeed      Int(55),
+DivertCompost    Int(55), 
+DivertPartNet    Int(55),
+DivertLandfill   Int(55)
 );
