@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.db import connection
 from .models import users
+from .models import inventory
 
 # Create your views here.
 def overview(request):
@@ -10,6 +11,23 @@ def overview(request):
 
 
 def tracker(request):
+    if request.method == "POST":
+        newData = inventory()
+        newData.Description = request.POST.get("description")
+        newData.Category = request.POST.get("category")
+        newData.Quantity = request.POST.get("quantity")
+        newData.Qunits = request.POST.get("qunits")
+        newData.DivertClients = request.POST.get("clients")
+        newData.DivertAFeed = request.POST.get("animalfeed")
+        newData.DivertCompost = request.POST.get("compost/fert")
+        newData.DivertPartNet = request.POST.get("partnet")
+        newData.DivertLandfill = request.POST.get("landfill")
+        cursor = connection.cursor()
+        sql = "INSERT INTO inventory (Description,Category,Quantity,Qunits,DivertClients,DivertAFeed,DivertCompost,DivertPartNet,DivertLandfill) VALUES (%s, %s,%s, %s,%s,%s,%s,%s,%s)"
+        val = (newData.Description, newData.Category, newData.Quantity,
+               newData.Qunits, newData.DivertClients, newData.DivertAFeed, newData.DivertCompost, newData.DivertPartNet, newData.DivertLandfill)
+        cursor.execute(sql, val)
+
     return render(request, 'postlogin/tracker.html', {'title': 'Tracker'})
 
 

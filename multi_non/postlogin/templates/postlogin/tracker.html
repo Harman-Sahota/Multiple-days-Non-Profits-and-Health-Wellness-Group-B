@@ -10,7 +10,7 @@
     <div class="card">
         <div class="card-body">
             <div id="form-wrapper">
-                <form class="tracker-data-entry">
+                <form class="tracker-data-entry" action="" method="post" id="tracker">
                     {% csrf_token %}
                     <div class="row">
                         <div class="col-md-auto">
@@ -19,7 +19,7 @@
                         </div>
                         <div class="col-md-auto">
                             <label for="category">Category</label><br>
-                            <select class="form-select" id="category">
+                            <select class="form-select" id="category" name="category">
                                 <option>Fresh Produce</option>
                                 <option>Metric #2</option>
                                 <option>Metric #3</option>
@@ -33,7 +33,7 @@
                         </div>
                         <div class="col-md-auto">
                             <label for="qunits">Units</label><br>
-                            <select class="form-select" id="qunits">
+                            <select class="form-select" id="qunits" name="qunits">
                                 <option>lbs</option>
                                 <option>kgs</option>
                             </select>
@@ -46,31 +46,31 @@
                             </div>
                             <div class="row pb-2">
                                 <div class="col-auto" id="percentcol">
-                                    <input type="text" class="form-control" id="clients" style="width: 75px;">
+                                    <input type="text" class="form-control" id="clients" name="clients" style="width: 75px;">
                                 </div>
                                 <div class="col d-flex align-items-center">Clients</div>
                             </div>
                             <div class="row pb-2">
                                 <div class="col-auto">
-                                    <input type="text" class="form-control" id="animalfeed" style="width: 75px;">
+                                    <input type="text" class="form-control" id="animalfeed" name="animalfeed" style="width: 75px;">
                                 </div>
                                 <div class="col d-flex align-items-center">Animal Feed</div>
                             </div>
                             <div class="row pb-2">
                                 <div class="col-auto">
-                                    <input type="text" class="form-control" id="compost/fert" style="width: 75px;">
+                                    <input type="text" class="form-control" id="compost/fert"  name="compost/fert" style="width: 75px;">
                                 </div>
                                 <div class="col d-flex align-items-center">Compost/Fertilizer</div>
                             </div>
                             <div class="row pb-2">
                                 <div class="col-auto">
-                                    <input type="text" class="form-control" id="partnet" style="width: 75px;">
+                                    <input type="text" class="form-control" id="partnet" name="partnet" style="width: 75px;">
                                 </div>
                                 <div class="col d-flex align-items-center">Partner Network</div>
                             </div>
                             <div class="row pb-2">
                                 <div class="col-auto">
-                                    <input type="text" class="form-control" id="landfill" style="width: 75px;">
+                                    <input type="text" class="form-control" id="landfill" name="landfill" style="width: 75px;">
                                 </div>
                                 <div class="col d-flex align-items-center">Landfill</div>
                             </div>
