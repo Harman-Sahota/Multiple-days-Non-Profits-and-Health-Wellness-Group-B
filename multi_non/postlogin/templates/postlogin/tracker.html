@@ -50,36 +50,36 @@
                             </div>
                             <div class="row pb-2">
                                 <div class="col-auto" id="percentcol">
-                                    <input type="text" class="form-control" id="clients" name="clients"
-                                        style="width: 75px;">
+                                    <input type="number" class="form-control" id="clients" name="clients"
+                                        style="width: 75px;" value="0" min="0" max="100" onkeyup="calculateLandfill()">
                                 </div>
                                 <div class="col d-flex align-items-center">Clients</div>
                             </div>
                             <div class="row pb-2">
                                 <div class="col-auto">
-                                    <input type="text" class="form-control" id="animalfeed" name="animalfeed"
-                                        style="width: 75px;">
+                                    <input type="number" class="form-control" id="animalfeed" name="animalfeed"
+                                        style="width: 75px;" value="0" min="0" max="100" onkeyup="calculateLandfill()">
                                 </div>
                                 <div class="col d-flex align-items-center">Animal Feed</div>
                             </div>
                             <div class="row pb-2">
                                 <div class="col-auto">
-                                    <input type="text" class="form-control" id="compost/fert" name="compost/fert"
-                                        style="width: 75px;">
+                                    <input type="number" class="form-control" id="compost/fert" name="compost/fert"
+                                        style="width: 75px;" value="0" min="0" max="100" onkeyup="calculateLandfill()">
                                 </div>
                                 <div class="col d-flex align-items-center">Compost/Fertilizer</div>
                             </div>
                             <div class="row pb-2">
                                 <div class="col-auto">
-                                    <input type="text" class="form-control" id="partnet" name="partnet"
-                                        style="width: 75px;">
+                                    <input type="number" class="form-control" id="partnet" name="partnet"
+                                        style="width: 75px;" value="0" min="0" max="100" onkeyup="calculateLandfill()">
                                 </div>
                                 <div class="col d-flex align-items-center">Partner Network</div>
                             </div>
                             <div class="row pb-2">
                                 <div class="col-auto">
-                                    <input type="text" class="form-control" id="landfill" name="landfill"
-                                        style="width: 75px;">
+                                    <input type="number" class="form-control" id="landfill" name="landfill"
+                                        style="width: 75px;" value="100" disabled>
                                 </div>
                                 <div class="col d-flex align-items-center">Landfill</div>
                             </div>
@@ -87,8 +87,6 @@
                     </div>
                     <div class="row p-2">
                         <div class="d-flex justify-content-start">
-                            <button type="button" class="delete btn btn-outline-danger" data-bs-toggle="modal"
-                                data-bs-target="#deleteModal">Clear Data</button>
                             <button class="save btn btn-outline-success" id="submit" type="submit">Save</button>
                         </div>
                     </div>
@@ -118,8 +116,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                        {% for i in Object %}
-                        <tr>
+                    {% for i in Object %}
+                    <tr>
                         <td>{{i.0}}</td>
                         <td>{{i.1}}</td>
                         <td>{{i.2}}</td>
@@ -135,26 +133,7 @@
         </div>
     </div>
 </div>
-</div>
 
-<!-- Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="deleteModalLabel">Delete data entry</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                Are you sure you want to delete this data entry?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                <button type="reset" class="btn btn-primary" data-bs-dismiss="modal">Yes, delete this entry</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 <script src="{% static 'postlogin/js/tracker.js'%}"></script>
 {% endblock content%}

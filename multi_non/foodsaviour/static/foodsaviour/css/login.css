@@ -11,9 +11,11 @@ html {
 
 body {
   /* font-size: 1.6rem; */
-  height: vh;
+  height: 100vh;
   background: url("/static/foodsaviour/images/login_bg.png");
-  
+
+  /* Disabling scroll */
+  /* overflow: hidden; */
 }
 
 /* .body {
@@ -104,8 +106,8 @@ footer {
   height: 2%;
   position: relative;
   overflow: hidden;
+}
 
-}
-.error{
+/* .error {
   border-color: red !important;
-}
+} */

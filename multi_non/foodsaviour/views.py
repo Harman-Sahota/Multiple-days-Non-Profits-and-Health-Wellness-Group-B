@@ -40,6 +40,25 @@ def home(request):
 
 
 def login(request):
+    if request.method == "POST":
+        newUser = users()
+        newUser.Email = request.POST.get("email")
+        newUser.Password = request.POST.get("password")
+
+        cursor = connection.cursor()
+
+        # Check if the email and password exist in the database
+        sql = "SELECT Email, Password FROM users WHERE Email = %s AND Password = %s"
+        values = (newUser.Email, newUser.Password)
+        cursor.execute(sql, values)
+        rows = cursor.fetchall()
+        numberOfRecords = len(rows)
+
+        if (numberOfRecords > 0):
+            return redirect("../../postlogin/overview")
+        else:
+            pass
+        
     return render(request, 'foodsaviour/login.html', {'title': 'Login'})
 
 
