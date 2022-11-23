@@ -514,7 +514,7 @@
                     <th scope="row">
                         <div class="form-check ">
                             <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="id[]"
-                                class="flexCheckDefault" value="approve">
+                                class="flexCheckDefault" value="{{forloop.counter}}">
                             <label class="form-check-label" for="flexCheckDefault">
                                 {{forloop.counter}}
                             </label>
@@ -554,5 +554,80 @@
 
     </form>
 
+</div>
+
+
+<div id="role-settings-container" class="container-lg col-md-auto">
+    <h3 class="h3">Approved Accounts:</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Roles</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for i in Object %}
+            {% if i.3 == 'approve' %}
+            <tr>
+                <th scope="row">
+                    {{forloop.counter}}
+
+                </th>
+
+                <td>{{i.0}}</td>
+
+                <td>{{i.1}}</td>
+
+                <td>{{i.2}}</td>
+
+            </tr>
+            {% endif %}
+            {% endfor %}
+
+
+        </tbody>
+    </table>
+</div>
+
+
+
+<div id="role-settings-container" class="container-lg col-md-auto">
+    <h3 class="h3">Disapproved Accounts:</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Roles</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for i in Object %}
+            {% if i.3 == 'disapprove' %}
+            <tr>
+                <th scope="row">
+                    {{forloop.counter}}
+
+                </th>
+
+                <td>{{i.0}}</td>
+
+                <td>{{i.1}}</td>
+
+                <td>{{i.2}}</td>
+
+            </tr>
+            {% endif %}
+            {% endfor %}
+
+
+        </tbody>
+    </table>
 </div>
 {% endblock content %}
