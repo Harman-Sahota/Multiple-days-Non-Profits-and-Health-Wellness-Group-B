@@ -2,9 +2,9 @@
 {% load static %}
 {% block content %}
 <link rel="stylesheet" type="text/css" href="{% static 'postlogin/css/admin.css'%}">
-<div id="role-settings-container" class="container-fluid">
-    <h3>Data Permissions:</h3>
-    <h5>Inside Organization: </h5>
+<div id="role-settings-container" class="container-lg col-md-auto">
+    <h3 class="h3">Data Permissions:</h3>
+    <h5 class="h5">Inside Organization: </h5>
     <table class="table">
         <thead>
             <tr>
@@ -321,7 +321,7 @@
     </table>
 
 
-    <h5>Outside Organization: </h5>
+    <h5 class="h5">Outside Organization: </h5>
     <table class="table">
         <thead>
             <tr>
@@ -491,10 +491,8 @@
 </div>
 
 
-
-
-<div id="role-settings-container" class="container-fluid">
-    <h3>Approve Accounts:</h3>
+<div id="role-settings-container" class="container-lg col-md-auto">
+    <h3 class="h3">Approve Accounts:</h3>
     <table class="table">
         <thead>
             <tr>
@@ -511,24 +509,23 @@
                 {% csrf_token %}
 
                 {% for i in Object %}
+                {% if i.3 == Null %}
                 <tr>
-                    <th scope="row">{{forloop.counter}}</th>
+                    <th scope="row">
+                        <div class="form-check ">
+                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="id[]"
+                                class="flexCheckDefault" value="approve">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                {{forloop.counter}}
+                            </label>
+                        </div>
+                    </th>
 
                     <td>{{i.0}}</td>
 
-                    <td>{{i.1}}</input></td>
+                    <td>{{i.1}}</td>
 
-                    <td>
-
-                        <div class="form-check ">
-                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="roleAssign[]"
-                                class="flexCheckDefault" value="roleAssign">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                {{i.2}}
-                            </label>
-                        </div>
-
-                    </td>
+                    <td>{{i.2}}</td>
 
                     <td>
                         <div class="form-check ">
@@ -547,6 +544,7 @@
                         </div>
                     </td>
                 </tr>
+                {% endif %}
                 {% endfor %}
 
 

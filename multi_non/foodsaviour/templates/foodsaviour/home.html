@@ -8,19 +8,24 @@
 <section>
     <div class="container">
         <div class="row d-flex h-100 align-items-center justify-content-center text-center">
-            <div class="col">
-                <img src="../../static/foodsaviour/images/ORT_logo.svg" height="200px"/>
-            </div>
-            <div class="col">
-                <a href="{% url 'login' %}"><img class="tracker_img" src="../../static/foodsaviour/images/calendar.png" height="100px"/></a>
-                <p>Login to access tracker</p>
-            </div>
-            <div class="col">
-                <a href="{% url 'register' %}"><img class="tracker_img" src="../../static/foodsaviour/images/abstract-user-flat-4.png" height="100px"/></a>
-                <p>Create an account</p>
+            <div class="card-group">
+                <div class="card">
+                    <img src="../../static/foodsaviour/images/ORT_logo.svg" height="200px" />
+                </div>
+                <div class="card">
+                    <a href="{% url 'login' %}"><img class="tracker_img"
+                            src="../../static/foodsaviour/images/calendar.png" height="100px" /></a>
+                    <p class="card-text">Login to access tracker</p>
+                </div>
+                <div class="card">
+                    <a href="{% url 'register' %}"><img class="tracker_img"
+                            src="../../static/foodsaviour/images/abstract-user-flat-4.png" height="100px" /></a>
+                    <p class="card-text">Create an account</p>
+                </div>
             </div>
         </div>
     </div>
+    <img class="img-baby-g-about for-desktop">
 </section>
 
 

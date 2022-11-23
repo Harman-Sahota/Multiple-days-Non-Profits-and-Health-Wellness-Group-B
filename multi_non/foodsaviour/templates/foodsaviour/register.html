@@ -10,7 +10,7 @@
 
 <!-- main content container-->
 
-<div class="contain">
+<div class="contain col-md-auto ">
   <h3>Create An Account</h3>
   <!-- progress bar-->
   <div class="progress-container">
@@ -25,18 +25,17 @@
 
   <!-- card 1 -->
   <div class="card-group">
-    <div class="card card-1" id="card-1">
+    <div class="card card-1 active col-md-auto " id="card-1">
       <div class="card-body">
         <form class="form-inside" action="" method="post" id="register">
           {% csrf_token %}
-          <input type="text" class="form-control text-input form-floating name-formt" id="firstname" name="firstname" placeholder="First Name">
+          <input type="text" class="form-control text-input form-floating name-form" id="firstname" name="firstname" placeholder="First Name">
           <input type="text" class="form-control text-input form-floating name-form" id="lastname" name="lastname" placeholder="Last Name">
           <input type="email" class="form-control text-input form-floating name-form" id="email" name="email" placeholder="Email">
           <input type="password" class="form-control text-input form-floating name-form" id="password" name="password" placeholder="Password">
-          <span id="passerror1" style="font-size:10px;color:red;display: none;">[7 to 16 chars which contain only characters, numerics, underscore & first character must be a letter]</span>
+          <span id="passerror1" style="font-size:10px;color:red;display: none;min-height: 10px;">[7 to 16 chars which contain only characters, numerics, underscore & first character must be a letter]</span>
           <input type="password" class="form-control text-input form-floating name-form" id="confirm-password" placeholder="Confirm Password">
-          <span id="passerror2" style="font-size:10px;color:red;display: none;">[7 to 16 chars which contain only characters, numerics, underscore & first character must be a letter]</span>
-          <span id="passerror3" style="font-size:10px;color:red;display: none;">Password and Confirm password not matched.</span>
+          <span id="passerror3" style="font-size:10px;color:red;display: none;min-height: 10px;">Password and Confirm password not matched.</span>
 
           <input type="text" class="form-control text-input form-floating name-form" id="organization" name="organization" placeholder="Organization Name">
          
@@ -113,20 +112,26 @@
           </label>
         </div>
         <div class="form-check consent">
-          <input class="form-check-input" type="checkbox" id="consent-check2" onchange="changeconsent2()" name="consent-disagree" value="consented">
+          <input class="form-check-input" type="checkbox" id="consent-check2" onchange="changeconsent2()" name="consent-disagree" value="not-consented">
           <label class="form-check-label consent-text" for="consent-check2">
             I refuse
           </label>
         </div>
-        <a href="#">more info</a>
+        <div class="form-check consent">
+          <input class="form-check-input" type="checkbox" id="consent-check3" onchange="changeconsent3()" name="consent-disagree" value="info-consented">
+          <label class="form-check-label consent-text" for="consent-check3">
+            More Info
+          </label>
+        </div>
+        
       </div>
     </div>
   </div>
   <div id="wrapper">
-  <div class="buttons">
+  <div class="buttons"> 
     <button class="btn btn-success form-floating name-form" id="prev" disabled type="button">Prev</button>
     <button class="btn btn-success form-floating name-form" id="next" type="button">Next</button>
-    <button class="btn btn-primary form-floating name-form" id="submit" type="submit" form="register">Register</button>
+    <button class="btn btn-primary form-floating name-form" id="submit" type="submit" disabled form="register">Register</button>
   </div>
   </div>
   </form>
