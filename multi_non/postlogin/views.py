@@ -70,7 +70,8 @@ def admin(request):
                  sql2 = "UPDATE users SET Approve = %s WHERE id = %s"
                  val = (i,j)
                  cursor.execute(sql2,val)
-                 return redirect('../../postlogin/admin')
+        
+        return redirect('../../postlogin/admin')
 
             
 
