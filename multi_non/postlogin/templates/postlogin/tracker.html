@@ -8,6 +8,9 @@
 <!--Food Saving Methods-->
 <div class="container p-2">
     <div class="card">
+        <div class="card-header">
+            <h3>Enter tracker data:</h3>
+        </div>
         <div class="card-body">
             <div id="form-wrapper">
                 <form class="tracker-data-entry" action="" method="post" id="tracker">
@@ -15,7 +18,8 @@
                     <div class="row">
                         <div class="col-md-auto">
                             <label for="description">Description</label><br>
-                            <input type="text" class="form-control" id="description" name="description" placeholder="Description">
+                            <input type="text" class="form-control" id="description" name="description"
+                                placeholder="Description">
                         </div>
                         <div class="col-md-auto">
                             <label for="category">Category</label><br>
@@ -46,31 +50,36 @@
                             </div>
                             <div class="row pb-2">
                                 <div class="col-auto" id="percentcol">
-                                    <input type="text" class="form-control" id="clients" name="clients" style="width: 75px;">
+                                    <input type="text" class="form-control" id="clients" name="clients"
+                                        style="width: 75px;">
                                 </div>
                                 <div class="col d-flex align-items-center">Clients</div>
                             </div>
                             <div class="row pb-2">
                                 <div class="col-auto">
-                                    <input type="text" class="form-control" id="animalfeed" name="animalfeed" style="width: 75px;">
+                                    <input type="text" class="form-control" id="animalfeed" name="animalfeed"
+                                        style="width: 75px;">
                                 </div>
                                 <div class="col d-flex align-items-center">Animal Feed</div>
                             </div>
                             <div class="row pb-2">
                                 <div class="col-auto">
-                                    <input type="text" class="form-control" id="compost/fert"  name="compost/fert" style="width: 75px;">
+                                    <input type="text" class="form-control" id="compost/fert" name="compost/fert"
+                                        style="width: 75px;">
                                 </div>
                                 <div class="col d-flex align-items-center">Compost/Fertilizer</div>
                             </div>
                             <div class="row pb-2">
                                 <div class="col-auto">
-                                    <input type="text" class="form-control" id="partnet" name="partnet" style="width: 75px;">
+                                    <input type="text" class="form-control" id="partnet" name="partnet"
+                                        style="width: 75px;">
                                 </div>
                                 <div class="col d-flex align-items-center">Partner Network</div>
                             </div>
                             <div class="row pb-2">
                                 <div class="col-auto">
-                                    <input type="text" class="form-control" id="landfill" name="landfill" style="width: 75px;">
+                                    <input type="text" class="form-control" id="landfill" name="landfill"
+                                        style="width: 75px;">
                                 </div>
                                 <div class="col d-flex align-items-center">Landfill</div>
                             </div>
@@ -80,20 +89,52 @@
                         <div class="d-flex justify-content-start">
                             <button type="button" class="delete btn btn-outline-danger" data-bs-toggle="modal"
                                 data-bs-target="#deleteModal">Delete</button>
-                            <button type="button" class="save btn btn-outline-success" id="submit" type="submit">Save</button>
+                            <button class="save btn btn-outline-success" id="submit" type="submit">Save</button>
                         </div>
                     </div>
                 </form>
             </div>
-            <div class="row p-2" id="add-data-row">
-                <div>
-                    <button type="button" class="btn btn-outline-primary" id="add-more-data"
-                        onclick="duplicateForm();">Click to add new data
-                        entry</button>
-                </div>
-            </div>
         </div>
     </div>
+
+    <br>
+
+    <div class="card">
+        <div class="card-header">
+            <h3>Database</h3>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Description</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">% Clients</th>
+                        <th scope="col">% Animal Feed</th>
+                        <th scope="col">% Compost/Fertilizer</th>
+                        <th scope="col">% Partner Network</th>
+                        <th scope="col">% Landfill</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        {% for i in Object %}
+                        <tr>
+                        <td>{{i.0}}</td>
+                        <td>{{i.1}}</td>
+                        <td>{{i.2}}</td>
+                        <td>{{i.3}}</td>
+                        <td>{{i.4}}</td>
+                        <td>{{i.5}}</td>
+                        <td>{{i.6}}</td>
+                        <td>{{i.7}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 </div>
 
 <!-- Modal -->

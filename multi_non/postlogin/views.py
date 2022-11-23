@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.db import connection
 from .models import users
 from .models import inventory
+from django.shortcuts import redirect
 
 # Create your views here.
 def overview(request):
@@ -27,8 +28,19 @@ def tracker(request):
         val = (newData.Description, newData.Category, newData.Quantity,
                newData.Qunits, newData.DivertClients, newData.DivertAFeed, newData.DivertCompost, newData.DivertPartNet, newData.DivertLandfill)
         cursor.execute(sql, val)
+        return redirect('../../postlogin/tracker')
+        
 
-    return render(request, 'postlogin/tracker.html', {'title': 'Tracker'})
+    cursor = connection.cursor()
+    sql = "SELECT Description AS Description,Category AS Category,CONCAT(Quantity, ' ', '(', Qunits, ')') AS Quantity,DivertClients,DivertAFeed,DivertCompost,DivertPartNet,DivertLandfill FROM inventory"
+    cursor.execute(sql)
+    rows = cursor.fetchall()
+    print(rows)
+    context = {
+        'title': 'Tracker',
+        'Object': rows
+    }
+    return render(request, 'postlogin/tracker.html', context)
 
 
 def network(request):
