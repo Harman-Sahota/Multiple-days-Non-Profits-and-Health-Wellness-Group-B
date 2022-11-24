@@ -55,7 +55,7 @@ def login(request):
         numberOfRecords = len(rows)
 
         if (numberOfRecords > 0):
-            return redirect("../../postlogin/overview")
+            return redirect("../../postlogin/tracker")
         else:
             pass
         
