@@ -40,3 +40,18 @@
   - Landfill should be minimised
   - Clients should be maximized
 
+## Website changes
+
+- Functionality should come first, then we make the appearance better.
+- The about button should not be on the navbar, should be as an icon on the center of the page, just like the icons on the .
+- Don't have to put the 'Survey' icon as per the former Okanagan Trail home landing page.
+- Place a 'Register' icon in the center page and a 'Click Here' link nearby.
+- Accept, I want more information, I decline
+- First one, enter the software, second one lead to page that leads to more information, third one kicks user to landing page of entire website.
+- It's okay to have an Overview / Tracker Home page.
+- Tracker page contains type of food (e.g. Fresh produce), amount of food (lbs), amount of food saved (lbs)
+- Minimize the clicks for the user.
+- Barbs suggests having a 'Plus' sign to add new trackers
+- We will have to graph the data e.g. using pie chart
+- If the admin approves, two users can work together, hence their statistics being merged on the trackers page and graphed together
+- The roles have to be within an organisation.
