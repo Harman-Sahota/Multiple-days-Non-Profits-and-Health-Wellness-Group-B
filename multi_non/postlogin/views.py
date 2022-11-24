@@ -18,11 +18,11 @@ def tracker(request):
         newData.Category = request.POST.get("category")
         newData.Quantity = request.POST.get("quantity")
         newData.Qunits = request.POST.get("qunits")
-        newData.DivertClients = request.POST.get("clients")
-        newData.DivertAFeed = request.POST.get("animalfeed")
-        newData.DivertCompost = request.POST.get("compost/fert")
-        newData.DivertPartNet = request.POST.get("partnet")
-        newData.DivertLandfill = request.POST.get("landfill")
+        newData.DivertClients = request.POST.get("percentclients")
+        newData.DivertAFeed = request.POST.get("percentanimalfeed")
+        newData.DivertCompost = request.POST.get("percentcompost/fert")
+        newData.DivertPartNet = request.POST.get("percentpartnet")
+        newData.DivertLandfill = request.POST.get("percentlandfill")
         cursor = connection.cursor()
         sql = "INSERT INTO inventory (Description,Category,Quantity,Qunits,DivertClients,DivertAFeed,DivertCompost,DivertPartNet,DivertLandfill) VALUES (%s, %s,%s, %s,%s,%s,%s,%s,%s)"
         val = (newData.Description, newData.Category, newData.Quantity,
