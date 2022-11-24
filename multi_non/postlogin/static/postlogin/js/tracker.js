@@ -41,34 +41,3 @@ function exportTableToCSV(filename) {
 
   downloadCSV(csv.join("\n"), filename);
 }
-
-function downloadPDF(pdf, filename) {
-  var pdfFile;
-  var downloadLink;
-
-  pdfFile = new Blob([pdf], { type: "text/pdf" });
-
-  downloadLink = document.createElement("a");
-  downloadLink.download = filename;
-  downloadLink.href = window.URL.createObjectURL(pdfFile);
-  downloadLink.style.display = "none";
-
-  document.body.appendChild(downloadLink);
-  downloadLink.click();
-}
-
-function exportTableToPDF(filename) {
-  var pdf = [];
-  var rows = document.querySelectorAll("table tr");
-
-  for (var i = 0; i < rows.length; i++) {
-    var row = [], cols = rows[i].querySelectorAll("td, th");
-
-    for (var j = 0; j < cols.length - 1; j++)
-      row.push(cols[j].innerText);
-
-    pdf.push(row.join(","));
-  }
-
-  downloadPDF(pdf.join("\n"), filename);
-}
