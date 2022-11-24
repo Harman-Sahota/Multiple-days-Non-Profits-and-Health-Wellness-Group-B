@@ -23,10 +23,22 @@
                             <input type="text" class="form-control" id="description" name="description"
                                 placeholder="Description" style="width: 10em;">
                         </div>
+                        <!--
                         <div class="col-md-auto">
                             <label for="category">Category</label><br>
-                            <input type="text" class="form-control" id="category" name="category" value="Fresh Produce"
+                            <input type="text" class="form-control" id="FPcategory" name="category" value="Fresh Produce"
                                 style="width: 10em;" readonly>
+                        </div>
+                        -->
+                        <div class="col-md-auto">
+                            <label for="category">Category</label><br>
+                            <select class="form-select" id="category" name="category">
+                                <option>Fresh Produce</option>
+                                <option>Metric #2</option>
+                                <option>Metric #3</option>
+                                <option>Metric #4</option>
+                                <option>Metric #5</option>
+                            </select>
                         </div>
                         <div class="col-md-auto">
                             <label for="quantity">Quantity</label><br>
@@ -135,6 +147,10 @@
 
     <br>
 
+    
+
+    <br>
+
     <section id="section">
         <div class="card">
             <div class="card-header">
@@ -170,11 +186,6 @@
                             <td>{{i.6}}</td>
                             <td>{{i.7}}</td>
                             <td>{{i.8}}</td>
-
-                            <td>
-                                <button type="button" class="btn btn-outline-info btn-sm" id="generate">Generate
-                                    Graph</button>
-                            </td>
                         </tr>
                         {% endfor %}
                     </tbody>
