@@ -1,4 +1,6 @@
-
+*{
+    scroll-behavior: smooth;
+}
 .container-fluid,.container-lg {
     margin-top: 5%;
     padding: 2em;
@@ -32,4 +34,7 @@ h5 {
 
 table {
     margin-top: 2%;
+} 
+.form-check select {
+    margin-left: -5%;
 }
