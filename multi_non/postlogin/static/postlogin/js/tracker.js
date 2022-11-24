@@ -28,12 +28,14 @@ function calculateLandfillPercent() {
 }
 
 function calculatePercent() {
-  percentClients.value = Number(Number(clients.value)/Number(quantity.value))*100;
-  percentAfeed.value = Number(Number(afeed.value)/Number(quantity.value))*100;
-  percentCompost.value = Number(Number(compost.value)/Number(quantity.value))*100;
-  percentPartNet.value = Number(Number(partNet.value)/Number(quantity.value))*100;
+  percentClients.value = (Number(Number(clients.value)/Number(quantity.value))*100).toFixed(2);
+  percentAfeed.value = (Number(Number(afeed.value)/Number(quantity.value))*100).toFixed(2);
+  percentCompost.value = (Number(Number(compost.value)/Number(quantity.value))*100).toFixed(2);
+  percentPartNet.value = (Number(Number(partNet.value)/Number(quantity.value))*100).toFixed(2);
 }
 
+
+//Exporting to CSV
 function downloadCSV(csv, filename) {
   var csvFile;
   var downloadLink;
