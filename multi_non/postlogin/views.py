@@ -32,7 +32,7 @@ def tracker(request):
         
 
     cursor = connection.cursor()
-    sql = "SELECT Description AS Description,Category AS Category,CONCAT(Quantity, ' ', '(', Qunits, ')') AS Quantity,DivertClients,DivertAFeed,DivertCompost,DivertPartNet,DivertLandfill FROM inventory"
+    sql = "SELECT Description AS Description,Category AS Category,Quantity,Qunits,DivertClients,DivertAFeed,DivertCompost,DivertPartNet,DivertLandfill FROM inventory"
     cursor.execute(sql)
     rows = cursor.fetchall()
     context = {
