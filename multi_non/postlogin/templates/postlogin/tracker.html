@@ -100,19 +100,23 @@
     <div class="card">
         <div class="card-header">
             <h3>Database</h3>
+            <button type="button" class="btn btn-outline-success" onclick="exportTableToCSV('data.csv')">Export CSV</button>
+            <button type="button" class="btn btn-outline-success" onclick="exportTableToPDF('data.pdf')">Export PDF</button>
         </div>
         <div class="card-body">
-            <table class="table">
+            <table class="table" style="width: 100%">
                 <thead>
                     <tr>
                         <th scope="col">Description</th>
                         <th scope="col">Category</th>
                         <th scope="col">Quantity</th>
+                        <th scope="col">Units</th>
                         <th scope="col">% Clients</th>
                         <th scope="col">% Animal Feed</th>
-                        <th scope="col">% Compost/Fertilizer</th>
+                        <th scope="col">% Compost</th>
                         <th scope="col">% Partner Network</th>
                         <th scope="col">% Landfill</th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -126,6 +130,11 @@
                         <td>{{i.5}}</td>
                         <td>{{i.6}}</td>
                         <td>{{i.7}}</td>
+                        <td>{{i.8}}</td>
+
+                        <td>
+                            <button type="button" class="btn btn-outline-info btn-sm" id="generate">Generate Graph</button>
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>
