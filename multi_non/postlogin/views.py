@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.db import connection
-from .models import users
+from .models import users,permissions
 from .models import inventory
 from django.shortcuts import redirect
 
@@ -64,8 +64,76 @@ def admin(request):
         newUser = users()
         newUser.Approve = request.POST.getlist("approve[]")
         newUser.Email = request.POST.getlist("id[]")
+
+        newPerm = permissions()
+        newPerm.Role = request.POST.getlist("role[]")
+        for object in newPerm.Role:
+            if(object == "User non-profit managers/CEO"):
+                newPerm.Metrics = request.POST.getlist("metrics-CEO[]")
+                newPerm.Network = request.POST.getlist("network-CEO")
+                newPerm.readwrite = request.POST.getlist("readwrite-CEO")
+                cursor = connection.cursor()
+                sql = "UPDATE permissions set metrics = %s,network=%s,readwrite=%s WHERE role = %s "
+                val = (str(newPerm.Metrics),newPerm.Network,newPerm.readwrite,object)
+                cursor.execute(sql,val)
+
+            if(object == "User non-profit warehouse boss"):
+                newPerm.Metrics = request.POST.getlist("metrics-warehouse[]")
+                newPerm.Network = request.POST.getlist("network-warehouse")
+                newPerm.readwrite = request.POST.getlist("readwrite-warehouse")
+                cursor = connection.cursor()
+                sql = "UPDATE permissions set metrics = %s,network=%s,readwrite=%s WHERE role = %s "
+                val = (str(newPerm.Metrics),newPerm.Network,newPerm.readwrite,object)
+                cursor.execute(sql,val)
+
+            if(object == "Admin"):
+                newPerm.Metrics = request.POST.getlist("metrics-Admin[]")
+                newPerm.Network = request.POST.getlist("network-Admin")
+                newPerm.readwrite = request.POST.getlist("readwrite-Admin")
+                cursor = connection.cursor()
+                sql = "UPDATE permissions set metrics = %s,network=%s,readwrite=%s WHERE role = %s "
+                val = (str(newPerm.Metrics),newPerm.Network,newPerm.readwrite,object)
+                cursor.execute(sql,val)
+
+            if(object == "User non-profit volunteer"):
+                newPerm.Metrics = request.POST.getlist("metrics-volunteer[]")
+                newPerm.Network = request.POST.getlist("network-volunteer")
+                newPerm.readwrite = request.POST.getlist("readwrite-volunteer")
+                cursor = connection.cursor()
+                sql = "UPDATE permissions set metrics = %s,network=%s,readwrite=%s WHERE role = %s "
+                val = (str(newPerm.Metrics),newPerm.Network,newPerm.readwrite,object)
+                cursor.execute(sql,val)
+ 
+            if(object == "Sponsors"):
+                newPerm.Metrics = request.POST.getlist("metrics-Sponsors[]")
+                newPerm.Network = request.POST.getlist("network-Sponsors")
+                newPerm.readwrite = request.POST.getlist("readwrite-Sponsors")
+                cursor = connection.cursor()
+                sql = "UPDATE permissions set metrics = %s,network=%s,readwrite=%s WHERE role = %s "
+                val = (str(newPerm.Metrics),newPerm.Network,newPerm.readwrite,object)
+                cursor.execute(sql,val)
+
+            if(object == "Experts"):
+                newPerm.Metrics = request.POST.getlist("metrics-Experts[]")
+                newPerm.Network = request.POST.getlist("network-Experts")
+                newPerm.readwrite = request.POST.getlist("readwrite-Experts")
+                cursor = connection.cursor()
+                sql = "UPDATE permissions set metrics = %s,network=%s,readwrite=%s WHERE role = %s "
+                val = (str(newPerm.Metrics),newPerm.Network,newPerm.readwrite,object)
+                cursor.execute(sql,val)
+
+
+            
+            
+
+
+
+
+
+
+
         for i, j in zip(newUser.Approve, newUser.Email):
-            if(i == 'approve' or i == 'disapprove'):
+            if(i == 'approve' or i == 'decline'):
                  cursor = connection.cursor()
                  sql2 = "UPDATE users SET Approve = %s WHERE id = %s"
                  val = (i,j)

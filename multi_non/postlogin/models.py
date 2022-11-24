@@ -21,3 +21,10 @@ class inventory(models.Model):
     DivertCompost = models.PositiveIntegerField()
     DivertPartNet = models.PositiveIntegerField()
     DivertLandfill = models.PositiveIntegerField()
+
+class permissions(models.Model):
+    Role = models.CharField(max_length=255)
+    Metrics = models.CharField(max_length=255)
+    Network = models.CharField(max_length=255)
+    readwrite =  models.CharField(max_length=255)
+    #insert role names preset
