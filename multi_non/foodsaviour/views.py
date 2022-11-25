@@ -43,35 +43,35 @@ def login(request):
         newUser = users()
         newUser.Email = request.POST.get("email")
         newUser.Password = request.POST.get("password")
+        print(newUser.Email)
+        cursor = connection.cursor()
 
-        if newUser.Email != "" and newUser.Password != "":
-
-            cursor = connection.cursor()
-
-            # Check if the email and password exist in the database
-            sql = "SELECT Email, Password FROM users WHERE Email = %s AND Password = %s"
-            values = (newUser.Email, newUser.Password)
-            cursor.execute(sql, values)
-            rows = cursor.fetchall()
-            numberOfRecords = len(rows)
-
+        if newUser.Email:
             sql2 = "SELECT * FROM users WHERE Email = %s"
             values = (newUser.Email)
             cursor.execute(sql2, values)
-            rows = cursor.fetchall()
-      
-         
-            request.session['FirstName'] = rows[0][0]
-            request.session['LastName'] = rows[0][1]
-            request.session['Email'] = rows[0][2]
-            request.session['Organization'] = rows[0][7]
-            request.session['Roles'] = rows[0][4]
-            request.session['Status'] = rows[0][8]
+            rows2 = cursor.fetchall()
+        
+       
+            request.session['FirstName'] = rows2[0][0]
+            request.session['LastName'] = rows2[0][1]
+            request.session['Email'] = rows2[0][2]
+            request.session['Organization'] = rows2[0][7]
+            request.session['Roles'] = rows2[0][4]
+            request.session['Status'] = rows2[0][8]
 
-            if (numberOfRecords > 0):
-                return redirect("../../postlogin/tracker")
-            else:
-                pass
+
+        # Check if the email and password exist in the database
+        sql = "SELECT Email, Password FROM users WHERE Email = %s AND Password = %s"
+        values = (newUser.Email, newUser.Password)
+        cursor.execute(sql, values)
+        rows = cursor.fetchall()
+        numberOfRecords = len(rows)
+
+        if (numberOfRecords > 0):
+            return redirect("../../postlogin/tracker")
+        else:
+            pass
         
     return render(request, 'foodsaviour/login.html', {'title': 'Login'})
 
@@ -87,5 +87,4 @@ def contact(request):
 def resetPassword(request):
     return render(request, 'foodsaviour/resetPassword.html', {'title': 'Reset Password'})
 
-def network(request):
-    return render(request, 'foodsaviour/network.html', {'title': 'Network'})
+
