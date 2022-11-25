@@ -22,15 +22,15 @@ def register(request):
         val = (newUser.FirstName, newUser.LastName, newUser.Email,
                newUser.Password, newUser.Roles, newUser.Consent, newUser.Organization)
         cursor.execute(sql, val)
-        details = {
-            'FirstName': newUser.FirstName,
-            "LastName": newUser.LastName,
-            'Roles': newUser.Roles,
-            'Email':  newUser.Email,
-            "Organization": newUser.Organization
+   
+        request.session['FirstName'] =  newUser.FirstName
+        request.session["LastName"]=  newUser.LastName
+        request.session['Roles']= newUser.Roles
+        request.session['Email']=  newUser.Email
+        request.session["Organization"]= newUser.Organization
 
-        }
-        return redirect('../../postlogin/tracker',details)
+        
+        return redirect('../../postlogin/tracker')
 
     return render(request, 'foodsaviour/register.html', {'title': 'Register'})
 
@@ -53,7 +53,7 @@ def login(request):
         cursor.execute(sql, values)
         rows = cursor.fetchall()
         numberOfRecords = len(rows)
-
+        request.session['username'] = newUser.Email;
         if (numberOfRecords > 0):
             return redirect("../../postlogin/tracker")
         else:

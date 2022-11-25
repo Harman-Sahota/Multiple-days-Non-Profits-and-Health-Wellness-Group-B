@@ -12,6 +12,7 @@ def overview(request):
 
 
 def tracker(request):
+    
     if request.method == "POST":
         newData = inventory()
         newData.Description = request.POST.get("description")
