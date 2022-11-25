@@ -15,14 +15,56 @@
 
 
     
-    <p>Categories</p>
+    <p class="Categories">Categories</p>
+
+    <div class="topsection">
+
+      <form class="searchbox" action="/action_page.php" style="margin:left;max-width:300px">
+        <input type="text" placeholder="Search.." name="search2">
+        <button type="submit"><i class="fa fa-search"></i></button>
+      </form>
+
+      <div class="select">
+        <select name="format" id="activity">
+           <option selected disabled>Choose a activity</option>
+           <option value="pdf">PDF</option>
+           <option value="txt">txt</option>
+           <option value="epub">ePub</option>
+           <option value="fb2">fb2</option>
+           <option value="mobi">mobi</option>
+        </select>
+     </div>
+
+     <div class="select">
+      <select name="format" id="labels">
+         <option selected disabled>Choose a label</option>
+         <option value="pdf">PDF</option>
+         <option value="txt">txt</option>
+         <option value="epub">ePub</option>
+         <option value="fb2">fb2</option>
+         <option value="mobi">mobi</option>
+      </select>
+   </div>
+
+   <div class="select">
+    <select name="format" id="filters">
+       <option selected disabled>Choose a filter</option>
+       <option value="pdf">PDF</option>
+       <option value="txt">txt</option>
+       <option value="epub">ePub</option>
+       <option value="fb2">fb2</option>
+       <option value="mobi">mobi</option>
+    </select>
+ </div>
+
+    </div>
     
     <div class="tab">
-      <button class="tablinks" onclick="openCity(event, 'disc')" id="defaultOpen">View All Discussions</button>
-      <button class="tablinks" onclick="openCity(event, 'announce')">Announcements</button>
-      <button class="tablinks" onclick="openCity(event, 'ideas')">Ideas</button>
-      <button class="tablinks" onclick="openCity(event, 'Tokyo')">Polls</button>
-      <button class="tablinks" onclick="openCity(event, 'Tokyo')">Q&A</button>
+      <button class="tablinks" onclick="opentab(event, 'disc')" id="defaultOpen">View All Discussions</button>
+      <button class="tablinks" onclick="opentab(event, 'announce')">Announcements</button>
+      <button class="tablinks" onclick="opentab(event, 'ideas')">Ideas</button>
+      <button class="tablinks" onclick="opentab(event, 'polls')">Polls</button>
+      <button class="tablinks" onclick="opentab(event, 'qa')">Q&A</button>
     </div>
     
     <div id="disc" class="tabcontent">
