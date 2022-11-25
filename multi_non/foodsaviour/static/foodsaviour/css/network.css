@@ -68,12 +68,14 @@
  .select {
     position: relative;
     display: flex;
-    width: 20em;
+    width: 15em;
     height: 3em;
     line-height: 3;
     background: #5c6664;
     overflow: hidden;
     border-radius: .25em;
+    float: left;
+    margin: 20px;
  }
  .select::after {
     content: '\25BC';
@@ -93,7 +95,7 @@
 
  
 form.searchbox input[type=text] {
-  padding: 10px;
+  padding: 10px 10px 1px 10px;
   font-size: 17px;
   border: 1px solid grey;
   float: left;
@@ -121,4 +123,8 @@ form.searchbox::after {
   content: "";
   clear: both;
   display: table;
+}
+.searchdiv {
+    float: left;
+    margin: 20px;
 }
