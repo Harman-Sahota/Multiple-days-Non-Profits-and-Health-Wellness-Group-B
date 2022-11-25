@@ -86,3 +86,6 @@ def contact(request):
 
 def resetPassword(request):
     return render(request, 'foodsaviour/resetPassword.html', {'title': 'Reset Password'})
+
+def network(request):
+    return render(request, 'foodsaviour/network.html', {'title': 'Network'})
