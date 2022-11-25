@@ -1,48 +1,28 @@
 {% extends "foodsaviour/base.html" %} {% load static %} {% block content %}
 
 <!-- LInking CSS File -->
-<link
-  href="{% static 'foodsaviour/css/login.css'%}"
-  rel="stylesheet"
-  type="text/css"
-/>
+<link href="{% static 'foodsaviour/css/login.css'%}" rel="stylesheet" type="text/css" />
 
 <!-- PROJECT -->
 <!-- HTML BODY CONTENT -->
 <!-- LOGIN FORM -->
 <div class="body">
   <div class="form-container">
-    <form class="form mx-auto bg-white" id="login" action="" method="post">
+    <form class="form mx-auto bg-white" id="login" action="" method="POST">
       {% csrf_token %}
       <!-- Form Title -->
       <h5 class="form-title">User Login</h5>
 
       <!-- Email Form -->
       <div class="form-floating email-form">
-        <input
-          type="email"
-          id="exampleInputEmail1"
-          class="form-control input-text"
-          placeholder="jordan@gmail.com"
-          name="email"
-        />
-        <label for="exampleInputEmail1" class="form-label input-text"
-          >Email:</label
-        >
+        <input type="email" id="exampleInputEmail1" class="form-control input-text" placeholder="jordan@gmail.com" name="email" />
+        <label for="exampleInputEmail1" class="form-label input-text">Email:</label>
       </div>
 
       <!-- Password Form -->
       <div class="form-floating password-form">
-        <input
-          type="password"
-          id="exampleInputPassword1"
-          class="form-control input-text"
-          placeholder="e.g. Kiwanuka"
-          name="password"
-        />
-        <label for="exampleInputPassword1" class="form-label input-text"
-          >Password:</label
-        >
+        <input type="password" id="exampleInputPassword1" class="form-control input-text" placeholder="e.g. Kiwanuka" name="password" />
+        <label for="exampleInputPassword1" class="form-label input-text">Password:</label>
       </div>
 
       <!-- Sign in Button -->
@@ -53,9 +33,7 @@
       <!-- Signin Trouble -->
       <div class="trouble">
         <span class="trouble-text text-muted">Having trouble signing in?</span>
-        <a class="trouble-reset text-danger" href="{% url 'resetpassword' %}"
-          >Reset password</a
-        >
+        <a class="trouble-reset text-danger" href="{% url 'resetpassword' %}">Reset password</a>
       </div>
 
       <!-- New Account -->
