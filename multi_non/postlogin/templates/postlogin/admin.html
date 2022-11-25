@@ -6,7 +6,7 @@
     <h3 class="h3">Data Permissions:</h3>
     <h5 class="h5">Inside Organization: </h5>
     <table class="table">
-        <thead>
+        <thead >
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Role</th>
@@ -16,42 +16,42 @@
             </tr>
         </thead>
         <tbody>
-            <form class="form" action="" method="post">
+            <form class="form" action="" id="perms" method="post">
                 {% csrf_token %}
                 <tr>
                     <th scope="row">1</th>
-                    <td>User non-profit managers/CEO</td>
+                    <td> <input type="checkbox" id="role" name="role[]" value="User non-profit managers/CEO">User non-profit managers/CEO</td>
                     <td>
                         <div class="form-check ">
-                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics[]"
+                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics-CEO[]"
                                 class="flexCheckDefault" value="Fresh Produce">
                             <label class="form-check-label" for="flexCheckDefault">
                                 Fresh Produce
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics[]"
+                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics-CEO[]"
                                 class="flexCheckDefault" value="Metric #2">
                             <label class="form-check-label" for="flexCheckDefault2">
                                 Metric #2
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics[]"
+                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics-CEO[]"
                                 class="flexCheckDefault" value="Metric #3">
                             <label class="form-check-label" for="flexCheckDefault3">
                                 Metric #3
                             </label>
                         </div>
                         <div class="form-check ">
-                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics[]"
+                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics[]-CEO"
                                 class="flexCheckDefault" value="Metric #4">
                             <label class="form-check-label" for="flexCheckDefault4">
                                 Metric #4
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics[]"
+                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics-CEO[]"
                                 class="flexCheckDefault" value="Metric #5">
                             <label class="form-check-label" for="flexCheckDefault5">
                                 Metric #5
@@ -60,72 +60,60 @@
                     </td>
                     <td>
                         <div class="form-check ">
-                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="network[]"
-                                class="flexCheckDefault" value="allow">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Allow
-                            </label>
-                        </div>
-                        <div class="form-check ">
-                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="network[]"
-                                class="flexCheckDefault" value="allow">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Dont Allow
-                            </label>
-                        </div>
+                            <div class="col-md-auto">
+                                <select class="form-select" id="network" name="network-CEO">
+                                    <option value="allow">Allow</option>
+                                    <option value="dont allow">Dont Allow</option>
+                                </select>
+                            </div>
                     </td>
                     <td>
-                        <div class="form-check ">
-                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="network[]"
-                                class="flexCheckDefault" value="allow">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Allow
-                            </label>
-                        </div>
-                        <div class="form-check ">
-                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="network[]"
-                                class="flexCheckDefault" value="allow">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Dont Allow
-                            </label>
-                        </div>
+                        <div class="form-check">
+                            <div class="col-md-auto">
+                                <select class="form-select" id="readwrite" name="readwrite-CEO">
+                                    <option value="read">Read</option>
+                                    <option value="write">Write</option>
+                                    <option value="both">Both</option>
+                                    <option value="none">None</option>
+                                </select>
+                            </div>
                     </td>
                 </tr>
 
                 <tr>
                     <th scope="row">2</th>
-                    <td>User non-profit warehouse boss</td>
+                    <td><input type="checkbox" id="role" name="role[]" value="User non-profit warehouse boss">User non-profit warehouse boss</td>
                     <td>
                         <div class="form-check ">
-                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics[]"
+                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics-warehouse[]"
                                 class="flexCheckDefault" value="Fresh Produce">
                             <label class="form-check-label" for="flexCheckDefault">
                                 Fresh Produce
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics[]"
+                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics-warehouse[]"
                                 class="flexCheckDefault" value="Metric #2">
                             <label class="form-check-label" for="flexCheckDefault2">
                                 Metric #2
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics[]"
+                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics-warehouse[]"
                                 class="flexCheckDefault" value="Metric #3">
                             <label class="form-check-label" for="flexCheckDefault3">
                                 Metric #3
                             </label>
                         </div>
                         <div class="form-check ">
-                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics[]"
+                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics-warehouse[]"
                                 class="flexCheckDefault" value="Metric #4">
                             <label class="form-check-label" for="flexCheckDefault4">
                                 Metric #4
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics[]"
+                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics-warehouse[]"
                                 class="flexCheckDefault" value="Metric #5">
                             <label class="form-check-label" for="flexCheckDefault5">
                                 Metric #5
@@ -134,58 +122,46 @@
                     </td>
                     <td>
                         <div class="form-check ">
-                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="network[]"
-                                class="flexCheckDefault" value="allow">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Allow
-                            </label>
-                        </div>
-                        <div class="form-check ">
-                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="network[]"
-                                class="flexCheckDefault" value="allow">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Dont Allow
-                            </label>
-                        </div>
+                            <div class="col-md-auto">
+                                <select class="form-select" id="network" name="network-warehouse">
+                                    <option value="allow">Allow</option>
+                                    <option value="dont allow">Dont Allow</option>
+                                </select>
+                            </div>
                     </td>
                     <td>
-                        <div class="form-check ">
-                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="network[]"
-                                class="flexCheckDefault" value="allow">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Allow
-                            </label>
-                        </div>
-                        <div class="form-check ">
-                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="network[]"
-                                class="flexCheckDefault" value="allow">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Dont Allow
-                            </label>
-                        </div>
+                        <div class="form-check">
+                            <div class="col-md-auto">
+                                <select class="form-select" id="readwrite" name="readwrite-warehouse">
+                                    <option value="read">Read</option>
+                                    <option value="write">Write</option>
+                                    <option value="both">Both</option>
+                                    <option value="none">None</option>
+                                </select>
+                            </div>
                     </td>
                 </tr>
 
                 <tr>
                     <th scope="row">3</th>
-                    <td>Admin</td>
+                    <td><input type="checkbox" id="role" name="role[]" value="Admin">Admin</td>
                     <td>
                         <div class="form-check ">
-                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics[]"
+                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics-Admin[]"
                                 class="flexCheckDefault" value="Fresh Produce">
                             <label class="form-check-label" for="flexCheckDefault">
                                 Fresh Produce
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics[]"
+                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics-Admin[]"
                                 class="flexCheckDefault" value="Metric #2">
                             <label class="form-check-label" for="flexCheckDefault2">
                                 Metric #2
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics[]"
+                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics-Admin[]"
                                 class="flexCheckDefault" value="Metric #3">
                             <label class="form-check-label" for="flexCheckDefault3">
                                 Metric #3
@@ -199,7 +175,7 @@
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics[]"
+                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics-Admin[]"
                                 class="flexCheckDefault" value="Metric #5">
                             <label class="form-check-label" for="flexCheckDefault5">
                                 Metric #5
@@ -208,72 +184,60 @@
                     </td>
                     <td>
                         <div class="form-check ">
-                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="network[]"
-                                class="flexCheckDefault" value="allow">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Allow
-                            </label>
-                        </div>
-                        <div class="form-check ">
-                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="network[]"
-                                class="flexCheckDefault" value="allow">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Dont Allow
-                            </label>
-                        </div>
+                            <div class="col-md-auto">
+                                <select class="form-select" id="network" name="network-Admin">
+                                    <option value="allow">Allow</option>
+                                    <option value="dont allow">Dont Allow</option>
+                                </select>
+                            </div>
                     </td>
                     <td>
-                        <div class="form-check ">
-                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="network[]"
-                                class="flexCheckDefault" value="allow">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Allow
-                            </label>
-                        </div>
-                        <div class="form-check ">
-                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="network[]"
-                                class="flexCheckDefault" value="allow">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Dont Allow
-                            </label>
-                        </div>
+                        <div class="form-check">
+                            <div class="col-md-auto">
+                                <select class="form-select" id="readwrite" name="readwrite-Admin">
+                                    <option value="read">Read</option>
+                                    <option value="write">Write</option>
+                                    <option value="both">Both</option>
+                                    <option value="none">None</option>
+                                </select>
+                            </div>
                     </td>
                 </tr>
 
                 <tr>
                     <th scope="row">4</th>
-                    <td>User non-profit volunteer</td>
+                    <td><input type="checkbox" id="role" name="role[]" value="User non-profit volunteer">User non-profit volunteer</td>
                     <td>
                         <div class="form-check ">
-                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics[]"
+                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics-volunteer[]"
                                 class="flexCheckDefault" value="Fresh Produce">
                             <label class="form-check-label" for="flexCheckDefault">
                                 Fresh Produce
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics[]"
+                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics-volunteer[]"
                                 class="flexCheckDefault" value="Metric #2">
                             <label class="form-check-label" for="flexCheckDefault2">
                                 Metric #2
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics[]"
+                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics-volunteer[]"
                                 class="flexCheckDefault" value="Metric #3">
                             <label class="form-check-label" for="flexCheckDefault3">
                                 Metric #3
                             </label>
                         </div>
                         <div class="form-check ">
-                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics[]"
+                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics-volunteer[]"
                                 class="flexCheckDefault" value="Metric #4">
                             <label class="form-check-label" for="flexCheckDefault4">
                                 Metric #4
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics[]"
+                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics-volunteer[]"
                                 class="flexCheckDefault" value="Metric #5">
                             <label class="form-check-label" for="flexCheckDefault5">
                                 Metric #5
@@ -282,41 +246,25 @@
                     </td>
                     <td>
                         <div class="form-check ">
-                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="network[]"
-                                class="flexCheckDefault" value="allow">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Allow
-                            </label>
-                        </div>
-                        <div class="form-check ">
-                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="network[]"
-                                class="flexCheckDefault" value="allow">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Dont Allow
-                            </label>
-                        </div>
+                            <div class="col-md-auto">
+                                <select class="form-select" id="network" name="network-volunteer">
+                                    <option value="allow">Allow</option>
+                                    <option value="dont allow">Dont Allow</option>
+                                </select>
+                            </div>
                     </td>
                     <td>
-                        <div class="form-check ">
-                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="network[]"
-                                class="flexCheckDefault" value="allow">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Allow
-                            </label>
-                        </div>
-                        <div class="form-check ">
-                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="network[]"
-                                class="flexCheckDefault" value="allow">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Dont Allow
-                            </label>
-                        </div>
+                        <div class="form-check">
+                            <div class="col-md-auto">
+                                <select class="form-select" id="readwrite" name="readwrite-volunteer">
+                                    <option value="read">Read</option>
+                                    <option value="write">Write</option>
+                                    <option value="both">Both</option>
+                                    <option value="none">None</option>
+                                </select>
+                            </div>
                     </td>
                 </tr>
-
-
-
-
         </tbody>
     </table>
 
@@ -335,10 +283,10 @@
         <tbody>
             <tr>
                 <th scope="row">1</th>
-                <td>Sponsors</td>
+                <td><input type="checkbox" id="role" name="role" value="Sponsors">Sponsors</td>
                 <td>
                     <div class="form-check ">
-                        <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics[]"
+                        <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics-Sponsors[]"
                             class="flexCheckDefault" value="Fresh Produce">
                         <label class="form-check-label" for="flexCheckDefault">
                             Fresh Produce
@@ -352,21 +300,21 @@
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics[]"
+                        <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics-Sponsors[]"
                             class="flexCheckDefault" value="Metric #3">
                         <label class="form-check-label" for="flexCheckDefault3">
                             Metric #3
                         </label>
                     </div>
                     <div class="form-check ">
-                        <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics[]"
+                        <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics-Sponsors[]"
                             class="flexCheckDefault" value="Metric #4">
                         <label class="form-check-label" for="flexCheckDefault4">
                             Metric #4
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics[]"
+                        <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics-Sponsors[]"
                             class="flexCheckDefault" value="Metric #5">
                         <label class="form-check-label" for="flexCheckDefault5">
                             Metric #5
@@ -375,72 +323,60 @@
                 </td>
                 <td>
                     <div class="form-check ">
-                        <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="network[]"
-                            class="flexCheckDefault" value="allow">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Allow
-                        </label>
-                    </div>
-                    <div class="form-check ">
-                        <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="network[]"
-                            class="flexCheckDefault" value="allow">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Dont Allow
-                        </label>
-                    </div>
+                        <div class="col-md-auto">
+                            <select class="form-select" id="network" name="network-Sponsors">
+                                <option value="allow">Allow</option>
+                                <option value="dont allow">Dont Allow</option>
+                            </select>
+                        </div>
                 </td>
                 <td>
-                    <div class="form-check ">
-                        <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="network[]"
-                            class="flexCheckDefault" value="allow">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Allow
-                        </label>
-                    </div>
-                    <div class="form-check ">
-                        <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="network[]"
-                            class="flexCheckDefault" value="allow">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Dont Allow
-                        </label>
-                    </div>
+                    <div class="form-check">
+                        <div class="col-md-auto">
+                            <select class="form-select" id="readwrite" name="readwrite-Sponsors">
+                                <option value="read">Read</option>
+                                <option value="write">Write</option>
+                                <option value="both">Both</option>
+                                <option value="none">None</option>
+                            </select>
+                        </div>    
                 </td>
             </tr>
 
             <tr>
                 <th scope="row">2</th>
-                <td>Experts</td>
+                <td><input type="checkbox" id="role" name="role[]" value="Experts">Experts</td>
                 <td>
                     <div class="form-check ">
-                        <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics[]"
+                        <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics-Experts[]"
                             class="flexCheckDefault" value="Fresh Produce">
                         <label class="form-check-label" for="flexCheckDefault">
                             Fresh Produce
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics[]"
+                        <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics-Experts[]"
                             class="flexCheckDefault" value="Metric #2">
                         <label class="form-check-label" for="flexCheckDefault2">
                             Metric #2
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics[]"
+                        <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics-Experts[]"
                             class="flexCheckDefault" value="Metric #3">
                         <label class="form-check-label" for="flexCheckDefault3">
                             Metric #3
                         </label>
                     </div>
                     <div class="form-check ">
-                        <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics[]"
+                        <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics-Experts[]"
                             class="flexCheckDefault" value="Metric #4">
                         <label class="form-check-label" for="flexCheckDefault4">
                             Metric #4
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics[]"
+                        <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="metrics-Experts[]"
                             class="flexCheckDefault" value="Metric #5">
                         <label class="form-check-label" for="flexCheckDefault5">
                             Metric #5
@@ -449,50 +385,37 @@
                 </td>
                 <td>
                     <div class="form-check ">
-                        <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="network[]"
-                            class="flexCheckDefault" value="allow">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Allow
-                        </label>
-                    </div>
-                    <div class="form-check ">
-                        <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="network[]"
-                            class="flexCheckDefault" value="allow">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Dont Allow
-                        </label>
-                    </div>
+                        <div class="col-md-auto">
+                            <select class="form-select" id="network" name="network-Experts">
+                                <option value="allow">Allow</option>
+                                <option value="dont allow">Dont Allow</option>
+                            </select>
+                        </div>
                 </td>
                 <td>
-                    <div class="form-check ">
-                        <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="network[]"
-                            class="flexCheckDefault" value="allow">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Allow
-                        </label>
-                    </div>
-                    <div class="form-check ">
-                        <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="network[]"
-                            class="flexCheckDefault" value="allow">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Dont Allow
-                        </label>
-                    </div>
+                    <div class="form-check">
+                        <div class="col-md-auto">
+                            <select class="form-select" id="readwrite" name="readwrite-Experts">
+                                <option value="read">Read</option>
+                                <option value="write">Write</option>
+                                <option value="both">Both</option>
+                                <option value="none">None</option>
+                            </select>
+                        </div>
                 </td>
             </tr>
-
-
         </tbody>
     </table>
-    <button type="submit" class="btn btn-outline-success">Save</button>
+    <button type="submit" for="perms" class="btn btn-outline-success">Save</button>
 
     </form>
 
 </div>
 
 
+
 <div id="role-settings-container" class="container-lg col-md-auto">
-    <h3 class="h3">Approve Accounts:</h3>
+    <h3 class="h3">Pending Accounts:</h3>
     <table class="table">
         <thead>
             <tr>
@@ -500,7 +423,7 @@
                 <th scope="col">Name</th>
                 <th scope="col">Email</th>
                 <th scope="col">Roles</th>
-                <th scope="col">Approve/Disapprove</th>
+                <th scope="col">Approve/Decline</th>
             </tr>
         </thead>
         <tbody>
@@ -513,9 +436,9 @@
                 <tr>
                     <th scope="row">
                         <div class="form-check ">
-                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="id[]"
-                                class="flexCheckDefault" value="{{forloop.counter}}">
-                            <label class="form-check-label" for="flexCheckDefault">
+                            <input class="form-check-input" type="checkbox" id="flexCheckDefault-5" name="id[]"
+                                class="flexCheckDefault-5" value="{{forloop.counter}}">
+                            <label class="form-check-label" for="flexCheckDefault-5">
                                 {{forloop.counter}}
                             </label>
                         </div>
@@ -529,19 +452,12 @@
 
                     <td>
                         <div class="form-check ">
-                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="approve[]"
-                                class="flexCheckDefault" value="approve">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Approve
-                            </label>
-                        </div>
-                        <div class="form-check ">
-                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="approve[]"
-                                class="flexCheckDefault" value="disapprove">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Disapprove
-                            </label>
-                        </div>
+                            <div class="col-md-auto">
+                                <select class="form-select" id="approve" name="approve[]">
+                                    <option value="approve">Approve</option>
+                                    <option value="decline">Decline</option>
+                                </select>
+                            </div>
                     </td>
                 </tr>
                 {% endif %}
@@ -555,7 +471,6 @@
     </form>
 
 </div>
-
 
 <div id="role-settings-container" class="container-lg col-md-auto">
     <h3 class="h3">Approved Accounts:</h3>
@@ -596,7 +511,7 @@
 
 
 <div id="role-settings-container" class="container-lg col-md-auto">
-    <h3 class="h3">Disapproved Accounts:</h3>
+    <h3 class="h3">Declined Accounts:</h3>
     <table class="table">
         <thead>
             <tr>
