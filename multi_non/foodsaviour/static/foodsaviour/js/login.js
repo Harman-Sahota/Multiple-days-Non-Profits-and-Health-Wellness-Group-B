@@ -15,6 +15,7 @@ const sub = document.getElementById("submit");
 function ValidatePssword(inputPass) {
     if(inputPass.trim() =="") {
       passwordControl.style.border = "red 2px solid";
+      event.preventDefault();
     }else {
       passwordControl.style.border = "green 1px solid";
     }
@@ -34,6 +35,7 @@ function ValidatePssword(inputPass) {
    } else {
     
     emailInputControl.style.border = "red 2px solid";
+    event.preventDefault();
     emailInputControl.focus();
 
      return false;
