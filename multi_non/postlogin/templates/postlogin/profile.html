@@ -14,19 +14,38 @@
                         <br>
                     </div>
                     <div class="card-body">
-                        <p><b>[User Name]</b></p>
-                        <p>[User email]</p>
+                        <p><b>{{ request.session.FirstName }} {{ request.session.LastName }}</b></p>
+                        <p>{{ request.session.Email }}</p>
                     </div>
                 </div>
             </div>
             <div class="col-8">
                 <div class="card">
-                    <div class="card-header bg-transparent text-center">Profile</div>
+                    <div class="card-header bg-transparent text-center"><b>Profile</b></div>
                     <div class="card-body">
-                        <p>Name: </p>
-                        <p>Email: </p>
-                        <p>Organization Name: </p>
-                        <p>Role: </p>
+                        <div class="row">
+                            <div class="col">
+                                <p>Account Status: </p>
+                            </div>
+                            <div class="col">
+                                <p>{{ request.session.Status }}</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-4">
+                                <p>Name: </p>
+                                <p>Email: </p>
+                                <p>Organization Name: </p>
+                                <p>Role: </p>
+                            </div>
+                            <div class="col-8">
+                                <p>{{ request.session.FirstName }} {{ request.session.LastName }}</p>
+                                <p>{{ request.session.Email }}</p>
+                                <p>{{ request.session.Organization }}</p>
+                                <p>{{ request.session.Roles }}</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

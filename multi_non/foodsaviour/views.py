@@ -29,7 +29,6 @@ def register(request):
         request.session['Email']=  newUser.Email
         request.session["Organization"]= newUser.Organization
 
-        
         return redirect('../../postlogin/tracker')
 
     return render(request, 'foodsaviour/register.html', {'title': 'Register'})
@@ -53,7 +52,20 @@ def login(request):
         cursor.execute(sql, values)
         rows = cursor.fetchall()
         numberOfRecords = len(rows)
-        request.session['username'] = newUser.Email;
+
+        sql2 = "SELECT * FROM users WHERE Email = %s"
+        values = (newUser.Email)
+        cursor.execute(sql2, values)
+        rows = cursor.fetchall()
+        print(rows[0][0])
+        
+        request.session['FirstName'] = rows[0][0]
+        request.session['LastName'] = rows[0][1]
+        request.session['Email'] = rows[0][2]
+        request.session['Organization'] = rows[0][7]
+        request.session['Roles'] = rows[0][4]
+        request.session['Status'] = rows[0][8]
+
         if (numberOfRecords > 0):
             return redirect("../../postlogin/tracker")
         else:
