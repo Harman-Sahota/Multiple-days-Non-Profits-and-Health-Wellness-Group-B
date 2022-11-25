@@ -5,7 +5,8 @@ from django.db import connection
 from .models import users,permissions
 from .models import inventory
 from django.shortcuts import redirect
-
+from django.http import JsonResponse
+import json
 # Create your views here.
 def overview(request):
     return render(request, 'postlogin/overview.html', {'title': 'Overview'})
@@ -36,11 +37,13 @@ def tracker(request):
     sql = "SELECT Description AS Description,Category AS Category,Quantity,Qunits,DivertClients,DivertAFeed,DivertCompost,DivertPartNet,DivertLandfill FROM inventory"
     cursor.execute(sql)
     rows = cursor.fetchall()
+    data = list(rows)
+  
     context = {
         'title': 'Tracker',
         'Object': rows
     }
-    return render(request, 'postlogin/tracker.html', context)
+    return render(request, 'postlogin/tracker.html', context,JsonResponse(data,safe=False))
 
 
 def network(request):
@@ -124,14 +127,6 @@ def admin(request):
                 cursor.execute(sql,val)
 
 
-            
-            
-
-
-
-
-
-
 
         for i, j in zip(newUser.Approve, newUser.Email):
             if(i == 'approve' or i == 'decline'):
@@ -147,3 +142,6 @@ def admin(request):
        
 
     return render(request, 'postlogin/admin.html', context)
+
+
+    
