@@ -43,7 +43,7 @@ def tracker(request):
         'title': 'Tracker',
         'Object': rows
     }
-    return render(request, 'postlogin/tracker.html', context,JsonResponse(data,safe=False))
+    return render(request, 'postlogin/tracker.html', context)
 
 
 def network(request):
