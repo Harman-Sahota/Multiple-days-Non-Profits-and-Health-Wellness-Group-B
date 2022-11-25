@@ -3,10 +3,12 @@
 {% block content %}
 
 <link rel="stylesheet" type="text/css" href="{% static 'postlogin/css/tracker.css'%}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 
 <!--Food Saving Methods-->
 <div class="container p-2">
+    <p><b>Welcome back, {{ request.session.FirstName }}</b></p>
     <div class="card">
         <div class="card-header">
             <h3>Enter tracker data:</h3>
@@ -19,8 +21,15 @@
                         <div class="col-md-auto">
                             <label for="description">Description</label><br>
                             <input type="text" class="form-control" id="description" name="description"
-                                placeholder="Description">
+                                placeholder="Description" style="width: 10em;">
                         </div>
+                        <!--
+                        <div class="col-md-auto">
+                            <label for="category">Category</label><br>
+                            <input type="text" class="form-control" id="FPcategory" name="category" value="Fresh Produce"
+                                style="width: 10em;" readonly>
+                        </div>
+                        -->
                         <div class="col-md-auto">
                             <label for="category">Category</label><br>
                             <select class="form-select" id="category" name="category">
@@ -33,7 +42,7 @@
                         </div>
                         <div class="col-md-auto">
                             <label for="quantity">Quantity</label><br>
-                            <input type="text" class="form-control" style="width: 75px;" id="quantity" name="quantity">
+                            <input type="text" class="form-control" id="quantity" name="quantity" style="width: 10em;">
                         </div>
                         <div class="col-md-auto">
                             <label for="qunits">Units</label><br>
@@ -42,44 +51,85 @@
                                 <option>kgs</option>
                             </select>
                         </div>
-                        <div class="col">
+                        <div class="col-auto">
                             <div class="row">
                                 <div class="col-auto">
-                                    <label for="percent">% Deviated to:</label><br>
+                                    <label for="amount">Amount</label>
                                 </div>
                             </div>
                             <div class="row pb-2">
-                                <div class="col-auto" id="percentcol">
-                                    <input type="number" class="form-control" id="clients" name="clients"
-                                        style="width: 75px;" value="0" min="0" max="100" onkeyup="calculateLandfill()">
+                                <div class="col-auto">
+                                    <input type="number" class="form-control" id="clients" name="clients" value="0"
+                                        min="0" onkeyup="calculateLandfill(); calculatePercent()" style="width: 10em;">
+                                </div>
+                            </div>
+                            <div class="row pb-2">
+                                <div class="col-auto">
+                                    <input type="number" class="form-control" id="animalFeed" name="animalFeed" value="0"
+                                        min="0" onkeyup="calculateLandfill(); calculatePercent()" style="width: 10em;">
+                                </div>
+                            </div>
+                            <div class="row pb-2">
+                                <div class="col-auto">
+                                    <input type="number" class="form-control" id="compost" name="compost" value="0"
+                                        min="0" onkeyup="calculateLandfill(); calculatePercent()" style="width: 10em;">
+                                </div>
+                            </div>
+                            <div class="row pb-2">
+                                <div class="col-auto">
+                                    <input type="number" class="form-control" id="partnet" name="partnet" value="0"
+                                        min="0" onkeyup="calculateLandfill(); calculatePercent()" style="width: 10em;">
+                                </div>
+                            </div>
+                            <div class="row pb-2">
+                                <div class="col-auto">
+                                    <input type="number" class="form-control" id="landfill" name="landfill" value="0"
+                                        min="0" style="width: 10em;">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="row">
+                                <div class="col-auto">
+                                    <label for="percent">% Diverted to:</label><br>
+                                </div>
+                            </div>
+                            <div class="row pb-2">
+                                <div class="col-auto">
+                                    <input type="number" class="form-control" id="percentclients" name="percentclients"
+                                        style="width: 4.5em;" value="0" min="0" max="100"
+                                        onload="calculateLandfillPercent()" readonly>
                                 </div>
                                 <div class="col d-flex align-items-center">Clients</div>
                             </div>
                             <div class="row pb-2">
                                 <div class="col-auto">
-                                    <input type="number" class="form-control" id="animalfeed" name="animalfeed"
-                                        style="width: 75px;" value="0" min="0" max="100" onkeyup="calculateLandfill()">
+                                    <input type="number" class="form-control" id="percentanimalfeed" name="percentanimalfeed"
+                                        style="width: 4.5em;" value="0" min="0" max="100"
+                                        onload="calculateLandfillPercent()" readonly>
                                 </div>
                                 <div class="col d-flex align-items-center">Animal Feed</div>
                             </div>
                             <div class="row pb-2">
                                 <div class="col-auto">
-                                    <input type="number" class="form-control" id="compost/fert" name="compost/fert"
-                                        style="width: 75px;" value="0" min="0" max="100" onkeyup="calculateLandfill()">
+                                    <input type="number" class="form-control" id="percentcompost/fert" name="percentcompost/fert"
+                                        style="width: 4.5em;" value="0" min="0" max="100"
+                                        onload="calculateLandfillPercent()" readonly>
                                 </div>
                                 <div class="col d-flex align-items-center">Compost/Fertilizer</div>
                             </div>
                             <div class="row pb-2">
                                 <div class="col-auto">
-                                    <input type="number" class="form-control" id="partnet" name="partnet"
-                                        style="width: 75px;" value="0" min="0" max="100" onkeyup="calculateLandfill()">
+                                    <input type="number" class="form-control" id="percentpartnet" name="percentpartnet"
+                                        style="width: 4.5em;" value="0" min="0" max="100"
+                                        onload="calculateLandfillPercent()" readonly>
                                 </div>
                                 <div class="col d-flex align-items-center">Partner Network</div>
                             </div>
                             <div class="row pb-2">
                                 <div class="col-auto">
-                                    <input type="number" class="form-control" id="landfill" name="landfill"
-                                        style="width: 75px;" value="100" disabled>
+                                    <input type="number" class="form-control" id="percentlandfill" name="percentlandfill"
+                                        style="width: 4.5em;" value="100" readonly>
                                 </div>
                                 <div class="col d-flex align-items-center">Landfill</div>
                             </div>
@@ -97,41 +147,52 @@
 
     <br>
 
-    <div class="card">
-        <div class="card-header">
-            <h3>Database</h3>
+    
+
+    <br>
+
+    <section id="section">
+        <div class="card">
+            <div class="card-header">
+                <h3>Database</h3>
+                <button type="button" class="btn btn-outline-success" onclick="exportTableToCSV('data.csv')">Export
+                    CSV</button>
+            </div>
+            <div class="card-body">
+                <table class="table" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th scope="col">Description</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Units</th>
+                            <th scope="col">% Clients</th>
+                            <th scope="col">% Animal Feed</th>
+                            <th scope="col">% Compost</th>
+                            <th scope="col">% Partner Network</th>
+                            <th scope="col">% Landfill</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in Object %}
+                        <tr>
+                            <td>{{i.0}}</td>
+                            <td>{{i.1}}</td>
+                            <td>{{i.2}}</td>
+                            <td>{{i.3}}</td>
+                            <td>{{i.4}}</td>
+                            <td>{{i.5}}</td>
+                            <td>{{i.6}}</td>
+                            <td>{{i.7}}</td>
+                            <td>{{i.8}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <div class="card-body">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Description</th>
-                        <th scope="col">Category</th>
-                        <th scope="col">Quantity</th>
-                        <th scope="col">% Clients</th>
-                        <th scope="col">% Animal Feed</th>
-                        <th scope="col">% Compost/Fertilizer</th>
-                        <th scope="col">% Partner Network</th>
-                        <th scope="col">% Landfill</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for i in Object %}
-                    <tr>
-                        <td>{{i.0}}</td>
-                        <td>{{i.1}}</td>
-                        <td>{{i.2}}</td>
-                        <td>{{i.3}}</td>
-                        <td>{{i.4}}</td>
-                        <td>{{i.5}}</td>
-                        <td>{{i.6}}</td>
-                        <td>{{i.7}}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    </div>
+    </section>
 </div>
 
 

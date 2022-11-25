@@ -22,15 +22,14 @@ def register(request):
         val = (newUser.FirstName, newUser.LastName, newUser.Email,
                newUser.Password, newUser.Roles, newUser.Consent, newUser.Organization)
         cursor.execute(sql, val)
-        details = {
-            'FirstName': newUser.FirstName,
-            "LastName": newUser.LastName,
-            'Roles': newUser.Roles,
-            'Email':  newUser.Email,
-            "Organization": newUser.Organization
+   
+        request.session['FirstName'] =  newUser.FirstName
+        request.session["LastName"]=  newUser.LastName
+        request.session['Roles']= newUser.Roles
+        request.session['Email']=  newUser.Email
+        request.session["Organization"]= newUser.Organization
 
-        }
-        return redirect('../../postlogin/tracker',details)
+        return redirect('../../postlogin/tracker')
 
     return render(request, 'foodsaviour/register.html', {'title': 'Register'})
 
@@ -45,19 +44,34 @@ def login(request):
         newUser.Email = request.POST.get("email")
         newUser.Password = request.POST.get("password")
 
-        cursor = connection.cursor()
+        if newUser.Email != "" and newUser.Password != "":
 
-        # Check if the email and password exist in the database
-        sql = "SELECT Email, Password FROM users WHERE Email = %s AND Password = %s"
-        values = (newUser.Email, newUser.Password)
-        cursor.execute(sql, values)
-        rows = cursor.fetchall()
-        numberOfRecords = len(rows)
+            cursor = connection.cursor()
 
-        if (numberOfRecords > 0):
-            return redirect("../../postlogin/overview")
-        else:
-            pass
+            # Check if the email and password exist in the database
+            sql = "SELECT Email, Password FROM users WHERE Email = %s AND Password = %s"
+            values = (newUser.Email, newUser.Password)
+            cursor.execute(sql, values)
+            rows = cursor.fetchall()
+            numberOfRecords = len(rows)
+
+            sql2 = "SELECT * FROM users WHERE Email = %s"
+            values = (newUser.Email)
+            cursor.execute(sql2, values)
+            rows = cursor.fetchall()
+      
+         
+            request.session['FirstName'] = rows[0][0]
+            request.session['LastName'] = rows[0][1]
+            request.session['Email'] = rows[0][2]
+            request.session['Organization'] = rows[0][7]
+            request.session['Roles'] = rows[0][4]
+            request.session['Status'] = rows[0][8]
+
+            if (numberOfRecords > 0):
+                return redirect("../../postlogin/tracker")
+            else:
+                pass
         
     return render(request, 'foodsaviour/login.html', {'title': 'Login'})
 
