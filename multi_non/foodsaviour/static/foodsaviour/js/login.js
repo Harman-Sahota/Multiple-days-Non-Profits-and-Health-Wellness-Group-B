@@ -3,11 +3,10 @@ console.log('Login script loaded')
  const passwordControl = document.getElementById("exampleInputPassword1");
 const sub = document.getElementById("submit");
 
- console.log(emailInputControl)
+
 
  sub.addEventListener("click", (e) => {
-  e.preventDefault();
-  console.log(emailInputControl.value);
+ 
   ValidateEmail(emailInputControl.value);
   ValidatePssword(passwordControl.value);
 })
@@ -33,7 +32,7 @@ function ValidatePssword(inputPass) {
      return true;
 
    } else {
-
+    
     emailInputControl.style.border = "red 2px solid";
     emailInputControl.focus();
 

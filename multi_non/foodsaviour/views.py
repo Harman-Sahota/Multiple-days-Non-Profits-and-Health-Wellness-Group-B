@@ -43,7 +43,6 @@ def login(request):
         newUser = users()
         newUser.Email = request.POST.get("email")
         newUser.Password = request.POST.get("password")
-        print(newUser.Email)
         cursor = connection.cursor()
 
         if newUser.Email:
@@ -51,7 +50,7 @@ def login(request):
             values = (newUser.Email)
             cursor.execute(sql2, values)
             rows2 = cursor.fetchall()
-        
+            
        
             request.session['FirstName'] = rows2[0][0]
             request.session['LastName'] = rows2[0][1]
@@ -66,8 +65,8 @@ def login(request):
         values = (newUser.Email, newUser.Password)
         cursor.execute(sql, values)
         rows = cursor.fetchall()
+        print(rows)
         numberOfRecords = len(rows)
-
         if (numberOfRecords > 0):
             return redirect("../../postlogin/tracker")
         else:
