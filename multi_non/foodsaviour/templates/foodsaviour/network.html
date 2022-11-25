@@ -2,7 +2,7 @@
 
 <!-- LInking CSS File -->
 <link
-  href="{% static 'foodsaviour/css/login.css'%}"
+  href="{% static 'foodsaviour/css/network.css'%}"
   rel="stylesheet"
   type="text/css"
 />
@@ -12,7 +12,40 @@
 <!-- LOGIN FORM -->
 <div class="body">
   <div class="form-container">
-     <p>Netowkr page</p>
+
+
+    
+    <p>Categories</p>
+    
+    <div class="tab">
+      <button class="tablinks" onclick="openCity(event, 'disc')" id="defaultOpen">View All Discussions</button>
+      <button class="tablinks" onclick="openCity(event, 'announce')">Announcements</button>
+      <button class="tablinks" onclick="openCity(event, 'ideas')">Ideas</button>
+      <button class="tablinks" onclick="openCity(event, 'Tokyo')">Polls</button>
+      <button class="tablinks" onclick="openCity(event, 'Tokyo')">Q&A</button>
+    </div>
+    
+    <div id="disc" class="tabcontent">
+      <h3>Discussions</h3>
+      <p>here is all the discussions</p>
+    </div>
+    
+    <div id="announce" class="tabcontent">
+      <h3>Announcements</h3>
+      <p>here is all the Announcements</p>
+    </div>
+    <div id="ideas" class="tabcontent">
+      <h3>Ideas</h3>
+      <p>here is all the Ideas</p>
+    </div>
+    <div id="polls" class="tabcontent">
+      <h3>Polls</h3>
+      <p>here is all the Polls</p>
+    </div>
+    <div id="qa" class="tabcontent">
+      <h3>Q&A</h3>
+      <p>here is all the Q&A</p>
+    </div>
   </div>
 </div>
 
