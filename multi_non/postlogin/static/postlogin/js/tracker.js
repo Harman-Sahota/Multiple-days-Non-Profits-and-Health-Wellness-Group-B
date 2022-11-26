@@ -2,38 +2,53 @@ const clients = document.getElementById("clients");
 const afeed = document.getElementById("animalFeed");
 const compost = document.getElementById("compost");
 const partNet = document.getElementById("partnet");
-const landfill = document.getElementById('landfill');
-const total = document.getElementById('quantity');
+const landfill = document.getElementById("landfill");
+const total = document.getElementById("quantity");
 
 const percentClients = document.getElementById("percentclients");
 const percentAfeed = document.getElementById("percentanimalfeed");
 const percentCompost = document.getElementById("percentcompost/fert");
 const percentPartNet = document.getElementById("percentpartnet");
-const percentLandfill = document.getElementById('percentlandfill');
+const percentLandfill = document.getElementById("percentlandfill");
 
 function calculateLandfill() {
-  const sum = Number(clients.value) + Number(afeed.value) + Number(compost.value) + Number(partNet.value);
+  const sum =
+    Number(clients.value) +
+    Number(afeed.value) +
+    Number(compost.value) +
+    Number(partNet.value);
   const diff = Number(quantity.value) - Number(sum);
 
   landfill.value = Number(diff);
 }
 
-setInterval(calculateLandfillPercent,500);
+setInterval(calculateLandfillPercent, 500);
 
 function calculateLandfillPercent() {
-  const sum = Number(percentClients.value) + Number(percentAfeed.value) + Number(percentCompost.value) + Number(percentPartNet.value);
+  const sum =
+    Number(percentClients.value) +
+    Number(percentAfeed.value) +
+    Number(percentCompost.value) +
+    Number(percentPartNet.value);
   const diff = 100 - Number(sum);
 
   percentLandfill.value = Number(diff);
 }
 
 function calculatePercent() {
-  percentClients.value = (Number(Number(clients.value)/Number(quantity.value))*100).toFixed(2);
-  percentAfeed.value = (Number(Number(afeed.value)/Number(quantity.value))*100).toFixed(2);
-  percentCompost.value = (Number(Number(compost.value)/Number(quantity.value))*100).toFixed(2);
-  percentPartNet.value = (Number(Number(partNet.value)/Number(quantity.value))*100).toFixed(2);
+  percentClients.value = (
+    Number(Number(clients.value) / Number(quantity.value)) * 100
+  ).toFixed(2);
+  percentAfeed.value = (
+    Number(Number(afeed.value) / Number(quantity.value)) * 100
+  ).toFixed(2);
+  percentCompost.value = (
+    Number(Number(compost.value) / Number(quantity.value)) * 100
+  ).toFixed(2);
+  percentPartNet.value = (
+    Number(Number(partNet.value) / Number(quantity.value)) * 100
+  ).toFixed(2);
 }
-
 
 //Exporting to CSV
 function downloadCSV(csv, filename) {
@@ -56,10 +71,10 @@ function exportTableToCSV(filename) {
   var rows = document.querySelectorAll("table tr");
 
   for (var i = 0; i < rows.length; i++) {
-    var row = [], cols = rows[i].querySelectorAll("td, th");
+    var row = [],
+      cols = rows[i].querySelectorAll("td, th");
 
-    for (var j = 0; j < cols.length - 1; j++)
-      row.push(cols[j].innerText);
+    for (var j = 0; j < cols.length - 1; j++) row.push(cols[j].innerText);
 
     csv.push(row.join(","));
   }

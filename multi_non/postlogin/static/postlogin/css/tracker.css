@@ -1,23 +1,23 @@
 .save {
-    color: #415d34 !important;
-    border-color: #415d34 !important;
-    margin-right: 1em;
+  color: #415d34 !important;
+  border-color: #415d34 !important;
+  margin-right: 1em;
 }
 
 .save:hover {
-    background-color: #415d34 !important;
-    color: white !important;
+  background-color: #415d34 !important;
+  color: white !important;
 }
 
 .delete {
-    color: #5d3434 !important;
-    border-color: #5d3434 !important;
-    margin-right: 1em;
+  color: #5d3434 !important;
+  border-color: #5d3434 !important;
+  margin-right: 1em;
 }
 
 .delete:hover {
-    background-color: #5d3434 !important;
-    color: white !important;
+  background-color: #5d3434 !important;
+  color: white !important;
 }
 
 .card-header {
@@ -33,13 +33,14 @@
   margin-left: auto;
 }
 
-thead, td {
+thead,
+td {
   text-align: center;
   vertical-align: middle;
 }
 
 td {
-  white-space:nowrap;
+  white-space: nowrap;
 }
 
 /* Removing input number arrows */
@@ -51,6 +52,10 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type=number] {
+input[type="number"] {
   -moz-appearance: textfield;
+}
+
+.penetrate {
+  margin-top: 1rem;
 }
