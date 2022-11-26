@@ -1,11 +1,9 @@
 from django.shortcuts import render
 from django.shortcuts import render
-from django.http import HttpResponse
 from django.db import connection
 from .models import users,permissions
 from .models import inventory
 from django.shortcuts import redirect
-from django.http import JsonResponse
 import json
 # Create your views here.
 def overview(request):
@@ -37,12 +35,16 @@ def tracker(request):
     sql = "SELECT Description AS Description,Category AS Category,Quantity,Qunits,DivertClients,DivertAFeed,DivertCompost,DivertPartNet,DivertLandfill FROM inventory"
     cursor.execute(sql)
     rows = cursor.fetchall()
-    data = list(rows)
-  
+    items = []
+    for row in rows:
+        items.append({'Description': row[0], 'Category': row[1], 'Quantity': row[2],"DivertClients":row[3],"DivertAFeed":row[4],"DivertCompost":row[5],"DivertPartNet":row[6],"DivertLandfill":row[7]})
+    
     context = {
         'title': 'Tracker',
-        'Object': rows
+        'Object': rows,
+        'json':json.dumps(items)
     }
+
     return render(request, 'postlogin/tracker.html', context)
 
 
