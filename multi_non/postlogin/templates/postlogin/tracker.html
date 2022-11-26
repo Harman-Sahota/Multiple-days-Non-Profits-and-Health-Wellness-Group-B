@@ -200,8 +200,9 @@
     var mydata = JSON.parse(document.getElementById('json').textContent);
     mydata = JSON.parse(mydata)
     mydata  = JSON.parse(JSON.stringify(mydata))
-    console.log(mydata)
-    
+    mydata.forEach((val) => console.log(val.Category)); //print by field
+    console.log(mydata) // print whole object
+     
 </script>
 <script src="{% static 'postlogin/js/tracker.js'%}"></script>
 {% endblock content%}
