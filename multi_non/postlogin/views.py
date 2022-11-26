@@ -37,7 +37,7 @@ def tracker(request):
     rows = cursor.fetchall()
     items = []
     for row in rows:
-        items.append({'Description': row[0], 'Category': row[1], 'Quantity': row[2],"DivertClients":row[3],"DivertAFeed":row[4],"DivertCompost":row[5],"DivertPartNet":row[6],"DivertLandfill":row[7]})
+        items.append({'Description': row[0], 'Category': row[1], 'Quantity': row[2],"Qunits": row[3],"DivertClients":row[4],"DivertAFeed":row[4],"DivertCompost":row[5],"DivertPartNet":row[6],"DivertLandfill":row[7]})
     
     context = {
         'title': 'Tracker',
