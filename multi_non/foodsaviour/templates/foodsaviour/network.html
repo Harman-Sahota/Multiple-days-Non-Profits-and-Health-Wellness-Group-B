@@ -2,25 +2,32 @@
 
 <!-- LInking CSS File -->
 <link
-  href="{% static 'postlogin/css/network.css'%}"
+  href="{% static 'foodsaviour/css/network.css'%}"
   rel="stylesheet"
   type="text/css"
 />
 
+<link
+  href="{% static 'foodsaviour/css/jquery-te-1.4.0.css'%}"
+  rel="stylesheet"
+  type="text/css"
+/>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+crossorigin="anonymous" referrerpolicy="no-referrer" />
 <!-- PROJECT -->
 <!-- HTML BODY CONTENT -->
 <!-- LOGIN FORM -->
 <div class="body">
   <div class="form-container">
 
-
-    
-   
-
     <div class="topsection">
    <div class= "searchdiv">
-          <form class="searchbox" action="/action_page.php" style="margin:left;width:500px">
-        <input type="text" placeholder="Search.." name="search2">
+        <form class="searchbox" action="/action_page.php" style="margin:left;width:650px">
+        <input type="text" placeholder="Search all the discussions" name="search2">
         <button type="submit"><i class="fa fa-search"></i></button>
       </form>
     </div>
@@ -28,7 +35,7 @@
 
       <div class="select">
         <select name="format" id="activity">
-           <option selected disabled>Sort By:</option>
+           <option selected disabled>Sort By: Latest Activity</option>
            <option value="pdf">Latest activity</option>
            <option value="txt">Date Created</option>
            <option value="epub">Top: Past day</option>
@@ -36,17 +43,6 @@
            <option value="mobi">Top: Past month</option>
         </select>
      </div>
-
-     <div class="select">
-      <select name="format" id="labels">
-         <option selected disabled>Choose a label</option>
-         <option value="pdf">non</option>
-         <option value="txt">non</option>
-         <option value="epub">non</option>
-         <option value="fb2">non</option>
-         <option value="mobi">non</option>
-      </select>
-   </div>
 
    <div class="select">
     <select name="format" id="filters">
@@ -58,29 +54,129 @@
        <option value="mobi">All</option>
     </select>
  </div>
+      <a href="#" onclick="openForm()" class="adddisc">+ New discussion</a>
+
 
     </div>
 
+    <div class="form-popup" id="myForm">
+      <form action="#" class="form-container">
+        <h3>Start a discussion</h3>
     
+        <div class="select">
+          <select name="format" id="activity">
+             <option selected disabled>Sort By: Latest Activity</option>
+             <option value="pdf">Latest activity</option>
+             <option value="txt">Date Created</option>
+             <option value="epub">Top: Past day</option>
+             <option value="fb2">Top: Past week </option>
+             <option value="mobi">Top: Past month</option>
+          </select>
+          
+        </div>
+         
+      </form>
+      <input type="text" placeholder="Search all the discussions" id="searchall">
+        <textarea id="editor"></textarea>
+        <a href="#" class="adddisc">Start discussion</a>
+        <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+      </form>
+    </div>
     <div class="tab">
-      <button class="tablinks" onclick="opentab(event, 'disc')" id="defaultOpen">View All Discussions</button>
-      <button class="tablinks" onclick="opentab(event, 'announce')">Announcements</button>
-      <button class="tablinks" onclick="opentab(event, 'ideas')">Ideas</button>
-      <button class="tablinks" onclick="opentab(event, 'polls')">Polls</button>
-      <button class="tablinks" onclick="opentab(event, 'qa')">Q&A</button>
+      <button class="tablinks" onclick="opentab(event, 'disc')" id="defaultOpen">💬 View All Discussions</button>
+      <button class="tablinks" onclick="opentab(event, 'announce')">📣 Announcements</button>
+      <button class="tablinks" onclick="opentab(event, 'general')">💬 General</button>
+      <button class="tablinks" onclick="opentab(event, 'polls')">🗳️ Polls</button>
+      <button class="tablinks" onclick="opentab(event, 'qa')">🙏 Q&A</button>
+
+      <div class="helpfulsection">
+         <strong>Most Helpful</strong>
+         <br><br>
+         <span>Be sure to mark someone's comment as an answer if it helps you resolve your question - they deserve the credit! 💕 </span>
+      </div>
+
+      <button class="tablinks" onclick="opentab(event, 'polls')">🗳️ Community Guidlines</button>
+      <button class="tablinks" onclick="opentab(event, 'qa')">🙏 Community Insights</button>
     </div>
     
     <div id="disc" class="tabcontent">
-      <h3>Discussions</h3>
-      <p>here is all the discussions</p>
+      <h4>Discussions</h4>
+       
+
+      <div class="anncard" >
+        <span class="roundbutton">↑ 1</span>
+        <span class="roundbutton">📣</span>
+        <div class="descparent">
+        <span class="description">Use discussions to ask and answer questions, share information, make announcements, and conduct or participate in a conversation about a project on GitHub.</span>
+        <span class="description subdesc">Cuber bob announced 9 days ago in Announcements.</span>
+      </div>
+        <span class="avatar">
+          👨
+        </span>
+        <span class="commentcount">💬 13</span>
+      </div>
+
+      <div class="anncard" >
+        <span class="roundbutton">↑ 1</span>
+        <span class="roundbutton">💬</span>
+        <div class="descparent">
+        <span class="description">Use discussions to ask and answer questions, share information, make announcements, and conduct or participate in a conversation about a project on GitHub.</span>
+        <span class="description subdesc">Cuber bob announced 9 days ago in Announcements.</span>
+      </div>
+        <span class="avatar">
+          👨
+        </span>
+        <span class="commentcount">💬 13</span>
+      </div>
+
+      <div class="anncard" >
+        <span class="roundbutton">↑ 1</span>
+        <span class="roundbutton">📣</span>
+        <div class="descparent">
+        <span class="description">Use discussions to ask and answer questions, share information, make announcements, and conduct or participate in a conversation about a project on GitHub.</span>
+        <span class="description subdesc">Cuber bob announced 9 days ago in Announcements.</span>
+      </div>
+        <span class="avatar">
+          👨
+        </span>
+        <span class="commentcount">💬 13</span>
+      </div>
+
+      <div class="anncard" >
+        <span class="roundbutton">↑ 1</span>
+        <span class="roundbutton">📣</span>
+        <div class="descparent">
+        <span class="description">Use discussions to ask and answer questions, share information, make announcements, and conduct or participate in a conversation about a project on GitHub.</span>
+        <span class="description subdesc">Cuber bob announced 9 days ago in Announcements.</span>
+      </div>
+        <span class="avatar">
+          👩 👨
+        </span>
+        <span class="commentcount">💬 1</span>
+      </div>
+
+      <div class="anncard" >
+        <span class="roundbutton">↑ 1</span>
+        <span class="roundbutton">💬</span>
+        <div class="descparent">
+        <span class="description">Use discussions to ask and answer questions, share information, make announcements, and conduct or participate in a conversation about a project on GitHub.</span>
+        <span class="description subdesc">Cuber bob announced 9 days ago in Announcements.</span>
+      </div>
+        <span class="avatar">
+          👩 👨
+        </span>
+        <span class="commentcount">💬 3</span>
+      </div>
+
+       
     </div>
     
     <div id="announce" class="tabcontent">
-      <h3>Announcements</h3>
+      <h2>Announcements</h2>
       <p>here is all the Announcements</p>
     </div>
-    <div id="ideas" class="tabcontent">
-      <h3>Ideas</h3>
+    <div id="general" class="tabcontent">
+      <h3>General</h3>
       <p>here is all the Ideas</p>
     </div>
     <div id="polls" class="tabcontent">
@@ -95,6 +191,9 @@
 </div>
 
 <!-- Linking JS File -->
-<script src="{% static 'postlogin/js/network.js'%}"></script>
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+<script src="{% static 'foodsaviour/js/jquery-te-1.4.0.min.js'%}"></script>
+<script src="{% static 'foodsaviour/js/network.js'%}"></script>
 
 {% endblock content%}
