@@ -27,3 +27,11 @@ DivertCompost    Int(55),
 DivertPartNet    Int(55),
 DivertLandfill   Int(55)
 );
+
+CREATE TABLE posts(
+product varchar(255),
+Type varchar(255),
+Quantity int,
+Units varchar(3),
+Description varchar(255)
+);
