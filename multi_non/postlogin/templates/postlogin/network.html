@@ -4,7 +4,7 @@
 <link href="{% static 'postlogin/css/network.css'%}" rel="stylesheet" type="text/css" />
 
 
-
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
   integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
@@ -56,17 +56,65 @@
     </div>
 
     <div id="disc" class="tabcontent container-xl">
-      <h4>Posts</h4>
+     {% for i in Object %}
+      <div class="card" id="posts">
+        <h5 class="card-header">{{ i.0 }} - {{ i.2 }} {{ i.3 }}</h5>
+        
+        <div class="card-body">
+          
+          <h6 class="card-text">{{i.4}}</h6>
+
+         <p class="text-success">{{i.1}}</p>
+          <a href="#" class="btn btn-outline-success">Comment</a>
+
+         
+        </div>
+      </div>
+      
+    {% endfor %}
+
+
+
     </div>
-    <div id="disc" class="tabcontent container-xl">
-      <h4>Search Results</h4>
-    </div>
+   
 
     <div id="announce" class="tabcontent container-xl">
-      <h4>Sharing</h4>
+      {% for i in Object %}
+      {% if i.1 == "Sharing" %}
+      <div class="card" id="posts">
+        <h5 class="card-header">{{ i.0 }} - {{ i.2 }} {{ i.3 }}</h5>
+        
+        <div class="card-body">
+          
+          <h6 class="card-text">{{i.4}}</h6>
+
+         <p class="text-success">{{i.1}}</p>
+          <a href="#" class="btn btn-outline-success">Comment</a>
+
+         
+        </div>
+      </div>
+      {% endif %}
+    {% endfor %}
     </div>
     <div id="general" class="tabcontent container-xl">
-      <h4>Recieving</h4>
+      {% for i in Object %}
+      {% if i.1 == "Recieving" %}
+      <div class="card" id="posts">
+        <h5 class="card-header">{{ i.0 }} - {{ i.2 }} {{ i.3 }}</h5>
+        
+        <div class="card-body">
+          
+          <h6 class="card-text">{{i.4}}</h6>
+
+         <p class="text-success">{{i.1}}</p>
+          <a href="#" class="btn btn-outline-success">Comment</a>
+
+         
+        </div>
+      </div>
+      {% endif %}
+    {% endfor %}
     </div>
   </div>
 </div>
@@ -82,9 +130,10 @@
         </button>
       </div>
       <form action="" method="post">
+        {% csrf_token %}
         <div class="modal-body">
           <div class="form-group">
-              <label for="email1">Product Name</label>
+              <label for="product">Product Name</label>
               <input type="text" class="form-control" id="productname" name="product" aria-describedby="productname"
                 placeholder="Apples">
           </div>
@@ -117,6 +166,7 @@
     </div>
   </div>
 </div>
+
 
 <script src="{% static 'postlogin/js/network.js'%}"></script>
 

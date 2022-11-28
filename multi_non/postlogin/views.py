@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import render
 from django.db import connection
-from .models import users,permissions
+from .models import users,permissions,posts
 from .models import inventory
 from django.shortcuts import redirect
 import json
@@ -49,7 +49,32 @@ def tracker(request):
 
 
 def network(request):
-    return render(request, 'postlogin/network.html', {'title': 'Network'})
+    if request.method == "POST":
+        newPost = posts();
+        newPost.Product = request.POST.get("product")
+        newPost.Type = request.POST.get("type")
+        newPost.Quantity = request.POST.get("quantity")
+        newPost.Units = request.POST.get("qunits")
+        newPost.Description = request.POST.get("description")
+        cursor = connection.cursor()
+        sql = "INSERT INTO posts VALUES (%s, %s,%s, %s,%s)"
+        val = ( newPost.Product , newPost.Type, newPost.Quantity,newPost.Units, newPost.Description )
+        cursor.execute(sql, val)
+        return redirect("../../postlogin/network")
+    cursor = connection.cursor()
+    sql2 = "SELECT * FROM POSTS"
+    cursor.execute(sql2)
+    
+    rows = cursor.fetchall()
+    context = {
+        'title': 'Network',
+        'Object': rows
+
+    }
+
+
+
+    return render(request, 'postlogin/network.html', context)
 
 
 def profile(request):

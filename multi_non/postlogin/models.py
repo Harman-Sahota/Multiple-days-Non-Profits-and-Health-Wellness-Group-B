@@ -28,3 +28,11 @@ class permissions(models.Model):
     Network = models.CharField(max_length=255)
     readwrite =  models.CharField(max_length=255)
     #insert role names preset
+
+class posts(models.Model):
+    Product = models.CharField(max_length=255)
+    Type = models.CharField(max_length=255)
+    Quantity = models.IntegerField()
+    Units =  models.CharField(max_length=3)
+    Description = models.CharField(max_length=255)
+    #insert role names preset

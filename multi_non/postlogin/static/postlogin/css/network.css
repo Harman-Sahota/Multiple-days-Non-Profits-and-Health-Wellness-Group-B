@@ -42,6 +42,7 @@ footer {
   margin-top: 2%;
   display: inline-block;
   width: 20%;
+  height: 30%;
   padding: 2em;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
@@ -72,4 +73,13 @@ footer {
 
 .form-group{
   margin-top: 2%;
+}
+
+.card{
+  margin-top: 2%;
+}
+
+.text-success{
+  text-overflow: ellipsis;
+  max-width: 13ch;
 }
