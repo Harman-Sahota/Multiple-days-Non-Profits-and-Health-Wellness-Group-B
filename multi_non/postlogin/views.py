@@ -5,6 +5,7 @@ from .models import users,permissions,posts
 from .models import inventory
 from django.shortcuts import redirect
 import json
+from django.http import JsonResponse
 # Create your views here.
 def overview(request):
     return render(request, 'postlogin/overview.html', {'title': 'Overview'})
@@ -62,19 +63,21 @@ def network(request):
         cursor.execute(sql, val)
         return redirect("../../postlogin/network")
     cursor = connection.cursor()
-    sql2 = "SELECT * FROM POSTS"
-    cursor.execute(sql2)
-    
-    rows = cursor.fetchall()
     context = {
         'title': 'Network',
-        'Object': rows
 
     }
-
-
-
     return render(request, 'postlogin/network.html', context)
+
+def getData(request):
+    cursor = connection.cursor()
+    sql = "SELECT * FROM posts"
+    cursor.execute(sql)
+    rows = cursor.fetchall()
+    items = []
+    for row in rows:
+        items.append({'product': row[0],'Type':row[1],'Quantity': row[2],'Qunits':row[3],'desc':row[4]})
+    return JsonResponse({'posts':list(items)})
 
 
 def profile(request):

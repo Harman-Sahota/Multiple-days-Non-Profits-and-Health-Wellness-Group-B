@@ -4,7 +4,8 @@
 <link href="{% static 'postlogin/css/network.css'%}" rel="stylesheet" type="text/css" />
 
 
-<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"
+  integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
   integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
@@ -14,23 +15,21 @@
 <div id="main" class="container-lg col-md-auto">
   <div class="container-fluid">
 
+      <div class="input-group">
+        <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+          aria-describedby="search-addon" id="searchinput" name="search" />
+        
 
-    <div class="input-group">
-      <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
-        aria-describedby="search-addon" id="searchinput" />
-      <button type="button" class="btn btn-secondary">
-        <i class="fas fa-search"></i>
-      </button>
-    </div>
+      </div>
 
-    <div class="select">
-      <select name="format" id="filters" class="form-select">
-        <option selected disabled>Choose a filter</option>
-        <option value="organization">Organization</option>
-        <option value="Product">Product</option>
-      </select>
-    </div>
 
+      <div class="select">
+        <select name="format" id="filters" class="form-select" name="category">
+          <option value="organization">Filter by: Organization</option>
+          <option value="Product" selected>Filter by: Product</option>
+        </select>
+      </div>
+    </form>
     <div class="select">
       <select name="format" id="activity" class="form-select">
         <option selected disabled>Sort By: Latest Activity</option>
@@ -55,66 +54,122 @@
       <button class="tablinks btn btn-light" onclick="opentab(event, 'general')">💬 Recieving</button><br>
     </div>
 
+
+    <script>
+      $(document).ready(function () {
+        $.ajax({
+          type: 'GET',
+          data: { csrfmiddlewaretoken: window.CSRF_TOKEN },
+          url: "{% url 'getData' %}",
+          success: function (response) {
+
+            $('#disc').empty();
+            for (var key in response.posts) {
+              var temp = "<div class='card'> <h5 class='card-header'>" + response.posts[key].product + " - " + response.posts[key].Quantity + " " + response.posts[key].Qunits + "</h5> <div class='card-body'> <h6 class='card-text'>" + response.posts[key].desc + "</h6> <p class='text-success'>" + response.posts[key].Type + "</p><button type='button' target class='btn btn-outline-success'>Comment</button></div></div>"
+              $('#disc').append(temp);
+            }
+
+            $('#announce').empty();
+            for (var key in response.posts) {
+              if (response.posts[key].Type == "Sharing") {
+                var temp = "<div class='card'> <h5 class='card-header'>" + response.posts[key].product + " - " + response.posts[key].Quantity + " " + response.posts[key].Qunits + "</h5> <div class='card-body'> <h6 class='card-text'>" + response.posts[key].desc + "</h6> <p class='text-success'>" + response.posts[key].Type + "</p><a href'#' class='btn btn-outline-success'>Comment</a></div></div>"
+                $('#announce').append(temp);
+              }
+            }
+
+            $('#general').empty();
+            for (var key in response.posts) {
+              if (response.posts[key].Type == "Recieving") {
+                var temp = "<div class='card'> <h5 class='card-header'>" + response.posts[key].product + " - " + response.posts[key].Quantity + " " + response.posts[key].Qunits + "</h5> <div class='card-body'> <h6 class='card-text'>" + response.posts[key].desc + "</h6> <p class='text-success'>" + response.posts[key].Type + "</p><a href'#' class='btn btn-outline-success'>Comment</a></div></div>"
+                $('#general').append(temp);
+              }
+            }
+          },
+          error: function (response) {
+
+          }
+        })
+
+        setInterval(function () {
+
+          var z = document.getElementById("searchinput")
+
+          if (z.value == "") {
+
+            $.ajax({
+              type: 'GET',
+              data: { csrfmiddlewaretoken: window.CSRF_TOKEN },
+              url: "{% url 'getData' %}",
+              success: function (response) {
+
+                $('#disc').empty();
+                for (var key in response.posts) {
+                  var temp = "<div class='card'> <h5 class='card-header'>" + response.posts[key].product + " - " + response.posts[key].Quantity + " " + response.posts[key].Qunits + "</h5> <div class='card-body'> <h6 class='card-text'>" + response.posts[key].desc + "</h6> <p class='text-success'>" + response.posts[key].Type + "</p><button type='button' target class='btn btn-outline-success'>Comment</button></div></div>"
+                  $('#disc').append(temp);
+                }
+
+                $('#announce').empty();
+                for (var key in response.posts) {
+                  if (response.posts[key].Type == "Sharing") {
+                    var temp = "<div class='card'> <h5 class='card-header'>" + response.posts[key].product + " - " + response.posts[key].Quantity + " " + response.posts[key].Qunits + "</h5> <div class='card-body'> <h6 class='card-text'>" + response.posts[key].desc + "</h6> <p class='text-success'>" + response.posts[key].Type + "</p><a href'#' class='btn btn-outline-success'>Comment</a></div></div>"
+                    $('#announce').append(temp);
+                  }
+                }
+
+                $('#general').empty();
+                for (var key in response.posts) {
+                  if (response.posts[key].Type == "Recieving") {
+                    var temp = "<div class='card'> <h5 class='card-header'>" + response.posts[key].product + " - " + response.posts[key].Quantity + " " + response.posts[key].Qunits + "</h5> <div class='card-body'> <h6 class='card-text'>" + response.posts[key].desc + "</h6> <p class='text-success'>" + response.posts[key].Type + "</p><a href'#' class='btn btn-outline-success'>Comment</a></div></div>"
+                    $('#general').append(temp);
+                  }
+                }
+              },
+              error: function (response) {
+
+              }
+            })
+          }
+          else {
+            z.addEventListener("keyup", searc())
+          }
+          function searc() {
+            var a = document.getElementById("searchinput").value;
+
+            $.ajax({
+              type: 'GET',
+              data: { csrfmiddlewaretoken: window.CSRF_TOKEN },
+              url: "{% url 'getData' %}",
+              success: function (response) {
+                for (var key in response.posts) {
+                  var c = response.posts[key].product.toLowerCase();
+                  if (c == a || response.posts[key].product == a) {
+                    var temp = "<div class='card'> <h5 class='card-header'>" + response.posts[key].product + " - " + response.posts[key].Quantity + " " + response.posts[key].Qunits + "</h5> <div class='card-body'> <h6 class='card-text'>" + response.posts[key].desc + "</h6> <p class='text-success'>" + response.posts[key].Type + "</p><button type='button' target class='btn btn-outline-success'>Comment</button></div></div>"
+                    $('#disc').html("");
+                    $('#disc').append(temp);
+                  } else {
+
+                  }
+                }
+              }
+            })
+          }
+        }, 1000);
+      })
+
+    </script>
+
+
     <div id="disc" class="tabcontent container-xl">
-     {% for i in Object %}
-      <div class="card" id="posts">
-        <h5 class="card-header">{{ i.0 }} - {{ i.2 }} {{ i.3 }}</h5>
-        
-        <div class="card-body">
-          
-          <h6 class="card-text">{{i.4}}</h6>
-
-         <p class="text-success">{{i.1}}</p>
-          <a href="#" class="btn btn-outline-success">Comment</a>
-
-         
-        </div>
-      </div>
-      
-    {% endfor %}
-
-
 
     </div>
-   
+
 
     <div id="announce" class="tabcontent container-xl">
-      {% for i in Object %}
-      {% if i.1 == "Sharing" %}
-      <div class="card" id="posts">
-        <h5 class="card-header">{{ i.0 }} - {{ i.2 }} {{ i.3 }}</h5>
-        
-        <div class="card-body">
-          
-          <h6 class="card-text">{{i.4}}</h6>
 
-         <p class="text-success">{{i.1}}</p>
-          <a href="#" class="btn btn-outline-success">Comment</a>
-
-         
-        </div>
-      </div>
-      {% endif %}
-    {% endfor %}
     </div>
+
     <div id="general" class="tabcontent container-xl">
-      {% for i in Object %}
-      {% if i.1 == "Recieving" %}
-      <div class="card" id="posts">
-        <h5 class="card-header">{{ i.0 }} - {{ i.2 }} {{ i.3 }}</h5>
-        
-        <div class="card-body">
-          
-          <h6 class="card-text">{{i.4}}</h6>
 
-         <p class="text-success">{{i.1}}</p>
-          <a href="#" class="btn btn-outline-success">Comment</a>
-
-         
-        </div>
-      </div>
-      {% endif %}
-    {% endfor %}
     </div>
   </div>
 </div>
@@ -133,9 +188,9 @@
         {% csrf_token %}
         <div class="modal-body">
           <div class="form-group">
-              <label for="product">Product Name</label>
-              <input type="text" class="form-control" id="productname" name="product" aria-describedby="productname"
-                placeholder="Apples">
+            <label for="product">Product Name</label>
+            <input type="text" class="form-control" id="productname" name="product" aria-describedby="productname"
+              placeholder="Apples">
           </div>
           <div class="form-group">
             <label for="type">Type</label><br />
@@ -166,6 +221,13 @@
     </div>
   </div>
 </div>
+
+<script>
+
+
+
+
+</script>
 
 
 <script src="{% static 'postlogin/js/network.js'%}"></script>
