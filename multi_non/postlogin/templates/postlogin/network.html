@@ -51,7 +51,7 @@
     <div class="tab container-sm">
       <button class="tablinks btn btn-light" onclick="opentab(event, 'disc')" id="defaultOpen">💬 All Posts</button><br>
       <button class="tablinks btn btn-light" onclick="opentab(event, 'announce')">📣 Sharing</button><br>
-      <button class="tablinks btn btn-light" onclick="opentab(event, 'general')">💬 Recieving</button><br>
+      <button class="tablinks btn btn-light" onclick="opentab(event, 'general')">💬 Receiving</button><br>
     </div>
 
 
@@ -79,7 +79,7 @@
 
             $('#general').empty();
             for (var key in response.posts) {
-              if (response.posts[key].Type == "Recieving") {
+              if (response.posts[key].Type == "Receiving") {
                 var temp = "<div class='card'> <h5 class='card-header'>" + response.posts[key].product + " - " + response.posts[key].Quantity + " " + response.posts[key].Qunits + "</h5> <div class='card-body'> <h6 class='card-text'>" + response.posts[key].desc + "</h6> <p class='text-success'>" + response.posts[key].Type + "</p><button  class='btn btn-outline-success'>Comment</button></div></div>"
                 $('#general').append(temp);
               }
@@ -118,7 +118,7 @@
 
                 $('#general').empty();
                 for (var key in response.posts) {
-                  if (response.posts[key].Type == "Recieving") {
+                  if (response.posts[key].Type == "Receiving") {
                     var temp = "<div class='card'> <h5 class='card-header'>" + response.posts[key].product + " - " + response.posts[key].Quantity + " " + response.posts[key].Qunits + "</h5> <div class='card-body'> <h6 class='card-text'>" + response.posts[key].desc + "</h6> <p class='text-success'>" + response.posts[key].Type + "</p><button type='button' ' class='btn btn-outline-success'>Comment</button></div></div>"
                     $('#general').append(temp);
                   }
@@ -191,19 +191,19 @@
           <div class="form-group">
             <label for="product">Product Name</label>
             <input type="text" class="form-control" id="productname" name="product" aria-describedby="productname"
-              placeholder="Apples">
+              placeholder="ex. Apples">
           </div>
           <div class="form-group">
             <label for="type">Type</label><br />
             <select class="form-select" id="type" name="type" style="width: 10em">
               <option>Sharing</option>
-              <option>Recieving</option>
+              <option>Receiving</option>
             </select>
           </div>
           <div class="form-group">
             <label for="quantity">Quantity</label><br />
             <input type="text" class="form-control" id="quantity" name="quantity" style="width: 10em"
-              placeholder="1000" />
+              placeholder="ex. 1000" />
             <label for="qunits">Units</label><br />
             <select class="form-select" id="qunits" name="qunits" style="width: 10em">
               <option>lbs</option>
