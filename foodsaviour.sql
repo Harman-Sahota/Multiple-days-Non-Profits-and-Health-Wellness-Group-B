@@ -13,7 +13,7 @@ Organization varchar(255),
 Approve varchar(255)
 );
 CREATE USER 'admin'@'localhost' IDENTIFIED BY 'groupb@2022!';
-GRANT ALL PRIVILEGES ON foodsaviour.* TO 'admin'@'localhost';
+GRANT ALL PRIVILEGES ON foodsaviour.* TO 'admin'@'  ocalhost';
 FLUSH PRIVILEGES;
 
 CREATE TABLE inventory (
