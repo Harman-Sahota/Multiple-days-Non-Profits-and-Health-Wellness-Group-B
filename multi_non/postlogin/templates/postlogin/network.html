@@ -49,52 +49,46 @@
 
   <div class="container-md">
     <div class="tab container-sm">
-      <button class="tablinks btn btn-light" onclick="opentab(event, 'disc')" id="defaultOpen">💬 <br/>All Posts</button><br>
-      <button class="tablinks btn btn-light" onclick="opentab(event, 'announce')">📣 <br/>Sharing</button><br>
-      <button class="tablinks btn btn-light" onclick="opentab(event, 'general')">👁‍🗨 <br/>Receiving</button><br>
+      <button class="tablinks btn btn-light" onclick="opentab(event, 'disc')" id="defaultOpen">💬 All Posts</button><br>
+      <button class="tablinks btn btn-light" onclick="opentab(event, 'announce')">📣 Sharing</button><br>
+      <button class="tablinks btn btn-light" onclick="opentab(event, 'general')">💬 Receiving</button><br>
     </div>
 
 
-    <script>
+    <script async>
+
       $(document).ready(function () {
-        $.ajax({
-          type: 'GET',
-          data: { csrfmiddlewaretoken: window.CSRF_TOKEN },
-          url: "{% url 'getData' %}",
-          success: function (response) {
 
-            $('#disc').empty();
-            for (var key in response.posts) {
-              var temp = "<div class='card'> <h5 class='card-header'>" + response.posts[key].product + " - " + response.posts[key].Quantity + " " + response.posts[key].Qunits + "</h5> <div class='card-body'> <h6 class='card-text'>" + response.posts[key].desc + "</h6> <p class='text-success'>" + response.posts[key].Type + "</p><button type='button'  class='btn btn-outline-success'>Comment</button></div></div>"
-              $('#disc').append(temp);
-            }
+        var z = "";
 
-            $('#announce').empty();
-            for (var key in response.posts) {
-              if (response.posts[key].Type == "Sharing") {
-                var temp = "<div class='card'> <h5 class='card-header'>" + response.posts[key].product + " - " + response.posts[key].Quantity + " " + response.posts[key].Qunits + "</h5> <div class='card-body'> <h6 class='card-text'>" + response.posts[key].desc + "</h6> <p class='text-success'>" + response.posts[key].Type + "</p><button type='button'  class='btn btn-outline-success'>Comment</button></div></div>"
-                $('#announce').append(temp);
+        var interval = setInterval(function () {
+          z = document.getElementById("searchinput").value;
+          if (z != "") {
+
+            $.ajax({
+              type: 'GET',
+              data: { csrfmiddlewaretoken: window.CSRF_TOKEN },
+              url: "{% url 'getData' %}",
+              success: function (response) {
+                $('#disc').empty();
+                for (var key in response.posts) {
+                  var c = response.posts[key].product.toLowerCase();
+                  var d = response.posts[key].product.toUpperCase();
+                  if (c.includes(z) || response.posts[key].product.includes(z) || d.includes(z)) {
+
+                    var temp = "<div class='card'> <h5 class='card-header'>" + response.posts[key].product + " - " + response.posts[key].Quantity + " " + response.posts[key].Qunits + "</h5> <div class='card-body'> <h6 class='card-text'>" + response.posts[key].desc + "</h6> <p class='text-success'>" + response.posts[key].Type + "</p><a href='href='{% url 'tracker' %}' id='postbutton'  class='btn btn-outline-success'>Comment</a></div></div>"
+
+                    $('#disc').append(temp);
+
+                  } else {
+
+                  }
+                }
               }
-            }
-
-            $('#general').empty();
-            for (var key in response.posts) {
-              if (response.posts[key].Type == "Receiving") {
-                var temp = "<div class='card'> <h5 class='card-header'>" + response.posts[key].product + " - " + response.posts[key].Quantity + " " + response.posts[key].Qunits + "</h5> <div class='card-body'> <h6 class='card-text'>" + response.posts[key].desc + "</h6> <p class='text-success'>" + response.posts[key].Type + "</p><button  class='btn btn-outline-success'>Comment</button></div></div>"
-                $('#general').append(temp);
-              }
-            }
-          },
-          error: function (response) {
+            })
 
           }
-        })
-
-        setInterval(function () {
-
-          var z = document.getElementById("searchinput")
-
-          if (z.value == "") {
+          if (z == "") {
 
             $.ajax({
               type: 'GET',
@@ -104,14 +98,14 @@
 
                 $('#disc').empty();
                 for (var key in response.posts) {
-                  var temp = "<div class='card'> <h5 class='card-header'>" + response.posts[key].product + " - " + response.posts[key].Quantity + " " + response.posts[key].Qunits + "</h5> <div class='card-body'> <h6 class='card-text'>" + response.posts[key].desc + "</h6> <p class='text-success'>" + response.posts[key].Type + "</p><button type='button'  class='btn btn-outline-success'>Comment</button></div></div>"
+                  var temp = "<div class='card'> <h5 class='card-header'>" + response.posts[key].product + " - " + response.posts[key].Quantity + " " + response.posts[key].Qunits + "</h5> <div class='card-body'> <h6 class='card-text'>" + response.posts[key].desc + "</h6> <p class='text-success'>" + response.posts[key].Type + "</p><a href='{% url 'tracker' %}' id='postbutton' class='btn btn-outline-success'>Comment</a></div></div>"
                   $('#disc').append(temp);
                 }
 
                 $('#announce').empty();
                 for (var key in response.posts) {
                   if (response.posts[key].Type == "Sharing") {
-                    var temp = "<div class='card'> <h5 class='card-header'>" + response.posts[key].product + " - " + response.posts[key].Quantity + " " + response.posts[key].Qunits + "</h5> <div class='card-body'> <h6 class='card-text'>" + response.posts[key].desc + "</h6> <p class='text-success'>" + response.posts[key].Type + "</p><button type='button'  class='btn btn-outline-success'>Comment</button></div></div>"
+                    var temp = "<div class='card'> <h5 class='card-header'>" + response.posts[key].product + " - " + response.posts[key].Quantity + " " + response.posts[key].Qunits + "</h5> <div class='card-body'> <h6 class='card-text'>" + response.posts[key].desc + "</h6> <p class='text-success'>" + response.posts[key].Type + "</p><a href='{% url 'tracker' %}' id='postbutton'  class='btn btn-outline-success'>Comment</a></div></div>"
                     $('#announce').append(temp);
                   }
                 }
@@ -119,7 +113,7 @@
                 $('#general').empty();
                 for (var key in response.posts) {
                   if (response.posts[key].Type == "Receiving") {
-                    var temp = "<div class='card'> <h5 class='card-header'>" + response.posts[key].product + " - " + response.posts[key].Quantity + " " + response.posts[key].Qunits + "</h5> <div class='card-body'> <h6 class='card-text'>" + response.posts[key].desc + "</h6> <p class='text-success'>" + response.posts[key].Type + "</p><button type='button' ' class='btn btn-outline-success'>Comment</button></div></div>"
+                    var temp = "<div class='card'> <h5 class='card-header'>" + response.posts[key].product + " - " + response.posts[key].Quantity + " " + response.posts[key].Qunits + "</h5> <div class='card-body'> <h6 class='card-text'>" + response.posts[key].desc + "</h6> <p class='text-success'>" + response.posts[key].Type + "</p><a href='{% url 'tracker' %}' id='postbutton'   class='btn btn-outline-success'>Comment</a></div></div>"
                     $('#general').append(temp);
                   }
                 }
@@ -130,35 +124,19 @@
             })
           }
           else {
-            z.addEventListener("keyup", searc())
-          }
-          function searc() {
-            var a = document.getElementById("searchinput").value;
 
-            $.ajax({
-              type: 'GET',
-              data: { csrfmiddlewaretoken: window.CSRF_TOKEN },
-              url: "{% url 'getData' %}",
-              success: function (response) {
-                for (var key in response.posts) {
-                  var c = response.posts[key].product.toLowerCase();
-                  var d = response.posts[key].product.toUpperCase();
-                  if (c == a || response.posts[key].product == a || d == a ) {
-                    var temp = "<div class='card'> <h5 class='card-header'>" + response.posts[key].product + " - " + response.posts[key].Quantity + " " + response.posts[key].Qunits + "</h5> <div class='card-body'> <h6 class='card-text'>" + response.posts[key].desc + "</h6> <p class='text-success'>" + response.posts[key].Type + "</p><button type='button' href='{% url 'comment' %}' class='btn btn-outline-success'>Comment</button></div></div>"
-                    $('#disc').html("");
-                    $('#disc').append(temp);
-                  } else {
 
-                  }
-                }
-              }
-            })
+
           }
-        }, 100);
+          console.log("running");
+        }, 10)
+        $('#postbutton').on('click', function () {
+          
+            clearInterval(interval);
+            location.href = 'tracker';
+        })
       })
-
     </script>
-
 
     <div id="disc" class="tabcontent container-xl">
 
@@ -222,14 +200,6 @@
     </div>
   </div>
 </div>
-
-<script>
-
-
-
-
-</script>
-
 
 <script src="{% static 'postlogin/js/network.js'%}"></script>
 

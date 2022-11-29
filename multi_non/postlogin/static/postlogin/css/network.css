@@ -18,6 +18,11 @@ justify-content: space-between;
 
 }
 
+#postbutton:hover{
+  background-color: white !important;
+  color: green !important;
+}
+
 .container-lg{
   margin-top: 3%;
   padding: 2em;
