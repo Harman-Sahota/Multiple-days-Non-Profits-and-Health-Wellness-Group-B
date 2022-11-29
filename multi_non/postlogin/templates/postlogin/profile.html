@@ -24,11 +24,17 @@
                     <div class="card-header bg-transparent text-center"><b>Profile</b></div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col">
+                            <div class="col-4">
                                 <p>Account Status: </p>
                             </div>
-                            <div class="col">
-                                <p>{{ request.session.Status }}</p>
+                            <div class="col-8">
+                                {% if request.session.Status == "approve" %} 
+                                    <p>Approved</p>
+                                {% elif request.session.Status == "decline" %} 
+                                    <p>Declined</p>
+                                {% else %} 
+                                    <p>Pending</p>
+                                {% endif %}
                             </div>
                         </div>
                         <hr>
@@ -37,13 +43,13 @@
                                 <p>Name: </p>
                                 <p>Email: </p>
                                 <p>Organization Name: </p>
-                                <p>Role: </p>
+                                <p>Role(s): </p>
                             </div>
                             <div class="col-8">
                                 <p>{{ request.session.FirstName }} {{ request.session.LastName }}</p>
                                 <p>{{ request.session.Email }}</p>
                                 <p>{{ request.session.Organization }}</p>
-                                <p>{{ request.session.Roles }}</p>
+                                <p>{{ request.session.Roles|title|cut:"["|cut:"]"|cut:"'" }}
                             </div>
                         </div>
                     </div>
