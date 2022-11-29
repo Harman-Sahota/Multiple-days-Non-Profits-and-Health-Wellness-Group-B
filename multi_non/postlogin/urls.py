@@ -9,6 +9,8 @@ urlpatterns = [
     path('admin/', views.admin,name='admin'),
     path('network/', views.network,name='network'),
     path('ajax/getData',views.getData,name="getData"),
+    path('ajax/getData',views.getData,name="getData"),
+    path('comment',views.comment,name="comment"),
 
 
 ]

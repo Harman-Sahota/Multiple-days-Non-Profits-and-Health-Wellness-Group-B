@@ -15,20 +15,20 @@
 <div id="main" class="container-lg col-md-auto">
   <div class="container-fluid">
 
-      <div class="input-group">
-        <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
-          aria-describedby="search-addon" id="searchinput" name="search" />
-        
-
-      </div>
+    <div class="input-group">
+      <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+        aria-describedby="search-addon" id="searchinput" name="search" />
 
 
-      <div class="select">
-        <select name="format" id="filters" class="form-select" name="category">
-          <option value="organization">Filter by: Organization</option>
-          <option value="Product" selected>Filter by: Product</option>
-        </select>
-      </div>
+    </div>
+
+
+    <div class="select">
+      <select name="format" id="filters" class="form-select" name="category">
+        <option value="organization">Filter by: Organization</option>
+        <option value="Product" selected>Filter by: Product</option>
+      </select>
+    </div>
     </form>
     <div class="select">
       <select name="format" id="activity" class="form-select">
@@ -65,14 +65,14 @@
 
             $('#disc').empty();
             for (var key in response.posts) {
-              var temp = "<div class='card'> <h5 class='card-header'>" + response.posts[key].product + " - " + response.posts[key].Quantity + " " + response.posts[key].Qunits + "</h5> <div class='card-body'> <h6 class='card-text'>" + response.posts[key].desc + "</h6> <p class='text-success'>" + response.posts[key].Type + "</p><button type='button' target class='btn btn-outline-success'>Comment</button></div></div>"
+              var temp = "<div class='card'> <h5 class='card-header'>" + response.posts[key].product + " - " + response.posts[key].Quantity + " " + response.posts[key].Qunits + "</h5> <div class='card-body'> <h6 class='card-text'>" + response.posts[key].desc + "</h6> <p class='text-success'>" + response.posts[key].Type + "</p><button type='button'  class='btn btn-outline-success'>Comment</button></div></div>"
               $('#disc').append(temp);
             }
 
             $('#announce').empty();
             for (var key in response.posts) {
               if (response.posts[key].Type == "Sharing") {
-                var temp = "<div class='card'> <h5 class='card-header'>" + response.posts[key].product + " - " + response.posts[key].Quantity + " " + response.posts[key].Qunits + "</h5> <div class='card-body'> <h6 class='card-text'>" + response.posts[key].desc + "</h6> <p class='text-success'>" + response.posts[key].Type + "</p><a href'#' class='btn btn-outline-success'>Comment</a></div></div>"
+                var temp = "<div class='card'> <h5 class='card-header'>" + response.posts[key].product + " - " + response.posts[key].Quantity + " " + response.posts[key].Qunits + "</h5> <div class='card-body'> <h6 class='card-text'>" + response.posts[key].desc + "</h6> <p class='text-success'>" + response.posts[key].Type + "</p><button type='button'  class='btn btn-outline-success'>Comment</button></div></div>"
                 $('#announce').append(temp);
               }
             }
@@ -80,7 +80,7 @@
             $('#general').empty();
             for (var key in response.posts) {
               if (response.posts[key].Type == "Recieving") {
-                var temp = "<div class='card'> <h5 class='card-header'>" + response.posts[key].product + " - " + response.posts[key].Quantity + " " + response.posts[key].Qunits + "</h5> <div class='card-body'> <h6 class='card-text'>" + response.posts[key].desc + "</h6> <p class='text-success'>" + response.posts[key].Type + "</p><a href'#' class='btn btn-outline-success'>Comment</a></div></div>"
+                var temp = "<div class='card'> <h5 class='card-header'>" + response.posts[key].product + " - " + response.posts[key].Quantity + " " + response.posts[key].Qunits + "</h5> <div class='card-body'> <h6 class='card-text'>" + response.posts[key].desc + "</h6> <p class='text-success'>" + response.posts[key].Type + "</p><button  class='btn btn-outline-success'>Comment</button></div></div>"
                 $('#general').append(temp);
               }
             }
@@ -104,14 +104,14 @@
 
                 $('#disc').empty();
                 for (var key in response.posts) {
-                  var temp = "<div class='card'> <h5 class='card-header'>" + response.posts[key].product + " - " + response.posts[key].Quantity + " " + response.posts[key].Qunits + "</h5> <div class='card-body'> <h6 class='card-text'>" + response.posts[key].desc + "</h6> <p class='text-success'>" + response.posts[key].Type + "</p><button type='button' target class='btn btn-outline-success'>Comment</button></div></div>"
+                  var temp = "<div class='card'> <h5 class='card-header'>" + response.posts[key].product + " - " + response.posts[key].Quantity + " " + response.posts[key].Qunits + "</h5> <div class='card-body'> <h6 class='card-text'>" + response.posts[key].desc + "</h6> <p class='text-success'>" + response.posts[key].Type + "</p><button type='button'  class='btn btn-outline-success'>Comment</button></div></div>"
                   $('#disc').append(temp);
                 }
 
                 $('#announce').empty();
                 for (var key in response.posts) {
                   if (response.posts[key].Type == "Sharing") {
-                    var temp = "<div class='card'> <h5 class='card-header'>" + response.posts[key].product + " - " + response.posts[key].Quantity + " " + response.posts[key].Qunits + "</h5> <div class='card-body'> <h6 class='card-text'>" + response.posts[key].desc + "</h6> <p class='text-success'>" + response.posts[key].Type + "</p><a href'#' class='btn btn-outline-success'>Comment</a></div></div>"
+                    var temp = "<div class='card'> <h5 class='card-header'>" + response.posts[key].product + " - " + response.posts[key].Quantity + " " + response.posts[key].Qunits + "</h5> <div class='card-body'> <h6 class='card-text'>" + response.posts[key].desc + "</h6> <p class='text-success'>" + response.posts[key].Type + "</p><button type='button'  class='btn btn-outline-success'>Comment</button></div></div>"
                     $('#announce').append(temp);
                   }
                 }
@@ -119,7 +119,7 @@
                 $('#general').empty();
                 for (var key in response.posts) {
                   if (response.posts[key].Type == "Recieving") {
-                    var temp = "<div class='card'> <h5 class='card-header'>" + response.posts[key].product + " - " + response.posts[key].Quantity + " " + response.posts[key].Qunits + "</h5> <div class='card-body'> <h6 class='card-text'>" + response.posts[key].desc + "</h6> <p class='text-success'>" + response.posts[key].Type + "</p><a href'#' class='btn btn-outline-success'>Comment</a></div></div>"
+                    var temp = "<div class='card'> <h5 class='card-header'>" + response.posts[key].product + " - " + response.posts[key].Quantity + " " + response.posts[key].Qunits + "</h5> <div class='card-body'> <h6 class='card-text'>" + response.posts[key].desc + "</h6> <p class='text-success'>" + response.posts[key].Type + "</p><button type='button' ' class='btn btn-outline-success'>Comment</button></div></div>"
                     $('#general').append(temp);
                   }
                 }
@@ -142,8 +142,9 @@
               success: function (response) {
                 for (var key in response.posts) {
                   var c = response.posts[key].product.toLowerCase();
-                  if (c == a || response.posts[key].product == a) {
-                    var temp = "<div class='card'> <h5 class='card-header'>" + response.posts[key].product + " - " + response.posts[key].Quantity + " " + response.posts[key].Qunits + "</h5> <div class='card-body'> <h6 class='card-text'>" + response.posts[key].desc + "</h6> <p class='text-success'>" + response.posts[key].Type + "</p><button type='button' target class='btn btn-outline-success'>Comment</button></div></div>"
+                  var d = response.posts[key].product.toUpperCase();
+                  if (c == a || response.posts[key].product == a || d == a ) {
+                    var temp = "<div class='card'> <h5 class='card-header'>" + response.posts[key].product + " - " + response.posts[key].Quantity + " " + response.posts[key].Qunits + "</h5> <div class='card-body'> <h6 class='card-text'>" + response.posts[key].desc + "</h6> <p class='text-success'>" + response.posts[key].Type + "</p><button type='button' href='{% url 'comment' %}' class='btn btn-outline-success'>Comment</button></div></div>"
                     $('#disc').html("");
                     $('#disc').append(temp);
                   } else {
