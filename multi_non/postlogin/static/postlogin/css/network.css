@@ -34,7 +34,7 @@ justify-content: space-between;
   border: 1px solid rgba(255, 255, 255, 0.26);
 }
 
-footer {
+/*footer {
   margin-top: 20%;
   height: auto !important;
   max-height: 2%;
@@ -42,7 +42,7 @@ footer {
   position: relative;
   overflow: hidden;
 
-}
+}*/
 
 .container-sm{
  

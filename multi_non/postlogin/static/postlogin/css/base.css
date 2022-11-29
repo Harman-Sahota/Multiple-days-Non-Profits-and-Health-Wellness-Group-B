@@ -159,6 +159,7 @@ footer {
   display: table;
   text-align: center;
   z-index: 2;
+  margin-top: 3em;
 }
 
 #welcome{
