@@ -32,10 +32,11 @@
                         <li><a href="{% url 'network' %}" class="nav-link px-3">Network</a></li>
                     {% elif 'user non-profit warehouse boss' in request.session.Roles %}
                         <li><a href="{% url 'network' %}" class="nav-link px-3">Network</a></li>
+                    {% elif 'admin' in request.session.Roles %}
+                        <li><a href="{% url 'network' %}" class="nav-link px-3">Network</a></li>
                     {% endif %}
                     {% if 'admin' in request.session.Roles %}
                         <li><a href="{% url 'admin' %}" class="nav-link px-3">Admin</a></li>
-                        <li><a href="{% url 'network' %}" class="nav-link px-3">Network</a></li>
                     {% endif %}
                     <li><a href="{% url 'profile' %}" class="nav-link px-3" href="#"><i class="fa-solid fa-user"></i>
                             Profile</a></li>
