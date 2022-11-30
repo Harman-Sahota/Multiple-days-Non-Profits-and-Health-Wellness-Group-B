@@ -1,4 +1,4 @@
-{% extends "postlogin/base.html" %} {% load static %} {% block content %}
+{% extends "postlogin/base.html" %} {% load static %} {% load postlogin_tags %}{% block content %}
 
    
 
@@ -8,7 +8,7 @@
        
      <div class="container-sm col-md-auto">
         <h2 class="display-6"> {{request.resolver_match.kwargs.product}} -  {{request.resolver_match.kwargs.qty}}  {{request.resolver_match.kwargs.units}} </h2>
-        <p class="mb-0 h6"> {{request.resolver_match.kwargs.description}} </p>
+        <p class="mb-0 h6"> {{request.resolver_match.kwargs.description|replace_underscore}} </p>
         <p class="mb-0 text-success"> {{request.resolver_match.kwargs.status}} </p>       
     </div>
     <div class="container-sm col-md-auto form">
