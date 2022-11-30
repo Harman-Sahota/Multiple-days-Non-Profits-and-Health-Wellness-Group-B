@@ -61,14 +61,13 @@ def tracker(request):
     }
 
     cursor = connection.cursor()
-    sql3 = "select * from permissions where role = %s" 
-    val3 = (request.session['Roles'])
-    cursor.execute(sql3,val3)
-    rows3 = cursor.fetchall()
-  
+    # sql3 = "select * from permissions where role = %s || role = %s" 
+    # val3 = (request.session['Roles'])
+    # cursor.execute(sql3,val3)
+    # rows3 = cursor.fetchall()
+    print(request.session['Roles'][0])
 
-
-       
+    
 
     return render(request, 'postlogin/tracker.html', context)
 
@@ -211,7 +210,9 @@ def comment(request,product = "default",qty = "default",units="default",descript
         newComment.Type = status
         newComment.Quantity = qty
         newComment.Units = units
-        newComment.Description = description
+        newComment.Description = description.replace("_"," ")
+      
+        
 
         cursor = connection.cursor()
         sql = "INSERT INTO Comments VALUES (%s, %s,%s, %s,%s,%s,%s)"
@@ -220,8 +221,8 @@ def comment(request,product = "default",qty = "default",units="default",descript
         return redirect(os.path.join('../../../../../../postlogin/comment',product,qty,units,description,status))
 
     cursor = connection.cursor()
-    sql2 = "SELECT * FROM Comments WHERE product = %s AND Type = %s AND Quantity = %s AND Units = %s AND Description = %s"
-    val2 = (product,status,qty,units,description)
+    sql2 = "SELECT * FROM Comments WHERE product = %s AND Type = %s AND Quantity = %s AND Units = %s"
+    val2 = (product,status,qty,units)
     cursor.execute(sql2,val2)
     rows = cursor.fetchall()
     Context = {

@@ -75,9 +75,14 @@
                   var c = response.posts[key].product.toLowerCase();
                   var d = response.posts[key].product.toUpperCase();
                   if (c.includes(z) || response.posts[key].product.includes(z) || d.includes(z)) {
-                    var title = response.posts[key].product + " - " +  response.posts[key].Quantity + " " + response.posts[key].Qunits;
+                    var product=  response.posts[key].product ;
+                  var quantity =  response.posts[key].Quantity ;
+                  var qunits = response.posts[key].Qunits;
                   var description = response.posts[key].desc;
-                    var temp = "<div class='card'> <h5 class='card-header'>" + response.posts[key].product + " - " + response.posts[key].Quantity + " " + response.posts[key].Qunits + "</h5> <div class='card-body'> <h6 class='card-text'>" + response.posts[key].desc + "</h6> <p class='text-success'>" + response.posts[key].Type + "</p><a href='href='{% url 'comment' %}' id='postbutton'  class='btn btn-outline-success'>Comment</a></div></div>"
+                  description = description.replace(/\s/g, "_");
+                  var status = response.posts[key].Type;
+                  var url_mask = "{% url 'comment' 'product' 'qty' 'units' 'desc' 'status' %}".replace(/product/, product.toString()).replace(/qty/,quantity.toString()).replace(/units/,qunits.toString()).replace(/desc/,description.toString()).replace(/status/,status.toString());
+                  var temp = "<div class='card'> <h5 class='card-header'>" + response.posts[key].product + " - " + response.posts[key].Quantity + " " + response.posts[key].Qunits + "</h5> <div class='card-body'> <h6 class='card-text'>" + response.posts[key].desc + "</h6> <p class='text-success'>" + response.posts[key].Type + "</p><a href='"+ url_mask + "' id='postbutton' class='btn btn-outline-success'>Comment</a></div></div>"
 
                     $('#disc').append(temp);
 
@@ -103,6 +108,7 @@
                   var quantity =  response.posts[key].Quantity ;
                   var qunits = response.posts[key].Qunits;
                   var description = response.posts[key].desc;
+                  description = description.replace(/\s/g, "_");
                   var status = response.posts[key].Type;
                   var url_mask = "{% url 'comment' 'product' 'qty' 'units' 'desc' 'status' %}".replace(/product/, product.toString()).replace(/qty/,quantity.toString()).replace(/units/,qunits.toString()).replace(/desc/,description.toString()).replace(/status/,status.toString());
                   var temp = "<div class='card'> <h5 class='card-header'>" + response.posts[key].product + " - " + response.posts[key].Quantity + " " + response.posts[key].Qunits + "</h5> <div class='card-body'> <h6 class='card-text'>" + response.posts[key].desc + "</h6> <p class='text-success'>" + response.posts[key].Type + "</p><a href='"+ url_mask + "' id='postbutton' class='btn btn-outline-success'>Comment</a></div></div>"
@@ -113,9 +119,14 @@
                 $('#announce').empty();
                 for (var key in response.posts) {
                   if (response.posts[key].Type == "Sharing") {
-                    var title = response.posts[key].product + " - " +  response.posts[key].Quantity + " " + response.posts[key].Qunits;
+                    var product=  response.posts[key].product ;
+                  var quantity =  response.posts[key].Quantity ;
+                  var qunits = response.posts[key].Qunits;
                   var description = response.posts[key].desc;
-                    var temp = "<div class='card'> <h5 class='card-header'>" + response.posts[key].product + " - " + response.posts[key].Quantity + " " + response.posts[key].Qunits + "</h5> <div class='card-body'> <h6 class='card-text'>" + response.posts[key].desc + "</h6> <p class='text-success'>" + response.posts[key].Type + "</p><a href='{% url 'comment' %}' id='postbutton'  class='btn btn-outline-success'>Comment</a></div></div>"
+                  description = description.replace(/\s/g, "_");
+                  var status = response.posts[key].Type;
+                  var url_mask = "{% url 'comment' 'product' 'qty' 'units' 'desc' 'status' %}".replace(/product/, product.toString()).replace(/qty/,quantity.toString()).replace(/units/,qunits.toString()).replace(/desc/,description.toString()).replace(/status/,status.toString());
+                  var temp = "<div class='card'> <h5 class='card-header'>" + response.posts[key].product + " - " + response.posts[key].Quantity + " " + response.posts[key].Qunits + "</h5> <div class='card-body'> <h6 class='card-text'>" + response.posts[key].desc + "</h6> <p class='text-success'>" + response.posts[key].Type + "</p><a href='"+ url_mask + "' id='postbutton' class='btn btn-outline-success'>Comment</a></div></div>"
                     $('#announce').append(temp);
                   }
                 }
@@ -123,9 +134,14 @@
                 $('#general').empty();
                 for (var key in response.posts) {
                   if (response.posts[key].Type == "Receiving") {
-                    var title = response.posts[key].product + " - " +  response.posts[key].Quantity + " " + response.posts[key].Qunits;
+                    var product=  response.posts[key].product ;
+                  var quantity =  response.posts[key].Quantity ;
+                  var qunits = response.posts[key].Qunits;
                   var description = response.posts[key].desc;
-                    var temp = "<div class='card'> <h5 class='card-header'>" + response.posts[key].product + " - " + response.posts[key].Quantity + " " + response.posts[key].Qunits + "</h5> <div class='card-body'> <h6 class='card-text'>" + response.posts[key].desc + "</h6> <p class='text-success'>" + response.posts[key].Type + "</p><a href='{% url 'comment' %}' id='postbutton'   class='btn btn-outline-success'>Comment</a></div></div>"
+                  description = description.replace(/\s/g, "_");
+                  var status = response.posts[key].Type;
+                  var url_mask = "{% url 'comment' 'product' 'qty' 'units' 'desc' 'status' %}".replace(/product/, product.toString()).replace(/qty/,quantity.toString()).replace(/units/,qunits.toString()).replace(/desc/,description.toString()).replace(/status/,status.toString());
+                  var temp = "<div class='card'> <h5 class='card-header'>" + response.posts[key].product + " - " + response.posts[key].Quantity + " " + response.posts[key].Qunits + "</h5> <div class='card-body'> <h6 class='card-text'>" + response.posts[key].desc + "</h6> <p class='text-success'>" + response.posts[key].Type + "</p><a href='"+ url_mask + "' id='postbutton' class='btn btn-outline-success'>Comment</a></div></div>"
                     $('#general').append(temp);
                   }
                 }
