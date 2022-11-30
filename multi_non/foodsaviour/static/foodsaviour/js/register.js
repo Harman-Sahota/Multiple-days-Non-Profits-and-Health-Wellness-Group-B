@@ -133,11 +133,20 @@ if(consent3.checked == false){
      
 }
 
+if(consent2.checked == true ){
+    alert("you must agree to continue")
+}
+
+if(consent3.checked == true ){
+    alert("sample information")
+}
+
 if(consent1.checked == true || consent2.checked == true || consent3.checked == true){
     return true;
 }else{
     return false;
 }
+
 
 }
 
@@ -166,6 +175,7 @@ function changeconsent2() {
         consent3.style.border = "grey 1px solid";
         consent3.checked = false;
         submit.disabled = true;
+        alert("you must agree to continue")
     }
 }
 
@@ -177,6 +187,7 @@ function changeconsent3() {
         consent2.style.border = "grey 1px solid";
         consent2.checked = false;
         submit.disabled = true;
+        alert("you must agree to continue")
     }
 }
 
