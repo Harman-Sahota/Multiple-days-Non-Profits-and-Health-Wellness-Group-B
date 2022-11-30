@@ -218,7 +218,7 @@ def comment(request,product = "default",qty = "default",units="default",descript
         sql = "INSERT INTO Comments VALUES (%s, %s,%s, %s,%s,%s,%s)"
         val = (newComment.Product,newComment.Type , newComment.Quantity,newComment.Units, newComment.Description,newComment.Comments, newComment.Username )
         cursor.execute(sql, val)
-        return redirect(os.path.join('../../../../../../postlogin/comment',product,qty,units,description,status))
+        return redirect(os.path.join('../../../../../../postlogin/comment',product,qty,units,description,status).replace("\\","/"))
 
     cursor = connection.cursor()
     sql2 = "SELECT * FROM Comments WHERE product = %s AND Type = %s AND Quantity = %s AND Units = %s AND Description = %s"
