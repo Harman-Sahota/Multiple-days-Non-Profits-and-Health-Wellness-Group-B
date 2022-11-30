@@ -1,7 +1,8 @@
+import os
 from django.shortcuts import render
 from django.shortcuts import render
 from django.db import connection
-from .models import users, permissions, posts
+from .models import users, permissions, posts,comments
 from .models import inventory
 from django.shortcuts import redirect
 import json
@@ -178,5 +179,32 @@ def admin(request):
 
     return render(request, 'postlogin/admin.html', context)
 
-def comment(request):
-    return render(request,'postlogin/comment.html')
+def comment(request,product = "default",qty = "default",units="default",description='default',status='default'):
+    if request.method == "POST":
+        newComment = comments()
+        newComment.Comments = request.POST.get("comment")
+        newComment.Username = request.session['FirstName'] + " " + request.session['LastName']
+        newComment.Product = product
+        newComment.Type = status
+        newComment.Quantity = qty
+        newComment.Units = units
+        newComment.Description = description
+
+        cursor = connection.cursor()
+        sql = "INSERT INTO Comments VALUES (%s, %s,%s, %s,%s,%s,%s)"
+        val = (newComment.Product,newComment.Type , newComment.Quantity,newComment.Units, newComment.Description,newComment.Comments, newComment.Username )
+        cursor.execute(sql, val)
+        return redirect(os.path.join('../../../../../../postlogin/comment',product,qty,units,description,status))
+
+    cursor = connection.cursor()
+    sql2 = "SELECT * FROM Comments WHERE product = %s AND Type = %s AND Quantity = %s AND Units = %s AND Description = %s"
+    val2 = (product,status,qty,units,description)
+    cursor.execute(sql2,val2)
+    rows = cursor.fetchall()
+    Context = {
+        'title':'Comment',
+        'Object':rows
+    }
+        
+
+    return render(request,'postlogin/comment.html',Context)

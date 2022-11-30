@@ -35,4 +35,13 @@ class posts(models.Model):
     Quantity = models.IntegerField()
     Units =  models.CharField(max_length=3)
     Description = models.CharField(max_length=255)
-    #insert role names preset
+
+
+class comments(models.Model):
+    Product = models.CharField(max_length=255)
+    Type = models.CharField(max_length=255)
+    Quantity = models.IntegerField()
+    Units =  models.CharField(max_length=3)
+    Description = models.CharField(max_length=255)
+    Comments = models.CharField(max_length=255)
+    Username = models.CharField(max_length=255)

@@ -10,7 +10,8 @@ urlpatterns = [
     path('network/', views.network,name='network'),
     path('ajax/getData',views.getData,name="getData"),
     path('ajax/getData',views.getData,name="getData"),
-    path('comment',views.comment,name="comment"),
+    path('comment/<str:product>/<str:qty>/<str:units>/<slug:description>/<str:status>',views.comment,name="comment"),
+     path('comment/',views.comment,name="comment")
 
 
 ]
