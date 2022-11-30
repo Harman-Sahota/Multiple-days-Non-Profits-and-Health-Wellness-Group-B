@@ -187,7 +187,7 @@ function changeconsent3() {
         consent2.style.border = "grey 1px solid";
         consent2.checked = false;
         submit.disabled = true;
-        alert("you must agree to continue")
+        alert("sample information")
     }
 }
 
