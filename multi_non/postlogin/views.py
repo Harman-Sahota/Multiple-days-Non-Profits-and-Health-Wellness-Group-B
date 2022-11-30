@@ -60,6 +60,14 @@ def tracker(request):
         'json': json.dumps(items)
     }
 
+    cursor = connection.cursor()
+    sql3 = "select * from permissions where role = %s" 
+    val3 = (request.session['Roles'])
+    cursor.execute(sql3,val3)
+    rows3 = cursor.fetchall()
+    print(rows3)
+    print(request.session['Roles'])
+
 
        
 
@@ -102,6 +110,8 @@ def getData(request):
 
 def profile(request):
     return render(request, 'postlogin/profile.html', {'title': 'Profile'})
+
+
 
 
 def admin(request):

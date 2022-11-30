@@ -10,7 +10,7 @@ from django.shortcuts import redirect
 def register(request):
     if request.method == "POST":
         newUser = users()
-        newUser.Roles = str(request.POST.getlist("roles[]"))
+        newUser.Roles = request.POST.getlist("roles[]")
         newUser.FirstName = request.POST.get("firstname")
         newUser.LastName = request.POST.get("lastname")
         newUser.Email = request.POST.get("email")
