@@ -167,11 +167,11 @@
         $('#sub').on('click',function(e){
 
           clearInterval(interval);
-          var format = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+          var format = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
           var d = document.getElementById('description').value;
           if(format.test(d)){
           e.preventDefault();
-          alert("no special chars in description")
+          alert("Do not use special characters in description.")
           }
 
 
