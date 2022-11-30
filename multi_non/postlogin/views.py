@@ -17,6 +17,7 @@ def overview(request):
 def tracker(request):
 
     if request.method == "POST":
+      
         newData = inventory()
         newData.Description = request.POST.get("description")
         newData.Category = request.POST.get("category")
@@ -28,11 +29,21 @@ def tracker(request):
         newData.DivertPartNet = request.POST.get("percentpartnet")
         newData.DivertLandfill = request.POST.get("percentlandfill")
         cursor = connection.cursor()
-        sql = "INSERT INTO inventory (Description,Category,Quantity,Qunits,DivertClients,DivertAFeed,DivertCompost,DivertPartNet,DivertLandfill) VALUES (%s, %s,%s, %s,%s,%s,%s,%s,%s)"
-        val = (newData.Description, newData.Category, newData.Quantity,
+        if request.POST.get("description"):
+            sql = "INSERT INTO inventory (Description,Category,Quantity,Qunits,DivertClients,DivertAFeed,DivertCompost,DivertPartNet,DivertLandfill) VALUES (%s, %s,%s, %s,%s,%s,%s,%s,%s)"
+            val = (newData.Description, newData.Category, newData.Quantity,
                newData.Qunits, newData.DivertClients, newData.DivertAFeed, newData.DivertCompost, newData.DivertPartNet, newData.DivertLandfill)
-        cursor.execute(sql, val)
+            cursor.execute(sql, val)
+        
+        if request.POST.get('field'):
+            test = request.POST.get('field').split('|')
+            cursor = connection.cursor()
+            sql2 = "DELETE FROM inventory WHERE Description = %s AND Category = %s AND Quantity = %s AND Qunits = %s AND DivertClients = %s AND DivertAFeed = %s AND DivertCompost = %s AND DivertPartNet = %s AND DivertLandfill = %s" 
+            val2 = (test[0],test[1],test[2],test[3],test[4],test[5],test[6],test[7],test[8])
+            cursor.execute(sql2,val2)
         return redirect('../../postlogin/tracker')
+        
+
 
     cursor = connection.cursor()
     sql = "SELECT Description AS Description,Category AS Category,Quantity,Qunits,DivertClients,DivertAFeed,DivertCompost,DivertPartNet,DivertLandfill FROM inventory"
@@ -48,6 +59,9 @@ def tracker(request):
         'Object': rows,
         'json': json.dumps(items)
     }
+
+
+       
 
     return render(request, 'postlogin/tracker.html', context)
 

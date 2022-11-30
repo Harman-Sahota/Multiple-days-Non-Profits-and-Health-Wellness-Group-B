@@ -169,11 +169,14 @@
               <th scope="col">% Partner Network</th>
               <th scope="col">% Landfill</th>
               <th scope="col"></th>
+
+              <th scope="col"></th>
             </tr>
           </thead>
           <tbody>
             {% for i in Object %}
             <tr>
+              
               <td>{{i.0}}</td>
               <td>{{i.1}}</td>
               <td>{{i.2}}</td>
@@ -183,6 +186,15 @@
               <td>{{i.6}}</td>
               <td>{{i.7}}</td>
               <td>{{i.8}}</td>
+              <td>
+                <form action="{% url 'tracker' %}" method="post">
+                  {% csrf_token %}
+                  <button class="btn btn-danger" type="submit" value="{{i.0}}|{{i.1}}|{{i.2}}|{{i.3}}|{{i.4}}|{{i.5}}|{{i.6}}|{{i.7}}|{{i.8}}" name="field">Delete</button>
+           
+              </form> 
+              
+              </td>
+
             </tr>
             {% endfor %}
           </tbody>
