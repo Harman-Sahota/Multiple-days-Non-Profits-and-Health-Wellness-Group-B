@@ -212,7 +212,7 @@ def comment(request,product = "default",qty = "default",units="default",descript
         newComment.Units = units
         newComment.Description = description.replace("_"," ")
        
-        
+      
 
         cursor = connection.cursor()
         sql = "INSERT INTO Comments VALUES (%s, %s,%s, %s,%s,%s,%s)"
@@ -221,10 +221,11 @@ def comment(request,product = "default",qty = "default",units="default",descript
         return redirect(os.path.join('../../../../../../postlogin/comment',product,qty,units,description,status).replace("\\","/"))
 
     cursor = connection.cursor()
-    sql2 = "SELECT * FROM Comments WHERE product = %s AND Type = %s AND Quantity = %s AND Units = %s AND Description = %s"
-    val2 = (product,status,qty,units,description)
+    sql2 = "SELECT * FROM Comments WHERE product = %s AND Type = %s AND Quantity = %s AND Units = %s"
+    val2 = (product,status,qty,units)
     cursor.execute(sql2,val2)
     rows = cursor.fetchall()
+    print(rows)
     Context = {
         'title':'Comment',
         'Object':rows
