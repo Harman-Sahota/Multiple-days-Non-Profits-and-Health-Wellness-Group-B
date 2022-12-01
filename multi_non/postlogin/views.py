@@ -65,7 +65,7 @@ def tracker(request):
     # val3 = (request.session['Roles'])
     # cursor.execute(sql3,val3)
     # rows3 = cursor.fetchall()
-    print(request.session['Roles'][0])
+    
 
     
 
@@ -113,23 +113,25 @@ def profile(request):
 
 
 def admin(request):
-    cursor = connection.cursor()
-    sql = "SELECT CONCAT(FirstName, ' ', LastName) AS FirstName,Email AS Email,Roles AS Roles,Approve FROM users"
-    cursor.execute(sql)
-    rows = cursor.fetchall()
-    context = {
-        'title': 'Admin',
-        'Object': rows
-    }
 
+
+    newUser = users()
+    newUser.Approve = request.POST.getlist("approve[]")
+    newUser.Email = request.POST.getlist("id[]")
+    for i, j in zip(newUser.Approve, newUser.Email):
+            if (i == 'approve' or i == 'decline'):
+                cursor = connection.cursor()
+                sql2 = "UPDATE users SET Approve = %s WHERE id = %s"
+                val = (i, j)
+                cursor.execute(sql2, val)
     if request.method == "POST":
-        newUser = users()
-        newUser.Approve = request.POST.getlist("approve[]")
-        newUser.Email = request.POST.getlist("id[]")
+      
 
         newPerm = permissions()
         newPerm.Role = request.POST.getlist("role[]")
+
         for object in newPerm.Role:
+            
             if (object == "User non-profit managers/CEO"):
                 newPerm.Metrics = request.POST.getlist("metrics-CEO[]")
                 newPerm.Network = request.POST.getlist("network-CEO")
@@ -190,14 +192,18 @@ def admin(request):
                        newPerm.readwrite, object)
                 cursor.execute(sql, val)
 
-        for i, j in zip(newUser.Approve, newUser.Email):
-            if (i == 'approve' or i == 'decline'):
-                cursor = connection.cursor()
-                sql2 = "UPDATE users SET Approve = %s WHERE id = %s"
-                val = (i, j)
-                cursor.execute(sql2, val)
+       
+        
 
         return redirect('../../postlogin/admin')
+    cursor = connection.cursor()
+    sql = "SELECT CONCAT(FirstName, ' ', LastName) AS FirstName,Email AS Email,Roles AS Roles,Approve FROM users"
+    cursor.execute(sql)
+    rows = cursor.fetchall()
+    context = {
+        'title': 'Admin',
+        'Object': rows
+    }
 
     return render(request, 'postlogin/admin.html', context)
 
