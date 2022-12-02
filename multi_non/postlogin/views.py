@@ -28,11 +28,16 @@ def tracker(request):
         newData.DivertCompost = request.POST.get("percentcompost/fert")
         newData.DivertPartNet = request.POST.get("percentpartnet")
         newData.DivertLandfill = request.POST.get("percentlandfill")
+        newData.Clients = request.POST.get("clients")
+        newData.AFeed = request.POST.get("animalFeed")
+        newData.Compost = request.POST.get("compost")
+        newData.PartNet = request.POST.get("partnet")
+        newData.Landfill = request.POST.get("landfill")
         cursor = connection.cursor()
         if request.POST.get("description"):
-            sql = "INSERT INTO inventory (Description,Category,Quantity,Qunits,DivertClients,DivertAFeed,DivertCompost,DivertPartNet,DivertLandfill) VALUES (%s, %s,%s, %s,%s,%s,%s,%s,%s)"
+            sql = "INSERT INTO inventory (Description,Category,Quantity,Qunits,DivertClients,DivertAFeed,DivertCompost,DivertPartNet,DivertLandfill,Clients,AFeed,Compost,PartNet,Landfill) VALUES (%s, %s,%s, %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
             val = (newData.Description, newData.Category, newData.Quantity,
-               newData.Qunits, newData.DivertClients, newData.DivertAFeed, newData.DivertCompost, newData.DivertPartNet, newData.DivertLandfill)
+               newData.Qunits,newData.DivertClients, newData.DivertAFeed, newData.DivertCompost, newData.DivertPartNet, newData.DivertLandfill, newData.Clients, newData.AFeed, newData.Compost, newData.PartNet, newData.Landfill)
             cursor.execute(sql, val)
         
         if request.POST.get('field'):
@@ -49,10 +54,14 @@ def tracker(request):
     sql = "SELECT Description AS Description,Category AS Category,Quantity,Qunits,DivertClients,DivertAFeed,DivertCompost,DivertPartNet,DivertLandfill FROM inventory"
     cursor.execute(sql)
     rows = cursor.fetchall()
+
+    sql2 = "SELECT Description AS Description,Category AS Category,Quantity,Qunits,Clients,AFeed,Compost,PartNet,Landfill FROM inventory"
+    cursor.execute(sql2)
+    rows2 = cursor.fetchall()
     items = []
-    for row in rows:
+    for row in rows2:
         items.append({'Description': row[0], 'Category': row[1], 'Quantity': row[2], "Qunits": row[3], "DivertClients": row[4],
-                     "DivertAFeed": row[4], "DivertCompost": row[5], "DivertPartNet": row[6], "DivertLandfill": row[7]})
+                     "DivertAFeed": row[5], "DivertCompost": row[6], "DivertPartNet": row[7], "DivertLandfill": row[8]})
 
     context = {
         'title': 'Tracker',
