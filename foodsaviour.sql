@@ -25,7 +25,7 @@ DivertClients    Int(55),
 DivertAFeed      Int(55),
 DivertCompost    Int(55), 
 DivertPartNet    Int(55),
-DivertLandfill   Int(55)
+DivertLandfill   Int(55),
 Clients          Int(55), 
 AFeed            Int(55), 
 Compost          Int(55),  
