@@ -13,7 +13,7 @@ Organization varchar(255),
 Approve varchar(255)
 );
 CREATE USER 'admin'@'localhost' IDENTIFIED BY 'groupb@2022!';
-GRANT ALL PRIVILEGES ON foodsaviour.* TO 'admin'@'localhost';
+GRANT ALL PRIVILEGES ON foodsaviour.* TO 'admin'@'  ocalhost';
 FLUSH PRIVILEGES;
 
 CREATE TABLE inventory (
@@ -26,4 +26,32 @@ DivertAFeed      Int(55),
 DivertCompost    Int(55), 
 DivertPartNet    Int(55),
 DivertLandfill   Int(55)
+);
+
+CREATE TABLE `permissions` (
+  `role` varchar(255) DEFAULT NULL,
+  `metrics` varchar(255) DEFAULT NULL,
+  `network` varchar(255) DEFAULT NULL,
+  `readwrite` varchar(255) DEFAULT NULL
+) 
+
+
+CREATE TABLE posts(
+product varchar(255),
+Type varchar(255),
+Quantity int,
+Units varchar(3),
+Description varchar(255)
+);
+
+CREATE TABLE Comments(
+
+product varchar(255),
+Type varchar(255),
+Quantity int,
+Units varchar(3),
+Description varchar(255),
+Comments varchar(255),
+username varchar(255)
+
 );

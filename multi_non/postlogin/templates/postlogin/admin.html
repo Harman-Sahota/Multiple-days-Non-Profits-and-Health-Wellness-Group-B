@@ -428,7 +428,7 @@
         </thead>
         <tbody>
 
-            <form class="form-approve" action="" method="post">
+            <form class="form-approve" id="approve-form" action="" method="post">
                 {% csrf_token %}
 
                 {% for i in Object %}
@@ -454,8 +454,8 @@
                         <div class="form-check ">
                             <div class="col-md-auto">
                                 <select class="form-select" id="approve" name="approve[]">
-                                    <option value="approve">Approve</option>
-                                    <option value="decline">Decline</option>
+                                    <option name='approve' value="approve">Approve</option>
+                                    <option name='decline' value="decline">Decline</option>
                                 </select>
                             </div>
                     </td>
@@ -466,7 +466,7 @@
 
         </tbody>
     </table>
-    <button type="submit" class="btn btn-outline-success">Save</button>
+    <button type="submit" for="approve-form" class="btn btn-outline-success">Save</button>
 
     </form>
 

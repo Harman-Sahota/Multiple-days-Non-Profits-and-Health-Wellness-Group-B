@@ -10,6 +10,7 @@ from django.shortcuts import redirect
 def register(request):
     if request.method == "POST":
         newUser = users()
+        #newUser.Roles = request.POST.getlist("roles[]")
         newUser.Roles = str(request.POST.getlist("roles[]"))
         newUser.FirstName = request.POST.get("firstname")
         newUser.LastName = request.POST.get("lastname")
@@ -50,8 +51,7 @@ def login(request):
             values = (newUser.Email)
             cursor.execute(sql2, values)
             rows2 = cursor.fetchall()
-            
-       
+               
             request.session['FirstName'] = rows2[0][0]
             request.session['LastName'] = rows2[0][1]
             request.session['Email'] = rows2[0][2]
@@ -65,7 +65,7 @@ def login(request):
         values = (newUser.Email, newUser.Password)
         cursor.execute(sql, values)
         rows = cursor.fetchall()
-        print(rows)
+       
         numberOfRecords = len(rows)
         if (numberOfRecords > 0):
             return redirect("../../postlogin/tracker")
@@ -85,5 +85,7 @@ def contact(request):
 
 def resetPassword(request):
     return render(request, 'foodsaviour/resetPassword.html', {'title': 'Reset Password'})
+
+
 
 

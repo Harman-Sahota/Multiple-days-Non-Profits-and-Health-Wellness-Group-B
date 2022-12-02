@@ -28,8 +28,16 @@
             <div class="nav" id="desktop-menu">
                 <ul>
                     <li><a href="{% url 'tracker' %}" class="nav-link px-3">Tracker</a></li>
-                    <li><a href="{% url 'network' %}" class="nav-link px-3">Network</a></li>
-                    <li><a href="{% url 'admin' %}" class="nav-link px-3">Admin</a></li>
+                    {% if 'user non-profit managers/CEO' in request.session.Roles  %}
+                        <li><a href="{% url 'network' %}" class="nav-link px-3">Network</a></li>
+                    {% elif 'user non-profit warehouse boss' in request.session.Roles %}
+                        <li><a href="{% url 'network' %}" class="nav-link px-3">Network</a></li>
+                    {% elif 'admin' in request.session.Roles %}
+                        <li><a href="{% url 'network' %}" class="nav-link px-3">Network</a></li>
+                    {% endif %}
+                    {% if 'admin' in request.session.Roles %}
+                        <li><a href="{% url 'admin' %}" class="nav-link px-3">Admin</a></li>
+                    {% endif %}
                     <li><a href="{% url 'profile' %}" class="nav-link px-3" href="#"><i class="fa-solid fa-user"></i>
                             Profile</a></li>
                     <li id="signup"><a href="{% url 'home' %}">Logout</a></li>
@@ -48,7 +56,7 @@
                         <li><a href="{% url 'network' %}" class="nav-link px-3">Network</a></li>
                         <li><a href="{% url 'profile' %}" class="nav-link px-3" href="#"><i
                                     class="fa-solid fa-user"></i> Profile</a></li>
-                        <li id="signup"><a href="{% url 'home' %}">Logout</a></li>
+                        <li id="signup"><a href="{% url 'home' %}" onclick="">Logout</a></li>
                     </ul>
                 </div>
             </div>

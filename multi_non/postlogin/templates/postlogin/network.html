@@ -1,100 +1,252 @@
-{% extends "foodsaviour/base.html" %} {% load static %} {% block content %}
+{% extends "postlogin/base.html" %} {% load static %} {% block content %}
 
 <!-- LInking CSS File -->
-<link
-  href="{% static 'postlogin/css/network.css'%}"
-  rel="stylesheet"
-  type="text/css"
-/>
-
-<!-- PROJECT -->
-<!-- HTML BODY CONTENT -->
-<!-- LOGIN FORM -->
-<div class="body">
-  <div class="form-container">
+<link href="{% static 'postlogin/css/network.css'%}" rel="stylesheet" type="text/css" />
 
 
-    
-   
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"
+  integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 
-    <div class="topsection">
-   <div class= "searchdiv">
-          <form class="searchbox" action="/action_page.php" style="margin:left;width:500px">
-        <input type="text" placeholder="Search.." name="search2">
-        <button type="submit"><i class="fa fa-search"></i></button>
-      </form>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+  integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+  crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+<div id="main" class="container-lg col-md-auto">
+  <div class="container-fluid">
+
+    <div class="input-group">
+      <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+        aria-describedby="search-addon" id="searchinput" name="search" />
+
+
     </div>
 
 
-      <div class="select">
-        <select name="format" id="activity">
-           <option selected disabled>Sort By:</option>
-           <option value="pdf">Latest activity</option>
-           <option value="txt">Date Created</option>
-           <option value="epub">Top: Past day</option>
-           <option value="fb2">Top: Past week </option>
-           <option value="mobi">Top: Past month</option>
-        </select>
-     </div>
-
-     <div class="select">
-      <select name="format" id="labels">
-         <option selected disabled>Choose a label</option>
-         <option value="pdf">non</option>
-         <option value="txt">non</option>
-         <option value="epub">non</option>
-         <option value="fb2">non</option>
-         <option value="mobi">non</option>
+    <div class="select">
+      <select name="format" id="filters" class="form-select" name="category">
+        <option value="organization">Filter by: Organization</option>
+        <option value="Product" selected>Filter by: Product</option>
       </select>
-   </div>
-
-   <div class="select">
-    <select name="format" id="filters">
-       <option selected disabled>Choose a filter</option>
-       <option value="pdf">Answered</option>
-       <option value="txt">Unanswered</option>
-       <option value="epub">Locked</option>
-       <option value="fb2">Unlocked</option>
-       <option value="mobi">All</option>
-    </select>
- </div>
-
+    </div>
+    </form>
+    <div class="select">
+      <select name="format" id="activity" class="form-select">
+        <option selected disabled>Sort By: Latest Activity</option>
+        <option value="pdf">Latest activity</option>
+        <option value="txt">Date Created</option>
+        <option value="epub">Top: Past day</option>
+        <option value="fb2">Top: Past week </option>
+        <option value="mobi">Top: Past month</option>
+      </select>
     </div>
 
-    
-    <div class="tab">
-      <button class="tablinks" onclick="opentab(event, 'disc')" id="defaultOpen">View All Discussions</button>
-      <button class="tablinks" onclick="opentab(event, 'announce')">Announcements</button>
-      <button class="tablinks" onclick="opentab(event, 'ideas')">Ideas</button>
-      <button class="tablinks" onclick="opentab(event, 'polls')">Polls</button>
-      <button class="tablinks" onclick="opentab(event, 'qa')">Q&A</button>
+    <div>
+      <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#form">Create Post</button>
     </div>
-    
-    <div id="disc" class="tabcontent">
-      <h3>Discussions</h3>
-      <p>here is all the discussions</p>
+
+  </div>
+
+  <div class="container-md">
+    <div class="tab container-sm">
+      <button class="tablinks btn btn-light" onclick="opentab(event, 'disc')" id="defaultOpen">💬 All Posts</button><br>
+      <button class="tablinks btn btn-light" onclick="opentab(event, 'announce')">📣 Sharing</button><br>
+      <button class="tablinks btn btn-light" onclick="opentab(event, 'general')">💬 Receiving</button><br>
     </div>
-    
-    <div id="announce" class="tabcontent">
-      <h3>Announcements</h3>
-      <p>here is all the Announcements</p>
+
+
+    <script async>
+
+      $(document).ready(function () {
+
+        var z = "";
+
+        var interval = setInterval(function () {
+          z = document.getElementById("searchinput").value;
+          if (z != "") {
+
+            $.ajax({
+              type: 'GET',
+              data: { csrfmiddlewaretoken: window.CSRF_TOKEN },
+              url: "{% url 'getData' %}",
+              success: function (response) {
+                $('#disc').empty();
+                for (var key in response.posts) {
+                  var c = response.posts[key].product.toLowerCase();
+                  var d = response.posts[key].product.toUpperCase();
+                  if (c.includes(z) || response.posts[key].product.includes(z) || d.includes(z)) {
+                    var product=  response.posts[key].product ;
+                  var quantity =  response.posts[key].Quantity ;
+                  var qunits = response.posts[key].Qunits;
+                  var description = response.posts[key].desc;
+                  description = description.replace(/\s/g, "_");
+                  var status = response.posts[key].Type;
+                  var url_mask = "{% url 'comment' 'product' 'qty' 'units' 'desc' 'status' %}".replace(/product/, product.toString()).replace(/qty/,quantity.toString()).replace(/units/,qunits.toString()).replace(/desc/,description.toString()).replace(/status/,status.toString());
+                  var temp = "<div class='card'> <h5 class='card-header'>" + response.posts[key].product + " - " + response.posts[key].Quantity + " " + response.posts[key].Qunits + "</h5> <div class='card-body'> <h6 class='card-text'>" + response.posts[key].desc + "</h6> <p class='text-success'>" + response.posts[key].Type + "</p><a href='"+ url_mask + "' id='postbutton' class='btn btn-outline-success'>Comment</a></div></div>"
+
+                    $('#disc').append(temp);
+
+                  } else {
+
+                  }
+                }
+              }
+            })
+
+          }
+          if (z == "") {
+
+            $.ajax({
+              type: 'GET',
+              data: { csrfmiddlewaretoken: window.CSRF_TOKEN },
+              url: "{% url 'getData' %}",
+              success: function (response) {
+
+                $('#disc').empty();
+                for (var key in response.posts) {
+                  var product=  response.posts[key].product ;
+                  var quantity =  response.posts[key].Quantity ;
+                  var qunits = response.posts[key].Qunits;
+                  var description = response.posts[key].desc;
+                  description = description.replace(/\s/g, "_");
+                  var status = response.posts[key].Type;
+                  var url_mask = "{% url 'comment' 'product' 'qty' 'units' 'desc' 'status' %}".replace(/product/, product.toString()).replace(/qty/,quantity.toString()).replace(/units/,qunits.toString()).replace(/desc/,description.toString()).replace(/status/,status.toString());
+                  var temp = "<div class='card'> <h5 class='card-header'>" + response.posts[key].product + " - " + response.posts[key].Quantity + " " + response.posts[key].Qunits + "</h5> <div class='card-body'> <h6 class='card-text'>" + response.posts[key].desc + "</h6> <p class='text-success'>" + response.posts[key].Type + "</p><a href='"+ url_mask + "' id='postbutton' class='btn btn-outline-success'>Comment</a></div></div>"
+                  
+                  $('#disc').append(temp);
+                }
+
+                $('#announce').empty();
+                for (var key in response.posts) {
+                  if (response.posts[key].Type == "Sharing") {
+                    var product=  response.posts[key].product ;
+                  var quantity =  response.posts[key].Quantity ;
+                  var qunits = response.posts[key].Qunits;
+                  var description = response.posts[key].desc;
+                  description = description.replace(/\s/g, "_");
+                  var status = response.posts[key].Type;
+                  var url_mask = "{% url 'comment' 'product' 'qty' 'units' 'desc' 'status' %}".replace(/product/, product.toString()).replace(/qty/,quantity.toString()).replace(/units/,qunits.toString()).replace(/desc/,description.toString()).replace(/status/,status.toString());
+                  var temp = "<div class='card'> <h5 class='card-header'>" + response.posts[key].product + " - " + response.posts[key].Quantity + " " + response.posts[key].Qunits + "</h5> <div class='card-body'> <h6 class='card-text'>" + response.posts[key].desc + "</h6> <p class='text-success'>" + response.posts[key].Type + "</p><a href='"+ url_mask + "' id='postbutton' class='btn btn-outline-success'>Comment</a></div></div>"
+                    $('#announce').append(temp);
+                  }
+                }
+
+                $('#general').empty();
+                for (var key in response.posts) {
+                  if (response.posts[key].Type == "Receiving") {
+                    var product=  response.posts[key].product ;
+                  var quantity =  response.posts[key].Quantity ;
+                  var qunits = response.posts[key].Qunits;
+                  var description = response.posts[key].desc;
+                  description = description.replace(/\s/g, "_");
+                  var status = response.posts[key].Type;
+                  var url_mask = "{% url 'comment' 'product' 'qty' 'units' 'desc' 'status' %}".replace(/product/, product.toString()).replace(/qty/,quantity.toString()).replace(/units/,qunits.toString()).replace(/desc/,description.toString()).replace(/status/,status.toString());
+                  var temp = "<div class='card'> <h5 class='card-header'>" + response.posts[key].product + " - " + response.posts[key].Quantity + " " + response.posts[key].Qunits + "</h5> <div class='card-body'> <h6 class='card-text'>" + response.posts[key].desc + "</h6> <p class='text-success'>" + response.posts[key].Type + "</p><a href='"+ url_mask + "' id='postbutton' class='btn btn-outline-success'>Comment</a></div></div>"
+                    $('#general').append(temp);
+                  }
+                }
+              },
+              error: function (response) {
+
+              }
+            })
+          }
+          else {
+
+
+
+          }
+          console.log("running");
+        }, 1000)
+        $('#postbutton').on('click', function () {
+          
+            clearInterval(interval);
+        
+        })
+
+        $('#sub').on('click',function(e){
+
+          clearInterval(interval);
+          var format = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+          var d = document.getElementById('description').value;
+          if(format.test(d)){
+          e.preventDefault();
+          alert("Do not use special characters in description.")
+          }
+
+
+        })
+      })
+    </script>
+
+    <div id="disc" class="tabcontent container-xl">
+
     </div>
-    <div id="ideas" class="tabcontent">
-      <h3>Ideas</h3>
-      <p>here is all the Ideas</p>
+
+
+    <div id="announce" class="tabcontent container-xl">
+
     </div>
-    <div id="polls" class="tabcontent">
-      <h3>Polls</h3>
-      <p>here is all the Polls</p>
+
+    <div id="general" class="tabcontent container-xl">
+
     </div>
-    <div id="qa" class="tabcontent">
-      <h3>Q&A</h3>
-      <p>here is all the Q&A</p>
+  </div>
+</div>
+</div>
+
+<div class="modal fade" id="form" tabindex="-1" role="dialog" aria-labelledby="createpost" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header border-bottom-0">
+        <h5 class="modal-title" id="exampleModalLabel">Create Post</h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="" method="post" id="createpost" >
+        {% csrf_token %}
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="product">Product Name</label>
+            <input type="text" class="form-control" id="productname" name="product" aria-describedby="productname"
+              placeholder="ex. Apples">
+          </div>
+          <div class="form-group">
+            <label for="type">Type</label><br />
+            <select class="form-select" id="type" name="type" style="width: 10em">
+              <option>Sharing</option>
+              <option>Receiving</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="quantity">Quantity</label><br />
+            <input type="text" class="form-control" id="quantity" name="quantity" style="width: 10em"
+              placeholder="ex. 1000" />
+            <label for="qunits">Units</label><br />
+            <select class="form-select" id="qunits" name="qunits" style="width: 10em">
+              <option>lbs</option>
+              <option>kgs</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea class="form-control rounded-0" id="description" name="description" rows="3"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer border-top-0 d-flex justify-content-center">
+          <button type="submit" id="sub" class="btn btn-success">Submit</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
 
-<!-- Linking JS File -->
+
+<script>
+
+</script>
+
 <script src="{% static 'postlogin/js/network.js'%}"></script>
 
 {% endblock content%}
