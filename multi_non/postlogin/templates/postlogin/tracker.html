@@ -176,7 +176,7 @@
           <tbody>
             {% for i in Object %}
             <tr>
-              
+
               <td>{{i.0}}</td>
               <td>{{i.1}}</td>
               <td>{{i.2}}</td>
@@ -189,10 +189,12 @@
               <td>
                 <form action="{% url 'tracker' %}" method="post">
                   {% csrf_token %}
-                  <button class="btn btn-danger" type="submit" value="{{i.0}}|{{i.1}}|{{i.2}}|{{i.3}}|{{i.4}}|{{i.5}}|{{i.6}}|{{i.7}}|{{i.8}}" name="field">Delete</button>
-           
-              </form> 
-              
+                  <button class="btn btn-danger" type="submit"
+                    value="{{i.0}}|{{i.1}}|{{i.2}}|{{i.3}}|{{i.4}}|{{i.5}}|{{i.6}}|{{i.7}}|{{i.8}}"
+                    name="field">Delete</button>
+
+                </form>
+
               </td>
 
             </tr>
@@ -203,7 +205,7 @@
     </div>
   </section>
 
-  <br/>
+  <br />
 
   <div id="penetrate" class="penetrate"></div>
   {{ json|json_script:"json" }}
@@ -219,12 +221,45 @@
     mydata.forEach((val) => console.log(val.Category)); //print by field
     console.log(mydata); // print whole object
 
+    // Accepts the array and key
+    const groupBy = (array, key) => {
+      // Return the end result
+      return array.reduce((result, currentValue) => {
+        // If an array already present for key, push it to the array. Else create an array and push the object
+        (result[currentValue[key]] = result[currentValue[key]] || []).push(
+          currentValue
+        );
+        // Return the current iteration `result` value, this will be taken as next iteration `result` value and accumulate
+        return result;
+      }, {}); // empty object is the initial value for result object
+    };
+
+    // Group by color as key to the person array
+    const grouped = groupBy(mydata, 'Category');
+
+    console.log(grouped);
+
+    var sum = mydata.reduce((n, { Quantity }) => n + Quantity, 0);
+    console.log(sum);
+
+    var result = Array.from(mydata.reduce(
+      (acc, obj) => Object.keys(obj).reduce(
+        (acc, key) => typeof obj[key] == "number"
+          ? acc.set(key, (acc.get(key) || []).concat(obj[key]))
+          : acc,
+        acc),
+      new Map()),
+      ([name, values]) =>
+        ({ name, average: values.reduce((a, b) => a + b) / sum * 100 })
+    );
+    console.log(result);
+
     let mycategory = mydata[0].Category;
-    let myclients = mydata[0].DivertClients;
-    let myfeeds = mydata[0].DivertAFeed;
-    let mycompost = mydata[0].DivertCompost;
-    let mypartners = mydata[0].DivertPartNet;
-    let mylandfill = mydata[0].DivertLandfill;
+    let myclients = result[1].average.toFixed(2);
+    let myfeeds = result[2].average.toFixed(2);
+    let mycompost = result[3].average.toFixed(2);
+    let mypartners = result[4].average.toFixed(2);
+    let mylandfill = result[5].average.toFixed(2);
 
     let thedata = [
       { category: "Clients", number: myclients },
