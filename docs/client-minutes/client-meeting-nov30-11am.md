@@ -34,3 +34,7 @@
 ## Research
 
 - [ ] User Authentication
+
+## Notes
+
+- For me, see notes in Discord
