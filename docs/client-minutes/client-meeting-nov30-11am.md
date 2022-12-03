@@ -1,4 +1,4 @@
-# Client Meeting December 2nd 2022
+# Client Meeting December 1st 2022
 
 ## Follow-Ups from Last Week
 
