@@ -16,3 +16,6 @@
 - Get the tracker page metric functionality
 - On tracker page, Add a button adding another '% Diverted to:'
 - On tracker page, Integrate functionality to edit the names in '% Diverted to:'
+- On tracker page, shift the 'Description' textbox down below to second row, it will be optional
+  - Another option is to switch 'Description' and 'Category' and then label the 'Description' as optional
+- On Network page, Change 'Receiving' to [*agreed upon term*]
