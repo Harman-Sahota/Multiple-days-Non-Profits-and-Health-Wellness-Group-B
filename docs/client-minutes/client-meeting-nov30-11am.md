@@ -30,3 +30,7 @@
 - [ ] Make a public Network page
 - [ ] On Network page, add a LIFO and FIFO sortby
 - [ ] There was something about permissions on the admin page that I think Maysey understood more than anyone else.
+
+## Research
+
+- [ ] User Authentication
