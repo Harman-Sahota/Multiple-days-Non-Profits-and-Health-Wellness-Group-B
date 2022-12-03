@@ -19,3 +19,7 @@
 - On tracker page, shift the 'Description' textbox down below to second row, it will be optional
   - Another option is to switch 'Description' and 'Category' and then label the 'Description' as optional
 - On Network page, Change 'Receiving' to [*agreed upon term*]
+- On the Network page, Update the 'Search' function to search for information in the description.
+- On Network page, add a 'Filter by: Category'
+- On Admin page, the 'Sponsor' and 'Expert' will be posting the products on the 'Network page'
+- On Admin page, Users could change their profile
