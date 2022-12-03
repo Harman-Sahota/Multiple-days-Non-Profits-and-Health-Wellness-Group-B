@@ -1,0 +1,48 @@
+{% extends "postlogin/base.html" %} {% load static %} {% load postlogin_tags %}{% block content %}
+
+   
+
+    <link href="{% static 'postlogin/css/comment.css'%}" rel="stylesheet" type="text/css" />
+    <div id="main" class="container-lg col-md-auto">
+        <a id="home" class="btn btn-success" href="{% url 'network' %}" >Go Back</a> 
+       
+     <div class="container-sm col-md-auto">
+        <h2 class="display-6"> {{request.resolver_match.kwargs.product}} -  {{request.resolver_match.kwargs.qty}}  {{request.resolver_match.kwargs.units}} </h2>
+        <p class="mb-0 h6"> {{request.resolver_match.kwargs.description|replace_underscore}} </p>
+        <p class="mb-0 text-success"> {{request.resolver_match.kwargs.status}} </p>       
+    </div>
+    <div class="container-sm col-md-auto form">
+
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                
+                <textarea class="form-control" id="comment" rows="5" name="comment" placeholder="Say Something"></textarea>
+                <button type="submit" id="sub" class="btn btn-secondary" for="comment">Comment</button>
+              </div>
+
+        </form>
+    
+    </div>
+    <div class="container-sm col-md-auto form">
+       {% for i in Object %}
+      
+       <div class="card border-secondary mb-3">
+        <div class="card-header bg-transparent">{{i.6}}</div>
+        <div class="card-body">
+          <p class="card-text">
+
+            {{i.5}}
+            
+           
+
+          </p>
+        </div>
+      </div>
+       
+
+
+       {% endfor %}
+    </div>
+    </div>
+{% endblock content%}

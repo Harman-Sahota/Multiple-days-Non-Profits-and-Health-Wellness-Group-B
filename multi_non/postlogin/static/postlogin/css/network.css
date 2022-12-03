@@ -1,0 +1,98 @@
+.container-fluid{
+  padding: 2em !important;
+display: flex;
+justify-content: space-between;
+border-bottom: 1px solid rgb(197, 197, 197);
+
+}
+
+
+.input-group{
+
+  width: 40%;
+}
+
+#search{
+  width: 50%;
+  display: flex;
+justify-content: space-between;
+
+}
+
+#postbutton:hover{
+  background-color: white !important;
+  color: green !important;
+}
+
+.container-lg{
+  margin-top: 3%;
+  padding: 2em;
+  width: auto;
+  border-radius: 5px;
+  
+ 
+  /* From https://css.glass */
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.26);
+}
+
+/*footer {
+  margin-top: 20%;
+  height: auto !important;
+  max-height: 2%;
+  height: 2%;
+  position: relative;
+  overflow: hidden;
+
+}*/
+
+.container-sm{
+ 
+  margin-top: 2%;
+  display: inline-block;
+  width: 20%;
+  height: 30%;
+  padding: 2em;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+
+}
+
+
+.tablinks{
+  margin-top: 2%;
+  width: 100%;
+}
+
+
+
+.container-md{
+
+  display: flex;
+  justify-content: space-between;
+  padding: 2em;
+}
+
+.container-xl{
+  margin-left: 1%;
+}
+
+.form-group{
+  margin-top: 2%;
+}
+
+.card{
+  margin-top: 2%;
+}
+
+.text-success{
+  text-overflow: ellipsis;
+  max-width: 13ch;
+}
