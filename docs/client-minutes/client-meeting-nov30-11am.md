@@ -23,3 +23,10 @@
 - On Network page, add a 'Filter by: Category'
 - On Admin page, the 'Sponsor' and 'Expert' will be posting the products on the 'Network page'
 - On Admin page, Users could change their profile
+-
+
+## To Do
+
+- [ ] Make a public Network page
+- [ ] On Network page, add a LIFO and FIFO sortby
+- [ ] There was something about permissions on the admin page that I think Maysey understood more than anyone else.
