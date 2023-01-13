@@ -32,7 +32,7 @@ function calculateLandfillPercent() {
     Number(percentPartNet.value);
   const diff = 100 - Number(sum);
 
-  percentLandfill.value = Number(diff);
+  percentLandfill.value = Number(diff).toFixed(2);
 }
 
 function calculatePercent() {

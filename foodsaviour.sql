@@ -18,14 +18,19 @@ FLUSH PRIVILEGES;
 
 CREATE TABLE inventory (
 Description varchar(255),
-Category	varchar(255),
-Quantity	Int(55),
+Category    varchar(255),
+Quantity    Int(55),
 Qunits      varchar(255),
 DivertClients    Int(55), 
 DivertAFeed      Int(55),
 DivertCompost    Int(55), 
 DivertPartNet    Int(55),
-DivertLandfill   Int(55)
+DivertLandfill   Int(55),
+Clients          Int(55), 
+AFeed            Int(55), 
+Compost          Int(55),  
+PartNet          Int(55), 
+Landfill         Int(55)
 );
 
 CREATE TABLE `permissions` (

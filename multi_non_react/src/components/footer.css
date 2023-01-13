@@ -1,0 +1,23 @@
+footer a {
+    text-decoration: none;
+    color: grey;
+  }
+  
+  footer .nav {
+    margin: 0;
+    width: 100%;
+    justify-content: center;
+  }
+  
+  footer {
+    width: 100%;
+    position: relative;
+    bottom: 0;
+    margin: auto auto;
+    padding: 10px 0;
+    background-color: #ffffff;
+    display: table;
+    text-align: center;
+    z-index: 2;
+  }
+  

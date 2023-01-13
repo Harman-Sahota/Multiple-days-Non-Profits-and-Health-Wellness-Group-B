@@ -28,11 +28,16 @@ def tracker(request):
         newData.DivertCompost = request.POST.get("percentcompost/fert")
         newData.DivertPartNet = request.POST.get("percentpartnet")
         newData.DivertLandfill = request.POST.get("percentlandfill")
+        newData.Clients = request.POST.get("clients")
+        newData.AFeed = request.POST.get("animalFeed")
+        newData.Compost = request.POST.get("compost")
+        newData.PartNet = request.POST.get("partnet")
+        newData.Landfill = request.POST.get("landfill")
         cursor = connection.cursor()
         if request.POST.get("description"):
-            sql = "INSERT INTO inventory (Description,Category,Quantity,Qunits,DivertClients,DivertAFeed,DivertCompost,DivertPartNet,DivertLandfill) VALUES (%s, %s,%s, %s,%s,%s,%s,%s,%s)"
+            sql = "INSERT INTO inventory (Description,Category,Quantity,Qunits,DivertClients,DivertAFeed,DivertCompost,DivertPartNet,DivertLandfill,Clients,AFeed,Compost,PartNet,Landfill) VALUES (%s, %s,%s, %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
             val = (newData.Description, newData.Category, newData.Quantity,
-               newData.Qunits, newData.DivertClients, newData.DivertAFeed, newData.DivertCompost, newData.DivertPartNet, newData.DivertLandfill)
+               newData.Qunits,newData.DivertClients, newData.DivertAFeed, newData.DivertCompost, newData.DivertPartNet, newData.DivertLandfill, newData.Clients, newData.AFeed, newData.Compost, newData.PartNet, newData.Landfill)
             cursor.execute(sql, val)
         
         if request.POST.get('field'):
@@ -49,10 +54,14 @@ def tracker(request):
     sql = "SELECT Description AS Description,Category AS Category,Quantity,Qunits,DivertClients,DivertAFeed,DivertCompost,DivertPartNet,DivertLandfill FROM inventory"
     cursor.execute(sql)
     rows = cursor.fetchall()
+
+    sql2 = "SELECT Description AS Description,Category AS Category,Quantity,Qunits,Clients,AFeed,Compost,PartNet,Landfill FROM inventory"
+    cursor.execute(sql2)
+    rows2 = cursor.fetchall()
     items = []
-    for row in rows:
+    for row in rows2:
         items.append({'Description': row[0], 'Category': row[1], 'Quantity': row[2], "Qunits": row[3], "DivertClients": row[4],
-                     "DivertAFeed": row[4], "DivertCompost": row[5], "DivertPartNet": row[6], "DivertLandfill": row[7]})
+                     "DivertAFeed": row[5], "DivertCompost": row[6], "DivertPartNet": row[7], "DivertLandfill": row[8]})
 
     context = {
         'title': 'Tracker',
@@ -65,7 +74,7 @@ def tracker(request):
     # val3 = (request.session['Roles'])
     # cursor.execute(sql3,val3)
     # rows3 = cursor.fetchall()
-    print(request.session['Roles'][0])
+    
 
     
 
@@ -113,23 +122,25 @@ def profile(request):
 
 
 def admin(request):
-    cursor = connection.cursor()
-    sql = "SELECT CONCAT(FirstName, ' ', LastName) AS FirstName,Email AS Email,Roles AS Roles,Approve FROM users"
-    cursor.execute(sql)
-    rows = cursor.fetchall()
-    context = {
-        'title': 'Admin',
-        'Object': rows
-    }
 
+
+    newUser = users()
+    newUser.Approve = request.POST.getlist("approve[]")
+    newUser.Email = request.POST.getlist("id[]")
+    for i, j in zip(newUser.Approve, newUser.Email):
+            if (i == 'approve' or i == 'decline'):
+                cursor = connection.cursor()
+                sql2 = "UPDATE users SET Approve = %s WHERE id = %s"
+                val = (i, j)
+                cursor.execute(sql2, val)
     if request.method == "POST":
-        newUser = users()
-        newUser.Approve = request.POST.getlist("approve[]")
-        newUser.Email = request.POST.getlist("id[]")
+      
 
         newPerm = permissions()
         newPerm.Role = request.POST.getlist("role[]")
+
         for object in newPerm.Role:
+            
             if (object == "User non-profit managers/CEO"):
                 newPerm.Metrics = request.POST.getlist("metrics-CEO[]")
                 newPerm.Network = request.POST.getlist("network-CEO")
@@ -190,14 +201,18 @@ def admin(request):
                        newPerm.readwrite, object)
                 cursor.execute(sql, val)
 
-        for i, j in zip(newUser.Approve, newUser.Email):
-            if (i == 'approve' or i == 'decline'):
-                cursor = connection.cursor()
-                sql2 = "UPDATE users SET Approve = %s WHERE id = %s"
-                val = (i, j)
-                cursor.execute(sql2, val)
+       
+        
 
         return redirect('../../postlogin/admin')
+    cursor = connection.cursor()
+    sql = "SELECT CONCAT(FirstName, ' ', LastName) AS FirstName,Email AS Email,Roles AS Roles,Approve FROM users"
+    cursor.execute(sql)
+    rows = cursor.fetchall()
+    context = {
+        'title': 'Admin',
+        'Object': rows
+    }
 
     return render(request, 'postlogin/admin.html', context)
 
