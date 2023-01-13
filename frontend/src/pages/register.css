@@ -1,0 +1,183 @@
+.contain {
+  width: 60%;
+  height: fit-content;
+  max-height: fit-content;
+  margin-top: 25%;
+  left: 50%;
+  text-align: center;
+  align-items: center;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  border-radius: 5px;
+  background: #ffffff;
+  filter: drop-shadow(0px 25px 80px rgba(0, 0, 0, 0.2));
+  padding: 2em;
+  position: relative;
+}
+
+.progress-container {
+  background: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  margin-left: 4%;
+  max-width: 100%;
+  width: 90%;
+  padding: 2em;
+}
+
+.progress-container::before {
+  content: "";
+  position: absolute;
+  background-color: grey;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  height: 4px;
+  width: 100%;
+  z-index: 0;
+  transition: 0.4s ease;
+}
+
+.progress {
+  content: "";
+  position: absolute;
+  background-color: #cee4cf;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  height: 4px;
+  width: 0%;
+  z-index: 0;
+  transition: 0.4s ease;
+}
+
+.circle {
+  z-index: 1;
+  background-color: #ffffff;
+  color: black;
+  border-radius: 50%;
+  height: 3.125rem;
+  width: 3.125rem;
+  padding: 1em;
+  border: 3px solid grey;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.4s ease;
+}
+
+.circle.active {
+  border-color: #cee4cf;
+}
+
+.buttons {
+  width: 50%;
+  height: 50%;
+  overflow: auto;
+  margin: auto;
+  position: relative;
+  top: 50%;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+#wrapper {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50%;
+}
+
+/*# submit{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 24%;
+    margin-left: -24%;
+}*/
+.btn {
+  margin-top: 4%;
+  margin-left: 2%;
+  font-family: inherit;
+  width: 7rem;
+}
+
+.btn:focus {
+  outline: 0;
+}
+
+.btn:active {
+  transform: scale(0.97);
+  z-index: 1000;
+}
+
+/*.btn:disabled{
+    cursor: pointer;
+}*/
+
+.text-input {
+  width: 50%;
+  margin: 2% 25%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.form-check {
+  text-align: center;
+  margin-top: 2%;
+  width: 55%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2% 25%;
+  position: relative;
+}
+
+.consent {
+  margin: 2% 23%;
+}
+
+.consent .consent-text {
+  width: 30%;
+}
+
+label {
+  width: calc(100%);
+}
+
+.card {
+  border: none !important;
+  position: absolute;
+  width: 90%;
+  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 400ms ease;
+}
+#card-1 {
+  display: block;
+  transition: transform 10100ms ease;
+}
+
+#card-2 {
+  display: none;
+  transition: transform 1000ms ease;
+}
+
+#card-3 {
+  display: none;
+  transition: transform 1000ms ease;
+}
+
+textarea {
+  margin-top: 2%;
+  resize: none;
+  width: 60%;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 4%;
+}
