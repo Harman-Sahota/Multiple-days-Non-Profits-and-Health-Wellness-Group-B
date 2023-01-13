@@ -19,7 +19,7 @@ function Navbar() {
             <li><a href="">About</a></li>
             <li><a href="">Contact</a></li>
             <li id="login"><a href="login/">Login</a></li>
-            <li id="signup"><a href=""><Button className="register btn btn-outline-success" variant="outline-success">Register</Button></a></li>
+            <li id="signup"><a href="resetPassword/"><Button className="register btn btn-outline-success" variant="outline-success">Register</Button></a></li>
           </ul>
         </div>
       </header>
