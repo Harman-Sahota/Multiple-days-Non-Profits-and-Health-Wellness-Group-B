@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './home.css';
 import ort from '../images/ORT_logo.svg';
-import calender from '../images/calendar.png';
+import calendar from '../images/calendar.png';
 import user_flat from '../images/abstract-user-flat-4.png';
 
 function Home(){
@@ -19,7 +19,7 @@ function Home(){
                           </div>
                           <div className="card">
                               <a href="{% url 'login' %}"><img className="tracker_img"
-                                  src={calender} height="100px" /></a>
+                                  src={calendar} height="100px" /></a>
                               <p className="card-text">Login to access tracker</p>
                           </div>
                           <div className="card">
