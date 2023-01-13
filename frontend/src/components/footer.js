@@ -7,7 +7,7 @@ function Footer(){
 
         <div>
         <footer>
-          <div class="nav navbar-fixed-bottom">
+          <div class="nav">
             <ul>
               <li><a href="#" className="px-2">Terms of Service</a></li>
               <li><a href="#" className="px-2">Privacy Policy</a></li>
