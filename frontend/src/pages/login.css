@@ -1,8 +1,8 @@
   
-  body {
+  .body {
     /* font-size: 1.6rem; */
     height: 100vh;
-    background: url("../images/login_bg.png");
+    background: url("../images/login_bg.png") !important;
   
     /* Disabling scroll */
     /* overflow: hidden; */
@@ -16,6 +16,8 @@
     /* Disabling scroll 
     overflow: hidden;
   } */
+
+  
   
   .form-container {
     transform: translate(0, 20%);

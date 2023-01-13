@@ -30,7 +30,7 @@ function Login(){
 
       <div className="trouble">
         <span className="trouble-text text-muted">Having trouble signing in?</span>
-        <a className="trouble-reset text-danger" href="{% url 'resetpassword' %}">Reset password</a>
+        <a className="trouble-reset text-danger" href="resetPassword/">Reset password</a>
       </div>
 
       <div className="new-account">

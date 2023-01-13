@@ -2,6 +2,7 @@ import Navbar from './components/NavBar';
 import Footer  from './components/footer';
 import Home from './pages/Home';
 import Login from './pages/login';
+import ResetPassword from './pages/resetPassword';
 import './App.css';
 import {
   BrowserRouter as Router,
@@ -26,6 +27,12 @@ function App() {
       <Router>
         <Routes>
           <Route exact path='login/' element={<Login />}  />
+        </Routes>
+      </Router>
+
+      <Router>
+        <Routes>
+          <Route exact path='resetPassword/' element={<ResetPassword />}  />
         </Routes>
       </Router>
      
