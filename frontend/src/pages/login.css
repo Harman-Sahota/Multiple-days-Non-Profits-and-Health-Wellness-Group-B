@@ -1,0 +1,97 @@
+  
+  body {
+    /* font-size: 1.6rem; */
+    height: 100vh;
+    background: url("../images/login_bg.png");
+  
+    /* Disabling scroll */
+    /* overflow: hidden; */
+  }
+  
+  /* .body {
+    /* font-size: 1.6rem; 
+    height: 84vh;
+    background-image: url("/static/foodsaviour/images/login_bg.png");
+  
+    /* Disabling scroll 
+    overflow: hidden;
+  } */
+  
+  .form-container {
+    transform: translate(0, 20%);
+  }
+  
+  .form {
+    /* top: 45%; */
+    /* transform: translate(0, -50%); */
+    width: 30rem;
+    box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.1);
+  
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2.1rem;
+    padding: 3rem;
+  }
+  
+  .form-title {
+    font-weight: 700;
+  }
+  
+  .email-form,
+  .password-form {
+    width: 20rem;
+  }
+  
+  .input-text {
+    font-weight: 400;
+  }
+  
+  .trouble {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .trouble-text {
+    display: block;
+    font-size: 1rem;
+  }
+  
+  .trouble-reset {
+    display: block;
+  }
+  
+  .sign-in {
+    width: 20rem;
+    font-weight: 500;
+  }
+  
+  .new-account {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .new-account-link {
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .mg--small {
+    margin-bottom: 2rem;
+  }
+  
+  /* .text-test {
+    font-size: 10rem;
+  } */
+  
+
+  
+  /* .error {
+    border-color: red !important;
+  } */
+  
