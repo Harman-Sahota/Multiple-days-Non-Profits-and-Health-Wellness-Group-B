@@ -1,8 +1,9 @@
   
   .body {
     /* font-size: 1.6rem; */
-    height: 100vh;
+    height: 85vh;
     background: url("../images/login_bg.png") !important;
+    
   
     /* Disabling scroll */
     /* overflow: hidden; */
