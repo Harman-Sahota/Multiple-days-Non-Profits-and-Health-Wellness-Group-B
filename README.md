@@ -20,9 +20,16 @@ This team (Group B) consists of four fourth-year Computer Science students from 
 |Harman Sahota|Technical Lead|10harmansahota@gmail.com|
 
 ## Gantt Chart
+
 Click [here](https://docs.google.com/spreadsheets/d/1qnWRLLMm4y7r7I7h9rt_KXN-MSfjhDgY9-zHiGCzGig/edit?usp=sharing) to view the Gantt Chart
 
 ## Timeline
+
+### Semester #2
+
+|Week #|Summary|Resources|
+|------|-------|---------|
+|1| Conversion to React| [Client Meeting Minutes (Jan. 12)]()|
 
 ### Semester #1
 
