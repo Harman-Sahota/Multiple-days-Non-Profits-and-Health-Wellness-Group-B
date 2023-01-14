@@ -156,7 +156,8 @@ label {
   border: none !important;
   position: absolute;
   width: 80%;
-  margin-top: -40%;
+  margin-top: 10%;
+  margin-left: 10%;
   display: inline-block;
   display: flex;
   align-items: center;
@@ -166,12 +167,12 @@ label {
   border: 2px solid red;
 }
 #card_1 {
-  display: none;
+  display: block;
   transition: transform 10100ms ease;
 }
 
 #card_2 {
-  display: block;
+  display: none;
   transition: transform 1000ms ease;
 }
 

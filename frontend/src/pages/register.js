@@ -235,7 +235,7 @@ function Register() {
         <div id={registerCSS.wrapper}>
           <div className={registerCSS.buttons}>
             <button
-              className={`btn-success form-floating name-form ${registerCSS.btn}`}
+              className={`btn btn-success form-floating name-form ${registerCSS.btn}`}
               id="prev"
               disabled
               type="button"
@@ -243,14 +243,14 @@ function Register() {
               Prev
             </button>
             <button
-              className={`btn-success form-floating name-form ${registerCSS.btn}`}
+              className={`btn btn-success form-floating name-form ${registerCSS.btn}`}
               id="next"
               type="button"
             >
               Next
             </button>
             <button
-              className={`btn-success form-floating name-form ${registerCSS.btn}`}
+              className={`btn btn-success form-floating name-form ${registerCSS.btn}`}
               id="submit"
               type="submit"
               disabled
