@@ -47,4 +47,4 @@ Click [here](https://docs.google.com/spreadsheets/d/1qnWRLLMm4y7r7I7h9rt_KXN-MSf
 |11| Tracker Page <br/> Admin Page <br/> Profile Page <br/> List of Usability Tasks|[Client Meeting Minutes (Nov. 17)](docs/client-minutes/client-meeting-minutes-nov17-11am.md) <br/> [Team Meeting Minutes (Nov. 18)](docs/team-minutes/minutes_nov18.md)|
 |12| Tracker Page Con't <br/> Admin Page Con't <br/> Profile Page Con't <br/> Prototype Video| [Client Meeting Minutes (Nov.24)](client-meeting-nov24-11am.md) <br/> [Team Meeting Minutes(Nov. 25)](docs/team-minutes/minutes_nov25.md)|
 |13| Peer Testing Sessions| [Client Meeting Minutes (Nov. 30)](client-meeting-nov30-11am.md) <br/> [Team Meeting Minutes (Dec. 2)](docs/team-minutes/minutes_dec2.md)|
-|14|[Peer Testing Report](https://docs.google.com/document/d/1BVLycf7midTlMoDLcINmmu4bYdKLqhyUX6D85qVkxyE/edit?usp=share_link) <br/> Peer Evaluations|
+|14|[Peer Testing Report](docs/reports/peer-testing-report.md) <br/> Peer Evaluations|
