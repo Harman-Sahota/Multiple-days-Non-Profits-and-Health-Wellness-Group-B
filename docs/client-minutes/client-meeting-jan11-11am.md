@@ -54,3 +54,4 @@
 
 - [ ] Break down project goals
 - [ ] Review Gantt chart regularly
+- [ ] Prioritise project / crucial goals
