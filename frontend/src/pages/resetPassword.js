@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './resetPassword.css';
+import resetCSS from './resetPassword.module.css';
 import Button from 'react-bootstrap/Button';
 //import { Form } from 'react-router-dom';
 import Form from 'react-bootstrap/Form'
