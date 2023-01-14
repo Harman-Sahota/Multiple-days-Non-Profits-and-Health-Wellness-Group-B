@@ -51,3 +51,5 @@
 - fill in the 499 class times in the when2meet
 
 ## Gema's add-ons
+
+- [ ] Break down project goals
