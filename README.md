@@ -2,7 +2,7 @@
 
 *Created: September 29, 2022*
 
-*Last updated: November 21, 2022*
+*Last updated: Januarty 13, 2023*
 
 ## Overview
 
@@ -20,9 +20,18 @@ This team (Group B) consists of four fourth-year Computer Science students from 
 |Harman Sahota|Technical Lead|10harmansahota@gmail.com|
 
 ## Gantt Chart
+
 Click [here](https://docs.google.com/spreadsheets/d/1qnWRLLMm4y7r7I7h9rt_KXN-MSfjhDgY9-zHiGCzGig/edit?usp=sharing) to view the Gantt Chart
 
 ## Timeline
+
+### Semester #2
+
+|Week #|Summary|Resources|
+|------|-------|---------|
+|1| Page Conversion to React| [Client Meeting Minutes (Jan. 12)](docs/client-minutes/client-meeting-jan11-11am.md)|
+
+### Semester #1
 
 |Week #|Summary|Resources|
 |------|-------|---------|
@@ -36,4 +45,6 @@ Click [here](https://docs.google.com/spreadsheets/d/1qnWRLLMm4y7r7I7h9rt_KXN-MSf
 |9| Project Change <br/> Begin coding homepage, login, and registration pages <br/> Create [Gantt Chart](https://docs.google.com/spreadsheets/d/1qnWRLLMm4y7r7I7h9rt_KXN-MSfjhDgY9-zHiGCzGig/edit?usp=sharing)| [Client Meeting Minutes (Oct. 31)](docs/client-minutes/client-meeting-oct31-1245pm.md) <br/> [Client Meeting Minutes (Nov. 3)](docs/client-minutes/client-meeting-nov3-11am.md) <br/> [Team Meeting Minutes (Nov. 4)](docs/team-minutes/minutes_nov4.md)|
 |10| **Reading Week** <br/> Complete Login Page <br/> Refine Homepage <br/> Refine Registration Page <br/> Designed Overview Page <br/> Completed Barb's [Research](docs/research/FoodSaviourResearch.md)|
 |11| Tracker Page <br/> Admin Page <br/> Profile Page <br/> List of Usability Tasks|[Client Meeting Minutes (Nov. 17)](docs/client-minutes/client-meeting-minutes-nov17-11am.md) <br/> [Team Meeting Minutes (Nov. 18)](docs/team-minutes/minutes_nov18.md)|
-|12| Tracker Page Con't <br/> Admin Page Con't <br/> Profile Page Con't <br/> Prototype Video
+|12| Tracker Page Con't <br/> Admin Page Con't <br/> Profile Page Con't <br/> Prototype Video| [Client Meeting Minutes (Nov.24)](client-meeting-nov24-11am.md) <br/> [Team Meeting Minutes(Nov. 25)](docs/team-minutes/minutes_nov25.md)|
+|13| Peer Testing Sessions| [Client Meeting Minutes (Nov. 30)](client-meeting-nov30-11am.md) <br/> [Team Meeting Minutes (Dec. 2)](docs/team-minutes/minutes_dec2.md)|
+|14|[Peer Testing Report](https://docs.google.com/document/d/1BVLycf7midTlMoDLcINmmu4bYdKLqhyUX6D85qVkxyE/edit?usp=share_link) <br/> Peer Evaluations|
