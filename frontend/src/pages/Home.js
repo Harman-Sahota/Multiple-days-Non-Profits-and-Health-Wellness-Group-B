@@ -1,8 +1,11 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './home.css';
+import HomeCSS from './home.module.css';
 import ort from '../images/ORT_logo.svg';
 import calender from '../images/calendar.png';
 import user_flat from '../images/abstract-user-flat-4.png';
+
+
+const b = "{HomeCSS.card-text.h-200}";
 
 function Home(){
    
@@ -10,22 +13,22 @@ function Home(){
         
        <> 
        <section>
-              <div className="container">
+              <div className={HomeCSS.container}>
                   <div className="row d-flex h-100 align-items-center justify-content-center text-center">
                       <div className="card-group">
-                          <div className="card">
-                              <img src={ort} height="200px" />
+                          <div className={HomeCSS.card}>
+                              <img src={ort} height="200px" className={HomeCSS.normal_img}  />
 
                           </div>
-                          <div className="card">
-                              <a href="login/"><img className="tracker_img"
+                          <div className={HomeCSS.card}>
+                              <a href="login/"><img className={HomeCSS.tracker_img}
                                   src={calender} height="100px" /></a>
-                              <p className="card-text">Login to access tracker</p>
+                              <p className={b}>Login to access tracker</p>
                           </div>
-                          <div className="card">
-                              <a href="{% url 'register' %}"><img className="tracker_img"
+                          <div className={HomeCSS.card}>
+                              <a href="{% url 'register' %}"><img className={HomeCSS.tracker_img}
                                   src={user_flat} height="100px" /></a>
-                              <p className="card-text">Create an account</p>
+                              <p className={b}>Create an account</p>
                           </div>
                       </div>
                   </div>
