@@ -49,3 +49,7 @@
 - without signing in - on home page view data that other organizations have agreed to share
 
 - fill in the 499 class times in the when2meet
+
+## Gema's add-ons
+
+- [ ] Break down project goals
