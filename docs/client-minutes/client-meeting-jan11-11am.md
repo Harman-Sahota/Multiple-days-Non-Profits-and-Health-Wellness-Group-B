@@ -53,3 +53,4 @@
 ## Gema's add-ons
 
 - [ ] Break down project goals
+- [ ] Review Gantt chart regularly
