@@ -29,7 +29,7 @@ Click [here](https://docs.google.com/spreadsheets/d/1qnWRLLMm4y7r7I7h9rt_KXN-MSf
 
 |Week #|Summary|Resources|
 |------|-------|---------|
-|1| Conversion to React| [Client Meeting Minutes (Jan. 12)]()|
+|1| Page Conversion to React| [Client Meeting Minutes (Jan. 12)](docs/client-minutes/client-meeting-jan11-11am.md)|
 
 ### Semester #1
 
