@@ -2,7 +2,7 @@
 
 *Created: September 29, 2022*
 
-*Last updated: Januarty 13, 2023*
+*Last updated: Januarty 16, 2023*
 
 ## Overview
 
@@ -23,13 +23,15 @@ This team (Group B) consists of four fourth-year Computer Science students from 
 
 Click [here](https://docs.google.com/spreadsheets/d/1qnWRLLMm4y7r7I7h9rt_KXN-MSfjhDgY9-zHiGCzGig/edit?usp=sharing) to view the Gantt Chart
 
+>Please make sure you are on the correct sheet (2022W2) to view the Gantt chart for Term 2. This Gantt chart will be continuously updated throughout the term.
+
 ## Timeline
 
 ### Semester #2
 
 |Week #|Summary|Resources|
 |------|-------|---------|
-|1| Page Conversion to React| [Client Meeting Minutes (Jan. 12)](docs/client-minutes/client-meeting-jan11-11am.md)|
+|1| Begin Page Conversion to React| [Client Meeting Minutes (Jan. 12)](docs/client-minutes/client-meeting-jan11-11am.md)|
 
 ### Semester #1
 
