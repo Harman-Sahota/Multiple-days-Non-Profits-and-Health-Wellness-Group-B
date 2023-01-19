@@ -1,79 +1,74 @@
-import React from 'react';
-import { Link } from 'react-router-dom'
-import "bootstrap/dist/css/bootstrap.min.css";
-import Button from 'react-bootstrap/Button';
-import ProgressBar from 'react-bootstrap/ProgressBar';
-const Step1 = ({ handleNext }) => {
+import React from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
+function SignUpInfo({ formData, setFormData }) {
+  return (
 
-    const myStyle = {
-        fontSize: "10px",
-        color: "red",
-        display: "none",
-        minHeight: "10px",
-    };
 
-    return (
+    <div className="sign-up-container">
+          <input
+        className="text_input"
+        id="firstname"
+        type="text"
+        placeholder="First Name"
+        value={formData.firstname}
+        onChange={(event) => 
+          setFormData({ ...formData, firstName: event.target.value })
+         
+        }
+      />
+         <input
+          id="lastname"
+        className="text_input"
+        type="text"
+        placeholder="Last Name"
+        value={formData.lastname}
+        onChange={(event) =>
+          setFormData({ ...formData, lastName: event.target.value })
+        }
+      />
+      <input
+      id="email"
+        className="text_input"
+        type="text"
+        placeholder="Email"
+        value={formData.email}
+        onChange={(event) =>
+          setFormData({ ...formData, email: event.target.value })
+        }
+      />
 
-        <form>
-            <h3 className='animations'>Personal Details</h3>
-            <br/>
-            <ProgressBar animated now={20} className='animations' variant='info'/>
-            <br/>
-            <input
-                type="text"
-                className="form-control form-floating name-form text_input"
-                id="firstname"
-                name="firstname"
-                placeholder="First Name"
-            />
-            <input
-                type="text"
-                className="form-control form-floating name-form text_input"
-                id="lastname"
-                name="lastname"
-                placeholder="Last Name"
-            />
-            <input
-                type="email"
-                className="form-control form-floating name-form text_input"
-                name="email"
-                placeholder="Email"
-            />
-            <input
-                type="password"
-                className="form-control form-floating name-form text_input"
-                id="password"
-                name="password"
-                placeholder="Password"
-            />
-            <span id="passerror1" style={myStyle}>
-                [7 to 16 chars which contain only characters, numerics,
-                underscore & first character must be a letter]
-            </span>
-            <input
-                type="password"
-                className="form-control form-floating name-form text_input"
-                id="confirm-password"
-                placeholder="Confirm Password"
-            />
-            <span id="passerror3" style={myStyle}>
-                Password and Confirm password not matched.
-            </span>
-
-            <input
-                type="text"
-                className="form-control form-floating name-form text_input"
-                id="organization"
-                name="organization"
-                placeholder="Organization Name"
-            />
-            <div className='Buttons'>
-                <Button onClick={handleNext} className='btn' variant='btn btn-success'>Next</Button>
-            </div>
-
-        </form>
-
-    );
+      <input
+       className="text_input"
+        type="password"
+        id = "password"
+        placeholder="Password"
+        value={formData.password}
+        onChange={(event) =>
+          setFormData({ ...formData, password: event.target.value })
+        }
+      />
+      <input 
+      className="text_input"
+        type="password"
+        id="confirm"
+        placeholder="Confirm Password"
+        value={formData.confirmPassword}
+        onChange={(event) =>
+          setFormData({ ...formData, confirmPassword: event.target.value })
+        }
+      />
+      <input 
+      id="org"
+      className="text_input"
+        type="text"
+        placeholder="Organization"
+        value={formData.organization}
+        onChange={(event) =>
+          setFormData({ ...formData, organization: event.target.value })
+        }
+      />
+    </div>
+  );
 }
 
-export default Step1;
+export default SignUpInfo;

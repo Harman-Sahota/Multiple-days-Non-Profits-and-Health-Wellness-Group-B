@@ -1,105 +1,159 @@
-
 @keyframes hue {
 
   0% {
-      opacity: 0;
+    opacity: 0;
   }
 
   100% {
-      opacity: 1;
+    opacity: 1;
   }
-
-}
-.card{
-    width: 50%;
-    height: fit-content;
-    max-height: fit-content;
-    padding: 4%;
-    margin: 23% auto;
-    left: 50%;
-    text-align: center;
-    align-items: center;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    background: #ffffff;
-    border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    position: absolute;
-    transition: transform 400ms ease;  
-
-
 }
 
-.btn {
-   
-    font-family: inherit;
-    width: 6rem;
-  }
-  .btn:focus {
-    outline: 0;
-  }
-  
-  .btn:active {
-    transform: scale(0.97);
-    z-index: 1000;
-  }
-  
-  .text_input {
-    width: 90%;
-    margin-top: 3%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-  }
-
-
-  .form-check {
-    text-align: center;
-    margin-top: 2%;
-    width: 100% !important;
-    margin: 3% 3%;  
-
- 
+body {
+  overflow: hidden;
+  font-family: Roboto, sans-serif !important;
 }
 
-.btn:hover{
-  transition: 0.05s ease-in-out all;
+h1 {
+  animation: 160ms ease-out 1s 1 hue;
 }
 
-.animations {
-  transition: 0.5s ease-in-out all;
-  animation: 200ms linear 0s hue;
+.form {
+  width: 100%;
+  height: fit-content;
+  display: flexbox;
+  height: 90vh;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  background-image: url('../images/login_bg.png') !important;
+
+}
+
+.form-container {
+  width: 45%;
+  height: fit-content;
+  max-height: fit-content;
+  margin-top: 23%;
+  left: 50%;
+  text-align: center;
+  align-items: center;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  border-radius: 5px;
+  background: #ffffff;
+  filter: drop-shadow(0px 25px 80px rgba(0, 0, 0, 0.2));
+  position: absolute;
+  padding: 3%;
+
+}
+
+.form-container .footer {
+  flex: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 
-  .Buttons {
-   display: flex;
-   align-items: center;
-   justify-content: space-evenly;
 
-   margin-top: 16%;
-   
-  }
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
 
-h3{
-    padding: 4%;
-    width: 80%;
+/* PROGRESS BAR */
+.progressbar {
+  width: 90%;
+  height: 40%;
+  transition: 0.4s ease;
+  background-color: #cee4cf;
+  margin-bottom: 10%;
+  border-radius: 16px;
 
 }
+
+.progressbar div {
+  width: 33.3%;
+  height: 100%;
+  background-color: green;
+  transition: 0.4s ease;
+}
+
 
 label {
-    width: calc(100%);
+  width: calc(100%);
 }
 
 textarea {
-    margin-top: 2%;
-    resize: none;
-    width: 100%;
-    padding: 6%;
-    border: 2px solid rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    padding: 4%;
+
+  resize: none;
+  width: 70%;
+  padding: 6%;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+
 }
 
+.error {
+  border: 1px solid red;
+}
+
+.success {
+  border: 1px solid green;
+}
+
+.text_input {
+  width: 50%;
+  margin: 3% 25%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border-radius: 5px;
+  padding: 1%;
+}
+
+
+.form-check {
+  text-align: center;
+  margin-top: 2%;
+  width: 55%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2% 25%;
+  position: relative;
+}
+
+
+.btn {
+  margin-top: 4%;
+  margin-left: 2%;
+  font-family: inherit;
+  width: 7rem;
+}
+
+.btn:focus {
+  outline: 0;
+}
+
+.btn:active {
+  transform: scale(0.97);
+  z-index: 1000;
+}
+
+.consent {
+  margin: 2% 23%;
+}
+
+.consent .consent_text {
+  width: 30%;
+}
+
+label {
+  width: calc(100%);
+}
