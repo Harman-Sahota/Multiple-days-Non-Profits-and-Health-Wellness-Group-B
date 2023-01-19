@@ -32,11 +32,11 @@ function App() {
       </Router> 
 
       
-      {/* <Router>
+       <Router>
         <Routes>
           <Route exact path="resetPassword/" element={<ResetPassword />} />
         </Routes>
-      </Router> */}
+      </Router> 
 
       <Footer />
     </>
