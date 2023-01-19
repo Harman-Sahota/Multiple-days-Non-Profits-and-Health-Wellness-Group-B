@@ -2,8 +2,8 @@
 
   .body {
     /* font-size: 1.6rem; */
+    background-image: url('../images/login_bg.png');
     height: 85vh;
-    background: url("../images/login_bg.png") !important;
     font-family: "Poppins", sans-serif;
     
   
@@ -23,7 +23,7 @@
   
   
   .form_container {
-    transform: translate(0, 20%);
+    transform: translate(0, 15%);
     
   }
   

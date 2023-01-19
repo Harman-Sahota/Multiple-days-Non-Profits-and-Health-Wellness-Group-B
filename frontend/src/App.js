@@ -3,7 +3,7 @@ import Footer from "./components/footer";
 import Home from "./pages/Home";
 import Login from "./pages/login";
 import ResetPassword from "./pages/resetPassword";
-import Register from "./pages/register";
+import Register from "./pages/Register";
 
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -15,7 +15,7 @@ function App() {
 
       <Router>
         <Routes>
-          <Route exact path="/" element={<Home />} />
+          <Route exact path="/" element={<Home title="Home"/>} />
         </Routes>
       </Router>
 
@@ -25,17 +25,18 @@ function App() {
         </Routes>
       </Router>
 
-      <Router>
+       <Router>
         <Routes>
-          <Route exact path="register/" element={<Register />} />
+          <Route exact path="/register" element={<Register />} />
         </Routes>
-      </Router>
+      </Router> 
 
-      <Router>
+      
+      {/* <Router>
         <Routes>
           <Route exact path="resetPassword/" element={<ResetPassword />} />
         </Routes>
-      </Router>
+      </Router> */}
 
       <Footer />
     </>

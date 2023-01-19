@@ -1,0 +1,113 @@
+
+@keyframes hue {
+
+  0% {
+      opacity: 0;
+  }
+
+  100% {
+      opacity: 1;
+  }
+
+}
+ProgressBar{
+border: 2px solid red !important;
+}
+
+h3{
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+
+.card{
+    width: 50%;
+    height: fit-content;
+    max-height: fit-content;
+    padding: 4%;
+    margin: 23% auto;
+    left: 50%;
+    text-align: center;
+    align-items: center;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    border-radius: 16px;
+    background: #ffffff;
+    filter: drop-shadow(0px 25px 80px rgba(0, 0, 0, 0.2));
+    position: absolute;
+    transition: transform 400ms ease;  
+
+
+}
+
+.btn {
+   
+    font-family: inherit;
+    width: 6rem;
+  }
+  .btn:focus {
+    outline: 0;
+  }
+  
+  .btn:active {
+    transform: scale(0.97);
+    z-index: 1000;
+  }
+  
+  .text_input {
+    width: 90%;
+    margin-top: 3%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+
+  .form-check {
+    text-align: center;
+    margin-top: 2%;
+    width: 100% !important;
+    margin: 3% 3%;  
+
+ 
+}
+
+.btn:hover{
+  transition: 0.05s ease-in-out all;
+}
+
+.animations {
+  transition: 0.5s ease-in-out all;
+  animation: 200ms linear 0s hue;
+}
+
+
+  .Buttons {
+   display: flex;
+   align-items: center;
+   justify-content: space-evenly;
+
+   margin-top: 16%;
+   
+  }
+
+h3{
+    padding: 4%;
+    width: 80%;
+
+}
+
+label {
+    width: calc(100%);
+}
+
+textarea {
+    margin-top: 2%;
+    resize: none;
+    width: 100%;
+    padding: 6%;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 4%;
+}
+
