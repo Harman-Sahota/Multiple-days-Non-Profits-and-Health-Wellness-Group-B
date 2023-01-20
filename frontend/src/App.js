@@ -36,6 +36,13 @@ function App() {
           <Route exact path="resetPassword/" element={<ResetPassword />} />
         </Routes>
       </Router>
+      
+      <Router>
+        <Routes>
+          <Route exact path="network/" element={<SearchBar />} />
+        </Routes>
+      </Router>
+
 
       <Footer />
     </>
