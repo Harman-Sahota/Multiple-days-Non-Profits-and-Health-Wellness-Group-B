@@ -6,6 +6,7 @@ import ResetPassword from "./pages/resetPassword";
 import Register from "./pages/Register";
 import Profile from "./pages/profile";
 import SearchBar from "./pages/network";
+import Comment from "./pages/comment";
 
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -41,8 +42,9 @@ function App() {
           <Route exact path="network/" element={<><Navbar /><SearchBar /><Footer /></>} />
         </Routes>
       </Router>
-      </>
- 
+
+      
+    </>
   );
 }
 

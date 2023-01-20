@@ -17,6 +17,8 @@ function Profile() {
                                  <br />
                              </div>
                              <div className="card-body">
+                                <p>User's full name will be displayed here.</p>
+                                <p>User's email will be displayed here.</p>
                                  {/*<p><b>{{ request.session.FirstName }} {{ request.session.LastName }}</b></p>
                                  <p>{{ request.session.Email }}</p>*/}
                              </div>
@@ -26,23 +28,6 @@ function Profile() {
                          <div className="card">
                              <div className="card-header bg-transparent text-center"><b>Profile</b></div>
                              <div className="card-body">
-                                 <div className="row">
-                                     <div className="col-4">
-                                         <p>Account Status: </p>
-                                     </div>
-                                     <div className="col-8">
-                                         {/* {% if request.session.Status == "approve" %}
-                                         <p>Approved</p>
-                                         {% elif request.session.Status == "decline" %}
-                                         <p style="margin-bottom: 0;">Declined</p>
-                                         <span style="font-size: 0.75em; color: red;">If this was a mistake, please contact your admin.</span>
-                                         {% else  %}
-                                         <p>Pending</p>
-                                         {% endif %} 
-                                */}
-                                     </div>
-                                 </div>
-                                 <hr/>
                                      <div className="row">
                                          <div className="col-4">
                                              <p>Name: </p>
