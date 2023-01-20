@@ -1,268 +1,218 @@
-import "bootstrap/dist/css/bootstrap.min.css";
-import registerCSS from "./register.module.css";
-import "./register"
-function Register() {
-  const myStyle = {
-    fontSize: "10px",
-    color: "red",
-    display: "none",
-    minHeight: "10px",
+import React, { useState } from "react";
+
+import SignUpInfo from "../components/Step1";
+import PersonalInfo from "../components/Step2";
+import OtherInfo from "../components/Step3";
+import Button from "react-bootstrap/Button";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './Register.css';
+function Form() {
+  const [page, setPage] = useState(0);
+
+  
+
+
+
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    confirmPassword: "",
+    firstName: "",
+    lastName: "",
+    consented: "",
+    roles: [],
+    organization: ""
+
+  });
+
+
+  const FormTitles = ["Personal Info", "Pick your roles", "Consent"];
+
+  const PageDisplay = () => {
+    if (page === 0) {
+      return <SignUpInfo formData={formData} setFormData={setFormData} />;
+    } else if (page === 1) {
+      return <PersonalInfo formData={formData} setFormData={setFormData} />;
+    } else {
+      return <OtherInfo formData={formData} setFormData={setFormData} />;
+    }
   };
 
   return (
-    <div className={`col-md-auto ${registerCSS.contain}`}>
-      <h3>Create An Account</h3>
-      <div className={registerCSS.progress_container}>
-        <div className={registerCSS.progress} id="progress">
-          {" "}
-        </div>
-        <div className={`active ${registerCSS.circle}`}>
-          <i className="fa-solid fa-1"></i>
-        </div>
-        <div className={` ${registerCSS.circle}`}>
-          <i className="fa-solid fa-2"></i>
-        </div>
-        <div className={`${registerCSS.circle}`}>
-          <i className="fa-solid fa-3"></i>
+    <div className="body">
+      <div className="form">
+        <div className="form-container">
+
+          <div className="header">
+            <h1>{FormTitles[page]}</h1>
+          </div>
+          <div className="progressbar">
+
+            <div
+              style={{ width: page === 0 ? "33.3%" : page == 1 ? "66.6%" : "100%" }}
+            ></div>
+          </div>
+          <div className="body">{PageDisplay()}</div>
+          <div className="footer">
+            <Button
+              variant="btn btn-success"
+              disabled={page == 0}
+              onClick={() => {
+                setPage((currPage) => currPage - 1);
+               
+                 
+
+                
+              }}
+            >
+              Back
+            </Button>
+            <Button
+              id = "submit"
+              variant="btn btn-success"
+              onClick={(e) => {
+
+                if (page === FormTitles.length - 1) {
+                  console.log(formData);
+                } else {
+
+                  var EmailValidRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+                  var PasswordRegex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
+
+                  if (page === 0) {
+                    if (formData.firstName != "" && formData.lastName != "" && !/\d/.test(formData.firstName) && !/\d/.test(formData.lastName) && formData.email != "" && formData.email.match(EmailValidRegex) && formData.password != "" && formData.password.match(PasswordRegex) && formData.confirmPassword == formData.password && formData.organization != "") {
+                      setPage((currPage) => currPage + 1);
+                    }
+
+
+                    if (formData.firstName == "" || formData.lastName == "" || formData.email == "" || formData.password == "" || formData.organization == "" || formData.confirmPassword == "") {
+                      window.alert('fields cannot be empty');
+                    }
+
+                    if (/\d/.test(formData.lastName) || /\d/.test(formData.lastName)) {
+                      window.alert('First Name and Last Name cannot have numbers, please check if you entered a number in one of these fields');
+                    }
+
+
+
+
+                    if (formData.firstName == "" || /\d/.test(formData.firstName)) {
+
+                      if (document.getElementById('firstname').hasAttribute('success'))
+                        document.getElementById('firstname').classList.remove('success');
+                      document.getElementById('firstname').classList.add('error');
+
+                    } else {
+
+                      if (document.getElementById('firstname').hasAttribute('error'))
+                        document.getElementById('firstname').classList.remove('error');
+                      document.getElementById('firstname').classList.add('success');
+
+                    }
+
+                    if (formData.lastName == "" || /\d/.test(formData.lastName)) {
+
+                      if (document.getElementById('lastname').hasAttribute('success'))
+                        document.getElementById('lastname').classList.remove('success');
+                      document.getElementById('lastname').classList.add('error');
+
+                    } else {
+
+                      if (document.getElementById('lastname').hasAttribute('error'))
+                        document.getElementById('lastname').classList.remove('error');
+                      document.getElementById('lastname').classList.add('success');
+                    }
+
+
+                    if (formData.email == "" || !formData.email.match(EmailValidRegex)) {
+                      if (document.getElementById('email').hasAttribute('success'))
+                        document.getElementById('email').classList.remove('success');
+                      document.getElementById('email').classList.add('error');
+                      if (!formData.email.match(EmailValidRegex) && formData.email != "") {
+                        window.alert('email is not valid');
+                      }
+
+                    } else {
+
+                      if (document.getElementById('email').hasAttribute('error'))
+                        document.getElementById('email').classList.remove('error');
+                      document.getElementById('email').classList.add('success');
+                    }
+
+                    if (formData.password == "" || !formData.password.match(PasswordRegex)) {
+                      if (document.getElementById('password').hasAttribute('success'))
+                        document.getElementById('password').classList.remove('success');
+                      document.getElementById('password').classList.add('error');
+                      if (!formData.email.match(PasswordRegex) && formData.password != "") {
+                        window.alert('Password Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters');
+                      }
+
+                    } else {
+
+                      if (document.getElementById('password').hasAttribute('error'))
+                        document.getElementById('password').classList.remove('error');
+                      document.getElementById('password').classList.add('success');
+                    }
+
+                    if (!(formData.confirmPassword == formData.password) || formData.confirmPassword == "") {
+                      if (document.getElementById('confirm').hasAttribute('success'))
+                        document.getElementById('confirm').classList.remove('success');
+                      document.getElementById('confirm').classList.add('error');
+                      if (formData.confirmPassword != "")
+                        window.alert('confirm password doesnt match password')
+
+                    } else {
+
+                      if (document.getElementById('confirm').hasAttribute('error'))
+                        document.getElementById('confirm').classList.remove('error');
+                      document.getElementById('confirm').classList.add('success');
+                    }
+
+                    if (formData.organization == "") {
+
+                      if (document.getElementById('org').hasAttribute('success'))
+                        document.getElementById('org').classList.remove('success');
+                      document.getElementById('org').classList.add('error');
+
+                    } else {
+
+                      if (document.getElementById('org').hasAttribute('error'))
+                        document.getElementById('org').classList.remove('error');
+                      document.getElementById('org').classList.add('success');
+
+                    }
+                  }
+
+
+
+
+                  if (page === 1) {
+                 
+                    if (formData.roles.length == '0') {
+                      window.alert('you must pick atleast one role');
+                      document.getElementById('flexCheckDefault1').classList.add('error');
+                      document.getElementById('flexCheckDefault2').classList.add('error');
+                      document.getElementById('flexCheckDefault3').classList.add('error');
+                      document.getElementById('flexCheckDefault4').classList.add('error');
+                      document.getElementById('flexCheckDefault5').classList.add('error');
+                      document.getElementById('flexCheckDefault6').classList.add('error');
+
+                    } else {
+                      setPage((currPage) => currPage + 1);
+                    }
+                  }
+
+
+                
+              }}}
+            >
+              {page === FormTitles.length - 1 ? "Submit" : "Next"}
+            </Button>
+          </div>
         </div>
       </div>
-      <form className="form-inside" action="" method="post" id="register">
-        <div className="card-group">
-          <div className={`card-1 active col-md-auto ${registerCSS.card}`} id={registerCSS.card_1}>
-            <div className="card-body">
-              <input
-                type="text"
-                className={`form-control form-floating name-form ${registerCSS.text_input}`}
-                id="firstname"
-                name="firstname"
-                placeholder="First Name"
-              />
-              <input
-                type="text"
-                className={`form-control form-floating name-form ${registerCSS.text_input}`}
-                id="lastname"
-                name="lastname"
-                placeholder="Last Name"
-              />
-              <input
-                type="email"
-                className={`form-control form-floating name-form ${registerCSS.text_input}`}
-                id="email"
-                name="email"
-                placeholder="Email"
-              />
-              <input
-                type="password"
-                className={`form-control form-floating name-form ${registerCSS.text_input}`}
-                id="password"
-                name="password"
-                placeholder="Password"
-              />
-              <span id="passerror1" style={myStyle}>
-                [7 to 16 chars which contain only characters, numerics,
-                underscore & first character must be a letter]
-              </span>
-              <input
-                type="password"
-                className={`form-control form-floating name-form ${registerCSS.text_input}`}
-                id="confirm-password"
-                placeholder="Confirm Password"
-              />
-              <span id="passerror3" style={myStyle}>
-                Password and Confirm password not matched.
-              </span>
-
-              <input
-                type="text"
-                className={`form-control form-floating name-form ${registerCSS.text_input}`}
-                id="organization"
-                name="organization"
-                placeholder="Organization Name"
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className="card-group">
-          <div className={`card-2 active col-md-auto ${registerCSS.card}`} id={registerCSS.card_2}>
-            <div className="card-body">
-              <h5>Choose your roles:</h5>
-
-              <div className={`form-check  ${registerCSS.form_check}`}>
-                <input
-                  className="form-check-input flexCheckDefault"
-                  type="checkbox"
-                  id="flexCheckDefault1"
-                  onchange="validateRoles()"
-                  name="roles[]"
-                  value="user non-profit managers/CEO"
-                />
-                <label className="form-check-label" for="flexCheckDefault1">
-                  user non-profit managers/CEO
-                </label>
-              </div>
-              <div className={`form-check  ${registerCSS.form_check}`}>
-                <input
-                  className="form-check-input flexCheckDefault"
-                  type="checkbox"
-                  id="flexCheckDefault2"
-                  onchange="validateRoles()"
-                  name="roles[]"
-                  value="user non-profit warehouse boss"
-                />
-                <label className="form-check-label" for="flexCheckDefault2">
-                  user non-profit warehouse boss
-                </label>
-              </div>
-              <div className={`form-check  ${registerCSS.form_check}`}>
-                <input
-                  className="form-check-input flexCheckDefault"
-                  type="checkbox"
-                  id="flexCheckDefault3"
-                  onchange="validateRoles()"
-                  name="roles[]"
-                  value="user non-profit volunteer"
-                />
-                <label className="form-check-label" for="flexCheckDefault3">
-                  user non-profit volunteer
-                </label>
-              </div>
-              <div className={`form-check  ${registerCSS.form_check}`}>
-                <input
-                  className="form-check-input flexCheckDefault"
-                  type="checkbox"
-                  id="flexCheckDefault4"
-                  onchange="validateRoles()"
-                  name="roles[]"
-                  value="sponsors"
-                />
-                <label className="form-check-label" for="flexCheckDefault4">
-                  sponsors
-                </label>
-              </div>
-              <div className={`form-check  ${registerCSS.form_check}`}>
-                <input
-                  className="form-check-input flexCheckDefault"
-                  type="checkbox"
-                  id="flexCheckDefault5"
-                  onchange="validateRoles()"
-                  name="roles[]"
-                  value="admin"
-                />
-                <label className="form-check-label" for="flexCheckDefault5">
-                  admin
-                </label>
-              </div>
-              <div className={`form-check  ${registerCSS.form_check}`}>
-                <input
-                  className="form-check-input flexCheckDefault"
-                  type="checkbox"
-                  id="flexCheckDefault6"
-                  onchange="validateRoles()"
-                  name="roles[]"
-                  value="experts "
-                />
-                <label className="form-check-label" for="flexCheckDefault6">
-                  experts
-                </label>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="card-group">
-          <div className={`card-3 active col-md-auto ${registerCSS.card}`} id={registerCSS.card_3}>
-            <div className="card-body">
-              <h5>Consent:</h5>
-              <textarea readonly rows="5" cols="auto">
-                The information you enter will be stored in a secure database
-                that meets Canadian privacy regulations. If you have any
-                concerns, please contact UBC Behavioural Research Ethics Council
-                (BREB) about Barb Marcolin's study or call Dr. Marcolin at
-                (250)807-9637 to ask any questions.
-              </textarea>
-              <div className={`consent  ${registerCSS.form_check}`}>
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  id="consent-check1"
-                  onchange="changeconsent1()"
-                  name="consent"
-                  value="consented"
-                />
-                <label
-                  className="form-check-label consent-text"
-                  for="consent-check1"
-                >
-                  I accept
-                </label>
-              </div>
-              <div className={`consent  ${registerCSS.form_check}`}>
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  id="consent-check2"
-                  onchange="changeconsent2()"
-                  name="consent-disagree"
-                  value="not-consented"
-                />
-                <label
-                  className={`form-check-label ${registerCSS.consent_text}`}
-                  for="consent-check2"
-                >
-                  I refuse
-                </label>
-              </div>
-              <div className={`consent  ${registerCSS.form_check}`}>
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  id="consent-check3"
-                  onchange="changeconsent3()"
-                  name="consent-disagree"
-                  value="info-consented"
-                />
-                <label
-                  className={`form-check-label ${registerCSS.consent_text}`}
-                  for="consent-check3"
-                >
-                  More Info
-                </label>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div id={registerCSS.wrapper}>
-          <div className={registerCSS.buttons}>
-            <button
-              className={`btn btn-success form-floating name-form ${registerCSS.btn}`}
-              id="prev"
-              disabled
-              type="button"
-            >
-              Prev
-            </button>
-            <button
-              className={`btn btn-success form-floating name-form ${registerCSS.btn}`}
-              id="next"
-              type="button"
-            >
-              Next
-            </button>
-            <button
-              className={`btn btn-success form-floating name-form ${registerCSS.btn}`}
-              id="submit"
-              type="submit"
-              disabled
-              form="register"
-            >
-              Register
-            </button>
-          </div>
-        </div>
-      </form>
     </div>
   );
 }
 
-export default Register;
+export default Form;

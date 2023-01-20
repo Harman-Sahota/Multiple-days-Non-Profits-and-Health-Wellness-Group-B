@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/static/css/main.4000dcf0.css",
-    "main.js": "/static/js/main.5994fc58.js",
+    "main.css": "/static/css/main.89bb49dd.css",
+    "main.js": "/static/js/main.ebfb5914.js",
     "static/js/787.cda612ba.chunk.js": "/static/js/787.cda612ba.chunk.js",
     "static/media/login_bg.png": "/static/media/login_bg.158e15d067cd25a1c7cd.png",
     "static/media/abstract-user-flat-4.png": "/static/media/abstract-user-flat-4.b95230eee6c958dbea8a.png",
     "static/media/ORT_logo.svg": "/static/media/ORT_logo.6b5c131e91955983ece7613336ed68b6.svg",
     "static/media/calendar.png": "/static/media/calendar.ebf373e6fb5aa2935c1d.png",
     "index.html": "/index.html",
-    "main.4000dcf0.css.map": "/static/css/main.4000dcf0.css.map",
-    "main.5994fc58.js.map": "/static/js/main.5994fc58.js.map",
+    "main.89bb49dd.css.map": "/static/css/main.89bb49dd.css.map",
+    "main.ebfb5914.js.map": "/static/js/main.ebfb5914.js.map",
     "787.cda612ba.chunk.js.map": "/static/js/787.cda612ba.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.4000dcf0.css",
-    "static/js/main.5994fc58.js"
+    "static/css/main.89bb49dd.css",
+    "static/js/main.ebfb5914.js"
   ]
 }

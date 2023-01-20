@@ -12,6 +12,7 @@
 
 body{
   background-image: none !important;
+  background-size: 0%;
 }
 
 .container{
@@ -42,7 +43,6 @@ body{
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.26);
- 
 }
 .card-text{
   margin-top: 4% !important;
