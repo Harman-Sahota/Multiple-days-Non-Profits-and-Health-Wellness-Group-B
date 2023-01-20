@@ -5,6 +5,7 @@ import Login from "./pages/login";
 import ResetPassword from "./pages/resetPassword";
 import Register from "./pages/register";
 import Profile from "./pages/profile";
+import SearchBar from "./pages/network";
 
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -37,6 +38,7 @@ function App() {
         <Routes>
           <Route exact path="resetPassword/" element={<ResetPassword />} />
         </Routes>
+
       </Router> 
 
       <Router>
@@ -44,6 +46,16 @@ function App() {
           <Route exact path="profile/" element={<Profile />} />
         </Routes>
       </Router> 
+
+      </Router>
+      
+      <Router>
+        <Routes>
+          <Route exact path="network/" element={<SearchBar />} />
+        </Routes>
+      </Router>
+
+
 
       <Footer />
     </>
