@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLeaf } from "@fortawesome/free-solid-svg-icons";
 
-function Navbar() {
+function NavbarOut() {
   return (
     <>
       <header>
@@ -71,4 +71,4 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export default NavbarOut;
