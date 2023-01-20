@@ -1,63 +1,62 @@
-import Navbar from "./components/NavBar";
+import NavbarOut from "./components/NavBarOut";
+import NavbarIn from "./components/NavBarIn";
 import Footer from "./components/footer";
 import Home from "./pages/Home";
 import Login from "./pages/login";
 import ResetPassword from "./pages/resetPassword";
-import Register from "./pages/register";
+import Register from "./pages/Register";
 import Profile from "./pages/profile";
 import SearchBar from "./pages/network";
+import Comment from "./pages/comment";
 
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
+
     <>
-      <Navbar />
-
       <Router>
         <Routes>
-          <Route exact path="/" element={<Home title="Home"/>} />
+          <Route exact path="/" element={<><NavbarOut /><Home title="Home" /><Footer /></>} />
         </Routes>
       </Router>
 
       <Router>
         <Routes>
-          <Route exact path="login/" element={<Login />} />
+          <Route exact path="login/" element={<><NavbarOut /><Login /><Footer /></>} />
         </Routes>
       </Router>
-
-       <Router>
-        <Routes>
-          <Route exact path="/register" element={<Register />} />
-        </Routes>
-      </Router> 
-
-      
-       <Router>
-        <Routes>
-          <Route exact path="resetPassword/" element={<ResetPassword />} />
-        </Routes>
-
-      </Router> 
 
       <Router>
         <Routes>
-          <Route exact path="profile/" element={<Profile />} />
+          <Route exact path="/register" element={<><NavbarOut /><Register /><Footer /></>} />
         </Routes>
-      </Router> 
-
       </Router>
-      
+
       <Router>
         <Routes>
-          <Route exact path="network/" element={<SearchBar />} />
+          <Route exact path="resetPassword/" element={<><NavbarOut /><ResetPassword /><Footer /></>} />
         </Routes>
       </Router>
 
+      <Router>
+        <Routes>
+          <Route exact path="profile/" element={<><NavbarIn /><Profile /><Footer /></>} />
+        </Routes>
+      </Router>
 
+      <Router>
+        <Routes>
+          <Route exact path="network/" element={<><NavbarIn /><SearchBar /><Footer /></>} />
+        </Routes>
+      </Router>
 
-      <Footer />
+      <Router>
+        <Routes>
+          <Route exact path="comments/" element={<><NavbarIn /><Comment /><Footer /></>} />
+        </Routes>
+      </Router>
     </>
   );
 }
