@@ -4,7 +4,7 @@ import Home from "./pages/Home";
 import Login from "./pages/login";
 import ResetPassword from "./pages/resetPassword";
 import Register from "./pages/register";
-
+import SearchBar from "./pages/network";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
