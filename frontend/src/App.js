@@ -3,7 +3,7 @@ import Footer from "./components/footer";
 import Home from "./pages/Home";
 import Login from "./pages/login";
 import ResetPassword from "./pages/resetPassword";
-import Register from "./pages/register";
+import Register from "./pages/Register";
 import Profile from "./pages/profile";
 import SearchBar from "./pages/network";
 
@@ -12,53 +12,37 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <>
-      <Navbar />
 
-      <Router>
+      <><Router>
+      <Routes>
+        <Route exact path="/" element={<><Navbar /><Home title="Home" /><Footer /></>} />
+      </Routes>
+    </Router><Router>
         <Routes>
-          <Route exact path="/" element={<Home title="Home"/>} />
+          <Route exact path="login/" element={<><Navbar /><Login /><Footer /></>} />
+        </Routes>
+      </Router><Router>
+        <Routes>
+          <Route exact path="/register" element={<><Navbar /><Register /><Footer /></>} />
+        </Routes>
+      </Router><Router>
+        <Routes>
+          <Route exact path="resetPassword/" element={<><Navbar /><ResetPassword /><Footer /></>} />
+        </Routes>
+
+      </Router><Router>
+        <Routes>
+          <Route exact path="profile/" element={<><Navbar /><Profile /><Footer /></>} />
         </Routes>
       </Router>
 
-      <Router>
+   <Router>
         <Routes>
-          <Route exact path="login/" element={<Login />} />
+          <Route exact path="network/" element={<><Navbar /><SearchBar /><Footer /></>} />
         </Routes>
       </Router>
-
-       <Router>
-        <Routes>
-          <Route exact path="/register" element={<Register />} />
-        </Routes>
-      </Router> 
-
-      
-       <Router>
-        <Routes>
-          <Route exact path="resetPassword/" element={<ResetPassword />} />
-        </Routes>
-
-      </Router> 
-
-      <Router>
-        <Routes>
-          <Route exact path="profile/" element={<Profile />} />
-        </Routes>
-      </Router> 
-
-      </Router>
-      
-      <Router>
-        <Routes>
-          <Route exact path="network/" element={<SearchBar />} />
-        </Routes>
-      </Router>
-
-
-
-      <Footer />
-    </>
+      </>
+ 
   );
 }
 

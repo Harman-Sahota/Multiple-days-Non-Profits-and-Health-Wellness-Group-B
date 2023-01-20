@@ -40,8 +40,8 @@ function Form() {
 
   return (
     <div className="body">
-      <div className="form">
-        <div className="form-container">
+      <div className="form-register">
+        <div className="form-container-register">
 
           <div className="header">
             <h1>{FormTitles[page]}</h1>
