@@ -9,10 +9,7 @@
   }
 }
 
-body {
-  overflow: hidden;
-  font-family: Roboto, sans-serif !important;
-}
+
 
 h1 {
   animation: 160ms ease-out 1s 1 hue;
