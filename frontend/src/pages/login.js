@@ -1,13 +1,32 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import loginCSS from './login.module.css';
 import Button from 'react-bootstrap/Button';
+
 function Login(){
 
     return (
 //login form
 <div className={loginCSS.body}>
   <div className={`form-container ${loginCSS.form_container}`}>
-    <form className={`mx-auto bg-white ${loginCSS.form}`}id="login" action="" method="POST">
+    <form className={`mx-auto bg-white ${loginCSS.form}`}id="login" action="/login" method="POST"  onSubmit={(e) => {
+          
+              if(document.getElementById('exampleInputEmail1').value === "" || document.getElementById('exampleInputPassword1').value === "" )
+               {
+
+                e.preventDefault();
+                window.alert('fields cannot be blank');
+               
+                document.getElementById('exampleInputPassword1').classList.add('error');
+
+              }else{
+                document.getElementById('exampleInputEmail1').classList.add('success');
+                document.getElementById('exampleInputPassword1').classList.add('success');
+              }
+
+             
+         
+          }}
+       >
    
       <h5 className={`form-title ${loginCSS.form_title}`}>User Login</h5>
 

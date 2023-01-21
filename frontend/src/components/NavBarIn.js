@@ -35,7 +35,7 @@ function NavbarIn() {
                         <li><a href="profile" className="nav-link px-3"><FontAwesomeIcon icon={faUser} />
                         &nbsp; Profile</a></li>
                         <li id="signup">
-                            <a href="home/">
+                            <a href="/">
                                 <Button className="register btn btn-outline-success" variant="outline-success">
                                     Logout
                                 </Button>
@@ -66,7 +66,7 @@ function NavbarIn() {
                             <li><a href="profile" className="nav-link px-3"><FontAwesomeIcon icon={faUser} />
                                 Profile</a></li>
                             <li id="signup">
-                                <a href="home/">
+                                <a href="/">
                                     <Button className="register btn btn-outline-success" variant="outline-success">
                                         Logout
                                     </Button>

@@ -36,25 +36,25 @@ function App() {
 
       <Router>
         <Routes>
-          <Route exact path="resetPassword/" element={<><NavbarOut /><ResetPassword /><Footer /></>} />
+          <Route exact path="/resetPassword" element={<><NavbarOut /><ResetPassword /><Footer /></>} />
         </Routes>
       </Router>
 
       <Router>
         <Routes>
-          <Route exact path="profile/" element={<><NavbarIn /><Profile /><Footer /></>} />
+          <Route exact path="/profile" element={<><NavbarIn /><Profile /><Footer /></>} />
         </Routes>
       </Router>
 
       <Router>
         <Routes>
-          <Route exact path="network/" element={<><NavbarIn /><SearchBar /><Footer /></>} />
+          <Route exact path="/network" element={<><NavbarIn /><SearchBar /><Footer /></>} />
         </Routes>
       </Router>
 
       <Router>
         <Routes>
-          <Route exact path="comments/" element={<><NavbarIn /><Comment /><Footer /></>} />
+          <Route exact path="/comments" element={<><NavbarIn /><Comment /><Footer /></>} />
         </Routes>
       </Router>
     </>
