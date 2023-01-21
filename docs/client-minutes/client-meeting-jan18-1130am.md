@@ -10,6 +10,9 @@
 
 ## Minutes
 
+- We will have a meeting with Wayne
+  - Barbs will bring us in contact
+
 ## Decisions / To-Do
 
 - Contact
