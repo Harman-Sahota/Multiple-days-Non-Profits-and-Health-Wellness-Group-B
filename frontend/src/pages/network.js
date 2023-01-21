@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
+import Button from "react-bootstrap/Button";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './network.css';
 
 
 function SearchBar() {
@@ -28,14 +31,14 @@ function SearchBar() {
           </select>
         </div>
         <div>
-          <button type="button" className="btn btn-success" data-bs-toggle="modal" data-bs-target="#form">Create Post</button>
+          <Button type="Button" className="btn btn-success" data-bs-toggle="modal" data-bs-target="#form">Create Post</Button>
         </div>
       </div>
       <div className="container-md">
         <div className="tab container-sm">
-          <button className="tablinks btn btn-light" id="defaultOpen">💬 All Posts</button><br />
-          <button className="tablinks btn btn-light">📣 Sharing</button><br />
-          <button className="tablinks btn btn-light">💬 Receiving</button><br />
+          <Button className="tablinks btn btn-light" id="defaultOpen">💬 All Posts</Button><br />
+          <Button className="tablinks btn btn-light">📣 Sharing</Button><br />
+          <Button className="tablinks btn btn-light">💬 Receiving</Button><br />
         </div>
         <div id="disc">
           {posts.map((post) => (
