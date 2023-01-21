@@ -4,7 +4,7 @@ import Footer from "./components/footer";
 import Home from "./pages/Home";
 import Login from "./pages/login";
 import ResetPassword from "./pages/resetPassword";
-import Register from "./pages/Register";
+import Register from "./pages/register";
 import Profile from "./pages/profile";
 import SearchBar from "./pages/network";
 import Comment from "./pages/comment";
@@ -19,8 +19,7 @@ function App() {
       <Router>
         <Routes>
           <Route
-            exact
-            path="/"
+            exact path="/"
             element={
               <>
                 <NavbarOut />
@@ -132,7 +131,7 @@ function App() {
         <Routes>
           <Route
             exact
-            path="/"
+            path="/tracker"
             element={
               <>
                 <NavbarIn />
