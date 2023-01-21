@@ -3,13 +3,14 @@ import React, { useState } from "react";
 import SignUpInfo from "../components/Step1";
 import PersonalInfo from "../components/Step2";
 import OtherInfo from "../components/Step3";
+import Confirm from "../components/Step4"
 import Button from "react-bootstrap/Button";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Register.css';
 function Form() {
   const [page, setPage] = useState(0);
 
-  
+
 
 
 
@@ -26,16 +27,19 @@ function Form() {
   });
 
 
-  const FormTitles = ["Personal Info", "Pick your roles", "Consent"];
+  const FormTitles = ["Personal Info", "Pick your roles", "Consent","Confirm"];
 
   const PageDisplay = () => {
     if (page === 0) {
       return <SignUpInfo formData={formData} setFormData={setFormData} />;
     } else if (page === 1) {
       return <PersonalInfo formData={formData} setFormData={setFormData} />;
-    } else {
+    } else if (page === 2) {
       return <OtherInfo formData={formData} setFormData={setFormData} />;
+    }else{
+      return <Confirm formData={formData} setFormData={setFormData} />;
     }
+
   };
 
   return (
@@ -49,7 +53,7 @@ function Form() {
           <div className="progressbar">
 
             <div
-              style={{ width: page === 0 ? "33.3%" : page == 1 ? "66.6%" : "100%" }}
+              style={{ width: page === 0 ? "33.3%" : page == 1 ? "66.6%" : page == 2 ? "88.8%"  : "100%" }}
             ></div>
           </div>
           <div className="body">{PageDisplay()}</div>
@@ -59,16 +63,16 @@ function Form() {
               disabled={page == 0}
               onClick={() => {
                 setPage((currPage) => currPage - 1);
-               
-                 
 
-                
+
+
+
               }}
             >
               Back
             </Button>
             <Button
-              id = "submit"
+              id="submit"
               variant="btn btn-success"
               onClick={(e) => {
 
@@ -187,7 +191,7 @@ function Form() {
 
 
                   if (page === 1) {
-                 
+
                     if (formData.roles.length == '0') {
                       window.alert('you must pick atleast one role');
                       document.getElementById('flexCheckDefault1').classList.add('error');
@@ -202,10 +206,27 @@ function Form() {
                     }
                   }
 
+                  if (page === 2) {
 
-                
-              }}}
+                    if (formData.consented == 'not-consented') {
+                      window.alert('you must consent to continue');
+                      document.getElementById('flexCheckDefault1').classList.add('consent-check1');
+
+                    } else {
+                      setPage((currPage) => currPage + 1);
+                    }
+                  }
+
+
+
+
+
+
+
+                }
+              }}
             >
+            
               {page === FormTitles.length - 1 ? "Submit" : "Next"}
             </Button>
           </div>

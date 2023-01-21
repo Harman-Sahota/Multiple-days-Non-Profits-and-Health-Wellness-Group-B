@@ -15,7 +15,7 @@ function Step3({ formData, setFormData }) {
       <div className="consent form-check ">
         <input
           className="form-check-input"
-          type="checkbox"
+          type="radio"
           id="consent-check1"
           name="consent"
           value="consented"
@@ -36,7 +36,7 @@ function Step3({ formData, setFormData }) {
       <div className="consent form-check">
         <input
           className="form-check-input"
-          type="checkbox"
+          type="radio"
           id="consent-check2"
           name="consent"
           value="not-consented"
