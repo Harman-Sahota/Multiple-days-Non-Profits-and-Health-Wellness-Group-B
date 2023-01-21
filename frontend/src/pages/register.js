@@ -6,7 +6,7 @@ import OtherInfo from "../components/Step3";
 import Confirm from "../components/Step4";
 import Button from "react-bootstrap/Button";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./register.module.css";
+import "./register.css";
 function Form() {
   const [page, setPage] = useState(0);
 
