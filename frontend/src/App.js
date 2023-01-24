@@ -9,6 +9,7 @@ import Profile from "./pages/profile";
 import SearchBar from "./pages/network";
 import Comment from "./pages/comment";
 import Tracker from "./pages/tracker";
+import Admin from "./pages/admin";
 
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -142,6 +143,25 @@ function App() {
           />
         </Routes>
       </Router>
+
+      <Router>
+        <Routes>
+          <Route
+            exact
+            path="/admin"
+            element={
+              <>
+                <NavbarIn />
+                <Admin />
+                <Footer />
+              </>
+            }
+          />
+        </Routes>
+      </Router>
+
+
+
     </>
   );
 }
