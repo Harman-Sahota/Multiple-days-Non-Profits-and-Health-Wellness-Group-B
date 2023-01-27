@@ -2,7 +2,7 @@
 
 *Created: September 29, 2022*
 
-*Last updated: Januarty 16, 2023*
+*Last updated: January 27, 2023*
 
 ## Overview
 
@@ -31,7 +31,9 @@ Click [here](https://docs.google.com/spreadsheets/d/1qnWRLLMm4y7r7I7h9rt_KXN-MSf
 
 |Week #|Summary|Resources|
 |------|-------|---------|
-|1| Begin Page Conversion to React| [Client Meeting Minutes (Jan. 12)](docs/client-minutes/client-meeting-jan11-11am.md)|
+|15| Begin Page Conversion to React| [Client Meeting Minutes (Jan. 11)](docs/client-minutes/client-meeting-jan11-11am.md)|
+|16| Continue Page Conversions to React| [Client Meeting Minutes(Jan. 18)](docs/client-minutes/client-meeting-jan18-1130am.md)|
+|17| Continue Page Conversions to React| [Client Meeting Minutes (Jan. 25)]()|
 
 ### Semester #1
 
