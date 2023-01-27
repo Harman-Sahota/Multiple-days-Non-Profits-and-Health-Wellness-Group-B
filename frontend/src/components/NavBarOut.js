@@ -20,8 +20,8 @@ function NavbarOut() {
             <li>
               <a href="/">Home</a>
             </li>
-            <li>
-              <a href="">About</a>
+            <li id="gettingStarted">
+              <a href="gettingStarted/">Getting Started</a>
             </li>
             <li>
               <a href="">Contact</a>
@@ -53,7 +53,7 @@ function NavbarOut() {
               <a href="{% url 'home' %}">Home</a>
             </li>
             <li>
-              <a href="{% url 'about' %}">About</a>
+              <a href="gettingStarted/">Getting Started</a>
             </li>
             <li>
               <a href="{% url 'contact' %}">Contact</a>
