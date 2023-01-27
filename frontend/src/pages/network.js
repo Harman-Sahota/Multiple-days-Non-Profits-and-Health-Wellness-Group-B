@@ -56,11 +56,31 @@ function SearchBar() {
             </div>
           ))}
         </div>
-      </div>
     </div>
-    
-  )
-
+    <Modal show={showModal} onHide={handleClose}>
+    <Modal.Header closeButton>
+      <Modal.Title>Create Post</Modal.Title>
+    </Modal.Header>
+    <Modal.Body>
+      <form>
+        <div className="form-group">
+        <label htmlFor="product">Product</label>
+        <input type="text" className="form-control" id="product" placeholder="Enter product name" />
+      </div>
+      <div className="form-group">
+        <label htmlFor="quantity">Quantity</label>
+        <input type="number" className="form-control" id="quantity" placeholder="Enter quantity" />
+      </div>
+      
+      <Button variant="primary" type="submit">
+        Submit
+      </Button>
+    </form>
+  </Modal.Body>
+</Modal>
+</div>
+)
+  
 }
 
 export default SearchBar;
