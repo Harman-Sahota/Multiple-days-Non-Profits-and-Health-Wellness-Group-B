@@ -5,14 +5,12 @@ import Modal from "react-bootstrap/Modal";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './network.css';
 
-
 function SearchBar() {
   const [posts, setPosts] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
-
 
   return (
     <div className="container-lg col-md-auto">
@@ -37,7 +35,7 @@ function SearchBar() {
           </select>
         </div>
         <div>
-          <Button type="Button" className="btn btn-success" data-bs-toggle="modal" data-bs-target="#form">Create Post</Button>
+          <Button type="Button" className="btn btn-success" onClick={handleShow}>Create Post</Button>
         </div>
       </div>
       <div className="container-md">
@@ -56,41 +54,41 @@ function SearchBar() {
             </div>
           ))}
         </div>
-    </div>
-    <Modal show={showModal} onHide={handleClose}>
-    <Modal.Header closeButton>
-      <Modal.Title>Create Post</Modal.Title>
-    </Modal.Header>
-    <Modal.Body>
-      <form>
-        <div className="form-group">
-        <label htmlFor="product">Product</label>
-        <input type="text" className="form-control" id="product" placeholder="Enter product name" />
       </div>
-      <div className="form-group">
-        <label htmlFor="quantity">Quantity</label>
-        <input type="number" className="form-control" id="quantity" placeholder="Enter quantity" />
-      </div>
-      <div className="form-group">
-        <label htmlFor="desc">Description</label>
-        <textarea className="form-control" id="desc" rows="3"></textarea>
-      </div>
-      <div className="form-group">
-        <label htmlFor="type">Type</label>
-        <select className="form-control" id="type">
-          <option>Sharing</option>
-          <option>Receiving</option>
-        </select>
-      </div>
-      <Button variant="primary" type="submit">
-        Submit
-      </Button>
-    </form>
-  </Modal.Body>
-</Modal>
-</div>
-)
-  
+      <Modal show={showModal} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Create Post</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <form>
+            <div className="form-group">
+            <label htmlFor="product">Product</label>
+            <input type="text" className="form-control" id="product" placeholder="Enter product name" />
+          </div>
+          <div className="form-group">
+            <label htmlFor="quantity">Quantity</label>
+            <input type="number" className="form-control" id="quantity" placeholder="Enter quantity" />
+          </div>
+          <div className="form-group">
+            <label htmlFor="desc">Description</label>
+            <textarea className="form-control" id="desc" rows="3"></textarea>
+          </div>
+          <div className="form-group">
+            <label htmlFor="type">Type</label>
+            <select className="form-control" id="type">
+              <option>Sharing</option>
+              <option>Receiving</option>
+            </select>
+          </div>
+          <Button variant="primary" type="submit">
+            Submit
+          </Button>
+        </form>
+      </Modal.Body>
+    </Modal>
+  </div>
+  )
 }
 
 export default SearchBar;
+
