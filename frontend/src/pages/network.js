@@ -75,7 +75,13 @@ function SearchBar() {
         <label htmlFor="desc">Description</label>
         <textarea className="form-control" id="desc" rows="3"></textarea>
       </div>
-      
+      <div className="form-group">
+        <label htmlFor="type">Type</label>
+        <select className="form-control" id="type">
+          <option>Sharing</option>
+          <option>Receiving</option>
+        </select>
+      </div>
       <Button variant="primary" type="submit">
         Submit
       </Button>
