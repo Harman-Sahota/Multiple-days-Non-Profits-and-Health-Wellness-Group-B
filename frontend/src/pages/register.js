@@ -204,10 +204,10 @@ function Form() {
                       !formData.Email.match(EmailValidRegex)
                     ) {
                       if (
-                        document.getElementById("Email").hasAttribute("success")
+                        document.getElementById("email").hasAttribute("success")
                       )
                         document
-                          .getElementById("Email")
+                          .getElementById("email")
                           .classList.remove("success");
                       document.getElementById("Email").classList.add("error");
                       if (
@@ -230,14 +230,14 @@ function Form() {
                     ) {
                       if (
                         document
-                          .getElementById("Password")
+                          .getElementById("password")
                           .hasAttribute("success")
                       )
                         document
-                          .getElementById("Password")
+                          .getElementById("password")
                           .classList.remove("success");
                       document
-                        .getElementById("Password")
+                        .getElementById("password")
                         .classList.add("error");
                       if (
                         !formData.Email.match(PasswordRegex) &&
@@ -250,14 +250,14 @@ function Form() {
                     } else {
                       if (
                         document
-                          .getElementById("Password")
+                          .getElementById("password")
                           .hasAttribute("error")
                       )
                         document
-                          .getElementById("Password")
+                          .getElementById("password")
                           .classList.remove("error");
                       document
-                        .getElementById("Password")
+                        .getElementById("password")
                         .classList.add("success");
                     }
 
