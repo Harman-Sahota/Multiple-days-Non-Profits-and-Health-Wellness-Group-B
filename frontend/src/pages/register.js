@@ -9,7 +9,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./register.css";
 import axios from 'axios';
 
-
 function Form() {
   const [page, setPage] = useState(0);
 
@@ -76,16 +75,24 @@ function Form() {
               variant="btn btn-success"
               onClick={(e) => {
                 if (page === FormTitles.length - 1) {
-                  console.log(JSON.stringify(formData));
+                  console.log(JSON.parse(JSON.stringify(formData)));
+                 
 
                   axios.post(
-                    "http://127.0.0.1:8000/api/",
+                    "http://127.0.0.1:8000/api/registerInsert/",
                     {
-                     data: JSON.stringify(formData)
+                      FirstName: formData.FirstName,
+                      LastName: formData.LastName,
+                      Email: formData.Email,
+                      Password: formData.Password,
+                      Roles: formData.Roles,
+                      Consent: formData.Consent,
+                      Organization: formData.Organization
+                     
                     },
                     {
                       headers: {
-                        "Content-type": "application/json; charset=UTF-8",
+                        "Content-type": "application/json",
                       }
                     }
                   )
@@ -210,11 +217,11 @@ function Form() {
                         window.alert("Email is not valid");
                       }
                     } else {
-                      if ( document.getElementById("Email").hasAttribute("error") )
+                      if ( document.getElementById("email").hasAttribute("error") )
                         document
-                          .getElementById("Email")
+                          .getElementById("email")
                           .classList.remove("error");
-                      document.getElementById("Email").classList.add("success");
+                      document.getElementById("email").classList.add("success");
                     }
 
                     if (
