@@ -24,7 +24,7 @@ function NavbarOut() {
               <a href="gettingStarted/">Getting Started</a>
             </li>
             <li>
-              <a href="">Contact</a>
+              <a href="directory/">Directory</a>
             </li>
             <li id="login">
               <a href="login/">Login</a>
@@ -56,7 +56,7 @@ function NavbarOut() {
               <a href="gettingStarted/">Getting Started</a>
             </li>
             <li>
-              <a href="{% url 'contact' %}">Contact</a>
+              <a href="directory/">Directory</a>
             </li>
             <li id="login">
               <a href="login/">Login</a>
