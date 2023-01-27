@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Login from "./pages/login";
 import ResetPassword from "./pages/resetPassword";
 import Register from "./pages/register";
+import GettingStarted from "./pages/gettingStarted";
 import Profile from "./pages/profile";
 import SearchBar from "./pages/network";
 import Comment from "./pages/comment";
@@ -57,6 +58,22 @@ function App() {
               <>
                 <NavbarOut />
                 <Register />
+                <Footer />
+              </>
+            }
+          />
+        </Routes>
+      </Router>
+
+      <Router>
+        <Routes>
+          <Route
+            exact
+            path="/gettingStarted"
+            element={
+              <>
+                <NavbarOut />
+                <GettingStarted />
                 <Footer />
               </>
             }
