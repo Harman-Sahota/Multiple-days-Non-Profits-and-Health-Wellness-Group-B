@@ -48,3 +48,30 @@
     border: 1px solid #d1d5da;
     transition: all 0.2s ease-in-out;
   }
+  .modal-content {
+    width: 90%;
+    margin: 0 auto;
+    border-radius: 10px;
+    padding: 2em;
+    background: #fff;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  }
+  .modal-header {
+    border-bottom: none;
+    }
+    
+    .modal-title {
+    font-weight: 600;
+    }
+    
+    #product, #quantity, #desc, #type {
+    margin-bottom: 1em;
+    }
+
+    #type {
+      width: 100%;
+      }
+      
+      .form-select {
+      width: auto;
+      }

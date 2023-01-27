@@ -1,10 +1,15 @@
 import NavbarOut from "./components/NavBarOut";
 import NavbarIn from "./components/NavBarIn";
 import Footer from "./components/footer";
+
 import Home from "./pages/Home";
 import Login from "./pages/login";
 import ResetPassword from "./pages/resetPassword";
 import Register from "./pages/register";
+import FAQ from "./pages/faq";
+import Directory from "./pages/directory";
+import PublicSharing from "./pages/publicSharing";
+
 import Profile from "./pages/profile";
 import SearchBar from "./pages/network";
 import Comment from "./pages/comment";
@@ -57,6 +62,54 @@ function App() {
               <>
                 <NavbarOut />
                 <Register />
+                <Footer />
+              </>
+            }
+          />
+        </Routes>
+      </Router>
+
+      <Router>
+        <Routes>
+          <Route
+            exact
+            path="/faq"
+            element={
+              <>
+                <NavbarOut />
+                <FAQ />
+                <Footer />
+              </>
+            }
+          />
+        </Routes>
+      </Router>
+
+      <Router>
+        <Routes>
+          <Route
+            exact
+            path="/directory"
+            element={
+              <>
+                <NavbarOut />
+                <Directory />
+                <Footer />
+              </>
+            }
+          />
+        </Routes>
+      </Router>
+
+      <Router>
+        <Routes>
+          <Route
+            exact
+            path="/publicSharing"
+            element={
+              <>
+                <NavbarOut />
+                <PublicSharing />
                 <Footer />
               </>
             }
