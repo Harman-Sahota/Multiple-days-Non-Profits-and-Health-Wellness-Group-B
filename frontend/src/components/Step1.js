@@ -12,7 +12,7 @@ function SignUpInfo({ formData, setFormData }) {
         placeholder="First Name"
         value={formData.firstname}
         onChange={(event) => 
-          setFormData({ ...formData, firstName: event.target.value })
+          setFormData({ ...formData, FirstName: event.target.value })
          
         }
       />
@@ -23,7 +23,7 @@ function SignUpInfo({ formData, setFormData }) {
         placeholder="Last Name"
         value={formData.lastname}
         onChange={(event) =>
-          setFormData({ ...formData, lastName: event.target.value })
+          setFormData({ ...formData, LastName: event.target.value })
         }
       />
       <input
@@ -33,7 +33,7 @@ function SignUpInfo({ formData, setFormData }) {
         placeholder="Email"
         value={formData.email}
         onChange={(event) =>
-          setFormData({ ...formData, email: event.target.value })
+          setFormData({ ...formData, Email: event.target.value })
         }
       />
 
@@ -44,18 +44,14 @@ function SignUpInfo({ formData, setFormData }) {
         placeholder="Password"
         value={formData.password}
         onChange={(event) =>
-          setFormData({ ...formData, password: event.target.value })
+          setFormData({ ...formData, Password: event.target.value })
         }
       />
       <input 
       className="text_input"
         type="password"
         id="confirm"
-        placeholder="Confirm Password"
-        value={formData.confirmPassword}
-        onChange={(event) =>
-          setFormData({ ...formData, confirmPassword: event.target.value })
-        }
+        placeholder="Confirm Password"      
       />
       <input 
       id="org"
@@ -64,7 +60,7 @@ function SignUpInfo({ formData, setFormData }) {
         placeholder="Organization"
         value={formData.organization}
         onChange={(event) =>
-          setFormData({ ...formData, organization: event.target.value })
+          setFormData({ ...formData, Organization: event.target.value })
         }
       />
     </div>

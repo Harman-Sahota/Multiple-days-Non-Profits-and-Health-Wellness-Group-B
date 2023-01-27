@@ -15,14 +15,14 @@ function Form() {
     LastName: "",
     Email: "",
     Password: "",
-    confirmPassword: "",
-    roles: [],
-    consented: "",
-    organization: "",
-    Approve: ""
+    Roles: [],
+    Consent: "",
+    Organization: "",
   });
 
-  const FormTitles = ["Personal Info", "Pick your roles", "Consent", "Confirm"];
+  formData.Roles = formData.Roles.toString();
+
+  const FormTitles = ["Personal Info", "Pick your Roles", "Consent", "Confirm"];
 
   const PageDisplay = () => {
     if (page === 0) {
@@ -50,10 +50,10 @@ function Form() {
                   page === 0
                     ? "33.3%"
                     : page == 1
-                    ? "66.6%"
-                    : page == 2
-                    ? "88.8%"
-                    : "100%",
+                      ? "66.6%"
+                      : page == 2
+                        ? "88.8%"
+                        : "100%",
               }}
             ></div>
           </div>
@@ -89,8 +89,8 @@ function Form() {
                       formData.Email.match(EmailValidRegex) &&
                       formData.Password != "" &&
                       formData.Password.match(PasswordRegex) &&
-                      formData.confirmPassword == formData.Password &&
-                      formData.organization != ""
+                      document.getElementById("confirm").value  == formData.Password &&
+                      formData.Organizatio != ""
                     ) {
                       setPage((currPage) => currPage + 1);
                     }
@@ -100,8 +100,8 @@ function Form() {
                       formData.LastName == "" ||
                       formData.Email == "" ||
                       formData.Password == "" ||
-                      formData.organization == "" ||
-                      formData.confirmPassword == ""
+                      formData.Organization == "" ||
+                      document.getElementById("confirm").value == ""
                     ) {
                       window.alert("fields cannot be empty");
                     }
@@ -238,8 +238,8 @@ function Form() {
                     }
 
                     if (
-                      !(formData.confirmPassword == formData.Password) ||
-                      formData.confirmPassword == ""
+                      !(document.getElementById("confirm").value  == formData.Password) ||
+                      document.getElementById("confirm").value  == ""
                     ) {
                       if (
                         document
@@ -250,7 +250,7 @@ function Form() {
                           .getElementById("confirm")
                           .classList.remove("success");
                       document.getElementById("confirm").classList.add("error");
-                      if (formData.confirmPassword != "")
+                      if (document.getElementById("confirm").value  != "")
                         window.alert("confirm Password doesnt match Password");
                     } else {
                       if (
@@ -264,7 +264,7 @@ function Form() {
                         .classList.add("success");
                     }
 
-                    if (formData.organization == "") {
+                    if (formData.Organizatio == "") {
                       if (
                         document.getElementById("org").hasAttribute("success")
                       )
@@ -282,7 +282,7 @@ function Form() {
                   }
 
                   if (page === 1) {
-                    if (formData.roles.length == "0") {
+                    if (formData.Roles.length == "0") {
                       window.alert("you must pick atleast one role");
                       document
                         .getElementById("flexCheckDefault1")
@@ -308,7 +308,7 @@ function Form() {
                   }
 
                   if (page === 2) {
-                    if (formData.consented == "not-consented") {
+                    if (formData.Consent == "not-Consent") {
                       window.alert("you must consent to continue");
                       document
                         .getElementById("flexCheckDefault1")
