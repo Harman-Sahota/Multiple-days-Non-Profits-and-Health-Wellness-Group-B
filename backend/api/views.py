@@ -11,6 +11,6 @@ def registerInsert(request):
         if saveserialize.is_valid():
             saveserialize.save()
             return Response(saveserialize.data,status=status.HTTP_201_CREATED)
-        return Response(saveserialize.data,status=status.HTTP_400_BAD_REQUEST)
+        return Response(saveserialize.data,status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
         
