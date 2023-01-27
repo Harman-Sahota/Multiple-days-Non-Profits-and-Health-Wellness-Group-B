@@ -11,14 +11,15 @@ function Form() {
   const [page, setPage] = useState(0);
 
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
+    FirstName: "",
+    LastName: "",
+    Email: "",
+    Password: "",
     confirmPassword: "",
-    firstName: "",
-    lastName: "",
-    consented: "",
     roles: [],
+    consented: "",
     organization: "",
+    Approve: ""
   });
 
   const FormTitles = ["Personal Info", "Pick your roles", "Consent", "Confirm"];
@@ -72,7 +73,7 @@ function Form() {
               variant="btn btn-success"
               onClick={(e) => {
                 if (page === FormTitles.length - 1) {
-                  console.log(formData);
+                  console.log(JSON.stringify(formData));
                 } else {
                   var EmailValidRegex =
                     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -80,25 +81,25 @@ function Form() {
 
                   if (page === 0) {
                     if (
-                      formData.firstName != "" &&
-                      formData.lastName != "" &&
-                      !/\d/.test(formData.firstName) &&
-                      !/\d/.test(formData.lastName) &&
-                      formData.email != "" &&
-                      formData.email.match(EmailValidRegex) &&
-                      formData.password != "" &&
-                      formData.password.match(PasswordRegex) &&
-                      formData.confirmPassword == formData.password &&
+                      formData.FirstName != "" &&
+                      formData.LastName != "" &&
+                      !/\d/.test(formData.FirstName) &&
+                      !/\d/.test(formData.LastName) &&
+                      formData.Email != "" &&
+                      formData.Email.match(EmailValidRegex) &&
+                      formData.Password != "" &&
+                      formData.Password.match(PasswordRegex) &&
+                      formData.confirmPassword == formData.Password &&
                       formData.organization != ""
                     ) {
                       setPage((currPage) => currPage + 1);
                     }
 
                     if (
-                      formData.firstName == "" ||
-                      formData.lastName == "" ||
-                      formData.email == "" ||
-                      formData.password == "" ||
+                      formData.FirstName == "" ||
+                      formData.LastName == "" ||
+                      formData.Email == "" ||
+                      formData.Password == "" ||
                       formData.organization == "" ||
                       formData.confirmPassword == ""
                     ) {
@@ -106,8 +107,8 @@ function Form() {
                     }
 
                     if (
-                      /\d/.test(formData.lastName) ||
-                      /\d/.test(formData.lastName)
+                      /\d/.test(formData.LastName) ||
+                      /\d/.test(formData.LastName)
                     ) {
                       window.alert(
                         "First Name and Last Name cannot have numbers, please check if you entered a number in one of these fields"
@@ -115,8 +116,8 @@ function Form() {
                     }
 
                     if (
-                      formData.firstName == "" ||
-                      /\d/.test(formData.firstName)
+                      formData.FirstName == "" ||
+                      /\d/.test(formData.FirstName)
                     ) {
                       if (
                         document
@@ -144,8 +145,8 @@ function Form() {
                     }
 
                     if (
-                      formData.lastName == "" ||
-                      /\d/.test(formData.lastName)
+                      formData.LastName == "" ||
+                      /\d/.test(formData.LastName)
                     ) {
                       if (
                         document
@@ -173,50 +174,50 @@ function Form() {
                     }
 
                     if (
-                      formData.email == "" ||
-                      !formData.email.match(EmailValidRegex)
+                      formData.Email == "" ||
+                      !formData.Email.match(EmailValidRegex)
                     ) {
                       if (
-                        document.getElementById("email").hasAttribute("success")
+                        document.getElementById("Email").hasAttribute("success")
                       )
                         document
-                          .getElementById("email")
+                          .getElementById("Email")
                           .classList.remove("success");
-                      document.getElementById("email").classList.add("error");
+                      document.getElementById("Email").classList.add("error");
                       if (
-                        !formData.email.match(EmailValidRegex) &&
-                        formData.email != ""
+                        !formData.Email.match(EmailValidRegex) &&
+                        formData.Email != ""
                       ) {
-                        window.alert("email is not valid");
+                        window.alert("Email is not valid");
                       }
                     } else {
                       if (
-                        document.getElementById("email").hasAttribute("error")
+                        document.getElementById("Email").hasAttribute("error")
                       )
                         document
-                          .getElementById("email")
+                          .getElementById("Email")
                           .classList.remove("error");
-                      document.getElementById("email").classList.add("success");
+                      document.getElementById("Email").classList.add("success");
                     }
 
                     if (
-                      formData.password == "" ||
-                      !formData.password.match(PasswordRegex)
+                      formData.Password == "" ||
+                      !formData.Password.match(PasswordRegex)
                     ) {
                       if (
                         document
-                          .getElementById("password")
+                          .getElementById("Password")
                           .hasAttribute("success")
                       )
                         document
-                          .getElementById("password")
+                          .getElementById("Password")
                           .classList.remove("success");
                       document
-                        .getElementById("password")
+                        .getElementById("Password")
                         .classList.add("error");
                       if (
-                        !formData.email.match(PasswordRegex) &&
-                        formData.password != ""
+                        !formData.Email.match(PasswordRegex) &&
+                        formData.Password != ""
                       ) {
                         window.alert(
                           "Password Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
@@ -225,19 +226,19 @@ function Form() {
                     } else {
                       if (
                         document
-                          .getElementById("password")
+                          .getElementById("Password")
                           .hasAttribute("error")
                       )
                         document
-                          .getElementById("password")
+                          .getElementById("Password")
                           .classList.remove("error");
                       document
-                        .getElementById("password")
+                        .getElementById("Password")
                         .classList.add("success");
                     }
 
                     if (
-                      !(formData.confirmPassword == formData.password) ||
+                      !(formData.confirmPassword == formData.Password) ||
                       formData.confirmPassword == ""
                     ) {
                       if (
@@ -250,7 +251,7 @@ function Form() {
                           .classList.remove("success");
                       document.getElementById("confirm").classList.add("error");
                       if (formData.confirmPassword != "")
-                        window.alert("confirm password doesnt match password");
+                        window.alert("confirm Password doesnt match Password");
                     } else {
                       if (
                         document.getElementById("confirm").hasAttribute("error")
