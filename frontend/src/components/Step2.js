@@ -9,12 +9,12 @@ function PersonalInfo({ formData, setFormData }) {
         onChange={(e) => {
           if(e.target.checked){
           temp.push(e.target.value);
-          setFormData({ ...formData, roles: temp });
+          setFormData({ ...formData, Roles: temp });
           console.log(temp)
          
           }else{
             temp.pop(e.target.value);
-            setFormData({ ...formData, roles: temp });
+            setFormData({ ...formData, Roles: temp });
           }
          
           

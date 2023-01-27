@@ -5,12 +5,12 @@ function Step4({ formData }) {
 
     return (
              <>
-             <p>First Name: {formData.firstName}</p>
-             <p>Last Name: {formData.lastName}</p>
-             <p>Email: {formData.email}</p>
-             <p>Organization: {formData.organization}</p>
-             <p>Roles: {formData.roles}</p>
-             <p>Consent: {formData.consented}</p>
+             <p>First Name: {formData.FirstName}</p>
+             <p>Last Name: {formData.LastName}</p>
+             <p>Email: {formData.Email}</p>
+             <p>Organization: {formData.Organization}</p>
+             <p>Roles: {formData.Roles}</p>
+             <p>Consent: {formData.Consent}</p>
              </>
     );
 }

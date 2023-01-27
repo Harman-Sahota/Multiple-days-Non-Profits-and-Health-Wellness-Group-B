@@ -7,21 +7,24 @@ import Confirm from "../components/Step4";
 import Button from "react-bootstrap/Button";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./register.css";
+import axios from 'axios';
+
 function Form() {
   const [page, setPage] = useState(0);
 
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-    confirmPassword: "",
-    firstName: "",
-    lastName: "",
-    consented: "",
-    roles: [],
-    organization: "",
+    FirstName: "",
+    LastName: "",
+    Email: "",
+    Password: "",
+    Roles: [],
+    Consent: "",
+    Organization: "",
   });
 
-  const FormTitles = ["Personal Info", "Pick your roles", "Consent", "Confirm"];
+  formData.Roles = formData.Roles.toString();
+
+  const FormTitles = ["Personal Info", "Pick your Roles", "Consent", "Confirm"];
 
   const PageDisplay = () => {
     if (page === 0) {
@@ -49,10 +52,10 @@ function Form() {
                   page === 0
                     ? "33.3%"
                     : page == 1
-                    ? "66.6%"
-                    : page == 2
-                    ? "88.8%"
-                    : "100%",
+                      ? "66.6%"
+                      : page == 2
+                        ? "88.8%"
+                        : "100%",
               }}
             ></div>
           </div>
@@ -72,7 +75,31 @@ function Form() {
               variant="btn btn-success"
               onClick={(e) => {
                 if (page === FormTitles.length - 1) {
-                  console.log(formData);
+                  console.log(JSON.parse(JSON.stringify(formData)));
+                 
+
+                  axios.post(
+                    "http://127.0.0.1:8000/api/registerInsert/",
+                    {
+                      FirstName: formData.FirstName,
+                      LastName: formData.LastName,
+                      Email: formData.Email,
+                      Password: formData.Password,
+                      Roles: formData.Roles,
+                      Consent: formData.Consent,
+                      Organization: formData.Organization
+                     
+                    },
+                    {
+                      headers: {
+                        "Content-type": "application/json",
+                      }
+                    }
+                  )
+                 
+                    .then(response => response.status)
+                    .catch(err => console.warn(err));
+
                 } else {
                   var EmailValidRegex =
                     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -80,34 +107,34 @@ function Form() {
 
                   if (page === 0) {
                     if (
-                      formData.firstName != "" &&
-                      formData.lastName != "" &&
-                      !/\d/.test(formData.firstName) &&
-                      !/\d/.test(formData.lastName) &&
-                      formData.email != "" &&
-                      formData.email.match(EmailValidRegex) &&
-                      formData.password != "" &&
-                      formData.password.match(PasswordRegex) &&
-                      formData.confirmPassword == formData.password &&
-                      formData.organization != ""
+                      formData.FirstName != "" &&
+                      formData.LastName != "" &&
+                      !/\d/.test(formData.FirstName) &&
+                      !/\d/.test(formData.LastName) &&
+                      formData.Email != "" &&
+                      formData.Email.match(EmailValidRegex) &&
+                      formData.Password != "" &&
+                      formData.Password.match(PasswordRegex) &&
+                      document.getElementById("confirm").value == formData.Password &&
+                      formData.Organizatio != ""
                     ) {
                       setPage((currPage) => currPage + 1);
                     }
 
                     if (
-                      formData.firstName == "" ||
-                      formData.lastName == "" ||
-                      formData.email == "" ||
-                      formData.password == "" ||
-                      formData.organization == "" ||
-                      formData.confirmPassword == ""
+                      formData.FirstName == "" ||
+                      formData.LastName == "" ||
+                      formData.Email == "" ||
+                      formData.Password == "" ||
+                      formData.Organization == "" ||
+                      document.getElementById("confirm").value == ""
                     ) {
                       window.alert("fields cannot be empty");
                     }
 
                     if (
-                      /\d/.test(formData.lastName) ||
-                      /\d/.test(formData.lastName)
+                      /\d/.test(formData.LastName) ||
+                      /\d/.test(formData.LastName)
                     ) {
                       window.alert(
                         "First Name and Last Name cannot have numbers, please check if you entered a number in one of these fields"
@@ -115,8 +142,8 @@ function Form() {
                     }
 
                     if (
-                      formData.firstName == "" ||
-                      /\d/.test(formData.firstName)
+                      formData.FirstName == "" ||
+                      /\d/.test(formData.FirstName)
                     ) {
                       if (
                         document
@@ -144,8 +171,8 @@ function Form() {
                     }
 
                     if (
-                      formData.lastName == "" ||
-                      /\d/.test(formData.lastName)
+                      formData.LastName == "" ||
+                      /\d/.test(formData.LastName)
                     ) {
                       if (
                         document
@@ -173,8 +200,8 @@ function Form() {
                     }
 
                     if (
-                      formData.email == "" ||
-                      !formData.email.match(EmailValidRegex)
+                      formData.Email == "" ||
+                      !formData.Email.match(EmailValidRegex)
                     ) {
                       if (
                         document.getElementById("email").hasAttribute("success")
@@ -182,17 +209,15 @@ function Form() {
                         document
                           .getElementById("email")
                           .classList.remove("success");
-                      document.getElementById("email").classList.add("error");
+                      document.getElementById("Email").classList.add("error");
                       if (
-                        !formData.email.match(EmailValidRegex) &&
-                        formData.email != ""
+                        !formData.Email.match(EmailValidRegex) &&
+                        formData.Email != ""
                       ) {
-                        window.alert("email is not valid");
+                        window.alert("Email is not valid");
                       }
                     } else {
-                      if (
-                        document.getElementById("email").hasAttribute("error")
-                      )
+                      if ( document.getElementById("email").hasAttribute("error") )
                         document
                           .getElementById("email")
                           .classList.remove("error");
@@ -200,8 +225,8 @@ function Form() {
                     }
 
                     if (
-                      formData.password == "" ||
-                      !formData.password.match(PasswordRegex)
+                      formData.Password == "" ||
+                      !formData.Password.match(PasswordRegex)
                     ) {
                       if (
                         document
@@ -215,8 +240,8 @@ function Form() {
                         .getElementById("password")
                         .classList.add("error");
                       if (
-                        !formData.email.match(PasswordRegex) &&
-                        formData.password != ""
+                        !formData.Email.match(PasswordRegex) &&
+                        formData.Password != ""
                       ) {
                         window.alert(
                           "Password Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
@@ -237,8 +262,8 @@ function Form() {
                     }
 
                     if (
-                      !(formData.confirmPassword == formData.password) ||
-                      formData.confirmPassword == ""
+                      !(document.getElementById("confirm").value == formData.Password) ||
+                      document.getElementById("confirm").value == ""
                     ) {
                       if (
                         document
@@ -249,8 +274,8 @@ function Form() {
                           .getElementById("confirm")
                           .classList.remove("success");
                       document.getElementById("confirm").classList.add("error");
-                      if (formData.confirmPassword != "")
-                        window.alert("confirm password doesnt match password");
+                      if (document.getElementById("confirm").value != "")
+                        window.alert("confirm Password doesnt match Password");
                     } else {
                       if (
                         document.getElementById("confirm").hasAttribute("error")
@@ -263,7 +288,7 @@ function Form() {
                         .classList.add("success");
                     }
 
-                    if (formData.organization == "") {
+                    if (formData.Organizatio == "") {
                       if (
                         document.getElementById("org").hasAttribute("success")
                       )
@@ -281,7 +306,7 @@ function Form() {
                   }
 
                   if (page === 1) {
-                    if (formData.roles.length == "0") {
+                    if (formData.Roles.length == "0") {
                       window.alert("you must pick atleast one role");
                       document
                         .getElementById("flexCheckDefault1")
@@ -307,7 +332,7 @@ function Form() {
                   }
 
                   if (page === 2) {
-                    if (formData.consented == "not-consented") {
+                    if (formData.Consent == "not-Consent") {
                       window.alert("you must consent to continue");
                       document
                         .getElementById("flexCheckDefault1")
