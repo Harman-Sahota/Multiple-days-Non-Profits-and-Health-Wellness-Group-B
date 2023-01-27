@@ -1,14 +1,13 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import startedCSS from './gettingStarted.module.css';
 import Button from 'react-bootstrap/Button';
 
-function GettingStarted() {
+function PublicSharing() {
      return (
 
         <section>
-            <h1> Getting Started </h1>
+            <h1> Public Sharing </h1>
         </section>
      );
 }
 
-export default GettingStarted;
+export default PublicSharing;

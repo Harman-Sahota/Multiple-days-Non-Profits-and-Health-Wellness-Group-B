@@ -6,8 +6,9 @@ import Home from "./pages/Home";
 import Login from "./pages/login";
 import ResetPassword from "./pages/resetPassword";
 import Register from "./pages/register";
-import GettingStarted from "./pages/gettingStarted";
+import FAQ from "./pages/faq";
 import Directory from "./pages/directory";
+import PublicSharing from "./pages/publicSharing";
 
 import Profile from "./pages/profile";
 import SearchBar from "./pages/network";
@@ -72,11 +73,11 @@ function App() {
         <Routes>
           <Route
             exact
-            path="/gettingStarted"
+            path="/faq"
             element={
               <>
                 <NavbarOut />
-                <GettingStarted />
+                <FAQ />
                 <Footer />
               </>
             }
@@ -93,6 +94,22 @@ function App() {
               <>
                 <NavbarOut />
                 <Directory />
+                <Footer />
+              </>
+            }
+          />
+        </Routes>
+      </Router>
+
+      <Router>
+        <Routes>
+          <Route
+            exact
+            path="/publicSharing"
+            element={
+              <>
+                <NavbarOut />
+                <PublicSharing />
                 <Footer />
               </>
             }

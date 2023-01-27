@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import directoryCSS from './gettingStarted.module.css';
+import directoryCSS from './directory.module.css';
 import Button from 'react-bootstrap/Button';
 
 function Directory() {
