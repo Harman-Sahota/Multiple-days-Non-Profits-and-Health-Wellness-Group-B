@@ -67,3 +67,11 @@
     #product, #quantity, #desc, #type {
     margin-bottom: 1em;
     }
+    
+    #type {
+      width: 100%;
+      }
+      
+      .form-select {
+      width: auto;
+      }
