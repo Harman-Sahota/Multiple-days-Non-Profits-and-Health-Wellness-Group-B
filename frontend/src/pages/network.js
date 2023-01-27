@@ -71,6 +71,10 @@ function SearchBar() {
         <label htmlFor="quantity">Quantity</label>
         <input type="number" className="form-control" id="quantity" placeholder="Enter quantity" />
       </div>
+      <div className="form-group">
+        <label htmlFor="desc">Description</label>
+        <textarea className="form-control" id="desc" rows="3"></textarea>
+      </div>
       
       <Button variant="primary" type="submit">
         Submit
