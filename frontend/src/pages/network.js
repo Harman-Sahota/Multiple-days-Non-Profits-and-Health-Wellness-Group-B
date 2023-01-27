@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './network.css';
 
 
 function SearchBar() {
   const [posts, setPosts] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+
+  const handleClose = () => setShowModal(false);
+  const handleShow = () => setShowModal(true);
+
 
   return (
     <div className="container-lg col-md-auto">
@@ -52,7 +58,9 @@ function SearchBar() {
         </div>
       </div>
     </div>
+    
   )
+
 }
 
 export default SearchBar;
