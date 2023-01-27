@@ -7,6 +7,9 @@ import Confirm from "../components/Step4";
 import Button from "react-bootstrap/Button";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./register.css";
+import axios from 'axios';
+
+
 function Form() {
   const [page, setPage] = useState(0);
 
@@ -74,6 +77,22 @@ function Form() {
               onClick={(e) => {
                 if (page === FormTitles.length - 1) {
                   console.log(JSON.stringify(formData));
+
+                  axios.post(
+                    "http://127.0.0.1:8000/api/",
+                    {
+                     data: JSON.stringify(formData)
+                    },
+                    {
+                      headers: {
+                        "Content-type": "application/json; charset=UTF-8",
+                      }
+                    }
+                  )
+                 
+                    .then(response => response.status)
+                    .catch(err => console.warn(err));
+
                 } else {
                   var EmailValidRegex =
                     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -89,7 +108,7 @@ function Form() {
                       formData.Email.match(EmailValidRegex) &&
                       formData.Password != "" &&
                       formData.Password.match(PasswordRegex) &&
-                      document.getElementById("confirm").value  == formData.Password &&
+                      document.getElementById("confirm").value == formData.Password &&
                       formData.Organizatio != ""
                     ) {
                       setPage((currPage) => currPage + 1);
@@ -191,9 +210,7 @@ function Form() {
                         window.alert("Email is not valid");
                       }
                     } else {
-                      if (
-                        document.getElementById("Email").hasAttribute("error")
-                      )
+                      if ( document.getElementById("Email").hasAttribute("error") )
                         document
                           .getElementById("Email")
                           .classList.remove("error");
@@ -238,8 +255,8 @@ function Form() {
                     }
 
                     if (
-                      !(document.getElementById("confirm").value  == formData.Password) ||
-                      document.getElementById("confirm").value  == ""
+                      !(document.getElementById("confirm").value == formData.Password) ||
+                      document.getElementById("confirm").value == ""
                     ) {
                       if (
                         document
@@ -250,7 +267,7 @@ function Form() {
                           .getElementById("confirm")
                           .classList.remove("success");
                       document.getElementById("confirm").classList.add("error");
-                      if (document.getElementById("confirm").value  != "")
+                      if (document.getElementById("confirm").value != "")
                         window.alert("confirm Password doesnt match Password");
                     } else {
                       if (
