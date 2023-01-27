@@ -4,11 +4,12 @@ import Footer from "./components/footer";
 import Home from "./pages/Home";
 import Login from "./pages/login";
 import ResetPassword from "./pages/resetPassword";
-import Register from "./pages/Register";
+import Register from "./pages/register";
 import Profile from "./pages/profile";
 import SearchBar from "./pages/network";
 import Comment from "./pages/comment";
 import Tracker from "./pages/tracker";
+import Admin from "./pages/admin";
 
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -19,8 +20,7 @@ function App() {
       <Router>
         <Routes>
           <Route
-            exact
-            path="/"
+            exact path="/"
             element={
               <>
                 <NavbarOut />
@@ -132,7 +132,7 @@ function App() {
         <Routes>
           <Route
             exact
-            path="/"
+            path="/tracker"
             element={
               <>
                 <NavbarIn />
@@ -143,6 +143,25 @@ function App() {
           />
         </Routes>
       </Router>
+
+      <Router>
+        <Routes>
+          <Route
+            exact
+            path="/admin"
+            element={
+              <>
+                <NavbarIn />
+                <Admin />
+                <Footer />
+              </>
+            }
+          />
+        </Routes>
+      </Router>
+
+
+
     </>
   );
 }

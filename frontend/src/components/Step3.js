@@ -21,7 +21,7 @@ function Step3({ formData, setFormData }) {
           value="consented"
           onChange={(e) => {
             if(e.target.checked){
-            setFormData({ ...formData, consented: e.target.value });
+            setFormData({ ...formData, Consent: e.target.value });
             }
             
           }}
@@ -42,7 +42,7 @@ function Step3({ formData, setFormData }) {
           value="not-consented"
           onChange={(e) => {
             if(e.target.checked){
-            setFormData({ ...formData, consented: e.target.value });
+            setFormData({ ...formData, Consent: e.target.value });
             }
           }}
         />
