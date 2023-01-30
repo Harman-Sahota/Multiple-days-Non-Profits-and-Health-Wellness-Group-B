@@ -60,14 +60,19 @@ input[type="number"] {
   margin-top: 1rem;
 }
 
-.form-control {
+.custom-table {
+  width: 100%;
+}
+
+.customised-input {
   width: 10em;
 }
 
-.smaller-input {
+.customised-smaller-input {
   width: 4.5em;
 }
 
-.table {
-  width: 100%;
+.my-input-text {
+  position: relative;
+  left: 0.7rem;
 }

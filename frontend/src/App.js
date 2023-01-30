@@ -25,7 +25,8 @@ function App() {
       <Router>
         <Routes>
           <Route
-            exact path="/"
+            exact
+            path="/"
             element={
               <>
                 <NavbarOut />
@@ -212,9 +213,6 @@ function App() {
           />
         </Routes>
       </Router>
-
-
-
     </>
   );
 }
