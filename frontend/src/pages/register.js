@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { redirect } from "react-router-dom";
 import SignUpInfo from "../components/Step1";
 import PersonalInfo from "../components/Step2";
 import OtherInfo from "../components/Step3";
@@ -95,10 +95,17 @@ function Form() {
                         "Content-type": "application/json",
                       }
                     }
+
                   )
+
                  
-                    .then(response => response.status)
+                    .then(response => 
+                      {if(response.status == 201){
+                        console.log('yes');
+                        return redirect('/tracker');}})
                     .catch(err => console.warn(err));
+
+                   
 
                 } else {
                   var EmailValidRegex =
