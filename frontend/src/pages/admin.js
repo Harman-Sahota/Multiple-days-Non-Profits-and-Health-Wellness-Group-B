@@ -1,12 +1,29 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './admin.css'
 import Button from 'react-bootstrap/Button';
-
+import React, { useState } from "react";
 function Admin() {
+
+
+    const [formData, setFormData] = useState({
+       
+        role: [],
+        metrics: [],
+        network_CEO: '',
+        readwrite_CEO: '',
+
+      
+      });
+
+    
+
+
     return (
 
+       
+
         <><div id="role-settings-container" className="container-lg col-md-auto">
-            <form className="form" action="" id="perms" method="post">
+            <form className="form" action="" id="perms" method="post" >
                 <h3 className="h3">Data Permissions:</h3>
                 <h5 className="h5">Inside Organization: </h5>
                 <table className="table">
@@ -23,7 +40,7 @@ function Admin() {
 
                         <tr>
                             <th scope="row">1</th>
-                            <td> <input type="checkbox" id="role" name="role[]" value="User non-profit managers/CEO" />User non-profit managers/CEO</td>
+                            <td> <input type="checkbox" id="role" name="role[]" value="User non-profit managers/CEO"  onChange={(e) => {  if(e.target.checked){ setFormData({ ...formData, role: e.target.value })}}} />User non-profit managers/CEO</td>
                             <td>
                                 <div className="form-check ">
                                     <input className="form-check-input flexCheckDefault" type="checkbox" id="flexCheckDefault" name="metrics-CEO[]"
@@ -64,7 +81,7 @@ function Admin() {
                             <td>
                                 <div className="form-check ">
                                     <div className="col-md-auto">
-                                        <select className="form-select" id="network" name="network-CEO">
+                                        <select className="form-select" id="network" name="network_CEO" onChange={(e) => { setFormData({ ...formData, network_CEO: e.target.value })}}>
                                             <option value="allow">Allow</option>
                                             <option value="dont allow">Dont Allow</option>
                                         </select>
@@ -74,7 +91,7 @@ function Admin() {
                             <td>
                                 <div className="form-check">
                                     <div className="col-md-auto">
-                                        <select className="form-select" id="readwrite" name="readwrite-CEO">
+                                        <select className="form-select" id="readwrite" name="readwrite_CEO" onChange={(e) => { setFormData({ ...formData, readwrite_CEO: e.target.value })}}>
                                             <option value="read">Read</option>
                                             <option value="write">Write</option>
                                             <option value="both">Both</option>
@@ -87,7 +104,7 @@ function Admin() {
 
                         <tr>
                             <th scope="row">2</th>
-                            <td><input type="checkbox" id="role" name="role[]" value="User non-profit warehouse boss" />User non-profit warehouse boss</td>
+                            <td><input type="checkbox" id="role" name="role[]" value="User non-profit warehouse boss" onChange={(e) => {  if(e.target.checked){ setFormData({ ...formData, role: e.target.value })}}} />User non-profit warehouse boss</td>
                             <td>
                                 <div className="form-check ">
                                     <input className="form-check-input flexCheckDefault" type="checkbox" id="flexCheckDefault" name="metrics-warehouse[]"
@@ -128,7 +145,7 @@ function Admin() {
                             <td>
                                 <div className="form-check ">
                                     <div className="col-md-auto">
-                                        <select className="form-select" id="network" name="network-warehouse">
+                                        <select className="form-select" id="network" name="network-warehouse" onChange={(e) => {  setFormData({ ...formData, network: e.target.value })}}>
                                             <option value="allow">Allow</option>
                                             <option value="dont allow">Dont Allow</option>
                                         </select>
@@ -138,7 +155,7 @@ function Admin() {
                             <td>
                                 <div className="form-check">
                                     <div className="col-md-auto">
-                                        <select className="form-select" id="readwrite" name="readwrite-warehouse">
+                                        <select className="form-select" id="readwrite" name="readwrite-warehouse" onChange={(e) => {   setFormData({ ...formData, readwrite: e.target.value })}}>
                                             <option value="read">Read</option>
                                             <option value="write">Write</option>
                                             <option value="both">Both</option>
@@ -151,7 +168,7 @@ function Admin() {
 
                         <tr>
                             <th scope="row">3</th>
-                            <td><input type="checkbox" id="role" name="role[]" value="Admin" />Admin</td>
+                            <td><input type="checkbox" id="role" name="role[]" value="Admin" onChange={(e) => {  if(e.target.checked){ setFormData({ ...formData, role: e.target.value })}}} />Admin</td>
                             <td>
                                 <div className="form-check ">
                                     <input className="form-check-input flexCheckDefault" type="checkbox" id="flexCheckDefault" name="metrics-Admin[]"
@@ -192,7 +209,7 @@ function Admin() {
                             <td>
                                 <div className="form-check ">
                                     <div className="col-md-auto">
-                                        <select className="form-select" id="network" name="network-Admin">
+                                        <select className="form-select" id="network" name="network-Admin" onChange={(e) => { setFormData({ ...formData, network: e.target.value })}}>
                                             <option value="allow">Allow</option>
                                             <option value="dont allow">Dont Allow</option>
                                         </select>
@@ -202,7 +219,7 @@ function Admin() {
                             <td>
                                 <div className="form-check">
                                     <div className="col-md-auto">
-                                        <select className="form-select" id="readwrite" name="readwrite-Admin">
+                                        <select className="form-select" id="readwrite" name="readwrite-Admin" onChange={(e) => {  if(e.target.checked){ setFormData({ ...formData, role: e.target.value })}}}>
                                             <option value="read">Read</option>
                                             <option value="write">Write</option>
                                             <option value="both">Both</option>
@@ -215,7 +232,7 @@ function Admin() {
 
                         <tr>
                             <th scope="row">4</th>
-                            <td><input type="checkbox" id="role" name="role[]" value="User non-profit volunteer" />User non-profit volunteer</td>
+                            <td><input type="checkbox" id="role" name="role[]" value="User non-profit volunteer" onChange={(e) => {  if(e.target.checked){ setFormData({ ...formData, role: e.target.value })}}} />User non-profit volunteer</td>
                             <td>
                                 <div className="form-check ">
                                     <input className="form-check-input flexCheckDefault" type="checkbox" id="flexCheckDefault" name="metrics-volunteer[]"
@@ -256,7 +273,7 @@ function Admin() {
                             <td>
                                 <div className="form-check ">
                                     <div className="col-md-auto">
-                                        <select className="form-select" id="network" name="network-volunteer">
+                                        <select className="form-select" id="network" name="network-volunteer" onChange={(e) => { setFormData({ ...formData, network: e.target.value })}}>
                                             <option value="allow">Allow</option>
                                             <option value="dont allow">Dont Allow</option>
                                         </select>
@@ -266,7 +283,7 @@ function Admin() {
                             <td>
                                 <div className="form-check">
                                     <div className="col-md-auto">
-                                        <select className="form-select" id="readwrite" name="readwrite-volunteer">
+                                        <select className="form-select" id="readwrite" name="readwrite-volunteer" onChange={(e) => {  setFormData({ ...formData, readwrite: e.target.value })}}>
                                             <option value="read">Read</option>
                                             <option value="write">Write</option>
                                             <option value="both">Both</option>
@@ -294,7 +311,7 @@ function Admin() {
                     <tbody>
                         <tr>
                             <th scope="row">1</th>
-                            <td><input type="checkbox" id="role" name="role" value="Sponsors" />Sponsors</td>
+                            <td><input type="checkbox" id="role" name="role" value="Sponsors" onChange={(e) => {  if(e.target.checked){ setFormData({ ...formData, role: e.target.value })}}} />Sponsors</td>
                             <td>
                                 <div className="form-check ">
                                     <input className="form-check-input flexCheckDefault" type="checkbox" id="flexCheckDefault" name="metrics-Sponsors[]"
@@ -335,7 +352,7 @@ function Admin() {
                             <td>
                                 <div className="form-check ">
                                     <div className="col-md-auto">
-                                        <select className="form-select" id="network" name="network-Sponsors">
+                                        <select className="form-select" id="network" name="network-Sponsors" onChange={(e) => {  setFormData({ ...formData, network: e.target.value })}}>
                                             <option value="allow">Allow</option>
                                             <option value="dont allow">Dont Allow</option>
                                         </select>
@@ -345,7 +362,7 @@ function Admin() {
                             <td>
                                 <div className="form-check">
                                     <div className="col-md-auto">
-                                        <select className="form-select" id="readwrite" name="readwrite-Sponsors">
+                                        <select className="form-select" id="readwrite" name="readwrite-Sponsors" onChange={(e) => {   setFormData({ ...formData, readwrite: e.target.value })}}>
                                             <option value="read">Read</option>
                                             <option value="write">Write</option>
                                             <option value="both">Both</option>
@@ -358,7 +375,7 @@ function Admin() {
 
                         <tr>
                             <th scope="row">2</th>
-                            <td><input type="checkbox" id="role" name="role[]" value="Experts" />Experts</td>
+                            <td><input type="checkbox" id="role" name="role[]" value="Experts" onChange={(e) => {  if(e.target.checked){ setFormData({ ...formData, role: e.target.value })}}} />Experts</td>
                             <td>
                                 <div className="form-check ">
                                     <input className="form-check-input flexCheckDefault" type="checkbox" id="flexCheckDefault" name="metrics-Experts[]"
@@ -399,7 +416,7 @@ function Admin() {
                             <td>
                                 <div className="form-check ">
                                     <div className="col-md-auto">
-                                        <select className="form-select" id="network" name="network-Experts">
+                                        <select className="form-select" id="network" name="network-Experts" onChange={(e) => {  setFormData({ ...formData, network: e.target.value })}}>
                                             <option value="allow">Allow</option>
                                             <option value="dont allow">Dont Allow</option>
                                         </select>
@@ -409,7 +426,7 @@ function Admin() {
                             <td>
                                 <div className="form-check">
                                     <div className="col-md-auto">
-                                        <select className="form-select" id="readwrite" name="readwrite-Experts">
+                                        <select className="form-select" id="readwrite" name="readwrite-Experts" onChange={(e) => {   setFormData({ ...formData, readwrite: e.target.value })}}>
                                             <option value="read">Read</option>
                                             <option value="write">Write</option>
                                             <option value="both">Both</option>
