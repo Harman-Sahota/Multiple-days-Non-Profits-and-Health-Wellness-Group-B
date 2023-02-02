@@ -19,20 +19,20 @@ function NavbarIn() {
 
                 <div className="nav" id="desktop-menu">
                     <ul>
-                        <li><a href="tracker/" className="nav-link px-3">Tracker</a></li>
+                        <li><a href="/tracker" className="nav-link px-3">Tracker</a></li>
                         {/*{% if 'user non-profit managers/CEO' in request.session.Roles  %}*/}
-                        <li><a href="network/" className="nav-link px-3">Network</a></li>
+                        <li><a href="/network" className="nav-link px-3">Network</a></li>
                         {/*{% elif 'user non-profit warehouse boss' in request.session.Roles %}*/}
-                        <li><a href="network/" className="nav-link px-3">Network</a></li>
+                        <li><a href="/network" className="nav-link px-3">Network</a></li>
                         {/*{% elif 'admin' in request.session.Roles %}*/}
-                        <li><a href="network/" className="nav-link px-3">Network</a></li>
+                        <li><a href="/network" className="nav-link px-3">Network</a></li>
                         {/*{% endif %}
 
                         {% if 'admin' in request.session.Roles %}*/}
-                        <li><a href="admin/" className="nav-link px-3">Admin</a></li>
+                        <li><a href="/admin" className="nav-link px-3">Admin</a></li>
                         {/*{% endif %}*/}
 
-                        <li><a href="profile" className="nav-link px-3"><FontAwesomeIcon icon={faUser} />
+                        <li><a href="/profile" className="nav-link px-3"><FontAwesomeIcon icon={faUser} />
                         &nbsp; Profile</a></li>
                         <li id="signup">
                             <a href="/">

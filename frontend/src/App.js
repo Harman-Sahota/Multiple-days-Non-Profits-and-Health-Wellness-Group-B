@@ -42,7 +42,7 @@ function App() {
         <Routes>
           <Route
             exact
-            path="login/"
+            path="/login"
             element={
               <>
                 <NavbarOut />
