@@ -34,24 +34,6 @@ function Tracker() {
               <Form.Group>
                 {/* {% csrf_token %} */}
                 <div className="row">
-                  <div className={`col-md-auto form-floating`}>
-                    <input
-                      type="text"
-                      id="description"
-                      className={`form-control input-text ${trackerCSS["customised-input"]}`}
-                      placeholder="Description"
-                      name="description"
-                    />
-                    <label
-                      htmlFor="description"
-                      className={`form-label input-text`}
-                    >
-                      <span class={`${trackerCSS["my-input-text"]}`}>
-                        Description:
-                      </span>
-                    </label>
-                    <br />
-                  </div>
                   <div className="col-md-auto">
                     <label htmlFor="category">Category</label>
                     <br />
@@ -67,7 +49,20 @@ function Tracker() {
                       <option>Metric #5</option>
                     </select>
                   </div>
-                  <div className="col-md-auto form-floating">
+                  <div className="col-md-auto">
+                    <label htmlFor="description">Description</label>
+                    <br />
+                    <input
+                      type="text"
+                      id="description"
+                      className={`form-control input-text ${trackerCSS["customised-input"]}`}
+                      placeholder="Description"
+                      name="description"
+                    />
+                  </div>
+                  <div className="col-md-auto">
+                    <label htmlFor="quantity">Quantity</label>
+                    <br />
                     <input
                       type={`text`}
                       id="quantity"
@@ -75,12 +70,6 @@ function Tracker() {
                       placeholder="Quantity"
                       name="quantity"
                     />
-                    <label htmlFor="quantity">
-                      <span class={`${trackerCSS["my-input-text"]}`}>
-                        Quantity:
-                      </span>
-                    </label>
-                    <br />
                   </div>
                   <div className="col-md-auto">
                     <label htmlFor="qunits">Units</label>
@@ -106,8 +95,8 @@ function Tracker() {
                           value={0}
                           min={0}
                           // style={{ width: "10em" }}
-                          onKeyUp={() => {}}
-                          // onkeyup="calculateLandfill(); calculatePercent()
+                          onKeyUp={() => { }}
+                        // onkeyup="calculateLandfill(); calculatePercent()
                         />
                       </div>
                     </div>
@@ -120,8 +109,8 @@ function Tracker() {
                           name="animalFeed"
                           value={0}
                           min={0}
-                          onKeyUp={() => {}}
-                          // onkeyup="calculateLandfill(); calculatePercent()"
+                          onKeyUp={() => { }}
+                        // onkeyup="calculateLandfill(); calculatePercent()"
                         />
                       </div>
                     </div>
@@ -134,8 +123,8 @@ function Tracker() {
                           name="compost"
                           value={0}
                           min={0}
-                          onKeyUp={() => {}}
-                          // onkeyup="calculateLandfill(); calculatePercent()"
+                          onKeyUp={() => { }}
+                        // onkeyup="calculateLandfill(); calculatePercent()"
                         />
                       </div>
                     </div>
@@ -148,9 +137,9 @@ function Tracker() {
                           name="partnet"
                           value={0}
                           min={0}
-                          onKeyUp={() => {}}
-                          // onKeyUp={() => {calculateLandfill(); calculatePercent()}}
-                          // onkeyup="calculateLandfill(); calculatePercent()"
+                          onKeyUp={() => { }}
+                        // onKeyUp={() => {calculateLandfill(); calculatePercent()}}
+                        // onkeyup="calculateLandfill(); calculatePercent()"
                         />
                       </div>
                     </div>
@@ -184,7 +173,7 @@ function Tracker() {
                           value={0}
                           min={0}
                           max={100}
-                          onLoad={() => {}}
+                          onLoad={() => { }}
                           // onLoad={() => calculateLandfillPercent()}
                           // onload="calculateLandfillPercent()"
                           readonly
@@ -204,7 +193,7 @@ function Tracker() {
                           value={0}
                           min={0}
                           max={100}
-                          onLoad={() => {}}
+                          onLoad={() => { }}
                           // onLoad={() => calculateLandfillPercent()}
                           // onload="calculateLandfillPercent()"
                           readonly
@@ -224,7 +213,7 @@ function Tracker() {
                           value={0}
                           min={0}
                           max={100}
-                          onLoad={() => {}}
+                          onLoad={() => { }}
                           // onLoad={() => calculateLandfillPercent()}
                           // onload="calculateLandfillPercent()"
                           readonly
@@ -244,7 +233,7 @@ function Tracker() {
                           value={0}
                           min={0}
                           max={100}
-                          onLoad={() => {}}
+                          onLoad={() => { }}
                           // onLoad={() => calculateLandfillPercent()}
                           // onLoad="calculateLandfillPercent()"
                           readonly
@@ -300,8 +289,8 @@ function Tracker() {
               type="button"
               variant="outline-success"
               className="btn btn-outline-success"
-              onClick={() => {}}
-              // onClick={() => exportTableToCSV("data.csv")}
+              onClick={() => { }}
+            // onClick={() => exportTableToCSV("data.csv")}
             >
               Export CSV
             </Button>

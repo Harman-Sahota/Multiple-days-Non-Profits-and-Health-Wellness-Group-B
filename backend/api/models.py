@@ -22,3 +22,15 @@ class permissions(models.Model):
     
     class Meta:
         db_table = "permissions"
+
+class comments(models.Model):
+    product = models.CharField(max_length=255)
+    Type = models.CharField(max_length=255)
+    Quantity = models.IntegerField()
+    Units = models.CharField(max_length=3)
+    Description = models.CharField(max_length=255)
+    Comments = models.CharField(max_length=255)
+    username = models.CharField(max_length=255)
+
+    class Meta:
+        db_table = "comments"
