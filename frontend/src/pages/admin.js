@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './admin.css'
+import axios from 'axios'
 import React, { useState } from "react";
 let temp = [];
 let temp_warehouse = [];
@@ -566,12 +567,12 @@ function Admin() {
                                 onChange={(e) => {
                                     if (e.target.checked) {
                                         temp.push(e.target.value);
-                                        setCEO({ ...CEO, metrics: temp });
+                                        setVolunteer({ ...volunteer, metrics: temp });
 
 
                                     } else {
                                         temp.pop(e.target.value);
-                                        setCEO({ ...CEO, metrics: temp });
+                                        setVolunteer({ ...volunteer, metrics: temp });
 
                                     }
 
@@ -652,7 +653,7 @@ function Admin() {
                             <div className="form-check ">
                                 <div className="col-md-auto">
                                     <select className="form-select" id="network" name="network-CEO" onChange={(event) =>
-                                        setCEO({ ...CEO, network: event.target.value })
+                                        setVolunteer({ ...volunteer, network: event.target.value })
                                     }>
                                         <option value="allow">Allow</option>
                                         <option value="dont allow">Dont Allow</option>
@@ -664,7 +665,7 @@ function Admin() {
                             <div className="form-check">
                                 <div className="col-md-auto">
                                     <select className="form-select" id="readwrite" name="readwrite-CEO" onChange={(event) =>
-                                        setCEO({ ...CEO, readwrite: event.target.value })
+                                        setVolunteer({ ...volunteer, readwrite: event.target.value })
 
                                     }>
                                         <option value="read">Read</option>
@@ -676,38 +677,9 @@ function Admin() {
                             </div>
 
                         </td>
-                        <td>
-                            <div className="form-check ">
-                                <div className="col-md-auto">
-                                    <select className="form-select" id="network" name="network-volunteer"
-
-                                        onChange={(event) =>
-                                            setAdmin({ ...volunteer, network: event.target.value })
-
-                                        }>
-                                        <option value="allow">Allow</option>
-                                        <option value="dont allow">Dont Allow</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div className="form-check">
-                                <div className="col-md-auto">
-                                    <select className="form-select" id="readwrite" name="readwrite-volunteer"
-
-                                        onChange={(event) =>
-                                            setAdmin({ ...volunteer, readwrite: event.target.value })
-
-                                        } >
-                                        <option value="read">Read</option>
-                                        <option value="write">Write</option>
-                                        <option value="both">Both</option>
-                                        <option value="none">None</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </td>
+                 
+                           
+                            
                     </tr>
                 </tbody>
             </table>
@@ -986,7 +958,67 @@ function Admin() {
                     </tr>
                 </tbody>
             </table>
-            <button type="submit" for="perms" id='sub' className="btn btn-outline-success">Save</button>
+            <button type="submit" for="perms" id='sub' className="btn btn-outline-success"
+            
+            onClick={(e) => {
+
+                axios.post(
+                    "http://127.0.0.1:8000/api/adminInsert/",
+                    [
+                     
+                     {
+                     role: CEO.role,
+                     metrics: CEO.metrics,
+                     network: CEO.network,
+                     readwrite: CEO.readwrite
+                    },
+                    {
+                        role: warehouse.role,
+                        metrics: warehouse.metrics,
+                        network: warehouse.network,
+                        readwrite: warehouse.readwrite
+                    },
+                    {
+                        role: admin.role,
+                        metrics: admin.metrics,
+                        network: admin.network,
+                        readwrite: admin.readwrite
+                    },
+                    {
+                        role: volunteer.role,
+                        metrics: volunteer.metrics,
+                        network: volunteer.network,
+                        readwrite: volunteer.readwrite
+                    },
+                    {
+                        role: Sponsors.role,
+                        metrics: Sponsors.metrics,
+                        network: Sponsors.network,
+                        readwrite: Sponsors.readwrite
+                    },
+                    {
+                        role: Experts.role,
+                        metrics: Experts.metrics,
+                        network: Experts.network,
+                        readwrite: Experts.readwrite
+                    }
+
+
+                    ],
+                    {
+                      headers: {
+                        "Content-type": "application/json",
+                      }
+                    }
+
+                  )
+
+
+
+            }}
+            
+            
+            >Save</button>
 
 
 
