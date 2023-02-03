@@ -18,3 +18,7 @@
   - Kudos to Harman for getting the REST API of the Register page functioning so far
 - Group A is working on their discussion board so far
 - Overall it is a bit of a learning curve so far
+- Building the project using Reactjs is to make maintenance easier
+- Barbs would like us to mind the font size of the graphics
+  - Make sure to make the font size large enough for older people to see
+  - Introduce some colors into the graphing
