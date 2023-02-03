@@ -1,446 +1,994 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './admin.css'
-import Button from 'react-bootstrap/Button';
 import React, { useState } from "react";
+let temp = [];
+let temp_warehouse = [];
 function Admin() {
 
+    const [CEO, setCEO] = useState({
 
-    const [formData, setFormData] = useState({
-       
-        role: [],
+        role: '',
         metrics: [],
-        network_CEO: '',
-        readwrite_CEO: '',
+        network: '',
+        readwrite: ''
 
-      
-      });
+    });
+    const [warehouse, setwarehouse] = useState({
 
-    
+        role: '',
+        metrics: [],
+        network: '',
+        readwrite: ''
+
+    });
+    const [admin, setAdmin] = useState({
+
+        role: '',
+        metrics: [],
+        network: '',
+        readwrite: ''
+
+    });
+
+    const [volunteer, setVolunteer] = useState({
+
+        role: '',
+        metrics: [],
+        network: '',
+        readwrite: ''
+
+    });
+
+
+    const [Sponsors, setSponsors] = useState({
+
+        role: '',
+        metrics: [],
+        network: '',
+        readwrite: ''
+
+    });
+
+    const [Experts, setExperts] = useState({
+
+        role: '',
+        metrics: [],
+        network: '',
+        readwrite: ''
+
+    });
+
+    CEO.metrics = CEO.metrics.toString();
+    warehouse.metrics = warehouse.metrics.toString();
+    admin.metrics = admin.metrics.toString();
+    volunteer.metrics = volunteer.metrics.toString();
+    Sponsors.metrics = Sponsors.metrics.toString();
+    Experts.metrics = Experts.metrics.toString();
+  
+    var jsonData = []
+    jsonData.push( 
+    JSON.parse(JSON.stringify(CEO)),
+    JSON.parse(JSON.stringify(warehouse)),
+    JSON.parse(JSON.stringify(admin)),
+    JSON.parse(JSON.stringify(volunteer)),
+    JSON.parse(JSON.stringify(Sponsors)),
+    JSON.parse(JSON.stringify(Experts)),
+    );
+    var j = JSON.stringify(jsonData);
+    console.log(j);
 
 
     return (
 
-       
-
         <><div id="role-settings-container" className="container-lg col-md-auto">
-            <form className="form" action="" id="perms" method="post" >
-                <h3 className="h3">Data Permissions:</h3>
-                <h5 className="h5">Inside Organization: </h5>
-                <table className="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Role</th>
-                            <th scope="col">Metric Access</th>
-                            <th scope="col">Network Access</th>
-                            <th scope="col">Read/Write Access</th>
-                        </tr>
-                    </thead>
-                    <tbody>
 
-                        <tr>
-                            <th scope="row">1</th>
-                            <td> <input type="checkbox" id="role" name="role[]" value="User non-profit managers/CEO"  onChange={(e) => {  if(e.target.checked){ setFormData({ ...formData, role: e.target.value })}}} />User non-profit managers/CEO</td>
-                            <td>
-                                <div className="form-check ">
-                                    <input className="form-check-input flexCheckDefault" type="checkbox" id="flexCheckDefault" name="metrics-CEO[]"
-                                        value="Fresh Produce" />
-                                    <label className="form-check-label" for="flexCheckDefault">
+            <h3 className="h3">Data Permissions:</h3>
+            <h5 className="h5">Inside Organization: </h5>
+            <table className="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Role</th>
+                        <th scope="col">Metric Access</th>
+                        <th scope="col">Network Access</th>
+                        <th scope="col">Read/Write Access</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <th scope="row">1</th>
+                        <td> <input type="checkbox" id="role" name="role[]" value="User non-profit managers/CEO"
+
+                            onChange={(e) => {
+                                if (e.target.checked) {
+
+                                    setCEO({ ...CEO, role: e.target.value });
+
+
+
+                                } else if (!e.target.checked) {
+
+                                    setCEO({ ...CEO, role: '' });
+
+                                }
+
+
+
+                            }}
+
+                        />User non-profit managers/CEO</td>
+                        <td>
+                            <div
+
+                                onChange={(e) => {
+                                    if (e.target.checked) {
+                                        temp.push(e.target.value);
+                                        setCEO({ ...CEO, metrics: temp });
+
+
+                                    } else {
+                                        temp.pop(e.target.value);
+                                        setCEO({ ...CEO, metrics: temp });
+
+                                    }
+
+
+
+                                }}
+
+
+                            >
+                                <div className="form-check">
+                                    <input
+
+                                        className="form-check-input flexCheckDefault"
+                                        type="checkbox"
+                                        id="flexCheckDefault1"
+                                        name="metrics[]"
+                                        value="Fresh Produce"
+                                    />
+                                    <label className="form-check-label" for="flexCheckDefault1">
                                         Fresh Produce
                                     </label>
                                 </div>
                                 <div className="form-check">
-                                    <input className="form-check-input flexCheckDefault" type="checkbox" id="flexCheckDefault" name="metrics-CEO[]"
-                                        value="Metric #2" />
+                                    <input
+                                        className="form-check-input flexCheckDefault"
+                                        type="checkbox"
+                                        id="flexCheckDefault2"
+                                        name="metrics[]"
+                                        value="metric#2"
+
+                                    />
                                     <label className="form-check-label" for="flexCheckDefault2">
                                         Metric #2
                                     </label>
                                 </div>
                                 <div className="form-check">
-                                    <input className="form-check-input flexCheckDefault" type="checkbox" id="flexCheckDefault" name="metrics-CEO[]"
-                                      value="Metric #3" />
+                                    <input
+                                        className="form-check-input flexCheckDefault"
+                                        type="checkbox"
+                                        id="flexCheckDefault3"
+                                        name="metrics[]"
+                                        value="Metric#3"
+
+                                    />
                                     <label className="form-check-label" for="flexCheckDefault3">
                                         Metric #3
                                     </label>
                                 </div>
-                                <div className="form-check ">
-                                    <input className="form-check-input flexCheckDefault" type="checkbox" id="flexCheckDefault" name="metrics[]-CEO"
-                                        value="Metric #4" />
+                                <div className="form-check">
+                                    <input
+                                        className="form-check-input flexCheckDefault"
+                                        type="checkbox"
+                                        id="flexCheckDefault4"
+                                        name="metrics[]"
+                                        value="Metric#4"
+
+                                    />
                                     <label className="form-check-label" for="flexCheckDefault4">
                                         Metric #4
                                     </label>
                                 </div>
                                 <div className="form-check">
-                                    <input className="form-check-input flexCheckDefault" type="checkbox" id="flexCheckDefault" name="metrics-CEO[]"
-                                        value="Metric #5" />
+                                    <input
+                                        className="form-check-input flexCheckDefault"
+                                        type="checkbox"
+                                        id="flexCheckDefault5"
+                                        name="metrics[]"
+                                        value="Metric#5"
+
+                                    />
                                     <label className="form-check-label" for="flexCheckDefault5">
                                         Metric #5
                                     </label>
                                 </div>
-                            </td>
-                            <td>
-                                <div className="form-check ">
-                                    <div className="col-md-auto">
-                                        <select className="form-select" id="network" name="network_CEO" onChange={(e) => { setFormData({ ...formData, network_CEO: e.target.value })}}>
-                                            <option value="allow">Allow</option>
-                                            <option value="dont allow">Dont Allow</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div className="form-check">
-                                    <div className="col-md-auto">
-                                        <select className="form-select" id="readwrite" name="readwrite_CEO" onChange={(e) => { setFormData({ ...formData, readwrite_CEO: e.target.value })}}>
-                                            <option value="read">Read</option>
-                                            <option value="write">Write</option>
-                                            <option value="both">Both</option>
-                                            <option value="none">None</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
+                            </div>
+                        </td>
+                        <td>
+                            <div className="form-check ">
+                                <div className="col-md-auto">
+                                    <select className="form-select" id="network" name="network-CEO" onChange={(event) =>
+                                        setCEO({ ...CEO, network: event.target.value })
 
-                        <tr>
-                            <th scope="row">2</th>
-                            <td><input type="checkbox" id="role" name="role[]" value="User non-profit warehouse boss" onChange={(e) => {  if(e.target.checked){ setFormData({ ...formData, role: e.target.value })}}} />User non-profit warehouse boss</td>
-                            <td>
-                                <div className="form-check ">
-                                    <input className="form-check-input flexCheckDefault" type="checkbox" id="flexCheckDefault" name="metrics-warehouse[]"
-                                         value="Fresh Produce" />
-                                    <label className="form-check-label" for="flexCheckDefault">
+                                    }>
+                                        <option value="allow">Allow</option>
+                                        <option value="dont allow">Dont Allow</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div className="form-check">
+                                <div className="col-md-auto">
+                                    <select className="form-select" id="readwrite" name="readwrite-CEO" onChange={(event) =>
+                                        setCEO({ ...CEO, readwrite: event.target.value })
+
+                                    }>
+                                        <option value="read">Read</option>
+                                        <option value="write">Write</option>
+                                        <option value="both">Both</option>
+                                        <option value="none">None</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">2</th>
+                        <td><input type="checkbox" id="role" name="role[]" value="User non-profit warehouse boss"
+
+
+                            onChange={(e) => {
+                                if (e.target.checked) {
+
+                                    setwarehouse({ ...warehouse, role: e.target.value });
+
+
+
+                                } else if (!e.target.checked) {
+
+                                    setwarehouse({ ...warehouse, role: '' });
+
+                                }
+
+
+
+                            }}
+
+
+
+                        />User non-profit warehouse boss</td>
+                        <td>
+                            <div
+
+                                onChange={(e) => {
+                                    if (e.target.checked) {
+                                        temp.push(e.target.value);
+                                        setwarehouse({ ...warehouse, metrics: temp_warehouse });
+
+
+                                    } else {
+                                        temp.pop(e.target.value);
+                                        setCEO({ ...warehouse, metrics: temp_warehouse });
+
+                                    }
+
+
+
+                                }}
+
+
+                            >
+                                <div className="form-check">
+                                    <input
+
+                                        className="form-check-input flexCheckDefault"
+                                        type="checkbox"
+                                        id="flexCheckDefault1"
+                                        name="metrics[]"
+                                        value="Fresh Produce"
+                                    />
+                                    <label className="form-check-label" for="flexCheckDefault1">
                                         Fresh Produce
                                     </label>
                                 </div>
                                 <div className="form-check">
-                                    <input className="form-check-input flexCheckDefault" type="checkbox" id="flexCheckDefault" name="metrics-warehouse[]"
-                                       value="Metric #2" />
+                                    <input
+                                        className="form-check-input flexCheckDefault"
+                                        type="checkbox"
+                                        id="flexCheckDefault2"
+                                        name="metrics[]"
+                                        value="metric#2"
+
+                                    />
                                     <label className="form-check-label" for="flexCheckDefault2">
                                         Metric #2
                                     </label>
                                 </div>
                                 <div className="form-check">
-                                    <input className="form-check-input flexCheckDefault" type="checkbox" id="flexCheckDefault" name="metrics-warehouse[]"
-                                        value="Metric #3" />
+                                    <input
+                                        className="form-check-input flexCheckDefault"
+                                        type="checkbox"
+                                        id="flexCheckDefault3"
+                                        name="metrics[]"
+                                        value="Metric#3"
+
+                                    />
                                     <label className="form-check-label" for="flexCheckDefault3">
                                         Metric #3
                                     </label>
                                 </div>
-                                <div className="form-check ">
-                                    <input className="form-check-input flexCheckDefault" type="checkbox" id="flexCheckDefault" name="metrics-warehouse[]"
-                                      value="Metric #4" />
+                                <div className="form-check">
+                                    <input
+                                        className="form-check-input flexCheckDefault"
+                                        type="checkbox"
+                                        id="flexCheckDefault4"
+                                        name="metrics[]"
+                                        value="Metric#4"
+
+                                    />
                                     <label className="form-check-label" for="flexCheckDefault4">
                                         Metric #4
                                     </label>
                                 </div>
                                 <div className="form-check">
-                                    <input className="form-check-input flexCheckDefault" type="checkbox" id="flexCheckDefault" name="metrics-warehouse[]"
-                                        value="Metric #5" />
+                                    <input
+                                        className="form-check-input flexCheckDefault"
+                                        type="checkbox"
+                                        id="flexCheckDefault5"
+                                        name="metrics[]"
+                                        value="Metric#5"
+
+                                    />
                                     <label className="form-check-label" for="flexCheckDefault5">
                                         Metric #5
                                     </label>
                                 </div>
-                            </td>
-                            <td>
-                                <div className="form-check ">
-                                    <div className="col-md-auto">
-                                        <select className="form-select" id="network" name="network-warehouse" onChange={(e) => {  setFormData({ ...formData, network: e.target.value })}}>
-                                            <option value="allow">Allow</option>
-                                            <option value="dont allow">Dont Allow</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div className="form-check">
-                                    <div className="col-md-auto">
-                                        <select className="form-select" id="readwrite" name="readwrite-warehouse" onChange={(e) => {   setFormData({ ...formData, readwrite: e.target.value })}}>
-                                            <option value="read">Read</option>
-                                            <option value="write">Write</option>
-                                            <option value="both">Both</option>
-                                            <option value="none">None</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
+                            </div>
+                        </td>
+                        <td>
+                            <div className="form-check ">
+                                <div className="col-md-auto">
+                                    <select className="form-select" id="network" name="network-warehouse"
 
-                        <tr>
-                            <th scope="row">3</th>
-                            <td><input type="checkbox" id="role" name="role[]" value="Admin" onChange={(e) => {  if(e.target.checked){ setFormData({ ...formData, role: e.target.value })}}} />Admin</td>
-                            <td>
-                                <div className="form-check ">
-                                    <input className="form-check-input flexCheckDefault" type="checkbox" id="flexCheckDefault" name="metrics-Admin[]"
-                                        value="Fresh Produce" />
-                                    <label className="form-check-label" for="flexCheckDefault">
+                                        onChange={(event) =>
+                                            setwarehouse({ ...warehouse, network: event.target.value })
+
+                                        }
+
+                                    >
+                                        <option value="allow">Allow</option>
+                                        <option value="dont allow">Dont Allow</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div className="form-check">
+                                <div className="col-md-auto">
+                                    <select className="form-select" id="readwrite" name="readwrite-warehouse"
+                                        onChange={(event) =>
+                                            setwarehouse({ ...warehouse, network: event.target.value })
+
+                                        }
+                                    >
+                                        <option value="read">Read</option>
+                                        <option value="write">Write</option>
+                                        <option value="both">Both</option>
+                                        <option value="none">None</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">3</th>
+                        <td><input type="checkbox" id="role" name="role[]" value="Admin"
+
+
+
+                            onChange={(e) => {
+                                if (e.target.checked) {
+
+                                    setAdmin({ ...admin, role: e.target.value });
+
+
+
+                                } else if (!e.target.checked) {
+
+                                    setAdmin({ ...admin, role: '' });
+
+                                }
+
+
+
+                            }}
+
+
+                        />Admin</td>
+                        <td>
+                            <div
+
+                                onChange={(e) => {
+                                    if (e.target.checked) {
+                                        temp.push(e.target.value);
+                                        setAdmin({ ...Admin, metrics: temp });
+
+
+                                    } else {
+                                        temp.pop(e.target.value);
+                                        setCEO({ ...Admin, metrics: temp });
+
+                                    }
+
+
+
+                                }}
+
+
+                            >
+                                <div className="form-check">
+                                    <input
+
+                                        className="form-check-input flexCheckDefault"
+                                        type="checkbox"
+                                        id="flexCheckDefault1"
+                                        name="metrics[]"
+                                        value="Fresh Produce"
+                                    />
+                                    <label className="form-check-label" for="flexCheckDefault1">
                                         Fresh Produce
                                     </label>
                                 </div>
                                 <div className="form-check">
-                                    <input className="form-check-input flexCheckDefault" type="checkbox" id="flexCheckDefault" name="metrics-Admin[]"
-                                         value="Metric #2" />
+                                    <input
+                                        className="form-check-input flexCheckDefault"
+                                        type="checkbox"
+                                        id="flexCheckDefault2"
+                                        name="metrics[]"
+                                        value="metric#2"
+
+                                    />
                                     <label className="form-check-label" for="flexCheckDefault2">
                                         Metric #2
                                     </label>
                                 </div>
                                 <div className="form-check">
-                                    <input className="form-check-input flexCheckDefault" type="checkbox" id="flexCheckDefault" name="metrics-Admin[]"
-                                         value="Metric #3" />
+                                    <input
+                                        className="form-check-input flexCheckDefault"
+                                        type="checkbox"
+                                        id="flexCheckDefault3"
+                                        name="metrics[]"
+                                        value="Metric#3"
+
+                                    />
                                     <label className="form-check-label" for="flexCheckDefault3">
                                         Metric #3
                                     </label>
                                 </div>
-                                <div className="form-check ">
-                                    <input className="form-check-input flexCheckDefault" type="checkbox" id="flexCheckDefault" name="metrics[]"
-                                        value="Metric #4" />
+                                <div className="form-check">
+                                    <input
+                                        className="form-check-input flexCheckDefault"
+                                        type="checkbox"
+                                        id="flexCheckDefault4"
+                                        name="metrics[]"
+                                        value="Metric#4"
+
+                                    />
                                     <label className="form-check-label" for="flexCheckDefault4">
                                         Metric #4
                                     </label>
                                 </div>
                                 <div className="form-check">
-                                    <input className="form-check-input flexCheckDefault" type="checkbox" id="flexCheckDefault" name="metrics-Admin[]"
-                                         value="Metric #5" />
+                                    <input
+                                        className="form-check-input flexCheckDefault"
+                                        type="checkbox"
+                                        id="flexCheckDefault5"
+                                        name="metrics[]"
+                                        value="Metric#5"
+
+                                    />
                                     <label className="form-check-label" for="flexCheckDefault5">
                                         Metric #5
                                     </label>
                                 </div>
-                            </td>
-                            <td>
-                                <div className="form-check ">
-                                    <div className="col-md-auto">
-                                        <select className="form-select" id="network" name="network-Admin" onChange={(e) => { setFormData({ ...formData, network: e.target.value })}}>
-                                            <option value="allow">Allow</option>
-                                            <option value="dont allow">Dont Allow</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div className="form-check">
-                                    <div className="col-md-auto">
-                                        <select className="form-select" id="readwrite" name="readwrite-Admin" onChange={(e) => {  if(e.target.checked){ setFormData({ ...formData, role: e.target.value })}}}>
-                                            <option value="read">Read</option>
-                                            <option value="write">Write</option>
-                                            <option value="both">Both</option>
-                                            <option value="none">None</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
+                            </div>
+                        </td>
+                        <td>
+                            <div className="form-check ">
+                                <div className="col-md-auto">
+                                    <select className="form-select" id="network" name="network-Admin"
 
-                        <tr>
-                            <th scope="row">4</th>
-                            <td><input type="checkbox" id="role" name="role[]" value="User non-profit volunteer" onChange={(e) => {  if(e.target.checked){ setFormData({ ...formData, role: e.target.value })}}} />User non-profit volunteer</td>
-                            <td>
-                                <div className="form-check ">
-                                    <input className="form-check-input flexCheckDefault" type="checkbox" id="flexCheckDefault" name="metrics-volunteer[]"
-                                        value="Fresh Produce" />
-                                    <label className="form-check-label" for="flexCheckDefault">
+                                        onChange={(event) =>
+                                            setAdmin({ ...Admin, network: event.target.value })
+
+                                        }
+
+                                    >
+                                        <option value="allow">Allow</option>
+                                        <option value="dont allow">Dont Allow</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div className="form-check">
+                                <div className="col-md-auto">
+                                    <select className="form-select" id="readwrite" name="readwrite-Admin"
+
+                                        onChange={(event) =>
+                                            setAdmin({ ...Admin, network: event.target.value })
+
+                                        }
+
+
+                                    >
+                                        <option value="read">Read</option>
+                                        <option value="write">Write</option>
+                                        <option value="both">Both</option>
+                                        <option value="none">None</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">4</th>
+                        <td><input type="checkbox" id="role" name="role[]" value="User non-profit volunteer"
+
+                            onChange={(e) => {
+                                if (e.target.checked) {
+
+                                    setVolunteer({ ...volunteer, role: e.target.value });
+
+
+
+                                } else if (!e.target.checked) {
+
+                                    setCEO({ ...volunteer, role: '' });
+
+                                }
+
+
+
+                            }}
+
+                        />User non-profit volunteer</td>
+                        <td>
+
+                            <div
+
+                                onChange={(e) => {
+                                    if (e.target.checked) {
+                                        temp.push(e.target.value);
+                                        setCEO({ ...CEO, metrics: temp });
+
+
+                                    } else {
+                                        temp.pop(e.target.value);
+                                        setCEO({ ...CEO, metrics: temp });
+
+                                    }
+
+
+
+                                }}
+
+
+                            >
+                                <div className="form-check">
+                                    <input
+
+                                        className="form-check-input flexCheckDefault"
+                                        type="checkbox"
+                                        id="flexCheckDefault1"
+                                        name="metrics[]"
+                                        value="Fresh Produce"
+                                    />
+                                    <label className="form-check-label" for="flexCheckDefault1">
                                         Fresh Produce
                                     </label>
                                 </div>
                                 <div className="form-check">
-                                    <input className="form-check-input flexCheckDefault" type="checkbox" id="flexCheckDefault" name="metrics-volunteer[]"
-                                       value="Metric #2" />
+                                    <input
+                                        className="form-check-input flexCheckDefault"
+                                        type="checkbox"
+                                        id="flexCheckDefault2"
+                                        name="metrics[]"
+                                        value="metric#2"
+
+                                    />
                                     <label className="form-check-label" for="flexCheckDefault2">
                                         Metric #2
                                     </label>
                                 </div>
                                 <div className="form-check">
-                                    <input className="form-check-input flexCheckDefault" type="checkbox" id="flexCheckDefault" name="metrics-volunteer[]"
-                                       value="Metric #3" />
+                                    <input
+                                        className="form-check-input flexCheckDefault"
+                                        type="checkbox"
+                                        id="flexCheckDefault3"
+                                        name="metrics[]"
+                                        value="Metric#3"
+
+                                    />
                                     <label className="form-check-label" for="flexCheckDefault3">
                                         Metric #3
                                     </label>
                                 </div>
-                                <div className="form-check ">
-                                    <input className="form-check-input flexCheckDefault" type="checkbox" id="flexCheckDefault" name="metrics-volunteer[]"
-                                       value="Metric #4" />
+                                <div className="form-check">
+                                    <input
+                                        className="form-check-input flexCheckDefault"
+                                        type="checkbox"
+                                        id="flexCheckDefault4"
+                                        name="metrics[]"
+                                        value="Metric#4"
+
+                                    />
                                     <label className="form-check-label" for="flexCheckDefault4">
                                         Metric #4
                                     </label>
                                 </div>
                                 <div className="form-check">
-                                    <input className="form-check-input flexCheckDefault" type="checkbox" id="flexCheckDefault" name="metrics-volunteer[]"
-                                        value="Metric #5" />
+                                    <input
+                                        className="form-check-input flexCheckDefault"
+                                        type="checkbox"
+                                        id="flexCheckDefault5"
+                                        name="metrics[]"
+                                        value="Metric#5"
+
+                                    />
                                     <label className="form-check-label" for="flexCheckDefault5">
                                         Metric #5
                                     </label>
                                 </div>
-                            </td>
-                            <td>
-                                <div className="form-check ">
-                                    <div className="col-md-auto">
-                                        <select className="form-select" id="network" name="network-volunteer" onChange={(e) => { setFormData({ ...formData, network: e.target.value })}}>
-                                            <option value="allow">Allow</option>
-                                            <option value="dont allow">Dont Allow</option>
-                                        </select>
-                                    </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div className="form-check ">
+                                <div className="col-md-auto">
+                                    <select className="form-select" id="network" name="network-CEO" onChange={(event) =>
+                                        setCEO({ ...CEO, network: event.target.value })
+                                    }>
+                                        <option value="allow">Allow</option>
+                                        <option value="dont allow">Dont Allow</option>
+                                    </select>
                                 </div>
-                            </td>
-                            <td>
+                            </div>
+                        </td>
+                        <td>
+                            <div className="form-check">
+                                <div className="col-md-auto">
+                                    <select className="form-select" id="readwrite" name="readwrite-CEO" onChange={(event) =>
+                                        setCEO({ ...CEO, readwrite: event.target.value })
+
+                                    }>
+                                        <option value="read">Read</option>
+                                        <option value="write">Write</option>
+                                        <option value="both">Both</option>
+                                        <option value="none">None</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </td>
+                        <td>
+                            <div className="form-check ">
+                                <div className="col-md-auto">
+                                    <select className="form-select" id="network" name="network-volunteer"
+
+                                        onChange={(event) =>
+                                            setAdmin({ ...volunteer, network: event.target.value })
+
+                                        }>
+                                        <option value="allow">Allow</option>
+                                        <option value="dont allow">Dont Allow</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div className="form-check">
+                                <div className="col-md-auto">
+                                    <select className="form-select" id="readwrite" name="readwrite-volunteer"
+
+                                        onChange={(event) =>
+                                            setAdmin({ ...volunteer, readwrite: event.target.value })
+
+                                        } >
+                                        <option value="read">Read</option>
+                                        <option value="write">Write</option>
+                                        <option value="both">Both</option>
+                                        <option value="none">None</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h5 className="h5">Outside Organization: </h5>
+            <table className="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Role</th>
+                        <th scope="col">Metric Access</th>
+                        <th scope="col">Network Access</th>
+                        <th scope="col">Read/Write Access</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td><input type="checkbox" id="role" name="role" value="Sponsors"
+
+                            onChange={(e) => {
+                                if (e.target.checked) {
+
+                                    setCEO({ ...CEO, role: e.target.value });
+
+                                } else if (!e.target.checked) {
+
+                                    setCEO({ ...CEO, role: '' });
+
+                                }
+
+                            }}
+                        />Sponsors</td>
+                        <td>
+                            <div
+
+                                onChange={(e) => {
+                                    if (e.target.checked) {
+                                        temp.push(e.target.value);
+                                        setCEO({ ...CEO, metrics: temp });
+
+
+                                    } else {
+                                        temp.pop(e.target.value);
+                                        setCEO({ ...CEO, metrics: temp });
+
+                                    }
+
+                                }}>
                                 <div className="form-check">
-                                    <div className="col-md-auto">
-                                        <select className="form-select" id="readwrite" name="readwrite-volunteer" onChange={(e) => {  setFormData({ ...formData, readwrite: e.target.value })}}>
-                                            <option value="read">Read</option>
-                                            <option value="write">Write</option>
-                                            <option value="both">Both</option>
-                                            <option value="none">None</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                                    <input
 
-
-                <h5 className="h5">Outside Organization: </h5>
-                <table className="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Role</th>
-                            <th scope="col">Metric Access</th>
-                            <th scope="col">Network Access</th>
-                            <th scope="col">Read/Write Access</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td><input type="checkbox" id="role" name="role" value="Sponsors" onChange={(e) => {  if(e.target.checked){ setFormData({ ...formData, role: e.target.value })}}} />Sponsors</td>
-                            <td>
-                                <div className="form-check ">
-                                    <input className="form-check-input flexCheckDefault" type="checkbox" id="flexCheckDefault" name="metrics-Sponsors[]"
-                                        value="Fresh Produce" />
-                                    <label className="form-check-label" for="flexCheckDefault">
+                                        className="form-check-input flexCheckDefault"
+                                        type="checkbox"
+                                        id="flexCheckDefault1"
+                                        name="metrics[]"
+                                        value="Fresh Produce"
+                                    />
+                                    <label className="form-check-label" for="flexCheckDefault1">
                                         Fresh Produce
                                     </label>
                                 </div>
                                 <div className="form-check">
-                                    <input className="form-check-input flexCheckDefault" type="checkbox" id="flexCheckDefault" name="metrics[]"
-                                        value="Metric #2" />
+                                    <input
+                                        className="form-check-input flexCheckDefault"
+                                        type="checkbox"
+                                        id="flexCheckDefault2"
+                                        name="metrics[]"
+                                        value="metric#2"
+
+                                    />
                                     <label className="form-check-label" for="flexCheckDefault2">
                                         Metric #2
                                     </label>
                                 </div>
                                 <div className="form-check">
-                                    <input className="form-check-input flexCheckDefault"  type="checkbox" id="flexCheckDefault" name="metrics-Sponsors[]"
-                                        value="Metric #3" />
+                                    <input
+                                        className="form-check-input flexCheckDefault"
+                                        type="checkbox"
+                                        id="flexCheckDefault3"
+                                        name="metrics[]"
+                                        value="Metric#3"
+
+                                    />
                                     <label className="form-check-label" for="flexCheckDefault3">
                                         Metric #3
                                     </label>
                                 </div>
-                                <div className="form-check ">
-                                    <input className="form-check-input flexCheckDefault" type="checkbox" id="flexCheckDefault" name="metrics-Sponsors[]"
-                                        value="Metric #4" />
+                                <div className="form-check">
+                                    <input
+                                        className="form-check-input flexCheckDefault"
+                                        type="checkbox"
+                                        id="flexCheckDefault4"
+                                        name="metrics[]"
+                                        value="Metric#4"
+
+                                    />
                                     <label className="form-check-label" for="flexCheckDefault4">
                                         Metric #4
                                     </label>
                                 </div>
                                 <div className="form-check">
-                                    <input className="form-check-input flexCheckDefault" type="checkbox" id="flexCheckDefault" name="metrics-Sponsors[]"
-                                         value="Metric #5" />
+                                    <input
+                                        className="form-check-input flexCheckDefault"
+                                        type="checkbox"
+                                        id="flexCheckDefault5"
+                                        name="metrics[]"
+                                        value="Metric#5"
+
+                                    />
                                     <label className="form-check-label" for="flexCheckDefault5">
                                         Metric #5
                                     </label>
                                 </div>
-                            </td>
-                            <td>
-                                <div className="form-check ">
-                                    <div className="col-md-auto">
-                                        <select className="form-select" id="network" name="network-Sponsors" onChange={(e) => {  setFormData({ ...formData, network: e.target.value })}}>
-                                            <option value="allow">Allow</option>
-                                            <option value="dont allow">Dont Allow</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div className="form-check">
-                                    <div className="col-md-auto">
-                                        <select className="form-select" id="readwrite" name="readwrite-Sponsors" onChange={(e) => {   setFormData({ ...formData, readwrite: e.target.value })}}>
-                                            <option value="read">Read</option>
-                                            <option value="write">Write</option>
-                                            <option value="both">Both</option>
-                                            <option value="none">None</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
+                            </div>
+                        </td>
+                        <td>
+                            <div className="form-check ">
+                                <div className="col-md-auto">
+                                    <select className="form-select" id="network" name="network-Sponsors" onChange={(event) =>
+                                        setCEO({ ...Sponsors, network: event.target.value })
 
-                        <tr>
-                            <th scope="row">2</th>
-                            <td><input type="checkbox" id="role" name="role[]" value="Experts" onChange={(e) => {  if(e.target.checked){ setFormData({ ...formData, role: e.target.value })}}} />Experts</td>
-                            <td>
-                                <div className="form-check ">
-                                    <input className="form-check-input flexCheckDefault" type="checkbox" id="flexCheckDefault" name="metrics-Experts[]"
-                                         value="Fresh Produce" />
-                                    <label className="form-check-label" for="flexCheckDefault">
+                                    }>
+                                        <option value="allow">Allow</option>
+                                        <option value="dont allow">Dont Allow</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div className="form-check">
+                                <div className="col-md-auto">
+                                    <select className="form-select" id="readwrite" name="readwrite-Sponsors" onChange={(event) =>
+                                        setCEO({ ...Sponsors, readwrite: event.target.value })
+
+                                    }>
+                                        <option value="read">Read</option>
+                                        <option value="write">Write</option>
+                                        <option value="both">Both</option>
+                                        <option value="none">None</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">2</th>
+                        <td><input type="checkbox" id="role" name="role[]" value="Experts"
+
+                            onChange={(e) => {
+                                if (e.target.checked) {
+
+                                    setExperts({ ...Experts, role: e.target.value });
+
+                                } else if (!e.target.checked) {
+
+                                    setExperts({ ...Experts, role: '' });
+
+                                }
+
+                            }}
+
+                        />Experts</td>
+                        <td>
+                            <div
+
+                                onChange={(e) => {
+                                    if (e.target.checked) {
+                                        temp.push(e.target.value);
+                                        setCEO({ ...CEO, metrics: temp });
+
+
+                                    } else {
+                                        temp.pop(e.target.value);
+                                        setCEO({ ...CEO, metrics: temp });
+
+                                    }
+
+                                }}>
+                                <div className="form-check">
+                                    <input
+
+                                        className="form-check-input flexCheckDefault"
+                                        type="checkbox"
+                                        id="flexCheckDefault1"
+                                        name="metrics[]"
+                                        value="Fresh Produce"
+                                    />
+                                    <label className="form-check-label" for="flexCheckDefault1">
                                         Fresh Produce
                                     </label>
                                 </div>
                                 <div className="form-check">
-                                    <input className="form-check-input flexCheckDefault" type="checkbox" id="flexCheckDefault" name="metrics-Experts[]"
-                                        value="Metric #2 /" />
+                                    <input
+                                        className="form-check-input flexCheckDefault"
+                                        type="checkbox"
+                                        id="flexCheckDefault2"
+                                        name="metrics[]"
+                                        value="metric#2"
+
+                                    />
                                     <label className="form-check-label" for="flexCheckDefault2">
                                         Metric #2
                                     </label>
                                 </div>
                                 <div className="form-check">
-                                    <input className="form-check-input flexCheckDefault" type="checkbox" id="flexCheckDefault" name="metrics-Experts[]"
-                                         value="Metric #3" />
+                                    <input
+                                        className="form-check-input flexCheckDefault"
+                                        type="checkbox"
+                                        id="flexCheckDefault3"
+                                        name="metrics[]"
+                                        value="Metric#3"
+
+                                    />
                                     <label className="form-check-label" for="flexCheckDefault3">
                                         Metric #3
                                     </label>
                                 </div>
-                                <div className="form-check ">
-                                    <input className="form-check-input flexCheckDefault" type="checkbox" id="flexCheckDefault" name="metrics-Experts[]"
-                                       value="Metric #4" />
+                                <div className="form-check">
+                                    <input
+                                        className="form-check-input flexCheckDefault"
+                                        type="checkbox"
+                                        id="flexCheckDefault4"
+                                        name="metrics[]"
+                                        value="Metric#4"
+
+                                    />
                                     <label className="form-check-label" for="flexCheckDefault4">
                                         Metric #4
                                     </label>
                                 </div>
                                 <div className="form-check">
-                                    <input className="form-check-input flexCheckDefault" type="checkbox" id="flexCheckDefault" name="metrics-Experts[]"
-                                       value="Metric #5" />
+                                    <input
+                                        className="form-check-input flexCheckDefault"
+                                        type="checkbox"
+                                        id="flexCheckDefault5"
+                                        name="metrics[]"
+                                        value="Metric#5"
+
+                                    />
                                     <label className="form-check-label" for="flexCheckDefault5">
                                         Metric #5
                                     </label>
                                 </div>
-                            </td>
-                            <td>
-                                <div className="form-check ">
-                                    <div className="col-md-auto">
-                                        <select className="form-select" id="network" name="network-Experts" onChange={(e) => {  setFormData({ ...formData, network: e.target.value })}}>
-                                            <option value="allow">Allow</option>
-                                            <option value="dont allow">Dont Allow</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <div className="form-check">
-                                    <div className="col-md-auto">
-                                        <select className="form-select" id="readwrite" name="readwrite-Experts" onChange={(e) => {   setFormData({ ...formData, readwrite: e.target.value })}}>
-                                            <option value="read">Read</option>
-                                            <option value="write">Write</option>
-                                            <option value="both">Both</option>
-                                            <option value="none">None</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <button type="submit" for="perms" className="btn btn-outline-success">Save</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div className="form-check ">
+                                <div className="col-md-auto">
+                                    <select className="form-select" id="network" name="network-Experts" onChange={(event) =>
+                                        setExperts({ ...Experts, network: event.target.value })
 
-            </form>
+                                    }>
+                                        <option value="allow">Allow</option>
+                                        <option value="dont allow">Dont Allow</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div className="form-check">
+                                <div className="col-md-auto">
+                                    <select className="form-select" id="readwrite" name="readwrite-Experts" onChange={(event) =>
+                                        setExperts({ ...Experts, network: event.target.value })
+
+                                    }>
+                                        <option value="read">Read</option>
+                                        <option value="write">Write</option>
+                                        <option value="both">Both</option>
+                                        <option value="none">None</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="submit" for="perms" id='sub' className="btn btn-outline-success">Save</button>
+
+
 
         </div><div id="role-settings-container" className="container-lg col-md-auto">
                 <h3 className="h3">Pending Accounts:</h3>
@@ -455,9 +1003,9 @@ function Admin() {
                         </tr>
                     </thead>
                     <form className="form-approve" id="approve-form" action="" method="post">
-                    <tbody>
+                        <tbody>
 
-                       
+
 
 
                             { /* </form>{%} for i in Object %{'}'}
@@ -466,11 +1014,11 @@ function Admin() {
                                 <th scope="row">
                                     <div className="form-check ">
                                         <input className="form-check-input flexCheckDefault-5" type="checkbox" id="flexCheckDefault-5" name="id[]"
-                                             value="{{forloop.counter}}" />
-                                            <label className="form-check-label" for="flexCheckDefault-5">
-                                                {/*{ forloop,: .counter }*/}
-                                            </label>
-                                        </div>
+                                            value="{{forloop.counter}}" />
+                                        <label className="form-check-label" for="flexCheckDefault-5">
+                                            {/*{ forloop,: .counter }*/}
+                                        </label>
+                                    </div>
                                 </th>
 
                                 <td>{/*{ i, .0: }*/}</td>
@@ -493,14 +1041,14 @@ function Admin() {
                             {/*% endif %*/}
                             {/*% endfor %*/}
 
-                        
+
                         </tbody>
                         <button type="submit" for="approve-form" className="btn btn-outline-success">Save</button>
-                </form>
+                    </form>
                 </table>
-               
-                </div >
-                </>
+
+            </div >
+        </>
 
     );
 }
