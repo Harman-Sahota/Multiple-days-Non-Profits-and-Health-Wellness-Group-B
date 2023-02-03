@@ -4,5 +4,6 @@ from . import views
 
 urlpatterns = [
     path("registerInsert/",views.registerInsert),
-    path("adminInsert/",views.adminInsert)
+    path("adminInsert/",views.adminInsert),
+    path("commentInsert/",views.commentInsert)
 ]

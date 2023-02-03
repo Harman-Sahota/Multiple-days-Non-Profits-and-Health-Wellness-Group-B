@@ -9,11 +9,8 @@ function Comment() {
         Comments: ''
     });
 
-    var jsonData = []
-    jsonData.push( 
-    JSON.parse(JSON.stringify(comment)),
-    );
-    var j = JSON.stringify(jsonData);
+    
+    var j = JSON.stringify(comment);
     console.log(j);
 
     return (
