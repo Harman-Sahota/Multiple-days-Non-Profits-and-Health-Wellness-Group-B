@@ -2,6 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import commentCSS from './comment.module.css';
 import React, { useState } from "react";
 import Button from 'react-bootstrap/Button';
+import axios from 'axios';
 
 function Comment() {
 
@@ -9,7 +10,7 @@ function Comment() {
         Comments: ''
     });
 
-    
+
     var j = JSON.stringify(comment);
     console.log(j);
 
@@ -30,12 +31,35 @@ function Comment() {
                 <div className={`${commentCSS.container_sm} container-sm col-md-auto ${commentCSS.form} form`}>
                     {/*{% csrf_token %}*/}
                     <div className="form-group">
-                        <textarea className="form-control" id="comment" rows="5" name="comment" placeholder="Say something" 
-                        onChange={(event) => {
-                            setComment({ ... comment, Comments: event.target.value})
-                        }}></textarea>
-                        
-                        <button type="submit" id={`${commentCSS.sub} sub`} className="btn btn-secondary" for="comment">Comment</button>
+                        <textarea className="form-control" id="comment" rows="5" name="comment" placeholder="Say something"
+                            onChange={(event) => {
+                                setComment({ ...comment, Comments: event.target.value })
+                            }}></textarea>
+
+                        <button type="submit" id={`${commentCSS.sub} sub`} className="btn btn-secondary" for="comment"
+                            onClick={(e) => {
+                                axios.post(
+                                    "http://127.0.0.1:8000/api/commentInsert/",
+                                    {
+                                        Comments: comment.Comments,
+                                    },
+                                    {
+                                        headers: {
+                                            "Content-type": "application/json",
+                                        }
+                                    }
+
+                                )
+
+                                    .then(response => {
+                                        if (response.status == 201) {
+                                            console.log('yes');
+                                        }
+                                    })
+                                    .catch(err => console.warn(err));
+                            }}
+
+                        >Comment</button>
                     </div>
                 </div>
 
@@ -54,7 +78,7 @@ function Comment() {
 
             </div>
 
-        </section>
+        </section >
     );
 }
 
