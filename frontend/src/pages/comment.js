@@ -1,8 +1,21 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import commentCSS from './comment.module.css';
+import React, { useState } from "react";
 import Button from 'react-bootstrap/Button';
 
 function Comment() {
+
+    const [comment, setComment] = useState({
+        Comments: ''
+    });
+
+    var jsonData = []
+    jsonData.push( 
+    JSON.parse(JSON.stringify(comment)),
+    );
+    var j = JSON.stringify(jsonData);
+    console.log(j);
+
     return (
         <section>
             <div id="main" className={`${commentCSS.container_lg} container-lg col-md-auto`}>
@@ -14,17 +27,19 @@ function Comment() {
                     <p className="mb-0 h6"> {{ request.resolver_match.kwargs.description | replace_underscore }} </p>
                     <p className="mb-0 text-success"> {{ request.resolver_match.kwargs.status }} </p>
     */}
-                <p>Full post with details will be displayed here.</p>
+                    <p>Full post with details will be displayed here.</p>
                 </div>
 
                 <div className={`${commentCSS.container_sm} container-sm col-md-auto ${commentCSS.form} form`}>
-                    <form action="" method="POST">
-                        {/*{% csrf_token %}*/}
-                        <div className="form-group">
-                            <textarea className="form-control" id="comment" rows="5" name="comment" placeholder="Say something"></textarea>
-                            <button type="submit" id={`${commentCSS.sub} sub`} className="btn btn-secondary" for="comment">Comment</button>
-                        </div>
-                    </form>
+                    {/*{% csrf_token %}*/}
+                    <div className="form-group">
+                        <textarea className="form-control" id="comment" rows="5" name="comment" placeholder="Say something" 
+                        onChange={(event) => {
+                            setComment({ ... comment, Comments: event.target.value})
+                        }}></textarea>
+                        
+                        <button type="submit" id={`${commentCSS.sub} sub`} className="btn btn-secondary" for="comment">Comment</button>
+                    </div>
                 </div>
 
                 <div className={`${commentCSS.container_sm} container-sm col-md-auto ${commentCSS.form} form`}>
