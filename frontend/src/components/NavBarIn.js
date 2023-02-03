@@ -23,9 +23,9 @@ function NavbarIn() {
                         {/*{% if 'user non-profit managers/CEO' in request.session.Roles  %}*/}
                         <li><a href="/network" className="nav-link px-3">Network</a></li>
                         {/*{% elif 'user non-profit warehouse boss' in request.session.Roles %}*/}
-                        <li><a href="/network" className="nav-link px-3">Network</a></li>
+                        {/*<li><a href="/network" className="nav-link px-3">Network</a></li>*/}
                         {/*{% elif 'admin' in request.session.Roles %}*/}
-                        <li><a href="/network" className="nav-link px-3">Network</a></li>
+                        {/*<li><a href="/network" className="nav-link px-3">Network</a></li>*/}
                         {/*{% endif %}
 
                         {% if 'admin' in request.session.Roles %}*/}
