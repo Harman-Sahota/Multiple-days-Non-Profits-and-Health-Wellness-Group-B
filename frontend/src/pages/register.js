@@ -102,7 +102,7 @@ function Form() {
                     .then(response => 
                       {if(response.status == 201){
                         console.log('yes');
-                        return redirect('/tracker');}})
+                        }})
                     .catch(err => console.warn(err));
 
                    

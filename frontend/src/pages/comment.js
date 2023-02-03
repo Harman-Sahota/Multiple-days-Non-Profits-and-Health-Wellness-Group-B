@@ -21,7 +21,10 @@ function Comment() {
                     <form action="" method="POST">
                         {/*{% csrf_token %}*/}
                         <div className="form-group">
-                            <textarea className="form-control" id="comment" rows="5" name="comment" placeholder="Say something"></textarea>
+                            <textarea className="form-control" id="comment" rows="5" name="comment" placeholder="Say something"
+                            
+                            
+                            ></textarea>
                             <button type="submit" id={`${commentCSS.sub} sub`} className="btn btn-secondary" for="comment">Comment</button>
                         </div>
                     </form>
