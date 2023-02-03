@@ -22,3 +22,6 @@
 - Barbs would like us to mind the font size of the graphics
   - Make sure to make the font size large enough for older people to see
   - Introduce some colors into the graphing
+  - Figure out the graph scaling to flexibly render data according to the data quantities
+- Form serves functionality
+  - Barbs means she would prefer functionality over design even if it means sacrificing the 
