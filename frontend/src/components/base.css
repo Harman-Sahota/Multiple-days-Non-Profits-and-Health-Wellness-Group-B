@@ -159,8 +159,11 @@ footer {
   min-height: 10vh;
   background-color: #ffffff;
   text-align: center;
-  z-index: 2;
+  width: 100%;
+  position:; /* instead of absolute */
   bottom: 0;
+  left: 0;
+
 
 
 }

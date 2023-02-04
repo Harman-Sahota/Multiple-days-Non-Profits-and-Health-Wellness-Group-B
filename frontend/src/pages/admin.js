@@ -76,8 +76,20 @@ function Admin() {
     JSON.parse(JSON.stringify(Experts)),
     );
     var j = JSON.stringify(jsonData);
-    console.log(j);
 
+
+    let data = { objects:[
+
+        JSON.parse(JSON.stringify(CEO)),
+        JSON.parse(JSON.stringify(warehouse)),
+        JSON.parse(JSON.stringify(admin)),
+        JSON.parse(JSON.stringify(volunteer)),
+        JSON.parse(JSON.stringify(Sponsors)),
+        JSON.parse(JSON.stringify(Experts)),
+
+    ]};
+
+    console.log(data);
 
     return (
 
@@ -964,47 +976,10 @@ function Admin() {
 
                 axios.post(
                     "http://127.0.0.1:8000/api/adminInsert/",
-                    [
-                     
-                     {
-                     role: CEO.role,
-                     metrics: CEO.metrics,
-                     network: CEO.network,
-                     readwrite: CEO.readwrite
-                    },
-                    {
-                        role: warehouse.role,
-                        metrics: warehouse.metrics,
-                        network: warehouse.network,
-                        readwrite: warehouse.readwrite
-                    },
-                    {
-                        role: admin.role,
-                        metrics: admin.metrics,
-                        network: admin.network,
-                        readwrite: admin.readwrite
-                    },
-                    {
-                        role: volunteer.role,
-                        metrics: volunteer.metrics,
-                        network: volunteer.network,
-                        readwrite: volunteer.readwrite
-                    },
-                    {
-                        role: Sponsors.role,
-                        metrics: Sponsors.metrics,
-                        network: Sponsors.network,
-                        readwrite: Sponsors.readwrite
-                    },
-                    {
-                        role: Experts.role,
-                        metrics: Experts.metrics,
-                        network: Experts.network,
-                        readwrite: Experts.readwrite
-                    }
-
-
-                    ],
+                    
+                     data
+                
+                    ,
                     {
                       headers: {
                         "Content-type": "application/json",
