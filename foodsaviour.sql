@@ -16,21 +16,21 @@ CREATE USER 'admin'@'localhost' IDENTIFIED BY 'groupb@2022!';
 GRANT ALL PRIVILEGES ON foodsaviour.* TO 'admin'@'  ocalhost';
 FLUSH PRIVILEGES;
 
-CREATE TABLE inventory (
-Description varchar(255),
+CREATE TABLE tracker (
 Category    varchar(255),
+Description varchar(255),
 Quantity    Int(55),
 Qunits      varchar(255),
-DivertClients    Int(55), 
-DivertAFeed      Int(55),
-DivertCompost    Int(55), 
-DivertPartNet    Int(55),
-DivertLandfill   Int(55),
-Clients          Int(55), 
-AFeed            Int(55), 
-Compost          Int(55),  
-PartNet          Int(55), 
-Landfill         Int(55)
+amountToClients    Int(55), 
+amountToAFeed      Int(55),
+amountToCompost    Int(55), 
+amountToPartNet    Int(55),
+amountToLandfill   Int(55),
+percentClients     Int(55), 
+percentAFeed       Int(55), 
+percentCompost     Int(55),  
+percentPartNet     Int(55), 
+percentLandfill    Int(55)
 );
 
 CREATE TABLE `permissions` (

@@ -23,20 +23,31 @@ function Comment() {
                     {/*
                     <h2 className="display-6"> {{ request.resolver_match.kwargs.product }} -  {{ request.resolver_match.kwargs.qty }}  {{ request.resolver_match.kwargs.units }} </h2>
                     <p className="mb-0 h6"> {{ request.resolver_match.kwargs.description | replace_underscore }} </p>
-                    <p className="mb-0 text-success"> {{ request.resolver_match.kwargs.status }} </p>
-    */}
-                    <p>Full post with details will be displayed here.</p>
+                    <p className="mb-0 text-success"> {{ request.resolver_match.kwargs.status }} </p> */}
+                    <div className='row'>
+                        <div className='col-10'>
+                            <h3>Post Title</h3>
+                            <p>Date posted:</p>
+                        </div>
+                        <div className='col-2'>
+                            <p style={{ textAlign: 'right' }}>Username</p>
+                        </div>
+                    </div>
+                    <div className='row'>
+                        <p>Post description will be displayed here.</p>
+                    </div>
                 </div>
 
                 <div className={`${commentCSS.container_sm} container-sm col-md-auto ${commentCSS.form} form`}>
                     {/*{% csrf_token %}*/}
                     <div className="form-group">
-                        <textarea className="form-control" id="comment" rows="5" name="comment" placeholder="Say something"
+                        <textarea className="form-control" id="comment" rows="5" name="comment" placeholder="Type in your comment here."
                             onChange={(event) => {
                                 setComment({ ...comment, Comments: event.target.value })
-                            }}></textarea>
+                            }}>
+                        </textarea>
 
-                        <button type="submit" id={`${commentCSS.sub} sub`} className="btn btn-secondary" for="comment"
+                        <Button type="submit" id="sub" className={`${commentCSS.sub} btn btn-secondary`} for="comment"
                             onClick={(e) => {
                                 axios.post(
                                     "http://127.0.0.1:8000/api/commentInsert/",
@@ -48,9 +59,7 @@ function Comment() {
                                             "Content-type": "application/json",
                                         }
                                     }
-
                                 )
-
                                     .then(response => {
                                         if (response.status == 201) {
                                             console.log('yes');
@@ -59,16 +68,18 @@ function Comment() {
                                     .catch(err => console.warn(err));
                             }}
 
-                        >Comment</button>
+                        >Comment</Button>
                     </div>
                 </div>
 
                 <div className={`${commentCSS.container_sm} container-sm col-md-auto ${commentCSS.form} form`}>
+                    <h3>Comments</h3>
                     {/*{% for i in Object %}*/}
                     <div className={`${commentCSS.card} card border-secondary mb-3`}>
-                        <div className="card-header bg-transparent">{/*{{i.6}}*/}</div>
                         <div className="card-body">
                             <p className="card-text">
+                                <p>Username</p>
+                                <p>Comment</p>
                                 {/*{{i.5}}*/}
                             </p>
                         </div>
