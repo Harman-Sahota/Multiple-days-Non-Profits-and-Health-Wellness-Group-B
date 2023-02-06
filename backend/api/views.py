@@ -20,8 +20,9 @@ def registerInsert(request):
 @api_view(["POST"])
 def adminInsert(request):
     if request.method == 'POST':
-        saveserialize = adminInsertSerialize(data=request.data)
+        saveserialize = adminInsertSerialize(data=request.data,many=True)
         if saveserialize.is_valid():
+            permissions.objects.all().delete()
             saveserialize.save();
             return Response(saveserialize.data,status=status.HTTP_201_CREATED)    
         return Response(saveserialize.data,status=status.HTTP_500_INTERNAL_SERVER_ERROR)

@@ -12,6 +12,8 @@ class adminInsertSerialize(serializers.ModelSerializer):
     class Meta:
         model = permissions
         fields = '__all__'
+       
+        
         
 class commentsSerialize(serializers.ModelSerializer):
     class Meta:

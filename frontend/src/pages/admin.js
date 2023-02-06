@@ -4,11 +4,15 @@ import axios from 'axios'
 import React, { useState } from "react";
 let temp = [];
 let temp_warehouse = [];
+let temp_admin = [];
+let temp_volunteer = [];
+let temp_Sponsor = [];
+let temp_Expert = [];
 function Admin() {
 
     const [CEO, setCEO] = useState({
 
-        role: '',
+        role: 'User non-profit managers/CEO',
         metrics: [],
         network: '',
         readwrite: ''
@@ -16,7 +20,7 @@ function Admin() {
     });
     const [warehouse, setwarehouse] = useState({
 
-        role: '',
+        role: 'User non-profit warehouse boss',
         metrics: [],
         network: '',
         readwrite: ''
@@ -24,7 +28,7 @@ function Admin() {
     });
     const [admin, setAdmin] = useState({
 
-        role: '',
+        role: 'Admin',
         metrics: [],
         network: '',
         readwrite: ''
@@ -33,7 +37,7 @@ function Admin() {
 
     const [volunteer, setVolunteer] = useState({
 
-        role: '',
+        role: 'User non-profit volunteer',
         metrics: [],
         network: '',
         readwrite: ''
@@ -43,7 +47,7 @@ function Admin() {
 
     const [Sponsors, setSponsors] = useState({
 
-        role: '',
+        role: 'Sponsors',
         metrics: [],
         network: '',
         readwrite: ''
@@ -52,7 +56,7 @@ function Admin() {
 
     const [Experts, setExperts] = useState({
 
-        role: '',
+        role: 'Experts',
         metrics: [],
         network: '',
         readwrite: ''
@@ -66,30 +70,6 @@ function Admin() {
     Sponsors.metrics = Sponsors.metrics.toString();
     Experts.metrics = Experts.metrics.toString();
   
-    var jsonData = []
-    jsonData.push( 
-    JSON.parse(JSON.stringify(CEO)),
-    JSON.parse(JSON.stringify(warehouse)),
-    JSON.parse(JSON.stringify(admin)),
-    JSON.parse(JSON.stringify(volunteer)),
-    JSON.parse(JSON.stringify(Sponsors)),
-    JSON.parse(JSON.stringify(Experts)),
-    );
-    var j = JSON.stringify(jsonData);
-
-
-    let data = { objects:[
-
-        JSON.parse(JSON.stringify(CEO)),
-        JSON.parse(JSON.stringify(warehouse)),
-        JSON.parse(JSON.stringify(admin)),
-        JSON.parse(JSON.stringify(volunteer)),
-        JSON.parse(JSON.stringify(Sponsors)),
-        JSON.parse(JSON.stringify(Experts)),
-
-    ]};
-
-    console.log(data);
 
     return (
 
@@ -111,26 +91,7 @@ function Admin() {
 
                     <tr>
                         <th scope="row">1</th>
-                        <td> <input type="checkbox" id="role" name="role[]" value="User non-profit managers/CEO"
-
-                            onChange={(e) => {
-                                if (e.target.checked) {
-
-                                    setCEO({ ...CEO, role: e.target.value });
-
-
-
-                                } else if (!e.target.checked) {
-
-                                    setCEO({ ...CEO, role: '' });
-
-                                }
-
-
-
-                            }}
-
-                        />User non-profit managers/CEO</td>
+                        <td> User non-profit managers/CEO</td>
                         <td>
                             <div
 
@@ -251,41 +212,19 @@ function Admin() {
 
                     <tr>
                         <th scope="row">2</th>
-                        <td><input type="checkbox" id="role" name="role[]" value="User non-profit warehouse boss"
-
-
-                            onChange={(e) => {
-                                if (e.target.checked) {
-
-                                    setwarehouse({ ...warehouse, role: e.target.value });
-
-
-
-                                } else if (!e.target.checked) {
-
-                                    setwarehouse({ ...warehouse, role: '' });
-
-                                }
-
-
-
-                            }}
-
-
-
-                        />User non-profit warehouse boss</td>
+                        <td>User non-profit warehouse boss</td>
                         <td>
                             <div
 
                                 onChange={(e) => {
                                     if (e.target.checked) {
-                                        temp.push(e.target.value);
+                                        temp_warehouse.push(e.target.value);
                                         setwarehouse({ ...warehouse, metrics: temp_warehouse });
 
 
                                     } else {
-                                        temp.pop(e.target.value);
-                                        setCEO({ ...warehouse, metrics: temp_warehouse });
+                                        temp_warehouse.pop(e.target.value);
+                                        setwarehouse({ ...warehouse, metrics: temp_warehouse });
 
                                     }
 
@@ -400,41 +339,19 @@ function Admin() {
 
                     <tr>
                         <th scope="row">3</th>
-                        <td><input type="checkbox" id="role" name="role[]" value="Admin"
-
-
-
-                            onChange={(e) => {
-                                if (e.target.checked) {
-
-                                    setAdmin({ ...admin, role: e.target.value });
-
-
-
-                                } else if (!e.target.checked) {
-
-                                    setAdmin({ ...admin, role: '' });
-
-                                }
-
-
-
-                            }}
-
-
-                        />Admin</td>
+                        <td>Admin</td>
                         <td>
                             <div
 
                                 onChange={(e) => {
                                     if (e.target.checked) {
-                                        temp.push(e.target.value);
-                                        setAdmin({ ...Admin, metrics: temp });
+                                        temp_admin.push(e.target.value);
+                                        setAdmin({ ...admin, metrics: temp_admin });
 
 
                                     } else {
-                                        temp.pop(e.target.value);
-                                        setCEO({ ...Admin, metrics: temp });
+                                        temp_admin.pop(e.target.value);
+                                        setAdmin({ ...admin, metrics: temp_admin });
 
                                     }
 
@@ -517,7 +434,7 @@ function Admin() {
                                     <select className="form-select" id="network" name="network-Admin"
 
                                         onChange={(event) =>
-                                            setAdmin({ ...Admin, network: event.target.value })
+                                            setAdmin({ ...admin, network: event.target.value })
 
                                         }
 
@@ -534,7 +451,7 @@ function Admin() {
                                     <select className="form-select" id="readwrite" name="readwrite-Admin"
 
                                         onChange={(event) =>
-                                            setAdmin({ ...Admin, network: event.target.value })
+                                            setAdmin({ ...admin, readwrite: event.target.value })
 
                                         }
 
@@ -552,39 +469,20 @@ function Admin() {
 
                     <tr>
                         <th scope="row">4</th>
-                        <td><input type="checkbox" id="role" name="role[]" value="User non-profit volunteer"
-
-                            onChange={(e) => {
-                                if (e.target.checked) {
-
-                                    setVolunteer({ ...volunteer, role: e.target.value });
-
-
-
-                                } else if (!e.target.checked) {
-
-                                    setCEO({ ...volunteer, role: '' });
-
-                                }
-
-
-
-                            }}
-
-                        />User non-profit volunteer</td>
+                        <td>User non-profit volunteer</td>
                         <td>
 
                             <div
 
                                 onChange={(e) => {
                                     if (e.target.checked) {
-                                        temp.push(e.target.value);
-                                        setVolunteer({ ...volunteer, metrics: temp });
+                                        temp_volunteer.push(e.target.value);
+                                        setVolunteer({ ...volunteer, metrics: temp_volunteer });
 
 
                                     } else {
-                                        temp.pop(e.target.value);
-                                        setVolunteer({ ...volunteer, metrics: temp });
+                                        temp_volunteer.pop(e.target.value);
+                                        setVolunteer({ ...volunteer, metrics: temp_volunteer });
 
                                     }
 
@@ -689,9 +587,9 @@ function Admin() {
                             </div>
 
                         </td>
-                 
-                           
-                            
+
+
+
                     </tr>
                 </tbody>
             </table>
@@ -710,33 +608,19 @@ function Admin() {
                 <tbody>
                     <tr>
                         <th scope="row">1</th>
-                        <td><input type="checkbox" id="role" name="role" value="Sponsors"
-
-                            onChange={(e) => {
-                                if (e.target.checked) {
-
-                                    setCEO({ ...CEO, role: e.target.value });
-
-                                } else if (!e.target.checked) {
-
-                                    setCEO({ ...CEO, role: '' });
-
-                                }
-
-                            }}
-                        />Sponsors</td>
+                        <td>Sponsors</td>
                         <td>
                             <div
 
                                 onChange={(e) => {
                                     if (e.target.checked) {
-                                        temp.push(e.target.value);
-                                        setCEO({ ...CEO, metrics: temp });
+                                        temp_Sponsor.push(e.target.value);
+                                        setSponsors({ ...Sponsors, metrics: temp_Sponsor });
 
 
                                     } else {
-                                        temp.pop(e.target.value);
-                                        setCEO({ ...CEO, metrics: temp });
+                                        temp_Sponsor.pop(e.target.value);
+                                        setSponsors({ ...Sponsors, metrics: temp_Sponsor });
 
                                     }
 
@@ -812,7 +696,7 @@ function Admin() {
                             <div className="form-check ">
                                 <div className="col-md-auto">
                                     <select className="form-select" id="network" name="network-Sponsors" onChange={(event) =>
-                                        setCEO({ ...Sponsors, network: event.target.value })
+                                        setSponsors({ ...Sponsors, network: event.target.value })
 
                                     }>
                                         <option value="allow">Allow</option>
@@ -825,7 +709,7 @@ function Admin() {
                             <div className="form-check">
                                 <div className="col-md-auto">
                                     <select className="form-select" id="readwrite" name="readwrite-Sponsors" onChange={(event) =>
-                                        setCEO({ ...Sponsors, readwrite: event.target.value })
+                                        setSponsors({ ...Sponsors, readwrite: event.target.value })
 
                                     }>
                                         <option value="read">Read</option>
@@ -840,34 +724,19 @@ function Admin() {
 
                     <tr>
                         <th scope="row">2</th>
-                        <td><input type="checkbox" id="role" name="role[]" value="Experts"
-
-                            onChange={(e) => {
-                                if (e.target.checked) {
-
-                                    setExperts({ ...Experts, role: e.target.value });
-
-                                } else if (!e.target.checked) {
-
-                                    setExperts({ ...Experts, role: '' });
-
-                                }
-
-                            }}
-
-                        />Experts</td>
+                        <td>Experts</td>
                         <td>
                             <div
 
                                 onChange={(e) => {
                                     if (e.target.checked) {
-                                        temp.push(e.target.value);
-                                        setCEO({ ...CEO, metrics: temp });
+                                        temp_Expert.push(e.target.value);
+                                        setExperts({ ...Experts, metrics: temp_Expert });
 
 
                                     } else {
-                                        temp.pop(e.target.value);
-                                        setCEO({ ...CEO, metrics: temp });
+                                        temp_Expert.pop(e.target.value);
+                                        setExperts({ ...Experts, metrics: temp_Expert });
 
                                     }
 
@@ -956,7 +825,7 @@ function Admin() {
                             <div className="form-check">
                                 <div className="col-md-auto">
                                     <select className="form-select" id="readwrite" name="readwrite-Experts" onChange={(event) =>
-                                        setExperts({ ...Experts, network: event.target.value })
+                                        setExperts({ ...Experts, readwrite: event.target.value })
 
                                     }>
                                         <option value="read">Read</option>
@@ -971,28 +840,63 @@ function Admin() {
                 </tbody>
             </table>
             <button type="submit" for="perms" id='sub' className="btn btn-outline-success"
-            
-            onClick={(e) => {
 
-                axios.post(
-                    "http://127.0.0.1:8000/api/adminInsert/",
-                    
-                     data
-                
-                    ,
-                    {
-                      headers: {
-                        "Content-type": "application/json",
-                      }
-                    }
+                onClick={(e) => {
 
-                  )
+                    axios.post(
+                        "http://127.0.0.1:8000/api/adminInsert/",
+
+                        [
+                            {
+                                role: CEO.role,
+                                metrics: CEO.metrics,
+                                network: CEO.network,
+                                readwrite: CEO.readwrite
+                            },
+                            {
+                                role: warehouse.role,
+                                metrics: warehouse.metrics,
+                                network: warehouse.network,
+                                readwrite: warehouse.readwrite
+                            },
+                            {
+                                role: admin.role,
+                                metrics: admin.metrics,
+                                network: admin.network,
+                                readwrite: admin.readwrite
+                            },
+                            {
+                                role: volunteer.role,
+                                metrics: volunteer.metrics,
+                                network: volunteer.network,
+                                readwrite: volunteer.readwrite
+                            },
+                            {
+                                role: Sponsors.role,
+                                metrics: Sponsors.metrics,
+                                network: Sponsors.network,
+                                readwrite: Sponsors.readwrite
+                            },
+                            {
+                                role: Experts.role,
+                                metrics: Experts.metrics,
+                                network: Experts.network,
+                                readwrite: Experts.readwrite
+                            }
+                        ],
+                        {
+                            headers: {
+                                "Content-type": "application/json",
+                            }
+                        }
+
+                    )
 
 
 
-            }}
-            
-            
+                }}
+
+
             >Save</button>
 
 
