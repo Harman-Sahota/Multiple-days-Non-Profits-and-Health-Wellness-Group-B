@@ -3,6 +3,7 @@ from api.models import permissions
 from api.serialize import userSerialize
 from api.serialize import adminInsertSerialize
 from api.serialize import commentsSerialize
+from api.serialize import adminPullSerialize
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -26,6 +27,13 @@ def adminInsert(request):
             saveserialize.save();
             return Response(saveserialize.data,status=status.HTTP_201_CREATED)    
         return Response(saveserialize.data,status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(["GET"])
+def adminPull(request):
+    if request.method == 'GET':
+        results = users.objects.all()
+        serialize = adminPullSerialize(results,many=True)
+        return Response(serialize.data)
         
 @api_view(["POST"])
 def commentInsert(request):

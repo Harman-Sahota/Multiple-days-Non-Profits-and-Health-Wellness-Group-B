@@ -15,7 +15,7 @@ class users(models.Model):
 
 
 class permissions(models.Model):
-    role = models.CharField(max_length=255,null=True,blank=True)
+    role = models.CharField(primary_key=True,max_length=255)
     metrics = models.CharField(max_length=255,null=True,blank=True)
     network = models.CharField(max_length=10,null=True,blank=True)
     readwrite = models.CharField(max_length=10,null=True,blank=True)

@@ -910,52 +910,35 @@ function Admin() {
                             <th scope="col">Name</th>
                             <th scope="col">Email</th>
                             <th scope="col">Roles</th>
-                            <th scope="col">Approve/Decline</th>
+                            <th scope="col">Agree to Share Data</th>
                         </tr>
                     </thead>
-                    <form className="form-approve" id="approve-form" action="" method="post">
-                        <tbody>
-
-
-
-
-                            { /* </form>{%} for i in Object %{'}'}
-                            {%} if i.3 == Null %{'}'} */}
+                    
+                        <tbody>           
                             <tr>
-                                <th scope="row">
-                                    <div className="form-check ">
-                                        <input className="form-check-input flexCheckDefault-5" type="checkbox" id="flexCheckDefault-5" name="id[]"
-                                            value="{{forloop.counter}}" />
-                                        <label className="form-check-label" for="flexCheckDefault-5">
-                                            {/*{ forloop,: .counter }*/}
-                                        </label>
-                                    </div>
-                                </th>
+                            
+                                <td></td>
 
-                                <td>{/*{ i, .0: }*/}</td>
+                                <td></td>
 
-                                <td>{/*{ i, .1: }*/}</td>
+                                <td></td>
 
-                                <td>{/*{ i, .2: }*/}</td>
+                                <td></td>
+
 
                                 <td>
-                                    <div className="form-check ">
+                                <div className="form-check ">
                                         <div className="col-md-auto">
                                             <select className="form-select" id="approve" name="approve[]">
-                                                <option name='approve' value="approve">Approve</option>
+                                                <option name='approve' value="approve">Accept</option>
                                                 <option name='decline' value="decline">Decline</option>
                                             </select>
                                         </div>
                                     </div>
                                 </td>
                             </tr>
-                            {/*% endif %*/}
-                            {/*% endfor %*/}
-
-
+                           
                         </tbody>
-                        <button type="submit" for="approve-form" className="btn btn-outline-success">Save</button>
-                    </form>
                 </table>
 
             </div >
