@@ -1,7 +1,7 @@
 import NavbarOut from "./components/NavBarOut";
 import NavbarIn from "./components/NavBarIn";
 import Footer from "./components/footer";
-
+import { useState, useEffect } from 'react';
 import Home from "./pages/Home";
 import Login from "./pages/login";
 import ResetPassword from "./pages/resetPassword";
@@ -204,11 +204,15 @@ function App() {
             exact
             path="/admin"
             element={
-              <>
+             
+          
+                <>
                 <NavbarIn />
                 <Admin />
                 <Footer />
-              </>
+                </>
+     
+            
             }
           />
         </Routes>
