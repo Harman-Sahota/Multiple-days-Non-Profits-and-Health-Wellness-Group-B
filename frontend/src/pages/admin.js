@@ -13,7 +13,10 @@ let temp_Expert = [];
 function Admin() {
 
     const [user, setUser] = useState([]);
-    
+    const [approvedUser, setApprovedUser] = useState([]);
+    const [declinedUser, setDeclinedUser] = useState([]);
+
+
     const fetchData = async () => {
         const response = await fetch("http://localhost:8000/api/adminPull/");
         const data = await response.json();
@@ -24,8 +27,28 @@ function Admin() {
         fetchData();
     }, [])
 
-    
-       
+    const fetchApprovedData = async () => {
+        const response = await fetch("http://localhost:8000/api/adminPullApprove/");
+        const data = await response.json();
+        return setApprovedUser(data);
+    }
+
+    useEffect(() => {
+        fetchApprovedData();
+    }, [])
+
+    const fetchDeclinedData = async () => {
+        const response = await fetch("http://localhost:8000/api/adminPullDecline/");
+        const data = await response.json();
+        return setDeclinedUser(data);
+    }
+
+    useEffect(() => {
+        fetchDeclinedData();
+    }, [])
+
+
+
 
 
     const [CEO, setCEO] = useState({
@@ -468,7 +491,7 @@ function Admin() {
                                             setAdmin({ ...admin, readwrite: event.target.value })
 
                                         }
-                                           >
+                                    >
                                         <option value="read">Read</option>
                                         <option value="write">Write</option>
                                         <option value="both">Both</option>
@@ -903,7 +926,7 @@ function Admin() {
 
         </div>
             <div id="role-settings-container" className="container-lg col-md-auto">
-                <h3 className="h3"> Accounts:</h3>
+                <h3 className="h3"> Pending Accounts:</h3>
                 <table className="table">
                     <thead>
                         <tr>
@@ -916,7 +939,7 @@ function Admin() {
                     </thead>
 
                     <tbody>
-                    
+
 
                         {user && user.length > 0 && user.map((userObj, index) => (
 
@@ -936,8 +959,8 @@ function Admin() {
                                                     axios.put(
                                                         `http://127.0.0.1:8000/api/adminUpdate/${userObj.id}`,
 
-                                                        
-                                                        {"Approve": e.target.value},
+
+                                                        { "Approve": e.target.value },
                                                         {
                                                             headers: {
                                                                 "Content-type": "application/json",
@@ -949,11 +972,16 @@ function Admin() {
                                                     const data = await response.json();
                                                     setUser(data);
                                                     fetchData();
-                                                      
-                                                     console.log(data);
 
-                                                    //window.location.reload()
-                               
+                                                    const response2 = await fetch("http://localhost:8000/api/adminPullApprove/");
+                                                    const data2 = await response2.json();
+                                                    setApprovedUser(data2);
+                                                    fetchApprovedData();
+
+                                                    const response3 = await fetch("http://localhost:8000/api/adminPullDecline/");
+                                                    const data3 = await response3.json();
+                                                    setDeclinedUser(data3);
+                                                    fetchDeclinedData();
                                                 }}
                                             >
                                                 <option name='empty' value="empty">Choose an option</option>
@@ -964,10 +992,71 @@ function Admin() {
                                     </div>
                                 </td></tr>
                         ))}
-               
+
                     </tbody>
                 </table>
             </div >
+
+
+
+             <div id="role-settings-container" className="container-lg col-md-auto">
+                <h3 className="h3">Approved Accounts:</h3>
+                <table className="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Roles</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        {approvedUser && approvedUser.length > 0 && approvedUser.map((userObj, index) => (
+
+                            <tr>
+                                <td key={userObj.id}>{userObj.id}</td>
+                                <td>{userObj.FirstName}  {userObj.LastName} </td>
+                                <td>{userObj.Email}</td>
+                                <td>{userObj.Roles}</td>
+                            </tr>
+                        ))}
+
+                    </tbody>
+                </table>
+            </div >
+
+
+            <div id="role-settings-container" className="container-lg col-md-auto">
+                <h3 className="h3">Declined Accounts:</h3>
+                <table className="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Roles</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        {declinedUser && declinedUser.length > 0 && declinedUser.map((userObj, index) => (
+
+                            <tr>
+                                <td key={userObj.id}>{userObj.id}</td>
+                                <td>{userObj.FirstName}  {userObj.LastName} </td>
+                                <td>{userObj.Email}</td>
+                                <td>{userObj.Roles}</td>
+                            </tr>
+                        ))}
+
+                    </tbody>
+                </table>
+            </div >
+
+
 
         </>
 

@@ -1,3 +1,4 @@
+
 from api.models import users
 from api.models import permissions
 from api.serialize import userSerialize
@@ -8,7 +9,7 @@ from api.serialize import adminUpdateSerialize
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-from django.shortcuts import render
+
 
 @api_view(["POST"])
 def registerInsert(request):
@@ -34,6 +35,22 @@ def adminInsert(request):
 def adminPull(request):
     if request.method == 'GET':
         results = users.objects.exclude(Approve__isnull=False)
+        serialize = adminPullSerialize(results,many=True)
+        return Response(serialize.data)
+
+@api_view(["GET"])
+def adminPullApprove(request):
+    if request.method == 'GET':
+        results = users.objects.exclude(Approve='decline')
+        results = results.exclude(Approve__isnull=True)
+        serialize = adminPullSerialize(results,many=True)
+        return Response(serialize.data)
+
+@api_view(["GET"])
+def adminPullDecline(request):
+    if request.method == 'GET':
+        results = users.objects.exclude(Approve='approve')
+        results = results.exclude(Approve__isnull=True)
         serialize = adminPullSerialize(results,many=True)
         return Response(serialize.data)
 
