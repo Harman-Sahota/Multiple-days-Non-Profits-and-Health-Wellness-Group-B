@@ -7,6 +7,7 @@ from api.serialize import adminPullSerialize
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+from django.shortcuts import render
 
 @api_view(["POST"])
 def registerInsert(request):
@@ -31,9 +32,10 @@ def adminInsert(request):
 @api_view(["GET"])
 def adminPull(request):
     if request.method == 'GET':
-        results = users.objects.all()
+        results = users.objects.exclude(Approve__isnull=False)
         serialize = adminPullSerialize(results,many=True)
         return Response(serialize.data)
+
         
 @api_view(["POST"])
 def commentInsert(request):
