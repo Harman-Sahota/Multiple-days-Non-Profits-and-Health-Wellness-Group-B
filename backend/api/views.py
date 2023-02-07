@@ -4,6 +4,7 @@ from api.serialize import userSerialize
 from api.serialize import adminInsertSerialize
 from api.serialize import commentsSerialize
 from api.serialize import adminPullSerialize
+from api.serialize import adminUpdateSerialize
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -35,6 +36,17 @@ def adminPull(request):
         results = users.objects.exclude(Approve__isnull=False)
         serialize = adminPullSerialize(results,many=True)
         return Response(serialize.data)
+
+@api_view(["PUT"])
+def adminUpdate(request,pk):
+    if request.method == 'PUT':
+        saveserialize = adminUpdateSerialize(data=request.data)
+        if saveserialize.is_valid():
+            users.objects.filter(id=pk).update(Approve=saveserialize.data["Approve"]) 
+            return Response(saveserialize.data,status=status.HTTP_201_CREATED)    
+        return Response(saveserialize.data,status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
 
         
 @api_view(["POST"])
