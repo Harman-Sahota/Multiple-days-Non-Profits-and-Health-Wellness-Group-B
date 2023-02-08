@@ -1,66 +1,111 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import loginCSS from './login.module.css';
 import Button from 'react-bootstrap/Button';
+import axios from 'axios';
+import React, { useState } from "react";
 
-function Login(){
+function Login() {
 
-    return (
-//login form
-<div className={loginCSS.body}>
-  <div className={`form-container ${loginCSS.form_container}`}>
-    <form className={`mx-auto bg-white ${loginCSS.form}`}id="login" action="/login" method="POST"  onSubmit={(e) => {
-          
-              if(document.getElementById('exampleInputEmail1').value === "" || document.getElementById('exampleInputPassword1').value === "" )
-               {
+  const [loginData, setLoginData] = useState({
+    Email: "",
+    Password: ""
+  });
 
-                e.preventDefault();
+
+
+
+
+  return (
+    //login form
+    <div className={loginCSS.body}>
+      <div className={`form-container ${loginCSS.form_container}`}>
+        <div className={`mx-auto bg-white ${loginCSS.form}`} id="login"   >
+
+          <h5 className={`form-title ${loginCSS.form_title}`}>User Login</h5>
+
+
+          <div className={`form-floating  ${loginCSS.email_form}`}>
+            <input type="email" id="exampleInputEmail1" className="form-control input-text" placeholder="jordan@gmail.com" name="email"
+
+              onChange={(event) =>
+                setLoginData({ ...loginData, Email: event.target.value })
+
+              }
+
+
+            />
+            <label for="exampleInputEmail1" className={`form-label  ${loginCSS.input_text}`}>Email:</label>
+          </div>
+
+
+          <div className={`form-floating  ${loginCSS.password_form}`}>
+            <input type="password" id="exampleInputPassword1" className="form-control input-text" placeholder="e.g. Kiwanuka" name="password"
+
+              onChange={(event) =>
+                setLoginData({ ...loginData, Password: event.target.value })
+
+              }
+            />
+            <label for="exampleInputPassword1" className={`form-label  ${loginCSS.input_text}`}>Password:</label>
+          </div>
+
+
+          <Button className={`btn btn-outline-success ${loginCSS.sign_in}`} variant="outline-success" id="submit" for="login" type="submit"
+
+            onClick={(e) => {
+              axios.post(
+                "http://127.0.0.1:8000/api/login/",
+                {
+                    Email: loginData.Email,
+                    Password: loginData.Password
+                },
+                {
+                    headers: {
+                        "Content-type": "application/json",
+                    }
+                }
+            )
+                .then(response => {
+                    if (response.status == 200) {
+                        console.log('yes');
+                    }
+                })
+                .catch(err => console.warn(err));
+              
+              if (document.getElementById('exampleInputEmail1').value === "" || document.getElementById('exampleInputPassword1').value === "") {
+
                 window.alert('fields cannot be blank');
-               
+                document.getElementById('exampleInputEmail1').classList.add('error');
+
                 document.getElementById('exampleInputPassword1').classList.add('error');
 
-              }else{
+              } else {
                 document.getElementById('exampleInputEmail1').classList.add('success');
                 document.getElementById('exampleInputPassword1').classList.add('success');
               }
 
-             
-         
-          }}
-       >
-   
-      <h5 className={`form-title ${loginCSS.form_title}`}>User Login</h5>
 
-     
-      <div className={`form-floating  ${loginCSS.email_form}`}>
-        <input type="email" id="exampleInputEmail1" className="form-control input-text" placeholder="jordan@gmail.com" name="email" />
-        <label for="exampleInputEmail1" className={`form-label  ${loginCSS.input_text}`}>Email:</label>
+
+            }}
+
+          >
+            Sign in
+          </Button>
+
+          <div className={loginCSS.trouble}>
+            <span className={`text-muted ${loginCSS.trouble_text}`}>Having trouble signing in?</span>
+            <a className={`text-danger ${loginCSS.trouble_reset}`} href="resetPassword/">Reset password</a>
+          </div>
+
+          <div className={loginCSS.new_account}>
+            <span className={`text-muted ${loginCSS.new_account_text}`}>Don't have an account?</span>
+            <a href="#" className={`text-success ${loginCSS.new_account_text}`}>Create Now &rarr;</a>
+          </div>
+        </div>
       </div>
+    </div>
 
-
-      <div className={`form-floating  ${loginCSS.password_form}`}>
-        <input type="password" id="exampleInputPassword1" className="form-control input-text" placeholder="e.g. Kiwanuka" name="password" />
-        <label for="exampleInputPassword1" className={`form-label  ${loginCSS.input_text}`}>Password:</label>
-      </div>
-
-      
-      <Button className={`btn btn-outline-success ${loginCSS.sign_in}`} variant="outline-success" id="submit" for="login" type="submit">
-        Sign in
-      </Button>
-
-      <div className={loginCSS.trouble}>
-        <span className={`text-muted ${loginCSS.trouble_text}`}>Having trouble signing in?</span>
-        <a className={`text-danger ${loginCSS.trouble_reset}`} href="resetPassword/">Reset password</a>
-      </div>
-
-      <div className={loginCSS.new_account}>
-        <span className={`text-muted ${loginCSS.new_account_text}`}>Don't have an account?</span>
-        <a href="#" className={`text-success ${loginCSS.new_account_text}`}>Create Now &rarr;</a>
-      </div>
-    </form>
-  </div>
-</div>
-
-    );
+  );
 
 }
 

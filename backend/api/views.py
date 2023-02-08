@@ -8,8 +8,11 @@ from api.serialize import adminPullSerialize
 from api.serialize import adminUpdateSerialize
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.views import APIView
 from rest_framework import status
-
+from rest_framework.authtoken.models import Token
+from rest_framework.authtoken.views import ObtainAuthToken
+from django.contrib.auth import login,authenticate
 
 @api_view(["POST"])
 def registerInsert(request):
@@ -75,3 +78,31 @@ def commentInsert(request):
             return Response(saveserialize.data,status=status.HTTP_201_CREATED)    
         return Response(saveserialize.data,status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
+
+class Login(APIView):
+    def post(self,request):
+        if request.method == 'POST':
+            email = request.data.get("Email")
+            password = request.data.get("Password")
+        if not email or not password:
+            return Response({"error": "Please fill all fields"},status=status.HTTP_400_BAD_REQUEST)
+
+        check_user = users.objects.filter(Email=email,Password=password).exists()
+        if check_user:
+            getdetails = users.objects.filter(Email=email,Password=password)
+        if check_user == False:
+            return Response({"error":"user does not exist"},status=status.HTTP_404_NOT_FOUND)
+
+        if  getdetails: 
+            results = users.objects.get(Email=email)
+            data = {
+                "firstname": results.FirstName,
+                "lastname": results.LastName,
+                "email": email,
+                "roles": results.Roles,
+                "organization": results.Organization
+
+            }
+            return Response({"success":"success logged in","data":data},status=status.HTTP_200_OK)
+        else:
+            return Response({"error":"invalid login credentials"},status=status.HTTP_400_BAD_REQUEST)
