@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import loginCSS from './login.module.css';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 function Login() {
 
@@ -11,7 +11,15 @@ function Login() {
     Password: ""
   });
 
+  
+  const win = window.sessionStorage;
 
+  useEffect (() => {
+
+    win.setItem("name",loginData.Email);
+    win.setItem("email",loginData.Password);
+
+  },[loginData])
 
 
 
@@ -67,7 +75,11 @@ function Login() {
             )
                 .then(response => {
                     if (response.status == 200) {
-                        console.log('yes');
+                        console.log(response.data);
+                        win.setItem("name",loginData.Email);
+                        console.log(win.getItem("name"));
+                      
+                       
                     }
                 })
                 .catch(err => console.warn(err));
