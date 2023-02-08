@@ -21,7 +21,7 @@ function Profile() {
                             </div>
 
                             <div className='col-6'>
-                                <p>Name displayed here</p>
+                                <p>{localStorage.getItem('firstname')}</p>
                             </div>
 
                             <div className='col-3'>

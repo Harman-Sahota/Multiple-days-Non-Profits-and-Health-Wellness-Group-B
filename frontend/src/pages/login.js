@@ -76,7 +76,7 @@ function Login() {
                 .then(response => {
                     if (response.status == 200) {
                         console.log(response.data);
-                        localStorage.setItem('dataKey', JSON.stringify(response.data['data']));
+                        localStorage.setItem('firstname', response.data['data']['firstname']);
                       
                        
                     }
