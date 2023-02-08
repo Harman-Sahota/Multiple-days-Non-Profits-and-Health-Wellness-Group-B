@@ -100,7 +100,9 @@ class Login(APIView):
                 "lastname": results.LastName,
                 "email": email,
                 "roles": results.Roles,
-                "organization": results.Organization
+                "organization": results.Organization,
+                "consent": results.Consent
+
 
             }
             return Response({"success":"success logged in","data":data},status=status.HTTP_200_OK)
