@@ -77,7 +77,12 @@ function Login() {
                     if (response.status == 200) {
                         console.log(response.data);
                         localStorage.setItem('firstname', response.data['data']['firstname']);
-                      
+                        localStorage.setItem('lastname', response.data['data']['lastname']);
+                        localStorage.setItem('email', response.data['data']['email']);
+                        localStorage.setItem( 'roles', response.data['data']['roles']);
+                        localStorage.setItem( 'organization', response.data['data']['organization']);
+                        localStorage.setItem( 'consent', response.data['data']['consent']);
+                        localStorage.setItem( 'approve', response.data['data']['approve']);
                        
                     }
                 })
