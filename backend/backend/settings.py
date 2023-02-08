@@ -38,6 +38,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 INSTALLED_APPS = [
     'api.apps.ApiConfig',
     'rest_framework',
+    'rest_framework.authtoken',
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
