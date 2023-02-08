@@ -36,7 +36,9 @@ function NavbarIn() {
                         &nbsp; Profile</a></li>
                         <li id="signup">
                             <a href="/">
-                                <Button className="register btn btn-outline-success" variant="outline-success">
+                                <Button className="register btn btn-outline-success" variant="outline-success" onClick={function(){
+                                    window.localStorage.clear();
+                                }}>
                                     Logout
                                 </Button>
                             </a>

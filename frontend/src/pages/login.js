@@ -76,8 +76,7 @@ function Login() {
                 .then(response => {
                     if (response.status == 200) {
                         console.log(response.data);
-                        win.setItem("name",loginData.Email);
-                        console.log(win.getItem("name"));
+                        localStorage.setItem('dataKey', JSON.stringify(response.data['data']));
                       
                        
                     }

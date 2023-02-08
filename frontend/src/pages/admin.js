@@ -3,6 +3,7 @@ import './admin.css'
 import axios from 'axios'
 import React, { useReducer } from 'react';
 import { useState, useEffect } from 'react';
+
 let temp = [];
 let temp_warehouse = [];
 let temp_admin = [];
@@ -141,8 +142,7 @@ function Admin() {
                                     if (e.target.checked) {
                                         temp.push(e.target.value);
                                         setCEO({ ...CEO, metrics: temp });
-
-
+                                    
                                     } else {
                                         temp.pop(e.target.value);
                                         setCEO({ ...CEO, metrics: temp });
@@ -1033,7 +1033,6 @@ function Admin() {
                 <table className="table">
                     <thead>
                         <tr>
-                            
                             <th scope="col">Name</th>
                             <th scope="col">Email</th>
                             <th scope="col">Roles</th>
