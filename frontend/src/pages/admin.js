@@ -3,6 +3,7 @@ import './admin.css'
 import axios from 'axios'
 import React, { useReducer } from 'react';
 import { useState, useEffect } from 'react';
+
 let temp = [];
 let temp_warehouse = [];
 let temp_admin = [];
@@ -141,8 +142,7 @@ function Admin() {
                                     if (e.target.checked) {
                                         temp.push(e.target.value);
                                         setCEO({ ...CEO, metrics: temp });
-
-
+                                    
                                     } else {
                                         temp.pop(e.target.value);
                                         setCEO({ ...CEO, metrics: temp });
@@ -930,7 +930,7 @@ function Admin() {
                 <table className="table">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
+                            
                             <th scope="col">Name</th>
                             <th scope="col">Email</th>
                             <th scope="col">Roles</th>
@@ -944,7 +944,7 @@ function Admin() {
                         {user && user.length > 0 && user.map((userObj, index) => (
 
                             <tr>
-                                <td key={userObj.id}>{userObj.id}</td>
+                               
                                 <td>{userObj.FirstName}  {userObj.LastName} </td>
                                 <td>{userObj.Email}</td>
                                 <td>{userObj.Roles}</td>
@@ -1004,7 +1004,7 @@ function Admin() {
                 <table className="table">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
+                           
                             <th scope="col">Name</th>
                             <th scope="col">Email</th>
                             <th scope="col">Roles</th>
@@ -1016,7 +1016,7 @@ function Admin() {
                         {approvedUser && approvedUser.length > 0 && approvedUser.map((userObj, index) => (
 
                             <tr>
-                                <td key={userObj.id}>{userObj.id}</td>
+                              
                                 <td>{userObj.FirstName}  {userObj.LastName} </td>
                                 <td>{userObj.Email}</td>
                                 <td>{userObj.Roles}</td>
@@ -1033,7 +1033,6 @@ function Admin() {
                 <table className="table">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
                             <th scope="col">Name</th>
                             <th scope="col">Email</th>
                             <th scope="col">Roles</th>
@@ -1045,7 +1044,7 @@ function Admin() {
                         {declinedUser && declinedUser.length > 0 && declinedUser.map((userObj, index) => (
 
                             <tr>
-                                <td key={userObj.id}>{userObj.id}</td>
+                            
                                 <td>{userObj.FirstName}  {userObj.LastName} </td>
                                 <td>{userObj.Email}</td>
                                 <td>{userObj.Roles}</td>

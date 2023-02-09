@@ -43,6 +43,7 @@ function Comment() {
                     <div className="form-group">
                         <textarea className="form-control" id="comment" rows="5" name="comment" placeholder="Type in your comment here."
                             onChange={(event) => {
+                                
                                 setComment({ ...comment, Comments: event.target.value })
                             }}>
                         </textarea>
