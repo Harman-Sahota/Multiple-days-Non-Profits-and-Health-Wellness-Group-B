@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './network.css';
+import fourcss from './fourcss.css';
 
 function SearchBar() {
   const [posts, setPosts] = useState([]);
@@ -11,7 +12,7 @@ function SearchBar() {
 
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
-
+   {if(localStorage.getItem('firstname')!= null){
   return (
     <div className="container-lg col-md-auto">
       <div className="container-fluid">
@@ -88,6 +89,28 @@ function SearchBar() {
     </Modal>
   </div>
   )
+}
+else if(localStorage.getItem('firstname') == null) {
+
+  return(
+    <section>
+    <div className="flex-container">
+        <div className="text-center">
+            <h1>
+                <span className="fade-in" id="digit1">4</span>
+                <span className="fade-in" id="digit2">0</span>
+                <span className="fade-in" id="digit3">4</span>
+            </h1>
+            <h3 className="fadeIn">YOU MUST LOGIN TO VIEW THIS PAGE</h3>
+            <a href='/login'><Button type="button" class = 'btn btn-primary 'name="button">Login</Button></a>
+        </div>
+    </div>
+</section>
+  );
+
+}
+
+}
 }
 
 export default SearchBar;

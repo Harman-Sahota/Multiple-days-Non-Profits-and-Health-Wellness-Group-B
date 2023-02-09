@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
-
+import fourcss from './fourcss.css';
 import * as d3Fetch from "d3-fetch";
 import * as d3Scale from "d3-scale";
 import * as d3Shape from "d3-shape";
@@ -14,6 +14,7 @@ import * as d3Axis from "d3-axis";
 import * as d3ScaleChromatic from "d3-scale-chromatic";
 
 function Tracker() {
+  {if(localStorage.getItem('firstname') != null){
   return (
     <div className="container p-2">
       <p>
@@ -351,7 +352,26 @@ function Tracker() {
       <div id="penetrate" className="penetrate" onLoad={pieChart}></div>
       {/* {{ json|json_script:"json" }} */}
     </div>
-  );
+  );}
+  else if(localStorage.getItem('firstname') == null) {
+
+    return(
+      <section>
+      <div className="flex-container">
+          <div className="text-center">
+              <h1>
+                  <span className="fade-in" id="digit1">4</span>
+                  <span className="fade-in" id="digit2">0</span>
+                  <span className="fade-in" id="digit3">4</span>
+              </h1>
+              <h3 className="fadeIn">YOU MUST LOGIN TO VIEW THIS PAGE</h3>
+              <a href='/login'><Button type="button" class = 'btn btn-primary 'name="button">Login</Button></a>
+          </div>
+      </div>
+  </section>
+    );
+
+}}
 
   function pieChart() {
     let penetrate = document.getElementById("penetrate");

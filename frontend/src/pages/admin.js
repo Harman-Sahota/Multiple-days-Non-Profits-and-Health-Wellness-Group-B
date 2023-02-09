@@ -3,6 +3,8 @@ import './admin.css'
 import axios from 'axios'
 import React, { useReducer } from 'react';
 import { useState, useEffect } from 'react';
+import Button from "react-bootstrap/Button";
+import fourcss from './fourcss.css';
 
 let temp = [];
 let temp_warehouse = [];
@@ -112,8 +114,9 @@ function Admin() {
     Sponsors.metrics = Sponsors.metrics.toString();
     Experts.metrics = Experts.metrics.toString();
 
+   {if(localStorage.getItem('firstname') != null){
 
-
+   
     return (
 
         <><div id="role-settings-container" className="container-lg col-md-auto">
@@ -1059,7 +1062,28 @@ function Admin() {
 
         </>
 
-    );
+    );}
+
+    else if(localStorage.getItem('firstname') == null) {
+
+        return(
+            <section>
+                <div className="flex-container">
+                    <div className="text-center">
+                        <h1>
+                            <span className="fade-in" id="digit1">4</span>
+                            <span className="fade-in" id="digit2">0</span>
+                            <span className="fade-in" id="digit3">4</span>
+                        </h1>
+                        <h3 className="fadeIn">YOU MUST LOGIN TO VIEW THIS PAGE</h3>
+                        <a href='/login'><Button type="button" class = 'btn btn-primary 'name="button">Login</Button></a>
+                    </div>
+                </div>
+            </section>
+        );
+
+    }
+}
 
 }
 
