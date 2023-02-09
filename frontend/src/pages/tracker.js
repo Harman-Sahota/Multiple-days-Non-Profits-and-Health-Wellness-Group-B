@@ -359,12 +359,12 @@ function Tracker() {
       <section>
       <div className="flex-container">
           <div className="text-center">
-              <h1>
+              <h1 className="heading1">
                   <span className="fade-in" id="digit1">4</span>
                   <span className="fade-in" id="digit2">0</span>
                   <span className="fade-in" id="digit3">4</span>
               </h1>
-              <h3 className="fadeIn">YOU MUST LOGIN TO VIEW THIS PAGE</h3>
+              <h3 className=" heading3 fadeIn">YOU MUST LOGIN TO VIEW THIS PAGE</h3>
               <a href='/login'><Button type="button" class = 'btn btn-primary 'name="button">Login</Button></a>
           </div>
       </div>
