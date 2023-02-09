@@ -87,9 +87,18 @@ function Login() {
                         window.location.replace("http://localhost:3000/tracker/");
                     }
                 })
-                .catch(err => console.warn(err));
+                .catch(err => 
+
+                  {if(err.status="404" && document.getElementById('exampleInputEmail1').value != "" && document.getElementById('exampleInputPassword1').value != ""){
+                    window.alert("invalid username or password");
+                    document.getElementById('exampleInputEmail1').classList.add('error');
+                    document.getElementById('exampleInputPassword1').classList.add('error');
+                  }}
+                  
+                  
+                  );
               
-              if (document.getElementById('exampleInputEmail1').value === "" || document.getElementById('exampleInputPassword1').value === "") {
+              if (document.getElementById('exampleInputEmail1').value === "" || document.getElementById('exampleInputPassword1').value === "" ) {
 
                 window.alert('fields cannot be blank');
                 document.getElementById('exampleInputEmail1').classList.add('error');

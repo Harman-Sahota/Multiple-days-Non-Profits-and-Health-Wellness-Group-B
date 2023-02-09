@@ -107,7 +107,7 @@ function Form() {
                         localStorage.setItem( 'roles', formData.Roles);
                         localStorage.setItem( 'organization', formData.Organization);
                         localStorage.setItem( 'consent', formData.Consent);
-                        localStorage.setItem( 'approve', 'pending');
+                        localStorage.setItem( 'approve', "");
 
                         window.location.replace("http://localhost:3000/tracker/");
                         }})
