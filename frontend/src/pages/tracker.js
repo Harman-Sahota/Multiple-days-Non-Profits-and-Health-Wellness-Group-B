@@ -17,7 +17,7 @@ function Tracker() {
   return (
     <div className="container p-2">
       <p>
-        <strong>Welcome back, {/* {{ request.session.FirstName }} */}</strong>
+        <strong>Welcome back, {localStorage.getItem('firstname')}</strong>
       </p>
       <div className="card">
         <div className="card-header">

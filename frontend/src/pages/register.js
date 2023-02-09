@@ -101,7 +101,15 @@ function Form() {
                  
                     .then(response => 
                       {if(response.status == 201){
-                        console.log('yes');
+                        localStorage.setItem('firstname', formData.FirstName);
+                        localStorage.setItem('lastname', formData.LastName);
+                        localStorage.setItem('email', formData.Email);
+                        localStorage.setItem( 'roles', formData.Roles);
+                        localStorage.setItem( 'organization', formData.Organization);
+                        localStorage.setItem( 'consent', formData.Consent);
+                        localStorage.setItem( 'approve', 'pending');
+
+                        window.location.replace("http://localhost:3000/tracker/");
                         }})
                     .catch(err => console.warn(err));
 

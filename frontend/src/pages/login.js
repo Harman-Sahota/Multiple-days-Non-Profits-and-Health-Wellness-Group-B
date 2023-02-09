@@ -3,7 +3,7 @@ import loginCSS from './login.module.css';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import React, { useEffect, useState } from "react";
-
+import { Navigate } from "react-router-dom";
 function Login() {
 
   const [loginData, setLoginData] = useState({
@@ -83,7 +83,8 @@ function Login() {
                         localStorage.setItem( 'organization', response.data['data']['organization']);
                         localStorage.setItem( 'consent', response.data['data']['consent']);
                         localStorage.setItem( 'approve', response.data['data']['approve']);
-                       
+
+                        window.location.replace("http://localhost:3000/tracker/");
                     }
                 })
                 .catch(err => console.warn(err));
