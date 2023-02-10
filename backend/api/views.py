@@ -1,5 +1,6 @@
 
 from api.models import users
+from api.models import posts
 from api.models import permissions
 from api.serialize import userSerialize
 from api.serialize import adminInsertSerialize
@@ -7,6 +8,7 @@ from api.serialize import commentsSerialize
 from api.serialize import adminPullSerialize
 from api.serialize import adminUpdateSerialize
 from api.serialize import networkInsertSerialize
+from api.serialize import networkPullSerialize
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -123,7 +125,7 @@ def networkInsert(request):
 @api_view(["GET"])
 def networkPull(request):
     if request.method == 'GET':
-        results = users.objects.all()
-        serialize = networkInsertSerialize(results,many=True)
+        results = posts.objects.all()
+        serialize = networkPullSerialize(results,many=True)
         return Response(serialize.data)
         
