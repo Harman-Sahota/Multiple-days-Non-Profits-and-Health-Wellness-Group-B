@@ -3,7 +3,7 @@ from api.models import users
 from api.models import permissions
 from api.serialize import userSerialize
 from api.serialize import adminInsertSerialize
-from api.serialize import commentsSerialize
+# from api.serialize import commentsSerialize
 from api.serialize import adminPullSerialize
 from api.serialize import adminUpdateSerialize
 from api.serialize import networkInsertSerialize
@@ -70,14 +70,14 @@ def adminUpdate(request,pk):
 
 
         
-@api_view(["POST"])
-def commentInsert(request):
-    if request.method == 'POST':
-        saveserialize = commentsSerialize(data=request.data)
-        if saveserialize.is_valid():
-            saveserialize.save();
-            return Response(saveserialize.data,status=status.HTTP_201_CREATED)    
-        return Response(saveserialize.data,status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+# @api_view(["POST"])
+# def commentInsert(request):
+#     if request.method == 'POST':
+#         saveserialize = commentsSerialize(data=request.data)
+#         if saveserialize.is_valid():
+#             saveserialize.save();
+#             return Response(saveserialize.data,status=status.HTTP_201_CREATED)    
+#         return Response(saveserialize.data,status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
 
 class Login(APIView):

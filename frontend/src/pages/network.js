@@ -52,14 +52,7 @@ function SearchBar() {
           <Button className="tablinks btn btn-light">💬 Receiving</Button><br />
         </div>
         <div id="disc">
-          {posts.map((post) => (
-            <div key={post.product}>
-              <p>Product: {post.product}</p>
-              <p>Quantity: {post.quantity} {post.qunits}</p>
-              <p>Description: {post.desc}</p>
-              <p>Status: {post.Type}</p>
-            </div>
-          ))}
+         
         </div>
       </div>
       <Modal show={showModal} onHide={handleClose}>
