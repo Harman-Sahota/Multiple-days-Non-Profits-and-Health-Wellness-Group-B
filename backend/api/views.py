@@ -9,6 +9,7 @@ from api.serialize import adminPullSerialize
 from api.serialize import adminUpdateSerialize
 from api.serialize import networkInsertSerialize
 from api.serialize import networkPullSerialize
+from api.serialize import profileSerialize
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -128,4 +129,22 @@ def networkPull(request):
         results = posts.objects.all()
         serialize = networkPullSerialize(results,many=True)
         return Response(serialize.data)
-        
+
+
+@api_view(["PUT"])
+def profileUpdate(request):
+    if request.method == 'PUT':
+        saveserialize = profileSerialize(data=request.data)
+        if saveserialize.is_valid():
+            if not request.data["FirstName"]:
+                users.objects.update(FirstName=saveserialize.data["FirstName"]) 
+            if not request.data["LastName"]:
+                users.objects.update(FirstName=saveserialize.data["LastName"]) 
+            if not request.data["Email"]:
+                users.objects.update(FirstName=saveserialize.data["Email"]) 
+            if not request.data["Organization"]:
+                users.objects.update(FirstName=saveserialize.data["Organization"]) 
+            if not request.data["Consent"]:
+                users.objects.update(FirstName=saveserialize.data["Consent"]) 
+            return Response(saveserialize.data,status=status.HTTP_201_CREATED)    
+        return Response(saveserialize.data,status=status.HTTP_500_INTERNAL_SERVER_ERROR)

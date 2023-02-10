@@ -39,3 +39,8 @@ class networkPullSerialize(serializers.ModelSerializer):
     class Meta:
         model = posts
         fields = '__all__'
+
+class profileSerialize(serializers.ModelSerializer):
+    class Meta:
+        model = users
+        fields = ['FirstName', 'LastName', 'Email', 'Organization', 'Consent']

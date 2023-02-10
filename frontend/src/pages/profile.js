@@ -12,7 +12,6 @@ function Profile() {
         FirstName: '',
         LastName: '',
         Email: '',
-        Roles: '',
         Consent: '',
         Organization: ''
     });
@@ -227,10 +226,8 @@ function Profile() {
 
                             <Button className={`${profileCSS.edit_btn} btn btn-outline-success`} variant="outline-sucess" onClick={(e) => {
                                 localStorage.setItem('roles', role_str);
-                                setAll({ ...all, Roles: role_str});
-                                
-                                
-                                console.log(all);
+                            
+                                console.log(JSON.stringify(all));
                             }}>
                                 Save
                             </Button>
