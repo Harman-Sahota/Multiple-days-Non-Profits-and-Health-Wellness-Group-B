@@ -38,4 +38,4 @@ class networkInsertSerialize(serializers.ModelSerializer):
 class networkPullSerialize(serializers.ModelSerializer):
     class Meta:
         model = posts
-        fields = ['product','Type','Quantity','Units', 'Description']
+        fields = '__all__'

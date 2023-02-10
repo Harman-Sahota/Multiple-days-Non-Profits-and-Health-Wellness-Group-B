@@ -32,11 +32,11 @@ class comments(models.Model):
     Comments = models.CharField(max_length=255)
     username = models.CharField(max_length=255)
 
-    # class Meta:
-    #     db_table = "comments"
+    class Meta:
+        db_table = "comments"
 
 class posts(models.Model):
-    product = models.CharField(max_length=255)
+    product = models.CharField(max_length=255,primary_key = True)
     Type = models.CharField(max_length=255)
     Quantity = models.IntegerField()
     Units = models.CharField(max_length=3)
