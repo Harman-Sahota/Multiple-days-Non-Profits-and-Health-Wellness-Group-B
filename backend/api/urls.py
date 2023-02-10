@@ -12,6 +12,6 @@ urlpatterns = [
     path("login/",views.Login.as_view(),name='login'),
     path("networkInsert/",views.networkInsert),
     path("networkPull/",views.networkPull),
-    path("profileUpdate/",views.profileUpdate)
+    path("profileUpdate/<pk>",views.profileUpdate)
 
 ]
