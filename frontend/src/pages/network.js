@@ -11,11 +11,12 @@ function SearchBar() {
   const [posts, setPosts] = useState({
     product: '',
     Type: '',
-    Quantity: '',
     Units: '',
+    Quantity: '',
     Description: ''
 });
   const [showModal, setShowModal] = useState(false);
+  posts.Quantity = parseInt(posts.Quantity)
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
    {if(localStorage.getItem('firstname')!= null){
@@ -60,7 +61,7 @@ function SearchBar() {
           <Modal.Title>Create Post</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <form>
+          <div>
             <div className="form-group">
             <label htmlFor="product">Product</label>
             <input type="text" className="form-control" id="product" placeholder="Enter product name" 
@@ -76,10 +77,24 @@ function SearchBar() {
             <input type="number" className="form-control" id="quantity" placeholder="Enter quantity"
             onChange={(event) => {
                                 
-              setPosts({ ...posts, Quanity: event.target.value })
+              setPosts({ ...posts, Quantity: event.target.value })
             }}
             
             />
+          </div>
+          <div className="form-group">
+            <label htmlFor="units">units</label>
+            <select className="form-control" id="units"
+            onChange={(event) => {
+                                
+              setPosts({ ...posts, Units: event.target.value })
+            }}
+            
+            >
+              <option>Choose an option</option>
+              <option>Lbs</option>
+              <option>Kg</option>
+            </select>
           </div>
           <div className="form-group">
             <label htmlFor="desc">Description</label>
@@ -100,10 +115,12 @@ function SearchBar() {
             }}
             
             >
+              <option>Choose an option</option>
               <option>Sharing</option>
               <option>Receiving</option>
             </select>
           </div>
+          
           <Button variant="primary" type="submit"
           onClick={(event) => {
             console.log(JSON.stringify(posts))
@@ -111,7 +128,7 @@ function SearchBar() {
           >
             Submit
           </Button>
-        </form>
+        </div>
       </Modal.Body>
     </Modal>
   </div>
