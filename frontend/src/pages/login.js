@@ -3,7 +3,7 @@ import loginCSS from './login.module.css';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import React, { useEffect, useState } from "react";
-
+import { Navigate } from "react-router-dom";
 function Login() {
 
   const [loginData, setLoginData] = useState({
@@ -83,12 +83,22 @@ function Login() {
                         localStorage.setItem( 'organization', response.data['data']['organization']);
                         localStorage.setItem( 'consent', response.data['data']['consent']);
                         localStorage.setItem( 'approve', response.data['data']['approve']);
-                       
+
+                        window.location.replace("http://localhost:3000/tracker/");
                     }
                 })
-                .catch(err => console.warn(err));
+                .catch(err => 
+
+                  {if(err.status="404" && document.getElementById('exampleInputEmail1').value != "" && document.getElementById('exampleInputPassword1').value != ""){
+                    window.alert("invalid username or password");
+                    document.getElementById('exampleInputEmail1').classList.add('error');
+                    document.getElementById('exampleInputPassword1').classList.add('error');
+                  }}
+                  
+                  
+                  );
               
-              if (document.getElementById('exampleInputEmail1').value === "" || document.getElementById('exampleInputPassword1').value === "") {
+              if (document.getElementById('exampleInputEmail1').value === "" || document.getElementById('exampleInputPassword1').value === "" ) {
 
                 window.alert('fields cannot be blank');
                 document.getElementById('exampleInputEmail1').classList.add('error');

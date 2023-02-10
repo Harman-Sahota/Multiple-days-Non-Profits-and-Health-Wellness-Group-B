@@ -5,7 +5,7 @@ function PublicSharing() {
      return (
 
         <section>
-            <h1> Public Sharing </h1>
+            <h2> Public Sharing </h2>
         </section>
      );
 }

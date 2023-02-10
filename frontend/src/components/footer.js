@@ -6,7 +6,7 @@ function Footer(){
 
 
         <div>
-        <footer>
+        {/* <footer>
           <div class="nav">
             <ul>
               <li><a href="#" className="px-2">Terms of Service</a></li>
@@ -14,7 +14,7 @@ function Footer(){
             </ul>
           </div>
           <p style= {{fontSize:0.75+'em',margin: '0'}} >Food Saviour © 2022</p>
-        </footer>
+        </footer> */}
       </div>
        
 

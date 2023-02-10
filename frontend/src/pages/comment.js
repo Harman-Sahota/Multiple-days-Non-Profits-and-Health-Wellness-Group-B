@@ -3,6 +3,7 @@ import commentCSS from './comment.module.css';
 import React, { useState } from "react";
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
+import fourcss from './fourcss.css';
 
 function Comment() {
 
@@ -13,8 +14,11 @@ function Comment() {
 
     var j = JSON.stringify(comment);
     console.log(j);
-
+    {if(localStorage.getItem('firstname') != null){
+      
     return (
+
+       
         <section>
             <div id="main" className={`${commentCSS.container_lg} container-lg col-md-auto`}>
                 <a id={`${commentCSS.home} home`} className="btn btn-success" href="network/" >Go Back</a>
@@ -89,9 +93,29 @@ function Comment() {
                 </div>
 
             </div>
-
+  
         </section >
-    );
+                      
+    );  }
+    else if(localStorage.getItem('firstname') == null) {
+
+        return(
+            <section>
+            <div className="flex-container">
+                <div className="text-center">
+                    <h1>
+                        <span className="fade-in" id="digit1">4</span>
+                        <span className="fade-in" id="digit2">0</span>
+                        <span className="fade-in" id="digit3">4</span>
+                    </h1>
+                    <h3 className="fadeIn">YOU MUST LOGIN TO VIEW THIS PAGE</h3>
+                    <a href='/login'><Button type="button" class = 'btn btn-primary 'name="button">Login</Button></a>
+                </div>
+            </div>
+        </section>
+        );
+
+    }}
 }
 
 export default Comment;
