@@ -134,17 +134,12 @@ def networkPull(request):
 @api_view(["PUT"])
 def profileUpdate(request,pk):
     if request.method == 'PUT':
-        saveserialize = profileSerialize(data=request.data)
+        saveserialize = profileSerialize(data=request.data, allow_null = True)
         if saveserialize.is_valid():
-            if not request.data["FirstName"]:
-                users.objects.filter(id=pk).update(FirstName=saveserialize.data["FirstName"]) 
-            if not request.filter(id=pk).data["LastName"]:
-                users.objects.update(FirstName=saveserialize.data["LastName"]) 
-            if not request.filter(id=pk).data["Email"]:
-                users.objects.update(FirstName=saveserialize.data["Email"]) 
-            if not request.filter(id=pk).data["Organization"]:
-                users.objects.update(FirstName=saveserialize.data["Organization"]) 
-            if not request.filter(id=pk).data["Consent"]:
-                users.objects.update(FirstName=saveserialize.data["Consent"]) 
+            users.objects.filter(id=pk).update(FirstName=saveserialize.data["FirstName"]) 
+            users.objects.filter(id=pk).update(LastName=saveserialize.data["LastName"]) 
+            users.objects.filter(id=pk).update(Email=saveserialize.data["Email"]) 
+            users.objects.filter(id=pk).update(Organization=saveserialize.data["Organization"]) 
+            users.objects.filter(id=pk).update(Consent=saveserialize.data["Consent"]) 
             return Response(saveserialize.data,status=status.HTTP_201_CREATED)    
         return Response(saveserialize.data,status=status.HTTP_500_INTERNAL_SERVER_ERROR)
