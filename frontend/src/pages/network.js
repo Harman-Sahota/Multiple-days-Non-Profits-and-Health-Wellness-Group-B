@@ -5,6 +5,7 @@ import Modal from "react-bootstrap/Modal";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './network.css';
 import fourcss from './fourcss.css';
+import axios from 'axios';
 
 
 function SearchBar() {
@@ -122,9 +123,29 @@ function SearchBar() {
           </div>
           
           <Button variant="primary" type="submit"
-          onClick={(event) => {
-            console.log(JSON.stringify(posts))
-          }}
+          onClick={(e) => {
+            axios.post(
+                "http://127.0.0.1:8000/api/networkInsert/",
+                {
+                    product: posts.product,
+                    Type: posts.Type,
+                    Quantity: posts.Quantity,
+                    Units: posts.Units,
+                    Description: posts.Description 
+                },
+                {
+                    headers: {
+                        "Content-type": "application/json",
+                    }
+                }
+            )
+                .then(response => {
+                    if (response.status == 201) {
+                        window.alert("Your form has been submitted succesfully")
+                    }
+                })
+                .catch(err => console.warn(err));
+        }}
           >
             Submit
           </Button>
