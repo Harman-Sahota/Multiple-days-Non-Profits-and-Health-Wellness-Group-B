@@ -34,3 +34,13 @@ class comments(models.Model):
 
     class Meta:
         db_table = "comments"
+
+class posts(models.Model):
+    product = models.CharField(max_length=255)
+    Type = models.CharField(max_length=255)
+    Quantity = models.IntegerField()
+    Units = models.CharField(max_length=3)
+    Description = models.CharField(max_length=255)
+
+    class Meta:
+        db_table = "posts"

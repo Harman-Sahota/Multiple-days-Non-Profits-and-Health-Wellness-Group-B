@@ -6,6 +6,7 @@ from api.serialize import adminInsertSerialize
 from api.serialize import commentsSerialize
 from api.serialize import adminPullSerialize
 from api.serialize import adminUpdateSerialize
+from api.serialize import networkInsertSerialize
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -109,3 +110,13 @@ class Login(APIView):
             return Response({"success":"success logged in","data":data},status=status.HTTP_200_OK)
         else:
             return Response({"error":"invalid login credentials"},status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(["POST"])
+def networkInsert(request):
+    if request.method == "POST":
+        saveserialize = networkInsertSerialize(data = request.data)
+        if saveserialize.is_valid():
+            saveserialize.save()
+            return Response(saveserialize.data,status=status.HTTP_201_CREATED)       
+        return Response(saveserialize.data,status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        

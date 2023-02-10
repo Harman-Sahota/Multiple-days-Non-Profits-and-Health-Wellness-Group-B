@@ -9,5 +9,7 @@ urlpatterns = [
     path("adminPullDecline/",views.adminPullDecline),
     path("adminUpdate/<pk>",views.adminUpdate),
     path("commentInsert/",views.commentInsert),
-    path("login/",views.Login.as_view(),name='login')
+    path("login/",views.Login.as_view(),name='login'),
+    path("networkInsert/",views.networkInsert)
+
 ]

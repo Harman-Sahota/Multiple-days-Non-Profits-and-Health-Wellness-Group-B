@@ -2,6 +2,8 @@ from rest_framework import serializers
 from api.models import users
 from api.models import permissions
 from api.models import comments
+from api.models import posts
+
 
 class userSerialize(serializers.ModelSerializer):
     class Meta:
@@ -27,3 +29,8 @@ class commentsSerialize(serializers.ModelSerializer):
     class Meta:
         model = comments
         fields = ['Comments']
+
+class networkInsertSerialize(serializers.ModelSerializer):
+    class Meta:
+        model = posts
+        fields = '__all__'
