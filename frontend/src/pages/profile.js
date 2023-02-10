@@ -3,17 +3,20 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import profileCSS from './profile.module.css';
 import blank_profile from '../images/blank-profile-picture.png';
 import Button from 'react-bootstrap/Button';
+import axios from 'axios';
 import fourcss from './fourcss.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 
 function Profile() {
     const [all, setAll] = useState({
-        FirstName: '',
-        LastName: '',
-        Email: '',
-        Consent: '',
-        Organization: ''
+        FirstName: localStorage.getItem('firstname'),
+        LastName: localStorage.getItem('lastname'),
+        Email: localStorage.getItem('email'),
+        Roles: localStorage.getItem('roles'),
+        Consent: localStorage.getItem('consent'),
+        Organization: localStorage.getItem('organization')
+        
     });
 
     window.onload = function () {
@@ -26,13 +29,13 @@ function Profile() {
         if (localStorage.getItem('roles').includes('user non-profit volunteer')) {
             document.getElementById('volunteer').checked = true;
         }
-        if (localStorage.getItem('roles').includes('sponsor')) {
+        if (localStorage.getItem('roles').includes('Sponsors')) {
             document.getElementById('sponsor').checked = true;
         }
         if (localStorage.getItem('roles').includes('admin')) {
             document.getElementById('admin').checked = true;
         }
-        if (localStorage.getItem('roles').includes('expert')) {
+        if (localStorage.getItem('roles').includes('experts')) {
             document.getElementById('expert').checked = true;
         }
         if (localStorage.getItem('consent') == 'consented') {
@@ -226,8 +229,31 @@ function Profile() {
 
                             <Button className={`${profileCSS.edit_btn} btn btn-outline-success`} variant="outline-sucess" onClick={(e) => {
                                 localStorage.setItem('roles', role_str);
-                            
+                                setAll({ ...all, Roles: localStorage.getItem('roles')})                            
                                 console.log(JSON.stringify(all));
+
+                                axios.post(
+                                    "http://127.0.0.1:8000/api/profileUpdate/",
+                                    {
+                                        FirstName: all.FirstName,
+                                        LastName: all.LastName,
+                                        Email: all.Email,
+                                        Roles: all.Roles,
+                                        Consent: all.Consent,
+                                        Organization: all.Organization
+                                    },
+                                    {
+                                        headers: {
+                                            "Content-type": "application/json",
+                                        }
+                                    }
+                                )
+                                    .then(response => {
+                                        if (response.status == 201) {
+                                            console.log('yes');
+                                        }
+                                    })
+                                    .catch(err => console.warn(err));
                             }}>
                                 Save
                             </Button>

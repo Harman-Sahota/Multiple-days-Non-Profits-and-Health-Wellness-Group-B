@@ -3,8 +3,9 @@ from api.models import users
 from api.models import permissions
 from api.models import comments
 from api.models import posts
+from api.models import tracker
 
-
+# Insert - POST
 class userSerialize(serializers.ModelSerializer):
     class Meta:
         model = users
@@ -25,6 +26,7 @@ class adminUpdateSerialize(serializers.ModelSerializer):
         model = users
         fields = ['Approve']
               
+# Insert - POST
 class commentsSerialize(serializers.ModelSerializer):
     class Meta:
         model = comments
@@ -40,7 +42,23 @@ class networkPullSerialize(serializers.ModelSerializer):
         model = posts
         fields = '__all__'
 
+# Update - PUT
 class profileSerialize(serializers.ModelSerializer):
     class Meta:
         model = users
-        fields = ['FirstName', 'LastName', 'Email', 'Organization', 'Consent']
+        fields = ['FirstName', 'LastName', 'Email', 'Roles', 'Organization', 'Consent']
+
+class trackerInsertSerialize(serializers.ModelSerializer):
+    class Meta:
+        model = tracker
+        fields = '__all__'
+
+class trackerPullSerialize(serializers.ModelSerializer):
+    class Meta:
+        model = tracker
+        fields = '__all__'
+
+class trackerUpdateSerialize(serializers.ModelSerializer):
+    class Meta:
+        model = users
+        fields = '__all__'

@@ -9,6 +9,16 @@ import axios from 'axios';
 
 
 function SearchBar() {
+  const [getData, setData] = useState([]);
+  const fetchData = async () => {
+    const response = await fetch("http://localhost:8000/api/networkPull/");
+    const data = await response.json();
+    return setData(data);
+}
+
+useEffect(() => {
+    fetchData();
+}, [])
   const [posts, setPosts] = useState({
     product: '',
     Type: '',
@@ -54,7 +64,22 @@ function SearchBar() {
           <Button className="tablinks btn btn-light">💬 Receiving</Button><br />
         </div>
         <div id="disc">
-         
+        {getData && getData.length > 0 && getData.map((userObj, index) => (
+<div class='card'>
+<h5 class='card-header'> 
+   <span>{userObj.product}</span>
+   <span>{userObj.Quantity}{userObj.Units}</span>
+  
+</h5>
+    <div class='card-body'> 
+    <h6 class='card-text'>
+      {userObj.Description}
+       </h6> 
+       <p class='text-success'> {userObj.Type} </p>
+       <a href='"+ url_mask + "' id='postbutton' class='btn btn-outline-success'>Comment</a></div></div>
+
+))}
+        
         </div>
       </div>
       <Modal show={showModal} onHide={handleClose}>

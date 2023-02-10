@@ -75,3 +75,8 @@
       .form-select {
       width: auto;
       }
+
+      .card-header span {
+        display: inline-block;
+        margin-right: 10px;
+     }
