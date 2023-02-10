@@ -2,20 +2,29 @@
 from api.models import users
 from api.models import posts
 from api.models import permissions
+from api.models import tracker
+
 from api.serialize import userSerialize
-from api.serialize import adminInsertSerialize
+
 from api.serialize import commentsSerialize
+
+from api.serialize import adminInsertSerialize
 from api.serialize import adminPullSerialize
 from api.serialize import adminUpdateSerialize
 from api.serialize import networkInsertSerialize
 from api.serialize import networkPullSerialize
 from api.serialize import profileSerialize
+from api.serialize import trackerInsertSerialize
+from api.serialize import trackerPullSerialize
+from api.serialize import trackerUpdateSerialize
+
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
+
 from django.contrib.auth import login,authenticate
 
 @api_view(["POST"])
@@ -143,3 +152,45 @@ def profileUpdate(request,pk):
             users.objects.filter(id=pk).update(Consent=saveserialize.data["Consent"]) 
             return Response(saveserialize.data,status=status.HTTP_201_CREATED)    
         return Response(saveserialize.data,status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+
+@api_view(['POST'])
+def trackerInsert(request):
+    if request.method == 'POST':
+        saveserialize = trackerInsertSerialize(data=request.data)
+        if saveserialize.is_valid():
+            saveserialize.save()
+            return Response(saveserialize.data, status=status.HTTP_201_CREATED)
+        
+        return Response(saveserialize.data, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+@api_view(['GET'])
+def trackerPull(request):
+    if request.method == 'GET':
+        results = tracker.objects.all()
+        serialize = trackerPullSerialize(results, many=True)
+        return Response(serialize.data)
+    
+@api_view(['PUT'])
+def trackerUpdate(request, pk):
+    if request.method == 'PUT':
+        saveserialize = trackerUpdateSerialize(data=request.data, allow_null = True)
+        if saveserialize.is_valid():
+            # .objects.filter(id=pk).update(Category=saveserialize.data['Category'])
+            # .objects.filter(id=pk).update(Description=saveserialize.data['Description'])
+            # .objects.filter(id=pk).update(Quantity=saveserialize.data['Quantity'])
+            # .objects.filter(id=pk).update(Qunits=saveserialize.data['Qunits'])
+            # .objects.filter(id=pk).update(amountToClients=saveserialize.data['amountToClients'])
+            # .objects.filter(id=pk).update(amountToAFeed=saveserialize.data['amountToAFeed'])
+            # .objects.filter(id=pk).update(amountToCompost=saveserialize.data['amountToCompost'])
+            # .objects.filter(id=pk).update(amountToPartNet=saveserialize.data['amountToPartNet'])
+            # .objects.filter(id=pk).update(amountToLandfill=saveserialize.data['amountToLandfill'])
+            # .objects.filter(id=pk).update(percentClients=saveserialize.data['percentClients'])
+            # .objects.filter(id=pk).update(percentAFeed=saveserialize.data['percentAFeed'])
+            # .objects.filter(id=pk).update(percentCompost=saveserialize.data['percentCompost'])
+            # .objects.filter(id=pk).update(percentPartNet=saveserialize.data['percentPartNet'])
+            # .objects.filter(id=pk).update(percentLandfill=saveserialize.data['percentLandfill'])
+            return Response(saveserialize.data, status=status.HTTP_201_CREATED)
+        
+        return Response(saveserialize.data, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

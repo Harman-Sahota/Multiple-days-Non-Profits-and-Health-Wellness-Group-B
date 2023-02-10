@@ -12,6 +12,9 @@ urlpatterns = [
     path("login/",views.Login.as_view(),name='login'),
     path("networkInsert/",views.networkInsert),
     path("networkPull/",views.networkPull),
-    path("profileUpdate/<pk>",views.profileUpdate)
+    path("profileUpdate/<pk>",views.profileUpdate),
+    path('trackerInsert/',views.trackerInsert),
+    path('trackerPull/',views.trackerPull),
+    path('trackerUpdate/',views.trackerUpdate)
 
 ]

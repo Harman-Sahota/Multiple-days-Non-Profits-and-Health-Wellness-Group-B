@@ -44,3 +44,22 @@ class posts(models.Model):
 
     class Meta:
         db_table = "posts"
+
+class tracker(models.Model):
+    Category = models.CharField(max_length=255)
+    Description = models.CharField(max_length=255)
+    Quantity = models.IntegerField(max_length=55)
+    Qunits = models.CharField(max_length=255)
+    amountToClients = models.IntegerField(max_length=55)
+    amountToAFeed = models.IntegerField(max_length=55)
+    amountToCompost = models.IntegerField(max_length=55)
+    amountToPartNet = models.IntegerField(max_length=55)
+    amountToLandfill = models.IntegerField(max_length=55)
+    percentClients = models.IntegerField(max_length=55)
+    percentAFeed = models.IntegerField(max_length=55)
+    percentCompost = models.IntegerField(max_length=55)
+    percentPartNet = models.IntegerField(max_length=55)
+    percentLandfill = models.IntegerField(max_length=55)
+
+    class Meta:
+        db_table = "tracker"
