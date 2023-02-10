@@ -6,10 +6,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './network.css';
 import fourcss from './fourcss.css';
 
-function SearchBar() {
-  const [posts, setPosts] = useState([]);
-  const [showModal, setShowModal] = useState(false);
 
+function SearchBar() {
+  const [posts, setPosts] = useState({
+    product: '',
+    Type: '',
+    Quantity: '',
+    Units: '',
+    Description: ''
+});
+  const [showModal, setShowModal] = useState(false);
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
    {if(localStorage.getItem('firstname')!= null){
@@ -64,24 +70,52 @@ function SearchBar() {
           <form>
             <div className="form-group">
             <label htmlFor="product">Product</label>
-            <input type="text" className="form-control" id="product" placeholder="Enter product name" />
+            <input type="text" className="form-control" id="product" placeholder="Enter product name" 
+            onChange={(event) => {
+                                
+              setPosts({ ...posts, product: event.target.value })
+            }}
+            
+            />
           </div>
           <div className="form-group">
             <label htmlFor="quantity">Quantity</label>
-            <input type="number" className="form-control" id="quantity" placeholder="Enter quantity" />
+            <input type="number" className="form-control" id="quantity" placeholder="Enter quantity"
+            onChange={(event) => {
+                                
+              setPosts({ ...posts, Quanity: event.target.value })
+            }}
+            
+            />
           </div>
           <div className="form-group">
             <label htmlFor="desc">Description</label>
-            <textarea className="form-control" id="desc" rows="3"></textarea>
+            <textarea className="form-control" id="desc" rows="3"
+            onChange={(event) => {
+                                
+              setPosts({ ...posts, Description: event.target.value })
+            }}
+            
+            />
           </div>
           <div className="form-group">
             <label htmlFor="type">Type</label>
-            <select className="form-control" id="type">
+            <select className="form-control" id="type"
+            onChange={(event) => {
+                                
+              setPosts({ ...posts, Type: event.target.value })
+            }}
+            
+            >
               <option>Sharing</option>
               <option>Receiving</option>
             </select>
           </div>
-          <Button variant="primary" type="submit">
+          <Button variant="primary" type="submit"
+          onClick={(event) => {
+            console.log(JSON.stringify(posts))
+          }}
+          >
             Submit
           </Button>
         </form>
