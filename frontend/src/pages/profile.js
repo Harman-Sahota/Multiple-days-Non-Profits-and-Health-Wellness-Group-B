@@ -26,13 +26,13 @@ function Profile() {
         if (localStorage.getItem('roles').includes('user non-profit volunteer')) {
             document.getElementById('volunteer').checked = true;
         }
-        if (localStorage.getItem('roles').includes('sponsor')) {
+        if (localStorage.getItem('roles').includes('Sponsors')) {
             document.getElementById('sponsor').checked = true;
         }
         if (localStorage.getItem('roles').includes('admin')) {
             document.getElementById('admin').checked = true;
         }
-        if (localStorage.getItem('roles').includes('expert')) {
+        if (localStorage.getItem('roles').includes('experts')) {
             document.getElementById('expert').checked = true;
         }
         if (localStorage.getItem('consent') == 'consented') {
