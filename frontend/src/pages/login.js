@@ -5,26 +5,9 @@ import axios from 'axios';
 import React, { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 function Login() {
-
-  const [loginData, setLoginData] = useState({
-    Email: "",
-    Password: ""
-  });
-
-  
-  const win = window.sessionStorage;
-
-  useEffect (() => {
-
-    win.setItem("name",loginData.Email);
-    win.setItem("email",loginData.Password);
-
-  },[loginData])
-
-
-
+  const [loginData, setLoginData] = useState([]);
   return (
-    //login form
+  
     <div className={loginCSS.body}>
       <div className={`form-container ${loginCSS.form_container}`}>
         <div className={`mx-auto bg-white ${loginCSS.form}`} id="login"   >

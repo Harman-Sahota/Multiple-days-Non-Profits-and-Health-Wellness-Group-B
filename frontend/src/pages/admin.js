@@ -950,7 +950,7 @@ function Admin() {
                                
                                 <td>{userObj.FirstName}  {userObj.LastName} </td>
                                 <td>{userObj.Email}</td>
-                                <td>{userObj.Roles}</td>
+                                <td id='roles'>{userObj.Roles}</td>
                                 <td>
                                     <div className="form-check ">
                                         <div className="col-md-auto">
