@@ -98,20 +98,7 @@ function Profile() {
                                     </div>
 
                                     <div className='col-6'>
-                                        <input type="email" id="email" name="email" placeholder={localStorage.getItem('email')} size="50" disabled
-                                            onChange={(e) => {
-                                                localStorage.removeItem('email');
-                                                localStorage.setItem('email', e.target.value);
-                                                setAll({ ...all, Email: localStorage.getItem('email')})
-                                            }} />
-                                    </div>
-
-                                    <div className='col-3'>
-                                        <Button className={`${profileCSS.edit_btn} btn btn-outline-danger`} variant="outline-danger" onClick={(e) => {
-                                            document.getElementById('email').disabled = false;
-                                        }}>
-                                            Edit <FontAwesomeIcon icon={faPenToSquare} style={{ color: "#DC143C	" }} />
-                                        </Button>
+                                        <input type="email" id="email" name="email" placeholder={localStorage.getItem('email')} size="50" disabled/>
                                     </div>
                                 </div>
 
