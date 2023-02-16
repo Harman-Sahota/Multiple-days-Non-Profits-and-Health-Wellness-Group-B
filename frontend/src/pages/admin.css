@@ -38,3 +38,11 @@ table {
 .form-check select {
     margin-left: -5%;
 }
+
+#roles{
+
+    display: block;
+  width: 60ch;
+  word-wrap: break-word;
+  white-space: initial;
+}

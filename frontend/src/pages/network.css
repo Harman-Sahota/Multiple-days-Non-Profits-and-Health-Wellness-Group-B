@@ -80,3 +80,18 @@
         display: inline-block;
         margin-right: 10px;
      }
+
+     
+.text-success{
+  text-overflow: ellipsis;
+  max-width: 13ch;
+}
+
+.card{
+  margin-top: 2%;
+}
+
+
+
+
+
