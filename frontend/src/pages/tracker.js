@@ -42,7 +42,7 @@ function Tracker() {
       return (
         <div className="container p-2">
           <p>
-            <strong>Welcome back, {localStorage.getItem("firstname")}</strong>
+            <strong>Welcome, {localStorage.getItem("firstname")}!</strong>
           </p>
           <div className="card">
             <div className="card-header">
