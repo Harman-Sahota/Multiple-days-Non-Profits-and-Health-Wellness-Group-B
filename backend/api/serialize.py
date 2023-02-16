@@ -46,7 +46,7 @@ class networkPullSerialize(serializers.ModelSerializer):
 class profileSerialize(serializers.ModelSerializer):
     class Meta:
         model = users
-        fields = ['FirstName', 'LastName', 'Email', 'Roles', 'Organization', 'Consent']
+        fields = ['FirstName', 'LastName', 'Roles', 'Organization', 'Consent']
 
 class trackerInsertSerialize(serializers.ModelSerializer):
     class Meta:

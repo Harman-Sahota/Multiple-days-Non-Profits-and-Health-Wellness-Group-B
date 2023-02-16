@@ -147,7 +147,6 @@ def profileUpdate(request,pk):
         if saveserialize.is_valid():
             users.objects.filter(id=pk).update(FirstName=saveserialize.data["FirstName"]) 
             users.objects.filter(id=pk).update(LastName=saveserialize.data["LastName"]) 
-            users.objects.filter(id=pk).update(Email=saveserialize.data["Email"]) 
             users.objects.filter(id=pk).update(Roles=saveserialize.data["Roles"]) 
             users.objects.filter(id=pk).update(Organization=saveserialize.data["Organization"]) 
             users.objects.filter(id=pk).update(Consent=saveserialize.data["Consent"]) 

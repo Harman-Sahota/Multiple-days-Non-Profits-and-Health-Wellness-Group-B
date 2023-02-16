@@ -12,11 +12,9 @@ function Profile() {
     const [all, setAll] = useState({
         FirstName: localStorage.getItem('firstname'),
         LastName: localStorage.getItem('lastname'),
-        Email: localStorage.getItem('email'),
         Roles: localStorage.getItem('roles'),
         Consent: localStorage.getItem('consent'),
         Organization: localStorage.getItem('organization')
-        
     });
 
     window.onload = function () {
@@ -224,7 +222,6 @@ function Profile() {
                                     {
                                         FirstName: all.FirstName,
                                         LastName: all.LastName,
-                                        Email: all.Email,
                                         Roles: all.Roles,
                                         Consent: all.Consent,
                                         Organization: all.Organization
