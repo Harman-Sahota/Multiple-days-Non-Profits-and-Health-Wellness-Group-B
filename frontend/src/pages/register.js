@@ -108,8 +108,10 @@ function Form() {
                         localStorage.setItem( 'organization', formData.Organization);
                         localStorage.setItem( 'consent', formData.Consent);
                         localStorage.setItem( 'approve', "");
+                        localStorage.setItem('id',response.data['id']);
 
-                        window.location.replace("http://localhost:3000/tracker/");
+
+                       
                         }}
                        
                       )

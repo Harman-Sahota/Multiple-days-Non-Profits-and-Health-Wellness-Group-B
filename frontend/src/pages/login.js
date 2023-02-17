@@ -66,6 +66,7 @@ function Login() {
                         localStorage.setItem( 'organization', response.data['data']['organization']);
                         localStorage.setItem( 'consent', response.data['data']['consent']);
                         localStorage.setItem( 'approve', response.data['data']['approve']);
+                       
 
                         
                         window.location.replace("http://localhost:3000/tracker/");
