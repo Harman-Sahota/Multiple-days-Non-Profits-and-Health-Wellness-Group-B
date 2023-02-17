@@ -67,7 +67,12 @@ function Login() {
                         localStorage.setItem( 'consent', response.data['data']['consent']);
                         localStorage.setItem( 'approve', response.data['data']['approve']);
 
+                        if(response.data['data']['approve'] === 'approve' ){
                         window.location.replace("http://localhost:3000/tracker/");
+                        }
+                        else{
+                          window.alert('your account was declined by the admin, please contact the admin for more info')
+                        }
                     }
                 })
                 .catch(err => 
