@@ -26,6 +26,8 @@
 ###### Sharing page
 
 - [ ] Make a graphing for the sharing page
+- Display a list of users in the current organization and what they have shared with the organization.
+-Display each user's role and the name of the organization they belong to.
 
 ###### Profile page
 
