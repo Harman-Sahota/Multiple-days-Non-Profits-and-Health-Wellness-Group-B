@@ -46,6 +46,9 @@ function Profile() {
         if (localStorage.getItem('consent') == 'consented') {
             document.getElementById('consented').checked = true;
         }
+        if (localStorage.getItem('consent') == 'unconsented') {
+            document.getElementById('unconsented').checked = true;
+        }
     }
 
     var role_str = [];
@@ -242,6 +245,8 @@ function Profile() {
                                         .then(response => {
                                             if (response.status == 201) {
                                                 console.log('yes');
+                                                window.location.replace("http://localhost:3000/profile/");
+
                                             }
                                         })
                                         .catch(err => console.warn(err));

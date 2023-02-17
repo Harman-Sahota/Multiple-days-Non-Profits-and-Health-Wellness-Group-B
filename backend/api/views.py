@@ -145,6 +145,12 @@ def networkPull(request):
         serialize = networkPullSerialize(results,many=True)
         return Response(serialize.data)
 
+@api_view(["GET"])
+def profilePull(request):
+    if request.method == 'GET':
+        results = users.objects.filter(id=request.data('id'))
+        serialize = adminPullSerialize(results,many=True)
+        return Response(serialize.data)
 
 @api_view(["PUT"])
 def profileUpdate(request,pk):
