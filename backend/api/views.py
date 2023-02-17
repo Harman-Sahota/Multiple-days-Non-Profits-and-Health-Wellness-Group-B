@@ -31,6 +31,10 @@ from django.contrib.auth import login,authenticate
 def registerInsert(request):
     if request.method == "POST":
         saveserialize = userSerialize(data = request.data)
+        email = request.data['Email'];
+        duplicated =  users.objects.filter(Email = email);
+        if duplicated != "":
+            return Response({"error":"the email already exists"},status=status.HTTP_409_CONFLICT);
         if saveserialize.is_valid():
             saveserialize.save()
             return Response(saveserialize.data,status=status.HTTP_201_CREATED)       

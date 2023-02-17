@@ -110,8 +110,18 @@ function Form() {
                         localStorage.setItem( 'approve', "");
 
                         window.location.replace("http://localhost:3000/tracker/");
-                        }})
-                    .catch(err => console.warn(err));
+                        }}
+                       
+                      )
+                      .catch(err => 
+
+                        {if(err.status="409" ){
+                          window.alert("Email already exists, please use a different email");
+                    
+                        }}
+                        
+                        )
+                      
 
                    
 
