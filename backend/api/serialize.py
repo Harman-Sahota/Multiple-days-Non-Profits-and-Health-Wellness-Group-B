@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from api.models import users
 from api.models import permissions
-from api.models import comments
+# from api.models import comments
 from api.models import posts
 from api.models import tracker
 
@@ -26,11 +26,11 @@ class adminUpdateSerialize(serializers.ModelSerializer):
         model = users
         fields = ['Approve']
               
-# Insert - POST
-class commentsSerialize(serializers.ModelSerializer):
-    class Meta:
-        model = comments
-        fields = ['Comments']
+# # Insert - POST
+# class commentsSerialize(serializers.ModelSerializer):
+#     class Meta:
+#         model = comments
+#         fields = ['Comments']
 
 class networkInsertSerialize(serializers.ModelSerializer):
     class Meta:
@@ -46,7 +46,7 @@ class networkPullSerialize(serializers.ModelSerializer):
 class profileSerialize(serializers.ModelSerializer):
     class Meta:
         model = users
-        fields = ['FirstName', 'LastName', 'Email', 'Roles', 'Organization', 'Consent']
+        fields = ['FirstName', 'LastName', 'Roles', 'Organization', 'Consent']
 
 class trackerInsertSerialize(serializers.ModelSerializer):
     class Meta:

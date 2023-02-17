@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import profileCSS from './profile.module.css';
 import blank_profile from '../images/blank-profile-picture.png';
 import Button from 'react-bootstrap/Button';
+import { Modal } from 'bootstrap';
 import axios from 'axios';
 import fourcss from './fourcss.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,11 +13,9 @@ function Profile() {
     const [all, setAll] = useState({
         FirstName: localStorage.getItem('firstname'),
         LastName: localStorage.getItem('lastname'),
-        Email: localStorage.getItem('email'),
         Roles: localStorage.getItem('roles'),
         Consent: localStorage.getItem('consent'),
         Organization: localStorage.getItem('organization')
-        
     });
 
     window.onload = function () {
@@ -67,7 +66,7 @@ function Profile() {
                                                     onChange={(e) => {
                                                         localStorage.removeItem('firstname');
                                                         localStorage.setItem('firstname', e.target.value);
-                                                        setAll({ ...all, FirstName: localStorage.getItem('firstname')})
+                                                        setAll({ ...all, FirstName: localStorage.getItem('firstname') })
                                                     }} />
                                             </div>
                                             <div className='col-auto'>
@@ -75,7 +74,7 @@ function Profile() {
                                                     onChange={(e) => {
                                                         localStorage.removeItem('lastname');
                                                         localStorage.setItem('lastname', e.target.value);
-                                                        setAll({ ...all, LastName: localStorage.getItem('lastname')})
+                                                        setAll({ ...all, LastName: localStorage.getItem('lastname') })
                                                     }} />
                                             </div>
                                         </div>
@@ -98,20 +97,7 @@ function Profile() {
                                     </div>
 
                                     <div className='col-6'>
-                                        <input type="email" id="email" name="email" placeholder={localStorage.getItem('email')} size="50" disabled
-                                            onChange={(e) => {
-                                                localStorage.removeItem('email');
-                                                localStorage.setItem('email', e.target.value);
-                                                setAll({ ...all, Email: localStorage.getItem('email')})
-                                            }} />
-                                    </div>
-
-                                    <div className='col-3'>
-                                        <Button className={`${profileCSS.edit_btn} btn btn-outline-danger`} variant="outline-danger" onClick={(e) => {
-                                            document.getElementById('email').disabled = false;
-                                        }}>
-                                            Edit <FontAwesomeIcon icon={faPenToSquare} style={{ color: "#DC143C	" }} />
-                                        </Button>
+                                        <input type="email" id="email" name="email" placeholder={localStorage.getItem('email')} size="50" disabled />
                                     </div>
                                 </div>
 
@@ -126,7 +112,7 @@ function Profile() {
                                         <input type="text" id="org" name="org" placeholder={localStorage.getItem('organization')} size="50" disabled onChange={(e) => {
                                             localStorage.removeItem('organization');
                                             localStorage.setItem('organization', e.target.value);
-                                            setAll({ ...all, Organization: localStorage.getItem('organization')})
+                                            setAll({ ...all, Organization: localStorage.getItem('organization') })
                                         }} />
                                     </div>
 
@@ -201,12 +187,12 @@ function Profile() {
                                     </div>
 
                                     <div className='col-6' onChange={(e) => {
-                                            localStorage.removeItem('consent');
-                                            if(e.target.checked){
-                                                localStorage.setItem('consent', e.target.value);
-                                            }
-                                            setAll({ ...all, Consent: localStorage.getItem('consent')})
-                                        }}>
+                                        localStorage.removeItem('consent');
+                                        if (e.target.checked) {
+                                            localStorage.setItem('consent', e.target.value);
+                                        }
+                                        setAll({ ...all, Consent: localStorage.getItem('consent') })
+                                    }}>
                                         <label for="consented">
                                             <input type="radio" id="consented" name="consent" value="consented" disabled />
                                             Yes, I consent to sharing my data.</label>
@@ -219,7 +205,6 @@ function Profile() {
                                         <Button className={`${profileCSS.edit_btn} btn btn-outline-danger`} variant="outline-danger" onClick={(e) => {
                                             document.getElementById('consented').disabled = false;
                                             document.getElementById('unconsented').disabled = false;
-
                                         }}>
                                             Edit <FontAwesomeIcon icon={faPenToSquare} style={{ color: "#DC143C	" }} />
                                         </Button>
@@ -227,36 +212,68 @@ function Profile() {
                                 </div>
                             </div>
 
-                            <Button className={`${profileCSS.edit_btn} btn btn-outline-success`} variant="outline-sucess" onClick={(e) => {
-                                localStorage.setItem('roles', role_str);
-                                setAll({ ...all, Roles: localStorage.getItem('roles')})                            
-                                console.log(JSON.stringify(all));
+                            <div className='row'>
+                                <Button className={`${profileCSS.save_btn} btn btn-outline-success`} variant="outline-sucess" onClick={(e) => {
+                                    localStorage.setItem('roles', role_str);
+                                    setAll({ ...all, Roles: localStorage.getItem('roles') })
+                                    console.log(JSON.stringify(all));
 
-                                axios.post(
-                                    "http://127.0.0.1:8000/api/profileUpdate/",
-                                    {
-                                        FirstName: all.FirstName,
-                                        LastName: all.LastName,
-                                        Email: all.Email,
-                                        Roles: all.Roles,
-                                        Consent: all.Consent,
-                                        Organization: all.Organization
-                                    },
-                                    {
-                                        headers: {
-                                            "Content-type": "application/json",
-                                        }
+                                    if (localStorage.getItem('consent') == "unconsented") {
+                                        document.getElementById("staticBackdrop").show();
                                     }
-                                )
-                                    .then(response => {
-                                        if (response.status == 201) {
-                                            console.log('yes');
+                                    else{
+
+                                    axios.post(
+                                        "http://127.0.0.1:8000/api/profileUpdate/",
+                                        {
+                                            FirstName: all.FirstName,
+                                            LastName: all.LastName,
+                                            Roles: all.Roles,
+                                            Consent: all.Consent,
+                                            Organization: all.Organization
+                                        },
+                                        {
+                                            headers: {
+                                                "Content-type": "application/json",
+                                            }
                                         }
-                                    })
-                                    .catch(err => console.warn(err));
-                            }}>
-                                Save
-                            </Button>
+                                    )
+                                        .then(response => {
+                                            if (response.status == 201) {
+                                                console.log('yes');
+                                            }
+                                        })
+                                        .catch(err => console.warn(err));
+                                    }
+                                }}>
+                                    Save
+                                </Button>
+
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                    Launch static backdrop modal
+                                </button>
+
+                                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="staticBackdropLabel">Consent Withdrawal Confirmation</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Are you sure you want to withdraw your consent?</p>
+
+                                                If this was a mistake, please change the consent option selected by clicking 'Go back'. <br/>
+                                                If this was not a mistake, please ensure you have taken the time to download your data before you confirm the withdrawl as your account will be deactivated <b>immediately</b> right after.
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Go back</button>
+                                                <button type="button" class={`${profileCSS.withdraw_btn} btn btn-primary`}>Confirm withdrawal</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>

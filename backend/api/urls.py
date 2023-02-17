@@ -8,7 +8,7 @@ urlpatterns = [
     path("adminPullApprove/",views.adminPullApprove),
     path("adminPullDecline/",views.adminPullDecline),
     path("adminUpdate/<pk>",views.adminUpdate),
-    path("commentInsert/",views.commentInsert),
+    # path("commentInsert/",views.commentInsert),
     path("login/",views.Login.as_view(),name='login'),
     path("networkInsert/",views.networkInsert),
     path("networkPull/",views.networkPull),

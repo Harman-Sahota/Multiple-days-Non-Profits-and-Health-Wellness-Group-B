@@ -42,7 +42,7 @@ function Tracker() {
       return (
         <div className="container p-2">
           <p>
-            <strong>Welcome back, {localStorage.getItem("firstname")}</strong>
+            <strong>Welcome, {localStorage.getItem("firstname")}!</strong>
           </p>
           <div className="card">
             <div className="card-header">
@@ -74,10 +74,11 @@ function Tracker() {
                           }}
                         >
                           <option>Fresh Produce</option>
-                          <option>Metric #2</option>
-                          <option>Metric #3</option>
-                          <option>Metric #4</option>
-                          <option>Metric #5</option>
+                          <option>Meat</option>
+                          <option>Canned Food</option>
+                          <option>Bread</option>
+                          <option>Dairy</option>
+                          <option>Reclaimed</option>
                         </select>
                       </div>
                       <div className="col-md-auto">
@@ -145,7 +146,6 @@ function Tracker() {
                               className={`form-control ${trackerCSS["customised-input"]}`}
                               id="clients"
                               name="clients"
-                              value={0}
                               min={0}
                               // style={{ width: "10em" }}
                               onKeyUp={() => {}}
@@ -166,7 +166,6 @@ function Tracker() {
                               className={`form-control ${trackerCSS["customised-input"]}`}
                               id="animalFeed"
                               name="animalFeed"
-                              value={0}
                               min={0}
                               onKeyUp={() => {}}
                               // onkeyup="calculateLandfill(); calculatePercent()"
@@ -186,7 +185,6 @@ function Tracker() {
                               className={`form-control ${trackerCSS["customised-input"]}`}
                               id="compost"
                               name="compost"
-                              value={0}
                               min={0}
                               onKeyUp={() => {}}
                               // onkeyup="calculateLandfill(); calculatePercent()"
@@ -206,7 +204,6 @@ function Tracker() {
                               className={`form-control ${trackerCSS["customised-input"]}`}
                               id="partnet"
                               name="partnet"
-                              value={0}
                               min={0}
                               onKeyUp={() => {}}
                               // onKeyUp={() => {calculateLandfill(); calculatePercent()}}
@@ -227,7 +224,6 @@ function Tracker() {
                               className={`form-control ${trackerCSS["customised-input"]}`}
                               id="landfill"
                               name="landfill"
-                              value={0}
                               min={0}
                               onChange={(event) => {
                                 setTrackers({
@@ -253,7 +249,6 @@ function Tracker() {
                               className={`form-control ${trackerCSS["customised-smaller-input"]}`}
                               id="percentclients"
                               name="percentclients"
-                              value={0}
                               min={0}
                               max={100}
                               onLoad={() => {}}
@@ -279,7 +274,6 @@ function Tracker() {
                               className={`form-control ${trackerCSS["customised-smaller-input"]}`}
                               id="percentanimalfeed"
                               name="percentanimalfeed"
-                              value={0}
                               min={0}
                               max={100}
                               onLoad={() => {}}
@@ -305,7 +299,6 @@ function Tracker() {
                               className={`form-control ${trackerCSS["customised-smaller-input"]}`}
                               id="percentcompost/fert"
                               name="percentcompost/fert"
-                              value={0}
                               min={0}
                               max={100}
                               onLoad={() => {}}
@@ -331,7 +324,6 @@ function Tracker() {
                               className={`form-control ${trackerCSS["customised-smaller-input"]}`}
                               id="percentpartnet"
                               name="percentpartnet"
-                              value={0}
                               min={0}
                               max={100}
                               onLoad={() => {}}
@@ -431,7 +423,7 @@ function Tracker() {
 
           <section id="section">
             <div className="card">
-              <div className="card-header">
+              <div className={`${trackerCSS["card-header"]} card-header`}>
                 <h3>Database</h3>
                 <Button
                   type="button"
@@ -453,8 +445,8 @@ function Tracker() {
                 >
                   <thead>
                     <tr>
-                      <th>Description</th>
                       <th>Category</th>
+                      <th>Description</th>
                       <th>Quantity</th>
                       <th>Units</th>
                       <th>Clients</th>
