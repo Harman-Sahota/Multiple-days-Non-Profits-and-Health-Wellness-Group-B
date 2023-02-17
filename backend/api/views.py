@@ -145,10 +145,11 @@ def networkPull(request):
         serialize = networkPullSerialize(results,many=True)
         return Response(serialize.data)
 
-@api_view(["GET"])
+@api_view(["POST"])
 def profilePull(request):
-    if request.method == 'GET':
-        results = users.objects.filter(id=request.data('id'))
+    if request.method == 'POST':
+        id = request.data.get("id")
+        results = users.objects.filter(id=id)
         serialize = adminPullSerialize(results,many=True)
         return Response(serialize.data)
 

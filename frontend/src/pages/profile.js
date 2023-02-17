@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import profileCSS from './profile.module.css';
-import blank_profile from '../images/blank-profile-picture.png';
 import Button from 'react-bootstrap/Button';
 import Modal from "react-bootstrap/Modal";
 import axios from 'axios';
@@ -227,6 +226,27 @@ function Profile() {
                                     setAll({ ...all, Roles: localStorage.getItem('roles') })
                                     console.log(JSON.stringify(all));
 
+                                    axios.post(
+                                        `http://127.0.0.1:8000/api/profilePull/`,
+                                        {
+                                            Id: userId
+                                        },
+                                        {
+                                            headers: {
+                                                "Content-type": "application/json",
+                                            }
+                                        }
+                                    )
+                                        .then(response => {
+                                            if (response.status == 201) {
+                                                localStorage.removeItem('roles');
+                                                localStorage.setItem('roles', response.data['roles']);
+
+                                            }
+                                        })
+                                        .catch(err => console.warn(err));
+
+
                                     axios.put(
                                         `http://127.0.0.1:8000/api/profileUpdate/${userId}`,
                                         {
@@ -261,7 +281,7 @@ function Profile() {
                                     <Modal.Body>
                                         <p>Are you sure you want to withdraw your consent?</p>
 
-                                        If this was a mistake, please change the consent option back to 'Yes, I consent to sharing my data'. <br /><br/>
+                                        If this was a mistake, please change the consent option back to 'Yes, I consent to sharing my data'. <br /><br />
                                         If this was not a mistake, please ensure you have taken the time to download your data before you confirm the withdrawal as your account will be deactivated <b>immediately</b> after you click 'Save'.
                                     </Modal.Body>
                                 </Modal>
