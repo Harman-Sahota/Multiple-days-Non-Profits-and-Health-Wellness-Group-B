@@ -23,6 +23,7 @@
 .card-header {
   display: flex;
   align-items: center;
+  height: 5rem;
 }
 
 .card-header h3 {
@@ -30,7 +31,7 @@
 }
 
 .card-header button {
-  margin-left: auto;
+  margin: auto 0 auto auto;
 }
 
 thead,
