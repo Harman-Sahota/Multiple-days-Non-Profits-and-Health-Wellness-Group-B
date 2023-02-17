@@ -27,7 +27,9 @@
 
 - [ ] Make a graphing for the sharing page
 - Display a list of users in the current organization and what they have shared with the organization.
--Display each user's role and the name of the organization they belong to.
+- Display each user's role and the name of the organization they belong to.
+- Only display the users that have shared something with the current organization
+- Volunteers are not allowed to share content as they do not have approval to do so.
 
 ###### Profile page
 
