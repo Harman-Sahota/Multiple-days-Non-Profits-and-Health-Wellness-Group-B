@@ -67,6 +67,7 @@ function Login() {
                         localStorage.setItem( 'consent', response.data['data']['consent']);
                         localStorage.setItem( 'approve', response.data['data']['approve']);
 
+                        
                         window.location.replace("http://localhost:3000/tracker/");
                     }
                 })
@@ -108,7 +109,7 @@ function Login() {
 
           <div className={loginCSS.new_account}>
             <span className={`text-muted ${loginCSS.new_account_text}`}>Don't have an account?</span>
-            <a href="#" className={`text-success ${loginCSS.new_account_text}`}>Create Now &rarr;</a>
+            <a href="/register" className={`text-success ${loginCSS.new_account_text}`}>Create Now &rarr;</a>
           </div>
         </div>
       </div>

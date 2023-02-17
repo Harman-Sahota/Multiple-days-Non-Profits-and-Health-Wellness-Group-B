@@ -23,17 +23,17 @@ class permissions(models.Model):
     class Meta:
         db_table = "permissions"
 
-class comments(models.Model):
-    product = models.CharField(max_length=255)
-    Type = models.CharField(max_length=255)
-    Quantity = models.IntegerField()
-    Units = models.CharField(max_length=3)
-    Description = models.CharField(max_length=255)
-    Comments = models.CharField(max_length=255)
-    username = models.CharField(max_length=255)
+# class comments(models.Model):
+#     product = models.CharField(max_length=255)
+#     Type = models.CharField(max_length=255)
+#     Quantity = models.IntegerField()
+#     Units = models.CharField(max_length=3)
+#     Description = models.CharField(max_length=255)
+#     Comments = models.CharField(max_length=255)
+#     username = models.CharField(max_length=255)
 
-    class Meta:
-        db_table = "comments"
+#     class Meta:
+#         db_table = "comments"
 
 class posts(models.Model):
     product = models.CharField(max_length=255,primary_key = True)
@@ -48,18 +48,18 @@ class posts(models.Model):
 class tracker(models.Model):
     Category = models.CharField(max_length=255)
     Description = models.CharField(max_length=255)
-    Quantity = models.IntegerField(max_length=55)
+    Quantity = models.IntegerField()
     Qunits = models.CharField(max_length=255)
-    amountToClients = models.IntegerField(max_length=55)
-    amountToAFeed = models.IntegerField(max_length=55)
-    amountToCompost = models.IntegerField(max_length=55)
-    amountToPartNet = models.IntegerField(max_length=55)
-    amountToLandfill = models.IntegerField(max_length=55)
-    percentClients = models.IntegerField(max_length=55)
-    percentAFeed = models.IntegerField(max_length=55)
-    percentCompost = models.IntegerField(max_length=55)
-    percentPartNet = models.IntegerField(max_length=55)
-    percentLandfill = models.IntegerField(max_length=55)
+    amountToClients = models.IntegerField()
+    amountToAFeed = models.IntegerField()
+    amountToCompost = models.IntegerField()
+    amountToPartNet = models.IntegerField()
+    amountToLandfill = models.IntegerField()
+    percentClients = models.IntegerField()
+    percentAFeed = models.IntegerField()
+    percentCompost = models.IntegerField()
+    percentPartNet = models.IntegerField()
+    percentLandfill = models.IntegerField()
 
     class Meta:
         db_table = "tracker"

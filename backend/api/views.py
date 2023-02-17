@@ -1,4 +1,5 @@
 
+import json
 from api.models import users
 from api.models import posts
 from api.models import permissions
@@ -6,7 +7,7 @@ from api.models import tracker
 
 from api.serialize import userSerialize
 
-from api.serialize import commentsSerialize
+# from api.serialize import commentsSerialize
 
 from api.serialize import adminInsertSerialize
 from api.serialize import adminPullSerialize
@@ -31,6 +32,10 @@ from django.contrib.auth import login,authenticate
 def registerInsert(request):
     if request.method == "POST":
         saveserialize = userSerialize(data = request.data)
+        email = request.data['Email'];
+        duplicated =  users.objects.filter(Email = email).count(); 
+        if duplicated != 0:
+             return Response(status=status.HTTP_409_CONFLICT) 
         if saveserialize.is_valid():
             saveserialize.save()
             return Response(saveserialize.data,status=status.HTTP_201_CREATED)       
@@ -73,7 +78,7 @@ def adminPullDecline(request):
 @api_view(["PUT"])
 def adminUpdate(request,pk):
     if request.method == 'PUT':
-        saveserialize = adminUpdateSerialize(data=request.data)
+        saveserialize = adminUpdateSerialize(data=request.data,allow_null = True)
         if saveserialize.is_valid():
             users.objects.filter(id=pk).update(Approve=saveserialize.data["Approve"]) 
             return Response(saveserialize.data,status=status.HTTP_201_CREATED)    
@@ -82,14 +87,14 @@ def adminUpdate(request,pk):
 
 
         
-@api_view(["POST"])
-def commentInsert(request):
-    if request.method == 'POST':
-        saveserialize = commentsSerialize(data=request.data)
-        if saveserialize.is_valid():
-            saveserialize.save();
-            return Response(saveserialize.data,status=status.HTTP_201_CREATED)    
-        return Response(saveserialize.data,status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+# @api_view(["POST"])
+# def commentInsert(request):
+#     if request.method == 'POST':
+#         saveserialize = commentsSerialize(data=request.data)
+#         if saveserialize.is_valid():
+#             saveserialize.save();
+#             return Response(saveserialize.data,status=status.HTTP_201_CREATED)    
+#         return Response(saveserialize.data,status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
 
 class Login(APIView):
