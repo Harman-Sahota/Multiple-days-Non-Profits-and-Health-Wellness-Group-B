@@ -22,6 +22,8 @@ function Profile() {
     const handleClose = () => setShowModal(false);
     const handleShow = () => setShowModal(true);
 
+    const userId = localStorage.getItem('id');
+
     window.onload = function () {
         if (localStorage.getItem('roles').includes('user non-profit managers/CEO')) {
             document.getElementById('manager_ceo').checked = true;
@@ -201,12 +203,12 @@ function Profile() {
                                             <input type="radio" id="consented" name="consent" value="consented" disabled />
                                             Yes, I consent to sharing my data.</label>
                                         <label for="unconsented">
-                                            <input type="radio" id="unconsented" name="consent" value="unconsented" onClick={handleShow} disabled />
+                                            <input type="radio" id="unconsented" name="consent" value="unconsented" disabled />
                                             No, I want to stop sharing my data.</label>
                                     </div>
 
                                     <div className='col-3' >
-                                        <Button className={`${profileCSS.edit_btn} btn btn-outline-danger`} variant="outline-danger" onClick={(e) => {
+                                        <Button className={`${profileCSS.edit_btn} btn btn-outline-danger`} variant="outline-danger" onClick={() => {
                                             document.getElementById('consented').disabled = false;
                                             document.getElementById('unconsented').disabled = false;
                                         }}>
@@ -217,13 +219,18 @@ function Profile() {
                             </div>
 
                             <div className='row'>
-                                <Button className={`${profileCSS.save_btn} btn btn-outline-success`} variant="outline-sucess" onClick={() => {
+                                <Button className={`${profileCSS.save_btn} btn btn-outline-success`} id="saveBtn" variant="outline-sucess" onClick={() => {
                                     localStorage.setItem('roles', role_str);
                                     setAll({ ...all, Roles: localStorage.getItem('roles') })
                                     console.log(JSON.stringify(all));
 
-                                    axios.post(
-                                        "http://127.0.0.1:8000/api/profileUpdate/",
+                                    if (localStorage.getItem('consent') == "unconsented") {
+                                        document.getElementById("saveBtn").setAttribute("data-bs-toggle", "modal");
+                                        document.getElementById("saveBtn").setAttribute("data-bs-target", "#staticBackdrop")
+                                    }
+
+                                    axios.put(
+                                        `http://127.0.0.1:8000/api/profileUpdate/${userId}` ,
                                         {
                                             FirstName: all.FirstName,
                                             LastName: all.LastName,
