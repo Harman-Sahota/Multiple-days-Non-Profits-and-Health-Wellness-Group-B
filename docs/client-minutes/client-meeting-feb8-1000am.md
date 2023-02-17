@@ -42,3 +42,41 @@
 > Does anyone have a concern if the JSON token expires in 30 minutes?
 
 - Group C is not sure about how to implement that at all
+
+## Harman's Additions
+
+- send session tokens as part of login data
+- they dont expire for 30 mins
+- default 7-8 days
+- json tokens
+- test to see how long they last
+- gonna have to use some framework for this
+- the only change to make in the backend is make tokens and pass it on to the frontend
+- then use this token to set time etc etc
+- csrf token
+- auth token
+- no security in login yet
+- only checking for the correct credentials
+- need to integrate tokens and such into it which i have no idea yet how to do
+- not sending username password, sending hashed link
+- api session information
+- saving hashed password in the db
+- other before landfill
+- description
+- Something like this:
+- Image
+
+###### Editing Tracker functionality
+
+- sharing page graph
+- sharing; who to share with - goes in the form
+- discussion posts - posts display as per permissions set
+- display aggregate shared data / take same graphic on - tracker and page repeat with data from 3 people
+- graphics of different organizations
+- previously first before ..😆
+- remove id from admin tables
+- withdrawing permissions is not optional
+  add datetime field to tables
+
+- Profile > consent:
+  - If they decide to withdraw their consent, their account is deactivated immediately. Have a blurb (Maysey could explain what she meant by that) that tells the user to download their data before they withdraw
