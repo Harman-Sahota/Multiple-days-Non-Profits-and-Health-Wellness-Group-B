@@ -1,4 +1,5 @@
 
+import json
 from api.models import users
 from api.models import posts
 from api.models import permissions
@@ -32,9 +33,9 @@ def registerInsert(request):
     if request.method == "POST":
         saveserialize = userSerialize(data = request.data)
         email = request.data['Email'];
-        duplicated =  users.objects.filter(Email = email);
-        if duplicated != "":
-            return Response({"error":"the email already exists"},status=status.HTTP_409_CONFLICT);
+        duplicated =  users.objects.filter(Email = email).count(); 
+        if duplicated != 0:
+             return Response(status=status.HTTP_409_CONFLICT) 
         if saveserialize.is_valid():
             saveserialize.save()
             return Response(saveserialize.data,status=status.HTTP_201_CREATED)       
