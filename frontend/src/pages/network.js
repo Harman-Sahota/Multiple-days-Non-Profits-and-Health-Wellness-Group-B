@@ -76,7 +76,8 @@ useEffect(() => {
       {userObj.Description}
        </h6> 
        <p class='text-success'> {userObj.Type} </p>
-       <a href='"+ url_mask + "' id='postbutton' class='btn btn-outline-success'>Comment</a></div></div>
+       {/* <a href='"+ url_mask + "' id='postbutton' class='btn btn-outline-success'>Comment</a>*/}
+       </div></div>  
 
 ))}
         
