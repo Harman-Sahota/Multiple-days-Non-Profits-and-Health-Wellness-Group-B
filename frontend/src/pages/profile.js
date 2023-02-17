@@ -190,6 +190,16 @@ function Profile() {
                                             document.getElementById('sponsor').disabled = false;
                                             document.getElementById('admin').disabled = false;
                                             document.getElementById('expert').disabled = false;
+
+                                            document.getElementById('manager_ceo').checked = false;
+                                            document.getElementById('warehouse_boss').checked = false;
+                                            document.getElementById('volunteer').checked = false;
+                                            document.getElementById('sponsor').checked = false;
+                                            document.getElementById('admin').checked = false;
+                                            document.getElementById('expert').checked= false;
+                                            
+
+
                                         }}>
                                             Edit <FontAwesomeIcon icon={faPenToSquare} style={{ color: "#DC143C	" }} />
                                         </Button>
