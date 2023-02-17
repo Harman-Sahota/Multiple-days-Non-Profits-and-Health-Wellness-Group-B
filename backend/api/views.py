@@ -73,7 +73,7 @@ def adminPullDecline(request):
 @api_view(["PUT"])
 def adminUpdate(request,pk):
     if request.method == 'PUT':
-        saveserialize = adminUpdateSerialize(data=request.data)
+        saveserialize = adminUpdateSerialize(data=request.data,allow_null = True)
         if saveserialize.is_valid():
             users.objects.filter(id=pk).update(Approve=saveserialize.data["Approve"]) 
             return Response(saveserialize.data,status=status.HTTP_201_CREATED)    
