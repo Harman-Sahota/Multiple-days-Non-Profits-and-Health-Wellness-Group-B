@@ -16,16 +16,17 @@ function SearchBar() {
     return setData(data);
 }
 
+// -
 useEffect(() => {
-    fetchData();
+  fetchData();
 }, [])
-  const [posts, setPosts] = useState({
-    product: '',
-    Type: '',
-    Units: '',
-    Quantity: '',
-    Description: ''
-});
+const [posts, setPosts] = useState({
+  product: '',
+  Type: '',
+  Units: '',
+  Quantity: '',
+  Description: ''
+}); 
   const [showModal, setShowModal] = useState(false);
   posts.Quantity = parseInt(posts.Quantity)
   const handleClose = () => setShowModal(false);
@@ -130,7 +131,7 @@ useEffect(() => {
                                 
               setPosts({ ...posts, Description: event.target.value })
             }}
-            
+          
             />
           </div>
           <div className="form-group">
