@@ -40,9 +40,9 @@ table {
 }
 
 #roles{
-
+ margin-left: 16%;
     display: block;
-  width: 60ch;
+  width: 50ch;
   word-wrap: break-word;
   white-space: initial;
 }
