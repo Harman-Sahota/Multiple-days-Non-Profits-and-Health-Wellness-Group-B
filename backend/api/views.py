@@ -120,7 +120,8 @@ class Login(APIView):
                 "roles": results.Roles,
                 "organization": results.Organization,
                 "consent": results.Consent,
-                "approve": results.Approve
+                "approve": results.Approve,
+                "id":results.id
 
 
             }
@@ -144,6 +145,13 @@ def networkPull(request):
         serialize = networkPullSerialize(results,many=True)
         return Response(serialize.data)
 
+@api_view(["POST"])
+def profilePull(request):
+    if request.method == 'POST':
+        id = request.data.get("id")
+        results = users.objects.filter(id=id)
+        serialize = adminPullSerialize(results,many=True)
+        return Response(serialize.data)
 
 @api_view(["PUT"])
 def profileUpdate(request,pk):

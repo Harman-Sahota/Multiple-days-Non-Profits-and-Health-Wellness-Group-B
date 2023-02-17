@@ -13,6 +13,7 @@ urlpatterns = [
     path("networkInsert/",views.networkInsert),
     path("networkPull/",views.networkPull),
     path("profileUpdate/<pk>",views.profileUpdate),
+    path("profilePull/",views.profilePull),
     path('trackerInsert/',views.trackerInsert),
     path('trackerPull/',views.trackerPull),
     path('trackerUpdate/',views.trackerUpdate)
