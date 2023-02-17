@@ -203,7 +203,7 @@ function Profile() {
                                             <input type="radio" id="consented" name="consent" value="consented" disabled />
                                             Yes, I consent to sharing my data.</label>
                                         <label for="unconsented">
-                                            <input type="radio" id="unconsented" name="consent" value="unconsented" disabled />
+                                            <input type="radio" id="unconsented" name="consent" value="unconsented" onChange={handleShow} disabled />
                                             No, I want to stop sharing my data.</label>
                                     </div>
 
@@ -224,13 +224,8 @@ function Profile() {
                                     setAll({ ...all, Roles: localStorage.getItem('roles') })
                                     console.log(JSON.stringify(all));
 
-                                    if (localStorage.getItem('consent') == "unconsented") {
-                                        document.getElementById("saveBtn").setAttribute("data-bs-toggle", "modal");
-                                        document.getElementById("saveBtn").setAttribute("data-bs-target", "#staticBackdrop")
-                                    }
-
                                     axios.put(
-                                        `http://127.0.0.1:8000/api/profileUpdate/${userId}` ,
+                                        `http://127.0.0.1:8000/api/profileUpdate/${userId}`,
                                         {
                                             FirstName: all.FirstName,
                                             LastName: all.LastName,
@@ -254,37 +249,17 @@ function Profile() {
                                     Save
                                 </Button>
 
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                                    Launch static backdrop modal
-                                </button>
-
                                 <Modal show={showModal} onHide={handleClose}>
                                     <Modal.Header closeButton>
-                                        <Modal.Title>Create Post</Modal.Title>
+                                        <Modal.Title>Consent Withdrawal Confirmation</Modal.Title>
                                     </Modal.Header>
-                                    <Modal.Body></Modal.Body>
+                                    <Modal.Body>
+                                        <p>Are you sure you want to withdraw your consent?</p>
+
+                                        If this was a mistake, please change the consent option back to 'Yes, I consent to sharing my data'. <br /><br/>
+                                        If this was not a mistake, please ensure you have taken the time to download your data before you confirm the withdrawal as your account will be deactivated <b>immediately</b> after you click 'Save'.
+                                    </Modal.Body>
                                 </Modal>
-
-                                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="staticBackdropLabel">Consent Withdrawal Confirmation</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <p>Are you sure you want to withdraw your consent?</p>
-
-                                                If this was a mistake, please change the consent option selected by clicking 'Go back'. <br />
-                                                If this was not a mistake, please ensure you have taken the time to download your data before you confirm the withdrawl as your account will be deactivated <b>immediately</b> right after.
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Go back</button>
-                                                <button type="button" class={`${profileCSS.withdraw_btn} btn btn-primary`}>Confirm withdrawal</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </form>
                     </div>

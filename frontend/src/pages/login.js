@@ -66,10 +66,10 @@ function Login() {
                         localStorage.setItem( 'organization', response.data['data']['organization']);
                         localStorage.setItem( 'consent', response.data['data']['consent']);
                         localStorage.setItem( 'approve', response.data['data']['approve']);
-                        
+                        localStorage.setItem( 'id', response.data['data']['id']);
 
                         
-                        // window.location.replace("http://localhost:3000/tracker/");
+                        window.location.replace("http://localhost:3000/tracker/");
                     }
                 })
                 .catch(err => 
