@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import profileCSS from './profile.module.css';
 import blank_profile from '../images/blank-profile-picture.png';
 import Button from 'react-bootstrap/Button';
-import { Modal } from 'bootstrap';
+import Modal from "react-bootstrap/Modal";
 import axios from 'axios';
 import fourcss from './fourcss.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -17,6 +17,10 @@ function Profile() {
         Consent: localStorage.getItem('consent'),
         Organization: localStorage.getItem('organization')
     });
+
+    const [showModal, setShowModal] = useState(false);
+    const handleClose = () => setShowModal(false);
+    const handleShow = () => setShowModal(true);
 
     window.onload = function () {
         if (localStorage.getItem('roles').includes('user non-profit managers/CEO')) {
@@ -197,7 +201,7 @@ function Profile() {
                                             <input type="radio" id="consented" name="consent" value="consented" disabled />
                                             Yes, I consent to sharing my data.</label>
                                         <label for="unconsented">
-                                            <input type="radio" id="unconsented" name="consent" value="unconsented" disabled />
+                                            <input type="radio" id="unconsented" name="consent" value="unconsented" onClick={handleShow} disabled />
                                             No, I want to stop sharing my data.</label>
                                     </div>
 
@@ -213,15 +217,10 @@ function Profile() {
                             </div>
 
                             <div className='row'>
-                                <Button className={`${profileCSS.save_btn} btn btn-outline-success`} variant="outline-sucess" onClick={(e) => {
+                                <Button className={`${profileCSS.save_btn} btn btn-outline-success`} variant="outline-sucess" onClick={() => {
                                     localStorage.setItem('roles', role_str);
                                     setAll({ ...all, Roles: localStorage.getItem('roles') })
                                     console.log(JSON.stringify(all));
-
-                                    if (localStorage.getItem('consent') == "unconsented") {
-                                        document.getElementById("staticBackdrop").show();
-                                    }
-                                    else{
 
                                     axios.post(
                                         "http://127.0.0.1:8000/api/profileUpdate/",
@@ -244,7 +243,6 @@ function Profile() {
                                             }
                                         })
                                         .catch(err => console.warn(err));
-                                    }
                                 }}>
                                     Save
                                 </Button>
@@ -252,6 +250,13 @@ function Profile() {
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                     Launch static backdrop modal
                                 </button>
+
+                                <Modal show={showModal} onHide={handleClose}>
+                                    <Modal.Header closeButton>
+                                        <Modal.Title>Create Post</Modal.Title>
+                                    </Modal.Header>
+                                    <Modal.Body></Modal.Body>
+                                </Modal>
 
                                 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-lg">
@@ -263,7 +268,7 @@ function Profile() {
                                             <div class="modal-body">
                                                 <p>Are you sure you want to withdraw your consent?</p>
 
-                                                If this was a mistake, please change the consent option selected by clicking 'Go back'. <br/>
+                                                If this was a mistake, please change the consent option selected by clicking 'Go back'. <br />
                                                 If this was not a mistake, please ensure you have taken the time to download your data before you confirm the withdrawl as your account will be deactivated <b>immediately</b> right after.
                                             </div>
                                             <div class="modal-footer">
