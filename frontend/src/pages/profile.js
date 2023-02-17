@@ -33,13 +33,13 @@ function Profile() {
         if (localStorage.getItem('roles').includes('user non-profit volunteer')) {
             document.getElementById('volunteer').checked = true;
         }
-        if (localStorage.getItem('roles').includes('Sponsors')) {
+        if (localStorage.getItem('roles').includes('sponsor')) {
             document.getElementById('sponsor').checked = true;
         }
         if (localStorage.getItem('roles').includes('admin')) {
             document.getElementById('admin').checked = true;
         }
-        if (localStorage.getItem('roles').includes('experts')) {
+        if (localStorage.getItem('roles').includes('expert')) {
             document.getElementById('expert').checked = true;
         }
         if (localStorage.getItem('consent') == 'consented') {
@@ -48,9 +48,12 @@ function Profile() {
         if (localStorage.getItem('consent') == 'unconsented') {
             document.getElementById('unconsented').checked = true;
         }
+
+        console.log(localStorage.getItem('roles'));
     }
 
     var role_str = [];
+    const prevroles = "";
 
     if (localStorage.getItem('firstname') != null) {
         return (
@@ -75,6 +78,7 @@ function Profile() {
                                                         localStorage.removeItem('firstname');
                                                         localStorage.setItem('firstname', e.target.value);
                                                         setAll({ ...all, FirstName: localStorage.getItem('firstname') })
+                                                        prevroles = localStorage.getItem('roles').toString();
                                                     }} />
                                             </div>
                                             <div className='col-auto'>
@@ -82,7 +86,8 @@ function Profile() {
                                                     onChange={(e) => {
                                                         localStorage.removeItem('lastname');
                                                         localStorage.setItem('lastname', e.target.value);
-                                                        setAll({ ...all, LastName: localStorage.getItem('lastname') })
+                                                        setAll({ ...all, LastName: localStorage.getItem('lastname') });
+                                                        prevroles = localStorage.getItem('roles').toString();
                                                     }} />
                                             </div>
                                         </div>
@@ -121,6 +126,7 @@ function Profile() {
                                             localStorage.removeItem('organization');
                                             localStorage.setItem('organization', e.target.value);
                                             setAll({ ...all, Organization: localStorage.getItem('organization') })
+                                            prevroles = localStorage.getItem('roles').toString();
                                         }} />
                                     </div>
 
@@ -146,30 +152,33 @@ function Profile() {
                                             if (e.target.checked) {
                                                 role_str.push(e.target.value);
                                             }
-                                        }}>
+
+                                        }
+                                       
+                                        }>
                                         <label for="manager_ceo" className='checkbox-inline'>
-                                            <input type="checkbox" id="manager_ceo" name="roles" value="user non-profit managers/CEO" disabled
+                                            <input type="checkbox" className='roles' id="manager_ceo" name="roles" value="user non-profit managers/CEO" disabled
                                             />
                                             User non-profit managers/CEO</label>
                                         <br />
                                         <label for="warehouse_boss">
-                                            <input type="checkbox" id="warehouse_boss" name="roles" value="user non-profit warehouse boss" disabled />
+                                            <input type="checkbox"  className='roles' id="warehouse_boss" name="roles" value="user non-profit warehouse boss" disabled />
                                             User non-profit warehouse boss</label>
                                         <br />
                                         <label for="volunteer">
-                                            <input type="checkbox" id="volunteer" name="roles" value="user non-profit volunteer" disabled />
+                                            <input type="checkbox"  className='roles' id="volunteer" name="roles" value="user non-profit volunteer" disabled />
                                             User non-profit volunteer</label>
                                         <br />
                                         <label for="sponsor" className='checkbox-inline'>
-                                            <input type="checkbox" id="sponsor" name="roles" value="sponsor" disabled />
+                                            <input type="checkbox"  className='roles' id="sponsor" name="roles" value="sponsor" disabled />
                                             Sponsor</label>
                                         <br />
                                         <label for="admin">
-                                            <input type="checkbox" id="admin" name="roles" value="admin" disabled />
+                                            <input type="checkbox" id="admin" className='roles' name="roles" value="admin" disabled />
                                             Admin</label>
                                         <br />
                                         <label for="expert">
-                                            <input type="checkbox" id="expert" name="roles" value="expert" disabled />
+                                            <input type="checkbox" id="expert" name="roles" className='roles' value="expert" disabled />
                                             Expert</label>
                                     </div>
 
@@ -181,6 +190,16 @@ function Profile() {
                                             document.getElementById('sponsor').disabled = false;
                                             document.getElementById('admin').disabled = false;
                                             document.getElementById('expert').disabled = false;
+
+                                            document.getElementById('manager_ceo').checked = false;
+                                            document.getElementById('warehouse_boss').checked = false;
+                                            document.getElementById('volunteer').checked = false;
+                                            document.getElementById('sponsor').checked = false;
+                                            document.getElementById('admin').checked = false;
+                                            document.getElementById('expert').checked= false;
+                                            
+
+
                                         }}>
                                             Edit <FontAwesomeIcon icon={faPenToSquare} style={{ color: "#DC143C	" }} />
                                         </Button>
@@ -199,7 +218,8 @@ function Profile() {
                                         if (e.target.checked) {
                                             localStorage.setItem('consent', e.target.value);
                                         }
-                                        setAll({ ...all, Consent: localStorage.getItem('consent') })
+                                        setAll({ ...all, Consent: localStorage.getItem('consent') });
+                                        prevroles = localStorage.getItem('roles').toString();
                                     }}>
                                         <label for="consented">
                                             <input type="radio" id="consented" name="consent" value="consented" disabled />
@@ -222,31 +242,22 @@ function Profile() {
 
                             <div className='row'>
                                 <Button className={`${profileCSS.save_btn} btn btn-outline-success`} id="saveBtn" variant="outline-sucess" onClick={() => {
-                                    localStorage.setItem('roles', role_str);
-                                    setAll({ ...all, Roles: localStorage.getItem('roles') })
-                                    console.log(JSON.stringify(all));
+                                     
+                                    if(role_str != "" || role_str != null){
+                                       if(localStorage.getItem("roles")){
+                                        localStorage.roles.setItem(role_str.toString());
+                                       }else{
+                                        localStorage.setItem("roles",role_str.toString());
+                                       }
+                                   
+                                    }else{
+                                        
+                                    
+                                        localStorage.roles.setItem(prevroles);
+                                    }
 
-                                    axios.post(
-                                        `http://127.0.0.1:8000/api/profilePull/`,
-                                        {
-                                            Id: userId
-                                        },
-                                        {
-                                            headers: {
-                                                "Content-type": "application/json",
-                                            }
-                                        }
-                                    )
-                                        .then(response => {
-                                            if (response.status == 201) {
-                                                localStorage.removeItem('roles');
-                                                localStorage.setItem('roles', response.data['roles']);
-
-                                            }
-                                        })
-                                        .catch(err => console.warn(err));
-
-
+                                  
+                                    console.log(role_str);
                                     axios.put(
                                         `http://127.0.0.1:8000/api/profileUpdate/${userId}`,
                                         {
@@ -264,8 +275,21 @@ function Profile() {
                                     )
                                         .then(response => {
                                             if (response.status == 201) {
-                                                console.log('yes');
-                                                window.location.replace("http://localhost:3000/profile/");
+                                                 
+                                                if(role_str != "" || role_str != null){
+                                                    if(localStorage.getItem("roles")){
+                                                     localStorage.roles.setItem(role_str.toString());
+                                                    }else{
+                                                     localStorage.setItem("roles",role_str.toString());
+                                                    }
+                                                
+                                                 }else{
+                                                     
+                                                 
+                                                     localStorage.roles.setItem(prevroles);
+                                                 }
+                                               
+                                                // window.location.replace("http://localhost:3000/profile/");
 
                                             }
                                         })
