@@ -151,7 +151,7 @@ def profilePull(request):
         id = request.data.get("id")
         results = users.objects.filter(id=id)
         serialize = adminPullSerialize(results,many=True)
-        return Response(serialize.data)
+        return Response(serialize.data,status=status.HTTP_201_CREATED)
 
 @api_view(["PUT"])
 def profileUpdate(request,pk):

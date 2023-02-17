@@ -33,13 +33,13 @@ function Profile() {
         if (localStorage.getItem('roles').includes('user non-profit volunteer')) {
             document.getElementById('volunteer').checked = true;
         }
-        if (localStorage.getItem('roles').includes('Sponsors')) {
+        if (localStorage.getItem('roles').includes('sponsor')) {
             document.getElementById('sponsor').checked = true;
         }
         if (localStorage.getItem('roles').includes('admin')) {
             document.getElementById('admin').checked = true;
         }
-        if (localStorage.getItem('roles').includes('experts')) {
+        if (localStorage.getItem('roles').includes('expert')) {
             document.getElementById('expert').checked = true;
         }
         if (localStorage.getItem('consent') == 'consented') {
@@ -48,6 +48,8 @@ function Profile() {
         if (localStorage.getItem('consent') == 'unconsented') {
             document.getElementById('unconsented').checked = true;
         }
+
+        console.log(localStorage.getItem('roles'));
     }
 
     var role_str = [];
@@ -225,27 +227,7 @@ function Profile() {
                                     localStorage.setItem('roles', role_str);
                                     setAll({ ...all, Roles: localStorage.getItem('roles') })
                                     console.log(JSON.stringify(all));
-
-                                    axios.post(
-                                        `http://127.0.0.1:8000/api/profilePull/`,
-                                        {
-                                            Id: userId
-                                        },
-                                        {
-                                            headers: {
-                                                "Content-type": "application/json",
-                                            }
-                                        }
-                                    )
-                                        .then(response => {
-                                            if (response.status == 201) {
-                                                localStorage.removeItem('roles');
-                                                localStorage.setItem('roles', response.data['roles']);
-
-                                            }
-                                        })
-                                        .catch(err => console.warn(err));
-
+                                    console.log(localStorage.getItem('roles'));
 
                                     axios.put(
                                         `http://127.0.0.1:8000/api/profileUpdate/${userId}`,
