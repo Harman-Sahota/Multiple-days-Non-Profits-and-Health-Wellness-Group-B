@@ -30,6 +30,7 @@
 - Display each user's role and the name of the organization they belong to.
 - Only display the users that have shared something with the current organization
 - Volunteers are not allowed to share content as they do not have approval to do so.
+- Before sharing anything, users must select who they want to share with, such as non-profits, community gardens, food banks, and other partners. This step should come first in the sharing process. Users should also select their own role (e.g. farmer, partner).
 
 ###### Profile page
 
