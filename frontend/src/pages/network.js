@@ -7,6 +7,7 @@ import './network.css';
 import fourcss from './fourcss.css';
 import axios from 'axios';
 
+//this page will be changed soon
 
 function SearchBar() {
   const [getData, setData] = useState([]);
