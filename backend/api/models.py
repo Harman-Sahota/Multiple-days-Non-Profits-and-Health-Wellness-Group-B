@@ -95,7 +95,7 @@ class tracker(models.Model):
     percentPartNet = models.IntegerField()
     percentLandfill = models.IntegerField()
 
-    Email = models.EmailField(max_length=255,unique=True)
+    #Email = models.EmailField(max_length=255,unique=True)
 
 
     class Meta:

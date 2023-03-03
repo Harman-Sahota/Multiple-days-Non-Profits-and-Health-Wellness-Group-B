@@ -26,7 +26,8 @@ const [posts, setPosts] = useState({
   Type: '',
   Units: '',
   Quantity: '',
-  Description: ''
+  Description: '',
+  Email: ''
 }); 
   const [showModal, setShowModal] = useState(false);
   posts.Quantity = parseInt(posts.Quantity)
@@ -169,7 +170,8 @@ const [posts, setPosts] = useState({
                     Type: posts.Type,
                     Quantity: posts.Quantity,
                     Units: posts.Units,
-                    Description: posts.Description 
+                    Description: posts.Description,
+                    Email: localStorage.getItem("email")
                 },
                 {
                     headers: {
