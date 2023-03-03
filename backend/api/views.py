@@ -6,7 +6,7 @@ from api.models import permissions
 from api.models import tracker
 import jwt,datetime
 from api.serialize import userSerialize
-from django.contrib import auth
+
 # from api.serialize import commentsSerialize
 
 from api.serialize import adminInsertSerialize
@@ -23,23 +23,23 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
-# from rest_framework.authtoken.models import Token
-# from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.authtoken.models import Token
+from rest_framework.authtoken.views import ObtainAuthToken
 
 from django.contrib.auth import login,authenticate
 
 @api_view(["POST"])
 def registerInsert(request):
     if request.method == "POST":
-        saveserialize = userSerialize(data = request.data,allow_null = True)
+        saveserialize = userSerialize(data = request.data)
         email = request.data['Email'];
         duplicated =  users.objects.filter(Email = email).count(); 
         if duplicated != 0:
              return Response(status=status.HTTP_409_CONFLICT) 
-        if saveserialize.is_valid():
+        if saveserialize.is_valid() and duplicated == 0:
             saveserialize.save()
-            # token = jwt.encode(saveserialize.data,'secret',algorithm='HS256').decode('utf-8')
-            return Response(saveserialize.data,status=status.HTTP_201_CREATED)       
+            token = jwt.encode(saveserialize.data,'secret',algorithm='HS256').decode('utf-8')
+            return Response({"data":saveserialize.data,"token":token},status=status.HTTP_201_CREATED)       
         return Response(saveserialize.data,status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
 
@@ -108,7 +108,6 @@ class Login(APIView):
 
         check_user = users.objects.filter(Email=email,Password=password).exists()
         if check_user:
-            user = auth.authenticate(email=email, password=password)
             getdetails = users.objects.filter(Email=email,Password=password)
         if check_user == False:
             return Response({"error":"user does not exist"},status=status.HTTP_404_NOT_FOUND)
@@ -169,7 +168,7 @@ def profileUpdate(request,pk):
             if saveserialize.data["Consent"] == 'unconsented':
                 users.objects.filter(id=pk).delete()
                 deleted = "deleted"
-            return Response({"data": saveserialize.data,"deleted": deleted}, status=status.HTTP_201_CREATED)    
+            return Response({"data":saveserialize.data,"deleted":deleted},status=status.HTTP_201_CREATED)    
         return Response(saveserialize.data,status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 

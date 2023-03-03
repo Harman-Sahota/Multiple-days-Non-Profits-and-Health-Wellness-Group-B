@@ -33,7 +33,7 @@ const [posts, setPosts] = useState({
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
   
-  if (new Date().getTime() > localStorage.getItem('expiry')){
+  if (new Date().getTime() > localStorage.getItem('expiry') && (localStorage.roles)){
     const response = window.confirm("do you still want to be logged in ? ");
   
     if(response){
@@ -42,7 +42,7 @@ const [posts, setPosts] = useState({
       localStorage.setItem('expiry',date) 
     }
   }
-   {if(new Date().getTime() < localStorage.getItem('expiry')){
+   {if(new Date().getTime() < localStorage.getItem('expiry')  && localStorage.roles){
   return (
     <div className="container-lg col-md-auto">
       <div className="container-fluid">
@@ -193,7 +193,7 @@ const [posts, setPosts] = useState({
   </div>
   )
 }
-else if(new Date().getTime() > localStorage.getItem('expiry')) {
+else if(new Date().getTime() > localStorage.getItem('expiry') && !(localStorage.roles)) {
 
   return(
     <section>

@@ -114,7 +114,7 @@ function Admin() {
     Sponsors.metrics = Sponsors.metrics.toString();
     Experts.metrics = Experts.metrics.toString();
 
-    if (new Date().getTime() > localStorage.getItem('expiry')){
+    if (new Date().getTime() > localStorage.getItem('expiry')  && localStorage.roles){
         const response = window.confirm("do you still want to be logged in ? ");
       
         if(response){
@@ -127,7 +127,7 @@ function Admin() {
 
 
     {
-        if (new Date().getTime() < localStorage.getItem('expiry')) {
+        if (new Date().getTime() < localStorage.getItem('expiry')  && localStorage.roles) {
 
 
             return (
@@ -1148,7 +1148,7 @@ function Admin() {
             );
         }
 
-        else if (new Date().getTime() > localStorage.getItem('expiry')) {
+        else if (new Date().getTime() > localStorage.getItem('expiry')  && !(localStorage.roles)) {
 
             return (
                 <section>
