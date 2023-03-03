@@ -126,8 +126,8 @@ class Login(APIView):
                 "approve": results.Approve,
                 "id":results.id,
             }
-            # token = jwt.encode(data,'secret',algorithm='HS256').decode('utf-8')
-            return Response({"success":"success logged in","data":data},status=status.HTTP_200_OK)
+            token = jwt.encode(data,'secret',algorithm='HS256').decode('utf-8')
+            return Response({"success":"success logged in","data":data,"token":token},status=status.HTTP_200_OK)
         else:
             return Response({"error":"invalid login credentials"},status=status.HTTP_400_BAD_REQUEST)
 
