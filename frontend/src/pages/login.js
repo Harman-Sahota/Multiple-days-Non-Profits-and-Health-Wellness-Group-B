@@ -59,6 +59,7 @@ function Login() {
                 .then(response => {
                     if (response.status == 200) {
                         console.log(response.data);
+                        const date = new Date().setHours(new Date().getHours() + 1 );
                         localStorage.setItem('firstname', response.data['data']['firstname']);
                         localStorage.setItem('lastname', response.data['data']['lastname']);
                         localStorage.setItem('email', response.data['data']['email']);
@@ -67,9 +68,9 @@ function Login() {
                         localStorage.setItem( 'consent', response.data['data']['consent']);
                         localStorage.setItem( 'approve', response.data['data']['approve']);
                         localStorage.setItem( 'id', response.data['data']['id']);
-
-                        
-                        window.location.replace("http://localhost:3000/tracker/");
+                        localStorage.setItem('token',response.data['token'])
+                        localStorage.setItem('expiry',date)
+                         window.location.replace("http://localhost:3000/tracker/");
                     }
                 })
                 .catch(err => 

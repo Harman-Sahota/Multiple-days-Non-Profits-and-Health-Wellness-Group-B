@@ -1,11 +1,13 @@
 
 from django.db import models
+from django.contrib.auth.models import AbstractBaseUser
+from django.contrib.auth.models import UserManager
 
 class users(models.Model):
     FirstName = models.CharField(max_length=255)
     LastName = models.CharField(max_length=255)
-    Email = models.CharField(max_length=255)
-    Password = models.CharField(max_length=255)
+    Email = models.EmailField(max_length=255,unique=True)
+    Password = models.CharField(max_length=255,default='Password')
     Roles = models.CharField(max_length=255)
     Consent = models.CharField(max_length=50)
     Organization = models.CharField(max_length=255, null=True)
@@ -63,3 +65,4 @@ class tracker(models.Model):
 
     class Meta:
         db_table = "tracker"
+    
