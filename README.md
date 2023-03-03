@@ -33,7 +33,12 @@ Click [here](https://docs.google.com/spreadsheets/d/1qnWRLLMm4y7r7I7h9rt_KXN-MSf
 |------|-------|---------|
 |15| Begin Page Conversion to React| [Client Meeting Minutes (Jan. 11)](docs/client-minutes/client-meeting-jan11-11am.md)|
 |16| Continue Page Conversions to React| [Client Meeting Minutes(Jan. 18)](docs/client-minutes/client-meeting-jan18-1130am.md)|
-|17| Continue Page Conversions to React| [Client Meeting Minutes (Jan. 25)]()|
+|17| Continue Page Conversions to React| [Client Group Meeting Minutes (Jan. 25)](docs/client-minutes/client-meeting-jan25-10am.md) <br/> [Client Private Meeting Minutes (Jan. 25)](docs/client-minutes/client-meeting-jan25-1130am.md)|
+|18| | [Client Group Meeting Minutes (Feb. 1)](docs/client-minutes/client-meeting-feb1-10am.md) <br/> [Client Private Meeting Minutes (Feb. 1)](docs/client-minutes/client-meeting-feb1-1130am.md)|
+|19| | [Client Group Meeting Minutes (Feb. 8)](docs/client-minutes/client-meeting-feb8-1000am.md) <br/> [Client Private Meeting Minutes (Feb. 8)](docs/client-minutes/client-meeting-feb8-1130am.md)|
+|20| | [Client Group Meeting Minutes (Feb. 15)](docs/client-minutes/client-meeting-feb15-1000am.md) <br/> [Client Private Meeting Minutes (Feb. 15)](docs/client-minutes/client-meeting-feb15-1130am.md)|
+|21| Reading Week| |
+|22| | [Client Group Meeting Minutes (Mar. 1)]() <br/> [Client Private Meeting Minutes (Mar. 1)]()|
 
 ### Semester #1
 
