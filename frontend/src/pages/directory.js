@@ -3,12 +3,20 @@ import directoryCSS from './directory.module.css';
 import Button from 'react-bootstrap/Button';
 
 function Directory() {
-     return (
+    return (
 
         <section>
-            <h1> Directory </h1>
+            <div className='container p-2'>
+                <div className='card'>
+                    <div className='card-body'>
+                        <h4 className='card-title'>Directory</h4>
+
+                        
+                    </div>
+                </div>
+            </div>
         </section>
-     );
+    );
 }
 
 export default Directory;

@@ -30,7 +30,9 @@ percentClients     Int(55),
 percentAFeed       Int(55), 
 percentCompost     Int(55),  
 percentPartNet     Int(55), 
-percentLandfill    Int(55)
+percentLandfill    Int(55),
+
+Email varchar(255)
 );
 
 CREATE TABLE `permissions` (
@@ -46,17 +48,7 @@ product varchar(255),
 Type varchar(255),
 Quantity int,
 Units varchar(3),
-Description varchar(255)
-);
-
-CREATE TABLE Comments(
-
-product varchar(255),
-Type varchar(255),
-Quantity int,
-Units varchar(3),
 Description varchar(255),
-Comments varchar(255),
-username varchar(255)
 
+Email varchar(255),
 );

@@ -33,8 +33,8 @@ const [posts, setPosts] = useState({
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
   
-  if (new Date().getTime() > localStorage.getItem('expiry')){
-    const response = window.confirm("do you still want to be logged in ? ");
+  if (new Date().getTime() > localStorage.getItem('expiry') && (localStorage.roles)){
+    const response = window.confirm("Your session has expired. Do you still want to be logged in?");
   
     if(response){
       localStorage.removeItem('expiry');
@@ -42,7 +42,7 @@ const [posts, setPosts] = useState({
       localStorage.setItem('expiry',date) 
     }
   }
-   {if(new Date().getTime() < localStorage.getItem('expiry')){
+   {if(new Date().getTime() < localStorage.getItem('expiry')  && localStorage.roles){
   return (
     <div className="container-lg col-md-auto">
       <div className="container-fluid">
@@ -193,18 +193,18 @@ const [posts, setPosts] = useState({
   </div>
   )
 }
-else if(new Date().getTime() > localStorage.getItem('expiry')) {
+else if(new Date().getTime() > localStorage.getItem('expiry') && !(localStorage.roles)) {
 
   return(
     <section>
     <div className="flex-container">
         <div className="text-center">
-            <h1>
+            <h1 className='heading1'>
                 <span className="fade-in" id="digit1">4</span>
                 <span className="fade-in" id="digit2">0</span>
                 <span className="fade-in" id="digit3">4</span>
             </h1>
-            <h3 className="fadeIn">YOU MUST LOGIN TO VIEW THIS PAGE</h3>
+            <h3 className="heading3 fadeIn">YOU MUST LOGIN TO VIEW THIS PAGE</h3>
             <a href='/login'><Button type="button" class = 'btn btn-primary 'name="button">Login</Button></a>
         </div>
     </div>
