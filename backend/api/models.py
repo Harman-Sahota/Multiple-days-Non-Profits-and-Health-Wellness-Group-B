@@ -3,32 +3,32 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser,BaseUserManager
 from django.contrib.auth.models import UserManager
 
-class UserManager(BaseUserManager):
-    def create_user(self, email,Email,username=None,password=None):
+# class UserManager(BaseUserManager):
+#     def create_user(self, email,Email,username=None,password=None):
     
 
-        if email is None:
-            raise TypeError('Users must have an email address.')
+#         if email is None:
+#             raise TypeError('Users must have an email address.')
 
-        user = self.model(username=username, email=self.normalize_email(email))
-        user.set_password(password)
-        user.save()
+#         user = self.model(username=username, email=self.normalize_email(email))
+#         user.set_password(password)
+#         user.save()
 
-        return user
+#         return user
 
-    def create_superuser(self, email, password,username=None):
+#     def create_superuser(self, email, password,username=None):
        
-        if password is None:
-            raise TypeError('Superusers must have a password.')
+#         if password is None:
+#             raise TypeError('Superusers must have a password.')
 
-        user = self.create_user(username, email, password)
-        user.is_superuser = True
-        user.is_staff = True
-        user.save()
+#         user = self.create_user(username, email, password)
+#         user.is_superuser = True
+#         user.is_staff = True
+#         user.save()
 
-        return user
+#         return user
 
-class users(AbstractBaseUser):
+class users(models.Model):
     FirstName = models.CharField(max_length=255)
     LastName = models.CharField(max_length=255)
     Email = models.EmailField(max_length=255,unique=True)
@@ -37,11 +37,10 @@ class users(AbstractBaseUser):
     Consent = models.CharField(max_length=50)
     Organization = models.CharField(max_length=255, null=True)
     Approve = models.CharField(max_length=50,null=True)
-    last_login = models.CharField(max_length=50,null=True)
-    username = None
-    USERNAME_FIELD = 'Email'
-    REQUIRED_FIELDS = ['Password']
-    objects = UserManager()
+    # last_login = models.CharField(max_length=50,null=True)
+    # USERNAME_FIELD = 'Email'
+    # REQUIRED_FIELDS = ['Password']
+    # objects = UserManager()
     class Meta: 
         db_table = "users"
 

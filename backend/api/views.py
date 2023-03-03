@@ -23,23 +23,23 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
-from rest_framework.authtoken.models import Token
-from rest_framework.authtoken.views import ObtainAuthToken
+# from rest_framework.authtoken.models import Token
+# from rest_framework.authtoken.views import ObtainAuthToken
 
 from django.contrib.auth import login,authenticate
 
 @api_view(["POST"])
 def registerInsert(request):
     if request.method == "POST":
-        saveserialize = userSerialize(data = request.data)
+        saveserialize = userSerialize(data = request.data,allow_null = True)
         email = request.data['Email'];
         duplicated =  users.objects.filter(Email = email).count(); 
         if duplicated != 0:
              return Response(status=status.HTTP_409_CONFLICT) 
-        if saveserialize.is_valid() and duplicated == 0:
+        if saveserialize.is_valid():
             saveserialize.save()
-            token = jwt.encode(saveserialize.data,'secret',algorithm='HS256').decode('utf-8')
-            return Response({"data":saveserialize.data,"token":token},status=status.HTTP_201_CREATED)       
+            # token = jwt.encode(saveserialize.data,'secret',algorithm='HS256').decode('utf-8')
+            return Response(saveserialize.data,status=status.HTTP_201_CREATED)       
         return Response(saveserialize.data,status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
 
@@ -126,8 +126,8 @@ class Login(APIView):
                 "approve": results.Approve,
                 "id":results.id,
             }
-            token = jwt.encode(data,'secret',algorithm='HS256').decode('utf-8')
-            return Response({"success":"success logged in","data":data,"token":token},status=status.HTTP_200_OK)
+            # token = jwt.encode(data,'secret',algorithm='HS256').decode('utf-8')
+            return Response({"success":"success logged in","data":data},status=status.HTTP_200_OK)
         else:
             return Response({"error":"invalid login credentials"},status=status.HTTP_400_BAD_REQUEST)
 
