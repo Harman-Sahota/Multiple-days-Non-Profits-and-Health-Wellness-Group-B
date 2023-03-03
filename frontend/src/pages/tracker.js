@@ -39,7 +39,7 @@ function Tracker() {
 
   var trackerData = JSON.stringify(trackers);
 if (new Date().getTime() > localStorage.getItem('expiry')  && localStorage.roles){
-  const response = window.confirm("do you still want to be logged in ? ");
+  const response = window.confirm("Your session has expired. Do you still want to be logged in?");
 
   if(response){
     localStorage.removeItem('expiry');

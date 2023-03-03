@@ -5,7 +5,15 @@ function PublicSharing() {
      return (
 
         <section>
-            <h2> Public Sharing </h2>
+            <div className='container p-2'>
+                <div className='card'>
+                    <div className='card-body'>
+                        <h4 className='card-title'>Public Sharing</h4>
+
+                        
+                    </div>
+                </div>
+            </div>
         </section>
      );
 }
