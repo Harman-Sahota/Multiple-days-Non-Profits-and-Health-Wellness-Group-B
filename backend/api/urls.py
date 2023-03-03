@@ -13,6 +13,8 @@ urlpatterns = [
     path("login/", views.Login.as_view(), name='login'),
     path("networkInsert/", views.networkInsert),
     path("networkPull/", views.networkPull),
+    path("networkPullSharing/", views.networkPullSharing),
+    path("networkPullReceiving/", views.networkPullReceiving),
     path("profileUpdate/<pk>", views.profileUpdate),
     path("profilePull/", views.profilePull),
     path('trackerInsert/', views.trackerInsert),

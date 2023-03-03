@@ -5,7 +5,7 @@ import Modal from "react-bootstrap/Modal";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './network.css';
 import fourcss from './fourcss.css';
-import axios from 'axios';
+import axios, { all } from 'axios';
 
 //this page will be changed soon
 
@@ -17,7 +17,18 @@ function SearchBar() {
     return setData(data);
   }
 
-  // -
+  const fetchDataSharing = async () => {
+    const response = await fetch("http://localhost:8000/api/networkPullSharing/");
+    const data = await response.json();
+    return setData(data);
+  }
+
+  const fetchDataReceiving = async () => {
+    const response = await fetch("http://localhost:8000/api/networkPullReceiving/");
+    const data = await response.json();
+    return setData(data);
+  }
+  
   useEffect(() => {
     fetchData();
   }, [])
@@ -73,12 +84,13 @@ function SearchBar() {
           </div>
           <div className="container-md">
             <div className="tab container-sm">
-              <Button className="tablinks btn btn-light" id="defaultOpen">💬 All Posts</Button><br />
-              <Button className="tablinks btn btn-light">📣 Sharing</Button><br />
-              <Button className="tablinks btn btn-light">💬 Receiving</Button><br />
+              <Button className="tablinks btn btn-light" onClick={(e) => { {fetchData()}}}id="defaultOpen">
+                  💬 All Posts</Button><br />
+              <Button className="tablinks btn btn-light"  onClick={(e) => { {fetchDataSharing()}}}  >📣 Sharing</Button><br />
+              <Button className="tablinks btn btn-light"  onClick={(e) => { {fetchDataReceiving()}}}>💬 Receiving</Button><br />
             </div>
             <div id="disc">
-              {getData && getData.length > 0 && getData.map((userObj, index) => (
+              {getData && getData.length > 0 && getData.map((userObj) => (
                 <div class='card'>
                   <h5 class='card-header m-0'>
                     <span>{userObj.product}</span>
