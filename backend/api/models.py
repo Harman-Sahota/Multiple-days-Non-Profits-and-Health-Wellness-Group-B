@@ -72,6 +72,9 @@ class posts(models.Model):
     Quantity = models.IntegerField()
     Units = models.CharField(max_length=3)
     Description = models.CharField(max_length=255)
+    
+    Email = models.EmailField(max_length=255,unique=True)
+
 
     class Meta:
         db_table = "posts"
@@ -91,6 +94,9 @@ class tracker(models.Model):
     percentCompost = models.IntegerField()
     percentPartNet = models.IntegerField()
     percentLandfill = models.IntegerField()
+
+    Email = models.EmailField(max_length=255,unique=True)
+
 
     class Meta:
         db_table = "tracker"
