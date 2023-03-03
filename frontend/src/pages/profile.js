@@ -54,8 +54,17 @@ function Profile() {
 
     var role_str = [];
     const prevroles = "";
+    if (new Date().getTime() > localStorage.getItem('expiry')){
+        const response = window.confirm("do you still want to be logged in ? ");
+      
+        if(response){
+          localStorage.removeItem('expiry');
+          const date = new Date().setHours(new Date().getHours()+1);
+          localStorage.setItem('expiry',date) 
+        }
+      }
 
-    if (localStorage.getItem('firstname') != null) {
+    if (new Date().getTime() < localStorage.getItem('expiry')) {
         return (
             <section>
                 <div className="container p-4">
@@ -316,7 +325,7 @@ function Profile() {
             </section >
         );
     }
-    else if (localStorage.getItem('firstname') == null) {
+    else if (new Date().getTime() > localStorage.getItem('expiry')) {
 
         return (
             <section>

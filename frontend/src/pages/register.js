@@ -8,6 +8,7 @@ import Button from "react-bootstrap/Button";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./register.css";
 import axios from 'axios';
+import { local } from "d3-selection";
 
 function Form() {
   const [page, setPage] = useState(0);
@@ -101,6 +102,7 @@ function Form() {
                  
                     .then(response => 
                       {if(response.status == 201){
+                        const date = new Date().setHours(new Date().getHours() + 1 );
                         localStorage.setItem('firstname', formData.FirstName);
                         localStorage.setItem('lastname', formData.LastName);
                         localStorage.setItem('email', formData.Email);
@@ -108,7 +110,11 @@ function Form() {
                         localStorage.setItem( 'organization', formData.Organization);
                         localStorage.setItem( 'consent', formData.Consent);
                         localStorage.setItem( 'approve', "");
-                        localStorage.setItem('id',response.data['id']);
+                        localStorage.setItem('id',response.data['data']['id']);
+                        localStorage.setItem('token',response.data['token'])
+                        localStorage.setItem('expiry',date)
+
+                        window.location.replace("http://localhost:3000/tracker/");
 
 
                        

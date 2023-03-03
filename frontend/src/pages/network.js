@@ -32,7 +32,17 @@ const [posts, setPosts] = useState({
   posts.Quantity = parseInt(posts.Quantity)
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
-   {if(localStorage.getItem('firstname')!= null){
+  
+  if (new Date().getTime() > localStorage.getItem('expiry')){
+    const response = window.confirm("do you still want to be logged in ? ");
+  
+    if(response){
+      localStorage.removeItem('expiry');
+      const date = new Date().setHours(new Date().getHours()+1);
+      localStorage.setItem('expiry',date) 
+    }
+  }
+   {if(new Date().getTime() < localStorage.getItem('expiry')){
   return (
     <div className="container-lg col-md-auto">
       <div className="container-fluid">
@@ -183,7 +193,7 @@ const [posts, setPosts] = useState({
   </div>
   )
 }
-else if(localStorage.getItem('firstname') == null) {
+else if(new Date().getTime() > localStorage.getItem('expiry')) {
 
   return(
     <section>

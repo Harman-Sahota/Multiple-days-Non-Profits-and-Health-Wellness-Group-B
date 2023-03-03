@@ -17,6 +17,9 @@ import * as d3Axis from "d3-axis";
 import * as d3ScaleChromatic from "d3-scale-chromatic";
 
 function Tracker() {
+
+
+
   const [trackers, setTrackers] = useState({
     Category: "",
     Description: "",
@@ -35,10 +38,18 @@ function Tracker() {
   });
 
   var trackerData = JSON.stringify(trackers);
-  console.log(trackerData);
+if (new Date().getTime() > localStorage.getItem('expiry')){
+  const response = window.confirm("do you still want to be logged in ? ");
+
+  if(response){
+    localStorage.removeItem('expiry');
+    const date = new Date().setHours(new Date().getHours()+1);
+    localStorage.setItem('expiry',date) 
+  }
+}
 
   {
-    if (localStorage.getItem("firstname") != null) {
+    if (new Date().getTime() < localStorage.getItem('expiry')) {
       return (
         <div className="container p-2">
           <p>
@@ -498,7 +509,8 @@ function Tracker() {
           {/* {{ json|json_script:"json" }} */}
         </div>
       );
-    } else if (localStorage.getItem("firstname") == null) {
+    } else if (new Date().getTime() > localStorage.getItem('expiry')) {
+   
       return (
         <section>
           <div className="flex-container">
