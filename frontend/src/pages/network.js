@@ -32,6 +32,7 @@ const [posts, setPosts] = useState({
   posts.Quantity = parseInt(posts.Quantity)
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
+  
   if (new Date().getTime() > localStorage.getItem('expiry')){
     const response = window.confirm("do you still want to be logged in ? ");
   
@@ -192,7 +193,7 @@ const [posts, setPosts] = useState({
   </div>
   )
 }
-else if(localStorage.getItem('firstname') == null) {
+else if(new Date().getTime() > localStorage.getItem('expiry')) {
 
   return(
     <section>

@@ -6,7 +6,7 @@ from api.models import permissions
 from api.models import tracker
 import jwt,datetime
 from api.serialize import userSerialize
-
+from django.contrib import auth
 # from api.serialize import commentsSerialize
 
 from api.serialize import adminInsertSerialize
@@ -108,6 +108,7 @@ class Login(APIView):
 
         check_user = users.objects.filter(Email=email,Password=password).exists()
         if check_user:
+            user = auth.authenticate(email=email, password=password)
             getdetails = users.objects.filter(Email=email,Password=password)
         if check_user == False:
             return Response({"error":"user does not exist"},status=status.HTTP_404_NOT_FOUND)
