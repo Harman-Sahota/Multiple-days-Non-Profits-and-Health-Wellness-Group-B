@@ -157,6 +157,7 @@ def profilePull(request):
 
 @api_view(["PUT"])
 def profileUpdate(request,pk):
+    deleted = ""
     if request.method == 'PUT':
         saveserialize = profileSerialize(data=request.data)
         if saveserialize.is_valid():
@@ -165,7 +166,10 @@ def profileUpdate(request,pk):
             users.objects.filter(id=pk).update(Roles=saveserialize.data["Roles"]) 
             users.objects.filter(id=pk).update(Organization=saveserialize.data["Organization"]) 
             users.objects.filter(id=pk).update(Consent=saveserialize.data["Consent"]) 
-            return Response(saveserialize.data,status=status.HTTP_201_CREATED)    
+            if saveserialize.data["Consent"] == 'unconsented':
+                users.objects.filter(id=pk).delete()
+                deleted = "deleted"
+            return Response({"data": saveserialize.data,"deleted": deleted}, status=status.HTTP_201_CREATED)    
         return Response(saveserialize.data,status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
