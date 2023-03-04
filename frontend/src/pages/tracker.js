@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 
 import trackerCSS from "./tracker.module.css";
@@ -17,12 +17,18 @@ import * as d3Axis from "d3-axis";
 import * as d3ScaleChromatic from "d3-scale-chromatic";
 
 function Tracker() {
-
-  // setInterval(calculateLandFillPercent(), 500);
   const quantity = useRef();
   const clients = useRef();
   const animalFeed = useRef();
+  const compost = useRef();
+  const partnerNetwork = useRef();
+  const landFill = useRef();
 
+  const percentClients = useRef();
+  const percentAnimalFeed = useRef();
+  const percentCompost = useRef();
+  const percentPartnerNetwork = useRef();
+  const percentLandFill = useRef();
 
   const [trackers, setTrackers] = useState({
     Category: "",
@@ -42,18 +48,26 @@ function Tracker() {
   });
 
   var trackerData = JSON.stringify(trackers);
-if (new Date().getTime() > localStorage.getItem('expiry')  && localStorage.roles){
-  const response = window.confirm("Your session has expired. Do you still want to be logged in?");
+  if (
+    new Date().getTime() > localStorage.getItem("expiry") &&
+    localStorage.roles
+  ) {
+    const response = window.confirm(
+      "Your session has expired. Do you still want to be logged in?"
+    );
 
-  if(response){
-    localStorage.removeItem('expiry');
-    const date = new Date().setHours(new Date().getHours()+1);
-    localStorage.setItem('expiry',date) 
+    if (response) {
+      localStorage.removeItem("expiry");
+      const date = new Date().setHours(new Date().getHours() + 1);
+      localStorage.setItem("expiry", date);
+    }
   }
-}
 
   {
-    if (new Date().getTime() < localStorage.getItem('expiry')  && localStorage.roles) {
+    if (
+      new Date().getTime() < localStorage.getItem("expiry") &&
+      localStorage.roles
+    ) {
       return (
         <div className="container p-2">
           <p>
@@ -122,6 +136,7 @@ if (new Date().getTime() > localStorage.getItem('expiry')  && localStorage.roles
                           className={`form-control input-text ${trackerCSS["customised-input"]}`}
                           placeholder="Quantity"
                           name="quantity"
+                          ref={quantity}
                           onChange={(event) => {
                             setTrackers({
                               ...trackers,
@@ -161,6 +176,7 @@ if (new Date().getTime() > localStorage.getItem('expiry')  && localStorage.roles
                               className={`form-control ${trackerCSS["customised-input"]}`}
                               id="clients"
                               name="clients"
+                              ref={clients}
                               min={0}
                               // style={{ width: "10em" }}
                               onKeyUp={() => {}}
@@ -181,6 +197,7 @@ if (new Date().getTime() > localStorage.getItem('expiry')  && localStorage.roles
                               className={`form-control ${trackerCSS["customised-input"]}`}
                               id="animalFeed"
                               name="animalFeed"
+                              ref={animalFeed}
                               min={0}
                               onKeyUp={() => {}}
                               // onkeyup="calculateLandfill(); calculatePercent()"
@@ -200,6 +217,7 @@ if (new Date().getTime() > localStorage.getItem('expiry')  && localStorage.roles
                               className={`form-control ${trackerCSS["customised-input"]}`}
                               id="compost"
                               name="compost"
+                              ref={compost}
                               min={0}
                               onKeyUp={() => {}}
                               // onkeyup="calculateLandfill(); calculatePercent()"
@@ -219,6 +237,7 @@ if (new Date().getTime() > localStorage.getItem('expiry')  && localStorage.roles
                               className={`form-control ${trackerCSS["customised-input"]}`}
                               id="partnet"
                               name="partnet"
+                              ref={partnerNetwork}
                               min={0}
                               onKeyUp={() => {}}
                               // onKeyUp={() => {calculateLandfill(); calculatePercent()}}
@@ -239,6 +258,7 @@ if (new Date().getTime() > localStorage.getItem('expiry')  && localStorage.roles
                               className={`form-control ${trackerCSS["customised-input"]}`}
                               id="landfill"
                               name="landfill"
+                              ref={landFill}
                               min={0}
                               onChange={(event) => {
                                 setTrackers({
@@ -264,6 +284,7 @@ if (new Date().getTime() > localStorage.getItem('expiry')  && localStorage.roles
                               className={`form-control ${trackerCSS["customised-smaller-input"]}`}
                               id="percentclients"
                               name="percentclients"
+                              ref={percentClients}
                               min={0}
                               max={100}
                               onLoad={() => {}}
@@ -289,6 +310,7 @@ if (new Date().getTime() > localStorage.getItem('expiry')  && localStorage.roles
                               className={`form-control ${trackerCSS["customised-smaller-input"]}`}
                               id="percentanimalfeed"
                               name="percentanimalfeed"
+                              ref={percentAnimalFeed}
                               min={0}
                               max={100}
                               onLoad={() => {}}
@@ -314,6 +336,7 @@ if (new Date().getTime() > localStorage.getItem('expiry')  && localStorage.roles
                               className={`form-control ${trackerCSS["customised-smaller-input"]}`}
                               id="percentcompost/fert"
                               name="percentcompost/fert"
+                              ref={percentCompost}
                               min={0}
                               max={100}
                               onLoad={() => {}}
@@ -339,6 +362,7 @@ if (new Date().getTime() > localStorage.getItem('expiry')  && localStorage.roles
                               className={`form-control ${trackerCSS["customised-smaller-input"]}`}
                               id="percentpartnet"
                               name="percentpartnet"
+                              ref={percentPartnerNetwork}
                               min={0}
                               max={100}
                               onLoad={() => {}}
@@ -364,6 +388,7 @@ if (new Date().getTime() > localStorage.getItem('expiry')  && localStorage.roles
                               className={`form-control ${trackerCSS["customised-smaller-input"]}`}
                               id="percentlandfill"
                               name="percentlandfill"
+                              ref={percentLandFill}
                               value={100}
                               onChange={(event) => {
                                 setTrackers({
@@ -513,8 +538,10 @@ if (new Date().getTime() > localStorage.getItem('expiry')  && localStorage.roles
           {/* {{ json|json_script:"json" }} */}
         </div>
       );
-    } else if (new Date().getTime() > localStorage.getItem('expiry')  && !(localStorage.roles)) {
-   
+    } else if (
+      new Date().getTime() > localStorage.getItem("expiry") &&
+      !localStorage.roles
+    ) {
       return (
         <section>
           <div className="flex-container">
