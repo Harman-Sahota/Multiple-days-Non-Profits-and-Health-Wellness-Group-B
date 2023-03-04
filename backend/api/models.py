@@ -73,7 +73,7 @@ class posts(models.Model):
     Units = models.CharField(max_length=3)
     Description = models.CharField(max_length=255)
     
-    Email = models.EmailField(max_length=255,unique=True)
+    Email = models.CharField(max_length=255)
 
 
     class Meta:
@@ -95,7 +95,7 @@ class tracker(models.Model):
     percentPartNet = models.IntegerField()
     percentLandfill = models.IntegerField()
 
-    Email = models.EmailField(max_length=255,unique=True)
+    #Email = models.CharField(max_length=255)
 
 
     class Meta:

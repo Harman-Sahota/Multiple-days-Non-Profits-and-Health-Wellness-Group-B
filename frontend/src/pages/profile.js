@@ -65,7 +65,7 @@ function Profile() {
       }
 
     if (new Date().getTime() < localStorage.getItem('expiry')  && localStorage.roles) {
-        return (
+           return (
             <section>
                 <div className="container p-4">
                     <div className="card">
