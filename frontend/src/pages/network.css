@@ -1,3 +1,6 @@
+html, body, .container-lg {
+  min-height: 80vh;
+}
 
 .container-lg {
     margin-top: 3%;
@@ -12,11 +15,13 @@
   }
   
   .container-fluid {
+    margin: 0 !important;
     padding: 2em !important;
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid #e1e4e8;
     align-items: center;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06), 0 1px 3px 0 rgba(0, 0, 0, 0.1) !important;
   }
   
 
@@ -36,7 +41,7 @@
     width: 20%;
     height: 30%;
     padding: 2em;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06), 0 1px 3px 0 rgba(0, 0, 0, 0.1);
     border-radius: 5px;
   }
   
@@ -98,8 +103,13 @@
 #disc{
   width: 70%;
   margin-left: 25%;
-margin-top: -19%;
+margin-top: -23%;
 
+}
+
+.create_btn {
+  white-space: nowrap;
+  width: auto;
 }
 
 

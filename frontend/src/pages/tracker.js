@@ -18,6 +18,10 @@ import * as d3ScaleChromatic from "d3-scale-chromatic";
 
 function Tracker() {
 
+  // setInterval(calculateLandFillPercent(), 500);
+  const quantity = useRef();
+  const clients = useRef();
+  const animalFeed = useRef();
 
 
   const [trackers, setTrackers] = useState({
