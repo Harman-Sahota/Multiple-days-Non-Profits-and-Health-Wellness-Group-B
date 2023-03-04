@@ -24,3 +24,9 @@
 - look into the graphing of the sharing page and how it will be implemented. How data will be illustrated.
 
 - Discussion board is good- implement the TA's changes and it will be good to go	
+
+
+
+## Summary
+
+- In summary, there are several tasks that need to be completed to improve a web application. These tasks include implementing a token for authentication and deciding whether it will be renewable or nonrenewable,
