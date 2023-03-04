@@ -16,3 +16,8 @@
 - consider action-> timeout, log out etc.
 - Implementation of graphing is not yet done--> pace needs to be picked up
 	-pie charts
+- The graph's design is important and should be carefully considered. Ease of interpretation should be a priority
+	-consider choosing an ideal font and size.
+	- it needs to be readable and easy to interpret.
+	- test the font for yourself and ensure that it is easy to read
+	
