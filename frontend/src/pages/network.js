@@ -113,7 +113,7 @@ function SearchBar() {
               </select>
             </div>
             <div>
-              <Button type="Button" className="btn btn-success" onClick={handleShow}>Create Post</Button>
+              <Button type="Button" className="create_btn btn btn-success" onClick={handleShow}>Create Post</Button>
             </div>
           </div>
           <div className="container-md">
