@@ -15,6 +15,7 @@ urlpatterns = [
     path("networkPull/", views.networkPull),
     path("networkPullSharing/", views.networkPullSharing),
     path("networkPullReceiving/", views.networkPullReceiving),
+    path("networkSearch/", views.networkSearch),
     path("profileUpdate/<pk>", views.profileUpdate),
     path("profilePull/", views.profilePull),
     path('trackerInsert/', views.trackerInsert),

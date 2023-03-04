@@ -8,7 +8,7 @@ import fourcss from './fourcss.css';
 import axios, { all } from 'axios';
 
 //this page will be changed soon
-
+var filter = 'Product';
 function SearchBar() {
   const [getData, setData] = useState([]);
   const fetchData = async () => {
@@ -16,7 +16,6 @@ function SearchBar() {
     const data = await response.json();
     return setData(data);
   }
-
   const fetchDataSharing = async () => {
     const response = await fetch("http://localhost:8000/api/networkPullSharing/");
     const data = await response.json();
@@ -28,7 +27,7 @@ function SearchBar() {
     const data = await response.json();
     return setData(data);
   }
-  
+
   useEffect(() => {
     fetchData();
   }, [])
@@ -60,11 +59,46 @@ function SearchBar() {
         <div className="container-lg col-md-auto">
           <div className="container-fluid">
             <div className="input-group">
-              <input type="search" className="form-control rounded" placeholder="Search" aria-label="Search" />
+              <input type="search" className="form-control rounded" placeholder="Search" aria-label="Search"
+
+                onChange={(event) => {
+
+                  axios.post(
+                    "http://127.0.0.1:8000/api/networkSearch/",
+                    {
+                       filter: filter,
+                       input: event.target.value
+                    },
+                    {
+                      headers: {
+                        "Content-type": "application/json",
+                      }
+                    }
+                  )
+                   .then(response => {
+                        if (response.status == 200) {
+                         setData(response.data);
+                         console.log(response.data)
+                        }
+                      })
+                      .catch(err => console.warn(err));
+                  }}
+
+                 
+                
+
+
+
+              />
             </div>
             <div className="select">
-              <select name="format" className="form-select">
-                <option value="organization">Filter by: Organization</option>
+              <select name="format" className="form-select"
+                onChange={(event) => {
+                    filter = event.target.value;
+                   
+                }}
+              >
+                <option value="Email" >Filter by: Email</option>
                 <option value="Product" selected>Filter by: Product</option>
               </select>
             </div>
@@ -84,10 +118,10 @@ function SearchBar() {
           </div>
           <div className="container-md">
             <div className="tab container-sm">
-              <Button className="tablinks btn btn-light" onClick={(e) => { {fetchData()}}}id="defaultOpen">
-                  💬 All Posts</Button><br />
-              <Button className="tablinks btn btn-light"  onClick={(e) => { {fetchDataSharing()}}}  >📣 Sharing</Button><br />
-              <Button className="tablinks btn btn-light"  onClick={(e) => { {fetchDataReceiving()}}}>💬 Receiving</Button><br />
+              <Button className="tablinks btn btn-light" onClick={(e) => { { fetchData() } }} id="defaultOpen">
+                💬 All Posts</Button><br />
+              <Button className="tablinks btn btn-light" onClick={(e) => { { fetchDataSharing() } }}  >📣 Sharing</Button><br />
+              <Button className="tablinks btn btn-light" onClick={(e) => { { fetchDataReceiving() } }}>💬 Receiving</Button><br />
             </div>
             <div id="disc">
               {getData && getData.length > 0 && getData.map((userObj) => (

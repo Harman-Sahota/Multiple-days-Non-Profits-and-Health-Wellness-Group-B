@@ -145,18 +145,34 @@ def networkPull(request):
         results = posts.objects.all()
         serialize = networkPullSerialize(results,many=True)
         return Response(serialize.data)
+    
 @api_view(["GET"])
 def networkPullSharing(request):
     if request.method == 'GET':
         results = posts.objects.filter(Type = 'Sharing')
         serialize = networkPullSerialize(results,many=True)
         return Response(serialize.data)
+    
 @api_view(["GET"])
 def networkPullReceiving(request):
     if request.method == 'GET':
         results = posts.objects.filter(Type = 'Receiving')
         serialize = networkPullSerialize(results,many=True)
         return Response(serialize.data)
+    
+
+
+@api_view(["POST"])
+def networkSearch(request):
+    if request.method == 'POST':
+        if request.data['filter'] == 'Product':
+            results = posts.objects.filter( product__icontains =  request.data['input']);
+        if request.data['filter'] == 'Email':
+            results = posts.objects.filter( Email__contains =  request.data['input']);
+            
+        serialize = networkPullSerialize(results,many=True)
+        return Response(serialize.data)
+
 
 @api_view(["POST"])
 def profilePull(request):
