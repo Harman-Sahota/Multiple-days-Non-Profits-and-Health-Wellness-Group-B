@@ -30,6 +30,14 @@ function Tracker() {
   const percentPartnerNetwork = useRef();
   const percentLandFill = useRef();
 
+  // setInterval(calculateLandFillPercent(), 500);
+  useEffect(() => {
+    const interval = setInterval(function () {
+      calculateLandFillAndPercentsWrapper();
+    }, 500);
+    return () => clearInterval(interval);
+  }, []);
+
   const [trackers, setTrackers] = useState({
     Category: "",
     Description: "",
@@ -38,7 +46,7 @@ function Tracker() {
     amountToClients: "",
     amountToAFeed: "",
     amountToCompost: "",
-    amountToPartNet: "",
+    amountToPartnerNetwork: "",
     amountToLandfill: "",
     percentClients: "",
     percentAFeed: "",
@@ -137,6 +145,7 @@ function Tracker() {
                           placeholder="Quantity"
                           name="quantity"
                           ref={quantity}
+                          onKeyUp={calculateLandFillAndPercentsWrapper}
                           onChange={(event) => {
                             setTrackers({
                               ...trackers,
@@ -179,7 +188,7 @@ function Tracker() {
                               ref={clients}
                               min={0}
                               // style={{ width: "10em" }}
-                              onKeyUp={() => {}}
+                              onKeyUp={calculateLandFillAndPercentsWrapper}
                               // onkeyup="calculateLandfill(); calculatePercent()
                               onChange={(event) => {
                                 setTrackers({
@@ -199,7 +208,7 @@ function Tracker() {
                               name="animalFeed"
                               ref={animalFeed}
                               min={0}
-                              onKeyUp={() => {}}
+                              onKeyUp={calculateLandFillAndPercentsWrapper}
                               // onkeyup="calculateLandfill(); calculatePercent()"
                               onChange={(event) => {
                                 setTrackers({
@@ -219,7 +228,7 @@ function Tracker() {
                               name="compost"
                               ref={compost}
                               min={0}
-                              onKeyUp={() => {}}
+                              onKeyUp={calculateLandFillAndPercentsWrapper}
                               // onkeyup="calculateLandfill(); calculatePercent()"
                               onChange={(event) => {
                                 setTrackers({
@@ -235,17 +244,17 @@ function Tracker() {
                             <input
                               type="number"
                               className={`form-control ${trackerCSS["customised-input"]}`}
-                              id="partnet"
-                              name="partnet"
+                              id="partnerNetwork"
+                              name="partnerNetwork"
                               ref={partnerNetwork}
                               min={0}
-                              onKeyUp={() => {}}
+                              onKeyUp={calculateLandFillAndPercentsWrapper}
                               // onKeyUp={() => {calculateLandfill(); calculatePercent()}}
                               // onkeyup="calculateLandfill(); calculatePercent()"
                               onChange={(event) => {
                                 setTrackers({
                                   ...trackers,
-                                  amountToPartNet: event.target.value,
+                                  amountToPartnerNetwork: event.target.value,
                                 });
                               }}
                             />
@@ -256,8 +265,8 @@ function Tracker() {
                             <input
                               type="number"
                               className={`form-control ${trackerCSS["customised-input"]}`}
-                              id="landfill"
-                              name="landfill"
+                              id="landFill"
+                              name="landFill"
                               ref={landFill}
                               min={0}
                               onChange={(event) => {
@@ -282,12 +291,13 @@ function Tracker() {
                             <input
                               type="number"
                               className={`form-control ${trackerCSS["customised-smaller-input"]}`}
-                              id="percentclients"
-                              name="percentclients"
+                              id="percentClients"
+                              name="percentClients"
                               ref={percentClients}
                               min={0}
+                              value={0}
                               max={100}
-                              onLoad={() => {}}
+                              onLoad={calculateLandFillPercent}
                               onChange={(event) => {
                                 setTrackers({
                                   ...trackers,
@@ -308,12 +318,13 @@ function Tracker() {
                             <input
                               type="number"
                               className={`form-control ${trackerCSS["customised-smaller-input"]}`}
-                              id="percentanimalfeed"
-                              name="percentanimalfeed"
+                              id="percentAnimalFeed"
+                              name="percentAnimalFeed"
                               ref={percentAnimalFeed}
                               min={0}
+                              value={0}
                               max={100}
-                              onLoad={() => {}}
+                              onLoad={calculateLandFillPercent}
                               onChange={(event) => {
                                 setTrackers({
                                   ...trackers,
@@ -334,12 +345,13 @@ function Tracker() {
                             <input
                               type="number"
                               className={`form-control ${trackerCSS["customised-smaller-input"]}`}
-                              id="percentcompost/fert"
-                              name="percentcompost/fert"
+                              id="percentCompost"
+                              name="percentCompost"
                               ref={percentCompost}
                               min={0}
+                              value={0}
                               max={100}
-                              onLoad={() => {}}
+                              onLoad={calculateLandFillPercent}
                               onChange={(event) => {
                                 setTrackers({
                                   ...trackers,
@@ -352,7 +364,7 @@ function Tracker() {
                             />
                           </div>
                           <div className="col d-flex align-items-center">
-                            Compost/Fertilizer
+                            Compost / Fertilizer
                           </div>
                         </div>
                         <div className="row pb-2">
@@ -360,12 +372,13 @@ function Tracker() {
                             <input
                               type="number"
                               className={`form-control ${trackerCSS["customised-smaller-input"]}`}
-                              id="percentpartnet"
-                              name="percentpartnet"
+                              id="percentPartnerNetwork"
+                              name="percentPartnerNetwork"
                               ref={percentPartnerNetwork}
                               min={0}
+                              value={0}
                               max={100}
-                              onLoad={() => {}}
+                              onLoad={calculateLandFillPercent}
                               onChange={(event) => {
                                 setTrackers({
                                   ...trackers,
@@ -386,8 +399,8 @@ function Tracker() {
                             <input
                               type="number"
                               className={`form-control ${trackerCSS["customised-smaller-input"]}`}
-                              id="percentlandfill"
-                              name="percentlandfill"
+                              id="percentLandFill"
+                              name="percentLandFill"
                               ref={percentLandFill}
                               value={100}
                               onChange={(event) => {
@@ -424,7 +437,8 @@ function Tracker() {
                                   amountToClients: trackers.amountToClients,
                                   amountToAFeed: trackers.amountToAFeed,
                                   amountToCompost: trackers.amountToCompost,
-                                  amountToPartNet: trackers.amountToPartNet,
+                                  amountToPartNet:
+                                    trackers.amountToPartnerNetwork,
                                   amountToLandfill: trackers.amountToLandfill,
                                   percentClients: trackers.percentClients,
                                   percentAFeed: trackers.percentAFeed,
