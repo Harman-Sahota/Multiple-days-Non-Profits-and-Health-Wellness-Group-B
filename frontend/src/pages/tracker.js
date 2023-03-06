@@ -55,6 +55,12 @@ function Tracker() {
     return () => clearInterval(interval);
   }, []);
 
+  function calculateLandFillAndPercentsWrapper() {
+    calculateLandFill();
+    calculatePercent();
+    calculateLandFillPercent();
+  }
+
   function calculateLandFill() {
     const sum =
       Number(clients.current.value) +
@@ -64,6 +70,39 @@ function Tracker() {
     const diff = Number(quantity.current.value) - Number(sum);
 
     landFill.current.value = Number(diff);
+  }
+
+  function calculateLandFillPercent() {
+    const sum =
+      Number(percentClients.current.value) +
+      Number(percentAnimalFeed.current.value) +
+      Number(percentCompost.current.value) +
+      Number(percentPartnerNetwork.current.value);
+
+    const diff = 100 - Number(sum);
+
+    percentLandFill.current.value = Number(diff).toFixed(2);
+  }
+
+  function calculatePercent() {
+    percentClients.current.value = (
+      Number(Number(clients.current.value) / Number(quantity.current.value)) *
+      100
+    ).toFixed(2);
+    percentAnimalFeed.current.value = (
+      Number(
+        Number(animalFeed.current.value) / Number(quantity.current.value)
+      ) * 100
+    ).toFixed(2);
+    percentCompost.current.value = (
+      Number(Number(compost.current.value) / Number(quantity.current.value)) *
+      100
+    ).toFixed(2);
+    percentPartnerNetwork.current.value = (
+      Number(
+        Number(partnerNetwork.current.value) / Number(quantity.current.value)
+      ) * 100
+    ).toFixed(2);
   }
 
   var trackerData = JSON.stringify(trackers);
