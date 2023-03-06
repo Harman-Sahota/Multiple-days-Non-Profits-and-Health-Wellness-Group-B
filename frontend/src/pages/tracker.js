@@ -105,6 +105,36 @@ function Tracker() {
     ).toFixed(2);
   }
 
+  // Downloading CSV
+  function downloadCSV(csv, filename) {
+    const csvFile = new Blob([csv], { type: "text/csv" });
+    const downloadLink = document.createElement("a");
+
+    downloadLink.download = filename;
+    downloadLink.href = window.URL.createObjectURL(csvFile);
+
+    downloadLink.style.display = "none";
+
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+  }
+
+  // Exporting Table to CSV
+  function exportTableToCSV(filename) {
+    var csv;
+    const rows = document.querySelectorAll("table tr");
+
+    for (var i = 0; i < rows.length; i++) {
+      var row = [],
+        cols = rows[i].querySelectorAll("td, th");
+
+      for (var j = 0; j < cols.length - 1; j++) row.push(cols[j].innerText);
+
+      csv.push(row.join(","));
+    }
+    downloadCSV(csv.join("\n"), filename);
+  }
+
   var trackerData = JSON.stringify(trackers);
   if (
     new Date().getTime() > localStorage.getItem("expiry") &&
@@ -533,7 +563,9 @@ function Tracker() {
                   type="button"
                   variant="outline-success"
                   className="btn btn-outline-success"
-                  onClick={() => {}}
+                  onClick={function () {
+                    exportTableToCSV("data.csv");
+                  }}
                   // onClick={() => exportTableToCSV("data.csv")}
                 >
                   Export CSV
