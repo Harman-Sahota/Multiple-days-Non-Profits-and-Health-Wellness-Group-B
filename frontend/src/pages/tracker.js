@@ -17,6 +17,23 @@ import * as d3Axis from "d3-axis";
 import * as d3ScaleChromatic from "d3-scale-chromatic";
 
 function Tracker() {
+  const [trackers, setTrackers] = useState({
+    Category: "",
+    Description: "",
+    Quantity: "",
+    Qunits: "",
+    amountToClients: "",
+    amountToAFeed: "",
+    amountToCompost: "",
+    amountToPartnerNetwork: "",
+    amountToLandfill: "",
+    percentClients: "",
+    percentAFeed: "",
+    percentCompost: "",
+    percentPartNet: "",
+    percentLandfill: "",
+  });
+
   const quantity = useRef();
   const clients = useRef();
   const animalFeed = useRef();
@@ -38,22 +55,16 @@ function Tracker() {
     return () => clearInterval(interval);
   }, []);
 
-  const [trackers, setTrackers] = useState({
-    Category: "",
-    Description: "",
-    Quantity: "",
-    Qunits: "",
-    amountToClients: "",
-    amountToAFeed: "",
-    amountToCompost: "",
-    amountToPartnerNetwork: "",
-    amountToLandfill: "",
-    percentClients: "",
-    percentAFeed: "",
-    percentCompost: "",
-    percentPartNet: "",
-    percentLandfill: "",
-  });
+  function calculateLandFill() {
+    const sum =
+      Number(clients.current.value) +
+      Number(animalFeed.current.value) +
+      Number(compost.current.value) +
+      Number(partnerNetwork.current.value);
+    const diff = Number(quantity.current.value) - Number(sum);
+
+    landFill.current.value = Number(diff);
+  }
 
   var trackerData = JSON.stringify(trackers);
   if (
