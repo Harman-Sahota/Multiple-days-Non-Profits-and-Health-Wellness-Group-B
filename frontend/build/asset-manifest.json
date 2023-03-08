@@ -1,20 +1,19 @@
 {
   "files": {
-    "main.css": "/static/css/main.20ef4e96.css",
-    "main.js": "/static/js/main.7b0406e2.js",
+    "main.css": "/static/css/main.c01d5d6e.css",
+    "main.js": "/static/js/main.29317bb9.js",
     "static/js/787.cda612ba.chunk.js": "/static/js/787.cda612ba.chunk.js",
     "static/media/login_bg.png": "/static/media/login_bg.158e15d067cd25a1c7cd.png",
     "static/media/abstract-user-flat-4.png": "/static/media/abstract-user-flat-4.b95230eee6c958dbea8a.png",
     "static/media/ORT_logo.svg": "/static/media/ORT_logo.6b5c131e91955983ece7613336ed68b6.svg",
     "static/media/calendar.png": "/static/media/calendar.ebf373e6fb5aa2935c1d.png",
-    "static/media/blank-profile-picture.png": "/static/media/blank-profile-picture.2fda6558cd58b877e14f.png",
     "index.html": "/index.html",
-    "main.20ef4e96.css.map": "/static/css/main.20ef4e96.css.map",
-    "main.7b0406e2.js.map": "/static/js/main.7b0406e2.js.map",
+    "main.c01d5d6e.css.map": "/static/css/main.c01d5d6e.css.map",
+    "main.29317bb9.js.map": "/static/js/main.29317bb9.js.map",
     "787.cda612ba.chunk.js.map": "/static/js/787.cda612ba.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.20ef4e96.css",
-    "static/js/main.7b0406e2.js"
+    "static/css/main.c01d5d6e.css",
+    "static/js/main.29317bb9.js"
   ]
 }

@@ -94,6 +94,7 @@ class tracker(models.Model):
     percentCompost = models.IntegerField()
     percentPartNet = models.IntegerField()
     percentLandfill = models.IntegerField()
+    date_time = models.DateTimeField(auto_now_add=True)
 
     #Email = models.CharField(max_length=255)
 
