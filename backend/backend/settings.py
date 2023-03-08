@@ -146,3 +146,6 @@ AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend']
 #         'rest_framework_simplejwt.authentication.JWTAuthentication',
 #     ],
 # }
+
+TIME_ZONE = 'US/Pacific'
+USE_TZ = False

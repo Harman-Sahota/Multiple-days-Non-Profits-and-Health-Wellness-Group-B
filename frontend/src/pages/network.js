@@ -207,7 +207,7 @@ function SearchBar() {
                         Quantity: posts.Quantity,
                         Units: posts.Units,
                         Description: posts.Description,
-                        Email: localStorage.getItem("email")
+                        Email: localStorage.getItem("email"),
                       },
                       {
                         headers: {
