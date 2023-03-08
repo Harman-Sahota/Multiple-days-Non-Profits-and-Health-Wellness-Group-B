@@ -77,3 +77,7 @@ input[type="number"] {
   position: relative;
   left: 0.7rem;
 }
+
+.date-input {
+  width: 12em;
+}
