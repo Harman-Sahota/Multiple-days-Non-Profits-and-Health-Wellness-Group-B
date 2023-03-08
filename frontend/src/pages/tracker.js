@@ -17,6 +17,23 @@ import * as d3Axis from "d3-axis";
 import * as d3ScaleChromatic from "d3-scale-chromatic";
 
 function Tracker() {
+  const [trackers, setTrackers] = useState({
+    Category: "",
+    Description: "",
+    Quantity: "",
+    Qunits: "",
+    amountToClients: "",
+    amountToAFeed: "",
+    amountToCompost: "",
+    amountToPartnerNetwork: "",
+    amountToLandfill: "",
+    percentClients: "",
+    percentAFeed: "",
+    percentCompost: "",
+    percentPartNet: "",
+    percentLandfill: "",
+  });
+
   const quantity = useRef();
   const clients = useRef();
   const animalFeed = useRef();
@@ -38,22 +55,85 @@ function Tracker() {
     return () => clearInterval(interval);
   }, []);
 
-  const [trackers, setTrackers] = useState({
-    Category: "",
-    Description: "",
-    Quantity: "",
-    Qunits: "",
-    amountToClients: "",
-    amountToAFeed: "",
-    amountToCompost: "",
-    amountToPartnerNetwork: "",
-    amountToLandfill: "",
-    percentClients: "",
-    percentAFeed: "",
-    percentCompost: "",
-    percentPartNet: "",
-    percentLandfill: "",
-  });
+  function calculateLandFillAndPercentsWrapper() {
+    calculateLandFill();
+    calculatePercent();
+    calculateLandFillPercent();
+  }
+
+  function calculateLandFill() {
+    const sum =
+      Number(clients.current.value) +
+      Number(animalFeed.current.value) +
+      Number(compost.current.value) +
+      Number(partnerNetwork.current.value);
+    const diff = Number(quantity.current.value) - Number(sum);
+
+    landFill.current.value = Number(diff);
+  }
+
+  function calculateLandFillPercent() {
+    const sum =
+      Number(percentClients.current.value) +
+      Number(percentAnimalFeed.current.value) +
+      Number(percentCompost.current.value) +
+      Number(percentPartnerNetwork.current.value);
+
+    const diff = 100 - Number(sum);
+
+    percentLandFill.current.value = Number(diff).toFixed(2);
+  }
+
+  function calculatePercent() {
+    percentClients.current.value = (
+      Number(Number(clients.current.value) / Number(quantity.current.value)) *
+      100
+    ).toFixed(2);
+    percentAnimalFeed.current.value = (
+      Number(
+        Number(animalFeed.current.value) / Number(quantity.current.value)
+      ) * 100
+    ).toFixed(2);
+    percentCompost.current.value = (
+      Number(Number(compost.current.value) / Number(quantity.current.value)) *
+      100
+    ).toFixed(2);
+    percentPartnerNetwork.current.value = (
+      Number(
+        Number(partnerNetwork.current.value) / Number(quantity.current.value)
+      ) * 100
+    ).toFixed(2);
+  }
+
+  // Downloading CSV
+  function downloadCSV(csv, filename) {
+    const csvFile = new Blob([csv], { type: "text/csv" });
+    const downloadLink = document.createElement("a");
+
+    downloadLink.download = filename;
+    downloadLink.href = window.URL.createObjectURL(csvFile);
+
+    downloadLink.style.display = "none";
+
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+  }
+
+  // Exporting Table to CSV
+  function exportTableToCSV(filename) {
+    var csv;
+    const rows = document.querySelectorAll("table tr");
+
+    for (var i = 0; i < rows.length; i++) {
+      var row = [],
+        cols = rows[i].querySelectorAll("td, th");
+
+      for (var j = 0; j < cols.length - 1; j++) row.push(cols[j].innerText);
+
+      csv.push(row.join(","));
+    }
+    downloadCSV(csv.join("\n"), filename);
+  }
 
   var trackerData = JSON.stringify(trackers);
   if (
@@ -483,7 +563,9 @@ function Tracker() {
                   type="button"
                   variant="outline-success"
                   className="btn btn-outline-success"
-                  onClick={() => {}}
+                  onClick={function () {
+                    exportTableToCSV("data.csv");
+                  }}
                   // onClick={() => exportTableToCSV("data.csv")}
                 >
                   Export CSV

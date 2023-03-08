@@ -72,8 +72,8 @@ class posts(models.Model):
     Quantity = models.IntegerField()
     Units = models.CharField(max_length=3)
     Description = models.CharField(max_length=255)
-    
     Email = models.CharField(max_length=255)
+    date_time = models.DateTimeField(auto_now_add=True)
 
 
     class Meta:
