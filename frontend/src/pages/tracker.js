@@ -18,15 +18,33 @@ import * as d3ScaleChromatic from "d3-scale-chromatic";
 
 function Tracker() {
   const [getData, setData] = useState([]);
-  
+  const [getPercentageData, setPercentageData] = useState([]);
+  const [getCategoryData, setCategoryData] = useState([]);
+
   const fetchData = async () => {
     const response = await fetch("http://127.0.0.1:8000/api/trackerPull/");
     const data = await response.json();
     return setData(data);
 
   }
+  const fetchPercentagechartData = async () => {
+    const response = await fetch("http://localhost:8000/api/trackerPercentageSum/");
+    const data = await response.json();
+    return setPercentageData(data);
+
+  }
+  const fetchCategorychartData = async () => {
+    const response = await fetch("http://localhost:8000/api/trackerCategorySum/");
+    const data = await response.json();
+    return setCategoryData(data);
+
+  }
+
+
   useEffect(() => {
     fetchData();
+    fetchPercentagechartData();
+    fetchCategorychartData();
   }, [])
 
 
@@ -557,6 +575,9 @@ function Tracker() {
                                     "Your form has been submitted successfully"
                                   );
                                   fetchData();
+                                  fetchPercentagechartData();
+                                  fetchCategorychartData();
+                                  console.log(getPercentageData);
                                  
                            
                                   
