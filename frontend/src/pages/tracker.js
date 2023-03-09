@@ -18,20 +18,15 @@ import * as d3ScaleChromatic from "d3-scale-chromatic";
 
 function Tracker() {
   const [trackers, setTrackers] = useState({
-    Category: "",
+    Category: "Fresh Produce",
     Description: "",
     Quantity: "",
-    Qunits: "",
+    Qunits: "lb",
     amountToClients: "",
     amountToAFeed: "",
     amountToCompost: "",
     amountToPartnerNetwork: "",
-    amountToLandfill: "",
-    percentClients: "",
-    percentAFeed: "",
-    percentCompost: "",
-    percentPartNet: "",
-    percentLandfill: "",
+   
   });
 
   const quantity = useRef();
@@ -167,7 +162,10 @@ function Tracker() {
             </div>
             <div className="card-body">
               <div id="form-wrapper">
-                <div className="tracker-data-entry" id="tracker">
+                <div
+                  className="tracker-data-entry"
+                  id="tracker"
+                >
                   <Form.Group>
                     {/* {% csrf_token %} */}
                     <div className="row">
@@ -208,20 +206,6 @@ function Tracker() {
                               Description: event.target.value,
                             });
                           }}
-                        />
-                      </div>
-                      <div className="col-md-auto">
-                        <label htmlFor="description">Date and Time</label>
-                        <br />
-                        <input
-                          type="text"
-                          disabled="disabled"
-                          id="datetime"
-                          className={`form-control input-text ${trackerCSS["date-input"]}`}
-                          placeholder="Date and Time"
-                          name="Date and Time"
-                          value={new Date().toLocaleString()}
-                          readonly
                         />
                       </div>
                       <div className="col-md-auto">
@@ -293,7 +277,7 @@ function Tracker() {
                           <div className="col-auto">
                             <input
                               type="number"
-                              step="any"
+                              step = "any"
                               className={`form-control ${trackerCSS["customised-input"]}`}
                               id="animalFeed"
                               name="animalFeed"
@@ -314,7 +298,7 @@ function Tracker() {
                           <div className="col-auto">
                             <input
                               type="number"
-                              step="any"
+                              step = "any"
                               className={`form-control ${trackerCSS["customised-input"]}`}
                               id="compost"
                               name="compost"
@@ -335,7 +319,7 @@ function Tracker() {
                           <div className="col-auto">
                             <input
                               type="number"
-                              step="any"
+                              step = "any"
                               className={`form-control ${trackerCSS["customised-input"]}`}
                               id="partnerNetwork"
                               name="partnerNetwork"
@@ -357,7 +341,7 @@ function Tracker() {
                           <div className="col-auto">
                             <input
                               type="number"
-                              step="any"
+                              step = "any"
                               className={`form-control ${trackerCSS["customised-input"]}`}
                               id="landFill"
                               name="landFill"
@@ -384,7 +368,7 @@ function Tracker() {
                           <div className="col-auto">
                             <input
                               type="number"
-                              step="any"
+                              step = "any"
                               className={`form-control ${trackerCSS["customised-smaller-input"]}`}
                               id="percentClients"
                               name="percentClients"
@@ -412,7 +396,7 @@ function Tracker() {
                           <div className="col-auto">
                             <input
                               type="number"
-                              step="any"
+                              step = "any"
                               className={`form-control ${trackerCSS["customised-smaller-input"]}`}
                               id="percentAnimalFeed"
                               name="percentAnimalFeed"
@@ -440,7 +424,7 @@ function Tracker() {
                           <div className="col-auto">
                             <input
                               type="number"
-                              step="any"
+                              step = "any"
                               className={`form-control ${trackerCSS["customised-smaller-input"]}`}
                               id="percentCompost"
                               name="percentCompost"
@@ -468,7 +452,7 @@ function Tracker() {
                           <div className="col-auto">
                             <input
                               type="number"
-                              step="any"
+                              step = "any"
                               className={`form-control ${trackerCSS["customised-smaller-input"]}`}
                               id="percentPartnerNetwork"
                               name="percentPartnerNetwork"
@@ -496,7 +480,7 @@ function Tracker() {
                           <div className="col-auto">
                             <input
                               type="number"
-                              step="any"
+                              step = "any"
                               className={`form-control ${trackerCSS["customised-smaller-input"]}`}
                               id="percentLandFill"
                               name="percentLandFill"
@@ -523,12 +507,11 @@ function Tracker() {
                           variant="outline-success"
                           className={`${trackerCSS["save"]} btn btn-outline-success`}
                           id="submit"
-                          type="submit"
                           onClick={(e) => {
-                            console.log(trackers);
+                            console.log(trackers)
                             axios
                               .post(
-                                "http://127.0.0.1:8000/api/trackerInsert",
+                                "http://127.0.0.1:8000/api/trackerInsert/",
                                 {
                                   Category: trackers.Category,
                                   Description: trackers.Description,
@@ -539,23 +522,12 @@ function Tracker() {
                                   amountToCompost: trackers.amountToCompost,
                                   amountToPartNet:
                                     trackers.amountToPartnerNetwork,
-                                  amountToLandfill:
-                                    document.getElementById("landFill").value,
-                                  percentClients:
-                                    document.getElementById("percentClients")
-                                      .value,
-                                  percentAFeed:
-                                    document.getElementById("percentAnimalFeed")
-                                      .value,
-                                  percentCompost:
-                                    document.getElementById("percentCompost")
-                                      .value,
-                                  percentPartNet: document.getElementById(
-                                    "percentPartnerNetwork"
-                                  ).value,
-                                  percentLandfill:
-                                    document.getElementById("percentLandFill")
-                                      .value,
+                                  amountToLandfill: document.getElementById('landFill').value,
+                                  percentClients: document.getElementById('percentClients').value,
+                                  percentAFeed: document.getElementById('percentAnimalFeed').value,
+                                  percentCompost: document.getElementById('percentCompost').value,
+                                  percentPartNet: document.getElementById('percentPartnerNetwork').value,
+                                  percentLandfill: document.getElementById('percentLandFill').value,
                                 },
                                 {
                                   headers: {
