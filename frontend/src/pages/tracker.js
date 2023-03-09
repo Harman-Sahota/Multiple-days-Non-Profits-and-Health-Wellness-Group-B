@@ -17,6 +17,18 @@ import * as d3Axis from "d3-axis";
 import * as d3ScaleChromatic from "d3-scale-chromatic";
 
 function Tracker() {
+  const [getData, setData] = useState([]);
+  const fetchData = async () => {
+    const response = await fetch("http://127.0.0.1:8000/api/trackerPull/");
+    const data = await response.json();
+    return setData(data);
+  }
+  useEffect(() => {
+    fetchData();
+  }, [])
+
+
+
   const [trackers, setTrackers] = useState({
     Category: "Fresh Produce",
     Description: "",
@@ -508,7 +520,7 @@ function Tracker() {
                           className={`${trackerCSS["save"]} btn btn-outline-success`}
                           id="submit"
                           onClick={(e) => {
-                            console.log(trackers)
+                            fetchData();
                             axios
                               .post(
                                 "http://127.0.0.1:8000/api/trackerInsert/",
@@ -593,30 +605,30 @@ function Tracker() {
                       <th>Compost</th>
                       <th>Partner Network</th>
                       <th>Landfill</th>
+                      <th>Date Time</th>
                       <th></th>
-                      <th></th>
+                   
                     </tr>
                   </thead>
                   <tbody>
-                    {/* {% for i in Object %} */}
+                  {getData && getData.length > 0 && getData.map((userObj) => (
                     <tr>
-                      <td>{/* {{i.0}} */}</td>
-                      <td>{/* {{i.1}} */}</td>
-                      <td>{/* {{i.2}} */}</td>
-                      <td>{/* {{i.3}} */}</td>
-                      <td>{/* {{i.4}} */}</td>
-                      <td>{/* {{i.5}} */}</td>
-                      <td>{/* {{i.6}} */}</td>
-                      <td>{/* {{i.7}} */}</td>
-                      <td>{/* {{i.8}} */}</td>
+                      <td>{userObj.Category}</td>
+                      <td>{userObj.Description}</td>
+                      <td>{userObj.Quantity}</td>
+                      <td>{userObj.Qunits}</td>
+                      <td>{userObj.percentClients}</td>
+                      <td>{userObj.percentAFeed}</td>
+                      <td>{userObj.percentCompost}</td>
+                      <td>{userObj.percentPartNet}</td>
+                      <td>{userObj.percentLandfill}</td>
+                      <td>{userObj.date_time}</td>
                       <td>
                         <div>
-                          {/* {% csrf_token %} */}
+                
                           <Button
                             variant="danger"
                             className="btn btn-danger"
-                            type="submit"
-                            // value="{{i.0}}|{{i.1}}|{{i.2}}|{{i.3}}|{{i.4}}|{{i.5}}|{{i.6}}|{{i.7}}|{{i.8}}"
                             name="field"
                           >
                             Delete
@@ -624,7 +636,8 @@ function Tracker() {
                         </div>
                       </td>
                     </tr>
-                    {/* {% endfor %} */}
+                    ))}
+                   
                   </tbody>
                 </Table>
               </div>
