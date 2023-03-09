@@ -558,7 +558,7 @@ function Tracker() {
                                   );
                                   fetchData();
                                  
-                                  console.log(resp);
+                           
                                   
                                 }
                               })
