@@ -2,7 +2,7 @@
 
 *Created: September 29, 2022*
 
-*Last updated: January 27, 2023*
+*Last updated: March 3, 2023*
 
 ## Overview
 
@@ -33,7 +33,15 @@ Click [here](https://docs.google.com/spreadsheets/d/1qnWRLLMm4y7r7I7h9rt_KXN-MSf
 |------|-------|---------|
 |15| Begin Page Conversion to React| [Client Meeting Minutes (Jan. 11)](docs/client-minutes/client-meeting-jan11-11am.md)|
 |16| Continue Page Conversions to React| [Client Meeting Minutes(Jan. 18)](docs/client-minutes/client-meeting-jan18-1130am.md)|
-|17| Continue Page Conversions to React| [Client Meeting Minutes (Jan. 25)]()|
+|17| Continue Page Conversions to React| [Client Group Meeting Minutes (Jan. 25)](docs/client-minutes/client-meeting-jan25-10am.md) <br/> [Client Private Meeting Minutes (Jan. 25)](docs/client-minutes/client-meeting-jan25-1130am.md)|
+|18| Continue Page Conversions to React <br/> Refine Permissions Page| [Client Group Meeting Minutes (Feb. 1)](docs/client-minutes/client-meeting-feb1-10am.md) <br/> [Client Private Meeting Minutes (Feb. 1)](docs/client-minutes/client-meeting-feb1-1130am.md)|
+|19| Continue Page Conversions to React <br/> Refine Profile Page <br/> Refine Permissions Page| [Client Group Meeting Minutes (Feb. 8)](docs/client-minutes/client-meeting-feb8-1000am.md) <br/> [Client Private Meeting Minutes (Feb. 8)](docs/client-minutes/client-meeting-feb8-1130am.md)|
+|20| Continue Page Conversions to React <br/> Refine Profile Page| [Client Group Meeting Minutes (Feb. 15)](docs/client-minutes/client-meeting-feb15-1000am.md) <br/> [Client Private Meeting Minutes (Feb. 15)](docs/client-minutes/client-meeting-feb15-1130am.md)|
+|21| **Reading Week**| |
+|22| Continue Page Conversions to React <br/> Research Tokens <br/> Final Adjustments to Profile Page| [Client Group Meeting Minutes (Mar. 1)]() <br/> [Client Private Meeting Minutes (Mar. 1)]()|
+|23| [List of Usability Tasks #2]()| [Client Group Meeting Minutes (Mar. 8)]() <br/> [Client Private Meeting Minutes (Mar. 8)]()|
+|24| Prototype Video #2 | [Client Group Meeting Minutes (Mar. 15)]() <br/> [Client Private Meeting Minutes (Mar. 15)]()|
+|25| Peer Testing Report #2 <br/> Peer Evaluations #3 | [Client Group Meeting Minutes (Mar. 22)]() <br/> [Client Private Meeting Minutes (Mar. 22)]()|
 
 ### Semester #1
 
@@ -48,7 +56,7 @@ Click [here](https://docs.google.com/spreadsheets/d/1qnWRLLMm4y7r7I7h9rt_KXN-MSf
 |8|[Design Mockups Con't](https://www.figma.com/file/1GtlA1QMreahkvaFInVySp/designs_nonprofits) <br/> [Design Mockup Review](docs/research/mockup_review.md) <br/> Install Django <br/> VM Access| [Client Meeting Minutes (Oct. 27)](docs/client-minutes/client-meeting-oct27-11am.md) <br/> [Team Meeting Minutes (Oct. 28)](docs/team-minutes/minutes_oct28.md)|
 |9| Project Change <br/> Begin coding homepage, login, and registration pages <br/> Create [Gantt Chart](https://docs.google.com/spreadsheets/d/1qnWRLLMm4y7r7I7h9rt_KXN-MSfjhDgY9-zHiGCzGig/edit?usp=sharing)| [Client Meeting Minutes (Oct. 31)](docs/client-minutes/client-meeting-oct31-1245pm.md) <br/> [Client Meeting Minutes (Nov. 3)](docs/client-minutes/client-meeting-nov3-11am.md) <br/> [Team Meeting Minutes (Nov. 4)](docs/team-minutes/minutes_nov4.md)|
 |10| **Reading Week** <br/> Complete Login Page <br/> Refine Homepage <br/> Refine Registration Page <br/> Designed Overview Page <br/> Completed Barb's [Research](docs/research/FoodSaviourResearch.md)|
-|11| Tracker Page <br/> Admin Page <br/> Profile Page <br/> List of Usability Tasks|[Client Meeting Minutes (Nov. 17)](docs/client-minutes/client-meeting-minutes-nov17-11am.md) <br/> [Team Meeting Minutes (Nov. 18)](docs/team-minutes/minutes_nov18.md)|
+|11| Tracker Page <br/> Admin Page <br/> Profile Page <br/> List of Usability Tasks #1|[Client Meeting Minutes (Nov. 17)](docs/client-minutes/client-meeting-minutes-nov17-11am.md) <br/> [Team Meeting Minutes (Nov. 18)](docs/team-minutes/minutes_nov18.md)|
 |12| Tracker Page Con't <br/> Admin Page Con't <br/> Profile Page Con't <br/> Prototype Video| [Client Meeting Minutes (Nov.24)](client-meeting-nov24-11am.md) <br/> [Team Meeting Minutes(Nov. 25)](docs/team-minutes/minutes_nov25.md)|
 |13| Peer Testing Sessions| [Client Meeting Minutes (Nov. 30)](client-meeting-nov30-11am.md) <br/> [Team Meeting Minutes (Dec. 2)](docs/team-minutes/minutes_dec2.md)|
 |14|[Peer Testing Report](docs/reports/peer-testing-report.md) <br/> Peer Evaluations|
