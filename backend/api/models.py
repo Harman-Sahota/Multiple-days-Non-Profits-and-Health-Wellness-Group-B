@@ -74,6 +74,9 @@ class posts(models.Model):
     Description = models.CharField(max_length=255)
     Email = models.CharField(max_length=255)
     date_time = models.DateTimeField(auto_now_add=True)
+    state = models.CharField(max_length=255,default='open')
+    shared_with = models.CharField(max_length=255,default='')
+    id = models.IntegerField();
 
 
     class Meta:

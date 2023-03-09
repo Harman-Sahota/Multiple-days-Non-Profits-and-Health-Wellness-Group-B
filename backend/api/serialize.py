@@ -37,6 +37,11 @@ class networkInsertSerialize(serializers.ModelSerializer):
         model = posts
         fields = '__all__'
 
+class networkUpdateSerialize(serializers.ModelSerializer):
+    class Meta:
+        model = posts
+        fields = ['state','shared_with']
+
 class networkPullSerialize(serializers.ModelSerializer):
     class Meta:
         model = posts

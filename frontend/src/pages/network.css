@@ -1,6 +1,6 @@
-html, body, .container-lg {
+/* html, body, .container-lg {
   min-height: 80vh;
-}
+} */
 
 .container-lg {
     margin-top: 3%;
@@ -13,6 +13,18 @@ html, body, .container-lg {
   
  
   }
+  
+  .container-md {
+    margin-top: 3%;
+    padding: 3em !important;
+    width: auto;
+    border-radius: 5px;
+    background: #fff;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    height: 100%;
+  
+  }
+
   
   .container-fluid {
     margin: 0 !important;
@@ -103,7 +115,7 @@ html, body, .container-lg {
 #disc{
   width: 70%;
   margin-left: 25%;
-margin-top: -19%;
+margin-top: -24%;
 
 }
 
@@ -112,6 +124,10 @@ margin-top: -19%;
   width: auto;
 }
 
-
-
-
+#status{
+  width: 13vh;
+  padding: 1.5em;
+  position: absolute;
+  margin-left: 85%;
+  margin-top: 0.5%;
+}
