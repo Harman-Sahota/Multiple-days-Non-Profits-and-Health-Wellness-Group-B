@@ -6,6 +6,7 @@ from api.models import permissions
 from api.models import tracker
 import jwt,datetime
 from api.serialize import userSerialize
+from django.db.models import Sum
 
 # from api.serialize import commentsSerialize
 
@@ -260,3 +261,16 @@ def trackerUpdate(request, pk):
             return Response(saveserialize.data, status=status.HTTP_201_CREATED)
         
         return Response(saveserialize.data, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+
+@api_view(['GET'])
+def trackerPercentageSum(request):
+    if request.method == 'GET':
+        sum = tracker.objects.aggregate(Sum('percentClients'),Sum('percentAFeed'),Sum('percentCompost'),Sum('percentPartNet'),Sum('percentLandfill'))
+        return Response(sum, status=status.HTTP_200_OK)  
+
+@api_view(['GET'])
+def trackerCategorySum(request):
+    if request.method == 'GET':
+        sum = tracker.objects.filter(Category='Fresh Produce').aggregate(Produce = Sum('Quantity')),tracker.objects.filter(Category='Meat').aggregate(Meat = Sum('Quantity')),tracker.objects.filter(Category='Canned Food').aggregate(Canned_Food = Sum('Quantity')),tracker.objects.filter(Category='Bread').aggregate(Bread = Sum('Quantity')),tracker.objects.filter(Category='Dairy').aggregate(Dairy = Sum('Quantity')), tracker.objects.filter(Category='Reclaimed').aggregate(Reclaimed = Sum('Quantity'))
+        return Response(sum, status=status.HTTP_200_OK) 
