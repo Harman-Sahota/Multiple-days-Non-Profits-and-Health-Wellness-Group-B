@@ -101,10 +101,10 @@ def networkUpdate(request,pk):
         return Response(saveserialize.data,status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
 
-@api_view(["GET"])
+@api_view(["POST"])
 def postsPullShared(request):
-    if request.method == 'GET':
-        results = posts.objects.exclude(shared_with__isnull=True).exclude(shared_with__exact='').values('shared_with').distinct()
+    if request.method == 'POST':
+        results = posts.objects.filter(Email = request.data['Email']).exclude(shared_with__isnull=True).exclude(shared_with__exact='').values('shared_with').distinct()
         serialize = postSharedSerialize(results,many=True)
         return Response(serialize.data)
 

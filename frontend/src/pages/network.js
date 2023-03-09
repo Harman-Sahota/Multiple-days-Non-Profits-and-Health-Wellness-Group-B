@@ -8,7 +8,6 @@ import fourcss from './fourcss.css';
 import axios, { all } from 'axios';
 import { local } from 'd3-selection';
 
-//this page will be changed soon
 var filter = 'Product';
 function SearchBar() {
 
@@ -16,11 +15,25 @@ function SearchBar() {
   const [getSharedData, setSharedData] = useState([]);
 
   const fetchSharedData = async () => {
-    const response = await fetch("http://localhost:8000/api/postsPullShared/");
-    const data = await response.json();
-    return setSharedData(data);
-
+    axios.post(
+      "http://localhost:8000/api/postsPullShared/",
+      {
+        Email: localStorage.getItem('email')
+      },
+      {
+        headers: {
+          "Content-type": "application/json",
+        }
+      }
+    )
+      .then(response => {
+        if (response.status == 200) {
+          setSharedData(response.data);
+        }
+      })
+      .catch(err => console.warn(err));
   }
+
 
   const fetchData = async () => {
     const response = await fetch("http://localhost:8000/api/networkPull/");
@@ -100,17 +113,11 @@ function SearchBar() {
               <tr>
                 <th>Email</th>
                 <th>Graph</th>
-                <th></th>
-                <th></th>
-                <th></th>
               </tr>
                {getSharedData && getSharedData.length > 0 && getSharedData.map((sharedObj) => (
                 <tr>
                   <td>{sharedObj.shared_with}</td>
                   <td><Button variant='outline-primary' className='btn btn-outline-primary'>Compare Data</Button></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
                 </tr>
               ))} 
             </table> 
