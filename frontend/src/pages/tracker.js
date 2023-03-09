@@ -18,10 +18,12 @@ import * as d3ScaleChromatic from "d3-scale-chromatic";
 
 function Tracker() {
   const [getData, setData] = useState([]);
+  
   const fetchData = async () => {
     const response = await fetch("http://127.0.0.1:8000/api/trackerPull/");
     const data = await response.json();
     return setData(data);
+
   }
   useEffect(() => {
     fetchData();
@@ -520,7 +522,9 @@ function Tracker() {
                           className={`${trackerCSS["save"]} btn btn-outline-success`}
                           id="submit"
                           onClick={(e) => {
-                            fetchData();
+                            
+                            
+                           
                             axios
                               .post(
                                 "http://127.0.0.1:8000/api/trackerInsert/",
@@ -552,9 +556,14 @@ function Tracker() {
                                   window.alert(
                                     "Your form has been submitted successfully"
                                   );
+                                  fetchData();
+                                 
+                                  console.log(resp);
+                                  
                                 }
                               })
                               .catch((err) => console.warn(err));
+                             
                           }}
                         >
                           Save
@@ -611,7 +620,9 @@ function Tracker() {
                     </tr>
                   </thead>
                   <tbody>
+                    
                   {getData && getData.length > 0 && getData.map((userObj) => (
+                 
                     <tr>
                       <td>{userObj.Category}</td>
                       <td>{userObj.Description}</td>
@@ -645,7 +656,7 @@ function Tracker() {
           </section>
 
           <br />
-
+        
           <div id="penetrate" className="penetrate" onLoad={pieChart}></div>
           {/* {{ json|json_script:"json" }} */}
         </div>

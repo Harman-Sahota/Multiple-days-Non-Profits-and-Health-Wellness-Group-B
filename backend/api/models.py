@@ -67,7 +67,7 @@ class permissions(models.Model):
 #         db_table = "comments"
 
 class posts(models.Model):
-    product = models.CharField(max_length=255,primary_key = True)
+    product = models.CharField(max_length=255)
     Type = models.CharField(max_length=255)
     Quantity = models.IntegerField()
     Units = models.CharField(max_length=3)
@@ -76,7 +76,7 @@ class posts(models.Model):
     date_time = models.DateTimeField(auto_now_add=True)
     state = models.CharField(max_length=255,default='open')
     shared_with = models.CharField(max_length=255,default='')
-    id = models.IntegerField();
+    id = models.AutoField(primary_key=True);
 
 
     class Meta:

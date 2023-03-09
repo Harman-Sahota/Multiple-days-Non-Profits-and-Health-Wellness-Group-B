@@ -97,12 +97,12 @@ function SearchBar() {
                 <th>Name</th>
                 <th></th>
               </tr>
-              {getSharedData && getSharedData.length > 0 && getSharedData.map((sharedObj) => (
+              {/* {getSharedData && getSharedData.length > 0 && getSharedData.map((sharedObj) => (
                 <tr>
                   <td>{sharedObj.FirstName}</td>
                   <td></td>
                 </tr>
-              ))}
+              ))} */}
             </table>
           </div>
           <div className="container-lg col-md-auto">
