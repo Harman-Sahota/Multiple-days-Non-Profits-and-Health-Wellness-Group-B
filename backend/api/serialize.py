@@ -10,6 +10,12 @@ class userSerialize(serializers.ModelSerializer):
     class Meta:
         model = users
         fields = '__all__'
+
+
+class postSharedSerialize(serializers.ModelSerializer):
+    class Meta:
+        model = posts
+        fields = ['shared_with']
     
 class adminInsertSerialize(serializers.ModelSerializer):
     class Meta:

@@ -23,6 +23,7 @@ urlpatterns = [
     path('trackerInsert/', views.trackerInsert),
     path('trackerPull/', views.trackerPull),
     path('trackerUpdate/', views.trackerUpdate),
+    path('postsPullShared/', views.postsPullShared),
     path('trackerPercentageSum/', views.trackerPercentageSum),
      path('trackerCategorySum/', views.trackerCategorySum),
     # path('token/', jwt_views.TokenObtainPairView.as_view(),name='token_obtain_pair'),

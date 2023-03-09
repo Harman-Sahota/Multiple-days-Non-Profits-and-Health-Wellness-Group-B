@@ -16,6 +16,7 @@ from api.serialize import adminUpdateSerialize
 from api.serialize import networkUpdateSerialize
 from api.serialize import networkInsertSerialize
 from api.serialize import networkPullSerialize
+from api.serialize import postSharedSerialize
 from api.serialize import profileSerialize
 from api.serialize import trackerInsertSerialize
 from api.serialize import trackerPullSerialize
@@ -95,10 +96,17 @@ def networkUpdate(request,pk):
         exists =  users.objects.filter(Email = request.data['shared_with'] ).count(); 
         if saveserialize.is_valid() and exists == 1:
             posts.objects.filter(id=pk).update(state='closed',shared_with=request.data['shared_with'])
+            
             return Response(saveserialize.data,status=status.HTTP_201_CREATED)    
         return Response(saveserialize.data,status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
 
+@api_view(["GET"])
+def postsPullShared(request):
+    if request.method == 'GET':
+        results = posts.objects.exclude(shared_with__isnull=True).exclude(shared_with__exact='').values('shared_with').distinct()
+        serialize = postSharedSerialize(results,many=True)
+        return Response(serialize.data)
 
         
 # @api_view(["POST"])
@@ -155,21 +163,21 @@ def networkInsert(request):
 @api_view(["GET"])
 def networkPull(request):
     if request.method == 'GET':
-        results = posts.objects.all()
+        results = posts.objects.exclude(state='closed')
         serialize = networkPullSerialize(results,many=True)
         return Response(serialize.data)
     
 @api_view(["GET"])
 def networkPullSharing(request):
     if request.method == 'GET':
-        results = posts.objects.filter(Type = 'Sharing')
+        results = posts.objects.filter(Type = 'Sharing').exclude(state='closed')
         serialize = networkPullSerialize(results,many=True)
         return Response(serialize.data)
 
 @api_view(["POST"])
 def networkPullCreator(request):
     if request.method == 'POST':
-        results = posts.objects.filter(Email = request.data['Email'])
+        results = posts.objects.filter(Email = request.data['Email']).exclude(state='closed')
         serialize = networkPullSerialize(results,many=True)
         return Response(serialize.data,status=status.HTTP_200_OK)
     return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
@@ -177,7 +185,7 @@ def networkPullCreator(request):
 @api_view(["GET"])
 def networkPullReceiving(request):
     if request.method == 'GET':
-        results = posts.objects.filter(Type = 'Receiving')
+        results = posts.objects.filter(Type = 'Receiving').exclude(state='closed')
         serialize = networkPullSerialize(results,many=True)
         return Response(serialize.data)
     

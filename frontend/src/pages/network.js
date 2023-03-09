@@ -15,6 +15,13 @@ function SearchBar() {
   const [getData, setData] = useState([]);
   const [getSharedData, setSharedData] = useState([]);
 
+  const fetchSharedData = async () => {
+    const response = await fetch("http://localhost:8000/api/postsPullShared/");
+    const data = await response.json();
+    return setSharedData(data);
+
+  }
+
   const fetchData = async () => {
     const response = await fetch("http://localhost:8000/api/networkPull/");
     const data = await response.json();
@@ -56,6 +63,7 @@ function SearchBar() {
 
   useEffect(() => {
     fetchData();
+    fetchSharedData();
   }, [])
 
   const [posts, setPosts] = useState({
@@ -86,24 +94,26 @@ function SearchBar() {
     if (new Date().getTime() < localStorage.getItem('expiry') && localStorage.roles) {
       return (
         <>
-          <div className="container-md col-md-auto">
+          <div className="container-md col-md-auto table-responsive-sm">
             <h3>Shared with:</h3>
-            <table striped
-              bordered
-              hover
-              responsive
-              style={{ width: "100%" }}>
+             <table class="table table-striped table-bordered table-hover table-sm">
               <tr>
-                <th>Name</th>
+                <th>Email</th>
+                <th>Graph</th>
+                <th></th>
+                <th></th>
                 <th></th>
               </tr>
-              {/* {getSharedData && getSharedData.length > 0 && getSharedData.map((sharedObj) => (
+               {getSharedData && getSharedData.length > 0 && getSharedData.map((sharedObj) => (
                 <tr>
-                  <td>{sharedObj.FirstName}</td>
+                  <td>{sharedObj.shared_with}</td>
+                  <td><Button variant='outline-primary' className='btn btn-outline-primary'>Compare Data</Button></td>
+                  <td></td>
+                  <td></td>
                   <td></td>
                 </tr>
-              ))} */}
-            </table>
+              ))} 
+            </table> 
           </div>
           <div className="container-lg col-md-auto">
             <div className="container-fluid">
@@ -207,8 +217,15 @@ function SearchBar() {
                                   )
                                   .then(response => {
                                     if (response.status == 201) {
-                                     setSharedData(response.data);
+                                      window.alert('post status successfully changed to closed');
                                     }
+
+                                    fetchSharedData();
+                                    fetchData();
+                                    fetchDataCreator();
+                                    fetchDataReceiving();
+                                    fetchDataSharing();
+                                    
                                   })
                                   .catch(err => console.warn(err));
 
