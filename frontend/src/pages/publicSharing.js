@@ -152,6 +152,14 @@ function PublicSharing() {
                     />
                   </div>
                   <div className="form-group">
+                    <label htmlFor="email">Email</label>
+                    <input type="text" className="form-control" id="email" placeholder="Enter your Email"
+                      onChange={(event) => {
+                        setPosts({ ...posts, Email: event.target.value })
+                      }}
+                    />
+                  </div>
+                  <div className="form-group">
                     <label htmlFor="quantity">Quantity</label>
                     <input type="number" step="any" className="form-control" id="quantity" placeholder="Enter quantity"
                       onChange={(event) => {
@@ -203,7 +211,7 @@ function PublicSharing() {
                           Quantity: posts.Quantity,
                           Units: posts.Units,
                           Description: posts.Description,
-                          Email: localStorage.getItem("email"),
+                          Email: posts.Email,
                         },
                         {
                           headers: {
