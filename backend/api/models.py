@@ -72,7 +72,7 @@ class posts(models.Model):
     Quantity = models.IntegerField()
     Units = models.CharField(max_length=3)
     Description = models.CharField(max_length=255)
-    Email = models.CharField(max_length=255)
+    Email = models.EmailField(max_length=255)
     date_time = models.DateTimeField(auto_now_add=True)
     state = models.CharField(max_length=255,default='open')
     shared_with = models.CharField(max_length=255,default='')
@@ -98,6 +98,8 @@ class tracker(models.Model):
     percentPartNet = models.FloatField()
     percentLandfill = models.FloatField()
     date_time = models.DateTimeField(auto_now_add=True)
+    Email = models.EmailField(max_length=255)
+    Organization = models.CharField(max_length=255, null=True)
 
     #Email = models.CharField(max_length=255)
 

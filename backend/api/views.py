@@ -282,3 +282,11 @@ def trackerCategorySum(request):
     if request.method == 'GET':
         sum = tracker.objects.filter(Category='Fresh Produce').aggregate(Produce = Sum('Quantity')),tracker.objects.filter(Category='Meat').aggregate(Meat = Sum('Quantity')),tracker.objects.filter(Category='Canned Food').aggregate(Canned_Food = Sum('Quantity')),tracker.objects.filter(Category='Bread').aggregate(Bread = Sum('Quantity')),tracker.objects.filter(Category='Dairy').aggregate(Dairy = Sum('Quantity')), tracker.objects.filter(Category='Reclaimed').aggregate(Reclaimed = Sum('Quantity'))
         return Response(sum, status=status.HTTP_200_OK) 
+
+
+@api_view(["POST"])
+def NetworkGraphing(request):
+    if request.method == 'POST':
+        results = tracker.objects.filter(Email = request.data['user_email']).aggregate(Sum('percentClients'),Sum('percentAFeed'),Sum('percentCompost'),Sum('percentPartNet'),Sum('percentLandfill'))
+        results2 = tracker.objects.filter(Email=request.data['compare_email']).aggregate(Sum('percentClients'),Sum('percentAFeed'),Sum('percentCompost'),Sum('percentPartNet'),Sum('percentLandfill'))
+        return Response({"user":results,"comparee":results2})

@@ -13,6 +13,7 @@ function SearchBar() {
 
   const [getData, setData] = useState([]);
   const [getSharedData, setSharedData] = useState([]);
+  const [getGraphData, setGraphData] = useState([]);
 
   const fetchSharedData = async () => {
     axios.post(
@@ -109,18 +110,37 @@ function SearchBar() {
         <>
           <div className="container-md col-md-auto table-responsive-sm">
             <h3>Shared with:</h3>
-             <table class="table table-striped table-bordered table-hover table-sm">
+            <table class="table table-striped table-bordered table-hover table-sm">
               <tr>
                 <th>Email</th>
                 <th>Graph</th>
               </tr>
-               {getSharedData && getSharedData.length > 0 && getSharedData.map((sharedObj) => (
+              {getSharedData && getSharedData.length > 0 && getSharedData.map((sharedObj) => (
                 <tr>
                   <td>{sharedObj.shared_with}</td>
-                  <td><Button variant='outline-primary' className='btn btn-outline-primary'>Compare Data</Button></td>
+                  <td><Button variant='outline-primary' className='btn btn-outline-primary' onClick={(event) => {
+                    axios.post(
+                      "http://localhost:8000/api/NetworkGraphing/",
+                      {
+                        user_email: localStorage.getItem('email'),
+                        compare_email: sharedObj.shared_with
+                      },
+                      {
+                        headers: {
+                          "Content-type": "application/json",
+                        }
+                      }
+                    )
+                      .then(response => {
+                        if (response.status == 200) {
+                          setGraphData(response.data);
+                        }
+                      })
+                      .catch(err => console.warn(err));
+                  }}>Compare Data</Button></td>
                 </tr>
-              ))} 
-            </table> 
+              ))}
+            </table>
           </div>
           <div className="container-lg col-md-auto">
             <div className="container-fluid">
@@ -222,19 +242,19 @@ function SearchBar() {
                                     }
 
                                   )
-                                  .then(response => {
-                                    if (response.status == 201) {
-                                      window.alert('post status successfully changed to closed');
-                                    }
+                                    .then(response => {
+                                      if (response.status == 201) {
+                                        window.alert('post status successfully changed to closed');
+                                      }
 
-                                    fetchSharedData();
-                                    fetchData();
-                                    fetchDataCreator();
-                                    fetchDataReceiving();
-                                    fetchDataSharing();
-                                    
-                                  })
-                                  .catch(err => console.warn(err));
+                                      fetchSharedData();
+                                      fetchData();
+                                      fetchDataCreator();
+                                      fetchDataReceiving();
+                                      fetchDataSharing();
+
+                                    })
+                                    .catch(err => console.warn(err));
 
                                 }
                               }

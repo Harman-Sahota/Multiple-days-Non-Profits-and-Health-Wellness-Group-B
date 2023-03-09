@@ -58,6 +58,8 @@ function Tracker() {
     amountToAFeed: "",
     amountToCompost: "",
     amountToPartnerNetwork: "",
+    Email: "",
+    Organization: ""
    
   });
 
@@ -562,6 +564,8 @@ function Tracker() {
                                   percentCompost: document.getElementById('percentCompost').value,
                                   percentPartNet: document.getElementById('percentPartnerNetwork').value,
                                   percentLandfill: document.getElementById('percentLandFill').value,
+                                  Email: localStorage.getItem('email'),
+                                  Organization: localStorage.getItem('organization')
                                 },
                                 {
                                   headers: {
@@ -576,11 +580,9 @@ function Tracker() {
                                   );
                                   fetchData();
                                   fetchPercentagechartData();
-                                  fetchCategorychartData();
-                                  console.log(getPercentageData);
-                                 
+                                  fetchCategorychartData();                                 
                            
-                                  
+
                                 }
                               })
                               .catch((err) => console.warn(err));
