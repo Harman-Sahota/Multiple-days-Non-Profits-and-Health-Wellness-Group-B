@@ -28,6 +28,7 @@ urlpatterns = [
     path('trackerPercentageSum/', views.trackerPercentageSum),
     path('trackerCategorySum/', views.trackerCategorySum),
     path('NetworkGraphing/', views.NetworkGraphing),
+    path('NetworkSorting/', views.NetworkSorting),
     
     # path('token/', jwt_views.TokenObtainPairView.as_view(),name='token_obtain_pair'),
     # path('token/refresh/',  jwt_views.TokenRefreshView.as_view(),name='token_refresh')
