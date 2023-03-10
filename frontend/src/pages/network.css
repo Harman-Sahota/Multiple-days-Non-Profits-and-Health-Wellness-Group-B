@@ -124,6 +124,12 @@ margin-top: -24%;
   width: auto;
 }
 
+.graph_btn {
+  white-space: nowrap;
+  width: auto;
+  margin: auto 0;
+}
+
 #status{
   width: 13vh;
   float: right;
@@ -131,9 +137,6 @@ margin-top: -24%;
   border-radius: 5px;
 }
 
-table {
-  width: 100%;
-  display: flexbox;
-  justify-content: center;
-  align-items: center;
+  .email {
+    margin: auto 0;
   }
