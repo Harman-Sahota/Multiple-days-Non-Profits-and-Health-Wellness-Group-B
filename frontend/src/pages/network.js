@@ -108,10 +108,9 @@ function SearchBar() {
     if (new Date().getTime() < localStorage.getItem('expiry') && localStorage.roles) {
       return (
         <>
-          <div className="container-md col-md-auto" id="">
+          <div className="share_box container-md col-md-auto">
             <div className='row'>
-              <div className='col share_list'>
-
+              <div className='col'>
                 <h3>Shared with:</h3>
                 <div className='row'>
                   <div className='col-6'>
@@ -122,7 +121,7 @@ function SearchBar() {
                   </div>
                 </div>
                 {getSharedData && getSharedData.length > 0 && getSharedData.map((sharedObj) => (
-                  <div className='row'>
+                  <div className='row share_list'>
                     <div className='col-6 email'>{sharedObj.shared_with}</div>
                     <div className='col-4'><button type="button" className='graph_btn btn btn-outline-primary' onClick={(event) => {
                       axios.post(
@@ -139,6 +138,9 @@ function SearchBar() {
                       )
                         .then(response => {
                           if (response.status == 200) {
+                            if(response.data['comparee']['percentClients__sum'] == null){
+                              alert('this user is a non registered user and no data is available to compare, only user data displayed in graph')
+                            }
                             setGraphData(response.data);
                           }
                         })
@@ -207,7 +209,7 @@ function SearchBar() {
               </div>
             </div>
 
-            <div className="container-md">
+            <div className="container-md p-0">
               <div className="tab container-sm">
                 <Button className="tablinks btn btn-light" onClick={(e) => { { fetchData() } }} id="defaultOpen">
                   💬 All Posts</Button><br />
@@ -294,12 +296,12 @@ function SearchBar() {
                         {userObj.Description}
                       </h6>
                       {/* <a href='"+ url_mask + "' id='postbutton' class='btn btn-outline-success'>Comment</a>*/}
-                      
-                      <p><small>Contact: {userObj.Email}</small></p>
-                      <p><small>Posted on: {userObj.date_time}</small></p>
-
                       <p class='text-success'> {userObj.Type} </p>
 
+                      <div className='contact_me'> 
+                      <small><strong>Contact email: </strong>{userObj.Email} <br/>
+                      Posted on: {new Date(userObj.date_time).toLocaleString('default', {month: 'long', day: 'numeric', year: 'numeric'})} at {new Date(userObj.date_time).toLocaleTimeString('default', {hour: '2-digit', minute:'2-digit'})}</small>
+                      </div>
                     </div>
                   </div>
                 )).reverse()}

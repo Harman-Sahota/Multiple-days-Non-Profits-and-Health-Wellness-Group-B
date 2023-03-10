@@ -94,8 +94,7 @@ def adminUpdate(request,pk):
 def networkUpdate(request,pk):
     if request.method == 'PUT':
         saveserialize = networkUpdateSerialize(data=request.data,allow_null = True)
-        exists =  users.objects.filter(Email = request.data['shared_with'] ).count(); 
-        if saveserialize.is_valid() and exists == 1:
+        if saveserialize.is_valid():
             posts.objects.filter(id=pk).update(state='closed',shared_with=request.data['shared_with'])
             
             return Response(saveserialize.data,status=status.HTTP_201_CREATED)    
@@ -104,7 +103,8 @@ def networkUpdate(request,pk):
 
 @api_view(["POST"])
 def postsPullShared(request):
-    if request.method == 'POST':
+    exists =  users.objects.filter(Email = request.data['Email'] ).count(); 
+    if request.method == 'POST' and exists == 1:
         results = posts.objects.filter(Email = request.data['Email']).exclude(shared_with__isnull=True).exclude(shared_with__exact='').values('shared_with').distinct()
         serialize = postSharedSerialize(results,many=True)
         return Response(serialize.data)
