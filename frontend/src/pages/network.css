@@ -140,3 +140,11 @@ margin-top: -24%;
   .email {
     margin: auto 0;
   }
+
+  .graph_box {
+    border: 1px solid black;
+  }
+
+  .share_list {
+    overflow-y: scroll;
+  }

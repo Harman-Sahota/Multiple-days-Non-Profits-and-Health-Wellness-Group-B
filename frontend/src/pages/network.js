@@ -108,41 +108,49 @@ function SearchBar() {
     if (new Date().getTime() < localStorage.getItem('expiry') && localStorage.roles) {
       return (
         <>
-          <div className="container-md col-md-auto">
-            <h3>Shared with:</h3>
+          <div className="container-md col-md-auto" id="">
             <div className='row'>
-              <div className='col-4'>
-                <h6><strong>Email</strong></h6>
+              <div className='col share_list'>
+
+                <h3>Shared with:</h3>
+                <div className='row'>
+                  <div className='col-6'>
+                    <h6><strong>Email</strong></h6>
+                  </div>
+                  <div className='col-4'>
+                    <h6><strong>Graph</strong></h6>
+                  </div>
+                </div>
+                {getSharedData && getSharedData.length > 0 && getSharedData.map((sharedObj) => (
+                  <div className='row'>
+                    <div className='col-6 email'>{sharedObj.shared_with}</div>
+                    <div className='col-4'><button type="button" className='graph_btn btn btn-outline-primary' onClick={(event) => {
+                      axios.post(
+                        "http://localhost:8000/api/NetworkGraphing/",
+                        {
+                          user_email: localStorage.getItem('email'),
+                          compare_email: sharedObj.shared_with
+                        },
+                        {
+                          headers: {
+                            "Content-type": "application/json",
+                          }
+                        }
+                      )
+                        .then(response => {
+                          if (response.status == 200) {
+                            setGraphData(response.data);
+                          }
+                        })
+                        .catch(err => console.warn(err));
+                    }}>Compare Data</button></div>
+                  </div>
+                ))}
               </div>
-              <div className='col-4'>
-                <h6><strong>Graph</strong></h6>
+              <div className='col graph_box'>
+                <h3>Graphing here</h3>
               </div>
             </div>
-            {getSharedData && getSharedData.length > 0 && getSharedData.map((sharedObj) => (
-              <div className='row'>
-                <div className='col-4 email'>{sharedObj.shared_with}</div>
-                <div className='col-4'><button type="button" className='graph_btn btn btn-outline-primary' onClick={(event) => {
-                  axios.post(
-                    "http://localhost:8000/api/NetworkGraphing/",
-                    {
-                      user_email: localStorage.getItem('email'),
-                      compare_email: sharedObj.shared_with
-                    },
-                    {
-                      headers: {
-                        "Content-type": "application/json",
-                      }
-                    }
-                  )
-                    .then(response => {
-                      if (response.status == 200) {
-                        setGraphData(response.data);
-                      }
-                    })
-                    .catch(err => console.warn(err));
-                }}>Compare Data</button></div>
-              </div>
-            ))}
           </div>
           <div className="container-lg col-md-auto">
             <div className="container-fluid">
@@ -286,27 +294,9 @@ function SearchBar() {
                         {userObj.Description}
                       </h6>
                       {/* <a href='"+ url_mask + "' id='postbutton' class='btn btn-outline-success'>Comment</a>*/}
-                      {getNameData && getNameData.length > 0 && getNameData.map((nameObj) => {
-                        axios.post(
-                          "http://localhost:8000/api/postsPullName/",
-                          {
-                            Email: userObj.Email
-                          },
-                          {
-                            headers: {
-                              "Content-type": "application/json",
-                            }
-                          }
-                        )
-                          .then(response => {
-                            if (response.status == 200) {
-                              setNameData(response.data);
-                            }
-                          })
-                          .catch(err => console.warn(err));
-                        <p><small>Posted By: {nameObj.FirstName} {nameObj.LastName} </small> </p>
-                      })}
+                      
                       <p><small>Contact: {userObj.Email}</small></p>
+                      <p><small>Posted on: {userObj.date_time}</small></p>
 
                       <p class='text-success'> {userObj.Type} </p>
 
