@@ -17,21 +17,50 @@ import * as d3Axis from "d3-axis";
 import * as d3ScaleChromatic from "d3-scale-chromatic";
 
 function Tracker() {
+  const [getData, setData] = useState([]);
+  const [getPercentageData, setPercentageData] = useState([]);
+  const [getCategoryData, setCategoryData] = useState([]);
+
+  const fetchData = async () => {
+    const response = await fetch("http://127.0.0.1:8000/api/trackerPull/");
+    const data = await response.json();
+    return setData(data);
+
+  }
+  const fetchPercentagechartData = async () => {
+    const response = await fetch("http://localhost:8000/api/trackerPercentageSum/");
+    const data = await response.json();
+    return setPercentageData(data);
+
+  }
+  const fetchCategorychartData = async () => {
+    const response = await fetch("http://localhost:8000/api/trackerCategorySum/");
+    const data = await response.json();
+    return setCategoryData(data);
+
+  }
+
+
+  useEffect(() => {
+    fetchData();
+    fetchPercentagechartData();
+    fetchCategorychartData();
+  }, [])
+
+
+
   const [trackers, setTrackers] = useState({
-    Category: "",
+    Category: "Fresh Produce",
     Description: "",
     Quantity: "",
-    Qunits: "",
+    Qunits: "lb",
     amountToClients: "",
     amountToAFeed: "",
     amountToCompost: "",
     amountToPartnerNetwork: "",
-    amountToLandfill: "",
-    percentClients: "",
-    percentAFeed: "",
-    percentCompost: "",
-    percentPartNet: "",
-    percentLandfill: "",
+    Email: "",
+    Organization: ""
+   
   });
 
   const quantity = useRef();
@@ -167,7 +196,10 @@ function Tracker() {
             </div>
             <div className="card-body">
               <div id="form-wrapper">
-                <div className="tracker-data-entry" id="tracker">
+                <div
+                  className="tracker-data-entry"
+                  id="tracker"
+                >
                   <Form.Group>
                     {/* {% csrf_token %} */}
                     <div className="row">
@@ -208,20 +240,6 @@ function Tracker() {
                               Description: event.target.value,
                             });
                           }}
-                        />
-                      </div>
-                      <div className="col-md-auto">
-                        <label htmlFor="description">Date and Time</label>
-                        <br />
-                        <input
-                          type="text"
-                          disabled="disabled"
-                          id="datetime"
-                          className={`form-control input-text ${trackerCSS["date-input"]}`}
-                          placeholder="Date and Time"
-                          name="Date and Time"
-                          value={new Date().toLocaleString()}
-                          readonly
                         />
                       </div>
                       <div className="col-md-auto">
@@ -293,7 +311,7 @@ function Tracker() {
                           <div className="col-auto">
                             <input
                               type="number"
-                              step="any"
+                              step = "any"
                               className={`form-control ${trackerCSS["customised-input"]}`}
                               id="animalFeed"
                               name="animalFeed"
@@ -314,7 +332,7 @@ function Tracker() {
                           <div className="col-auto">
                             <input
                               type="number"
-                              step="any"
+                              step = "any"
                               className={`form-control ${trackerCSS["customised-input"]}`}
                               id="compost"
                               name="compost"
@@ -335,7 +353,7 @@ function Tracker() {
                           <div className="col-auto">
                             <input
                               type="number"
-                              step="any"
+                              step = "any"
                               className={`form-control ${trackerCSS["customised-input"]}`}
                               id="partnerNetwork"
                               name="partnerNetwork"
@@ -357,7 +375,7 @@ function Tracker() {
                           <div className="col-auto">
                             <input
                               type="number"
-                              step="any"
+                              step = "any"
                               className={`form-control ${trackerCSS["customised-input"]}`}
                               id="landFill"
                               name="landFill"
@@ -384,7 +402,7 @@ function Tracker() {
                           <div className="col-auto">
                             <input
                               type="number"
-                              step="any"
+                              step = "any"
                               className={`form-control ${trackerCSS["customised-smaller-input"]}`}
                               id="percentClients"
                               name="percentClients"
@@ -412,7 +430,7 @@ function Tracker() {
                           <div className="col-auto">
                             <input
                               type="number"
-                              step="any"
+                              step = "any"
                               className={`form-control ${trackerCSS["customised-smaller-input"]}`}
                               id="percentAnimalFeed"
                               name="percentAnimalFeed"
@@ -440,7 +458,7 @@ function Tracker() {
                           <div className="col-auto">
                             <input
                               type="number"
-                              step="any"
+                              step = "any"
                               className={`form-control ${trackerCSS["customised-smaller-input"]}`}
                               id="percentCompost"
                               name="percentCompost"
@@ -468,7 +486,7 @@ function Tracker() {
                           <div className="col-auto">
                             <input
                               type="number"
-                              step="any"
+                              step = "any"
                               className={`form-control ${trackerCSS["customised-smaller-input"]}`}
                               id="percentPartnerNetwork"
                               name="percentPartnerNetwork"
@@ -496,7 +514,7 @@ function Tracker() {
                           <div className="col-auto">
                             <input
                               type="number"
-                              step="any"
+                              step = "any"
                               className={`form-control ${trackerCSS["customised-smaller-input"]}`}
                               id="percentLandFill"
                               name="percentLandFill"
@@ -523,12 +541,13 @@ function Tracker() {
                           variant="outline-success"
                           className={`${trackerCSS["save"]} btn btn-outline-success`}
                           id="submit"
-                          type="submit"
                           onClick={(e) => {
-                            console.log(trackers);
+                            
+                            
+                           
                             axios
                               .post(
-                                "http://127.0.0.1:8000/api/trackerInsert",
+                                "http://127.0.0.1:8000/api/trackerInsert/",
                                 {
                                   Category: trackers.Category,
                                   Description: trackers.Description,
@@ -539,23 +558,14 @@ function Tracker() {
                                   amountToCompost: trackers.amountToCompost,
                                   amountToPartNet:
                                     trackers.amountToPartnerNetwork,
-                                  amountToLandfill:
-                                    document.getElementById("landFill").value,
-                                  percentClients:
-                                    document.getElementById("percentClients")
-                                      .value,
-                                  percentAFeed:
-                                    document.getElementById("percentAnimalFeed")
-                                      .value,
-                                  percentCompost:
-                                    document.getElementById("percentCompost")
-                                      .value,
-                                  percentPartNet: document.getElementById(
-                                    "percentPartnerNetwork"
-                                  ).value,
-                                  percentLandfill:
-                                    document.getElementById("percentLandFill")
-                                      .value,
+                                  amountToLandfill: document.getElementById('landFill').value,
+                                  percentClients: document.getElementById('percentClients').value,
+                                  percentAFeed: document.getElementById('percentAnimalFeed').value,
+                                  percentCompost: document.getElementById('percentCompost').value,
+                                  percentPartNet: document.getElementById('percentPartnerNetwork').value,
+                                  percentLandfill: document.getElementById('percentLandFill').value,
+                                  Email: localStorage.getItem('email'),
+                                  Organization: localStorage.getItem('organization')
                                 },
                                 {
                                   headers: {
@@ -568,9 +578,15 @@ function Tracker() {
                                   window.alert(
                                     "Your form has been submitted successfully"
                                   );
+                                  fetchData();
+                                  fetchPercentagechartData();
+                                  fetchCategorychartData();                                 
+                           
+
                                 }
                               })
                               .catch((err) => console.warn(err));
+                             
                           }}
                         >
                           Save
@@ -621,30 +637,32 @@ function Tracker() {
                       <th>Compost</th>
                       <th>Partner Network</th>
                       <th>Landfill</th>
+                      <th>Date Time</th>
                       <th></th>
-                      <th></th>
+                   
                     </tr>
                   </thead>
                   <tbody>
-                    {/* {% for i in Object %} */}
+                    
+                  {getData && getData.length > 0 && getData.map((userObj) => (
+                 
                     <tr>
-                      <td>{/* {{i.0}} */}</td>
-                      <td>{/* {{i.1}} */}</td>
-                      <td>{/* {{i.2}} */}</td>
-                      <td>{/* {{i.3}} */}</td>
-                      <td>{/* {{i.4}} */}</td>
-                      <td>{/* {{i.5}} */}</td>
-                      <td>{/* {{i.6}} */}</td>
-                      <td>{/* {{i.7}} */}</td>
-                      <td>{/* {{i.8}} */}</td>
+                      <td>{userObj.Category}</td>
+                      <td>{userObj.Description}</td>
+                      <td>{userObj.Quantity}</td>
+                      <td>{userObj.Qunits}</td>
+                      <td>{userObj.percentClients}</td>
+                      <td>{userObj.percentAFeed}</td>
+                      <td>{userObj.percentCompost}</td>
+                      <td>{userObj.percentPartNet}</td>
+                      <td>{userObj.percentLandfill}</td>
+                      <td>{userObj.date_time}</td>
                       <td>
                         <div>
-                          {/* {% csrf_token %} */}
+                
                           <Button
                             variant="danger"
                             className="btn btn-danger"
-                            type="submit"
-                            // value="{{i.0}}|{{i.1}}|{{i.2}}|{{i.3}}|{{i.4}}|{{i.5}}|{{i.6}}|{{i.7}}|{{i.8}}"
                             name="field"
                           >
                             Delete
@@ -652,7 +670,8 @@ function Tracker() {
                         </div>
                       </td>
                     </tr>
-                    {/* {% endfor %} */}
+                    ))}
+                   
                   </tbody>
                 </Table>
               </div>
@@ -660,7 +679,7 @@ function Tracker() {
           </section>
 
           <br />
-
+        
           <div id="penetrate" className="penetrate" onLoad={pieChart}></div>
           {/* {{ json|json_script:"json" }} */}
         </div>

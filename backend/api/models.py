@@ -67,13 +67,16 @@ class permissions(models.Model):
 #         db_table = "comments"
 
 class posts(models.Model):
-    product = models.CharField(max_length=255,primary_key = True)
+    product = models.CharField(max_length=255)
     Type = models.CharField(max_length=255)
     Quantity = models.IntegerField()
     Units = models.CharField(max_length=3)
     Description = models.CharField(max_length=255)
-    Email = models.CharField(max_length=255)
+    Email = models.EmailField(max_length=255)
     date_time = models.DateTimeField(auto_now_add=True)
+    state = models.CharField(max_length=255,default='open')
+    shared_with = models.CharField(max_length=255,default='')
+    id = models.AutoField(primary_key=True);
 
 
     class Meta:
@@ -82,19 +85,21 @@ class posts(models.Model):
 class tracker(models.Model):
     Category = models.CharField(max_length=255)
     Description = models.CharField(max_length=255)
-    Quantity = models.IntegerField()
+    Quantity = models.FloatField()
     Qunits = models.CharField(max_length=255)
-    amountToClients = models.IntegerField()
-    amountToAFeed = models.IntegerField()
-    amountToCompost = models.IntegerField()
-    amountToPartNet = models.IntegerField()
-    amountToLandfill = models.IntegerField()
-    percentClients = models.IntegerField()
-    percentAFeed = models.IntegerField()
-    percentCompost = models.IntegerField()
-    percentPartNet = models.IntegerField()
-    percentLandfill = models.IntegerField()
+    amountToClients = models.FloatField()
+    amountToAFeed = models.FloatField()
+    amountToCompost = models.FloatField()
+    amountToPartNet = models.FloatField()
+    amountToLandfill = models.FloatField()
+    percentClients = models.FloatField()
+    percentAFeed = models.FloatField()
+    percentCompost = models.FloatField()
+    percentPartNet = models.FloatField()
+    percentLandfill = models.FloatField()
     date_time = models.DateTimeField(auto_now_add=True)
+    Email = models.EmailField(max_length=255)
+    Organization = models.CharField(max_length=255, null=True)
 
     #Email = models.CharField(max_length=255)
 

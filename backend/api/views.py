@@ -6,14 +6,17 @@ from api.models import permissions
 from api.models import tracker
 import jwt,datetime
 from api.serialize import userSerialize
+from django.db.models import Sum
 
 # from api.serialize import commentsSerialize
 
 from api.serialize import adminInsertSerialize
 from api.serialize import adminPullSerialize
 from api.serialize import adminUpdateSerialize
+from api.serialize import networkUpdateSerialize
 from api.serialize import networkInsertSerialize
 from api.serialize import networkPullSerialize
+from api.serialize import postSharedSerialize
 from api.serialize import profileSerialize
 from api.serialize import trackerInsertSerialize
 from api.serialize import trackerPullSerialize
@@ -86,6 +89,24 @@ def adminUpdate(request,pk):
         return Response(saveserialize.data,status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
+@api_view(["PUT"])
+def networkUpdate(request,pk):
+    if request.method == 'PUT':
+        saveserialize = networkUpdateSerialize(data=request.data,allow_null = True)
+        exists =  users.objects.filter(Email = request.data['shared_with'] ).count(); 
+        if saveserialize.is_valid() and exists == 1:
+            posts.objects.filter(id=pk).update(state='closed',shared_with=request.data['shared_with'])
+            
+            return Response(saveserialize.data,status=status.HTTP_201_CREATED)    
+        return Response(saveserialize.data,status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+
+@api_view(["POST"])
+def postsPullShared(request):
+    if request.method == 'POST':
+        results = posts.objects.filter(Email = request.data['Email']).exclude(shared_with__isnull=True).exclude(shared_with__exact='').values('shared_with').distinct()
+        serialize = postSharedSerialize(results,many=True)
+        return Response(serialize.data)
 
         
 # @api_view(["POST"])
@@ -133,30 +154,38 @@ class Login(APIView):
 @api_view(["POST"])
 def networkInsert(request):
     if request.method == "POST":
-        saveserialize = networkInsertSerialize(data = request.data)
+        saveserialize = networkInsertSerialize(data = request.data,allow_null=True)
         if saveserialize.is_valid():
             saveserialize.save()
-            return Response(saveserialize.data,status=status.HTTP_201_CREATED)       
+            return Response(saveserialize.data,status=status.HTTP_201_CREATED)      
         return Response(saveserialize.data,status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 @api_view(["GET"])
 def networkPull(request):
     if request.method == 'GET':
-        results = posts.objects.all()
+        results = posts.objects.exclude(state='closed')
         serialize = networkPullSerialize(results,many=True)
         return Response(serialize.data)
     
 @api_view(["GET"])
 def networkPullSharing(request):
     if request.method == 'GET':
-        results = posts.objects.filter(Type = 'Sharing')
+        results = posts.objects.filter(Type = 'Sharing').exclude(state='closed')
         serialize = networkPullSerialize(results,many=True)
         return Response(serialize.data)
+
+@api_view(["POST"])
+def networkPullCreator(request):
+    if request.method == 'POST':
+        results = posts.objects.filter(Email = request.data['Email']).exclude(state='closed')
+        serialize = networkPullSerialize(results,many=True)
+        return Response(serialize.data,status=status.HTTP_200_OK)
+    return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
 @api_view(["GET"])
 def networkPullReceiving(request):
     if request.method == 'GET':
-        results = posts.objects.filter(Type = 'Receiving')
+        results = posts.objects.filter(Type = 'Receiving').exclude(state='closed')
         serialize = networkPullSerialize(results,many=True)
         return Response(serialize.data)
     
@@ -240,3 +269,24 @@ def trackerUpdate(request, pk):
             return Response(saveserialize.data, status=status.HTTP_201_CREATED)
         
         return Response(saveserialize.data, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+
+@api_view(['GET'])
+def trackerPercentageSum(request):
+    if request.method == 'GET':
+        sum = tracker.objects.aggregate(Sum('percentClients'),Sum('percentAFeed'),Sum('percentCompost'),Sum('percentPartNet'),Sum('percentLandfill'))
+        return Response(sum, status=status.HTTP_200_OK)  
+
+@api_view(['GET'])
+def trackerCategorySum(request):
+    if request.method == 'GET':
+        sum = tracker.objects.filter(Category='Fresh Produce').aggregate(Produce = Sum('Quantity')),tracker.objects.filter(Category='Meat').aggregate(Meat = Sum('Quantity')),tracker.objects.filter(Category='Canned Food').aggregate(Canned_Food = Sum('Quantity')),tracker.objects.filter(Category='Bread').aggregate(Bread = Sum('Quantity')),tracker.objects.filter(Category='Dairy').aggregate(Dairy = Sum('Quantity')), tracker.objects.filter(Category='Reclaimed').aggregate(Reclaimed = Sum('Quantity'))
+        return Response(sum, status=status.HTTP_200_OK) 
+
+
+@api_view(["POST"])
+def NetworkGraphing(request):
+    if request.method == 'POST':
+        results = tracker.objects.filter(Email = request.data['user_email']).aggregate(Sum('percentClients'),Sum('percentAFeed'),Sum('percentCompost'),Sum('percentPartNet'),Sum('percentLandfill'))
+        results2 = tracker.objects.filter(Email=request.data['compare_email']).aggregate(Sum('percentClients'),Sum('percentAFeed'),Sum('percentCompost'),Sum('percentPartNet'),Sum('percentLandfill'))
+        return Response({"user":results,"comparee":results2})
