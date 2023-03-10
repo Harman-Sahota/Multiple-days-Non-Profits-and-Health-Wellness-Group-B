@@ -14,6 +14,7 @@ function SearchBar() {
   const [getData, setData] = useState([]);
   const [getSharedData, setSharedData] = useState([]);
   const [getGraphData, setGraphData] = useState([]);
+  const [getNameData, setNameData] = useState([]);
 
   const fetchSharedData = async () => {
     axios.post(
@@ -34,7 +35,6 @@ function SearchBar() {
       })
       .catch(err => console.warn(err));
   }
-
 
   const fetchData = async () => {
     const response = await fetch("http://localhost:8000/api/networkPull/");
@@ -108,39 +108,51 @@ function SearchBar() {
     if (new Date().getTime() < localStorage.getItem('expiry') && localStorage.roles) {
       return (
         <>
-          <div className="container-md col-md-auto table-responsive-sm">
-            <h3>Shared with:</h3>
-            <table class="table table-striped table-bordered table-hover table-sm">
-              <tr>
-                <th>Email</th>
-                <th>Graph</th>
-              </tr>
-              {getSharedData && getSharedData.length > 0 && getSharedData.map((sharedObj) => (
-                <tr>
-                  <td>{sharedObj.shared_with}</td>
-                  <td><Button variant='outline-primary' className='btn btn-outline-primary' onClick={(event) => {
-                    axios.post(
-                      "http://localhost:8000/api/NetworkGraphing/",
-                      {
-                        user_email: localStorage.getItem('email'),
-                        compare_email: sharedObj.shared_with
-                      },
-                      {
-                        headers: {
-                          "Content-type": "application/json",
+          <div className="share_box container-md col-md-auto">
+            <div className='row'>
+              <div className='col'>
+                <h3>Shared with:</h3>
+                <div className='row'>
+                  <div className='col-6'>
+                    <h6><strong>Email</strong></h6>
+                  </div>
+                  <div className='col-4'>
+                    <h6><strong>Graph</strong></h6>
+                  </div>
+                </div>
+                {getSharedData && getSharedData.length > 0 && getSharedData.map((sharedObj) => (
+                  <div className='row share_list'>
+                    <div className='col-6 email'>{sharedObj.shared_with}</div>
+                    <div className='col-4'><button type="button" className='graph_btn btn btn-outline-primary' onClick={(event) => {
+                      axios.post(
+                        "http://localhost:8000/api/NetworkGraphing/",
+                        {
+                          user_email: localStorage.getItem('email'),
+                          compare_email: sharedObj.shared_with
+                        },
+                        {
+                          headers: {
+                            "Content-type": "application/json",
+                          }
                         }
-                      }
-                    )
-                      .then(response => {
-                        if (response.status == 200) {
-                          setGraphData(response.data);
-                        }
-                      })
-                      .catch(err => console.warn(err));
-                  }}>Compare Data</Button></td>
-                </tr>
-              ))}
-            </table>
+                      )
+                        .then(response => {
+                          if (response.status == 200) {
+                            if(response.data['comparee']['percentClients__sum'] == null){
+                              alert('this user is a non registered user and no data is available to compare, only user data displayed in graph')
+                            }
+                            setGraphData(response.data);
+                          }
+                        })
+                        .catch(err => console.warn(err));
+                    }}>Compare Data</button></div>
+                  </div>
+                ))}
+              </div>
+              <div className='col graph_box'>
+                <h3>Graphing here</h3>
+              </div>
+            </div>
           </div>
           <div className="container-lg col-md-auto">
             <div className="container-fluid">
@@ -197,7 +209,7 @@ function SearchBar() {
               </div>
             </div>
 
-            <div className="container-md">
+            <div className="container-md p-0">
               <div className="tab container-sm">
                 <Button className="tablinks btn btn-light" onClick={(e) => { { fetchData() } }} id="defaultOpen">
                   💬 All Posts</Button><br />
@@ -211,81 +223,85 @@ function SearchBar() {
                   <div class='card'>
                     <h5 class='card-header m-0'>
                       <span>{userObj.product} - {userObj.Quantity} {userObj.Units}</span>
-                    </h5>
-                    {(() => {
-                      if (userObj.Email == localStorage.getItem('email') && userObj.Type == 'Sharing') {
-                        return (
-                          <select id='status'
 
-                            onChange={(event) => {
-                              if (event.target.value == 'closed') {
-                                var a = prompt('enter the email of the person you shared your products with');
-                                if (a === '') {
-                                  alert('value of the email cannot be empty, please try again')
-                                  document.getElementById('status').value = 'open'
-                                } else {
+                      {(() => {
+                        if (userObj.Email == localStorage.getItem('email') && userObj.Type == 'Sharing') {
+                          return (
+                            <select id='status'
 
-                                  axios.put(
-                                    `http://127.0.0.1:8000/api/networkUpdate/${userObj.id}`,
+                              onChange={(event) => {
+                                if (event.target.value == 'closed') {
+                                  var a = prompt('enter the email of the person you shared your products with');
+                                  if (a === '') {
+                                    alert('value of the email cannot be empty, please try again')
+                                    document.getElementById('status').value = 'open'
+                                  } else {
+
+                                    axios.put(
+                                      `http://127.0.0.1:8000/api/networkUpdate/${userObj.id}`,
 
 
-                                    {
-                                      "shared_with": a,
-                                      "product": userObj.product,
-                                      "Quantity": userObj.Quantity,
-                                      "Units": userObj.Units
-                                    },
-                                    {
-                                      headers: {
-                                        "Content-type": "application/json",
-                                      }
-                                    }
-
-                                  )
-                                    .then(response => {
-                                      if (response.status == 201) {
-                                        window.alert('post status successfully changed to closed');
+                                      {
+                                        "shared_with": a,
+                                        "product": userObj.product,
+                                        "Quantity": userObj.Quantity,
+                                        "Units": userObj.Units
+                                      },
+                                      {
+                                        headers: {
+                                          "Content-type": "application/json",
+                                        }
                                       }
 
-                                      fetchSharedData();
-                                      fetchData();
-                                      fetchDataCreator();
-                                      fetchDataReceiving();
-                                      fetchDataSharing();
+                                    )
+                                      .then(response => {
+                                        if (response.status == 201) {
+                                          window.alert('post status successfully changed to closed');
+                                        }
 
-                                    })
-                                    .catch(err => console.warn(err));
+                                        fetchSharedData();
+                                        fetchData();
+                                        fetchDataCreator();
+                                        fetchDataReceiving();
+                                        fetchDataSharing();
 
+                                      })
+                                      .catch(err => console.warn(err));
+
+                                  }
                                 }
-                              }
-                            }}
+                              }}
 
-                          >
-                            {(() => {
-                              if (userObj.state == 'open') {
-                                // document.getElementById('status').style.borderColor = 'green';
-                                return (
-                                  <><option selected> open </option><option> closed </option></>
-                                )
-                              } else {
-                                // document.getElementById('status').style.borderColor = 'red';
-                                return (
-                                  <><option> open </option><option selected> closed </option></>
-                                )
-                              }
-                            })()}
-                          </select>
-                        )
-                      } else { }
-                    })()}
+                            >
+                              {(() => {
+                                if (userObj.state == 'open') {
+                                  // document.getElementById('status').style.borderColor = 'green';
+                                  return (
+                                    <><option selected> open </option><option> closed </option></>
+                                  )
+                                } else {
+                                  // document.getElementById('status').style.borderColor = 'red';
+                                  return (
+                                    <><option> open </option><option selected> closed </option></>
+                                  )
+                                }
+                              })()}
+                            </select>
+                          )
+                        } else { }
+                      })()}
+                    </h5>
                     <div class='card-body'>
                       <h6 class='card-text'>
                         {userObj.Description}
                       </h6>
                       {/* <a href='"+ url_mask + "' id='postbutton' class='btn btn-outline-success'>Comment</a>*/}
-                      <p><small>Posted By: <br /> Contact: {userObj.Email}</small></p>
                       <p class='text-success'> {userObj.Type} </p>
 
+                      <div className='contact_me'> 
+                      <small><strong>Contact email: </strong>{userObj.Email} <br/>
+                      Posted on: {new Date(userObj.date_time).toLocaleString('default', {month: 'long', day: 'numeric', year: 'numeric'})} at {new Date(userObj.date_time).toLocaleTimeString('default', {hour: '2-digit', minute:'2-digit'})}</small>
+                      </div>
                     </div>
                   </div>
                 )).reverse()}

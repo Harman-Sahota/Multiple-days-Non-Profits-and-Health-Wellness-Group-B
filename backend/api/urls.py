@@ -24,6 +24,7 @@ urlpatterns = [
     path('trackerPull/', views.trackerPull),
     path('trackerUpdate/', views.trackerUpdate),
     path('postsPullShared/', views.postsPullShared),
+    path('postsPullName/', views.postsPullName),
     path('trackerPercentageSum/', views.trackerPercentageSum),
     path('trackerCategorySum/', views.trackerCategorySum),
     path('NetworkGraphing/', views.NetworkGraphing),
