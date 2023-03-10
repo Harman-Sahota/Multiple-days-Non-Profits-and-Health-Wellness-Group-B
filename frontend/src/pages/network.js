@@ -196,11 +196,10 @@ function SearchBar() {
               <div className="select">
                 <select name="format" className="form-select">
                   <option selected disabled>Sort By: Latest Activity</option>
-                  <option value="pdf">Latest activity</option>
                   <option value="txt">Date Created</option>
-                  <option value="epub">Top: Past day</option>
-                  <option value="fb2">Top: Past week</option>
-                  <option value="mobi">Top: Past month</option>
+                  <option value="epub">Past day</option>
+                  <option value="fb2">Past week</option>
+                  <option value="mobi">Past month</option>
                 </select>
               </div>
 
