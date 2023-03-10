@@ -6,7 +6,7 @@
 
 ## Overview
 
-For the COSC 499 Capstone Software Engineering project, we are working with Dr. Barb Marcolin alongside two other COSC 499 teams to create an online platform to track/calculate/visualize food waste. This platform is designed to be used by small businesses and non-profit organizations who need these calculations and visualizations to apply for government grants or simply want to keep track of how much food waste they've reduced. Users of this website will also be able to connect/network with other organizations to further reduce food waste by using each others' sources and services.
+For the COSC 499 Capstone Software Engineering project, we are working with Dr. Barb Marcolin alongside two other COSC 499 teams to create an online platform to track/calculate/visualize food waste. This platform is primarily designed to be used by small businesses and non-profit organizations who need these calculations and visualizations services to apply for government grants and/or simply want to keep track of how much food waste they've reduced over the year(s). Users of this website will also be able to connect/network with other organizations to further reduce food waste by using each others' sources and services.
 
 ## The Team
 
@@ -23,7 +23,7 @@ This team (Group B) consists of four fourth-year Computer Science students from 
 
 Click [here](https://docs.google.com/spreadsheets/d/1qnWRLLMm4y7r7I7h9rt_KXN-MSfjhDgY9-zHiGCzGig/edit?usp=sharing) to view the Gantt Chart
 
->Please make sure you are on the correct sheet (2022W2) to view the Gantt chart for Term 2. This Gantt chart will be continuously updated throughout the term.
+>Please make sure you are on the correct sheet (2022W2) to view the Gantt chart for Term 2. This Gantt chart will be continuously updated whenever possible throughout the term.
 
 ## Timeline
 
