@@ -2,7 +2,7 @@
 
 *Created: September 29, 2022*
 
-*Last updated: March 3, 2023*
+*Last updated: March 10, 2023*
 
 ## Overview
 
@@ -38,8 +38,8 @@ Click [here](https://docs.google.com/spreadsheets/d/1qnWRLLMm4y7r7I7h9rt_KXN-MSf
 |19| Continue Page Conversions to React <br/> Refine Profile Page <br/> Refine Permissions Page| [Client Group Meeting Minutes (Feb. 8)](docs/client-minutes/client-meeting-feb8-1000am.md) <br/> [Client Private Meeting Minutes (Feb. 8)](docs/client-minutes/client-meeting-feb8-1130am.md)|
 |20| Continue Page Conversions to React <br/> Refine Profile Page| [Client Group Meeting Minutes (Feb. 15)](docs/client-minutes/client-meeting-feb15-1000am.md) <br/> [Client Private Meeting Minutes (Feb. 15)](docs/client-minutes/client-meeting-feb15-1130am.md)|
 |21| **Reading Week**| |
-|22| Continue Page Conversions to React <br/> Research Tokens <br/> Final Adjustments to Profile Page| [Client Group Meeting Minutes (Mar. 1)]() <br/> [Client Private Meeting Minutes (Mar. 1)]()|
-|23| [List of Usability Tasks #2]()| [Client Group Meeting Minutes (Mar. 8)]() <br/> [Client Private Meeting Minutes (Mar. 8)]()|
+|22| Continue Page Conversions to React <br/> Research Tokens <br/> Final Adjustments to Profile Page| [Client Group Meeting Minutes (Mar. 1)](docs/client-minutes/client-meeting-mar1-10am.md) <br/> [Client Private Meeting Minutes (Mar. 1)](docs/client-minutes/client-meeting-mar1-1130am.md)|
+|23| [List of Usability Tasks #2]() <br/> Continue Page Conversions to React| [Client Group Meeting Minutes (Mar. 8)]() <br/> [Client Private Meeting Minutes (Mar. 8)]()|
 |24| Prototype Video #2 | [Client Group Meeting Minutes (Mar. 15)]() <br/> [Client Private Meeting Minutes (Mar. 15)]()|
 |25| Peer Testing Report #2 <br/> Peer Evaluations #3 | [Client Group Meeting Minutes (Mar. 22)]() <br/> [Client Private Meeting Minutes (Mar. 22)]()|
 
