@@ -7,6 +7,7 @@ import { faLeaf } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 function NavbarIn() {
+
     return (
         <>
             <header>

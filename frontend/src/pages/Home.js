@@ -3,14 +3,20 @@ import HomeCSS from './home.module.css';
 import ort from '../images/ORT_logo.svg';
 import calender from '../images/calendar.png';
 import user_flat from '../images/abstract-user-flat-4.png';
+import { local } from 'd3-selection';
 
 
 const b = "{HomeCSS.card-text.h-200}";
 
 function Home(){
     
-
+    window.addEventListener("beforeunload", function(e){
+        localStorage.clear();
+     }, false);
+ 
+     window.addEventListener('load', localStorage.clear());
       return (
+        
         
        <> 
        <section>
