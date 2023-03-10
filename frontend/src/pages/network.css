@@ -126,11 +126,11 @@ margin-top: -24%;
 
 #status{
   width: 13vh;
-  padding: 1.5em;
-  position: absolute;
-  margin-left: 85%;
-  margin-top: 0.5%;
+  float: right;
+  font-size: small;
+  border-radius: 5px;
 }
+
 table {
   width: 100%;
   display: flexbox;

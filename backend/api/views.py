@@ -17,6 +17,7 @@ from api.serialize import networkUpdateSerialize
 from api.serialize import networkInsertSerialize
 from api.serialize import networkPullSerialize
 from api.serialize import postSharedSerialize
+from api.serialize import postNameSerialize
 from api.serialize import profileSerialize
 from api.serialize import trackerInsertSerialize
 from api.serialize import trackerPullSerialize
@@ -106,6 +107,13 @@ def postsPullShared(request):
     if request.method == 'POST':
         results = posts.objects.filter(Email = request.data['Email']).exclude(shared_with__isnull=True).exclude(shared_with__exact='').values('shared_with').distinct()
         serialize = postSharedSerialize(results,many=True)
+        return Response(serialize.data)
+
+@api_view(["POST"])
+def postsPullName(request):
+    if request.method == 'POST':
+        results = users.objects.filter(Email = request.data['Email'])
+        serialize = postNameSerialize(results,many=True)
         return Response(serialize.data)
 
         

@@ -14,6 +14,7 @@ function SearchBar() {
   const [getData, setData] = useState([]);
   const [getSharedData, setSharedData] = useState([]);
   const [getGraphData, setGraphData] = useState([]);
+  const [getNameData, setNameData] = useState([]);
 
   const fetchSharedData = async () => {
     axios.post(
@@ -34,7 +35,6 @@ function SearchBar() {
       })
       .catch(err => console.warn(err));
   }
-
 
   const fetchData = async () => {
     const response = await fetch("http://localhost:8000/api/networkPull/");
@@ -208,82 +208,107 @@ function SearchBar() {
 
               <div id="disc">
                 {getData && getData.length > 0 && getData.map((userObj) => (
+
+                    axios.post(
+                      "http://localhost:8000/api/postsPullName/",
+                      {
+                        Email: userObj.Email
+                      },
+                      {
+                        headers: {
+                          "Content-type": "application/json",
+                        }
+                      }
+                    )
+                      .then(response => {
+                        if (response.status == 200) {
+                          setNameData(response.data);
+                        }
+                      })
+                      .catch(err => console.warn(err));
+                  
                   <div class='card'>
                     <h5 class='card-header m-0'>
                       <span>{userObj.product} - {userObj.Quantity} {userObj.Units}</span>
-                    </h5>
-                    {(() => {
-                      if (userObj.Email == localStorage.getItem('email') && userObj.Type == 'Sharing') {
-                        return (
-                          <select id='status'
 
-                            onChange={(event) => {
-                              if (event.target.value == 'closed') {
-                                var a = prompt('enter the email of the person you shared your products with');
-                                if (a === '') {
-                                  alert('value of the email cannot be empty, please try again')
-                                  document.getElementById('status').value = 'open'
-                                } else {
+                      {(() => {
+                        if (userObj.Email == localStorage.getItem('email') && userObj.Type == 'Sharing') {
+                          return (
+                            <select id='status'
 
-                                  axios.put(
-                                    `http://127.0.0.1:8000/api/networkUpdate/${userObj.id}`,
+                              onChange={(event) => {
+                                if (event.target.value == 'closed') {
+                                  var a = prompt('enter the email of the person you shared your products with');
+                                  if (a === '') {
+                                    alert('value of the email cannot be empty, please try again')
+                                    document.getElementById('status').value = 'open'
+                                  } else {
+
+                                    axios.put(
+                                      `http://127.0.0.1:8000/api/networkUpdate/${userObj.id}`,
 
 
-                                    {
-                                      "shared_with": a,
-                                      "product": userObj.product,
-                                      "Quantity": userObj.Quantity,
-                                      "Units": userObj.Units
-                                    },
-                                    {
-                                      headers: {
-                                        "Content-type": "application/json",
-                                      }
-                                    }
-
-                                  )
-                                    .then(response => {
-                                      if (response.status == 201) {
-                                        window.alert('post status successfully changed to closed');
+                                      {
+                                        "shared_with": a,
+                                        "product": userObj.product,
+                                        "Quantity": userObj.Quantity,
+                                        "Units": userObj.Units
+                                      },
+                                      {
+                                        headers: {
+                                          "Content-type": "application/json",
+                                        }
                                       }
 
-                                      fetchSharedData();
-                                      fetchData();
-                                      fetchDataCreator();
-                                      fetchDataReceiving();
-                                      fetchDataSharing();
+                                    )
+                                      .then(response => {
+                                        if (response.status == 201) {
+                                          window.alert('post status successfully changed to closed');
+                                        }
 
-                                    })
-                                    .catch(err => console.warn(err));
+                                        fetchSharedData();
+                                        fetchData();
+                                        fetchDataCreator();
+                                        fetchDataReceiving();
+                                        fetchDataSharing();
 
+                                      })
+                                      .catch(err => console.warn(err));
+
+                                  }
                                 }
-                              }
-                            }}
+                              }}
 
-                          >
-                            {(() => {
-                              if (userObj.state == 'open') {
-                                // document.getElementById('status').style.borderColor = 'green';
-                                return (
-                                  <><option selected> open </option><option> closed </option></>
-                                )
-                              } else {
-                                // document.getElementById('status').style.borderColor = 'red';
-                                return (
-                                  <><option> open </option><option selected> closed </option></>
-                                )
-                              }
-                            })()}
-                          </select>
-                        )
-                      } else { }
-                    })()}
+                            >
+                              {(() => {
+                                if (userObj.state == 'open') {
+                                  // document.getElementById('status').style.borderColor = 'green';
+                                  return (
+                                    <><option selected> open </option><option> closed </option></>
+                                  )
+                                } else {
+                                  // document.getElementById('status').style.borderColor = 'red';
+                                  return (
+                                    <><option> open </option><option selected> closed </option></>
+                                  )
+                                }
+                              })()}
+                            </select>
+                          )
+                        } else { }
+                      })()}
+                    </h5>
                     <div class='card-body'>
                       <h6 class='card-text'>
                         {userObj.Description}
                       </h6>
                       {/* <a href='"+ url_mask + "' id='postbutton' class='btn btn-outline-success'>Comment</a>*/}
-                      <p><small>Posted By: <br /> Contact: {userObj.Email}</small></p>
+                      {getNameData && getNameData.length > 0 && getNameData.map((nameObj) => (
+                        
+                        <p><small>Posted By: {nameObj.FirstName} {nameObj.LastName} </small> </p>
+                      ))}
+                      <p><small>Contact: {userObj.Email}</small></p>
+
                       <p class='text-success'> {userObj.Type} </p>
 
                     </div>
