@@ -40,8 +40,7 @@ Click [here](https://docs.google.com/spreadsheets/d/1qnWRLLMm4y7r7I7h9rt_KXN-MSf
 |21| **Reading Week**| |
 |22| Continue Page Conversions to React <br/> Research Tokens <br/> Final Adjustments to Profile Page| [Client Group Meeting Minutes (Mar. 1)](docs/client-minutes/client-meeting-mar1-10am.md) <br/> [Client Private Meeting Minutes (Mar. 1)](docs/client-minutes/client-meeting-mar1-1130am.md)|
 |23| [List of Usability Tasks #2]() <br/> Continue Page Conversions to React| [Client Group Meeting Minutes (Mar. 8)]() <br/> [Client Private Meeting Minutes (Mar. 8)]()|
-|24| Prototype Video #2 | [Client Group Meeting Minutes (Mar. 15)]() <br/> [Client Private Meeting Minutes (Mar. 15)]()|
-|25| Peer Testing Report #2 <br/> Peer Evaluations #3 | [Client Group Meeting Minutes (Mar. 22)]() <br/> [Client Private Meeting Minutes (Mar. 22)]()|
+
 
 ### Semester #1
 
