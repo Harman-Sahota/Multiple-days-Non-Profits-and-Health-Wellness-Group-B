@@ -96,6 +96,7 @@ function Tracker() {
         .append("g")
         .attr("transform", `translate(${width / 2},${height / 2})`);
 
+
       const data = { ...graphPercentageData };
 
       const dataEntries = Object.entries(data);
@@ -418,17 +419,20 @@ function Tracker() {
 
   // Exporting Table to CSV
   function exportTableToCSV(filename) {
-    var csv;
+    let csv = [];
     const rows = document.querySelectorAll("table tr");
-
-    for (var i = 0; i < rows.length; i++) {
-      var row = [],
-        cols = rows[i].querySelectorAll("td, th");
-
-      for (var j = 0; j < cols.length - 1; j++) row.push(cols[j].innerText);
-
+  
+    for (let i = 0; i < rows.length; i++) {
+      let row = [];
+      const cols = rows[i].querySelectorAll("td, th");
+  
+      for (let j = 0; j < cols.length - 1; j++) {
+        row.push(cols[j].innerText);
+      }
+  
       csv.push(row.join(","));
     }
+  
     downloadCSV(csv.join("\n"), filename);
   }
 
