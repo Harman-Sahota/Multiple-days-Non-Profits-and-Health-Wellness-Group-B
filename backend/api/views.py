@@ -7,6 +7,8 @@ from api.models import tracker
 import jwt,datetime
 from api.serialize import userSerialize
 from django.db.models import Sum
+from django.utils import timezone
+
 
 # from api.serialize import commentsSerialize
 
@@ -254,6 +256,7 @@ def trackerPull(request):
         results = tracker.objects.all()
         serialize = trackerPullSerialize(results, many=True)
         return Response(serialize.data)
+
     
 @api_view(['PUT'])
 def trackerUpdate(request, pk):
@@ -302,9 +305,9 @@ def NetworkGraphing(request):
 @api_view(["POST"])
 def NetworkSorting(request):
     if request.method == 'POST':
-        results = tracker.objects.all()
-        serialize = trackerPullSerialize(results, many=True)
-        return Response(serialize.data)
+        return Response()
+
+
 
 
 
