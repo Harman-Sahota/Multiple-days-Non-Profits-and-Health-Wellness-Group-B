@@ -303,12 +303,50 @@ def NetworkGraphing(request):
         return Response({"user":results,"comparee":results2})
     
 @api_view(["GET"])
-def NetworkSorting(request):
-    timer = datetime.datetime.utcnow().isoformat(sep='T',timespec='seconds')
+def Past_Hour(request):
+    timer = datetime.datetime.now() - datetime.timedelta(hours = 1)
     if request.method == 'GET':
-        results = posts.objects.filter(date_time__lt = timer)
+        results = posts.objects.filter(date_time__lt = timer).exclude(state = 'closed')
         serialize = networkPullSerialize(results,many=True)
-        return Response(serialize.data)
+        return Response(serialize.data,status=status.HTTP_200_OK)
+    return Response("error",status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(["GET"])
+def Past_Day(request):
+    timer = datetime.datetime.now() - datetime.timedelta(days =  1)
+    if request.method == 'GET':
+        results = posts.objects.filter(date_time__lt = timer).exclude(state='closed')
+        serialize = networkPullSerialize(results,many=True)
+        return Response(serialize.data,status=status.HTTP_200_OK)
+    return Response("error",status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(["GET"])
+def Past_Week(request):
+    timer = datetime.datetime.now() - datetime.timedelta(days =  7)
+    if request.method == 'GET':
+        results = posts.objects.filter(date_time__lt = timer).exclude(state='closed')
+        serialize = networkPullSerialize(results,many=True)
+        return Response(serialize.data,status=status.HTTP_200_OK)
+    return Response("error",status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(["GET"])
+def Past_Month(request):
+    timer = datetime.datetime.now() - datetime.timedelta(days =  30)
+    if request.method == 'GET':
+        results = posts.objects.filter(date_time__lt = timer).exclude(state='closed')
+        serialize = networkPullSerialize(results,many=True)
+        return Response(serialize.data,status=status.HTTP_200_OK)
+    return Response("error",status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(["GET"])
+def Past_6Months(request):
+    timer = datetime.datetime.now() - datetime.timedelta(days =  182)
+    if request.method == 'GET':
+        results = posts.objects.filter(date_time__lt = timer).exclude(state='closed')
+        serialize = networkPullSerialize(results,many=True)
+        return Response(serialize.data,status=status.HTTP_200_OK)
+    return Response("error",status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
 
 
 

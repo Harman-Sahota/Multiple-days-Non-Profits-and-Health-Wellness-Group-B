@@ -148,10 +148,12 @@
 
 .graph_box {
   border: 1px solid black;
+  height: 50vh;
 }
 
 .share_list {
   overflow-y: scroll;
+  margin-top: 2%;
 }
 
 .share_box {

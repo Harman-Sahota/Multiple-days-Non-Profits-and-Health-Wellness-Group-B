@@ -9,12 +9,12 @@ import axios, { all } from 'axios';
 import { local } from 'd3-selection';
 
 var filter = 'Product';
+var time_filter = 'http://localhost:8000/api/networkPull/';
 function SearchBar() {
 
   const [getData, setData] = useState([]);
   const [getSharedData, setSharedData] = useState([]);
   const [getGraphData, setGraphData] = useState([]);
-  const [getNameData, setNameData] = useState([]);
 
   const fetchSharedData = async () => {
     axios.post(
@@ -125,6 +125,7 @@ function SearchBar() {
                     <div className='col-6 email'>{sharedObj.shared_with}</div>
                     <div className='col-4'><button type="button" className='graph_btn btn btn-outline-primary' onClick={(event) => {
                       axios.post(
+
                         "http://localhost:8000/api/NetworkGraphing/",
                         {
                           user_email: localStorage.getItem('email'),
@@ -174,7 +175,6 @@ function SearchBar() {
                       .then(response => {
                         if (response.status == 200) {
                           setData(response.data);
-                          console.log(response.data)
                         }
                       })
                       .catch(err => console.warn(err));
@@ -194,12 +194,36 @@ function SearchBar() {
               </div>
 
               <div className="select">
-                <select name="format" className="form-select">
-                  <option selected disabled>Sort By: Latest Activity</option>
-                  <option value="txt">Date Created</option>
-                  <option value="epub">Past day</option>
-                  <option value="fb2">Past week</option>
-                  <option value="mobi">Past month</option>
+            
+                <select name="format" className="form-select" onChange={async  (event) => {
+                    if(event.target.value == 'default'){
+                      time_filter = 'http://localhost:8000/api/networkPull/'
+                    }
+                    if(event.target.value == 'Past Hour'){
+                      time_filter = 'http://localhost:8000/api/Past_Hour/'
+                    }else if(event.target.value == 'Past day'){
+                      time_filter = 'http://localhost:8000/api/Past_Day/'
+                    }
+                    else if(event.target.value == 'Past week'){
+                      time_filter = 'http://localhost:8000/api/Past_Week/'
+                    }else if(event.target.value == 'Past month'){
+                      time_filter = 'http://localhost:8000/api/Past_Month/'
+                    }else if(event.target.value == 'Past 6 months'){
+                      time_filter = 'http://localhost:8000/api/Past_6Months/'
+                    }
+                  
+                    const response = await fetch(time_filter);
+                    const data = await response.json();
+                    setData(data);
+                    console.log(getData)
+
+                }}>
+                  <option value="default" selected>Filter By Time</option>
+                  <option value="Past Hour">Past Hour</option>
+                  <option value="Past day">Past day</option>
+                  <option value="Past week">Past week</option>
+                  <option value="Past month">Past month</option>  
+                  <option value="Past 6 months">Past 6 months</option>
                 </select>
               </div>
 

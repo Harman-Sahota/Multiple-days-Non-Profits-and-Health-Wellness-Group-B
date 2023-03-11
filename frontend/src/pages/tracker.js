@@ -15,39 +15,15 @@ import * as d3Shape from "d3-shape";
 import * as d3Selection from "d3-selection";
 import * as d3Axis from "d3-axis";
 import * as d3ScaleChromatic from "d3-scale-chromatic";
+import * as d3 from "d3";
 
 function Tracker() {
   const [getData, setData] = useState([]);
   const [getPercentageData, setPercentageData] = useState([]);
   const [getCategoryData, setCategoryData] = useState([]);
 
-  const fetchData = async () => {
-    const response = await fetch("http://127.0.0.1:8000/api/trackerPull/");
-    const data = await response.json();
-    return setData(data);
-
-  }
-  const fetchPercentagechartData = async () => {
-    const response = await fetch("http://localhost:8000/api/trackerPercentageSum/");
-    const data = await response.json();
-    return setPercentageData(data);
-
-  }
-  const fetchCategorychartData = async () => {
-    const response = await fetch("http://localhost:8000/api/trackerCategorySum/");
-    const data = await response.json();
-    return setCategoryData(data);
-
-  }
-
-
-  useEffect(() => {
-    fetchData();
-    fetchPercentagechartData();
-    fetchCategorychartData();
-  }, [])
-
-
+  const [graphPercentageData, setGraphPercentageData] = useState([]);
+  const [graphCategoryData, setGraphCategoryData] = useState([]);
 
   const [trackers, setTrackers] = useState({
     Category: "Fresh Produce",
@@ -59,8 +35,7 @@ function Tracker() {
     amountToCompost: "",
     amountToPartnerNetwork: "",
     Email: "",
-    Organization: ""
-   
+    Organization: "",
   });
 
   const quantity = useRef();
@@ -75,14 +50,307 @@ function Tracker() {
   const percentCompost = useRef();
   const percentPartnerNetwork = useRef();
   const percentLandFill = useRef();
+  // console.log(getPercentageData);
+  // console.log(getCategoryData);
+  // console.log(graphingPercentageData());
+  // console.log(graphingCategoryData());
 
-  // setInterval(calculateLandFillPercent(), 500);
   useEffect(() => {
+    fetchData();
+    fetchPercentageChartData();
+    fetchCategoryChartData();
+
+    // setInterval(calculateLandFillPercent(), 500);
     const interval = setInterval(function () {
       calculateLandFillAndPercentsWrapper();
     }, 500);
     return () => clearInterval(interval);
   }, []);
+
+  const percentsPieChartRef = useRef();
+  useEffect(() => {
+    function percentsPieChart() {
+      // d3.select("body").selectAll("svg").remove();
+      const width = 500;
+      const height = 450;
+      const margin = 40;
+
+      const radius = Math.min(width, height) / 2 - margin;
+
+      // const svg = d3.select(percentsPieChartRef.current);
+
+      // svg.selectAll("*").remove();
+
+      // svg
+      //   .append("svg")
+      //   .attr("width", width)
+      //   .attr("height", height)
+      //   .append("g")
+      //   .attr("transform", `translate(${width / 2},${height / 2})`);
+
+      const svg = d3
+        .select(percentsPieChartRef.current)
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .append("g")
+        .attr("transform", `translate(${width / 2},${height / 2})`);
+
+      const data = { ...graphPercentageData };
+
+      const dataEntries = Object.entries(data);
+
+      const colorScales = Object.keys(data).reduce((obj, key) => {
+        obj[key] = d3.scaleOrdinal().domain([key]).range([d3.schemeDark2[key]]);
+        return obj;
+      }, {});
+
+      const color = d3
+        .scaleOrdinal()
+        // .domain(["a", "b", "c", "d", "e", "f", "g", "h"])
+        // .domain(Object.keys(data))
+        .domain(dataEntries.map((entry) => entry[0]))
+        .range(d3.schemeDark2);
+
+      const pie = d3
+        .pie()
+        .sort(null)
+        .value((d) => d[1]);
+
+      const data_ready = pie(Object.entries(data));
+
+      const arc = d3
+        .arc()
+        .innerRadius(radius * 0.5) // This is the size of the donut hole
+        .outerRadius(radius * 0.8);
+
+      const outerArc = d3
+        .arc()
+        .innerRadius(radius * 0.8)
+        .outerRadius(radius * 0.8);
+
+      svg
+        .selectAll("allSlices")
+        .data(data_ready)
+        // .data(d3.entries(data))
+        .join("path")
+        .attr("d", arc)
+        // .attr("fill", (d) => color(d.data[1]))
+        .attr("fill", (d) => color(d.data[0]))
+        .attr("stroke", "white")
+        .style("stroke-width", "2px")
+        .style("opacity", 0.7);
+
+      svg
+        .selectAll("allPolylines")
+        .data(data_ready)
+        .join("polyline")
+        .attr("stroke", "black")
+        .style("fill", "none")
+        .attr("stroke-width", 1)
+        .attr("points", function (d) {
+          const posA = arc.centroid(d); // line insertion in the slice
+          const posB = outerArc.centroid(d); // line break: we use the other arc generator that has been built only for that
+          const posC = outerArc.centroid(d); // Label position = almost the same as posB
+          const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2; // we need the angle to see if the X position will be at the extreme right or extreme left
+          posC[0] = radius * 0.8 * (midangle < Math.PI ? 1 : -1); // multiply by 1 or -1 to put it on the right or on the left
+          return [posA, posB, posC];
+        });
+
+      svg
+        .selectAll("allLabels")
+        .data(data_ready)
+        .join("text")
+        .text((d) => d.data[0])
+        .attr("transform", function (d) {
+          const pos = outerArc.centroid(d);
+          const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2;
+          pos[0] = radius * 0.81 * (midangle < Math.PI ? 1 : -1);
+          return `translate(${pos})`;
+        })
+        .style("text-anchor", function (d) {
+          const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2;
+          return midangle < Math.PI ? "start" : "end";
+        });
+
+      return () => {
+        // svg.remove();
+        d3.select("body").selectAll("svg").remove();
+        // svg.selectAll("*").remove();
+      };
+    }
+
+    if (percentsPieChartRef.current) {
+      percentsPieChart();
+    }
+  });
+
+  const categoryPieChartRef = useRef();
+  useEffect(() => {
+    function categoryPieChart() {
+      const width = 500;
+      const height = 450;
+      const margin = 40;
+
+      const radius = Math.min(width, height) / 2 - margin;
+
+      const svg = d3
+        .select(categoryPieChartRef.current)
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .append("g")
+        .attr("transform", `translate(${width / 2},${height / 2})`);
+
+      const data = { ...graphCategoryData };
+
+      const dataEntries = Object.entries(data);
+
+      const colorScales = Object.keys(data).reduce((obj, key) => {
+        obj[key] = d3.scaleOrdinal().domain([key]).range([d3.schemeDark2[key]]);
+        return obj;
+      }, {});
+
+      const color = d3
+        .scaleOrdinal()
+        // .domain(["a", "b", "c", "d", "e", "f", "g", "h"])
+        // .domain(Object.keys(data))
+        .domain(dataEntries.map((entry) => entry[0]))
+        .range(d3.schemeDark2);
+
+      const pie = d3
+        .pie()
+        .sort(null)
+        .value((d) => d[1]);
+
+      const data_ready = pie(Object.entries(data));
+
+      const arc = d3
+        .arc()
+        .innerRadius(radius * 0.5) // This is the size of the donut hole
+        .outerRadius(radius * 0.8);
+
+      const outerArc = d3
+        .arc()
+        .innerRadius(radius * 0.8)
+        .outerRadius(radius * 0.8);
+
+      svg
+        .selectAll("allSlices")
+        .data(data_ready)
+        // .data(d3.entries(data))
+        .join("path")
+        .attr("d", arc)
+        // .attr("fill", (d) => color(d.data[1]))
+        .attr("fill", (d) => color(d.data[0]))
+        .attr("stroke", "white")
+        .style("stroke-width", "2px")
+        .style("opacity", 0.7);
+
+      svg
+        .selectAll("allPolylines")
+        .data(data_ready)
+        .join("polyline")
+        .attr("stroke", "black")
+        .style("fill", "none")
+        .attr("stroke-width", 1)
+        .attr("points", function (d) {
+          const posA = arc.centroid(d); // line insertion in the slice
+          const posB = outerArc.centroid(d); // line break: we use the other arc generator that has been built only for that
+          const posC = outerArc.centroid(d); // Label position = almost the same as posB
+          const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2; // we need the angle to see if the X position will be at the extreme right or extreme left
+          posC[0] = radius * 0.8 * (midangle < Math.PI ? 1 : -1); // multiply by 1 or -1 to put it on the right or on the left
+          return [posA, posB, posC];
+        });
+
+      svg
+        .selectAll("allLabels")
+        .data(data_ready)
+        .join("text")
+        .text((d) => d.data[0])
+        .attr("transform", function (d) {
+          const pos = outerArc.centroid(d);
+          const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2;
+          pos[0] = radius * 0.81 * (midangle < Math.PI ? 1 : -1);
+          return `translate(${pos})`;
+        })
+        .style("text-anchor", function (d) {
+          const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2;
+          return midangle < Math.PI ? "start" : "end";
+        });
+    }
+
+    if (categoryPieChartRef.current) {
+      categoryPieChart();
+    }
+  });
+
+  // function pieChartWrapper() {
+  //   percentsPieChart();
+  //   // categoryPieChart();
+  // }
+
+  async function fetchData() {
+    const response = await fetch("http://127.0.0.1:8000/api/trackerPull/");
+    const data = await response.json();
+    return setData(data);
+  }
+
+  async function fetchPercentageChartData() {
+    const response = await fetch(
+      "http://localhost:8000/api/trackerPercentageSum/"
+    );
+    const data = await response.json();
+    setGraphPercentageData(graphingPercentageData());
+    return setPercentageData(data);
+  }
+
+  async function fetchCategoryChartData() {
+    const response = await fetch(
+      "http://localhost:8000/api/trackerCategorySum/"
+    );
+    const data = await response.json();
+    setGraphCategoryData(graphingCategoryData());
+    return setCategoryData(data);
+  }
+
+  function graphingPercentageData() {
+    const data = {
+      "Clients %": getPercentageData["percentClients__sum"],
+      "Compost %": getPercentageData["percentCompost__sum"],
+      "Feed %": getPercentageData["percentAFeed__sum"],
+      "Landfill %": getPercentageData["percentLandfill__sum"],
+      "Partner Network %": getPercentageData["percentPartNet__sum"],
+    };
+
+    return data;
+    // return { ...getPercentageData };
+
+    // for (let key in getPercentageData) {
+    // data.push(
+    //   Object.create({
+    //     category: key,
+    //     number: getPercentageData[key],
+    //   })
+    // );
+    // }
+  }
+
+  function graphingCategoryData() {
+    let data = {};
+
+    for (let i = 0; i < getCategoryData.length; i++)
+      for (let key in getCategoryData[i]) {
+        data[key] = getCategoryData[i][key];
+        // let obj = {
+        //   category: key,
+        //   number: getCategoryData[i][key],
+        // };
+        // data.push(obj);
+      }
+
+    return data;
+  }
 
   function calculateLandFillAndPercentsWrapper() {
     calculateLandFill();
@@ -180,6 +448,30 @@ function Tracker() {
     }
   }
 
+  // const fetchData = async () => {
+  //   const response = await fetch("http://127.0.0.1:8000/api/trackerPull/");
+  //   const data = await response.json();
+  //   return setData(data);
+  // };
+
+  // const fetchPercentageChartData = async () => {
+  //   const response = await fetch(
+  //     "http://localhost:8000/api/trackerPercentageSum/"
+  //   );
+  //   const data = await response.json();
+  //   setGraphPercentageData(graphingPercentageData());
+  //   return setPercentageData(data);
+  // };
+
+  // const fetchCategoryChartData = async () => {
+  //   const response = await fetch(
+  //     "http://localhost:8000/api/trackerCategorySum/"
+  //   );
+  //   const data = await response.json();
+  //   setGraphCategoryData(graphingCategoryData());
+  //   return setCategoryData(data);
+  // };
+
   {
     if (
       new Date().getTime() < localStorage.getItem("expiry") &&
@@ -196,10 +488,7 @@ function Tracker() {
             </div>
             <div className="card-body">
               <div id="form-wrapper">
-                <div
-                  className="tracker-data-entry"
-                  id="tracker"
-                >
+                <div className="tracker-data-entry" id="tracker">
                   <Form.Group>
                     {/* {% csrf_token %} */}
                     <div className="row">
@@ -311,7 +600,7 @@ function Tracker() {
                           <div className="col-auto">
                             <input
                               type="number"
-                              step = "any"
+                              step="any"
                               className={`form-control ${trackerCSS["customised-input"]}`}
                               id="animalFeed"
                               name="animalFeed"
@@ -332,7 +621,7 @@ function Tracker() {
                           <div className="col-auto">
                             <input
                               type="number"
-                              step = "any"
+                              step="any"
                               className={`form-control ${trackerCSS["customised-input"]}`}
                               id="compost"
                               name="compost"
@@ -353,7 +642,7 @@ function Tracker() {
                           <div className="col-auto">
                             <input
                               type="number"
-                              step = "any"
+                              step="any"
                               className={`form-control ${trackerCSS["customised-input"]}`}
                               id="partnerNetwork"
                               name="partnerNetwork"
@@ -375,7 +664,7 @@ function Tracker() {
                           <div className="col-auto">
                             <input
                               type="number"
-                              step = "any"
+                              step="any"
                               className={`form-control ${trackerCSS["customised-input"]}`}
                               id="landFill"
                               name="landFill"
@@ -402,7 +691,7 @@ function Tracker() {
                           <div className="col-auto">
                             <input
                               type="number"
-                              step = "any"
+                              step="any"
                               className={`form-control ${trackerCSS["customised-smaller-input"]}`}
                               id="percentClients"
                               name="percentClients"
@@ -430,7 +719,7 @@ function Tracker() {
                           <div className="col-auto">
                             <input
                               type="number"
-                              step = "any"
+                              step="any"
                               className={`form-control ${trackerCSS["customised-smaller-input"]}`}
                               id="percentAnimalFeed"
                               name="percentAnimalFeed"
@@ -458,7 +747,7 @@ function Tracker() {
                           <div className="col-auto">
                             <input
                               type="number"
-                              step = "any"
+                              step="any"
                               className={`form-control ${trackerCSS["customised-smaller-input"]}`}
                               id="percentCompost"
                               name="percentCompost"
@@ -486,7 +775,7 @@ function Tracker() {
                           <div className="col-auto">
                             <input
                               type="number"
-                              step = "any"
+                              step="any"
                               className={`form-control ${trackerCSS["customised-smaller-input"]}`}
                               id="percentPartnerNetwork"
                               name="percentPartnerNetwork"
@@ -514,7 +803,7 @@ function Tracker() {
                           <div className="col-auto">
                             <input
                               type="number"
-                              step = "any"
+                              step="any"
                               className={`form-control ${trackerCSS["customised-smaller-input"]}`}
                               id="percentLandFill"
                               name="percentLandFill"
@@ -542,9 +831,6 @@ function Tracker() {
                           className={`${trackerCSS["save"]} btn btn-outline-success`}
                           id="submit"
                           onClick={(e) => {
-                            
-                            
-                           
                             axios
                               .post(
                                 "http://127.0.0.1:8000/api/trackerInsert/",
@@ -558,14 +844,26 @@ function Tracker() {
                                   amountToCompost: trackers.amountToCompost,
                                   amountToPartNet:
                                     trackers.amountToPartnerNetwork,
-                                  amountToLandfill: document.getElementById('landFill').value,
-                                  percentClients: document.getElementById('percentClients').value,
-                                  percentAFeed: document.getElementById('percentAnimalFeed').value,
-                                  percentCompost: document.getElementById('percentCompost').value,
-                                  percentPartNet: document.getElementById('percentPartnerNetwork').value,
-                                  percentLandfill: document.getElementById('percentLandFill').value,
-                                  Email: localStorage.getItem('email'),
-                                  Organization: localStorage.getItem('organization')
+                                  amountToLandfill:
+                                    document.getElementById("landFill").value,
+                                  percentClients:
+                                    document.getElementById("percentClients")
+                                      .value,
+                                  percentAFeed:
+                                    document.getElementById("percentAnimalFeed")
+                                      .value,
+                                  percentCompost:
+                                    document.getElementById("percentCompost")
+                                      .value,
+                                  percentPartNet: document.getElementById(
+                                    "percentPartnerNetwork"
+                                  ).value,
+                                  percentLandfill:
+                                    document.getElementById("percentLandFill")
+                                      .value,
+                                  Email: localStorage.getItem("email"),
+                                  Organization:
+                                    localStorage.getItem("organization"),
                                 },
                                 {
                                   headers: {
@@ -579,14 +877,11 @@ function Tracker() {
                                     "Your form has been submitted successfully"
                                   );
                                   fetchData();
-                                  fetchPercentagechartData();
-                                  fetchCategorychartData();                                 
-                           
-
+                                  fetchPercentageChartData();
+                                  fetchCategoryChartData();
                                 }
                               })
                               .catch((err) => console.warn(err));
-                             
                           }}
                         >
                           Save
@@ -601,7 +896,21 @@ function Tracker() {
 
           <br />
           <br />
+          <div
+            className={`pie-chart-percents trackerCSS['pie-chart-percents']`}
+            // onLoad={pieChartWrapper}
+            id="pie-chart-percents"
+            ref={percentsPieChartRef}
+          ></div>
 
+          <div
+            className={`pie-chart-category trackerCSS['pie-chart-category']`}
+            // onLoad={pieChartWrapper}
+            id="pie-chart-category"
+            ref={categoryPieChartRef}
+          ></div>
+          <br />
+          <br />
           <section id="section">
             <div className="card">
               <div className={`${trackerCSS["card-header"]} card-header`}>
@@ -639,39 +948,36 @@ function Tracker() {
                       <th>Landfill</th>
                       <th>Date Time</th>
                       <th></th>
-                   
                     </tr>
                   </thead>
                   <tbody>
-                    
-                  {getData && getData.length > 0 && getData.map((userObj) => (
-                 
-                    <tr>
-                      <td>{userObj.Category}</td>
-                      <td>{userObj.Description}</td>
-                      <td>{userObj.Quantity}</td>
-                      <td>{userObj.Qunits}</td>
-                      <td>{userObj.percentClients}</td>
-                      <td>{userObj.percentAFeed}</td>
-                      <td>{userObj.percentCompost}</td>
-                      <td>{userObj.percentPartNet}</td>
-                      <td>{userObj.percentLandfill}</td>
-                      <td>{userObj.date_time}</td>
-                      <td>
-                        <div>
-                
-                          <Button
-                            variant="danger"
-                            className="btn btn-danger"
-                            name="field"
-                          >
-                            Delete
-                          </Button>
-                        </div>
-                      </td>
-                    </tr>
-                    ))}
-                   
+                    {getData &&
+                      getData.length > 0 &&
+                      getData.map((userObj) => (
+                        <tr>
+                          <td>{userObj.Category}</td>
+                          <td>{userObj.Description}</td>
+                          <td>{userObj.Quantity}</td>
+                          <td>{userObj.Qunits}</td>
+                          <td>{userObj.percentClients}</td>
+                          <td>{userObj.percentAFeed}</td>
+                          <td>{userObj.percentCompost}</td>
+                          <td>{userObj.percentPartNet}</td>
+                          <td>{userObj.percentLandfill}</td>
+                          <td>{userObj.date_time}</td>
+                          <td>
+                            <div>
+                              <Button
+                                variant="danger"
+                                className="btn btn-danger"
+                                name="field"
+                              >
+                                Delete
+                              </Button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
                   </tbody>
                 </Table>
               </div>
@@ -679,9 +985,6 @@ function Tracker() {
           </section>
 
           <br />
-        
-          <div id="penetrate" className="penetrate" onLoad={pieChart}></div>
-          {/* {{ json|json_script:"json" }} */}
         </div>
       );
     } else if (
@@ -716,148 +1019,6 @@ function Tracker() {
         </section>
       );
     }
-  }
-
-  function pieChart() {
-    let penetrate = document.getElementById("penetrate");
-    let h3 = document.createElement("h3");
-    h3.innerText = "Database Visuals";
-    penetrate.appendChild(h3);
-
-    var mydata = JSON.parse(document.getElementById("json").textContent);
-    mydata = JSON.parse(mydata);
-    mydata = JSON.parse(JSON.stringify(mydata));
-    mydata.forEach((val) => console.log(val.Category)); //print by field
-    console.log(mydata); // print whole object
-
-    var sum = mydata.reduce((n, { Quantity }) => n + Quantity, 0);
-    console.log(sum);
-
-    var result = Array.from(
-      mydata.reduce(
-        (acc, obj) =>
-          Object.keys(obj).reduce(
-            (acc, key) =>
-              typeof obj[key] == "number"
-                ? acc.set(key, (acc.get(key) || []).concat(obj[key]))
-                : acc,
-            acc
-          ),
-        new Map()
-      ),
-      ([name, values]) => ({
-        name,
-        average: (values.reduce((a, b) => a + b) / sum) * 100,
-      })
-    );
-    console.log(result);
-
-    let mycategory = mydata[0].Category;
-    let myclients = result[1].average.toFixed(2);
-    let myfeeds = result[2].average.toFixed(2);
-    let mycompost = result[3].average.toFixed(2);
-    let mypartners = result[4].average.toFixed(2);
-    let mylandfill = result[5].average.toFixed(2);
-
-    let thedata = [
-      { category: "Clients", number: myclients },
-      { category: "Animal Feed", number: myfeeds },
-      { category: "Compost / Fertilizer", number: mycompost },
-      { category: "Partner Network", number: mypartners },
-      { category: "Landfill", number: mylandfill },
-    ];
-
-    let width = 750,
-      height = 500;
-
-    let colors = d3Scale.scaleOrdinal(d3ScaleChromatic.schemeDark2);
-
-    let svg = d3Selection
-      .select("body")
-      .append("svg")
-      .attr("width", width)
-      .attr("height", height)
-      .style("background", "#e7f5e4");
-
-    let data = d3Shape
-      .pie()
-      .sort(null)
-      .value(function (d) {
-        return d.number;
-      })(thedata);
-
-    let segments = d3Shape
-      .arc()
-      .innerRadius(0)
-      .outerRadius(200)
-      .padAngle(0.05)
-      .padRadius(50);
-
-    let sections = svg
-      .append("g")
-      .attr("transform", "translate(250, 250)")
-      .selectAll("path")
-      .data(data);
-
-    sections
-      .enter()
-      .append("path")
-      .attr("d", segments)
-      .attr("fill", function (d) {
-        return colors(d.data.category);
-      });
-
-    let content = d3Selection.select("g").selectAll("text").data(data);
-
-    content
-      .enter()
-      .append("text")
-      .classed("inside", true)
-      .each(function (d) {
-        let center = segments.centroid(d);
-        d3Selection
-          .select(this)
-          .attr("x", center[0])
-          .attr("y", center[1])
-          .text(`${d.data.category}:\n${d.data.number}`)
-          .style("text-anchor", "middle");
-      });
-
-    let legends = svg
-      .append("g")
-      .attr("transform", "translate(500, 100)")
-      .selectAll(".legends")
-      .data(data);
-
-    let legend = legends
-      .enter()
-      .append("g")
-      .classed("legends", true)
-      .attr("transform", function (d, i) {
-        return "translate(0," + (i + 1) * 30 + ")";
-      });
-
-    legend
-      .append("rect")
-      .attr("width", 20)
-      .attr("height", 20)
-      .attr("fill", function (d) {
-        return colors(d.data.category);
-      });
-
-    legend
-      .append("text")
-      .classed("label", true)
-      .text(function (d) {
-        return d.data.category;
-      })
-      .attr("fill", function (d) {
-        return colors(d.data.category);
-      })
-      .attr("x", 30)
-      .attr("y", 15);
-    //   console.log(`Hey my category is: ${mydata[0].Category}`);
-    //   for (let i = 0; i < mydata.length; i++) console.log(mydata[i].DivertAFeed);
   }
 }
 export default Tracker;
