@@ -304,8 +304,11 @@ def NetworkGraphing(request):
     
 @api_view(["POST"])
 def NetworkSorting(request):
+    timer = datetime.datetime.now() - datetime.timedelta(minutes=3)
     if request.method == 'POST':
-        return Response()
+        results = posts.objects.filter(date_time__gt = timer, Email=request.data["Email"])
+        serialize = networkPullSerialize(results,many=True)
+        return Response(serialize.data)
 
 
 
