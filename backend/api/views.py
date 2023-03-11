@@ -7,6 +7,8 @@ from api.models import tracker
 import jwt,datetime
 from api.serialize import userSerialize
 from django.db.models import Sum
+from django.utils import timezone
+
 
 # from api.serialize import commentsSerialize
 
@@ -254,6 +256,7 @@ def trackerPull(request):
         results = tracker.objects.all()
         serialize = trackerPullSerialize(results, many=True)
         return Response(serialize.data)
+
     
 @api_view(['PUT'])
 def trackerUpdate(request, pk):
@@ -298,3 +301,17 @@ def NetworkGraphing(request):
         results = tracker.objects.filter(Email = request.data['user_email']).aggregate(Sum('percentClients'),Sum('percentAFeed'),Sum('percentCompost'),Sum('percentPartNet'),Sum('percentLandfill'))
         results2 = tracker.objects.filter(Email=request.data['compare_email']).aggregate(Sum('percentClients'),Sum('percentAFeed'),Sum('percentCompost'),Sum('percentPartNet'),Sum('percentLandfill'))
         return Response({"user":results,"comparee":results2})
+    
+@api_view(["GET"])
+def NetworkSorting(request):
+    timer = datetime.datetime.utcnow().isoformat(sep='T',timespec='seconds')
+    if request.method == 'GET':
+        results = posts.objects.filter(date_time__lt = timer)
+        serialize = networkPullSerialize(results,many=True)
+        return Response(serialize.data)
+
+
+
+
+
+
