@@ -69,7 +69,6 @@ function Tracker() {
 
   const percentsPieChartRef = useRef();
   function plotPercentsPieChart() {
-    // d3.select("body").selectAll("svg").remove();
     const width = 500;
     const height = 450;
     const margin = 40;
@@ -172,17 +171,29 @@ function Tracker() {
         return midangle < Math.PI ? "start" : "end";
       });
 
-    return () => {
-      // svg.remove();
-      d3.select("body").selectAll("svg").remove();
-      // svg.selectAll("*").remove();
-    };
+    // return () => {
+    //   // svg.remove();
+    //   d3.select("body").selectAll("svg").remove();
+    //   // svg.selectAll("*").remove();
+    // };
   }
   useEffect(() => {
+    // d3.select("#container").selectAll("svg").remove();
+    // d3.select("#container").selectAll("g").remove();
+
     if (percentsPieChartRef.current) {
       plotPercentsPieChart();
     }
-  }, [getPercentageData]);
+
+    if (categoryPieChartRef.current) {
+      plotCategoryPieChart();
+    }
+  }, [
+    graphPercentageData,
+    getPercentageData,
+    graphCategoryData,
+    getCategoryData,
+  ]);
 
   const categoryPieChartRef = useRef();
   function plotCategoryPieChart() {
@@ -277,17 +288,12 @@ function Tracker() {
         return midangle < Math.PI ? "start" : "end";
       });
 
-    return () => {
-      // svg.remove();
-      d3.select("body").selectAll("svg").remove();
-      // svg.selectAll("*").remove();
-    };
+    // return () => {
+    //   // svg.remove();
+    //   // d3.select("body").selectAll("svg").remove();
+    //   // svg.selectAll("*").remove();
+    // };
   }
-  useEffect(() => {
-    if (categoryPieChartRef.current) {
-      plotCategoryPieChart();
-    }
-  }, [getCategoryData]);
 
   // function pieChartWrapper() {
   //   percentsPieChart();
@@ -485,7 +491,7 @@ function Tracker() {
       localStorage.roles
     ) {
       return (
-        <div className="container p-2">
+        <div className="container p-2" id="container">
           <p>
             <strong>Welcome, {localStorage.getItem("firstname")}!</strong>
           </p>
