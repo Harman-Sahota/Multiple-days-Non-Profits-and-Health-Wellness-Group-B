@@ -2,11 +2,9 @@ import React, { useState, useEffect, useRef } from "react";
 
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./network.css";
 import fourcss from "./fourcss.css";
-
 import axios, { all } from "axios";
 import { local } from "d3-selection";
 import * as d3 from "d3";
@@ -14,52 +12,91 @@ import * as d3 from "d3";
 var filter = "Product";
 var time_filter = "http://localhost:8000/api/networkPull/";
 
+function LineChart({ data }) {
+  const chartRef = useRef(null);
+
+  useEffect(() => {
+    const margin = { top: 20, right: 30, bottom: 30, left: 50 };
+    const width = 500 - margin.left - margin.right;
+    const height = 300 - margin.top - margin.bottom;
+  
+    const svg = d3.select(chartRef.current).select("svg");
+  
+    if (data) {
+      const xScale = d3.scalePoint()
+        .domain(data.map(d => d.category))
+        .range([0, width]);
+  
+      const yScale = d3.scaleLinear()
+        .domain([0, d3.max(data, d => Math.max(d.ClientsA, d.ClientB))])
+        .range([height, 0]);
+  
+      const line = d3.line()
+        .x(d => xScale(d.category))
+        .y(d => yScale(d.ClientsA));
+  
+      svg.select(".blue-line").remove(); // Remove existing blue line
+      svg.append("path")
+        .datum(data)
+        .attr("fill", "none")
+        .attr("stroke", "blue")
+        .attr("stroke-width", 1.5)
+        .attr("d", line)
+        .classed("blue-line", true);
+  
+      const line2 = d3.line()
+        .x(d => xScale(d.category))
+        .y(d => yScale(d.ClientB));
+  
+      svg.select(".red-line").remove(); // Remove existing red line
+      svg.append("path")
+        .datum(data)
+        .attr("fill", "none")
+        .attr("stroke", "red")
+        .attr("stroke-width", 1.5)
+        .attr("d", line2)
+        .classed("red-line", true);
+  
+      const xAxis = d3.axisBottom(xScale);
+  
+      svg.select(".x-axis")
+        .attr("transform", `translate(0, ${height})`)
+        .call(xAxis);
+  
+      const yAxis = d3.axisLeft(yScale);
+  
+      svg.select(".y-axis")
+        .call(yAxis);
+    } else {
+      // Remove existing lines when data is null or undefined
+      svg.select(".blue-line").remove();
+      svg.select(".red-line").remove();
+    }
+  
+  }, [data]);
+  
+
+  return (
+    <div ref={chartRef}>
+      <svg width="500" height="300">
+        <g className="x-axis" />
+        <g className="y-axis" />
+      </svg>
+    </div>
+  );
+}
+
 function SearchBar() {
+
+
   const [getData, setData] = useState([]);
   const [getSharedData, setSharedData] = useState([]);
   const [getGraphData, setGraphData] = useState([]);
 
-  const [graphingData, setGraphingData] = useState({});
-  const [buttonClicked, setButtonClicked] = useState(false);
+  //graph stuff
 
-  console.log(getGraphData);
-  console.log(graphingData);
 
-  // Rmr to insert dependency
-  const lineGraphRef = useRef();
-  function plotLineGraph() {
-    var margin = { top: 10, right: 30, bottom: 30, left: 60 },
-      width = 460 - margin.left - margin.right,
-      height = 400 - margin.top - margin.bottom;
-
-    var svg = d3
-      .select(lineGraphRef.current)
-      .append("svg")
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
-      .append("g")
-      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-  }
-  // useEffect(() => {
-  //   if (lineGraphRef.current && buttonClicked) {
-  //     plotLineGraph();
-  //   }
-  // }, [graphingData, buttonClicked]);
-
-  function retrieveGraphingData(fedInData) {
-    const data = {
-      "Feeds %": fedInData["comparee"]["percentAFeed__sum"],
-      "Clients %": fedInData["comparee"]["percentClients__sum"],
-      "Compost %": fedInData["comparee"]["percentCompost__sum"],
-      "Landfill %": fedInData["comparee"]["percentLandfill__sum"],
-      "Partner Network %": fedInData["comparee"]["percentPartNet__sum"],
-    };
-    return data;
-  }
-
-  function handleClick() {
-    setButtonClicked(true);
-  }
+  
 
   const fetchSharedData = async () => {
     axios
@@ -192,6 +229,7 @@ function SearchBar() {
                           type="button"
                           className="graph_btn btn btn-outline-primary"
                           onClick={(event) => {
+                        
                             axios
                               .post(
                                 "http://localhost:8000/api/NetworkGraphing/",
@@ -209,18 +247,25 @@ function SearchBar() {
                                 if (response.status == 200) {
                                   if (
                                     response.data["comparee"][
-                                      "percentClients__sum"
+                                    "percentClients__sum"
                                     ] == null
                                   ) {
                                     alert(
-                                      "this user is a non registered user and no data is available to compare, only user data displayed in graph"
+                                      "this user is a non registered user (or the user has no data and no data) is available to compare, only user data displayed in graph"
                                     );
                                   }
-                                  setGraphData(response.data);
-                                  setGraphingData(
-                                    retrieveGraphingData(response.data)
-                                  );
-                                  handleClick();
+                                  const data = [
+                                    { category: "Clients", ClientsA: response.data['user']['percentClients__sum'], ClientB: response.data['comparee']['percentClients__sum'] },
+                                    { category: "Animal_Feed", ClientsA: response.data['user']['percentAFeed__sum'], ClientB: response.data['comparee']['percentAFeed__sum'] },
+                                    { category: "Partner_Network", ClientsA: response.data['user']['percentPartNet__sum'], ClientB: response.data['comparee']['percentPartNet__sum'] },
+                                    { category: "Landfill", ClientsA: response.data['user']['percentLandfill__sum'], ClientB: response.data['comparee']['percentLandfill__sum'] },
+                                  ];
+                                  
+                        
+                                  setGraphData(data);
+                                  console.log(getGraphData)
+                                  LineChart(getGraphData)
+
                                 }
                               })
                               .catch((err) => console.warn(err));
@@ -232,8 +277,8 @@ function SearchBar() {
                     </div>
                   ))}
               </div>
-              <div className="col graph_box" ref={lineGraphRef}>
-                <h3>Graphing here</h3>
+              <div className="col graph_box chart chart-container">
+              <LineChart data={getGraphData}/>
               </div>
             </div>
           </div>
@@ -646,7 +691,9 @@ function SearchBar() {
               </a>
             </div>
           </div>
+
         </section>
+
       );
     }
   }
