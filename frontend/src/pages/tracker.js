@@ -8,22 +8,92 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
-
-// import * as d3Fetch from "d3-fetch";
-// import * as d3Scale from "d3-scale";
-// import * as d3Shape from "d3-shape";
-// import * as d3Selection from "d3-selection";
-// import * as d3Axis from "d3-axis";
-// import * as d3ScaleChromatic from "d3-scale-chromatic";
 import * as d3 from "d3";
+function PieChart({ data }) {
+  const ref = useRef(null);
+  const labelOffset = 100;
+
+  useEffect(() => {
+    const width = 400;
+    const height = 400;
+    const radius = 150;
+
+    const color = d3.scaleOrdinal()
+      .range(['#2C3E50', '#E74C3C', '#F1C40F', '#3498DB', '#9B59B6', '#FF5733', '#34495E']);
+
+    const pie = d3.pie()
+      .sort(null)
+      .value(d => d.value);
+
+    const path = d3.arc()
+      .outerRadius(radius - 10)
+      .innerRadius(0);
+
+    const label = d3.arc()
+      .outerRadius(radius - labelOffset)
+      .innerRadius(radius - labelOffset);
+
+    const svg = d3.select(ref.current)
+      .append('svg')
+      .attr('width', width)
+      .attr('height', height)
+      .append('g')
+      .attr('transform', `translate(${width / 2}, ${height / 2})`);
+
+    const arc = svg.selectAll('.arc')
+      .data(pie(data))
+      .enter()
+      .append('g')
+      .attr('class', 'arc');
+
+    arc.append('path')
+      .attr('d', path)
+      .attr('fill', d => color(d.data.label))
+      .attr('stroke', 'black');
+
+    const labelLines = arc.append('polyline')
+      .attr('class', 'label-line')
+      .attr('points', d => {
+        const [x, y] = label.centroid(d);
+        const offset = x > 0 ? labelOffset : -labelOffset;
+        return [
+          path.centroid(d),
+          [label.centroid(d)[0] + offset, label.centroid(d)[1]],
+          [label.centroid(d)[0] + offset, label.centroid(d)[1] + (y > 0 ? 10 : -10)]
+        ];
+      });
+
+    arc.append('text')
+      .attr('transform', d => {
+        const [x, y] = label.centroid(d);
+        const offset = x > 0 ? labelOffset : -labelOffset;
+        return `translate(${label.centroid(d)[0] + offset}, ${label.centroid(d)[1]})`;
+      })
+      .attr('dy', '0.35em')
+      .style('font-size', '14px')
+      .style('text-anchor', d => {
+        const x = label.centroid(d)[0];
+        return x > 0 ? 'start' : 'end';
+      })
+      .text(d => d.data.label);
+
+    return () => {
+      svg.remove();
+    };
+  }, [data]);
+
+  return (
+    <div style={{ width: '500px', height: '500px', border: '2px solid red' }}>
+      <div ref={ref}></div>
+    </div>
+  );
+}
 
 function Tracker() {
+
   const [getData, setData] = useState([]);
   const [getPercentageData, setPercentageData] = useState([]);
   const [getCategoryData, setCategoryData] = useState([]);
-
-  const [graphPercentageData, setGraphPercentageData] = useState({});
-  const [graphCategoryData, setGraphCategoryData] = useState({});
 
   const [trackers, setTrackers] = useState({
     Category: "Fresh Produce",
@@ -50,10 +120,7 @@ function Tracker() {
   const percentCompost = useRef();
   const percentPartnerNetwork = useRef();
   const percentLandFill = useRef();
-  // console.log(getPercentageData);
-  // console.log(getCategoryData);
-  // console.log(formPercentageData());
-  // console.log(formCategoryData());
+
 
   useEffect(() => {
     fetchData();
@@ -67,239 +134,6 @@ function Tracker() {
     return () => clearInterval(interval);
   }, []);
 
-  const percentsPieChartRef = useRef();
-  function plotPercentsPieChart() {
-    const width = 500;
-    const height = 450;
-    const margin = 40;
-
-    const radius = Math.min(width, height) / 2 - margin;
-
-    // const svg = d3.select(percentsPieChartRef.current);
-
-    // svg.selectAll("*").remove();
-
-    // svg
-    //   .append("svg")
-    //   .attr("width", width)
-    //   .attr("height", height)
-    //   .append("g")
-    //   .attr("transform", `translate(${width / 2},${height / 2})`);
-
-    const svg = d3
-      .select(percentsPieChartRef.current)
-      .append("svg")
-      .attr("width", width)
-      .attr("height", height)
-      .append("g")
-      .attr("transform", `translate(${width / 2},${height / 2})`);
-
-    const data = { ...graphPercentageData };
-
-    const dataEntries = Object.entries(data);
-
-    const colorScales = Object.keys(data).reduce((obj, key) => {
-      obj[key] = d3.scaleOrdinal().domain([key]).range([d3.schemeDark2[key]]);
-      return obj;
-    }, {});
-
-    const color = d3
-      .scaleOrdinal()
-      // .domain(["a", "b", "c", "d", "e", "f", "g", "h"])
-      // .domain(Object.keys(data))
-      .domain(dataEntries.map((entry) => entry[0]))
-      .range(d3.schemeDark2);
-
-    const pie = d3
-      .pie()
-      .sort(null)
-      .value((d) => d[1]);
-
-    const data_ready = pie(Object.entries(data));
-
-    const arc = d3
-      .arc()
-      .innerRadius(radius * 0.5) // This is the size of the donut hole
-      .outerRadius(radius * 0.8);
-
-    const outerArc = d3
-      .arc()
-      .innerRadius(radius * 0.8)
-      .outerRadius(radius * 0.8);
-
-    svg
-      .selectAll("allSlices")
-      .data(data_ready)
-      // .data(d3.entries(data))
-      .join("path")
-      .attr("d", arc)
-      // .attr("fill", (d) => color(d.data[1]))
-      .attr("fill", (d) => color(d.data[0]))
-      .attr("stroke", "white")
-      .style("stroke-width", "2px")
-      .style("opacity", 0.7);
-
-    svg
-      .selectAll("allPolylines")
-      .data(data_ready)
-      .join("polyline")
-      .attr("stroke", "black")
-      .style("fill", "none")
-      .attr("stroke-width", 1)
-      .attr("points", function (d) {
-        const posA = arc.centroid(d); // line insertion in the slice
-        const posB = outerArc.centroid(d); // line break: we use the other arc generator that has been built only for that
-        const posC = outerArc.centroid(d); // Label position = almost the same as posB
-        const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2; // we need the angle to see if the X position will be at the extreme right or extreme left
-        posC[0] = radius * 0.8 * (midangle < Math.PI ? 1 : -1); // multiply by 1 or -1 to put it on the right or on the left
-        return [posA, posB, posC];
-      });
-
-    svg
-      .selectAll("allLabels")
-      .data(data_ready)
-      .join("text")
-      .text((d) => d.data[0])
-      .attr("transform", function (d) {
-        const pos = outerArc.centroid(d);
-        const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2;
-        pos[0] = radius * 0.81 * (midangle < Math.PI ? 1 : -1);
-        return `translate(${pos})`;
-      })
-      .style("text-anchor", function (d) {
-        const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2;
-        return midangle < Math.PI ? "start" : "end";
-      });
-
-    // return () => {
-    //   // svg.remove();
-    //   d3.select("body").selectAll("svg").remove();
-    //   // svg.selectAll("*").remove();
-    // };
-  }
-  useEffect(() => {
-    // d3.select("#container").selectAll("svg").remove();
-    // d3.select("#container").selectAll("g").remove();
-
-    if (percentsPieChartRef.current) {
-      plotPercentsPieChart();
-    }
-
-    if (categoryPieChartRef.current) {
-      plotCategoryPieChart();
-    }
-  }, [
-    graphPercentageData,
-    getPercentageData,
-    graphCategoryData,
-    getCategoryData,
-  ]);
-
-  const categoryPieChartRef = useRef();
-  function plotCategoryPieChart() {
-    const width = 500;
-    const height = 450;
-    const margin = 40;
-
-    const radius = Math.min(width, height) / 2 - margin;
-
-    const svg = d3
-      .select(categoryPieChartRef.current)
-      .append("svg")
-      .attr("width", width)
-      .attr("height", height)
-      .append("g")
-      .attr("transform", `translate(${width / 2},${height / 2})`);
-
-    const data = { ...graphCategoryData };
-
-    const dataEntries = Object.entries(data);
-
-    const colorScales = Object.keys(data).reduce((obj, key) => {
-      obj[key] = d3.scaleOrdinal().domain([key]).range([d3.schemeDark2[key]]);
-      return obj;
-    }, {});
-
-    const color = d3
-      .scaleOrdinal()
-      // .domain(["a", "b", "c", "d", "e", "f", "g", "h"])
-      // .domain(Object.keys(data))
-      .domain(dataEntries.map((entry) => entry[0]))
-      .range(d3.schemeDark2);
-
-    const pie = d3
-      .pie()
-      .sort(null)
-      .value((d) => d[1]);
-
-    const data_ready = pie(Object.entries(data));
-
-    const arc = d3
-      .arc()
-      .innerRadius(radius * 0.5) // This is the size of the donut hole
-      .outerRadius(radius * 0.8);
-
-    const outerArc = d3
-      .arc()
-      .innerRadius(radius * 0.8)
-      .outerRadius(radius * 0.8);
-
-    svg
-      .selectAll("allSlices")
-      .data(data_ready)
-      // .data(d3.entries(data))
-      .join("path")
-      .attr("d", arc)
-      // .attr("fill", (d) => color(d.data[1]))
-      .attr("fill", (d) => color(d.data[0]))
-      .attr("stroke", "white")
-      .style("stroke-width", "2px")
-      .style("opacity", 0.7);
-
-    svg
-      .selectAll("allPolylines")
-      .data(data_ready)
-      .join("polyline")
-      .attr("stroke", "black")
-      .style("fill", "none")
-      .attr("stroke-width", 1)
-      .attr("points", function (d) {
-        const posA = arc.centroid(d); // line insertion in the slice
-        const posB = outerArc.centroid(d); // line break: we use the other arc generator that has been built only for that
-        const posC = outerArc.centroid(d); // Label position = almost the same as posB
-        const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2; // we need the angle to see if the X position will be at the extreme right or extreme left
-        posC[0] = radius * 0.8 * (midangle < Math.PI ? 1 : -1); // multiply by 1 or -1 to put it on the right or on the left
-        return [posA, posB, posC];
-      });
-
-    svg
-      .selectAll("allLabels")
-      .data(data_ready)
-      .join("text")
-      .text((d) => d.data[0])
-      .attr("transform", function (d) {
-        const pos = outerArc.centroid(d);
-        const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2;
-        pos[0] = radius * 0.81 * (midangle < Math.PI ? 1 : -1);
-        return `translate(${pos})`;
-      })
-      .style("text-anchor", function (d) {
-        const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2;
-        return midangle < Math.PI ? "start" : "end";
-      });
-
-    // return () => {
-    //   // svg.remove();
-    //   // d3.select("body").selectAll("svg").remove();
-    //   // svg.selectAll("*").remove();
-    // };
-  }
-
-  // function pieChartWrapper() {
-  //   percentsPieChart();
-  //   // categoryPieChart();
-  // }
-
   async function fetchData() {
     const response = await fetch("http://127.0.0.1:8000/api/trackerPull/");
     const data = await response.json();
@@ -311,8 +145,13 @@ function Tracker() {
       "http://localhost:8000/api/trackerPercentageSum/"
     );
     const data = await response.json();
-    setGraphPercentageData(formPercentageData());
-    return setPercentageData(data);
+    const data2 = [{ label: "Clients %", value: data["percentClients__sum"] },
+    { label: "Compost %", value: data["percentCompost__sum"] },
+    { label: "Feed %", value: data["percentAFeed__sum"] },
+    { label: "Landfill %", value: data["percentLandfill__sum"] },
+    { label: "Partner Network %", value: data["percentPartNet__sum"] }
+    ];
+    return setPercentageData(data2);
   }
 
   async function fetchCategoryChartData() {
@@ -320,47 +159,18 @@ function Tracker() {
       "http://localhost:8000/api/trackerCategorySum/"
     );
     const data = await response.json();
-    setGraphCategoryData(formCategoryData());
-    return setCategoryData(data);
+    const data2 = [
+      { label: 'Produce', value: data[0].Produce },
+      { label: 'Meat', value: data[1].Meat },
+      { label: 'Canned_Food', value: data[2].Canned_Food },
+      { label: 'Bread', value: data[3].Bread },
+      { label: 'Dairy', value: data[4].Dairy },
+      { label: 'Reclaimed', value: data[5].Reclaimed },
+    ];
+
+    return setCategoryData(data2);
   }
 
-  function formPercentageData() {
-    const data = {
-      "Clients %": getPercentageData["percentClients__sum"],
-      "Compost %": getPercentageData["percentCompost__sum"],
-      "Feed %": getPercentageData["percentAFeed__sum"],
-      "Landfill %": getPercentageData["percentLandfill__sum"],
-      "Partner Network %": getPercentageData["percentPartNet__sum"],
-    };
-
-    return data;
-    // return { ...getPercentageData };
-
-    // for (let key in getPercentageData) {
-    // data.push(
-    //   Object.create({
-    //     category: key,
-    //     number: getPercentageData[key],
-    //   })
-    // );
-    // }
-  }
-
-  function formCategoryData() {
-    let data = {};
-
-    for (let i = 0; i < getCategoryData.length; i++)
-      for (let key in getCategoryData[i]) {
-        data[key] = getCategoryData[i][key];
-        // let obj = {
-        //   category: key,
-        //   number: getCategoryData[i][key],
-        // };
-        // data.push(obj);
-      }
-
-    return data;
-  }
 
   function calculateLandFillAndPercentsWrapper() {
     calculateLandFill();
@@ -460,30 +270,6 @@ function Tracker() {
       localStorage.setItem("expiry", date);
     }
   }
-
-  // const fetchData = async () => {
-  //   const response = await fetch("http://127.0.0.1:8000/api/trackerPull/");
-  //   const data = await response.json();
-  //   return setData(data);
-  // };
-
-  // const fetchPercentageChartData = async () => {
-  //   const response = await fetch(
-  //     "http://localhost:8000/api/trackerPercentageSum/"
-  //   );
-  //   const data = await response.json();
-  //   setGraphPercentageData(formPercentageData());
-  //   return setPercentageData(data);
-  // };
-
-  // const fetchCategoryChartData = async () => {
-  //   const response = await fetch(
-  //     "http://localhost:8000/api/trackerCategorySum/"
-  //   );
-  //   const data = await response.json();
-  //   setGraphCategoryData(formCategoryData());
-  //   return setCategoryData(data);
-  // };
 
   {
     if (
@@ -844,6 +630,7 @@ function Tracker() {
                           className={`${trackerCSS["save"]} btn btn-outline-success`}
                           id="submit"
                           onClick={(e) => {
+                            console.log(getCategoryData)
                             axios
                               .post(
                                 "http://127.0.0.1:8000/api/trackerInsert/",
@@ -909,19 +696,17 @@ function Tracker() {
 
           <br />
           <br />
-          <div
-            className={`pie-chart-percents trackerCSS['pie-chart-percents']`}
-            // onLoad={pieChartWrapper}
-            id="pie-chart-percents"
-            ref={percentsPieChartRef}
-          ></div>
 
-          <div
-            className={`pie-chart-category trackerCSS['pie-chart-category']`}
-            // onLoad={pieChartWrapper}
-            id="pie-chart-category"
-            ref={categoryPieChartRef}
-          ></div>
+      
+          <div className="card" style={{padding: '5%'}}>
+          <div className="svg-container" style={{display: 'inline-block', margin: '0 auto'}}>
+            <PieChart data={getPercentageData} />
+            <PieChart data={getCategoryData} />
+            </div>
+            </div>
+          
+
+
           <br />
           <br />
           <section id="section">
@@ -935,7 +720,7 @@ function Tracker() {
                   onClick={function () {
                     exportTableToCSV("data.csv");
                   }}
-                  // onClick={() => exportTableToCSV("data.csv")}
+                // onClick={() => exportTableToCSV("data.csv")}
                 >
                   Export CSV
                 </Button>
