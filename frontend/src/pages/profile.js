@@ -307,8 +307,8 @@ function Profile() {
                                                      localStorage.roles.setItem(prevroles);
 
                                                  }
-                                               
-                                                // window.location.replace("http://localhost:3000/profile/");
+                                                
+                                                //  window.location.replace("http://localhost:3000/profile/");
 
                                             }
                                         })

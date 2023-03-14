@@ -14,26 +14,30 @@ var time_filter = "http://localhost:8000/api/networkPull/";
 
 function LineChart({ data }) {
   const chartRef = useRef(null);
-  const margin = { top: 20, right: 30, bottom: 30, left: 50 };
-  const width = 500 - margin.left - margin.right;
-  const height = 300 - margin.top - margin.bottom;
+  const margin = { top: 20, right: 30, bottom: 10, left: 50 };
+  const width = 500;
+  const height = 400 - margin.top - margin.bottom;
 
   useEffect(() => {
     const svg = d3.select(chartRef.current).select("svg");
   
     if (data) {
-      const xScale = d3.scalePoint()
-        .domain(data.map(d => d.category))
-        .range([0, width]);
-  
-      const yScale = d3.scaleLinear()
-        .domain([0, d3.max(data, d => Math.max(d.ClientsA, d.ClientB))])
-        .range([height, 0]);
-  
-      const line = d3.line()
-        .x(d => xScale(d.category))
-        .y(d => yScale(d.ClientsA));
-  
+      const xScale = d3
+      .scalePoint()
+      .rangeRound([0, width])
+      .padding(0.2)
+      .domain(data.map((d) => d.category));
+
+    const yScale = d3
+      .scaleLinear()
+      .range([height, 0])
+      .domain([0, d3.max(data, (d) => Math.max(d.ClientsA, d.ClientB)) + 20]);
+
+    const line = d3
+      .line()
+      .x((d) => xScale(d.category))
+      .y((d) => yScale(d.ClientsA));
+
       svg.select(".blue-line").remove(); // Remove existing blue line
       svg.append("path")
         .datum(data)
@@ -64,8 +68,10 @@ function LineChart({ data }) {
   
       const yAxis = d3.axisLeft(yScale);
   
-      svg.select(".y-axis")
-        .call(yAxis);
+      svg
+         .select(".y-axis")
+         .attr("transform", `translate(${30}, 0)`)
+         .call(yAxis);
     } else {
       // Remove existing lines when data is null or undefined
       svg.select(".blue-line").remove();
