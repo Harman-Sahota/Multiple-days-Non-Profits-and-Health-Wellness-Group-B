@@ -14,71 +14,80 @@ var time_filter = "http://localhost:8000/api/networkPull/";
 
 function LineChart({ data }) {
   const chartRef = useRef(null);
+  const margin = { top: 20, right: 30, bottom: 10, left: 50 };
+  const width = 500;
+  const height = 400 - margin.top - margin.bottom;
 
   useEffect(() => {
-    const margin = { top: 20, right: 30, bottom: 30, left: 50 };
-    const width = 500 - margin.left - margin.right;
-    const height = 300 - margin.top - margin.bottom;
-  
     const svg = d3.select(chartRef.current).select("svg");
-  
+
     if (data) {
-      const xScale = d3.scalePoint()
-        .domain(data.map(d => d.category))
-        .range([0, width]);
-  
-      const yScale = d3.scaleLinear()
-        .domain([0, d3.max(data, d => Math.max(d.ClientsA, d.ClientB))])
-        .range([height, 0]);
-  
-      const line = d3.line()
-        .x(d => xScale(d.category))
-        .y(d => yScale(d.ClientsA));
-  
+      const xScale = d3
+        .scalePoint()
+        .rangeRound([0, width])
+        .padding(0.2)
+        .domain(data.map((d) => d.category));
+
+      const yScale = d3
+        .scaleLinear()
+        .range([height, 0])
+        .domain([0, d3.max(data, (d) => Math.max(d.ClientsA, d.ClientB)) + 20]);
+
+      const line = d3
+        .line()
+        .x((d) => xScale(d.category))
+        .y((d) => yScale(d.ClientsA));
+
       svg.select(".blue-line").remove(); // Remove existing blue line
-      svg.append("path")
+
+      svg
+        .append("path")
         .datum(data)
         .attr("fill", "none")
         .attr("stroke", "blue")
         .attr("stroke-width", 1.5)
         .attr("d", line)
         .classed("blue-line", true);
-  
-      const line2 = d3.line()
-        .x(d => xScale(d.category))
-        .y(d => yScale(d.ClientB));
-  
+
+      const line2 = d3
+        .line()
+        .x((d) => xScale(d.category))
+        .y((d) => yScale(d.ClientB));
+
       svg.select(".red-line").remove(); // Remove existing red line
-      svg.append("path")
+
+      svg
+        .append("path")
         .datum(data)
         .attr("fill", "none")
         .attr("stroke", "red")
         .attr("stroke-width", 1.5)
         .attr("d", line2)
         .classed("red-line", true);
-  
+
       const xAxis = d3.axisBottom(xScale);
-  
-      svg.select(".x-axis")
+
+      svg
+        .select(".x-axis")
         .attr("transform", `translate(0, ${height})`)
         .call(xAxis);
-  
+
       const yAxis = d3.axisLeft(yScale);
-  
-      svg.select(".y-axis")
+
+      svg
+        .select(".y-axis")
+        .attr("transform", `translate(${30}, 0)`)
         .call(yAxis);
     } else {
       // Remove existing lines when data is null or undefined
       svg.select(".blue-line").remove();
       svg.select(".red-line").remove();
     }
-  
-  }, [data]);
-  
+  }, [data, height, width]);
 
   return (
     <div ref={chartRef}>
-      <svg width="500" height="300">
+      <svg width={width} height={height + margin.top + margin.bottom}>
         <g className="x-axis" />
         <g className="y-axis" />
       </svg>
@@ -87,16 +96,14 @@ function LineChart({ data }) {
 }
 
 function SearchBar() {
-
-
   const [getData, setData] = useState([]);
   const [getSharedData, setSharedData] = useState([]);
   const [getGraphData, setGraphData] = useState([]);
+  console.log(getData);
+  console.log(getSharedData);
+  console.log(getGraphData);
 
   //graph stuff
-
-
-  
 
   const fetchSharedData = async () => {
     axios
@@ -229,7 +236,6 @@ function SearchBar() {
                           type="button"
                           className="graph_btn btn btn-outline-primary"
                           onClick={(event) => {
-                        
                             axios
                               .post(
                                 "http://localhost:8000/api/NetworkGraphing/",
@@ -247,7 +253,7 @@ function SearchBar() {
                                 if (response.status == 200) {
                                   if (
                                     response.data["comparee"][
-                                    "percentClients__sum"
+                                      "percentClients__sum"
                                     ] == null
                                   ) {
                                     alert(
@@ -255,17 +261,55 @@ function SearchBar() {
                                     );
                                   }
                                   const data = [
-                                    { category: "Clients", ClientsA: response.data['user']['percentClients__sum'], ClientB: response.data['comparee']['percentClients__sum'] },
-                                    { category: "Animal_Feed", ClientsA: response.data['user']['percentAFeed__sum'], ClientB: response.data['comparee']['percentAFeed__sum'] },
-                                    { category: "Partner_Network", ClientsA: response.data['user']['percentPartNet__sum'], ClientB: response.data['comparee']['percentPartNet__sum'] },
-                                    { category: "Landfill", ClientsA: response.data['user']['percentLandfill__sum'], ClientB: response.data['comparee']['percentLandfill__sum'] },
+                                    {
+                                      category: "Clients",
+                                      ClientsA:
+                                        response.data["user"][
+                                          "percentClients__sum"
+                                        ],
+                                      ClientB:
+                                        response.data["comparee"][
+                                          "percentClients__sum"
+                                        ],
+                                    },
+                                    {
+                                      category: "Animal_Feed",
+                                      ClientsA:
+                                        response.data["user"][
+                                          "percentAFeed__sum"
+                                        ],
+                                      ClientB:
+                                        response.data["comparee"][
+                                          "percentAFeed__sum"
+                                        ],
+                                    },
+                                    {
+                                      category: "Partner_Network",
+                                      ClientsA:
+                                        response.data["user"][
+                                          "percentPartNet__sum"
+                                        ],
+                                      ClientB:
+                                        response.data["comparee"][
+                                          "percentPartNet__sum"
+                                        ],
+                                    },
+                                    {
+                                      category: "Landfill",
+                                      ClientsA:
+                                        response.data["user"][
+                                          "percentLandfill__sum"
+                                        ],
+                                      ClientB:
+                                        response.data["comparee"][
+                                          "percentLandfill__sum"
+                                        ],
+                                    },
                                   ];
-                                  
-                        
-                                  setGraphData(data);
-                                  console.log(getGraphData)
-                                  LineChart(getGraphData)
 
+                                  setGraphData(data);
+                                  LineChart(data);
+                                  console.log(getGraphData);
                                 }
                               })
                               .catch((err) => console.warn(err));
@@ -278,7 +322,7 @@ function SearchBar() {
                   ))}
               </div>
               <div className="col graph_box chart chart-container">
-              <LineChart data={getGraphData}/>
+                <LineChart data={getGraphData} />
               </div>
             </div>
           </div>
@@ -691,9 +735,7 @@ function SearchBar() {
               </a>
             </div>
           </div>
-
         </section>
-
       );
     }
   }
