@@ -144,26 +144,130 @@ function PublicSharing() {
           </div>
 
           <div id="disc">
-            {getData && getData.length > 0 && getData.map((userObj) => (
-              <div class='card'>
-                <h5 class='card-header m-0'>
-                  <span>{userObj.product} - {userObj.Quantity} {userObj.Units}</span>
-                </h5>
+                {getData &&
+                  getData.length > 0 &&
+                  getData
+                    .map((userObj) => (
+                      <div class="card">
+                        <h5 class="card-header m-0">
+                          <span>
+                            {userObj.product} - {userObj.Quantity}{" "}
+                            {userObj.Units}
+                          </span>
 
-                <div class='card-body'>
-                  <h6 class='card-text'>
-                    {userObj.Description}
-                  </h6>
-                  {/* <a href='"+ url_mask + "' id='postbutton' class='btn btn-outline-success'>Comment</a>*/}
-                  <p><small>Posted By: <br /> Contact: {userObj.Email}</small></p>
-                  <p class='text-success'> {userObj.Type} </p>
+                          {(() => {
+                            if (
+                              userObj.Email == localStorage.getItem("email") &&
+                              userObj.Type == "Sharing"
+                            ) {
+                              return (
+                                <select
+                                  id="status"
+                                  onChange={(event) => {
+                                    if (event.target.value == "closed") {
+                                      var a = prompt(
+                                        "enter the email of the person you shared your products with"
+                                      );
+                                      if (a === "") {
+                                        alert(
+                                          "value of the email cannot be empty, please try again"
+                                        );
+                                        document.getElementById(
+                                          "status"
+                                        ).value = "open";
+                                      } else {
+                                        axios
+                                          .put(
+                                            `http://127.0.0.1:8000/api/networkUpdate/${userObj.id}`,
 
-                </div>
+                                            {
+                                              shared_with: a,
+                                              product: userObj.product,
+                                              Quantity: userObj.Quantity,
+                                              Units: userObj.Units,
+                                            },
+                                            {
+                                              headers: {
+                                                "Content-type":
+                                                  "application/json",
+                                              },
+                                            }
+                                          )
+                                          .then((response) => {
+                                            if (response.status == 201) {
+                                              window.alert(
+                                                "post status successfully changed to closed"
+                                              );
+                                            }
+
+                                          
+                                            fetchData();
+                                           
+                                            fetchDataReceiving();
+                                            fetchDataSharing();
+                                          })
+                                          .catch((err) => console.warn(err));
+                                      }
+                                    }
+                                  }}
+                                >
+                                  {(() => {
+                                    if (userObj.state == "open") {
+                                      // document.getElementById('status').style.borderColor = 'green';
+                                      return (
+                                        <>
+                                          <option selected> open </option>
+                                          <option> closed </option>
+                                        </>
+                                      );
+                                    } else {
+                                      // document.getElementById('status').style.borderColor = 'red';
+                                      return (
+                                        <>
+                                          <option> open </option>
+                                          <option selected> closed </option>
+                                        </>
+                                      );
+                                    }
+                                  })()}
+                                </select>
+                              );
+                            } else {
+                            }
+                          })()}
+                        </h5>
+                        <div class="card-body">
+                          <h6 class="card-text">{userObj.Description}</h6>
+                          {/* <a href='"+ url_mask + "' id='postbutton' class='btn btn-outline-success'>Comment</a>*/}
+                          <p class="text-success"> {userObj.Type} </p>
+
+                          <div className="contact_me">
+                            <small>
+                              <strong>Contact email: </strong>
+                              {userObj.Email} <br />
+                              Posted on:{" "}
+                              {new Date(userObj.date_time).toLocaleString(
+                                "default",
+                                {
+                                  month: "long",
+                                  day: "numeric",
+                                  year: "numeric",
+                                }
+                              )}{" "}
+                              at{" "}
+                              {new Date(userObj.date_time).toLocaleTimeString(
+                                "default",
+                                { hour: "2-digit", minute: "2-digit" }
+                              )}
+                            </small>
+                          </div>
+                        </div>
+                      </div>
+                    ))
+                    .reverse()}
               </div>
-            )).reverse()}
-          </div>
-        </div>
-
+            </div>
+         
         <Modal show={showModal} onHide={handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>Create Post</Modal.Title>

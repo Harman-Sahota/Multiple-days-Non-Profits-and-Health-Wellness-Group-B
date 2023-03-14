@@ -185,11 +185,11 @@ function Admin() {
                                                 type="checkbox"
                                                 id="flexCheckDefault2"
                                                 name="metrics[]"
-                                                value="metric#2"
+                                                value="Meat"
 
                                             />
                                             <label className="form-check-label" for="flexCheckDefault2">
-                                                Metric #2
+                                                Meat
                                             </label>
                                         </div>
                                         <div className="form-check">
@@ -198,11 +198,11 @@ function Admin() {
                                                 type="checkbox"
                                                 id="flexCheckDefault3"
                                                 name="metrics[]"
-                                                value="Metric#3"
+                                                value="Canned Food"
 
                                             />
                                             <label className="form-check-label" for="flexCheckDefault3">
-                                                Metric #3
+                                                Canned Food
                                             </label>
                                         </div>
                                         <div className="form-check">
@@ -211,11 +211,11 @@ function Admin() {
                                                 type="checkbox"
                                                 id="flexCheckDefault4"
                                                 name="metrics[]"
-                                                value="Metric#4"
+                                                value="Bread"
 
                                             />
                                             <label className="form-check-label" for="flexCheckDefault4">
-                                                Metric #4
+                                                Bread
                                             </label>
                                         </div>
                                         <div className="form-check">
@@ -224,11 +224,24 @@ function Admin() {
                                                 type="checkbox"
                                                 id="flexCheckDefault5"
                                                 name="metrics[]"
-                                                value="Metric#5"
+                                                value="Dairy"
 
                                             />
                                             <label className="form-check-label" for="flexCheckDefault5">
-                                                Metric #5
+                                                Dairy
+                                            </label>
+                                        </div>
+                                        <div className="form-check">
+                                            <input
+                                                className="form-check-input flexCheckDefault"
+                                                type="checkbox"
+                                                id="flexCheckDefault6"
+                                                name="metrics[]"
+                                                value="Reclaimed"
+
+                                            />
+                                            <label className="form-check-label" for="flexCheckDefault6">
+                                               Reclaimed
                                             </label>
                                         </div>
                                     </div>
@@ -306,11 +319,11 @@ function Admin() {
                                                 type="checkbox"
                                                 id="flexCheckDefault2"
                                                 name="metrics[]"
-                                                value="metric#2"
+                                                value="Meat"
 
                                             />
                                             <label className="form-check-label" for="flexCheckDefault2">
-                                                Metric #2
+                                                Meat
                                             </label>
                                         </div>
                                         <div className="form-check">
@@ -319,11 +332,11 @@ function Admin() {
                                                 type="checkbox"
                                                 id="flexCheckDefault3"
                                                 name="metrics[]"
-                                                value="Metric#3"
+                                                value="Canned Food"
 
                                             />
                                             <label className="form-check-label" for="flexCheckDefault3">
-                                                Metric #3
+                                                Canned Food
                                             </label>
                                         </div>
                                         <div className="form-check">
@@ -332,11 +345,11 @@ function Admin() {
                                                 type="checkbox"
                                                 id="flexCheckDefault4"
                                                 name="metrics[]"
-                                                value="Metric#4"
+                                                value="Bread"
 
                                             />
                                             <label className="form-check-label" for="flexCheckDefault4">
-                                                Metric #4
+                                                Bread
                                             </label>
                                         </div>
                                         <div className="form-check">
@@ -345,11 +358,24 @@ function Admin() {
                                                 type="checkbox"
                                                 id="flexCheckDefault5"
                                                 name="metrics[]"
-                                                value="Metric#5"
+                                                value="Dairy"
 
                                             />
                                             <label className="form-check-label" for="flexCheckDefault5">
-                                                Metric #5
+                                                Dairy
+                                            </label>
+                                        </div>
+                                        <div className="form-check">
+                                            <input
+                                                className="form-check-input flexCheckDefault"
+                                                type="checkbox"
+                                                id="flexCheckDefault6"
+                                                name="metrics[]"
+                                                value="Reclaimed"
+
+                                            />
+                                            <label className="form-check-label" for="flexCheckDefault6">
+                                               Reclaimed
                                             </label>
                                         </div>
                                     </div>
@@ -433,11 +459,11 @@ function Admin() {
                                                 type="checkbox"
                                                 id="flexCheckDefault2"
                                                 name="metrics[]"
-                                                value="metric#2"
+                                                value="Meat"
 
                                             />
                                             <label className="form-check-label" for="flexCheckDefault2">
-                                                Metric #2
+                                                Meat
                                             </label>
                                         </div>
                                         <div className="form-check">
@@ -446,11 +472,11 @@ function Admin() {
                                                 type="checkbox"
                                                 id="flexCheckDefault3"
                                                 name="metrics[]"
-                                                value="Metric#3"
+                                                value="Canned Food"
 
                                             />
                                             <label className="form-check-label" for="flexCheckDefault3">
-                                                Metric #3
+                                                Canned Food
                                             </label>
                                         </div>
                                         <div className="form-check">
@@ -459,11 +485,11 @@ function Admin() {
                                                 type="checkbox"
                                                 id="flexCheckDefault4"
                                                 name="metrics[]"
-                                                value="Metric#4"
+                                                value="Bread"
 
                                             />
                                             <label className="form-check-label" for="flexCheckDefault4">
-                                                Metric #4
+                                                Bread
                                             </label>
                                         </div>
                                         <div className="form-check">
@@ -472,11 +498,24 @@ function Admin() {
                                                 type="checkbox"
                                                 id="flexCheckDefault5"
                                                 name="metrics[]"
-                                                value="Metric#5"
+                                                value="Dairy"
 
                                             />
                                             <label className="form-check-label" for="flexCheckDefault5">
-                                                Metric #5
+                                                Dairy
+                                            </label>
+                                        </div>
+                                        <div className="form-check">
+                                            <input
+                                                className="form-check-input flexCheckDefault"
+                                                type="checkbox"
+                                                id="flexCheckDefault6"
+                                                name="metrics[]"
+                                                value="Reclaimed"
+
+                                            />
+                                            <label className="form-check-label" for="flexCheckDefault6">
+                                               Reclaimed
                                             </label>
                                         </div>
                                     </div>
@@ -557,11 +596,11 @@ function Admin() {
                                                 type="checkbox"
                                                 id="flexCheckDefault2"
                                                 name="metrics[]"
-                                                value="metric#2"
+                                                value="Meat"
 
                                             />
                                             <label className="form-check-label" for="flexCheckDefault2">
-                                                Metric #2
+                                                Meat
                                             </label>
                                         </div>
                                         <div className="form-check">
@@ -570,11 +609,11 @@ function Admin() {
                                                 type="checkbox"
                                                 id="flexCheckDefault3"
                                                 name="metrics[]"
-                                                value="Metric#3"
+                                                value="Canned Food"
 
                                             />
                                             <label className="form-check-label" for="flexCheckDefault3">
-                                                Metric #3
+                                                Canned Food
                                             </label>
                                         </div>
                                         <div className="form-check">
@@ -583,11 +622,11 @@ function Admin() {
                                                 type="checkbox"
                                                 id="flexCheckDefault4"
                                                 name="metrics[]"
-                                                value="Metric#4"
+                                                value="Bread"
 
                                             />
                                             <label className="form-check-label" for="flexCheckDefault4">
-                                                Metric #4
+                                                Bread
                                             </label>
                                         </div>
                                         <div className="form-check">
@@ -596,11 +635,24 @@ function Admin() {
                                                 type="checkbox"
                                                 id="flexCheckDefault5"
                                                 name="metrics[]"
-                                                value="Metric#5"
+                                                value="Dairy"
 
                                             />
                                             <label className="form-check-label" for="flexCheckDefault5">
-                                                Metric #5
+                                                Dairy
+                                            </label>
+                                        </div>
+                                        <div className="form-check">
+                                            <input
+                                                className="form-check-input flexCheckDefault"
+                                                type="checkbox"
+                                                id="flexCheckDefault6"
+                                                name="metrics[]"
+                                                value="Reclaimed"
+
+                                            />
+                                            <label className="form-check-label" for="flexCheckDefault6">
+                                               Reclaimed
                                             </label>
                                         </div>
                                     </div>
@@ -690,11 +742,11 @@ function Admin() {
                                                 type="checkbox"
                                                 id="flexCheckDefault2"
                                                 name="metrics[]"
-                                                value="metric#2"
+                                                value="Meat"
 
                                             />
                                             <label className="form-check-label" for="flexCheckDefault2">
-                                                Metric #2
+                                                Meat
                                             </label>
                                         </div>
                                         <div className="form-check">
@@ -703,11 +755,11 @@ function Admin() {
                                                 type="checkbox"
                                                 id="flexCheckDefault3"
                                                 name="metrics[]"
-                                                value="Metric#3"
+                                                value="Canned Food"
 
                                             />
                                             <label className="form-check-label" for="flexCheckDefault3">
-                                                Metric #3
+                                                Canned Food
                                             </label>
                                         </div>
                                         <div className="form-check">
@@ -716,11 +768,11 @@ function Admin() {
                                                 type="checkbox"
                                                 id="flexCheckDefault4"
                                                 name="metrics[]"
-                                                value="Metric#4"
+                                                value="Bread"
 
                                             />
                                             <label className="form-check-label" for="flexCheckDefault4">
-                                                Metric #4
+                                                Bread
                                             </label>
                                         </div>
                                         <div className="form-check">
@@ -729,11 +781,24 @@ function Admin() {
                                                 type="checkbox"
                                                 id="flexCheckDefault5"
                                                 name="metrics[]"
-                                                value="Metric#5"
+                                                value="Dairy"
 
                                             />
                                             <label className="form-check-label" for="flexCheckDefault5">
-                                                Metric #5
+                                                Dairy
+                                            </label>
+                                        </div>
+                                        <div className="form-check">
+                                            <input
+                                                className="form-check-input flexCheckDefault"
+                                                type="checkbox"
+                                                id="flexCheckDefault6"
+                                                name="metrics[]"
+                                                value="Reclaimed"
+
+                                            />
+                                            <label className="form-check-label" for="flexCheckDefault6">
+                                               Reclaimed
                                             </label>
                                         </div>
                                     </div>
@@ -810,7 +875,7 @@ function Admin() {
 
                                             />
                                             <label className="form-check-label" for="flexCheckDefault2">
-                                                Metric #2
+                                                Meat
                                             </label>
                                         </div>
                                         <div className="form-check">
@@ -823,7 +888,7 @@ function Admin() {
 
                                             />
                                             <label className="form-check-label" for="flexCheckDefault3">
-                                                Metric #3
+                                                Canned Food
                                             </label>
                                         </div>
                                         <div className="form-check">
@@ -836,7 +901,7 @@ function Admin() {
 
                                             />
                                             <label className="form-check-label" for="flexCheckDefault4">
-                                                Metric #4
+                                                Bread
                                             </label>
                                         </div>
                                         <div className="form-check">
@@ -849,7 +914,20 @@ function Admin() {
 
                                             />
                                             <label className="form-check-label" for="flexCheckDefault5">
-                                                Metric #5
+                                                Dairy
+                                            </label>
+                                        </div>
+                                        <div className="form-check">
+                                            <input
+                                                className="form-check-input flexCheckDefault"
+                                                type="checkbox"
+                                                id="flexCheckDefault6"
+                                                name="metrics[]"
+                                                value="Reclaimed"
+
+                                            />
+                                            <label className="form-check-label" for="flexCheckDefault6">
+                                               Reclaimed
                                             </label>
                                         </div>
                                     </div>

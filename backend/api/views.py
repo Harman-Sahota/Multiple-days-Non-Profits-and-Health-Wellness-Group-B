@@ -9,9 +9,9 @@ from api.serialize import userSerialize
 from django.db.models import Sum
 from django.utils import timezone
 
-
+from api.serialize import trackerDeleteSerialize
 # from api.serialize import commentsSerialize
-
+from api.serialize import passwordSerialize
 from api.serialize import adminInsertSerialize
 from api.serialize import adminPullSerialize
 from api.serialize import adminUpdateSerialize
@@ -205,9 +205,9 @@ def networkPullReceiving(request):
 def networkSearch(request):
     if request.method == 'POST':
         if request.data['filter'] == 'Product':
-            results = posts.objects.filter( product__icontains =  request.data['input']);
+            results = posts.objects.filter( product__icontains =  request.data['input']).exclude(state = 'closed');
         if request.data['filter'] == 'Email':
-            results = posts.objects.filter( Email__contains =  request.data['input']);
+            results = posts.objects.filter( Email__contains =  request.data['input']).exclude(state = 'closed');
             
         serialize = networkPullSerialize(results,many=True)
         return Response(serialize.data)
@@ -234,12 +234,33 @@ def profileUpdate(request,pk):
             users.objects.filter(id=pk).update(Consent=saveserialize.data["Consent"]) 
             if saveserialize.data["Consent"] == 'unconsented':
                 users.objects.filter(id=pk).delete()
-                deleted = "deleted"
+                deleted = "deleted",
             return Response({"data":saveserialize.data,"deleted":deleted},status=status.HTTP_201_CREATED)    
         return Response(saveserialize.data,status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+@api_view(['POST'])
+def resetPassword(request):
+    if request.method == 'POST':
+        try:
+            user = users.objects.get(Email=request.data['Email'])
+        except users.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        user.Password = request.data.get('Password')
+        user.save(update_fields=['Password'])
+        return Response(status=status.HTTP_200_OK)
+    return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-
+ 
+@api_view(['POST'])
+def trackerDelete(request):
+    deleteserialize = trackerDeleteSerialize(data = request.data)
+    if request.method == 'POST': 
+        if deleteserialize.is_valid():
+            tracker.objects.filter(Category = request.data['Category'], Description = request.data['Description'],Quantity = request.data['Quantity'],percentClients = request.data['percentClients'],percentAFeed = request.data['percentAFeed'],percentCompost = request.data['percentCompost'],percentPartNet = request.data['percentPartNet'],percentLandfill = request.data['percentLandfill'],date_time = request.data['date_time']).delete()  
+            return Response(status=status.HTTP_200_OK)
+        print(deleteserialize.errors)
+        return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
 @api_view(['POST'])
 def trackerInsert(request):
     if request.method == 'POST':

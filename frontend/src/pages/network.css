@@ -2,6 +2,18 @@
   min-height: 80vh;
 } */
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .container-lg {
   margin-top: 3%;
   padding: 3em !important;
@@ -10,6 +22,7 @@
   background: #fff;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   height: 100%;
+  animation: fadeIn 0.5s ease-in-out forwards;
 }
 
 .container-md {
@@ -20,6 +33,7 @@
   background: #fff;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   height: 100%;
+  animation: fadeIn 0.5s ease-in-out forwards;
 }
 
 .container-fluid {
@@ -110,8 +124,10 @@
   max-width: 13ch;
 }
 
+
 .card {
   margin-top: 2%;
+  animation: fadeIn 0.5s ease-in-out forwards;
 }
 
 #disc {
@@ -170,8 +186,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  
 }
 
 .line-chart .y-axis .tick text {
   font-size: 12px;
 }
+

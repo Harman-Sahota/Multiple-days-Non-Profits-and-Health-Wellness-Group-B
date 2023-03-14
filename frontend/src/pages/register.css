@@ -1,18 +1,20 @@
 @keyframes hue {
 
-  0% {
+  from {
     opacity: 0;
+ 
   }
 
-  100% {
+  to {
     opacity: 1;
+
   }
 }
 
 
 
 h1 {
-  animation: 160ms ease-out 1s 1 hue;
+  animation: hue 0.5s ease-in-out forwards;
 }
 
 .form-register {
@@ -25,6 +27,7 @@ h1 {
   align-items: center;
   flex-direction: row;
   background-image: url('../images/login_bg.png') !important;
+  animation: fadeIn 0.5s ease-in-out forwards;
 
 }
 
@@ -51,15 +54,6 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-
-
-.footer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
 }
 
 

@@ -11,12 +11,19 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
+import Confetti from 'react-confetti';
 
 function Tracker() {
   const [getData, setData] = useState([]);
   const [getPercentageData, setPercentageData] = useState([]);
   const [getCategoryData, setCategoryData] = useState([]);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [completed, setCompleted] = useState(false);
+  const [isRunning, setIsRunning] = useState(true);
 
+  const onConfettiComplete = () => {
+    setIsRunning(false); // stop the animation
+  };
   const [trackers, setTrackers] = useState({
     Category: "Fresh Produce",
     Description: "",
@@ -397,7 +404,8 @@ function Tracker() {
       localStorage.roles
     ) {
       return (
-        <div className="container p-2" id="container">
+       <div className={isSubmitted ? 'confetti-container' : ''}>
+        <div className="container p-2" id="container"  >
           <p>
             <strong>Welcome, {localStorage.getItem("firstname")}!</strong>
           </p>
@@ -793,9 +801,7 @@ function Tracker() {
                               )
                               .then((response) => {
                                 if (response.status == 201) {
-                                  window.alert(
-                                    "Your form has been submitted successfully"
-                                  );
+                                  setIsSubmitted(true);
                                   fetchData();
                                   fetchPercentageChartData();
                                   fetchCategoryChartData();
@@ -896,6 +902,41 @@ function Tracker() {
                                 variant="danger"
                                 className="btn btn-danger"
                                 name="field"
+                                onClick={(e) => {
+
+                                  axios.post(
+                                    `http://localhost:8000/api/trackerDelete/`,
+                                    {
+                                        Category: userObj.Category,
+                                        Description: userObj.Description,
+                                        Quantity: userObj.Quantity,
+                                        percentClients: userObj.percentClients,
+                                        percentAFeed: userObj.percentAFeed,
+                                        percentCompost: userObj.percentCompost,
+                                        percentPartNet: userObj.percentPartNet,
+                                        percentLandfill: userObj.percentLandfill,
+                                        date_time: userObj.date_time
+
+                                    },
+                                    {
+                                        headers: {
+                                            "Content-type": "application/json",
+                                        },
+                                    }
+                                )
+                                    .then((response) => {
+                                        if (response.status == 200) {
+                                           
+                                            setIsSubmitted(true);
+                                            fetchData();
+                                            fetchPercentageChartData();
+                                            fetchCategoryChartData();
+
+                                        }
+                                    })
+                                    .catch((err) => console.warn(err));
+
+                                }}
                               >
                                 Delete
                               </Button>
@@ -910,6 +951,20 @@ function Tracker() {
           </section>
 
           <br />
+          {isSubmitted && (
+                    <Confetti
+                    width={window.innerWidth}
+                    height={window.innerHeight}
+                    recycle={false}
+                    run={isRunning}
+                    numberOfPieces={isRunning ? undefined : 0}
+                    onConfettiComplete={onConfettiComplete}
+                  />
+                 )
+             }
+          
+       
+        </div>
         </div>
       );
     } else if (
@@ -942,6 +997,7 @@ function Tracker() {
             </div>
           </div>
         </section>
+       
       );
     }
   }

@@ -23,9 +23,9 @@ function NavbarOut() {
             <li id="gettingStarted">
               <a href="/faq">FAQ</a>
             </li>
-            <li>
+            {/* <li>
               <a href="/directory">Directory</a>
-            </li>
+            </li> */}
             <li>
               <a href="/publicSharing">Public Sharing</a>
             </li>
@@ -58,9 +58,9 @@ function NavbarOut() {
             <li>
               <a href="faq/">FAQ</a>
             </li>
-            <li>
+            {/* <li>
               <a href="directory/">Directory</a>
-            </li>
+            </li> */}
             <li id="login">
               <a href="login/">Login</a>
             </li>
