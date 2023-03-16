@@ -11,7 +11,10 @@ class userSerialize(serializers.ModelSerializer):
         model = users
         fields = '__all__'
 
-
+class passwordSerialize(serializers.ModelSerializer):
+    class Meta:
+        model = users
+        fields = ['Email','Password']
 class postSharedSerialize(serializers.ModelSerializer):
     class Meta:
         model = posts
@@ -78,3 +81,7 @@ class trackerUpdateSerialize(serializers.ModelSerializer):
     class Meta:
         model = users
         fields = '__all__'
+class trackerDeleteSerialize(serializers.ModelSerializer):
+    class Meta:
+        model = tracker
+        fields = ['Category','Description','Quantity','percentClients','percentAFeed','percentCompost','percentPartNet','percentLandfill' , 'date_time' ]

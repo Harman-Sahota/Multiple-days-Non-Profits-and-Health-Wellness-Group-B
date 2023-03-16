@@ -1,5 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
+
 import axios from "axios";
+
+import * as d3 from "d3";
 
 import trackerCSS from "./tracker.module.css";
 import fourcss from "./fourcss.css";
@@ -8,93 +11,19 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
-import * as d3 from "d3";
-function PieChart({ data }) {
-  const ref = useRef(null);
-  const labelOffset = 100;
-
-  useEffect(() => {
-    const width = 400;
-    const height = 400;
-    const radius = 150;
-
-    const color = d3.scaleOrdinal()
-      .range(['#2C3E50', '#E74C3C', '#F1C40F', '#3498DB', '#9B59B6', '#FF5733', '#34495E']);
-
-    const pie = d3.pie()
-      .sort(null)
-      .value(d => d.value);
-
-    const path = d3.arc()
-      .outerRadius(radius - 10)
-      .innerRadius(0);
-
-    const label = d3.arc()
-      .outerRadius(radius - labelOffset)
-      .innerRadius(radius - labelOffset);
-
-    const svg = d3.select(ref.current)
-      .append('svg')
-      .attr('width', width)
-      .attr('height', height)
-      .append('g')
-      .attr('transform', `translate(${width / 2}, ${height / 2})`);
-
-    const arc = svg.selectAll('.arc')
-      .data(pie(data))
-      .enter()
-      .append('g')
-      .attr('class', 'arc');
-
-    arc.append('path')
-      .attr('d', path)
-      .attr('fill', d => color(d.data.label))
-      .attr('stroke', 'black');
-
-    const labelLines = arc.append('polyline')
-      .attr('class', 'label-line')
-      .attr('points', d => {
-        const [x, y] = label.centroid(d);
-        const offset = x > 0 ? labelOffset : -labelOffset;
-        return [
-          path.centroid(d),
-          [label.centroid(d)[0] + offset, label.centroid(d)[1]],
-          [label.centroid(d)[0] + offset, label.centroid(d)[1] + (y > 0 ? 10 : -10)]
-        ];
-      });
-
-    arc.append('text')
-      .attr('transform', d => {
-        const [x, y] = label.centroid(d);
-        const offset = x > 0 ? labelOffset : -labelOffset;
-        return `translate(${label.centroid(d)[0] + offset}, ${label.centroid(d)[1]})`;
-      })
-      .attr('dy', '0.35em')
-      .style('font-size', '14px')
-      .style('text-anchor', d => {
-        const x = label.centroid(d)[0];
-        return x > 0 ? 'start' : 'end';
-      })
-      .text(d => d.data.label);
-
-    return () => {
-      svg.remove();
-    };
-  }, [data]);
-
-  return (
-    <div style={{ width: '500px', height: '500px', border: '2px solid red' }}>
-      <div ref={ref}></div>
-    </div>
-  );
-}
+import Confetti from 'react-confetti';
 
 function Tracker() {
-
   const [getData, setData] = useState([]);
   const [getPercentageData, setPercentageData] = useState([]);
   const [getCategoryData, setCategoryData] = useState([]);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [completed, setCompleted] = useState(false);
+  const [isRunning, setIsRunning] = useState(true);
 
+  const onConfettiComplete = () => {
+    setIsRunning(false); // stop the animation
+  };
   const [trackers, setTrackers] = useState({
     Category: "Fresh Produce",
     Description: "",
@@ -121,6 +50,8 @@ function Tracker() {
   const percentPartnerNetwork = useRef();
   const percentLandFill = useRef();
 
+  const percentagePieChartRef = useRef(null);
+  const categoryPieChartRef = useRef(null);
 
   useEffect(() => {
     fetchData();
@@ -134,6 +65,201 @@ function Tracker() {
     return () => clearInterval(interval);
   }, []);
 
+  function PercentagePieChart({ data }) {
+    // const labelOffset = 100;
+
+    useEffect(() => {
+      d3.select("#percentage-pie-chart").selectAll("svg").remove();
+      const width = 600;
+      const height = 400;
+      const margin = 40;
+
+      const radius = Math.min(width, height) / 2 - margin;
+
+      const svg = d3
+        .select(percentagePieChartRef.current)
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .append("g")
+        .attr("transform", `translate(${width / 2},${height / 2})`);
+
+      const data = { ...getPercentageData };
+
+      const dataEntries = Object.entries(data);
+
+      const color = d3
+        .scaleOrdinal()
+        // .domain(["a", "b", "c", "d", "e", "f", "g", "h"])
+        // .domain(Object.keys(data))
+        .domain(dataEntries.map((entry) => entry[0]))
+        .range(d3.schemeDark2);
+
+      const pie = d3
+        .pie()
+        .sort(null)
+        .value((d) => d[1]);
+
+      const data_ready = pie(Object.entries(data));
+
+      const arc = d3
+        .arc()
+        .innerRadius(radius * 0.5) // This is the size of the donut hole
+        .outerRadius(radius * 0.8);
+
+      const outerArc = d3
+        .arc()
+        .innerRadius(radius * 0.8)
+        .outerRadius(radius * 0.8);
+
+      svg
+        .selectAll("allSlices")
+        .data(data_ready)
+        .join("path")
+        .attr("d", arc)
+        .attr("fill", (d) => color(d.data[0]))
+        .attr("stroke", "white")
+        .style("stroke-width", "2px")
+        .style("opacity", 0.7);
+
+      svg
+        .selectAll("allPolylines")
+        .data(data_ready)
+        .join("polyline")
+        .attr("stroke", "black")
+        .style("fill", "none")
+        .attr("stroke-width", 1)
+        .attr("points", function (d) {
+          const posA = arc.centroid(d); // line insertion in the slice
+          const posB = outerArc.centroid(d); // line break: we use the other arc generator that has been built only for that
+          const posC = outerArc.centroid(d); // Label position = almost the same as posB
+          const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2; // we need the angle to see if the X position will be at the extreme right or extreme left
+          posC[0] = radius * 0.8 * (midangle < Math.PI ? 1 : -1); // multiply by 1 or -1 to put it on the right or on the left
+          return [posA, posB, posC];
+        });
+
+      svg
+        .selectAll("allLabels")
+        .data(data_ready)
+        .join("text")
+        .text((d) => d.data[0])
+        .attr("transform", function (d) {
+          const pos = outerArc.centroid(d);
+          const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2;
+          pos[0] = radius * 0.81 * (midangle < Math.PI ? 1 : -1);
+          return `translate(${pos})`;
+        })
+        .style("text-anchor", function (d) {
+          const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2;
+          return midangle < Math.PI ? "start" : "end";
+        })
+        .style("font-size", "1rem");
+
+      return () => {
+        // svg.remove();
+        d3.select("#percentage-pie-chart").selectAll("svg").remove();
+      };
+    }, [data]);
+
+    // return (
+    //   <div style={{ width: "500px", height: "500px", border: "2px solid red" }}>
+    //     <div ref={ref}></div>
+    //   </div>
+    // );
+  }
+
+  function CategoryPieChart({ data }) {
+    useEffect(() => {
+      d3.select("#category-pie-chart").selectAll("svg").remove();
+      const width = 600;
+      const height = 400;
+      const margin = 40;
+
+      const radius = Math.min(width, height) / 2 - margin;
+
+      const svg = d3
+        .select(categoryPieChartRef.current)
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .append("g")
+        .attr("transform", `translate(${width / 2},${height / 2})`);
+
+      const data = { ...getCategoryData };
+
+      const dataEntries = Object.entries(data);
+
+      const color = d3
+        .scaleOrdinal()
+        .domain(dataEntries.map((entry) => entry[0]))
+        .range(d3.schemeDark2);
+
+      const pie = d3
+        .pie()
+        .sort(null)
+        .value((d) => d[1]);
+
+      const data_ready = pie(Object.entries(data));
+
+      const arc = d3
+        .arc()
+        .innerRadius(radius * 0.5)
+        .outerRadius(radius * 0.8);
+
+      const outerArc = d3
+        .arc()
+        .innerRadius(radius * 0.8)
+        .outerRadius(radius * 0.8);
+
+      svg
+        .selectAll("allSlices")
+        .data(data_ready)
+        .join("path")
+        .attr("d", arc)
+        .attr("fill", (d) => color(d.data[0]))
+        .attr("stroke", "white")
+        .style("stroke-width", "2px")
+        .style("opacity", 0.7);
+
+      svg
+        .selectAll("allPolylines")
+        .data(data_ready)
+        .join("polyline")
+        .attr("stroke", "black")
+        .style("fill", "none")
+        .attr("stroke-width", 1)
+        .attr("points", function (d) {
+          const posA = arc.centroid(d);
+          const posB = outerArc.centroid(d);
+          const posC = outerArc.centroid(d);
+          const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2;
+          posC[0] = radius * 0.8 * (midangle < Math.PI ? 1 : -1);
+          return [posA, posB, posC];
+        });
+
+      svg
+        .selectAll("allLabels")
+        .data(data_ready)
+        .join("text")
+        .text((d) => d.data[0])
+        .attr("transform", function (d) {
+          const pos = outerArc.centroid(d);
+          const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2;
+          pos[0] = radius * 0.81 * (midangle < Math.PI ? 1 : -1);
+          return `translate(${pos})`;
+        })
+        .style("text-anchor", function (d) {
+          const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2;
+          return midangle < Math.PI ? "start" : "end";
+        })
+        .style("font-size", "1rem");
+
+      return () => {
+        d3.select("#category-pie-chart").selectAll("svg").remove();
+      };
+    }, [data]);
+  }
+
   async function fetchData() {
     const response = await fetch("http://127.0.0.1:8000/api/trackerPull/");
     const data = await response.json();
@@ -145,12 +271,15 @@ function Tracker() {
       "http://localhost:8000/api/trackerPercentageSum/"
     );
     const data = await response.json();
-    const data2 = [{ label: "Clients %", value: data["percentClients__sum"] },
-    { label: "Compost %", value: data["percentCompost__sum"] },
-    { label: "Feed %", value: data["percentAFeed__sum"] },
-    { label: "Landfill %", value: data["percentLandfill__sum"] },
-    { label: "Partner Network %", value: data["percentPartNet__sum"] }
-    ];
+
+    const data2 = {
+      "Clients %": data["percentClients__sum"],
+      "Compost %": data["percentCompost__sum"],
+      "Feed %": data["percentAFeed__sum"],
+      "Landfill %": data["percentLandfill__sum"],
+      "Partner Network %": data["percentPartNet__sum"],
+    };
+
     return setPercentageData(data2);
   }
 
@@ -159,18 +288,16 @@ function Tracker() {
       "http://localhost:8000/api/trackerCategorySum/"
     );
     const data = await response.json();
-    const data2 = [
-      { label: 'Produce', value: data[0].Produce },
-      { label: 'Meat', value: data[1].Meat },
-      { label: 'Canned_Food', value: data[2].Canned_Food },
-      { label: 'Bread', value: data[3].Bread },
-      { label: 'Dairy', value: data[4].Dairy },
-      { label: 'Reclaimed', value: data[5].Reclaimed },
-    ];
+
+    let data2 = {};
+
+    for (let i = 0; i < data.length; i++)
+      for (let key in data[i]) {
+        data2[key] = data[i][key];
+      }
 
     return setCategoryData(data2);
   }
-
 
   function calculateLandFillAndPercentsWrapper() {
     calculateLandFill();
@@ -277,7 +404,8 @@ function Tracker() {
       localStorage.roles
     ) {
       return (
-        <div className="container p-2" id="container">
+       <div className={isSubmitted ? 'confetti-container' : ''}>
+        <div className="container p-2" id="container"  >
           <p>
             <strong>Welcome, {localStorage.getItem("firstname")}!</strong>
           </p>
@@ -630,7 +758,7 @@ function Tracker() {
                           className={`${trackerCSS["save"]} btn btn-outline-success`}
                           id="submit"
                           onClick={(e) => {
-                            console.log(getCategoryData)
+                            console.log(getCategoryData);
                             axios
                               .post(
                                 "http://127.0.0.1:8000/api/trackerInsert/",
@@ -673,9 +801,7 @@ function Tracker() {
                               )
                               .then((response) => {
                                 if (response.status == 201) {
-                                  window.alert(
-                                    "Your form has been submitted successfully"
-                                  );
+                                  setIsSubmitted(true);
                                   fetchData();
                                   fetchPercentageChartData();
                                   fetchCategoryChartData();
@@ -697,15 +823,22 @@ function Tracker() {
           <br />
           <br />
 
-      
-          <div className="card" style={{padding: '5%'}}>
-          <div className="svg-container" style={{display: 'inline-block', margin: '0 auto'}}>
-            <PieChart data={getPercentageData} />
-            <PieChart data={getCategoryData} />
+          <div className={`card ${trackerCSS["pie-chart-outer-div"]}`}>
+            <div
+              className={`svg-container ${trackerCSS["pie-chart-inner-div"]}`}
+              id="percentage-pie-chart"
+              ref={percentagePieChartRef}
+            >
+              <PercentagePieChart data={getPercentageData} />
             </div>
+            <div
+              className={`svg-container ${trackerCSS["pie-chart-inner-div"]}`}
+              id="category-pie-chart"
+              ref={categoryPieChartRef}
+            >
+              <CategoryPieChart data={getCategoryData} />
             </div>
-          
-
+          </div>
 
           <br />
           <br />
@@ -720,7 +853,7 @@ function Tracker() {
                   onClick={function () {
                     exportTableToCSV("data.csv");
                   }}
-                // onClick={() => exportTableToCSV("data.csv")}
+                  // onClick={() => exportTableToCSV("data.csv")}
                 >
                   Export CSV
                 </Button>
@@ -769,6 +902,41 @@ function Tracker() {
                                 variant="danger"
                                 className="btn btn-danger"
                                 name="field"
+                                onClick={(e) => {
+
+                                  axios.post(
+                                    `http://localhost:8000/api/trackerDelete/`,
+                                    {
+                                        Category: userObj.Category,
+                                        Description: userObj.Description,
+                                        Quantity: userObj.Quantity,
+                                        percentClients: userObj.percentClients,
+                                        percentAFeed: userObj.percentAFeed,
+                                        percentCompost: userObj.percentCompost,
+                                        percentPartNet: userObj.percentPartNet,
+                                        percentLandfill: userObj.percentLandfill,
+                                        date_time: userObj.date_time
+
+                                    },
+                                    {
+                                        headers: {
+                                            "Content-type": "application/json",
+                                        },
+                                    }
+                                )
+                                    .then((response) => {
+                                        if (response.status == 200) {
+                                           
+                                            setIsSubmitted(true);
+                                            fetchData();
+                                            fetchPercentageChartData();
+                                            fetchCategoryChartData();
+
+                                        }
+                                    })
+                                    .catch((err) => console.warn(err));
+
+                                }}
                               >
                                 Delete
                               </Button>
@@ -783,6 +951,20 @@ function Tracker() {
           </section>
 
           <br />
+          {isSubmitted && (
+                    <Confetti
+                    width={window.innerWidth}
+                    height={window.innerHeight}
+                    recycle={false}
+                    run={isRunning}
+                    numberOfPieces={isRunning ? undefined : 0}
+                    onConfettiComplete={onConfettiComplete}
+                  />
+                 )
+             }
+          
+       
+        </div>
         </div>
       );
     } else if (
@@ -815,6 +997,7 @@ function Tracker() {
             </div>
           </div>
         </section>
+       
       );
     }
   }

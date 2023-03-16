@@ -33,7 +33,8 @@ urlpatterns = [
     path('Past_Week/', views.Past_Week),
     path('Past_Month/', views.Past_Month),
     path('Past_6Months/', views.Past_6Months),
-    
+    path('resetPassword/',views.resetPassword),
+    path('trackerDelete/',views.trackerDelete)
     # path('token/', jwt_views.TokenObtainPairView.as_view(),name='token_obtain_pair'),
     # path('token/refresh/',  jwt_views.TokenRefreshView.as_view(),name='token_refresh')
 

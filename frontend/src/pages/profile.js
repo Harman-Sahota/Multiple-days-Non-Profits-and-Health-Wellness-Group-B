@@ -291,7 +291,7 @@ function Profile() {
                                                     const date = new Date().setHours(new Date().getHours());
                                                     localStorage.setItem('expiry', date);
 
-                                                    window.location.replace("http://localhost:3000/");
+                                                    window.location.replace("http://localhost:3000");
                                                 }
                                                  
                                                 if(role_str != "" || role_str != null){
@@ -305,9 +305,10 @@ function Profile() {
                                                      
                                                  
                                                      localStorage.roles.setItem(prevroles);
+
                                                  }
-                                               
-                                                // window.location.replace("http://localhost:3000/profile/");
+                                                
+                                                //  window.location.replace("http://localhost:3000/profile/");
 
                                             }
                                         })

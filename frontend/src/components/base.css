@@ -68,6 +68,7 @@ header {
 .nav ul li a:hover
  {
   color: #a1c298;
+  transition: 0.2s ease;
 }
 
 .nav #login{
@@ -143,7 +144,7 @@ header {
   }
 }
 
-footer a {
+/* footer a {
   text-decoration: none;
   color: grey;
 }
@@ -160,11 +161,11 @@ footer {
   background-color: #ffffff;
   text-align: center;
   width: 100%;
-  position:; /* instead of absolute */
+  position:;
   bottom: 0;
   left: 0;
 
 
 
 }
-
+ */

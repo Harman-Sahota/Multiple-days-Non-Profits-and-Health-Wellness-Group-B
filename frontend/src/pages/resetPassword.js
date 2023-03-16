@@ -2,29 +2,39 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import resetCSS from './resetPassword.module.css';
 import Button from 'react-bootstrap/Button';
 //import { Form } from 'react-router-dom';
-import Form from 'react-bootstrap/Form'
+import Form from 'react-bootstrap/Form';
+import React, { useState } from "react";
+import axios, { all } from "axios";
+import Confetti from 'react-confetti';
 
-function resetPassword() {
+function ResetPassword() {
+
+    const [formData, setFormData] = useState({
+
+        Email: "",
+        Password: "",
+
+    });
+    const [isSubmitted, setIsSubmitted] = useState(false);
 
     return (
+
         <>
             <section>
                 <div className={resetCSS.body}>
                     <div className={resetCSS.form_container}>
-                        <Form className={`form mx-auto bg-white ${resetCSS.form}`} action="" method="POST" onSubmit={(e) => {
-
-                            if (document.getElementById('exampleInputEmail1').value == "") {
-
-                                e.preventDefault();
-                                window.alert('fields cannot be blank');
-
-                                document.getElementById('exampleInputEmail1').classList.add('error');
-
-                            }else{
-                                document.getElementById('exampleInputEmail1').classList.add('success');
-                            }
-
-                        }}>
+                    {isSubmitted ? (
+                            <div className={resetCSS.success_container}>
+                                <Confetti
+                                    numberOfPieces={200}
+                                    recycle={false}
+                                    colors={['#ff0000', '#00ff00', '#0000ff']}
+                                />
+                                <h1 className={resetCSS.success_title}>Password reset successful!</h1><br/>
+                                <a href="/login"><Button className='btn btn-success'>Login</Button></a>
+                            </div>
+                        ) : (
+                        <div className={`form mx-auto bg-white ${resetCSS.form}`}>
                             <h5 className={`form-title ${resetCSS.form_title}`}>Reset Password</h5>
                             <div>
                                 <span>
@@ -36,17 +46,65 @@ function resetPassword() {
                             </div>
 
                             <div className={`form-floating email-form ${resetCSS.email_form}`}>
-                                <Form.Control type="email" id="exampleInputEmail1" className="form-control input-text" placeholder="jordan@gmail.com" name="email" />
+                                <Form.Control type="email" id="exampleInputEmail1" className="form-control input-text" placeholder="jordan@gmail.com" name="email" onChange={(event) =>
+                                    setFormData({ ...formData, Email: event.target.value })
+                                } />
                                 <Form.Label for="exampleInputEmail1" className="form-label input-text">Email:</Form.Label>
                             </div>
+                            <div className={`form-floating password-form ${resetCSS.email_form}`}>
+                                <Form.Control type="password" id="exampleInputPassword" className="form-control input-text" placeholder="abc" name="password" onChange={(event) =>
+                                    setFormData({ ...formData, Password: event.target.value })
+                                } />
+                                <Form.Label for="exampleInput1" className="form-label input-text">Password:</Form.Label>
+                            </div>
 
-                            <Button classname={`resetPassword btn btn-outline-danger reset-button ${resetCSS.reset_button}`} variant="outline-danger" type="submit">Reset</Button>
-                        </Form>
+                            <Button classname={`resetPassword btn btn-outline-danger reset-button ${resetCSS.reset_button}`} variant="outline-danger" onClick={(e) => {
 
+                                if (document.getElementById('exampleInputEmail1').value == "" || document.getElementById('exampleInputPassword').value == "") {
+
+                                    e.preventDefault();
+                                    window.alert('fields cannot be blank');
+
+                                    document.getElementById('exampleInputEmail1').classList.add('error');
+                                    document.getElementById('exampleInputPassword').classList.add('error');
+
+                                } else {
+                                    document.getElementById('exampleInputEmail1').classList.add('success');
+                                    document.getElementById('exampleInputPassword').classList.add('success');
+                                    var Email = formData.Email;
+                                    axios.post(
+                                        `http://localhost:8000/api/resetPassword/`,
+                                        {
+                                            Email: Email,
+                                            Password: formData.Password
+                                        },
+                                        {
+                                            headers: {
+                                                "Content-type": "application/json",
+                                            },
+                                        }
+                                    )
+                                        .then((response) => {
+                                            if (response.status == 200) {
+                                               
+                                                setIsSubmitted(true);
+                                            }
+                                        })
+                                        .catch((err) => console.warn(err));
+
+
+
+                                }
+
+
+
+                            }}>Reset</Button>
+                        </div>
+                        )}
                     </div>
                 </div>
             </section>
         </>
     );
 }
-export default resetPassword;
+export default ResetPassword;
