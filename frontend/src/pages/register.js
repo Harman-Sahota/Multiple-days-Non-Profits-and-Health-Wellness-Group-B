@@ -149,7 +149,7 @@ function Form() {
                       formData.Password != "" &&
                       formData.Password.match(PasswordRegex) &&
                       document.getElementById("confirm").value == formData.Password &&
-                      formData.Organizatio != ""
+                      formData.Organization != ""
                     ) {
                       setPage((currPage) => currPage + 1);
                     }
@@ -321,7 +321,7 @@ function Form() {
                         .classList.add("success");
                     }
 
-                    if (formData.Organizatio == "") {
+                    if (formData.Organization == "") {
                       if (
                         document.getElementById("org").hasAttribute("success")
                       )
