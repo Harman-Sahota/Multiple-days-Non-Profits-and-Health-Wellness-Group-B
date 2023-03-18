@@ -19,4 +19,4 @@
 
 ## Summary
 
-- On March 1, 2023 at 10am, a client meeting took place. The follow-ups from the previous week were discussed, which included the cookie expiry time, progress on the tracker page, graph generation, progress on the sharing page, and the virtual machine work deployment.
+- On March 1, 2023 at 10am, a client meeting took place. The follow-ups from the previous week were discussed, which included the cookie expiry time, progress on the tracker page, graph generation, progress on the sharing page, and the virtual machine work deployment. Mitch's group reported almost completing the register and login feature and switching to JWT tokens. Barbs expressed concerns about privacy and security issues related to the cookie expiry time. The only code that needs to be adapted is in the virtual machine, which is currently being worked on by Barbs.
