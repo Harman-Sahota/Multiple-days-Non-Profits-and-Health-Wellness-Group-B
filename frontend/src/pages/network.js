@@ -99,7 +99,7 @@ function SearchBar() {
   const [getSharedData, setSharedData] = useState([]);
   const [getGraphData, setGraphData] = useState([]);
 
-  //graph stuff
+  //graph stuff- Jordan's Work
 
 
   
