@@ -1,17 +1,30 @@
+// Importing React and relevant React hooks
 import React, { useState, useRef, useEffect } from "react";
 
+// This imports the axios package to communicate with the REST API
 import axios from "axios";
 
+// This imports the d3 package to create the pie charts
 import * as d3 from "d3";
 
+// This imports the tracker CSS file
 import trackerCSS from "./tracker.module.css";
 import fourcss from "./fourcss.css";
+
+// Importing Bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
 
+// Importing the Form from Bootstrap
 import Form from "react-bootstrap/Form";
+
+// Importing the Button from Bootstrap
 import Button from "react-bootstrap/Button";
+
+// Importing Table from Bootstrap
 import Table from "react-bootstrap/Table";
-import Confetti from 'react-confetti';
+
+// This package will add the celebration effect on tracker page
+import Confetti from "react-confetti";
 
 function Tracker() {
   const [getData, setData] = useState([]);
@@ -404,567 +417,565 @@ function Tracker() {
       localStorage.roles
     ) {
       return (
-       <div className={isSubmitted ? 'confetti-container' : ''}>
-        <div className="container p-2" id="container"  >
-          <p>
-            <strong>Welcome, {localStorage.getItem("firstname")}!</strong>
-          </p>
-          <div className="card">
-            <div className="card-header">
-              <h3>Enter tracker data:</h3>
-            </div>
-            <div className="card-body">
-              <div id="form-wrapper">
-                <div className="tracker-data-entry" id="tracker">
-                  <Form.Group>
-                    {/* {% csrf_token %} */}
-                    <div className="row">
-                      <div className="col-md-auto">
-                        <label htmlFor="category">Category</label>
-                        <br />
-                        <select
-                          className="form-select"
-                          id="category"
-                          name="category"
-                          onChange={(event) => {
-                            setTrackers({
-                              ...trackers,
-                              Category: event.target.value,
-                            });
-                          }}
-                        >
-                          <option selected>Fresh Produce</option>
-                          <option>Meat</option>
-                          <option>Canned Food</option>
-                          <option>Bread</option>
-                          <option>Dairy</option>
-                          <option>Reclaimed</option>
-                        </select>
+        <div className={isSubmitted ? "confetti-container" : ""}>
+          <div className="container p-2" id="container">
+            <p>
+              <strong>Welcome, {localStorage.getItem("firstname")}!</strong>
+            </p>
+            <div className="card">
+              <div className="card-header">
+                <h3>Enter tracker data:</h3>
+              </div>
+              <div className="card-body">
+                <div id="form-wrapper">
+                  <div className="tracker-data-entry" id="tracker">
+                    <Form.Group>
+                      {/* {% csrf_token %} */}
+                      <div className="row">
+                        <div className="col-md-auto">
+                          <label htmlFor="category">Category</label>
+                          <br />
+                          <select
+                            className="form-select"
+                            id="category"
+                            name="category"
+                            onChange={(event) => {
+                              setTrackers({
+                                ...trackers,
+                                Category: event.target.value,
+                              });
+                            }}
+                          >
+                            <option selected>Fresh Produce</option>
+                            <option>Meat</option>
+                            <option>Canned Food</option>
+                            <option>Bread</option>
+                            <option>Dairy</option>
+                            <option>Reclaimed</option>
+                          </select>
+                        </div>
+                        <div className="col-md-auto">
+                          <label htmlFor="description">Description</label>
+                          <br />
+                          <input
+                            type="text"
+                            id="description"
+                            className={`form-control input-text ${trackerCSS["customised-input"]}`}
+                            placeholder="Description"
+                            name="description"
+                            onChange={(event) => {
+                              setTrackers({
+                                ...trackers,
+                                Description: event.target.value,
+                              });
+                            }}
+                          />
+                        </div>
+                        <div className="col-md-auto">
+                          <label htmlFor="quantity">Quantity</label>
+                          <br />
+                          <input
+                            type={`text`}
+                            id="quantity"
+                            className={`form-control input-text ${trackerCSS["customised-input"]}`}
+                            placeholder="Quantity"
+                            name="quantity"
+                            ref={quantity}
+                            onKeyUp={calculateLandFillAndPercentsWrapper}
+                            onChange={(event) => {
+                              setTrackers({
+                                ...trackers,
+                                Quantity: event.target.value,
+                              });
+                            }}
+                          />
+                        </div>
+                        <div className="col-md-auto">
+                          <label htmlFor="qunits">Units</label>
+                          <br />
+                          <select
+                            className="form-select"
+                            id="qunits"
+                            name="qunits"
+                            onChange={(event) => {
+                              setTrackers({
+                                ...trackers,
+                                Qunits: event.target.value,
+                              });
+                            }}
+                          >
+                            <option selected>lbs</option>
+                            <option>kgs</option>
+                          </select>
+                        </div>
+                        <div className="col-auto">
+                          <div className="row">
+                            <div className="col-auto">
+                              <label htmlFor="amount">Amount</label>
+                            </div>
+                          </div>
+                          <div className="row pb-2">
+                            <div className="col-auto">
+                              <input
+                                type="number"
+                                step="any"
+                                className={`form-control ${trackerCSS["customised-input"]}`}
+                                id="clients"
+                                name="clients"
+                                ref={clients}
+                                min={0}
+                                // style={{ width: "10em" }}
+                                onKeyUp={calculateLandFillAndPercentsWrapper}
+                                // onkeyup="calculateLandfill(); calculatePercent()
+                                onChange={(event) => {
+                                  setTrackers({
+                                    ...trackers,
+                                    amountToClients: event.target.value,
+                                  });
+                                }}
+                              />
+                            </div>
+                          </div>
+                          <div className="row pb-2">
+                            <div className="col-auto">
+                              <input
+                                type="number"
+                                step="any"
+                                className={`form-control ${trackerCSS["customised-input"]}`}
+                                id="animalFeed"
+                                name="animalFeed"
+                                ref={animalFeed}
+                                min={0}
+                                onKeyUp={calculateLandFillAndPercentsWrapper}
+                                // onkeyup="calculateLandfill(); calculatePercent()"
+                                onChange={(event) => {
+                                  setTrackers({
+                                    ...trackers,
+                                    amountToAFeed: event.target.value,
+                                  });
+                                }}
+                              />
+                            </div>
+                          </div>
+                          <div className="row pb-2">
+                            <div className="col-auto">
+                              <input
+                                type="number"
+                                step="any"
+                                className={`form-control ${trackerCSS["customised-input"]}`}
+                                id="compost"
+                                name="compost"
+                                ref={compost}
+                                min={0}
+                                onKeyUp={calculateLandFillAndPercentsWrapper}
+                                // onkeyup="calculateLandfill(); calculatePercent()"
+                                onChange={(event) => {
+                                  setTrackers({
+                                    ...trackers,
+                                    amountToCompost: event.target.value,
+                                  });
+                                }}
+                              />
+                            </div>
+                          </div>
+                          <div className="row pb-2">
+                            <div className="col-auto">
+                              <input
+                                type="number"
+                                step="any"
+                                className={`form-control ${trackerCSS["customised-input"]}`}
+                                id="partnerNetwork"
+                                name="partnerNetwork"
+                                ref={partnerNetwork}
+                                min={0}
+                                onKeyUp={calculateLandFillAndPercentsWrapper}
+                                // onKeyUp={() => {calculateLandfill(); calculatePercent()}}
+                                // onkeyup="calculateLandfill(); calculatePercent()"
+                                onChange={(event) => {
+                                  setTrackers({
+                                    ...trackers,
+                                    amountToPartnerNetwork: event.target.value,
+                                  });
+                                }}
+                              />
+                            </div>
+                          </div>
+                          <div className="row pb-2">
+                            <div className="col-auto">
+                              <input
+                                type="number"
+                                step="any"
+                                className={`form-control ${trackerCSS["customised-input"]}`}
+                                id="landFill"
+                                name="landFill"
+                                ref={landFill}
+                                min={0}
+                                onChange={(event) => {
+                                  setTrackers({
+                                    ...trackers,
+                                    amountToLandfill: event.target.value,
+                                  });
+                                }}
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col">
+                          <div className="row">
+                            <div className="col-auto">
+                              <label htmlFor="percent">% Diverted to:</label>
+                              <br />
+                            </div>
+                          </div>
+                          <div className="row pb-2">
+                            <div className="col-auto">
+                              <input
+                                type="number"
+                                step="any"
+                                className={`form-control ${trackerCSS["customised-smaller-input"]}`}
+                                id="percentClients"
+                                name="percentClients"
+                                ref={percentClients}
+                                min={0}
+                                value={0}
+                                max={100}
+                                onLoad={calculateLandFillPercent}
+                                onChange={(event) => {
+                                  setTrackers({
+                                    ...trackers,
+                                    percentClients: event.target.value,
+                                  });
+                                }}
+                                // onLoad={() => calculateLandfillPercent()}
+                                // onload="calculateLandfillPercent()"
+                                readonly
+                              />
+                            </div>
+                            <div className="col d-flex align-items-center">
+                              Clients
+                            </div>
+                          </div>
+                          <div className="row pb-2">
+                            <div className="col-auto">
+                              <input
+                                type="number"
+                                step="any"
+                                className={`form-control ${trackerCSS["customised-smaller-input"]}`}
+                                id="percentAnimalFeed"
+                                name="percentAnimalFeed"
+                                ref={percentAnimalFeed}
+                                min={0}
+                                value={0}
+                                max={100}
+                                onLoad={calculateLandFillPercent}
+                                onChange={(event) => {
+                                  setTrackers({
+                                    ...trackers,
+                                    percentAFeed: event.target.value,
+                                  });
+                                }}
+                                // onLoad={() => calculateLandfillPercent()}
+                                // onload="calculateLandfillPercent()"
+                                readonly
+                              />
+                            </div>
+                            <div className="col d-flex align-items-center">
+                              Animal Feed
+                            </div>
+                          </div>
+                          <div className="row pb-2">
+                            <div className="col-auto">
+                              <input
+                                type="number"
+                                step="any"
+                                className={`form-control ${trackerCSS["customised-smaller-input"]}`}
+                                id="percentCompost"
+                                name="percentCompost"
+                                ref={percentCompost}
+                                min={0}
+                                value={0}
+                                max={100}
+                                onLoad={calculateLandFillPercent}
+                                onChange={(event) => {
+                                  setTrackers({
+                                    ...trackers,
+                                    percentCompost: event.target.value,
+                                  });
+                                }}
+                                // onLoad={() => calculateLandfillPercent()}
+                                // onload="calculateLandfillPercent()"
+                                readonly
+                              />
+                            </div>
+                            <div className="col d-flex align-items-center">
+                              Compost / Fertilizer
+                            </div>
+                          </div>
+                          <div className="row pb-2">
+                            <div className="col-auto">
+                              <input
+                                type="number"
+                                step="any"
+                                className={`form-control ${trackerCSS["customised-smaller-input"]}`}
+                                id="percentPartnerNetwork"
+                                name="percentPartnerNetwork"
+                                ref={percentPartnerNetwork}
+                                min={0}
+                                value={0}
+                                max={100}
+                                onLoad={calculateLandFillPercent}
+                                onChange={(event) => {
+                                  setTrackers({
+                                    ...trackers,
+                                    percentPartNet: event.target.value,
+                                  });
+                                }}
+                                // onLoad={() => calculateLandfillPercent()}
+                                // onLoad="calculateLandfillPercent()"
+                                readonly
+                              />
+                            </div>
+                            <div className="col d-flex align-items-center">
+                              Partner Network
+                            </div>
+                          </div>
+                          <div className="row pb-2">
+                            <div className="col-auto">
+                              <input
+                                type="number"
+                                step="any"
+                                className={`form-control ${trackerCSS["customised-smaller-input"]}`}
+                                id="percentLandFill"
+                                name="percentLandFill"
+                                ref={percentLandFill}
+                                value={100}
+                                onChange={(event) => {
+                                  setTrackers({
+                                    ...trackers,
+                                    percentLandfill: event.target.value,
+                                  });
+                                }}
+                                readonly
+                              />
+                            </div>
+                            <div className="col d-flex align-items-center">
+                              Landfill
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                      <div className="col-md-auto">
-                        <label htmlFor="description">Description</label>
-                        <br />
-                        <input
-                          type="text"
-                          id="description"
-                          className={`form-control input-text ${trackerCSS["customised-input"]}`}
-                          placeholder="Description"
-                          name="description"
-                          onChange={(event) => {
-                            setTrackers({
-                              ...trackers,
-                              Description: event.target.value,
-                            });
-                          }}
-                        />
-                      </div>
-                      <div className="col-md-auto">
-                        <label htmlFor="quantity">Quantity</label>
-                        <br />
-                        <input
-                          type={`text`}
-                          id="quantity"
-                          className={`form-control input-text ${trackerCSS["customised-input"]}`}
-                          placeholder="Quantity"
-                          name="quantity"
-                          ref={quantity}
-                          onKeyUp={calculateLandFillAndPercentsWrapper}
-                          onChange={(event) => {
-                            setTrackers({
-                              ...trackers,
-                              Quantity: event.target.value,
-                            });
-                          }}
-                        />
-                      </div>
-                      <div className="col-md-auto">
-                        <label htmlFor="qunits">Units</label>
-                        <br />
-                        <select
-                          className="form-select"
-                          id="qunits"
-                          name="qunits"
-                          onChange={(event) => {
-                            setTrackers({
-                              ...trackers,
-                              Qunits: event.target.value,
-                            });
-                          }}
-                        >
-                          <option selected>lbs</option>
-                          <option>kgs</option>
-                        </select>
-                      </div>
-                      <div className="col-auto">
-                        <div className="row">
-                          <div className="col-auto">
-                            <label htmlFor="amount">Amount</label>
-                          </div>
-                        </div>
-                        <div className="row pb-2">
-                          <div className="col-auto">
-                            <input
-                              type="number"
-                              step="any"
-                              className={`form-control ${trackerCSS["customised-input"]}`}
-                              id="clients"
-                              name="clients"
-                              ref={clients}
-                              min={0}
-                              // style={{ width: "10em" }}
-                              onKeyUp={calculateLandFillAndPercentsWrapper}
-                              // onkeyup="calculateLandfill(); calculatePercent()
-                              onChange={(event) => {
-                                setTrackers({
-                                  ...trackers,
-                                  amountToClients: event.target.value,
-                                });
-                              }}
-                            />
-                          </div>
-                        </div>
-                        <div className="row pb-2">
-                          <div className="col-auto">
-                            <input
-                              type="number"
-                              step="any"
-                              className={`form-control ${trackerCSS["customised-input"]}`}
-                              id="animalFeed"
-                              name="animalFeed"
-                              ref={animalFeed}
-                              min={0}
-                              onKeyUp={calculateLandFillAndPercentsWrapper}
-                              // onkeyup="calculateLandfill(); calculatePercent()"
-                              onChange={(event) => {
-                                setTrackers({
-                                  ...trackers,
-                                  amountToAFeed: event.target.value,
-                                });
-                              }}
-                            />
-                          </div>
-                        </div>
-                        <div className="row pb-2">
-                          <div className="col-auto">
-                            <input
-                              type="number"
-                              step="any"
-                              className={`form-control ${trackerCSS["customised-input"]}`}
-                              id="compost"
-                              name="compost"
-                              ref={compost}
-                              min={0}
-                              onKeyUp={calculateLandFillAndPercentsWrapper}
-                              // onkeyup="calculateLandfill(); calculatePercent()"
-                              onChange={(event) => {
-                                setTrackers({
-                                  ...trackers,
-                                  amountToCompost: event.target.value,
-                                });
-                              }}
-                            />
-                          </div>
-                        </div>
-                        <div className="row pb-2">
-                          <div className="col-auto">
-                            <input
-                              type="number"
-                              step="any"
-                              className={`form-control ${trackerCSS["customised-input"]}`}
-                              id="partnerNetwork"
-                              name="partnerNetwork"
-                              ref={partnerNetwork}
-                              min={0}
-                              onKeyUp={calculateLandFillAndPercentsWrapper}
-                              // onKeyUp={() => {calculateLandfill(); calculatePercent()}}
-                              // onkeyup="calculateLandfill(); calculatePercent()"
-                              onChange={(event) => {
-                                setTrackers({
-                                  ...trackers,
-                                  amountToPartnerNetwork: event.target.value,
-                                });
-                              }}
-                            />
-                          </div>
-                        </div>
-                        <div className="row pb-2">
-                          <div className="col-auto">
-                            <input
-                              type="number"
-                              step="any"
-                              className={`form-control ${trackerCSS["customised-input"]}`}
-                              id="landFill"
-                              name="landFill"
-                              ref={landFill}
-                              min={0}
-                              onChange={(event) => {
-                                setTrackers({
-                                  ...trackers,
-                                  amountToLandfill: event.target.value,
-                                });
-                              }}
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <div className="col">
-                        <div className="row">
-                          <div className="col-auto">
-                            <label htmlFor="percent">% Diverted to:</label>
-                            <br />
-                          </div>
-                        </div>
-                        <div className="row pb-2">
-                          <div className="col-auto">
-                            <input
-                              type="number"
-                              step="any"
-                              className={`form-control ${trackerCSS["customised-smaller-input"]}`}
-                              id="percentClients"
-                              name="percentClients"
-                              ref={percentClients}
-                              min={0}
-                              value={0}
-                              max={100}
-                              onLoad={calculateLandFillPercent}
-                              onChange={(event) => {
-                                setTrackers({
-                                  ...trackers,
-                                  percentClients: event.target.value,
-                                });
-                              }}
-                              // onLoad={() => calculateLandfillPercent()}
-                              // onload="calculateLandfillPercent()"
-                              readonly
-                            />
-                          </div>
-                          <div className="col d-flex align-items-center">
-                            Clients
-                          </div>
-                        </div>
-                        <div className="row pb-2">
-                          <div className="col-auto">
-                            <input
-                              type="number"
-                              step="any"
-                              className={`form-control ${trackerCSS["customised-smaller-input"]}`}
-                              id="percentAnimalFeed"
-                              name="percentAnimalFeed"
-                              ref={percentAnimalFeed}
-                              min={0}
-                              value={0}
-                              max={100}
-                              onLoad={calculateLandFillPercent}
-                              onChange={(event) => {
-                                setTrackers({
-                                  ...trackers,
-                                  percentAFeed: event.target.value,
-                                });
-                              }}
-                              // onLoad={() => calculateLandfillPercent()}
-                              // onload="calculateLandfillPercent()"
-                              readonly
-                            />
-                          </div>
-                          <div className="col d-flex align-items-center">
-                            Animal Feed
-                          </div>
-                        </div>
-                        <div className="row pb-2">
-                          <div className="col-auto">
-                            <input
-                              type="number"
-                              step="any"
-                              className={`form-control ${trackerCSS["customised-smaller-input"]}`}
-                              id="percentCompost"
-                              name="percentCompost"
-                              ref={percentCompost}
-                              min={0}
-                              value={0}
-                              max={100}
-                              onLoad={calculateLandFillPercent}
-                              onChange={(event) => {
-                                setTrackers({
-                                  ...trackers,
-                                  percentCompost: event.target.value,
-                                });
-                              }}
-                              // onLoad={() => calculateLandfillPercent()}
-                              // onload="calculateLandfillPercent()"
-                              readonly
-                            />
-                          </div>
-                          <div className="col d-flex align-items-center">
-                            Compost / Fertilizer
-                          </div>
-                        </div>
-                        <div className="row pb-2">
-                          <div className="col-auto">
-                            <input
-                              type="number"
-                              step="any"
-                              className={`form-control ${trackerCSS["customised-smaller-input"]}`}
-                              id="percentPartnerNetwork"
-                              name="percentPartnerNetwork"
-                              ref={percentPartnerNetwork}
-                              min={0}
-                              value={0}
-                              max={100}
-                              onLoad={calculateLandFillPercent}
-                              onChange={(event) => {
-                                setTrackers({
-                                  ...trackers,
-                                  percentPartNet: event.target.value,
-                                });
-                              }}
-                              // onLoad={() => calculateLandfillPercent()}
-                              // onLoad="calculateLandfillPercent()"
-                              readonly
-                            />
-                          </div>
-                          <div className="col d-flex align-items-center">
-                            Partner Network
-                          </div>
-                        </div>
-                        <div className="row pb-2">
-                          <div className="col-auto">
-                            <input
-                              type="number"
-                              step="any"
-                              className={`form-control ${trackerCSS["customised-smaller-input"]}`}
-                              id="percentLandFill"
-                              name="percentLandFill"
-                              ref={percentLandFill}
-                              value={100}
-                              onChange={(event) => {
-                                setTrackers({
-                                  ...trackers,
-                                  percentLandfill: event.target.value,
-                                });
-                              }}
-                              readonly
-                            />
-                          </div>
-                          <div className="col d-flex align-items-center">
-                            Landfill
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="row p-2">
-                      <div className="d-flex justify-content-start">
-                        <Button
-                          variant="outline-success"
-                          className={`${trackerCSS["save"]} btn btn-outline-success`}
-                          id="submit"
-                          onClick={(e) => {
-                            console.log(getCategoryData);
-                            axios
-                              .post(
-                                "http://127.0.0.1:8000/api/trackerInsert/",
-                                {
-                                  Category: trackers.Category,
-                                  Description: trackers.Description,
-                                  Quantity: trackers.Quantity,
-                                  Qunits: trackers.Qunits,
-                                  amountToClients: trackers.amountToClients,
-                                  amountToAFeed: trackers.amountToAFeed,
-                                  amountToCompost: trackers.amountToCompost,
-                                  amountToPartNet:
-                                    trackers.amountToPartnerNetwork,
-                                  amountToLandfill:
-                                    document.getElementById("landFill").value,
-                                  percentClients:
-                                    document.getElementById("percentClients")
-                                      .value,
-                                  percentAFeed:
-                                    document.getElementById("percentAnimalFeed")
-                                      .value,
-                                  percentCompost:
-                                    document.getElementById("percentCompost")
-                                      .value,
-                                  percentPartNet: document.getElementById(
-                                    "percentPartnerNetwork"
-                                  ).value,
-                                  percentLandfill:
-                                    document.getElementById("percentLandFill")
-                                      .value,
-                                  Email: localStorage.getItem("email"),
-                                  Organization:
-                                    localStorage.getItem("organization"),
-                                },
-                                {
-                                  headers: {
-                                    "Content-type": "application/json",
+                      <div className="row p-2">
+                        <div className="d-flex justify-content-start">
+                          <Button
+                            variant="outline-success"
+                            className={`${trackerCSS["save"]} btn btn-outline-success`}
+                            id="submit"
+                            onClick={(e) => {
+                              console.log(getCategoryData);
+                              axios
+                                .post(
+                                  "http://127.0.0.1:8000/api/trackerInsert/",
+                                  {
+                                    Category: trackers.Category,
+                                    Description: trackers.Description,
+                                    Quantity: trackers.Quantity,
+                                    Qunits: trackers.Qunits,
+                                    amountToClients: trackers.amountToClients,
+                                    amountToAFeed: trackers.amountToAFeed,
+                                    amountToCompost: trackers.amountToCompost,
+                                    amountToPartNet:
+                                      trackers.amountToPartnerNetwork,
+                                    amountToLandfill:
+                                      document.getElementById("landFill").value,
+                                    percentClients:
+                                      document.getElementById("percentClients")
+                                        .value,
+                                    percentAFeed:
+                                      document.getElementById(
+                                        "percentAnimalFeed"
+                                      ).value,
+                                    percentCompost:
+                                      document.getElementById("percentCompost")
+                                        .value,
+                                    percentPartNet: document.getElementById(
+                                      "percentPartnerNetwork"
+                                    ).value,
+                                    percentLandfill:
+                                      document.getElementById("percentLandFill")
+                                        .value,
+                                    Email: localStorage.getItem("email"),
+                                    Organization:
+                                      localStorage.getItem("organization"),
                                   },
-                                }
-                              )
-                              .then((response) => {
-                                if (response.status == 201) {
-                                  setIsSubmitted(true);
-                                  fetchData();
-                                  fetchPercentageChartData();
-                                  fetchCategoryChartData();
-                                }
-                              })
-                              .catch((err) => console.warn(err));
-                          }}
-                        >
-                          Save
-                        </Button>
+                                  {
+                                    headers: {
+                                      "Content-type": "application/json",
+                                    },
+                                  }
+                                )
+                                .then((response) => {
+                                  if (response.status == 201) {
+                                    setIsSubmitted(true);
+                                    fetchData();
+                                    fetchPercentageChartData();
+                                    fetchCategoryChartData();
+                                  }
+                                })
+                                .catch((err) => console.warn(err));
+                            }}
+                          >
+                            Save
+                          </Button>
+                        </div>
                       </div>
-                    </div>
-                  </Form.Group>
+                    </Form.Group>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <br />
-          <br />
+            <br />
+            <br />
 
-          <div className={`card ${trackerCSS["pie-chart-outer-div"]}`}>
-            <div
-              className={`svg-container ${trackerCSS["pie-chart-inner-div"]}`}
-              id="percentage-pie-chart"
-              ref={percentagePieChartRef}
-            >
-              <PercentagePieChart data={getPercentageData} />
-            </div>
-            <div
-              className={`svg-container ${trackerCSS["pie-chart-inner-div"]}`}
-              id="category-pie-chart"
-              ref={categoryPieChartRef}
-            >
-              <CategoryPieChart data={getCategoryData} />
-            </div>
-          </div>
-
-          <br />
-          <br />
-          <section id="section">
-            <div className="card">
-              <div className={`${trackerCSS["card-header"]} card-header`}>
-                <h3>Database</h3>
-                <Button
-                  type="button"
-                  variant="outline-success"
-                  className="btn btn-outline-success"
-                  onClick={function () {
-                    exportTableToCSV("data.csv");
-                  }}
-                  // onClick={() => exportTableToCSV("data.csv")}
-                >
-                  Export CSV
-                </Button>
+            <div className={`card ${trackerCSS["pie-chart-outer-div"]}`}>
+              <div
+                className={`svg-container ${trackerCSS["pie-chart-inner-div"]}`}
+                id="percentage-pie-chart"
+                ref={percentagePieChartRef}
+              >
+                <PercentagePieChart data={getPercentageData} />
               </div>
-              <div className="card-body">
-                <Table
-                  striped
-                  bordered
-                  hover
-                  responsive
-                  style={{ width: "100%" }}
-                >
-                  <thead>
-                    <tr>
-                      <th>Category</th>
-                      <th>Description</th>
-                      <th>Quantity</th>
-                      <th>Units</th>
-                      <th>Clients</th>
-                      <th>Animal Feed</th>
-                      <th>Compost</th>
-                      <th>Partner Network</th>
-                      <th>Landfill</th>
-                      <th>Date Time</th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {getData &&
-                      getData.length > 0 &&
-                      getData.map((userObj) => (
-                        <tr>
-                          <td>{userObj.Category}</td>
-                          <td>{userObj.Description}</td>
-                          <td>{userObj.Quantity}</td>
-                          <td>{userObj.Qunits}</td>
-                          <td>{userObj.percentClients}</td>
-                          <td>{userObj.percentAFeed}</td>
-                          <td>{userObj.percentCompost}</td>
-                          <td>{userObj.percentPartNet}</td>
-                          <td>{userObj.percentLandfill}</td>
-                          <td>{userObj.date_time}</td>
-                          <td>
-                            <div>
-                              <Button
-                                variant="danger"
-                                className="btn btn-danger"
-                                name="field"
-                                onClick={(e) => {
+              <div
+                className={`svg-container ${trackerCSS["pie-chart-inner-div"]}`}
+                id="category-pie-chart"
+                ref={categoryPieChartRef}
+              >
+                <CategoryPieChart data={getCategoryData} />
+              </div>
+            </div>
 
-                                  axios.post(
-                                    `http://localhost:8000/api/trackerDelete/`,
-                                    {
-                                        Category: userObj.Category,
-                                        Description: userObj.Description,
-                                        Quantity: userObj.Quantity,
-                                        percentClients: userObj.percentClients,
-                                        percentAFeed: userObj.percentAFeed,
-                                        percentCompost: userObj.percentCompost,
-                                        percentPartNet: userObj.percentPartNet,
-                                        percentLandfill: userObj.percentLandfill,
-                                        date_time: userObj.date_time
-
-                                    },
-                                    {
-                                        headers: {
-                                            "Content-type": "application/json",
+            <br />
+            <br />
+            <section id="section">
+              <div className="card">
+                <div className={`${trackerCSS["card-header"]} card-header`}>
+                  <h3>Database</h3>
+                  <Button
+                    type="button"
+                    variant="outline-success"
+                    className="btn btn-outline-success"
+                    onClick={function () {
+                      exportTableToCSV("data.csv");
+                    }}
+                    // onClick={() => exportTableToCSV("data.csv")}
+                  >
+                    Export CSV
+                  </Button>
+                </div>
+                <div className="card-body">
+                  <Table
+                    striped
+                    bordered
+                    hover
+                    responsive
+                    style={{ width: "100%" }}
+                  >
+                    <thead>
+                      <tr>
+                        <th>Category</th>
+                        <th>Description</th>
+                        <th>Quantity</th>
+                        <th>Units</th>
+                        <th>Clients</th>
+                        <th>Animal Feed</th>
+                        <th>Compost</th>
+                        <th>Partner Network</th>
+                        <th>Landfill</th>
+                        <th>Date Time</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {getData &&
+                        getData.length > 0 &&
+                        getData.map((userObj) => (
+                          <tr>
+                            <td>{userObj.Category}</td>
+                            <td>{userObj.Description}</td>
+                            <td>{userObj.Quantity}</td>
+                            <td>{userObj.Qunits}</td>
+                            <td>{userObj.percentClients}</td>
+                            <td>{userObj.percentAFeed}</td>
+                            <td>{userObj.percentCompost}</td>
+                            <td>{userObj.percentPartNet}</td>
+                            <td>{userObj.percentLandfill}</td>
+                            <td>{userObj.date_time}</td>
+                            <td>
+                              <div>
+                                <Button
+                                  variant="danger"
+                                  className="btn btn-danger"
+                                  name="field"
+                                  onClick={(e) => {
+                                    axios
+                                      .post(
+                                        `http://localhost:8000/api/trackerDelete/`,
+                                        {
+                                          Category: userObj.Category,
+                                          Description: userObj.Description,
+                                          Quantity: userObj.Quantity,
+                                          percentClients:
+                                            userObj.percentClients,
+                                          percentAFeed: userObj.percentAFeed,
+                                          percentCompost:
+                                            userObj.percentCompost,
+                                          percentPartNet:
+                                            userObj.percentPartNet,
+                                          percentLandfill:
+                                            userObj.percentLandfill,
+                                          date_time: userObj.date_time,
                                         },
-                                    }
-                                )
-                                    .then((response) => {
-                                        if (response.status == 200) {
-                                           
-                                            setIsSubmitted(true);
-                                            fetchData();
-                                            fetchPercentageChartData();
-                                            fetchCategoryChartData();
-
+                                        {
+                                          headers: {
+                                            "Content-type": "application/json",
+                                          },
                                         }
-                                    })
-                                    .catch((err) => console.warn(err));
-
-                                }}
-                              >
-                                Delete
-                              </Button>
-                            </div>
-                          </td>
-                        </tr>
-                      ))}
-                  </tbody>
-                </Table>
+                                      )
+                                      .then((response) => {
+                                        if (response.status == 200) {
+                                          setIsSubmitted(true);
+                                          fetchData();
+                                          fetchPercentageChartData();
+                                          fetchCategoryChartData();
+                                        }
+                                      })
+                                      .catch((err) => console.warn(err));
+                                  }}
+                                >
+                                  Delete
+                                </Button>
+                              </div>
+                            </td>
+                          </tr>
+                        ))}
+                    </tbody>
+                  </Table>
+                </div>
               </div>
-            </div>
-          </section>
+            </section>
 
-          <br />
-          {isSubmitted && (
-                    <Confetti
-                    width={window.innerWidth}
-                    height={window.innerHeight}
-                    recycle={false}
-                    run={isRunning}
-                    numberOfPieces={isRunning ? undefined : 0}
-                    onConfettiComplete={onConfettiComplete}
-                  />
-                 )
-             }
-          
-       
-        </div>
+            <br />
+            {isSubmitted && (
+              <Confetti
+                width={window.innerWidth}
+                height={window.innerHeight}
+                recycle={false}
+                run={isRunning}
+                numberOfPieces={isRunning ? undefined : 0}
+                onConfettiComplete={onConfettiComplete}
+              />
+            )}
+          </div>
         </div>
       );
     } else if (
@@ -997,7 +1008,6 @@ function Tracker() {
             </div>
           </div>
         </section>
-       
       );
     }
   }
