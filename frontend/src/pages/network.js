@@ -1,3 +1,4 @@
+//Sharing page
 import React, { useState, useEffect, useRef } from "react";
 
 import Button from "react-bootstrap/Button";
@@ -38,7 +39,7 @@ function LineChart({ data }) {
       .x((d) => xScale(d.category))
       .y((d) => yScale(d.ClientsA));
 
-      svg.select(".blue-line").remove(); // Remove existing blue line
+      svg.select(".blue-line").remove(); // remove-existing-blue-line-- ls
       svg.append("path")
         .datum(data)
         .attr("fill", "none")
@@ -91,7 +92,7 @@ function LineChart({ data }) {
   );
 }
 
-
+// searchBar function
 function SearchBar() {
 
 
@@ -99,7 +100,8 @@ function SearchBar() {
   const [getSharedData, setSharedData] = useState([]);
   const [getGraphData, setGraphData] = useState([]);
 
-  //graph stuff
+  //graph stuff Jordan's Work- 
+  //more work will be implemented eventually
 
 
   
