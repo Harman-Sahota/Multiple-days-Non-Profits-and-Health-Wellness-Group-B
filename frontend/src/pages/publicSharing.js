@@ -166,11 +166,11 @@ function PublicSharing() {
                                   onChange={(event) => {
                                     if (event.target.value == "closed") {
                                       var a = prompt(
-                                        "enter the email of the person you shared your products with"
+                                        "Enter the email address of the person you shared your products with:"
                                       );
                                       if (a === "") {
                                         alert(
-                                          "value of the email cannot be empty, please try again"
+                                          "The email field cannot be empty, please try again."
                                         );
                                         document.getElementById(
                                           "status"
@@ -196,7 +196,7 @@ function PublicSharing() {
                                           .then((response) => {
                                             if (response.status == 201) {
                                               window.alert(
-                                                "post status successfully changed to closed"
+                                                "The post status has successfully been changed to CLOSED."
                                               );
                                             }
 
