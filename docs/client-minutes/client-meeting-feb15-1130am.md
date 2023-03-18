@@ -42,4 +42,4 @@
 
 
 ## Summary
-- On February 15, 2023 at 11:30am, a client meeting took place. The follow-ups from the previous week included progress on the React conversion and API integration. The agenda for the meeting was to discuss the tracking page and the sharing page
+- On February 15, 2023 at 11:30am, a client meeting took place. The follow-ups from the previous week included progress on the React conversion and API integration. The agenda for the meeting was to discuss the tracking page and the sharing page. The meeting resulted in several to-do items for the tracker page, such as making a pie chart and allowing users to select different chart types, along with category options. For the sharing page, a list of users in the current organization was discussed, along with user roles,
