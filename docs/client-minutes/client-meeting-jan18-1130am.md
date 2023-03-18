@@ -1,5 +1,11 @@
 # Client Meeting 18 January 2023
 
+## Members
+
+- AbdulAziz Almutlaq
+- Maysey Lu
+- Harman Sahota
+
 ## Agenda
 
 - Barbs would like to view our current system and streamline things
