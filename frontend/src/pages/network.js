@@ -91,7 +91,7 @@ function LineChart({ data }) {
   );
 }
 
-
+// searchBar function
 function SearchBar() {
 
 
@@ -99,7 +99,7 @@ function SearchBar() {
   const [getSharedData, setSharedData] = useState([]);
   const [getGraphData, setGraphData] = useState([]);
 
-  //graph stuff- Jordan's Work
+  //graph stuff- Jordan's Work- more work will be implemented eventually
 
 
   
