@@ -38,7 +38,7 @@ function LineChart({ data }) {
       .x((d) => xScale(d.category))
       .y((d) => yScale(d.ClientsA));
 
-      svg.select(".blue-line").remove(); // Remove existing blue line
+      svg.select(".blue-line").remove(); // remove-existing-blue-line-- ls
       svg.append("path")
         .datum(data)
         .attr("fill", "none")
