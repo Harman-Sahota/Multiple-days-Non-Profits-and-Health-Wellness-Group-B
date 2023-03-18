@@ -50,3 +50,50 @@ The features presented for this user testing are as follows:
 - On the admin page, the user is able to set permissions for access to each page as well as read/write permissions which are then stored in the database. 
 - The user is also able to approve or decline accounts on the admin page, these accounts show in the appropriate table.
 
+## Peer Testing Session
+
+|Participant|Admin|Status|Evaluation Type|Tested On|
+|-----------|-----|------|---------------|---------|
+|Veronica Jack|Maysey Lu|Completed|User Feedback|March 15, 2023 (In-person)|
+|Harshal Patel|Maysey Lu|Completed|Think Aloud|March 17, 2023 (In-person)|
+|Ben Keeley|Harman Sahota|Completed|User Feedback|March 15, 2023 (In-person)|
+|Illya Yereferenko|Harman Sahota|Completed|Think Aloud|March 17, 2023 (In-person)|
+|Abhiek Bist|Jordan Onwuvuche||User Feedback||
+|Akshaj Srinivasan|Jordan Onwuvuche|Completed|Think Aloud|March 17, 2023 (In-person)|
+|Jake Daongam|Abdulaziz Almutlaq||User Feedback|(Online)|
+||Abdulaziz Almutlaq||Think Aloud|(Online)|
+
+## List of Usability Tasks
+
+### User Group: Volunteer
+
+**Description:**
+You are a 64 years old, retired bus driver that is not very familiar with technology and has only used a smartphone for making calls and texting. To pass time, you have decided to volunteer for ABC Farms, a local farm, which focuses on growing fresh produce such as apples, plums, and squashes. This is your first time working with them and has never heard of the Food Saviour website until now. You have been tasked to calculate how much food waste the organization has diverted from the landfill and use those results to create a report. 
+
+**Tasks:**
+
+1. Create an account.
+2. View your profile.
+3. Log out of your account.
+4. Log into your account.
+5. Enter data to figure out how much food waste the organization has diverted from the landfill so far.
+6. Export your results.
+7. Add some more data entries.
+8. Download your results again.
+9. Delete one or more data entries.
+
+### User Group: Admin
+
+**Description:**
+You are the Admin of XYZ Farms which specializes in growing pumpkin, zucchini, and garlic. Your organization recently got some new volunteers and staff. Your manager has requested that you quickly approve their Food Saviour accounts so that they can start collecting the data needed to create a report that you will be presenting to the Board. You are looking to measure how much food you can save and distribute. You would also like to connect with other organizations that use the Food Saviour website.
+
+**Tasks:**
+
+1. Log into your account:
+2. Change the access level(s) of two different roles. 
+3. Approve or disapprove any pending accounts.
+4. Browse through postings made by other organizations
+5. Create your own posting.
+6. Search for your posting.
+7. Change your first and last name.
+8. Deactivate your account. 
