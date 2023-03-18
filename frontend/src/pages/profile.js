@@ -161,7 +161,6 @@ function Profile() {
                                             if (e.target.checked) {
                                                 role_str.push(e.target.value);
                                             }
-
                                         }
                                        
                                         }>
@@ -206,9 +205,6 @@ function Profile() {
                                             document.getElementById('sponsor').checked = false;
                                             document.getElementById('admin').checked = false;
                                             document.getElementById('expert').checked= false;
-                                            
-
-
                                         }}>
                                             Edit <FontAwesomeIcon icon={faPenToSquare} style={{ color: "#DC143C	" }} />
                                         </Button>
@@ -260,12 +256,9 @@ function Profile() {
                                        }
                                    
                                     }else{
-                                        
-                                    
                                         localStorage.roles.setItem(prevroles);
                                     }
 
-                                  
                                     console.log(role_str);
                                     axios.put(
                                         `http://127.0.0.1:8000/api/profileUpdate/${userId}`,
@@ -302,14 +295,8 @@ function Profile() {
                                                     }
                                                 
                                                  }else{
-                                                     
-                                                 
                                                      localStorage.roles.setItem(prevroles);
-
                                                  }
-                                                
-                                                //  window.location.replace("http://localhost:3000/profile/");
-
                                             }
                                         })
                                         .catch(err => console.warn(err));

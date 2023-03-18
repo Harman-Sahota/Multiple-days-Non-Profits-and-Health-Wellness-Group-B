@@ -124,7 +124,7 @@ function Form() {
                       .catch(err => 
 
                         {if(err.status="409" ){
-                          window.alert("Email already exists, please use a different email");
+                          window.alert("An account with this email already exists, please use a different email.");
                     
                         }}
                         
@@ -149,7 +149,7 @@ function Form() {
                       formData.Password != "" &&
                       formData.Password.match(PasswordRegex) &&
                       document.getElementById("confirm").value == formData.Password &&
-                      formData.Organizatio != ""
+                      formData.Organization != ""
                     ) {
                       setPage((currPage) => currPage + 1);
                     }
@@ -162,7 +162,7 @@ function Form() {
                       formData.Organization == "" ||
                       document.getElementById("confirm").value == ""
                     ) {
-                      window.alert("fields cannot be empty");
+                      window.alert("Please ensure you have filled in all the required fields.");
                     }
 
                     if (
@@ -170,7 +170,7 @@ function Form() {
                       /\d/.test(formData.LastName)
                     ) {
                       window.alert(
-                        "First Name and Last Name cannot have numbers, please check if you entered a number in one of these fields"
+                        "First name and last name cannot contain numbers, please check if you accidentally entered a number in one of these fields."
                       );
                     }
 
@@ -247,7 +247,7 @@ function Form() {
                         !formData.Email.match(EmailValidRegex) &&
                         formData.Email != ""
                       ) {
-                        window.alert("Email is not valid");
+                        window.alert("The email address entered is not valid.");
                       }
                     } else {
                       if ( document.getElementById("email").hasAttribute("error") )
@@ -277,7 +277,7 @@ function Form() {
                         formData.Password != ""
                       ) {
                         window.alert(
-                          "Password Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+                          "Your password must contain at least one number, one uppercase and lowercase letter, and at least 8 or more characters."
                         );
                       }
                     } else {
@@ -308,7 +308,7 @@ function Form() {
                           .classList.remove("success");
                       document.getElementById("confirm").classList.add("error");
                       if (document.getElementById("confirm").value != "")
-                        window.alert("confirm Password doesnt match Password");
+                        window.alert("The passwords you have entered do not match. Please try again.");
                     } else {
                       if (
                         document.getElementById("confirm").hasAttribute("error")
@@ -321,7 +321,7 @@ function Form() {
                         .classList.add("success");
                     }
 
-                    if (formData.Organizatio == "") {
+                    if (formData.Organization == "") {
                       if (
                         document.getElementById("org").hasAttribute("success")
                       )
@@ -340,7 +340,7 @@ function Form() {
 
                   if (page === 1) {
                     if (formData.Roles.length == "0") {
-                      window.alert("you must pick atleast one role");
+                      window.alert("Please select at least one role.");
                       document
                         .getElementById("flexCheckDefault1")
                         .classList.add("error");
@@ -366,7 +366,7 @@ function Form() {
 
                   if (page === 2) {
                     if (formData.Consent == "not-Consent") {
-                      window.alert("you must consent to continue");
+                      window.alert("You must consent in order to continue.");
                       document
                         .getElementById("flexCheckDefault1")
                         .classList.add("consent-check1");
