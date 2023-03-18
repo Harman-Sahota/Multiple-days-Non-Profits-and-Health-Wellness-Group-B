@@ -1,5 +1,12 @@
 # Client Meeting 11 January 2022
 
+## Members
+
+- AbdulAziz Almutlaq
+- Maysey Lu
+- Harman Sahota
+- Jordan Onwuvuche
+
 ## Follow-Ups from Last Week
 
 > Relatives stuck in snow 😆
