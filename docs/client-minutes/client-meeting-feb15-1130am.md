@@ -39,3 +39,7 @@
 ## Decisions
 
 - Project timeline constrained to August due to availability.
+
+
+## Summary
+- On February 15, 2023 at 11:30am, a client meeting took place. The follow-ups from the previous week included progress on the React conversion and API integration. The agenda for the meeting was to discuss the tracking page and the sharing page
