@@ -865,7 +865,7 @@ function Tracker() {
                     variant="outline-success"
                     className="btn btn-outline-success"
                     onClick={function () {
-                      exportTableToCSV("data.csv");
+                      exportTableToCSV(`tracker-data-${dateFormat(new Date(), "mmmm dS, yyyy, hh:mm")}.csv`);
                     }}
                   // onClick={() => exportTableToCSV("data.csv")}
                   >

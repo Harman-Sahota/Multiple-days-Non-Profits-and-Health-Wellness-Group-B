@@ -5,6 +5,10 @@
   margin-top: -2%;
 }
 
+#export{
+  width: 5% !important; 
+}
+
 .save:hover {
   background-color: #415d34 !important;
   color: white !important;
