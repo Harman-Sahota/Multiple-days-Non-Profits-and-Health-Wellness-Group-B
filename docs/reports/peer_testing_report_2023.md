@@ -60,7 +60,9 @@ The features presented for this user testing are as follows:
 |Abhiek Bist|Jordan Onwuvuche||User Feedback||
 |Akshaj Srinivasan|Jordan Onwuvuche|Completed|Think Aloud|March 17, 2023 (In-person)|
 |Jake Daongam|Abdulaziz Almutlaq||User Feedback|(Online)|
-||Abdulaziz Almutlaq||Think Aloud|(Online)|
+|Abhiek Bist|Abdulaziz Almutlaq|Incomplete*|Think Aloud||
+
+*The peer testing session with Abhiek Bist was not done due to the lack of time and inability to coordinate with Abhiek. The session was initially supposed to be done with Veronica Jack. A time and date was set up with her, however, it was later noticed that Veronica had already reviewed our website with another team member. Overall, there was a lack of organization from all sides.
 
 ## List of Usability Tasks
 
