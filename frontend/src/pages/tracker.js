@@ -1,6 +1,6 @@
 // Importing React and relevant React hooks
 import React, { useState, useRef, useEffect } from "react";
-
+import dateFormat from 'dateformat';
 // This imports the axios package to communicate with the REST API
 import axios from "axios";
 
@@ -865,9 +865,9 @@ function Tracker() {
                     variant="outline-success"
                     className="btn btn-outline-success"
                     onClick={function () {
-                      exportTableToCSV("data.csv");
+                      exportTableToCSV(`tracker-data-${dateFormat(new Date(), "mmmm dS, yyyy, hh:mm")}.csv`);
                     }}
-                    // onClick={() => exportTableToCSV("data.csv")}
+                  // onClick={() => exportTableToCSV("data.csv")}
                   >
                     Export CSV
                   </Button>
@@ -909,7 +909,7 @@ function Tracker() {
                             <td>{userObj.percentCompost}</td>
                             <td>{userObj.percentPartNet}</td>
                             <td>{userObj.percentLandfill}</td>
-                            <td>{userObj.date_time}</td>
+                            <td>{dateFormat(userObj.date_time, "mmmm dS, yyyy")}</td>
                             <td>
                               <div>
                                 <Button
@@ -953,6 +953,14 @@ function Tracker() {
                                   }}
                                 >
                                   Delete
+                                </Button>
+                                <Button 
+                                variant="primary"
+                                className="btn btn-primary"
+                                >
+                                 
+                                 Edit
+
                                 </Button>
                               </div>
                             </td>
