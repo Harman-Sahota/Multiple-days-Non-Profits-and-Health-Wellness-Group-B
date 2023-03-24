@@ -42,3 +42,7 @@
 
 - Look at the National Food Bank data to get a sense of the min and max to set.
 - Look at user authentication for the Django framework.
+
+## Extensive Summary
+The discussion board and network page project involves creating a platform that facilitates communication and collaboration among its users. It aims to provide a user-friendly interface that allows both logged-in and non-logged-in users to participate in the discussions, exchange ideas, and share information.
+
