@@ -2,7 +2,7 @@
 
 *Created: September 29, 2022*
 
-*Last updated: March 17, 2023*
+*Last updated: March 24, 2023*
 
 ## Overview
 
@@ -41,6 +41,7 @@ Click [here](https://docs.google.com/spreadsheets/d/1qnWRLLMm4y7r7I7h9rt_KXN-MSf
 |22| Continue Page Conversions to React <br/> Research Tokens <br/> Final Adjustments to Profile Page| [Client Group Meeting Minutes (Mar. 1)](docs/client-minutes/client-meeting-mar1-10am.md) <br/> [Client Private Meeting Minutes (Mar. 1)](docs/client-minutes/client-meeting-mar1-1130am.md)|
 |23| [List of Usability Tasks #2]() <br/> Continue Page Conversions to React| [Client Group Meeting Minutes (Mar. 8)]() <br/> [Client Private Meeting Minutes (Mar. 8)]()|
 |24| Peer Testing #2 | No client meeting this week|
+|25| Peer Testing Report | [Client Group Meeting Minutes (Mar. 22)](docs/client-minutes/client-meeting-mar22-10am.md) <br/> [Client Private Meeting Minutes (Mar. 22)](docs/client-minutes/client-meeting-mar22-1130am.md)|
 
 
 ### Semester #1
