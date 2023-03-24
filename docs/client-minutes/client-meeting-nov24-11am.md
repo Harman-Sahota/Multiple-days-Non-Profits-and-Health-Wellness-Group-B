@@ -50,5 +50,6 @@ One of the key features of the platform is its ability to draw inspiration from 
 
 Another important feature of the platform is the use of filters to draw out specific topics. This functionality can be incredibly helpful in making it easier for users to navigate the platform and find the information they need quickly. The use of filters can also help to streamline the user experience, ensuring that users can focus on the topics that are most relevant to them.
 
-To ensure that the platform is accessible on a variety of devices and screen sizes, the team will be using Bootstrap to make the page responsive.
+To ensure that the platform is accessible on a variety of devices and screen sizes, the team will be using Bootstrap to make the page responsive. This will ensure that users can access the platform from their smartphones, tablets, and computers without encountering any display or formatting issues.
+
 
