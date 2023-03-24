@@ -1,5 +1,12 @@
 # Client Meeting 11 January 2022
 
+## Members
+
+- AbdulAziz Almutlaq
+- Maysey Lu
+- Harman Sahota
+- Jordan Onwuvuche
+
 ## Follow-Ups from Last Week
 
 > Relatives stuck in snow 😆
@@ -11,6 +18,8 @@
 
 ## To Do
 
+<!-- We might have to upload also the peer testing report for the second semester -->
+
 - [ ] Have the peer testing report uploaded to GitHub
 - [ ] Have everyone's software up and running, including Virtual machine connection
 - [ ] Notify Barbs when we figure out the Peer Testing Report
@@ -18,10 +27,12 @@
 ## Minutes
 
 - Barbs got a research grant to continue building the architecture of the app
+<!-- - I don't know whether this implies we get to eat something -->
 - Another student has been hired to make a food bank with a similar architecture
 - Group members will have their software up and running
 - The web app graphics have been appreciated by many
 - A Reactjs example will be given to us to help demonstrate how to implement it in the project
+<!-- - I doubt we've ever received this example -->
 
 ## Decisions
 
@@ -53,5 +64,6 @@
 ## Gema's add-ons
 
 - [ ] Break down project goals
+  - Through studying the pace at which we are getting the tasks done on a weekly basis
 - [ ] Review Gantt chart regularly
 - [ ] Prioritise project / crucial goals
