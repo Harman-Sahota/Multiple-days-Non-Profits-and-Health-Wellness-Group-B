@@ -98,3 +98,51 @@ You are the Admin of XYZ Farms which specializes in growing pumpkin, zucchini, a
 6. Search for your posting.
 7. Change your first and last name.
 8. Deactivate your account. 
+
+# Issues Discovered
+
+## Severity: High
+
+Issue #1: Permissions Not Implemented
+
+Description: Currently, everyone can see all the data regardless of whether they created that data, if it's from their organization, or even from a different organization altogether. This needs to be changed so that the only data shown to the user is either their own or data from someone else that they have received permission to access. This issue raises the concern of data privacy and protection. 
+
+Issue #2: Profile Page Goes Blank
+
+Description: When the user edits their data (i.e. name, roles, etc.) and submits the new changes, the page goes blank. However, the data is updated in the database and the user is able to see these changes once they log back in again. This can be resolved once we determine the reason why the page turns blank upon form submission.
+
+Issue #3: Ability to Edit Data
+
+Description: At the moment, there is no implementation to allow the user to edit any data that they have submitted. If the user enters the wrong data, they must delete the data entry and re-enter everything into the form and submit it again. If the user has a typo in their network post, there is no way to edit the post. Thus, it is of high priority that this feature is implemented in time for the final milestone. 
+
+## Severity: Medium
+
+Issue #1: Distinction Between User-entered Data and Auto-calculated Data
+
+Description: When the user enters data into the form, the percentage and values related to the landfill are automatically calculated. However, it was confusing for some users to know if they were auto-calculated or not unless they were paying attention to the changes and/or if they filled out the form in the order that was intended. Thus, there should be some way to differentiate the two types of data by either using a different font color or encapsulating the auto-calculated data into a separate box. 
+
+Issue #2: Too Much Information Displayed
+
+Description: The amount of information in the tracker and permissions page can be a bit overwhelming and confusing to new users. Thus, it would be helpful to provide some sort of documentation that the users can refer to when they are unsure of the functionality of a page.
+
+Issue #3: Cannot View Saved Permission Settings 
+
+Description: When the user saves their permission settings and refreshes the page, all fields are cleared (although the permissions were saved into the database), making it confusing to the user whether their settings were saved. Thus, it would be helpful to have an alert notifying the user that the settings have been saved and also have the system pull the permissions data from the database and display it back to the user by pre-selecting the currently saved permission settings. 
+
+Issue #4: Tootips/Information panels to provide more information on the graphs
+
+Description: The pie chart on the tracker page only displays the data and labels but there’s no way to see what the actual numbers on the chart are. Thus, it would be nice to have that information displayed as tooltips on hover or in information panels.
+
+## Severity: Low
+
+Issue #1: System Messages
+
+Description: When the user submits a form, either saving a data entry or permission setting or submitting a post to the network page, there is no clear indication to the user that the form has been submitted successfully. There is a confetti animation that plays, however, it sometimes does not work. The only way to know is by scrolling down the page to where the user expects to see the results of the form submission. Thus, there should be a message that appears, letting the user know if the form was submitted or not.
+
+Issue #2: Displaying Search Results
+
+Description: When the user searches using a keyword on the network page, it displays back the posts that include the keyword. However, if there are no postings with the matching keyword, the page is blank. This makes it unclear to the user whether the system is still searching for results or if there are no matching posts. Thus, there should be some indication that there were no posts containing the keyword. 
+
+Issue #3: Display Issues for Different Screen Sizes
+
+Description: Not all pages and/or page elements are responsive to different screen sizes. For example, the registration page form stretches into the navigation bar and any error messages that appear causes the form fields to be pushed down and the form buttons to overlap with the form fields. Thus, we must ensure that all elements are responsive and the CSS used does not force it to be a specific size. 
