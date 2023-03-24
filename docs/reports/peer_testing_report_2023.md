@@ -34,7 +34,7 @@ Harman Sahota - 28337426 <br>
 
 ## Overview
 
-Foodsaviour is a web application designed to minimize food waste by organizations by directing it to other sources rather than landfill. It also serves as an application with which organizations can generate a report for the government annually as well as share their resources among other organizations all while keeping track of this data and being able to compare it, view it as a graphic and compare the different data gathered over time. The web app aims to do  all this while maintaining safety of the data by performing user authentication and protecting the confidentiality of the data and that of the organization. 
+Foodsaviour is a web application designed to minimize food waste by organizations by directing it to other sources rather than landfill. It also serves as an application with which organizations can utilize to generate data and visuals for annual reports as well as share their resources among other organizations. In addition, users of this online platform will be able to compare data, view it as a graphic and compare the different data gathered over time. The web app aims to do all this while maintaining safety of the data by performing user authentication and protecting the confidentiality of the data and that of the organization. 
 
 ## Features
 
