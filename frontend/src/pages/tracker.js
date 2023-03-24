@@ -886,12 +886,12 @@ function Tracker() {
                         <th>Description</th>
                         <th>Quantity</th>
                         <th>Units</th>
-                        <th>Clients</th>
-                        <th>Animal Feed</th>
-                        <th>Compost</th>
-                        <th>Partner Network</th>
-                        <th>Landfill</th>
-                        <th>Date Time</th>
+                        <th>% Clients</th>
+                        <th>% Animal Feed</th>
+                        <th>% Compost</th>
+                        <th>% Partner Network</th>
+                        <th>% Landfill</th>
+                        <th>Date</th>
                         <th></th>
                       </tr>
                     </thead>
