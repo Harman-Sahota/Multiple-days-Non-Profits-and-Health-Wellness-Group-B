@@ -40,15 +40,14 @@ Foodsaviour is a web application designed to minimize food waste by organization
 
 The features presented for this user testing are as follows: 
 
-- The user is able to successfully register an account.
-- The user is able to successfully log into an existing account. 
-- On the tracker page, the user is able to create records for a food type listening to how much of it was directed to what place, the user enters the amound in lbs or kgs, and the system automatically converts these values into percentages. In addition, the landfill amount is also auto-calculated.
-- Once the user submits the form on the tracker page they are able to view their record in a table which gives them the option to delete that record, the user is also able to see a rough graph of the data. 
-- On the profile page, the user is able to view details about their account listening to their name, email, roles, and consent. They also have the ability to edit all these details except their email. 
-- On the sharing page, the user is able to browse through posts and filter by sharing or receiving posts only. They can also organize the postings by time and search for posts by typing in a search bar. 
-- On the sharing page, the user is also able to create posts. 
-- On the admin page, the user is able to set permissions for access to each page as well as read/write permissions which are then stored in the database. 
-- The user is also able to approve or decline accounts on the admin page, these accounts show in the appropriate table.
+- The user is able to register an account and log in with an existing account. 
+- On the tracker page, the user can enter their data by selecting a food category, entering the total quantity in kgs or lbs, and the amount diverted to each source. The amounts are then auto-converted into percentages by the system. 
+- Once the user saves the data on the tracker page, they are able to view their record in a data table which gives them the option to delete that record. The user is also able to see a pie chart generated from the data they have saved. 
+- On the profile page, the user is able to view details about their account such as their name, email, and roles. They are able to edit their name and/or email and withdraw their consent. If the user withdraws their consent, they are prompted to download their data before withdrawing as their account would be deleted immediately after they confirm. 
+- On the sharing page, the user is able to browse through posts, view only the sharing or only the receiving posts, search for posts by typing keywords in the search bar, create posts and sort posts using time filters. 
+- On the sharing page, the user is also able to see a list of users they’ve shared food with and generate a graph to compare each other’s data.
+- On the permissions page, the user is able to set permissions for access to each page as well as read/write permissions for each role.
+- The user is also able to approve or decline accounts on the admin page and revert these selections. Once saved, these accounts appear in the appropriate table.
 
 ## Peer Testing Session
 
