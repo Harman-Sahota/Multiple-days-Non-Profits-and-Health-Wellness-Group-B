@@ -146,3 +146,39 @@ Description: When the user searches using a keyword on the network page, it disp
 Issue #3: Display Issues for Different Screen Sizes
 
 Description: Not all pages and/or page elements are responsive to different screen sizes. For example, the registration page form stretches into the navigation bar and any error messages that appear causes the form fields to be pushed down and the form buttons to overlap with the form fields. Thus, we must ensure that all elements are responsive and the CSS used does not force it to be a specific size. 
+
+# Quantitative Scores
+
+Number of Data Points: 7
+
+![](../images/heuristic_evaluation_scores_2023.png)
+
+Visibility of System Status
+From the results, it is obvious that the software system exceeded the expectations of most participants by demonstrating with great clarity the outcome of their prior interactions in a timely manner. The participants could also easily predict the next steps in their interactions. However there are still aspects of the program to improve. For example on the Sharing page when the user submitted a form while sharing a post, the participants preferred to receive a clear indication that the form had successfully been submitted.
+
+Match Between The System and the Real World
+Based on the results, the participants easily related the system to real-world conventions as they found the layout to be organized naturally and logically. This means that the participants found the system easy to understand due to the similar arrangement of various features compared to other programs they’ve used before. Although they were greatly satisfied, the team will improve on this through implementing various changes including a clear differentiating demarcation between input fields and calculation fields on the tracker page.
+
+User Control and Freedom
+Indicated by the outcome, most participants could intuitively undo an action, exit a certain process and leave a certain page easily. They experienced the freedom to roam around the site and execute various tasks with the confidence of being able to navigate the system the way they like to. This is attributed to the implementation of site wide features including the navigation bar and buttons in various locations and pages across the site.
+
+Consistency and Standards
+Reflecting from the results, we can see that the participants didn’t have to wonder where they were, what they were doing, or how things worked. This means that they didn’t have to wonder what various terminology and features meant. Therefore we are glad that they experienced a hassle free use of our system. This can be traced to various implementations across the website that all had one goal in mind, homogeneity. This is seen in the colors, font faces, shapes, and other aspects.
+
+Error Prevention
+From the results, we can see that various participants had mixed experiences and perspectives on the site’s ability to prevent unexpected outcomes from happening or being sustained.  This means that the site did not adequately prevent problems from occurring in the first place nor did it warn the user about them. One of the main concerns raised that the team will work on is to give users the ability to edit the data that they entered into the tracker table.
+
+Recognition Rather than Recall
+Based on the result outcome, participants had mixed feelings and experiences using the website. This means that some had to recall from memory how the site works while others did not. One of the reasons this is the case is the working process on the sharing page to do with the plotting of the line graph. The team will work to make this more intuitive.
+
+Flexibility and Efficiency of Use
+Indicated in the results, the participants had mixed experiences and perspectives to offer on the liberty they had to execute the tasks through multiple ways. This means that there were less ways than some expected to go about a task in a faster manner. This indicates that frequent actions could become more tedious or frustrating for the daily user. The reason being that the website was designed specially for non tech savvy users. However, the team is working to offer users more flexibility in various sectors, especially to do with the tracker page functionality.
+
+Aesthetic and Minimalist Design
+It’s obvious from the result that the participants were blown away by the aesthetics of the website. They enjoyed their experience on the website and found it to contain only the relevant information just enough to successfully execute tasks required. The team will work to ensure that more features are not created at the expense of the design.
+
+Help Users Recognize, Diagnose, and Recover From Errors
+Although the team has placed some effort in this aspect, the results clearly indicate  that there is more to be done to recognize potential errors before they occur and alert the users before they confirm any action. Such changes are already on the team’s radar such as allowing users to change already entered tracking data.
+
+Help and Documentation
+From the results, the team can reasonably conclude that it would be best to provide documentation describing with utmost clarity how to accomplish some tasks and how different features work. This can be in different areas of the website such as the sharing of products, Tracking data, and even the change of access to data within an organization. This is necessary to provide users with a step by step process on how to realize their goals as they use the site.
