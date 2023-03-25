@@ -1,6 +1,6 @@
 // Importing React and relevant React hooks
 import React, { useState, useRef, useEffect } from "react";
-import dateFormat from 'dateformat';
+import dateFormat from "dateformat";
 // This imports the axios package to communicate with the REST API
 import axios from "axios";
 
@@ -83,9 +83,9 @@ function Tracker() {
 
     useEffect(() => {
       d3.select("#percentage-pie-chart").selectAll("svg").remove();
-      const width = 600;
+      const width = 650;
       const height = 400;
-      const margin = 40;
+      const margin = 50;
 
       const radius = Math.min(width, height) / 2 - margin;
 
@@ -184,9 +184,9 @@ function Tracker() {
   function CategoryPieChart({ data }) {
     useEffect(() => {
       d3.select("#category-pie-chart").selectAll("svg").remove();
-      const width = 600;
+      const width = 650;
       const height = 400;
-      const margin = 40;
+      const margin = 50;
 
       const radius = Math.min(width, height) / 2 - margin;
 
@@ -285,12 +285,36 @@ function Tracker() {
     );
     const data = await response.json();
 
+    let clientValue = data["percentClients__sum"].toFixed(2);
+    let compostValue = data["percentCompost__sum"].toFixed(2);
+    let feedValue = data["percentAFeed__sum"].toFixed(2);
+    let landFillValue = data["percentAFeed__sum"].toFixed(2);
+    let partnerNetworkValue = data["percentPartNet__sum"].toFixed(2);
+
+    let total =
+      parseFloat(clientValue) +
+      parseFloat(compostValue) +
+      parseFloat(feedValue) +
+      parseFloat(landFillValue) +
+      parseFloat(partnerNetworkValue);
+
+    let clientKey = `Clients: ${((clientValue * 100) / total).toFixed(1)} %`;
+    let compostKey = `Compost: ${((compostValue * 100) / total).toFixed(2)} %`;
+    let feedKey = `Feed: ${((feedValue * 100) / total).toFixed(2)} %`;
+    let landFillKey = `Landfill: ${((landFillValue * 100) / total).toFixed(
+      2
+    )} %`;
+    let partnerNetworkKey = `Partner Network: ${(
+      (partnerNetworkValue * 100) /
+      total
+    ).toFixed(2)} %`;
+
     const data2 = {
-      "Clients %": data["percentClients__sum"],
-      "Compost %": data["percentCompost__sum"],
-      "Feed %": data["percentAFeed__sum"],
-      "Landfill %": data["percentLandfill__sum"],
-      "Partner Network %": data["percentPartNet__sum"],
+      [clientKey]: clientValue,
+      [compostKey]: compostValue,
+      [feedKey]: feedValue,
+      [landFillKey]: landFillValue,
+      [partnerNetworkKey]: partnerNetworkValue,
     };
 
     return setPercentageData(data2);
@@ -306,7 +330,11 @@ function Tracker() {
 
     for (let i = 0; i < data.length; i++)
       for (let key in data[i]) {
-        data2[key] = data[i][key];
+        let value = data[i][key];
+        let newKey = `${key}: ${value}`;
+        if (value != null) {
+          data2[newKey] = value;
+        }
       }
 
     return setCategoryData(data2);
@@ -422,7 +450,7 @@ function Tracker() {
             <p>
               <strong>Welcome, {localStorage.getItem("firstname")}!</strong>
             </p>
-            <div className="card">
+            <div className={`card ${trackerCSS["tracker-card-div"]}`}>
               <div className="card-header">
                 <h3>Enter tracker data:</h3>
               </div>
@@ -856,7 +884,7 @@ function Tracker() {
 
             <br />
             <br />
-            <section id="section">
+            <section id="section" className={`${trackerCSS["database-table"]}`}>
               <div className="card">
                 <div className={`${trackerCSS["card-header"]} card-header`}>
                   <h3>Database</h3>
@@ -865,9 +893,14 @@ function Tracker() {
                     variant="outline-success"
                     className="btn btn-outline-success"
                     onClick={function () {
-                      exportTableToCSV(`tracker-data-${dateFormat(new Date(), "mmmm dS, yyyy, hh:mm")}.csv`);
+                      exportTableToCSV(
+                        `tracker-data-${dateFormat(
+                          new Date(),
+                          "mmmm dS, yyyy, hh:mm"
+                        )}.csv`
+                      );
                     }}
-                  // onClick={() => exportTableToCSV("data.csv")}
+                    // onClick={() => exportTableToCSV("data.csv")}
                   >
                     Export CSV
                   </Button>
@@ -909,7 +942,9 @@ function Tracker() {
                             <td>{userObj.percentCompost}</td>
                             <td>{userObj.percentPartNet}</td>
                             <td>{userObj.percentLandfill}</td>
-                            <td>{dateFormat(userObj.date_time, "mmmm dS, yyyy")}</td>
+                            <td>
+                              {dateFormat(userObj.date_time, "mmmm dS, yyyy")}
+                            </td>
                             <td>
                               <div>
                                 <Button
@@ -954,13 +989,11 @@ function Tracker() {
                                 >
                                   Delete
                                 </Button>
-                                <Button 
-                                variant="primary"
-                                className="btn btn-primary"
+                                <Button
+                                  variant="primary"
+                                  className="btn btn-primary"
                                 >
-                                 
-                                 Edit
-
+                                  Edit
                                 </Button>
                               </div>
                             </td>

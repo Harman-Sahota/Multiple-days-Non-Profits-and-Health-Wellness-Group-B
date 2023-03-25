@@ -5,7 +5,6 @@
   margin-top: -2%;
 }
 
-
 .save:hover {
   background-color: #415d34 !important;
   color: white !important;
@@ -59,6 +58,10 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
+.tracker-card-div {
+  width: 85rem;
+}
+
 .pie-chart-outer-div {
   /* height: 60rem; */
   /* display: block !important; */
@@ -66,12 +69,17 @@ input[type="number"] {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+  width: 85rem;
 }
 
 .pie-chart-inner-div {
   display: flex;
   flex-direction: row;
   justify-content: center;
+}
+
+.database-table {
+  width: 85rem;
 }
 
 .custom-table {
