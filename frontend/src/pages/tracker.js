@@ -269,14 +269,14 @@ function Tracker() {
   }
 
   const [editingRow, setEditingRow] = useState(null);
-  const [editable, setEditable] = useState(false);
+  const [editable, setEditable] = useState(0);
   async function handleEdit(id) {
-    setEditable(true);
+    setEditable(id);
     setEditingRow(id);
   }
 
   function defaultValue() {
-    setEditable(false);
+    setEditable(0);
     setEditingRow(null);
   }
 
@@ -943,7 +943,7 @@ function Tracker() {
                           <tr>
                             <td>
 
-                              {editable ? (
+                              {editingRow === userObj.id ? (
                                 <select
                                   className="form-select"
                                   id="category"
@@ -968,7 +968,7 @@ function Tracker() {
 
                             </td>
                             <td>
-                              {editable ? (
+                              {editingRow === userObj.id ? (
                                 <input
                                   type="text"
                                   id="description"
@@ -986,7 +986,7 @@ function Tracker() {
                                 userObj.Description)}
                             </td>
                             <td>
-                              {editable ? (
+                              {editingRow === userObj.id ? (
 
                                 <input
                                   type={`text`}
@@ -1011,7 +1011,7 @@ function Tracker() {
 
                             </td>
                             <td>
-                              {editable ? (
+                              {editingRow === userObj.id ? (
 
                                 <select
                                   className="form-select"
@@ -1036,7 +1036,7 @@ function Tracker() {
 
                             </td>
                             <td>
-                              {editable ? (
+                              {editingRow === userObj.id ? (
                                 <input
                                   type="number"
                                   step="any"
@@ -1055,7 +1055,7 @@ function Tracker() {
 
                               }</td>
                             <td>
-                              {editable ? (
+                              {editingRow === userObj.id ? (
                                 <input
                                   type="number"
                                   step="any"
@@ -1074,7 +1074,7 @@ function Tracker() {
                               ) : (userObj.amountToAFeed)
                               }</td>
                             <td>
-                              {editable ? (
+                              {editingRow === userObj.id ? (
                                 <input
                                   type="number"
                                   step="any"
@@ -1098,7 +1098,7 @@ function Tracker() {
 
                             </td>
                             <td>
-                              {editable ? (
+                              {editingRow === userObj.id ? (
 
                                 <input
                                   type="number"
@@ -1122,15 +1122,15 @@ function Tracker() {
 
                             </td>
                             <td>
-                              {editable ? (
+                              {editingRow === userObj.id ? (
 
                                 <input
                                   type="number"
                                   step="any"
                                   className={`form-control ${trackerCSS["customised-smaller-input"]}`}
-                                  id="landFill"
+
                                   placeholder={userObj.amountToLandfill}
-                                  name="landFill"
+
                                   min={0}
                                   onChange={(event) => {
                                     setTrackers({
