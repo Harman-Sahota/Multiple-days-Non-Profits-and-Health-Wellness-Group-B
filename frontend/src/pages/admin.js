@@ -114,20 +114,20 @@ function Admin() {
     Sponsors.metrics = Sponsors.metrics.toString();
     Experts.metrics = Experts.metrics.toString();
 
-    if (new Date().getTime() > localStorage.getItem('expiry')  && localStorage.roles){
+    if (new Date().getTime() > localStorage.getItem('expiry') && localStorage.roles) {
         const response = window.confirm("Your session has expired. Do you still want to be logged in?");
-      
-        if(response){
-          localStorage.removeItem('expiry');
-          const date = new Date().setHours(new Date().getHours()+1);
-          localStorage.setItem('expiry',date) 
+
+        if (response) {
+            localStorage.removeItem('expiry');
+            const date = new Date().setHours(new Date().getHours() + 1);
+            localStorage.setItem('expiry', date)
         }
-      }
+    }
 
 
 
     {
-        if (new Date().getTime() < localStorage.getItem('expiry')  && localStorage.roles) {
+        if (new Date().getTime() < localStorage.getItem('expiry') && localStorage.roles) {
 
 
             return (
@@ -241,7 +241,7 @@ function Admin() {
 
                                             />
                                             <label className="form-check-label" for="flexCheckDefault6">
-                                               Reclaimed
+                                                Reclaimed
                                             </label>
                                         </div>
                                     </div>
@@ -375,7 +375,7 @@ function Admin() {
 
                                             />
                                             <label className="form-check-label" for="flexCheckDefault6">
-                                               Reclaimed
+                                                Reclaimed
                                             </label>
                                         </div>
                                     </div>
@@ -515,7 +515,7 @@ function Admin() {
 
                                             />
                                             <label className="form-check-label" for="flexCheckDefault6">
-                                               Reclaimed
+                                                Reclaimed
                                             </label>
                                         </div>
                                     </div>
@@ -652,7 +652,7 @@ function Admin() {
 
                                             />
                                             <label className="form-check-label" for="flexCheckDefault6">
-                                               Reclaimed
+                                                Reclaimed
                                             </label>
                                         </div>
                                     </div>
@@ -798,7 +798,7 @@ function Admin() {
 
                                             />
                                             <label className="form-check-label" for="flexCheckDefault6">
-                                               Reclaimed
+                                                Reclaimed
                                             </label>
                                         </div>
                                     </div>
@@ -927,7 +927,7 @@ function Admin() {
 
                                             />
                                             <label className="form-check-label" for="flexCheckDefault6">
-                                               Reclaimed
+                                                Reclaimed
                                             </label>
                                         </div>
                                     </div>
@@ -1014,7 +1014,15 @@ function Admin() {
                                     }
                                 }
 
+
                             )
+
+                                .then((response) => {
+                                    if (response.status == 201) {
+                                        alert("form submitted successfully");
+                                    }
+                                })
+                                .catch((err) => console.warn(err));
                         }}
                     >Save</button>
 
@@ -1115,40 +1123,40 @@ function Admin() {
                                         <td>{userObj.FirstName}  {userObj.LastName} </td>
                                         <td>{userObj.Email}</td>
                                         <td id='roles'>{userObj.Roles}</td>
-                                        <td><Button className='btn btn-outline-success' variant='btn-outline-sucess' 
+                                        <td><Button className='btn btn-outline-success' variant='btn-outline-sucess'
 
-                                         onClick={async (e) => {
+                                            onClick={async (e) => {
 
-                                    axios.put(
-                                        `http://127.0.0.1:8000/api/adminUpdate/${userObj.id}`,
+                                                axios.put(
+                                                    `http://127.0.0.1:8000/api/adminUpdate/${userObj.id}`,
 
 
-                                        { "Approve": null },
-                                        {
-                                            headers: {
-                                                "Content-type": "application/json",
-                                            }
-                                        }
-                                    )
+                                                    { "Approve": null },
+                                                    {
+                                                        headers: {
+                                                            "Content-type": "application/json",
+                                                        }
+                                                    }
+                                                )
 
-                                    const response = await fetch("http://localhost:8000/api/adminPull/");
-                                    const data = await response.json();
-                                    setUser(data);
-                                    fetchData();
+                                                const response = await fetch("http://localhost:8000/api/adminPull/");
+                                                const data = await response.json();
+                                                setUser(data);
+                                                fetchData();
 
-                                    const response2 = await fetch("http://localhost:8000/api/adminPullApprove/");
-                                    const data2 = await response2.json();
-                                    setApprovedUser(data2);
-                                    fetchApprovedData();
+                                                const response2 = await fetch("http://localhost:8000/api/adminPullApprove/");
+                                                const data2 = await response2.json();
+                                                setApprovedUser(data2);
+                                                fetchApprovedData();
 
-                                    const response3 = await fetch("http://localhost:8000/api/adminPullDecline/");
-                                    const data3 = await response3.json();
-                                    setDeclinedUser(data3);
-                                    fetchDeclinedData();
-                                }}
-                                        
-                                        
-                                        
+                                                const response3 = await fetch("http://localhost:8000/api/adminPullDecline/");
+                                                const data3 = await response3.json();
+                                                setDeclinedUser(data3);
+                                                fetchDeclinedData();
+                                            }}
+
+
+
                                         > Revert </Button></td>
                                     </tr>
                                 ))}
@@ -1179,38 +1187,38 @@ function Admin() {
                                         <td>{userObj.FirstName}  {userObj.LastName} </td>
                                         <td>{userObj.Email}</td>
                                         <td id='roles'>{userObj.Roles}</td>
-                                        <td><Button className='btn btn-outline-success' variant='btn-outline-sucess' 
-                                        
-                                onClick={async (e) => {
+                                        <td><Button className='btn btn-outline-success' variant='btn-outline-sucess'
 
-                                    axios.put(
-                                        `http://127.0.0.1:8000/api/adminUpdate/${userObj.id}`,
+                                            onClick={async (e) => {
+
+                                                axios.put(
+                                                    `http://127.0.0.1:8000/api/adminUpdate/${userObj.id}`,
 
 
-                                        { "Approve": null },
-                                        {
-                                            headers: {
-                                                "Content-type": "application/json",
-                                            }
-                                        }
-                                    )
+                                                    { "Approve": null },
+                                                    {
+                                                        headers: {
+                                                            "Content-type": "application/json",
+                                                        }
+                                                    }
+                                                )
 
-                                    const response = await fetch("http://localhost:8000/api/adminPull/");
-                                    const data = await response.json();
-                                    setUser(data);
-                                    fetchData();
+                                                const response = await fetch("http://localhost:8000/api/adminPull/");
+                                                const data = await response.json();
+                                                setUser(data);
+                                                fetchData();
 
-                                    const response2 = await fetch("http://localhost:8000/api/adminPullApprove/");
-                                    const data2 = await response2.json();
-                                    setApprovedUser(data2);
-                                    fetchApprovedData();
+                                                const response2 = await fetch("http://localhost:8000/api/adminPullApprove/");
+                                                const data2 = await response2.json();
+                                                setApprovedUser(data2);
+                                                fetchApprovedData();
 
-                                    const response3 = await fetch("http://localhost:8000/api/adminPullDecline/");
-                                    const data3 = await response3.json();
-                                    setDeclinedUser(data3);
-                                    fetchDeclinedData();
-                                }}
-                                        
+                                                const response3 = await fetch("http://localhost:8000/api/adminPullDecline/");
+                                                const data3 = await response3.json();
+                                                setDeclinedUser(data3);
+                                                fetchDeclinedData();
+                                            }}
+
                                         > Revert </Button></td>
                                     </tr>
                                 ))}
@@ -1226,7 +1234,7 @@ function Admin() {
             );
         }
 
-        else if (new Date().getTime() > localStorage.getItem('expiry')  && !(localStorage.roles)) {
+        else if (new Date().getTime() > localStorage.getItem('expiry') && !(localStorage.roles)) {
 
             return (
                 <section>
@@ -1239,13 +1247,13 @@ function Admin() {
                             </h1>
                             <h3 className=" heading3 fadeIn">YOU MUST LOGIN TO VIEW THIS PAGE</h3>
                             <a href='/login'><Button type="button" class='btn btn-primary ' name="button"> Login</Button ></a >
-          </div >
-      </div >
-  </section >
-        );
+                        </div >
+                    </div >
+                </section >
+            );
 
+        }
     }
-}
 
 }
 

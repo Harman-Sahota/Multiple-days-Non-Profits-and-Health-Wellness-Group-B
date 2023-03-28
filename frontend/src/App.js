@@ -9,10 +9,8 @@ import Register from "./pages/register";
 import FAQ from "./pages/faq";
 import Directory from "./pages/directory";
 import PublicSharing from "./pages/publicSharing";
-
 import Profile from "./pages/profile";
 import SearchBar from "./pages/network";
-import Comment from "./pages/comment";
 import Tracker from "./pages/tracker";
 import Admin from "./pages/admin";
 
@@ -159,22 +157,6 @@ function App() {
               <>
                 <NavbarIn />
                 <SearchBar />
-                <Footer />
-              </>
-            }
-          />
-        </Routes>
-      </Router>
-
-      <Router>
-        <Routes>
-          <Route
-            exact
-            path="/comments"
-            element={
-              <>
-                <NavbarIn />
-                <Comment />
                 <Footer />
               </>
             }
