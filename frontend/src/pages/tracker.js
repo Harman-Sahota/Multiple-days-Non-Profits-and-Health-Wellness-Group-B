@@ -838,31 +838,31 @@ function Tracker() {
                                   {
                                     Category: trackers.Category,
                                     Description: trackers.Description,
-                                    Quantity: trackers.Quantity,
+                                    Quantity: parseFloat(trackers.Quantity),
                                     Qunits: trackers.Qunits,
-                                    amountToClients: trackers.amountToClients,
-                                    amountToAFeed: trackers.amountToAFeed,
-                                    amountToCompost: trackers.amountToCompost,
+                                    amountToClients: parseFloat(trackers.amountToClients),
+                                    amountToAFeed: parseFloat(trackers.amountToAFeed),
+                                    amountToCompost: parseFloat(trackers.amountToCompost),
                                     amountToPartNet:
-                                      trackers.amountToPartnerNetwork,
+                                      parseFloat(trackers.amountToPartnerNetwork),
                                     amountToLandfill:
-                                      document.getElementById("landFill").value,
+                                      parseFloat(document.getElementById("landFill").value),
                                     percentClients:
-                                      document.getElementById("percentClients")
-                                        .value,
+                                      parseFloat(document.getElementById("percentClients")
+                                        .value),
                                     percentAFeed:
-                                      document.getElementById(
+                                      parseFloat(document.getElementById(
                                         "percentAnimalFeed"
-                                      ).value,
+                                      ).value),
                                     percentCompost:
-                                      document.getElementById("percentCompost")
-                                        .value,
-                                    percentPartNet: document.getElementById(
+                                      parseFloat(document.getElementById("percentCompost")
+                                        .value),
+                                    percentPartNet: parseFloat(document.getElementById(
                                       "percentPartnerNetwork"
-                                    ).value,
+                                    ).value),
                                     percentLandfill:
-                                      document.getElementById("percentLandFill")
-                                        .value,
+                                      parseFloat(document.getElementById("percentLandFill")
+                                        .value),
                                     Email: localStorage.getItem("email"),
                                     Organization:
                                       localStorage.getItem("organization"),
@@ -1228,6 +1228,7 @@ function Tracker() {
                                         .catch((err) => console.warn(err));
 
                                     }} >Save</button>
+                                    <br />
                                     <button variant="danger" className="btn btn-danger" onClick={() => defaultValue()}>Cancel</button>
                                   </>
                                 ) : (
