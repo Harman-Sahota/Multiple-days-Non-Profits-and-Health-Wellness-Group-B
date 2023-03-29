@@ -13,16 +13,16 @@ urlpatterns = [
     path("login/", views.Login.as_view(), name='login'),
     path("networkInsert/", views.networkInsert),
     path("networkPull/", views.networkPull),
-    path("networkUpdate/<pk>",views.networkUpdate),
+    path("networkUpdate/<pk>", views.networkUpdate),
     path("networkPullSharing/", views.networkPullSharing),
     path("networkPullReceiving/", views.networkPullReceiving),
     path("networkSearch/", views.networkSearch),
-    path("networkPullCreator/", views.networkPullCreator), 
+    path("networkPullCreator/", views.networkPullCreator),
     path("profileUpdate/<pk>", views.profileUpdate),
     path("profilePull/", views.profilePull),
     path('trackerInsert/', views.trackerInsert),
     path('trackerPull/', views.trackerPull),
-    path('trackerUpdate/', views.trackerUpdate),
+    path('trackerUpdate/<pk>', views.trackerUpdate),
     path('postsPullShared/', views.postsPullShared),
     path('postsPullName/', views.postsPullName),
     path('trackerPercentageSum/', views.trackerPercentageSum),
@@ -33,8 +33,8 @@ urlpatterns = [
     path('Past_Week/', views.Past_Week),
     path('Past_Month/', views.Past_Month),
     path('Past_6Months/', views.Past_6Months),
-    path('resetPassword/',views.resetPassword),
-    path('trackerDelete/',views.trackerDelete)
+    path('resetPassword/', views.resetPassword),
+    path('trackerDelete/<pk>', views.trackerDelete)
     # path('token/', jwt_views.TokenObtainPairView.as_view(),name='token_obtain_pair'),
     # path('token/refresh/',  jwt_views.TokenRefreshView.as_view(),name='token_refresh')
 

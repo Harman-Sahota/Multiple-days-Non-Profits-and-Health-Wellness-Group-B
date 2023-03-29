@@ -50,6 +50,17 @@ function Tracker() {
     Email: "",
     Organization: "",
   });
+  const [trackers_edit, setEditTrackers] = useState({
+    Category: "Fresh Produce",
+    Description: "",
+    Quantity: "",
+    Qunits: "lb",
+    amountToClients: "",
+    amountToAFeed: "",
+    amountToCompost: "",
+    amountToPartnerNetwork: "",
+    amountToLandfill: "",
+  });
 
   const quantity = useRef();
   const clients = useRef();
@@ -266,6 +277,22 @@ function Tracker() {
         d3.select("#category-pie-chart").selectAll("svg").remove();
       };
     }, [data]);
+  }
+
+  function calculateLandFillEdit() {
+    if (document.getElementById('quantity-edit')) {
+      var total = parseFloat(document.getElementById('quantity-edit').value);
+      total = total ? total : 0;
+      var num1 = parseFloat(document.getElementById('clients-edit').value);
+      num1 = num1 ? num1 : 0.0;
+      var num2 = parseFloat(document.getElementById('animalFeed-edit').value);
+      num2 = num2 ? num2 : 0.0;
+      var num3 = parseFloat(document.getElementById('compost-edit').value);
+      num3 = num3 ? num3 : 0;
+      var num4 = parseFloat(document.getElementById('partnerNetwork-edit').value);
+      num4 = num4 ? num4 : 0;
+      return (total - (num1 + num2 + num3 + num4));
+    }
   }
 
   const [editingRow, setEditingRow] = useState(null);
@@ -624,8 +651,6 @@ function Tracker() {
                                 ref={partnerNetwork}
                                 min={0}
                                 onKeyUp={calculateLandFillAndPercentsWrapper}
-                                // onKeyUp={() => {calculateLandfill(); calculatePercent()}}
-                                // onkeyup="calculateLandfill(); calculatePercent()"
                                 onChange={(event) => {
                                   setTrackers({
                                     ...trackers,
@@ -949,8 +974,8 @@ function Tracker() {
                                   id="category"
                                   name="category"
                                   onChange={(event) => {
-                                    setTrackers({
-                                      ...trackers,
+                                    setEditTrackers({
+                                      ...trackers_edit,
                                       Category: event.target.value,
                                     });
                                   }}
@@ -971,13 +996,13 @@ function Tracker() {
                               {editingRow === userObj.id ? (
                                 <input
                                   type="text"
-                                  id="description"
+                                  id="description-edit"
                                   className={`form-control input-text ${trackerCSS["customised-input"]}`}
                                   placeholder={userObj.Description}
-                                  name="description"
+                                  name="description-edit"
                                   onChange={(event) => {
-                                    setTrackers({
-                                      ...trackers,
+                                    setEditTrackers({
+                                      ...trackers_edit,
                                       Description: event.target.value,
                                     });
                                   }}
@@ -990,17 +1015,19 @@ function Tracker() {
 
                                 <input
                                   type={`text`}
-                                  id="quantity"
+                                  id="quantity-edit"
                                   className={`form-control input-text ${trackerCSS["customised-smaller-input"]}`}
                                   placeholder={userObj.Quantity}
-                                  name="quantity"
+                                  name="quantity-edit"
                                   ref={quantity}
                                   onKeyUp={calculateLandFillAndPercentsWrapper}
                                   onChange={(event) => {
-                                    setTrackers({
-                                      ...trackers,
+                                    setEditTrackers({
+                                      ...trackers_edit,
                                       Quantity: event.target.value,
+
                                     });
+                                    calculateLandFillEdit()
                                   }}
                                 />
 
@@ -1015,11 +1042,11 @@ function Tracker() {
 
                                 <select
                                   className="form-select"
-                                  id="qunits"
-                                  name="qunits"
+                                  id="qunits-edit"
+                                  name="qunits-edit"
                                   onChange={(event) => {
-                                    setTrackers({
-                                      ...trackers,
+                                    setEditTrackers({
+                                      ...trackers_edit,
                                       Qunits: event.target.value,
                                     });
                                   }}
@@ -1041,15 +1068,17 @@ function Tracker() {
                                   type="number"
                                   step="any"
                                   className={`form-control ${trackerCSS["customised-smaller-input"]}`}
-                                  id="clients"
-                                  name="clients"
+                                  id="clients-edit"
+                                  name="clients-edit"
                                   placeholder={userObj.amountToClients}
                                   min={0}
                                   onChange={(event) => {
-                                    setTrackers({
-                                      ...trackers,
+                                    setEditTrackers({
+                                      ...trackers_edit,
                                       amountToClients: event.target.value,
+
                                     });
+                                    calculateLandFillEdit()
                                   }}
                                 />) : (userObj.amountToClients)
 
@@ -1060,15 +1089,17 @@ function Tracker() {
                                   type="number"
                                   step="any"
                                   className={`form-control ${trackerCSS["customised-smaller-input"]}`}
-                                  id="animalFeed"
-                                  name="animalFeed"
+                                  id="animalFeed-edit"
+                                  name="animalFeed-edit"
                                   placeholder={userObj.amountToAFeed}
                                   min={0}
                                   onChange={(event) => {
-                                    setTrackers({
-                                      ...trackers,
+                                    setEditTrackers({
+                                      ...trackers_edit,
                                       amountToAFeed: event.target.value,
+
                                     });
+                                    calculateLandFillEdit()
                                   }}
                                 />
                               ) : (userObj.amountToAFeed)
@@ -1079,15 +1110,17 @@ function Tracker() {
                                   type="number"
                                   step="any"
                                   className={`form-control ${trackerCSS["customised-smaller-input"]}`}
-                                  id="compost"
-                                  name="compost"
+                                  id="compost-edit"
+                                  name="compost-edit"
                                   placeholder={userObj.amountToCompost}
                                   min={0}
                                   onChange={(event) => {
-                                    setTrackers({
-                                      ...trackers,
+                                    setEditTrackers({
+                                      ...trackers_edit,
                                       amountToCompost: event.target.value,
+
                                     });
+                                    calculateLandFillEdit()
                                   }}
                                 />
 
@@ -1104,15 +1137,17 @@ function Tracker() {
                                   type="number"
                                   step="any"
                                   className={`form-control ${trackerCSS["customised-smaller-input"]}`}
-                                  id="partnerNetwork"
-                                  name="partnerNetwork"
+                                  id="partnerNetwork-edit"
+                                  name="partnerNetwork-edit"
                                   placeholder={userObj.amountToPartNet}
                                   min={0}
                                   onChange={(event) => {
-                                    setTrackers({
-                                      ...trackers,
+                                    setEditTrackers({
+                                      ...trackers_edit,
                                       amountToPartnerNetwork: event.target.value,
+
                                     });
+                                    calculateLandFillEdit()
                                   }}
                                 />
 
@@ -1127,17 +1162,12 @@ function Tracker() {
                                 <input
                                   type="number"
                                   step="any"
+                                  id="landfill_edit"
                                   className={`form-control ${trackerCSS["customised-smaller-input"]}`}
-
-                                  placeholder={userObj.amountToLandfill}
-
+                                  placeholder={calculateLandFillEdit()}
+                                  value={calculateLandFillEdit()}
                                   min={0}
-                                  onChange={(event) => {
-                                    setTrackers({
-                                      ...trackers,
-                                      amountToLandfill: event.target.value,
-                                    });
-                                  }}
+                                  readonly
                                 />
 
                               ) : (
@@ -1155,8 +1185,49 @@ function Tracker() {
 
                                 {editingRow === userObj.id ? (
                                   <>
-                                    {/* onClick={() => handleSave(index, userObj)} */}
-                                    <button variant="success" className="btn btn-success"  >Save</button>
+                                    <button variant="success" className="btn btn-success" onClick={() => {
+
+                                      console.log('clicked');
+
+                                      axios
+                                        .put(
+                                          `http://localhost:8000/api/trackerUpdate/${userObj.id}`,
+                                          {
+                                            Category: trackers_edit.Category,
+                                            Description: trackers_edit.Description,
+                                            Quantity: trackers_edit.Quantity,
+                                            Qunits: trackers_edit.Qunits,
+                                            amountToClients: trackers_edit.amountToClients,
+                                            amountToAFeed: trackers_edit.amountToAFeed,
+                                            amountToCompost: trackers_edit.amountToClients,
+                                            amountToPartNet: trackers_edit.amountToPartnerNetwork,
+                                            amountToLandfill: parseFloat(document.getElementById('landfill_edit').value),
+                                            percentClients: parseFloat((trackers_edit.amountToClients / trackers_edit.Quantity) * 100),
+                                            percentAFeed: parseFloat((trackers_edit.amountToAFeed / trackers_edit.Quantity) * 100),
+                                            percentCompost: parseFloat((trackers_edit.amountToCompost / trackers_edit.Quantity) * 100),
+                                            percentPartNet: parseFloat((trackers_edit.amountToPartnerNetwork / trackers_edit.Quantity) * 100),
+                                            percentLandfill: parseFloat((document.getElementById('landfill_edit').value / trackers_edit.Quantity) * 100),
+                                            Email: userObj.Email,
+                                            Organization: userObj.Organization
+                                          },
+                                          {
+                                            headers: {
+                                              "Content-type": "application/json",
+                                            },
+                                          }
+                                        )
+                                        .then((response) => {
+                                          if (response.status == 201) {
+                                            setIsSubmitted(true);
+                                            fetchData();
+                                            fetchPercentageChartData();
+                                            fetchCategoryChartData();
+                                            defaultValue();
+                                          }
+                                        })
+                                        .catch((err) => console.warn(err));
+
+                                    }} >Save</button>
                                     <button variant="danger" className="btn btn-danger" onClick={() => defaultValue()}>Cancel</button>
                                   </>
                                 ) : (
@@ -1166,18 +1237,10 @@ function Tracker() {
                                     name="field"
                                     onClick={(e) => {
                                       axios
-                                        .post(
-                                          `http://localhost:8000/api/trackerDelete/`,
+                                        .put(
+                                          `http://localhost:8000/api/trackerDelete/${userObj.id}`,
                                           {
-                                            Category: userObj.Category,
-                                            Description: userObj.Description,
-                                            Quantity: userObj.Quantity,
-                                            percentClients: userObj.percentClients,
-                                            percentAFeed: userObj.percentAFeed,
-                                            percentCompost: userObj.percentCompost,
-                                            percentPartNet: userObj.percentPartNet,
-                                            percentLandfill: userObj.percentLandfill,
-                                            date_time: userObj.date_time,
+
                                           },
                                           {
                                             headers: {
