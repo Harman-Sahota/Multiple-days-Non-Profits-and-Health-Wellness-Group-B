@@ -1,11 +1,10 @@
-
 name: Test
 
 on:
   pull_request:
     branches:
-      - develop
       - code
+      - develop
 
 jobs:
   backend:
