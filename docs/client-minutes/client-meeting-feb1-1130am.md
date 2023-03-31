@@ -29,4 +29,4 @@
 
 ## Summary
 
-- Update the interface by prioritizing the category, reducing the description space if necessary, and ensuring boxes are properly aligned. Allow for decimal inputs and expand the 'Diverted to %' field to accommodate 4-6 decimal places.
+- Update the interface by prioritizing the category, reducing the description space if necessary, and ensuring boxes are properly aligned. Allow for decimal inputs and expand the 'Diverted to %' field to accommodate 4-6 decimal places. Additionally, provide users with the option to select their desired precision for the 'Diverted to %' field.
