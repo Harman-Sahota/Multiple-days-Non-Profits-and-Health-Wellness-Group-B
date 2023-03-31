@@ -26,3 +26,7 @@
   - With those in same organization
   - According to those in a certain role
   - Increase on the categories of foods in terms of produce, meats
+
+## Summary
+
+- Update the interface by prioritizing the category, reducing the description space if necessary, and ensuring boxes are properly aligned. Allow for decimal inputs and expand the 'Diverted to %' field to accommodate 4-6 decimal places.
