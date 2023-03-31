@@ -1,6 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import startedCSS from './faq.module.css';
 import Button from 'react-bootstrap/Button';
+import React, { Component } from 'react';
 
 function FAQ() {
    return (

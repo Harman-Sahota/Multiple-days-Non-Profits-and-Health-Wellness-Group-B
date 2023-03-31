@@ -13,6 +13,7 @@ import Profile from "./pages/profile";
 import SearchBar from "./pages/network";
 import Tracker from "./pages/tracker";
 import Admin from "./pages/admin";
+import React, { Component } from 'react';
 
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -186,15 +187,15 @@ function App() {
             exact
             path="/admin"
             element={
-             
-          
-                <>
+
+
+              <>
                 <NavbarIn />
                 <Admin />
                 <Footer />
-                </>
-     
-            
+              </>
+
+
             }
           />
         </Routes>

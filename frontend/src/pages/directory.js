@@ -1,6 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import directoryCSS from './directory.module.css';
 import Button from 'react-bootstrap/Button';
+import React, { Component } from 'react';
+
 
 function Directory() {
     return (
@@ -11,7 +13,7 @@ function Directory() {
                     <div className='card-body'>
                         <h4 className='card-title'>Directory</h4>
 
-                        
+
                     </div>
                 </div>
             </div>
