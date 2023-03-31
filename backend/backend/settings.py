@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from datetime import timedelta
 from pathlib import Path
-import pymysql  
+import pymysql
 import os
 
 pymysql.install_as_MySQLdb()
@@ -30,7 +30,7 @@ SECRET_KEY = "django-insecure-23iat%)rzmm1_*+1!2@-2p*#-a9n(67(ky-=%72!3=r@c6u13r
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS=['*']
+ALLOWED_HOSTS = ['*']
 
 CORS_ORIGIN_ALLOW_ALL = True
 
@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-     'corsheaders',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -62,7 +62,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
 ]
 
-ROOT_URLCONF = "backend.urls" 
+ROOT_URLCONF = "backend.urls"
 
 TEMPLATES = [
     {
@@ -88,15 +88,15 @@ WSGI_APPLICATION = "backend.wsgi.application"
 
 
 DATABASES = {
-     "default": {
-         "ENGINE": "django.db.backends.mysql",
-         "NAME": "foodsaviour",
-         "HOST": "localhost",
-         "USER": "admin",
-         "PASSWORD": "groupb@2022!",
-         "PORT": "3306"
-     }
- }
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "foodsaviour",
+        "HOST": "localhost",
+        "USER": "admin",
+        "PASSWORD": "groupb@2022!",
+        "PORT": "3306"
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -139,7 +139,7 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend'] 
+AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend']
 
 # AUTH_USER_MODEL = 'api.users'
 # REST_FRAMEWORK = {
@@ -150,3 +150,11 @@ AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend']
 
 TIME_ZONE = 'US/Pacific'
 USE_TZ = False
+
+# SMTP email settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'foosaviourreset@gmail.com'
+EMAIL_HOST_PASSWORD = 'rmysxyunflmwyjyh'

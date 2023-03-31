@@ -10,9 +10,7 @@ import Confetti from 'react-confetti';
 function ResetPassword() {
 
     const [formData, setFormData] = useState({
-
         Email: "",
-        Password: "",
 
     });
     const [isSubmitted, setIsSubmitted] = useState(false);
@@ -23,83 +21,77 @@ function ResetPassword() {
             <section>
                 <div className={resetCSS.body}>
                     <div className={resetCSS.form_container}>
-                    {isSubmitted ? (
+                        {isSubmitted ? (
                             <div className={resetCSS.success_container}>
                                 <Confetti
                                     numberOfPieces={200}
                                     recycle={false}
                                     colors={['#ff0000', '#00ff00', '#0000ff']}
                                 />
-                                <h1 className={resetCSS.success_title}>Password reset successful!</h1><br/>
-                                <a href="/login"><Button className='btn btn-success'>Login</Button></a>
+                                <h1 className={resetCSS.success_title}>We have sent you an email with the link to reset your password!</h1><br />
+                                <a href="/"><Button className='btn btn-success'>Home</Button></a>
                             </div>
                         ) : (
-                        <div className={`form mx-auto bg-white ${resetCSS.form}`}>
-                            <h5 className={`form-title ${resetCSS.form_title}`}>Reset Password</h5>
-                            <div>
-                                <span>
-                                    <p className={`form-title-text mb-0`}>
-                                        If the details entered ascribe to an account, your password will be
-                                        reset.
-                                    </p>
-                                </span>
-                            </div>
+                            <div className={`form mx-auto bg-white ${resetCSS.form}`}>
+                                <h5 className={`form-title ${resetCSS.form_title}`}>Reset Password</h5>
+                                <div>
+                                    <span>
+                                        <p className={`form-title-text mb-0`}>
+                                            If the details entered ascribe to an account, your password will be
+                                            reset.
+                                        </p>
+                                    </span>
+                                </div>
 
-                            <div className={`form-floating email-form ${resetCSS.email_form}`}>
-                                <Form.Control type="email" id="exampleInputEmail1" className="form-control input-text" placeholder="jordan@gmail.com" name="email" onChange={(event) =>
-                                    setFormData({ ...formData, Email: event.target.value })
-                                } />
-                                <Form.Label for="exampleInputEmail1" className="form-label input-text">Email:</Form.Label>
-                            </div>
-                            <div className={`form-floating password-form ${resetCSS.email_form}`}>
-                                <Form.Control type="password" id="exampleInputPassword" className="form-control input-text" placeholder="abc" name="password" onChange={(event) =>
-                                    setFormData({ ...formData, Password: event.target.value })
-                                } />
-                                <Form.Label for="exampleInput1" className="form-label input-text">Password:</Form.Label>
-                            </div>
+                                <div className={`form-floating email-form ${resetCSS.email_form}`}>
+                                    <Form.Control type="email" id="exampleInputEmail1" className="form-control input-text" placeholder="jordan@gmail.com" name="email" onChange={(event) =>
+                                        setFormData({ ...formData, Email: event.target.value })
+                                    } />
+                                    <Form.Label for="exampleInputEmail1" className="form-label input-text">Email:</Form.Label>
+                                </div>
 
-                            <Button classname={`resetPassword btn btn-outline-danger reset-button ${resetCSS.reset_button}`} variant="outline-danger" onClick={(e) => {
 
-                                if (document.getElementById('exampleInputEmail1').value == "" || document.getElementById('exampleInputPassword').value == "") {
+                                <Button classname={`resetPassword btn btn-outline-danger reset-button ${resetCSS.reset_button}`} variant="outline-danger" onClick={(e) => {
 
-                                    e.preventDefault();
-                                    window.alert('fields cannot be blank');
+                                    if (document.getElementById('exampleInputEmail1').value == "") {
 
-                                    document.getElementById('exampleInputEmail1').classList.add('error');
-                                    document.getElementById('exampleInputPassword').classList.add('error');
+                                        e.preventDefault();
+                                        window.alert('fields cannot be blank');
 
-                                } else {
-                                    document.getElementById('exampleInputEmail1').classList.add('success');
-                                    document.getElementById('exampleInputPassword').classList.add('success');
-                                    var Email = formData.Email;
-                                    axios.post(
-                                        `http://localhost:8000/api/resetPassword/`,
-                                        {
-                                            Email: Email,
-                                            Password: formData.Password
-                                        },
-                                        {
-                                            headers: {
-                                                "Content-type": "application/json",
+                                        document.getElementById('exampleInputEmail1').classList.add('error');
+
+
+                                    } else {
+                                        document.getElementById('exampleInputEmail1').classList.add('success');
+
+                                        var Email = formData.Email;
+                                        axios.post(
+                                            `http://localhost:8000/api/resetPassword/`,
+                                            {
+                                                Email: Email
                                             },
-                                        }
-                                    )
-                                        .then((response) => {
-                                            if (response.status == 200) {
-                                               
-                                                setIsSubmitted(true);
+                                            {
+                                                headers: {
+                                                    "Content-type": "application/json",
+                                                },
                                             }
-                                        })
-                                        .catch((err) => console.warn(err));
+                                        )
+                                            .then((response) => {
+                                                if (response.status == 200) {
+
+                                                    setIsSubmitted(true);
+                                                }
+                                            })
+                                            .catch((err) => console.warn(err));
 
 
 
-                                }
+                                    }
 
 
 
-                            }}>Reset</Button>
-                        </div>
+                                }}>Reset</Button>
+                            </div>
                         )}
                     </div>
                 </div>
