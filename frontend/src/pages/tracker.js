@@ -1019,7 +1019,6 @@ function Tracker() {
                                   className={`form-control input-text ${trackerCSS["customised-smaller-input"]}`}
                                   placeholder={userObj.Quantity}
                                   name="quantity-edit"
-                                  ref={quantity}
                                   onKeyUp={calculateLandFillAndPercentsWrapper}
                                   onChange={(event) => {
                                     setEditTrackers({
@@ -1187,8 +1186,6 @@ function Tracker() {
                                   <>
                                     <button variant="success" className="btn btn-success" onClick={() => {
 
-                                      console.log('clicked');
-
                                       axios
                                         .put(
                                           `http://localhost:8000/api/trackerUpdate/${userObj.id}`,
@@ -1229,7 +1226,15 @@ function Tracker() {
 
                                     }} >Save</button>
                                     <br />
-                                    <button variant="danger" className="btn btn-danger" onClick={() => defaultValue()}>Cancel</button>
+                                    <button variant="danger" className="btn btn-danger" onClick={() => {
+                                      defaultValue();
+                                      fetchData();
+                                      fetchPercentageChartData();
+                                      fetchCategoryChartData();
+                                      defaultValue()
+
+
+                                    }}>Cancel</button>
                                   </>
                                 ) : (
                                   <><Button variant="primary" className="btn btn-primary" onClick={() => handleEdit(userObj.id)}>Edit</Button><Button
