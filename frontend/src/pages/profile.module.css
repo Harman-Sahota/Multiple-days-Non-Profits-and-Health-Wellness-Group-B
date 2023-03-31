@@ -25,3 +25,11 @@
 .withdraw_btn {
     width: fit-content;
 }
+
+input {
+    border-radius: 5px;
+}
+
+input::placeholder {
+    padding: 10px;
+}
