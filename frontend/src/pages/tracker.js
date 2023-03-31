@@ -25,8 +25,11 @@ import Table from "react-bootstrap/Table";
 
 // This package will add the celebration effect on tracker page
 import Confetti from "react-confetti";
+import { select } from "d3";
+
 
 function Tracker() {
+
   const [getData, setData] = useState([]);
   const [getPercentageData, setPercentageData] = useState([]);
   const [getCategoryData, setCategoryData] = useState([]);
@@ -48,6 +51,17 @@ function Tracker() {
     amountToPartnerNetwork: "",
     Email: "",
     Organization: "",
+  });
+  const [trackers_edit, setEditTrackers] = useState({
+    Category: "Fresh Produce",
+    Description: "",
+    Quantity: "",
+    Qunits: "lb",
+    amountToClients: "",
+    amountToAFeed: "",
+    amountToCompost: "",
+    amountToPartnerNetwork: "",
+    amountToLandfill: "",
   });
 
   const quantity = useRef();
@@ -173,12 +187,6 @@ function Tracker() {
         d3.select("#percentage-pie-chart").selectAll("svg").remove();
       };
     }, [data]);
-
-    // return (
-    //   <div style={{ width: "500px", height: "500px", border: "2px solid red" }}>
-    //     <div ref={ref}></div>
-    //   </div>
-    // );
   }
 
   function CategoryPieChart({ data }) {
@@ -271,6 +279,34 @@ function Tracker() {
         d3.select("#category-pie-chart").selectAll("svg").remove();
       };
     }, [data]);
+  }
+
+  function calculateLandFillEdit() {
+    if (document.getElementById('quantity-edit')) {
+      var total = parseFloat(document.getElementById('quantity-edit').value);
+      total = total ? total : 0;
+      var num1 = parseFloat(document.getElementById('clients-edit').value);
+      num1 = num1 ? num1 : 0.0;
+      var num2 = parseFloat(document.getElementById('animalFeed-edit').value);
+      num2 = num2 ? num2 : 0.0;
+      var num3 = parseFloat(document.getElementById('compost-edit').value);
+      num3 = num3 ? num3 : 0;
+      var num4 = parseFloat(document.getElementById('partnerNetwork-edit').value);
+      num4 = num4 ? num4 : 0;
+      return (total - (num1 + num2 + num3 + num4));
+    }
+  }
+
+  const [editingRow, setEditingRow] = useState(null);
+  const [editable, setEditable] = useState(0);
+  async function handleEdit(id) {
+    setEditable(id);
+    setEditingRow(id);
+  }
+
+  function defaultValue() {
+    setEditable(0);
+    setEditingRow(null);
   }
 
   async function fetchData() {
@@ -617,8 +653,6 @@ function Tracker() {
                                 ref={partnerNetwork}
                                 min={0}
                                 onKeyUp={calculateLandFillAndPercentsWrapper}
-                                // onKeyUp={() => {calculateLandfill(); calculatePercent()}}
-                                // onkeyup="calculateLandfill(); calculatePercent()"
                                 onChange={(event) => {
                                   setTrackers({
                                     ...trackers,
@@ -638,6 +672,7 @@ function Tracker() {
                                 name="landFill"
                                 ref={landFill}
                                 min={0}
+                                readonly="readonly"
                                 onChange={(event) => {
                                   setTrackers({
                                     ...trackers,
@@ -676,7 +711,7 @@ function Tracker() {
                                 }}
                                 // onLoad={() => calculateLandfillPercent()}
                                 // onload="calculateLandfillPercent()"
-                                readonly
+                                readonly="readonly"
                               />
                             </div>
                             <div className="col d-flex align-items-center">
@@ -704,7 +739,7 @@ function Tracker() {
                                 }}
                                 // onLoad={() => calculateLandfillPercent()}
                                 // onload="calculateLandfillPercent()"
-                                readonly
+                                readonly="readonly"
                               />
                             </div>
                             <div className="col d-flex align-items-center">
@@ -732,7 +767,7 @@ function Tracker() {
                                 }}
                                 // onLoad={() => calculateLandfillPercent()}
                                 // onload="calculateLandfillPercent()"
-                                readonly
+                                readonly="readonly"
                               />
                             </div>
                             <div className="col d-flex align-items-center">
@@ -760,7 +795,7 @@ function Tracker() {
                                 }}
                                 // onLoad={() => calculateLandfillPercent()}
                                 // onLoad="calculateLandfillPercent()"
-                                readonly
+                                readonly="readonly"
                               />
                             </div>
                             <div className="col d-flex align-items-center">
@@ -783,7 +818,8 @@ function Tracker() {
                                     percentLandfill: event.target.value,
                                   });
                                 }}
-                                readonly
+                                readonly="readonly"
+
                               />
                             </div>
                             <div className="col d-flex align-items-center">
@@ -806,31 +842,31 @@ function Tracker() {
                                   {
                                     Category: trackers.Category,
                                     Description: trackers.Description,
-                                    Quantity: trackers.Quantity,
+                                    Quantity: parseFloat(trackers.Quantity),
                                     Qunits: trackers.Qunits,
-                                    amountToClients: trackers.amountToClients,
-                                    amountToAFeed: trackers.amountToAFeed,
-                                    amountToCompost: trackers.amountToCompost,
+                                    amountToClients: parseFloat(trackers.amountToClients),
+                                    amountToAFeed: parseFloat(trackers.amountToAFeed),
+                                    amountToCompost: parseFloat(trackers.amountToCompost),
                                     amountToPartNet:
-                                      trackers.amountToPartnerNetwork,
+                                      parseFloat(trackers.amountToPartnerNetwork),
                                     amountToLandfill:
-                                      document.getElementById("landFill").value,
+                                      parseFloat(document.getElementById("landFill").value),
                                     percentClients:
-                                      document.getElementById("percentClients")
-                                        .value,
+                                      parseFloat(document.getElementById("percentClients")
+                                        .value),
                                     percentAFeed:
-                                      document.getElementById(
+                                      parseFloat(document.getElementById(
                                         "percentAnimalFeed"
-                                      ).value,
+                                      ).value),
                                     percentCompost:
-                                      document.getElementById("percentCompost")
-                                        .value,
-                                    percentPartNet: document.getElementById(
+                                      parseFloat(document.getElementById("percentCompost")
+                                        .value),
+                                    percentPartNet: parseFloat(document.getElementById(
                                       "percentPartnerNetwork"
-                                    ).value,
+                                    ).value),
                                     percentLandfill:
-                                      document.getElementById("percentLandFill")
-                                        .value,
+                                      parseFloat(document.getElementById("percentLandFill")
+                                        .value),
                                     Email: localStorage.getItem("email"),
                                     Organization:
                                       localStorage.getItem("organization"),
@@ -900,7 +936,7 @@ function Tracker() {
                         )}.csv`
                       );
                     }}
-                    // onClick={() => exportTableToCSV("data.csv")}
+                  // onClick={() => exportTableToCSV("data.csv")}
                   >
                     Export CSV
                   </Button>
@@ -911,6 +947,7 @@ function Tracker() {
                     bordered
                     hover
                     responsive
+                    id="data-table"
                     style={{ width: "100%" }}
                   >
                     <thead>
@@ -919,11 +956,11 @@ function Tracker() {
                         <th>Description</th>
                         <th>Quantity</th>
                         <th>Units</th>
-                        <th>% Clients</th>
-                        <th>% Animal Feed</th>
-                        <th>% Compost</th>
-                        <th>% Partner Network</th>
-                        <th>% Landfill</th>
+                        <th>Clients</th>
+                        <th>Animal Feed</th>
+                        <th>Compost</th>
+                        <th>Partner Network</th>
+                        <th>Landfill</th>
                         <th>Date</th>
                         <th></th>
                       </tr>
@@ -933,68 +970,310 @@ function Tracker() {
                         getData.length > 0 &&
                         getData.map((userObj) => (
                           <tr>
-                            <td>{userObj.Category}</td>
-                            <td>{userObj.Description}</td>
-                            <td>{userObj.Quantity}</td>
-                            <td>{userObj.Qunits}</td>
-                            <td>{userObj.percentClients}</td>
-                            <td>{userObj.percentAFeed}</td>
-                            <td>{userObj.percentCompost}</td>
-                            <td>{userObj.percentPartNet}</td>
-                            <td>{userObj.percentLandfill}</td>
+                            <td>
+
+                              {editingRow === userObj.id ? (
+                                <select
+                                  className={`form-control input-text ${trackerCSS["customised-smaller-input"]}`}
+                                  id="category"
+
+                                  name="category"
+                                  onChange={(event) => {
+                                    setEditTrackers({
+                                      ...trackers_edit,
+                                      Category: event.target.value,
+                                    });
+                                  }}
+                                >
+                                  <option>Fresh Produce</option>
+                                  <option>Meat</option>
+                                  <option>Canned Food</option>
+                                  <option>Bread</option>
+                                  <option>Dairy</option>
+                                  <option>Reclaimed</option>
+                                </select>
+                              ) : (
+                                userObj.Category
+                              )}
+
+                            </td>
+                            <td>
+                              {editingRow === userObj.id ? (
+                                <textarea
+                                  type="text"
+                                  id="description-edit"
+                                  className={`form-control input-text ${trackerCSS["customised-smaller-input"]}`}
+                                  placeholder={userObj.Description}
+                                  name="description-edit"
+                                  onChange={(event) => {
+                                    setEditTrackers({
+                                      ...trackers_edit,
+                                      Description: event.target.value,
+                                    });
+                                  }}
+                                />) : (
+
+                                userObj.Description)}
+                            </td>
+                            <td>
+                              {editingRow === userObj.id ? (
+
+                                <input
+                                  type={`text`}
+                                  id="quantity-edit"
+                                  className={`form-control input-text ${trackerCSS["customised-smaller-input"]}`}
+                                  placeholder={userObj.Quantity}
+                                  name="quantity-edit"
+                                  onKeyUp={calculateLandFillAndPercentsWrapper}
+                                  onChange={(event) => {
+                                    setEditTrackers({
+                                      ...trackers_edit,
+                                      Quantity: event.target.value,
+
+                                    });
+                                    calculateLandFillEdit()
+                                  }}
+                                />
+
+
+                              ) : (
+                                userObj.Quantity
+                              )}
+
+                            </td>
+                            <td>
+                              {editingRow === userObj.id ? (
+
+                                <select
+                                  className="form-select"
+                                  id="qunits-edit"
+                                  name="qunits-edit"
+                                  onChange={(event) => {
+                                    setEditTrackers({
+                                      ...trackers_edit,
+                                      Qunits: event.target.value,
+                                    });
+                                  }}
+                                >
+                                  <option selected>lbs</option>
+                                  <option>kgs</option>
+                                </select>
+
+                              ) : (
+                                userObj.Qunits
+                              )}
+
+
+
+                            </td>
+                            <td>
+                              {editingRow === userObj.id ? (
+                                <input
+                                  type="number"
+                                  step="any"
+                                  className={`form-control ${trackerCSS["customised-smaller-input"]}`}
+                                  id="clients-edit"
+                                  name="clients-edit"
+                                  placeholder={userObj.amountToClients}
+                                  min={0}
+                                  onChange={(event) => {
+                                    setEditTrackers({
+                                      ...trackers_edit,
+                                      amountToClients: event.target.value,
+
+                                    });
+                                    calculateLandFillEdit()
+                                  }}
+                                />) : (userObj.amountToClients)
+
+                              }</td>
+                            <td>
+                              {editingRow === userObj.id ? (
+                                <input
+                                  type="number"
+                                  step="any"
+                                  className={`form-control ${trackerCSS["customised-smaller-input"]}`}
+                                  id="animalFeed-edit"
+                                  name="animalFeed-edit"
+                                  placeholder={userObj.amountToAFeed}
+                                  min={0}
+                                  onChange={(event) => {
+                                    setEditTrackers({
+                                      ...trackers_edit,
+                                      amountToAFeed: event.target.value,
+
+                                    });
+                                    calculateLandFillEdit()
+                                  }}
+                                />
+                              ) : (userObj.amountToAFeed)
+                              }</td>
+                            <td>
+                              {editingRow === userObj.id ? (
+                                <input
+                                  type="number"
+                                  step="any"
+                                  className={`form-control ${trackerCSS["customised-smaller-input"]}`}
+                                  id="compost-edit"
+                                  name="compost-edit"
+                                  placeholder={userObj.amountToCompost}
+                                  min={0}
+                                  onChange={(event) => {
+                                    setEditTrackers({
+                                      ...trackers_edit,
+                                      amountToCompost: event.target.value,
+
+                                    });
+                                    calculateLandFillEdit()
+                                  }}
+                                />
+
+                              ) : (
+                                userObj.amountToCompost
+                              )}
+
+
+                            </td>
+                            <td>
+                              {editingRow === userObj.id ? (
+
+                                <input
+                                  type="number"
+                                  step="any"
+                                  className={`form-control ${trackerCSS["customised-smaller-input"]}`}
+                                  id="partnerNetwork-edit"
+                                  name="partnerNetwork-edit"
+                                  placeholder={userObj.amountToPartNet}
+                                  min={0}
+                                  onChange={(event) => {
+                                    setEditTrackers({
+                                      ...trackers_edit,
+                                      amountToPartnerNetwork: event.target.value,
+
+                                    });
+                                    calculateLandFillEdit()
+                                  }}
+                                />
+
+                              ) : (
+                                userObj.amountToPartNet
+                              )}
+
+                            </td>
+                            <td>
+                              {editingRow === userObj.id ? (
+
+                                <input
+                                  type="number"
+                                  step="any"
+                                  id="landfill_edit"
+                                  className={`form-control ${trackerCSS["customised-smaller-input"]}`}
+                                  placeholder={calculateLandFillEdit()}
+                                  value={calculateLandFillEdit()}
+                                  min={0}
+                                  readonly="readonly"
+
+                                />
+
+                              ) : (
+                                userObj.amountToLandfill
+                              )}
+
+
+
+                            </td>
                             <td>
                               {dateFormat(userObj.date_time, "mmmm dS, yyyy")}
                             </td>
                             <td>
                               <div>
-                                <Button
-                                  variant="danger"
-                                  className="btn btn-danger"
-                                  name="field"
-                                  onClick={(e) => {
-                                    axios
-                                      .post(
-                                        `http://localhost:8000/api/trackerDelete/`,
-                                        {
-                                          Category: userObj.Category,
-                                          Description: userObj.Description,
-                                          Quantity: userObj.Quantity,
-                                          percentClients:
-                                            userObj.percentClients,
-                                          percentAFeed: userObj.percentAFeed,
-                                          percentCompost:
-                                            userObj.percentCompost,
-                                          percentPartNet:
-                                            userObj.percentPartNet,
-                                          percentLandfill:
-                                            userObj.percentLandfill,
-                                          date_time: userObj.date_time,
-                                        },
-                                        {
-                                          headers: {
-                                            "Content-type": "application/json",
+
+                                {editingRow === userObj.id ? (
+                                  <>
+                                    <button variant="success" className="btn btn-success" onClick={() => {
+
+                                      axios
+                                        .put(
+                                          `http://localhost:8000/api/trackerUpdate/${userObj.id}`,
+                                          {
+                                            Category: trackers_edit.Category,
+                                            Description: trackers_edit.Description,
+                                            Quantity: trackers_edit.Quantity,
+                                            Qunits: trackers_edit.Qunits,
+                                            amountToClients: trackers_edit.amountToClients,
+                                            amountToAFeed: trackers_edit.amountToAFeed,
+                                            amountToCompost: trackers_edit.amountToClients,
+                                            amountToPartNet: trackers_edit.amountToPartnerNetwork,
+                                            amountToLandfill: parseFloat(document.getElementById('landfill_edit').value),
+                                            percentClients: parseFloat((trackers_edit.amountToClients / trackers_edit.Quantity) * 100),
+                                            percentAFeed: parseFloat((trackers_edit.amountToAFeed / trackers_edit.Quantity) * 100),
+                                            percentCompost: parseFloat((trackers_edit.amountToCompost / trackers_edit.Quantity) * 100),
+                                            percentPartNet: parseFloat((trackers_edit.amountToPartnerNetwork / trackers_edit.Quantity) * 100),
+                                            percentLandfill: parseFloat((document.getElementById('landfill_edit').value / trackers_edit.Quantity) * 100),
+                                            Email: userObj.Email,
+                                            Organization: userObj.Organization
                                           },
-                                        }
-                                      )
-                                      .then((response) => {
-                                        if (response.status == 200) {
-                                          setIsSubmitted(true);
-                                          fetchData();
-                                          fetchPercentageChartData();
-                                          fetchCategoryChartData();
-                                        }
-                                      })
-                                      .catch((err) => console.warn(err));
-                                  }}
-                                >
-                                  Delete
-                                </Button>
-                                <Button
-                                  variant="primary"
-                                  className="btn btn-primary"
-                                >
-                                  Edit
-                                </Button>
+                                          {
+                                            headers: {
+                                              "Content-type": "application/json",
+                                            },
+                                          }
+                                        )
+                                        .then((response) => {
+                                          if (response.status == 201) {
+                                            setIsSubmitted(true);
+                                            fetchData();
+                                            fetchPercentageChartData();
+                                            fetchCategoryChartData();
+                                            defaultValue();
+                                          }
+                                        })
+                                        .catch((err) => console.warn(err));
+
+                                    }} >Save</button>
+                                    <br />
+                                    <button variant="danger" className="btn btn-danger" onClick={() => {
+                                      defaultValue();
+                                      fetchData();
+                                      fetchPercentageChartData();
+                                      fetchCategoryChartData();
+                                      defaultValue()
+
+
+                                    }}>Cancel</button>
+                                  </>
+                                ) : (
+                                  <><Button variant="primary" className="btn btn-primary" onClick={() => handleEdit(userObj.id)}>Edit</Button><Button
+                                    variant="danger"
+                                    className="btn btn-danger"
+                                    name="field"
+                                    onClick={(e) => {
+                                      axios
+                                        .put(
+                                          `http://localhost:8000/api/trackerDelete/${userObj.id}`,
+                                          {
+
+                                          },
+                                          {
+                                            headers: {
+                                              "Content-type": "application/json",
+                                            },
+                                          }
+                                        )
+                                        .then((response) => {
+                                          if (response.status == 200) {
+                                            setIsSubmitted(true);
+                                            fetchData();
+                                            fetchPercentageChartData();
+                                            fetchCategoryChartData();
+                                          }
+                                        })
+                                        .catch((err) => console.warn(err));
+                                    }}
+                                  >
+                                    Delete
+                                  </Button></>
+                                )}
                               </div>
                             </td>
                           </tr>
@@ -1006,18 +1285,20 @@ function Tracker() {
             </section>
 
             <br />
-            {isSubmitted && (
-              <Confetti
-                width={window.innerWidth}
-                height={window.innerHeight}
-                recycle={false}
-                run={isRunning}
-                numberOfPieces={isRunning ? undefined : 0}
-                onConfettiComplete={onConfettiComplete}
-              />
-            )}
-          </div>
-        </div>
+            {
+              isSubmitted && (
+                <Confetti
+                  width={window.innerWidth}
+                  height={window.innerHeight}
+                  recycle={false}
+                  run={isRunning}
+                  numberOfPieces={isRunning ? undefined : 0}
+                  onConfettiComplete={onConfettiComplete}
+                />
+              )
+            }
+          </div >
+        </div >
       );
     } else if (
       new Date().getTime() > localStorage.getItem("expiry") &&

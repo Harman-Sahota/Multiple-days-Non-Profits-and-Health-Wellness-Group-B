@@ -49,23 +49,23 @@ function Profile() {
             document.getElementById('unconsented').checked = true;
         }
 
-        console.log(localStorage.getItem('roles')); 
+        console.log(localStorage.getItem('roles'));
     }
 
     var role_str = [];
     var prevroles = "";
-    if (new Date().getTime() > localStorage.getItem('expiry')  && localStorage.roles ){
+    if (new Date().getTime() > localStorage.getItem('expiry') && localStorage.roles) {
         const response = window.confirm("Your session has expired. Do you still want to be logged in?");
-      
-        if(response){
-          localStorage.removeItem('expiry');
-          const date = new Date().setHours(new Date().getHours()+1);
-          localStorage.setItem('expiry',date) 
-        }
-      }
 
-    if (new Date().getTime() < localStorage.getItem('expiry')  && localStorage.roles) {
-           return (
+        if (response) {
+            localStorage.removeItem('expiry');
+            const date = new Date().setHours(new Date().getHours() + 1);
+            localStorage.setItem('expiry', date)
+        }
+    }
+
+    if (new Date().getTime() < localStorage.getItem('expiry') && localStorage.roles) {
+        return (
             <section>
                 <div className="container p-4">
                     <div className="card">
@@ -162,7 +162,7 @@ function Profile() {
                                                 role_str.push(e.target.value);
                                             }
                                         }
-                                       
+
                                         }>
                                         <label for="manager_ceo" className='checkbox-inline'>
                                             <input type="checkbox" className='roles' id="manager_ceo" name="roles" value="user non-profit managers/CEO" disabled
@@ -170,15 +170,15 @@ function Profile() {
                                             User non-profit managers/CEO</label>
                                         <br />
                                         <label for="warehouse_boss">
-                                            <input type="checkbox"  className='roles' id="warehouse_boss" name="roles" value="user non-profit warehouse boss" disabled />
+                                            <input type="checkbox" className='roles' id="warehouse_boss" name="roles" value="user non-profit warehouse boss" disabled />
                                             User non-profit warehouse boss</label>
                                         <br />
                                         <label for="volunteer">
-                                            <input type="checkbox"  className='roles' id="volunteer" name="roles" value="user non-profit volunteer" disabled />
+                                            <input type="checkbox" className='roles' id="volunteer" name="roles" value="user non-profit volunteer" disabled />
                                             User non-profit volunteer</label>
                                         <br />
                                         <label for="sponsor" className='checkbox-inline'>
-                                            <input type="checkbox"  className='roles' id="sponsor" name="roles" value="sponsor" disabled />
+                                            <input type="checkbox" className='roles' id="sponsor" name="roles" value="sponsor" disabled />
                                             Sponsor</label>
                                         <br />
                                         <label for="admin">
@@ -204,7 +204,7 @@ function Profile() {
                                             document.getElementById('volunteer').checked = false;
                                             document.getElementById('sponsor').checked = false;
                                             document.getElementById('admin').checked = false;
-                                            document.getElementById('expert').checked= false;
+                                            document.getElementById('expert').checked = false;
                                         }}>
                                             Edit <FontAwesomeIcon icon={faPenToSquare} style={{ color: "#DC143C	" }} />
                                         </Button>
@@ -247,15 +247,15 @@ function Profile() {
 
                             <div className='row'>
                                 <Button className={`${profileCSS.save_btn} btn btn-outline-success`} id="saveBtn" variant="outline-sucess" onClick={() => {
-                                     
-                                    if(role_str != "" || role_str != null){
-                                       if(localStorage.getItem("roles")){
-                                        localStorage.setItem("roles",role_str.toString());
-                                       }else{
-                                        localStorage.setItem("roles",role_str.toString());
-                                       }
-                                   
-                                    }else{
+
+                                    if (role_str != "" || role_str != null) {
+                                        if (localStorage.getItem("roles")) {
+                                            localStorage.setItem("roles", role_str.toString());
+                                        } else {
+                                            localStorage.setItem("roles", role_str.toString());
+                                        }
+
+                                    } else {
                                         localStorage.roles.setItem(prevroles);
                                     }
 
@@ -286,17 +286,17 @@ function Profile() {
 
                                                     window.location.replace("http://localhost:3000");
                                                 }
-                                                 
-                                                if(role_str != "" || role_str != null){
-                                                    if(localStorage.getItem("roles")){
-                                                     localStorage.roles.setItem(role_str.toString());
-                                                    }else{
-                                                     localStorage.setItem("roles",role_str.toString());
+
+                                                if (role_str != "" || role_str != null) {
+                                                    if (localStorage.getItem("roles")) {
+                                                        localStorage.roles.setItem(role_str.toString());
+                                                    } else {
+                                                        localStorage.setItem("roles", role_str.toString());
                                                     }
-                                                
-                                                 }else{
-                                                     localStorage.roles.setItem(prevroles);
-                                                 }
+
+                                                } else {
+                                                    localStorage.roles.setItem(prevroles);
+                                                }
                                             }
                                         })
                                         .catch(err => console.warn(err));

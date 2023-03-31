@@ -9,12 +9,11 @@ import Register from "./pages/register";
 import FAQ from "./pages/faq";
 import Directory from "./pages/directory";
 import PublicSharing from "./pages/publicSharing";
-
 import Profile from "./pages/profile";
 import SearchBar from "./pages/network";
-import Comment from "./pages/comment";
 import Tracker from "./pages/tracker";
 import Admin from "./pages/admin";
+import React, { Component } from 'react';
 
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -170,22 +169,6 @@ function App() {
         <Routes>
           <Route
             exact
-            path="/comments"
-            element={
-              <>
-                <NavbarIn />
-                <Comment />
-                <Footer />
-              </>
-            }
-          />
-        </Routes>
-      </Router>
-
-      <Router>
-        <Routes>
-          <Route
-            exact
             path="/tracker"
             element={
               <>
@@ -204,15 +187,15 @@ function App() {
             exact
             path="/admin"
             element={
-             
-          
-                <>
+
+
+              <>
                 <NavbarIn />
                 <Admin />
                 <Footer />
-                </>
-     
-            
+              </>
+
+
             }
           />
         </Routes>
