@@ -974,8 +974,9 @@ function Tracker() {
 
                               {editingRow === userObj.id ? (
                                 <select
-                                  className="form-select"
+                                  className={`form-control input-text ${trackerCSS["customised-smaller-input"]}`}
                                   id="category"
+
                                   name="category"
                                   onChange={(event) => {
                                     setEditTrackers({
@@ -998,10 +999,10 @@ function Tracker() {
                             </td>
                             <td>
                               {editingRow === userObj.id ? (
-                                <input
+                                <textarea
                                   type="text"
                                   id="description-edit"
-                                  className={`form-control input-text ${trackerCSS["customised-input"]}`}
+                                  className={`form-control input-text ${trackerCSS["customised-smaller-input"]}`}
                                   placeholder={userObj.Description}
                                   name="description-edit"
                                   onChange={(event) => {
@@ -1171,6 +1172,7 @@ function Tracker() {
                                   value={calculateLandFillEdit()}
                                   min={0}
                                   readonly="readonly"
+
                                 />
 
                               ) : (

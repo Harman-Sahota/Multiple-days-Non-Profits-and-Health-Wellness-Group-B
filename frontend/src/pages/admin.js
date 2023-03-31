@@ -174,6 +174,7 @@ function Admin() {
                                                 id="flexCheckDefault1"
                                                 name="metrics[]"
                                                 value="Fresh Produce"
+
                                             />
                                             <label className="form-check-label" for="flexCheckDefault1">
                                                 Fresh Produce
