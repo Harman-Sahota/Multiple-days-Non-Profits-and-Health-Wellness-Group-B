@@ -102,6 +102,7 @@ input[type="number"] {
 .date-input {
   width: 12em;
 }
+
 .confetti-container {
   position: fixed;
   top: 0;

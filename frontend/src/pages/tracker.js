@@ -27,7 +27,9 @@ import Table from "react-bootstrap/Table";
 import Confetti from "react-confetti";
 import { select } from "d3";
 
+
 function Tracker() {
+
   const [getData, setData] = useState([]);
   const [getPercentageData, setPercentageData] = useState([]);
   const [getCategoryData, setCategoryData] = useState([]);
@@ -670,6 +672,7 @@ function Tracker() {
                                 name="landFill"
                                 ref={landFill}
                                 min={0}
+                                readonly="readonly"
                                 onChange={(event) => {
                                   setTrackers({
                                     ...trackers,
@@ -708,7 +711,7 @@ function Tracker() {
                                 }}
                                 // onLoad={() => calculateLandfillPercent()}
                                 // onload="calculateLandfillPercent()"
-                                readonly
+                                readonly="readonly"
                               />
                             </div>
                             <div className="col d-flex align-items-center">
@@ -736,7 +739,7 @@ function Tracker() {
                                 }}
                                 // onLoad={() => calculateLandfillPercent()}
                                 // onload="calculateLandfillPercent()"
-                                readonly
+                                readonly="readonly"
                               />
                             </div>
                             <div className="col d-flex align-items-center">
@@ -764,7 +767,7 @@ function Tracker() {
                                 }}
                                 // onLoad={() => calculateLandfillPercent()}
                                 // onload="calculateLandfillPercent()"
-                                readonly
+                                readonly="readonly"
                               />
                             </div>
                             <div className="col d-flex align-items-center">
@@ -792,7 +795,7 @@ function Tracker() {
                                 }}
                                 // onLoad={() => calculateLandfillPercent()}
                                 // onLoad="calculateLandfillPercent()"
-                                readonly
+                                readonly="readonly"
                               />
                             </div>
                             <div className="col d-flex align-items-center">
@@ -815,7 +818,8 @@ function Tracker() {
                                     percentLandfill: event.target.value,
                                   });
                                 }}
-                                readonly
+                                readonly="readonly"
+
                               />
                             </div>
                             <div className="col d-flex align-items-center">
@@ -1166,7 +1170,7 @@ function Tracker() {
                                   placeholder={calculateLandFillEdit()}
                                   value={calculateLandFillEdit()}
                                   min={0}
-                                  readonly
+                                  readonly="readonly"
                                 />
 
                               ) : (
