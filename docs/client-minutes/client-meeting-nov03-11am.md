@@ -2,8 +2,8 @@
 
 ## Follow-Ups from Last Week
 
-- Can run virtual machine without VPN running but can not run virtual machine with VPN running.
-- Have to update Barbara with different events happening throughout project - Jordan.
+- Running a virtual machine is possible without VPN, but not while VPN is active.
+- Keep Barbara informed about any project updates such that she can stay updated. - To Jordan
 - Maysey converting Barbara's file about the project to a markdown file.
 - Barbara has Django and MySQL installed on virtual machine though Python is yet to be installed 🥴 - I don't know how that is possible.
 - **We're working on:**
@@ -17,12 +17,16 @@
 
 ## To Do
 
+<!-- This could start with hand sketches or digitally through resources like Figma -->
+
 - [ ] Sketch / Mock up the pages out.
   - Have a basic content box on various pages where users can input things.
 - [ ] Write a paragraph on the tracker page.
   - Describe area of focus (food types and others)
+  - Discuss the functionality regarding the metrics and so forth
 - [ ] Have to make budgets. This will be later carried on by the warehouse manager.
-  - Describe how much you're saving (financially or food amounts)
+  - Describe how much you're **saving** (financially or food amounts)
+  - How much one is sharing and saving up instead of wasting is a focus in this project.
 
 ###### Harman's Additions
 
@@ -40,7 +44,7 @@
 - [ ] skim through articles
 - [ ] lots of techniques
 - [ ] pick a few and describe
-- [ ] for ex our team will focus on produce and this how we will deal with it
+- [ ] our team will focus on produce and this how we will deal with it
 - [ ] if you pick this this is what you get you save this much and it will cost you this much
 - [ ] compostable phone cases pella in kelowna
 - [ ] grinding and drying for kitchens
@@ -55,11 +59,11 @@
 
 ## Minutes
 
-- There's always at least, a labour cost. Not everyone can be an employee.
+- Labor costs are inevitable, and not everyone can or wants to be an employee.
 - Have to ensure to build rich data to retain users.
-- Have to help corporations find out how to minimize their waste.
-- Don't dwell too much on the research articles.
-- Managers will be approving budgets used for the year.
+- It is important to create valuable data to keep users engaged and help corporations reduce waste.
+- While research articles can be useful, it's important not to focus too much on them.
+- Managers are responsible for approving budgets for the year.
 -
 
 ## Decisions
@@ -121,8 +125,6 @@
 - setup organizations - roles in an organization
 - manager approves volunteer then he can see their numbers
 - give them graph
-- save it year over year
-- cost-benefit analysis
 - add new role - staff accounts
 - when we create user accounts - what info do we need - can have a field of company name but can be left null
 - not within the user accounts no organization seperation
@@ -132,27 +134,9 @@
 - but for this page users must be logged in
 - boss approves accounts can also add them to their organization which will help the functionality of the sharing page
   name , address if they want
-- email
-- role
-- consent
-- food types - tracker page
-- waste types
-- calculations options
-- set of functions
-- pick couple simple ones and graph it
-- Fresh produce
-- meat
-- i have , i want
-- for free
-- sharing network
-- i have on left
-- i want on right
-  mhm
-- im just writing down notes
 - ceo approval for volunteers but each can have their own accounts
 - ceo views work of volunteers
 - have approvals on admin page
-- put it on a tab
 - volunteer come in put their organizations and ceo can come in and say they are the rep of the organization
 - then they both click and approve each other and yeah
 - recover work done by volunteer and make it accessible to the admins/managers
