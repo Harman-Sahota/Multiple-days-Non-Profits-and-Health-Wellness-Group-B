@@ -36,8 +36,8 @@ import { faPenToSquare, faTrash, faSquareCheck, faRectangleXmark } from "@fortaw
 function Tracker() {
 
   if (
-    new Date().getTime() < localStorage.getItem("expiry") &&
-    localStorage.roles
+    new Date().getTime() < localStorage.getItem("expiry")
+
   ) {
 
     const [getData, setData] = useState([]);
@@ -471,8 +471,7 @@ function Tracker() {
 
     var trackerData = JSON.stringify(trackers);
     if (
-      new Date().getTime() > localStorage.getItem("expiry") &&
-      localStorage.roles
+      new Date().getTime() > localStorage.getItem("expiry")
     ) {
       const response = window.confirm(
         "Your session has expired. Do you still want to be logged in?"
@@ -693,7 +692,7 @@ function Tracker() {
                         <div className="col-auto">
                           <div className="row">
                             <div className="col-auto">
-                              <label htmlFor="percent">% <small style={{color: "red"}}>(These values are auto-calculated)</small></label>
+                              <label htmlFor="percent">% <small style={{ color: "red" }}>(These values are auto-calculated)</small></label>
                               <br />
                             </div>
                           </div>
@@ -1196,7 +1195,7 @@ function Tracker() {
 
                                 {editingRow === userObj.id ? (
                                   <>
-                                    <button variant="success" className="btn btn-success" style={{width: "fit-content"}} onClick={() => {
+                                    <button variant="success" className="btn btn-success" style={{ width: "fit-content" }} onClick={() => {
 
                                       axios
                                         .put(
@@ -1236,9 +1235,9 @@ function Tracker() {
                                         })
                                         .catch((err) => console.warn(err));
 
-                                    }} ><FontAwesomeIcon icon={faSquareCheck}/></button>
+                                    }} ><FontAwesomeIcon icon={faSquareCheck} /></button>
                                     <br />
-                                    <button variant="danger" className="btn btn-danger" style={{width: "fit-content"}} onClick={() => {
+                                    <button variant="danger" className="btn btn-danger" style={{ width: "fit-content" }} onClick={() => {
                                       defaultValue();
                                       fetchData();
                                       fetchPercentageChartData();
@@ -1246,41 +1245,41 @@ function Tracker() {
                                       defaultValue()
 
 
-                                    }}><FontAwesomeIcon icon={faRectangleXmark}/></button>
+                                    }}><FontAwesomeIcon icon={faRectangleXmark} /></button>
                                   </>
                                 ) : (
-                                  <><Button variant="primary" className="btn" onClick={() => handleEdit(userObj.id)} style={{width: "fit-content"}}><FontAwesomeIcon icon={faPenToSquare}/></Button>
-                                  <Button
-                                    variant="danger"
-                                    className="btn btn-danger"
-                                    style={{width: "fit-content"}}
-                                    name="field"
-                                    onClick={(e) => {
-                                      axios
-                                        .put(
-                                          `http://localhost:8000/api/trackerDelete/${userObj.id}`,
-                                          {
+                                  <><Button variant="primary" className="btn" onClick={() => handleEdit(userObj.id)} style={{ width: "fit-content" }}><FontAwesomeIcon icon={faPenToSquare} /></Button>
+                                    <Button
+                                      variant="danger"
+                                      className="btn btn-danger"
+                                      style={{ width: "fit-content" }}
+                                      name="field"
+                                      onClick={(e) => {
+                                        axios
+                                          .put(
+                                            `http://localhost:8000/api/trackerDelete/${userObj.id}`,
+                                            {
 
-                                          },
-                                          {
-                                            headers: {
-                                              "Content-type": "application/json",
                                             },
-                                          }
-                                        )
-                                        .then((response) => {
-                                          if (response.status == 200) {
-                                            setIsSubmitted(true);
-                                            fetchData();
-                                            fetchPercentageChartData();
-                                            fetchCategoryChartData();
-                                          }
-                                        })
-                                        .catch((err) => console.warn(err));
-                                    }}
-                                  >
-                                  <FontAwesomeIcon icon={faTrash}/>
-                                  </Button></>
+                                            {
+                                              headers: {
+                                                "Content-type": "application/json",
+                                              },
+                                            }
+                                          )
+                                          .then((response) => {
+                                            if (response.status == 200) {
+                                              setIsSubmitted(true);
+                                              fetchData();
+                                              fetchPercentageChartData();
+                                              fetchCategoryChartData();
+                                            }
+                                          })
+                                          .catch((err) => console.warn(err));
+                                      }}
+                                    >
+                                      <FontAwesomeIcon icon={faTrash} />
+                                    </Button></>
                                 )}
                               </div>
                             </td>
@@ -1310,8 +1309,7 @@ function Tracker() {
       );
     }
   } else if (
-    new Date().getTime() > localStorage.getItem("expiry") &&
-    !localStorage.roles
+    new Date().getTime() > localStorage.getItem("expiry")
   ) {
     return (
       <section>

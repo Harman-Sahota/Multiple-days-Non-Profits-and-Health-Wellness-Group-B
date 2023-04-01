@@ -114,7 +114,7 @@ function Admin() {
     Sponsors.metrics = Sponsors.metrics.toString();
     Experts.metrics = Experts.metrics.toString();
 
-    if (new Date().getTime() > localStorage.getItem('expiry') && localStorage.roles) {
+    if (new Date().getTime() > localStorage.getItem('expiry')) {
         const response = window.confirm("Your session has expired. Do you still want to be logged in?");
 
         if (response) {
@@ -127,7 +127,7 @@ function Admin() {
 
 
     {
-        if (new Date().getTime() < localStorage.getItem('expiry') && localStorage.roles) {
+        if (new Date().getTime() < localStorage.getItem('expiry')) {
 
 
             return (
@@ -1235,7 +1235,7 @@ function Admin() {
             );
         }
 
-        else if (new Date().getTime() > localStorage.getItem('expiry') && !(localStorage.roles)) {
+        else if (new Date().getTime() > localStorage.getItem('expiry')) {
 
             return (
                 <section>
