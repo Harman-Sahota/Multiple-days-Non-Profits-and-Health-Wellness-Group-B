@@ -63,6 +63,6 @@
 
 ### Summary
 
-- Communicate with the professor through the repository and avoid interfering with the server. Use SSH keys for authentication and collaborate with IT support on virtual machine partitioning.
+- Communicate with the professor through the repository and avoid interfering with the server. Use SSH keys for authentication and collaborate with IT support on virtual machine partitioning. Consider using Joomla with Django or FastAPI as alternatives for the project. Utilize Git Issues for project management and share research information in the group-wide repository
 
 >
