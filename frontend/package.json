@@ -28,12 +28,12 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.42.1",
     "react-router-dom": "^6.8.0",
-    "react-scripts": "^5.0.1",
     "reactstrap": "^9.1.5",
     "web-vitals": "^2.1.4",
     "y18n": "^4.0.3"
   },
   "devDependencies": {
+    "react-scripts": "^5.0.1",
     "yargs": "^17.7.1"
   },
   "browserslist": {

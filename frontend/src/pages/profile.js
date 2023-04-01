@@ -53,7 +53,7 @@ function Profile() {
     }
 
     var role_str = [];
-    var prevroles = "";
+    var prevroles = localStorage.getItem('roles').toString();
     var saved_roles = "";
     if (new Date().getTime() > localStorage.getItem('expiry') && localStorage.roles) {
         const response = window.confirm("Your session has expired. Do you still want to be logged in?");
@@ -65,7 +65,7 @@ function Profile() {
         }
     }
 
-    if (new Date().getTime() < localStorage.getItem('expiry') && localStorage.roles) {
+    if (new Date().getTime() < localStorage.getItem('expiry')) {
         return (
             <section>
                 <div className="container p-4">
@@ -248,7 +248,7 @@ function Profile() {
 
                             <div className='row'>
                                 <Button className={`${profileCSS.save_btn} btn btn-outline-success`} id="saveBtn" variant="outline-sucess" onClick={() => {
-                                    
+
 
                                     if (role_str != "" || role_str != null) {
                                         localStorage.setItem("roles", role_str.toString());
@@ -294,7 +294,7 @@ function Profile() {
                                                 else if (role_str != "" || role_str != null) {
                                                     localStorage.setItem("roles", role_str.toString());
                                                     console.log("was set to new roles: ", role_str)
-            
+
                                                 } else {
                                                     localStorage.setItem("roles", prevroles);
                                                     console.log("was set to prev roles: ", prevroles);
@@ -326,7 +326,7 @@ function Profile() {
             </section >
         );
     }
-    else if (new Date().getTime() > localStorage.getItem('expiry') && !(localStorage.roles)) {
+    else if (new Date().getTime() > localStorage.getItem('expiry')) {
 
         return (
             <section>
