@@ -60,7 +60,7 @@ input[type="number"] {
 
 /*.tracker-card-div {
   width: 85rem;
-}*/
+} Commented out bcs this forces smaller screens to have horizontal scroll*/
 
 .pie-chart-outer-div {
   /* height: 60rem; */
@@ -70,7 +70,7 @@ input[type="number"] {
   flex-direction: row;
   /*justify-content: space-evenly;*/
   width: 100%;
-  /*width: 85rem;*/
+  /*width: 85rem; Commented out bcs this forces smaller screens to have horizontal scroll*/
 }
 
 .pie-chart-inner-div {
@@ -81,7 +81,7 @@ input[type="number"] {
 
 /*.database-table {
   width: 85rem;
-}*/
+} Commented out bcs this forces smaller screens to have horizontal scroll*/
 
 .custom-table {
   width: 100%;
