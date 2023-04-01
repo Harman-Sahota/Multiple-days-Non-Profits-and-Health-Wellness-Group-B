@@ -7,6 +7,7 @@ import axios from 'axios';
 import fourcss from './fourcss.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import { local } from 'd3-selection';
 
 function Profile() {
     const [all, setAll] = useState({
@@ -263,13 +264,12 @@ function Profile() {
                                     //setAll({ ...all, Roles: localStorage.getItem('roles') });
                                     console.log(all.Roles);
 
-
                                     axios.put(
                                         `http://127.0.0.1:8000/api/profileUpdate/${userId}`,
                                         {
                                             FirstName: all.FirstName,
                                             LastName: all.LastName,
-                                            Roles: saved_roles,
+                                            Roles: all.Roles,
                                             Consent: all.Consent,
                                             Organization: all.Organization
                                         },
@@ -279,31 +279,46 @@ function Profile() {
                                             }
                                         }
                                     )
-                                        .then(response => {
-                                            if (response.status == 201) {
-                                                if (response.data["deleted"] == "deleted") {
-                                                    localStorage.clear();
-
-                                                    localStorage.removeItem('expiry');
-                                                    const date = new Date().setHours(new Date().getHours());
-                                                    localStorage.setItem('expiry', date);
-
-                                                    window.location.replace("http://localhost:3000");
-                                                }
-
-                                                else if (role_str != "" || role_str != null) {
-                                                    localStorage.setItem("roles", role_str.toString());
-                                                    console.log("was set to new roles: ", role_str)
-
-                                                } else {
-                                                    localStorage.setItem("roles", prevroles);
-                                                    console.log("was set to prev roles: ", prevroles);
-                                                }
-                                                window.location.replace("http://localhost:3000/profile/");
-
+                                        .then(updateResponse => {
+                                            if (updateResponse.status == 201) {
+                                                axios.post(
+                                                    `http://127.0.0.1:8000/api/profilePull`,
+                                                    {
+                                                        id: userId
+                                                    },
+                                                    {
+                                                        headers: {
+                                                            "Content-type": "application/json",
+                                                        }
+                                                    }
+                                                )
+                                                    .then(pullResponse => {
+                                                        if (pullResponse.status == 201) {
+                                                            // Handle the response data from the pull request here, if necessary
+                                                            localStorage.removeItem('roles');
+                                                            localStorage.setItem('roles', response.data['Roles'])
+                                                        }
+                                                        else {
+                                                            console.log(`Error pulling profile data: ${pullResponse.statusText}`);
+                                                        }
+                                                        window.location.replace("http://localhost:3000/profile/");
+                                                    })
+                                                    .catch(pullError => {
+                                                        console.warn(`Error pulling profile data: ${pullError}`);
+                                                    });
+                                            }
+                                            else {
+                                                console.log(`Error updating profile data: ${updateResponse.statusText}`);
                                             }
                                         })
-                                        .catch(err => console.warn(err));
+                                        .catch(updateError => {
+                                            console.warn(`Error updating profile data: ${updateError}`);
+                                        });
+
+
+
+
+
                                 }}>
                                     Save
                                 </Button>
