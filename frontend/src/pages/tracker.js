@@ -27,6 +27,11 @@ import Table from "react-bootstrap/Table";
 import Confetti from "react-confetti";
 import { select } from "d3";
 
+// Importing FontAwesomeIcons
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPenToSquare, faTrash, faSquareCheck, faRectangleXmark } from "@fortawesome/free-solid-svg-icons"; //Edit,Delete icon
+
+
 
 function Tracker() {
 
@@ -197,7 +202,7 @@ function Tracker() {
     function CategoryPieChart({ data }) {
       useEffect(() => {
         d3.select("#category-pie-chart").selectAll("svg").remove();
-        const width = 650;
+        const width = 600;
         const height = 400;
         const margin = 50;
 
@@ -577,7 +582,7 @@ function Tracker() {
                         <div className="col-auto">
                           <div className="row">
                             <div className="col-auto">
-                              <label htmlFor="amount">Amount</label>
+                              <label htmlFor="amount">Amount Diverted To</label>
                             </div>
                           </div>
                           <div className="row pb-2">
@@ -685,10 +690,10 @@ function Tracker() {
                             </div>
                           </div>
                         </div>
-                        <div className="col">
+                        <div className="col-auto">
                           <div className="row">
                             <div className="col-auto">
-                              <label htmlFor="percent">% Diverted to:</label>
+                              <label htmlFor="percent">% <small style={{color: "red"}}>(These values are auto-calculated)</small></label>
                               <br />
                             </div>
                           </div>
@@ -901,18 +906,17 @@ function Tracker() {
             </div>
 
             <br />
-            <br />
 
             <div className={`card ${trackerCSS["pie-chart-outer-div"]}`}>
               <div
-                className={`svg-container ${trackerCSS["pie-chart-inner-div"]}`}
+                className={`col-6 svg-container ${trackerCSS["pie-chart-inner-div"]}`}
                 id="percentage-pie-chart"
                 ref={percentagePieChartRef}
               >
                 <PercentagePieChart data={getPercentageData} />
               </div>
               <div
-                className={`svg-container ${trackerCSS["pie-chart-inner-div"]}`}
+                className={`col-6 svg-container ${trackerCSS["pie-chart-inner-div"]}`}
                 id="category-pie-chart"
                 ref={categoryPieChartRef}
               >
@@ -1192,7 +1196,7 @@ function Tracker() {
 
                                 {editingRow === userObj.id ? (
                                   <>
-                                    <button variant="success" className="btn btn-success" onClick={() => {
+                                    <button variant="success" className="btn btn-success" style={{width: "fit-content"}} onClick={() => {
 
                                       axios
                                         .put(
@@ -1232,9 +1236,9 @@ function Tracker() {
                                         })
                                         .catch((err) => console.warn(err));
 
-                                    }} >Save</button>
+                                    }} ><FontAwesomeIcon icon={faSquareCheck}/></button>
                                     <br />
-                                    <button variant="danger" className="btn btn-danger" onClick={() => {
+                                    <button variant="danger" className="btn btn-danger" style={{width: "fit-content"}} onClick={() => {
                                       defaultValue();
                                       fetchData();
                                       fetchPercentageChartData();
@@ -1242,12 +1246,14 @@ function Tracker() {
                                       defaultValue()
 
 
-                                    }}>Cancel</button>
+                                    }}><FontAwesomeIcon icon={faRectangleXmark}/></button>
                                   </>
                                 ) : (
-                                  <><Button variant="primary" className="btn btn-primary" onClick={() => handleEdit(userObj.id)}>Edit</Button><Button
+                                  <><Button variant="primary" className="btn" onClick={() => handleEdit(userObj.id)} style={{width: "fit-content"}}><FontAwesomeIcon icon={faPenToSquare}/></Button>
+                                  <Button
                                     variant="danger"
                                     className="btn btn-danger"
+                                    style={{width: "fit-content"}}
                                     name="field"
                                     onClick={(e) => {
                                       axios
@@ -1273,7 +1279,7 @@ function Tracker() {
                                         .catch((err) => console.warn(err));
                                     }}
                                   >
-                                    Delete
+                                  <FontAwesomeIcon icon={faTrash}/>
                                   </Button></>
                                 )}
                               </div>
