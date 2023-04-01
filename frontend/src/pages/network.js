@@ -21,23 +21,23 @@ function LineChart({ data }) {
 
   useEffect(() => {
     const svg = d3.select(chartRef.current).select("svg");
-  
+
     if (data) {
       const xScale = d3
-      .scalePoint()
-      .rangeRound([0, width])
-      .padding(0.2)
-      .domain(data.map((d) => d.category));
+        .scalePoint()
+        .rangeRound([0, width])
+        .padding(0.2)
+        .domain(data.map((d) => d.category));
 
-    const yScale = d3
-      .scaleLinear()
-      .range([height, 0])
-      .domain([0, d3.max(data, (d) => Math.max(d.ClientsA, d.ClientB)) + 20]);
+      const yScale = d3
+        .scaleLinear()
+        .range([height, 0])
+        .domain([0, d3.max(data, (d) => Math.max(d.ClientsA, d.ClientB)) + 20]);
 
-    const line = d3
-      .line()
-      .x((d) => xScale(d.category))
-      .y((d) => yScale(d.ClientsA));
+      const line = d3
+        .line()
+        .x((d) => xScale(d.category))
+        .y((d) => yScale(d.ClientsA));
 
       svg.select(".blue-line").remove(); // remove-existing-blue-line-- ls
       svg.append("path")
@@ -47,11 +47,11 @@ function LineChart({ data }) {
         .attr("stroke-width", 1.5)
         .attr("d", line)
         .classed("blue-line", true);
-  
+
       const line2 = d3.line()
         .x(d => xScale(d.category))
         .y(d => yScale(d.ClientB));
-  
+
       svg.select(".red-line").remove(); // Remove existing red line
       svg.append("path")
         .datum(data)
@@ -60,27 +60,27 @@ function LineChart({ data }) {
         .attr("stroke-width", 1.5)
         .attr("d", line2)
         .classed("red-line", true);
-  
+
       const xAxis = d3.axisBottom(xScale);
-  
+
       svg.select(".x-axis")
         .attr("transform", `translate(0, ${height})`)
         .call(xAxis);
-  
+
       const yAxis = d3.axisLeft(yScale);
-  
+
       svg
-         .select(".y-axis")
-         .attr("transform", `translate(${30}, 0)`)
-         .call(yAxis);
+        .select(".y-axis")
+        .attr("transform", `translate(${30}, 0)`)
+        .call(yAxis);
     } else {
       // Remove existing lines when data is null or undefined
       svg.select(".blue-line").remove();
       svg.select(".red-line").remove();
     }
-  
+
   }, [data, height, width]);
-  
+
 
   return (
     <div ref={chartRef}>
@@ -104,7 +104,7 @@ function SearchBar() {
   //more work will be implemented eventually
 
 
-  
+
 
   const fetchSharedData = async () => {
     axios
@@ -190,8 +190,7 @@ function SearchBar() {
   const handleShow = () => setShowModal(true);
 
   if (
-    new Date().getTime() > localStorage.getItem("expiry") &&
-    localStorage.roles
+    new Date().getTime() > localStorage.getItem("expiry")
   ) {
     const response = window.confirm(
       "Your session has expired. Do you still want to be logged in?"
@@ -206,8 +205,7 @@ function SearchBar() {
 
   {
     if (
-      new Date().getTime() < localStorage.getItem("expiry") &&
-      localStorage.roles
+      new Date().getTime() < localStorage.getItem("expiry")
     ) {
       return (
         <>
@@ -237,7 +235,7 @@ function SearchBar() {
                           type="button"
                           className="graph_btn btn btn-outline-primary"
                           onClick={(event) => {
-                        
+
                             axios
                               .post(
                                 "http://localhost:8000/api/NetworkGraphing/",
@@ -268,8 +266,8 @@ function SearchBar() {
                                     { category: "Partner_Network", ClientsA: response.data['user']['percentPartNet__sum'], ClientB: response.data['comparee']['percentPartNet__sum'] },
                                     { category: "Landfill", ClientsA: response.data['user']['percentLandfill__sum'], ClientB: response.data['comparee']['percentLandfill__sum'] },
                                   ];
-                                  
-                        
+
+
                                   setGraphData(data);
                                   console.log(getGraphData)
                                   LineChart(getGraphData)
@@ -282,11 +280,11 @@ function SearchBar() {
                           Compare Data
                         </button>
                       </div>
-                    </div>  
+                    </div>
                   ))}
               </div>
               <div className="col graph_box chart chart-container">
-              <LineChart data={getGraphData}/>
+                <LineChart data={getGraphData} />
               </div>
             </div>
           </div>
@@ -671,8 +669,7 @@ function SearchBar() {
         </>
       );
     } else if (
-      new Date().getTime() > localStorage.getItem("expiry") &&
-      !localStorage.roles
+      new Date().getTime() > localStorage.getItem("expiry")
     ) {
       return (
         <section>

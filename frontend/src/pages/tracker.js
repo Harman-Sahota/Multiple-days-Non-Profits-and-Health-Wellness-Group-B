@@ -36,8 +36,8 @@ import { faPenToSquare, faTrash, faSquareCheck, faRectangleXmark } from "@fortaw
 function Tracker() {
 
   if (
-    new Date().getTime() < localStorage.getItem("expiry") &&
-    localStorage.roles
+    new Date().getTime() < localStorage.getItem("expiry")
+
   ) {
 
     const [getData, setData] = useState([]);
@@ -471,8 +471,7 @@ function Tracker() {
 
     var trackerData = JSON.stringify(trackers);
     if (
-      new Date().getTime() > localStorage.getItem("expiry") &&
-      localStorage.roles
+      new Date().getTime() > localStorage.getItem("expiry")
     ) {
       const response = window.confirm(
         "Your session has expired. Do you still want to be logged in?"
@@ -1307,8 +1306,7 @@ function Tracker() {
       );
     }
   } else if (
-    new Date().getTime() > localStorage.getItem("expiry") &&
-    !localStorage.roles
+    new Date().getTime() > localStorage.getItem("expiry")
   ) {
     return (
       <section>
