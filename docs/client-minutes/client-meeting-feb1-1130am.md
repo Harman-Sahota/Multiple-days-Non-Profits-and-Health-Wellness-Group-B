@@ -29,5 +29,5 @@
 
 ## Summary
 
-- Update the interface by prioritizing the category, reducing the description space if necessary, and ensuring boxes are properly aligned. Allow for decimal inputs and expand the 'Diverted to %' field to accommodate 4-6 decimal places. Additionally, provide users with the option to select their desired precision for the 'Diverted to %' field. Integrate a sharing button for users to share within various categories, including the public, those in the same organization, and individuals with specific roles. Additionally, expand the food categories to include a broader range of produce and meats.
+- Revise the user interface by giving more importance to categories, minimizing description space when necessary, and ensuring proper alignment of boxes. Enable users to input decimals and widen the range of the 'Diverted to %' field to hold 4-6 decimal places. Moreover, provide users with the choice to specify their preferred precision for the 'Diverted to %' field. Incorporate a sharing button that lets users share content with the public, colleagues within the organization, and individuals with specific roles. Also, expand the food categories to encompass a wider variety of fruits, vegetables, and meats.
 

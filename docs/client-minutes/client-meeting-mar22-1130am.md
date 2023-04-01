@@ -34,3 +34,7 @@
 ## Decisions
 
 - Project timeline constrained to August due to availability.
+
+## Summary
+
+- There was an issue with the action sequence on the Sharing page, and it seems that the Sharing graph and Sharing posts were not connected. The problem will be resolved, and the feature will be kept.
