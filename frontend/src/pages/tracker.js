@@ -27,459 +27,466 @@ import Table from "react-bootstrap/Table";
 import Confetti from "react-confetti";
 import { select } from "d3";
 
+// Importing FontAwesomeIcons
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPenToSquare, faTrash, faSquareCheck, faRectangleXmark } from "@fortawesome/free-solid-svg-icons"; //Edit,Delete icon
+
+
 
 function Tracker() {
 
-  const [getData, setData] = useState([]);
-  const [getPercentageData, setPercentageData] = useState([]);
-  const [getCategoryData, setCategoryData] = useState([]);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [completed, setCompleted] = useState(false);
-  const [isRunning, setIsRunning] = useState(true);
-
-  const onConfettiComplete = () => {
-    setIsRunning(false); // stop the animation
-  };
-  const [trackers, setTrackers] = useState({
-    Category: "Fresh Produce",
-    Description: "",
-    Quantity: "",
-    Qunits: "lb",
-    amountToClients: "",
-    amountToAFeed: "",
-    amountToCompost: "",
-    amountToPartnerNetwork: "",
-    Email: "",
-    Organization: "",
-  });
-  const [trackers_edit, setEditTrackers] = useState({
-    Category: "Fresh Produce",
-    Description: "",
-    Quantity: "",
-    Qunits: "lb",
-    amountToClients: "",
-    amountToAFeed: "",
-    amountToCompost: "",
-    amountToPartnerNetwork: "",
-    amountToLandfill: "",
-  });
-
-  const quantity = useRef();
-  const clients = useRef();
-  const animalFeed = useRef();
-  const compost = useRef();
-  const partnerNetwork = useRef();
-  const landFill = useRef();
-
-  const percentClients = useRef();
-  const percentAnimalFeed = useRef();
-  const percentCompost = useRef();
-  const percentPartnerNetwork = useRef();
-  const percentLandFill = useRef();
-
-  const percentagePieChartRef = useRef(null);
-  const categoryPieChartRef = useRef(null);
-
-  useEffect(() => {
-    fetchData();
-    fetchPercentageChartData();
-    fetchCategoryChartData();
-
-    // setInterval(calculateLandFillPercent(), 500);
-    const interval = setInterval(function () {
-      calculateLandFillAndPercentsWrapper();
-    }, 500);
-    return () => clearInterval(interval);
-  }, []);
-
-  function PercentagePieChart({ data }) {
-    // const labelOffset = 100;
-
-    useEffect(() => {
-      d3.select("#percentage-pie-chart").selectAll("svg").remove();
-      const width = 650;
-      const height = 400;
-      const margin = 50;
-
-      const radius = Math.min(width, height) / 2 - margin;
-
-      const svg = d3
-        .select(percentagePieChartRef.current)
-        .append("svg")
-        .attr("width", width)
-        .attr("height", height)
-        .append("g")
-        .attr("transform", `translate(${width / 2},${height / 2})`);
-
-      const data = { ...getPercentageData };
-
-      const dataEntries = Object.entries(data);
-
-      const color = d3
-        .scaleOrdinal()
-        // .domain(["a", "b", "c", "d", "e", "f", "g", "h"])
-        // .domain(Object.keys(data))
-        .domain(dataEntries.map((entry) => entry[0]))
-        .range(d3.schemeDark2);
-
-      const pie = d3
-        .pie()
-        .sort(null)
-        .value((d) => d[1]);
-
-      const data_ready = pie(Object.entries(data));
-
-      const arc = d3
-        .arc()
-        .innerRadius(radius * 0.5) // This is the size of the donut hole
-        .outerRadius(radius * 0.8);
-
-      const outerArc = d3
-        .arc()
-        .innerRadius(radius * 0.8)
-        .outerRadius(radius * 0.8);
-
-      svg
-        .selectAll("allSlices")
-        .data(data_ready)
-        .join("path")
-        .attr("d", arc)
-        .attr("fill", (d) => color(d.data[0]))
-        .attr("stroke", "white")
-        .style("stroke-width", "2px")
-        .style("opacity", 0.7);
-
-      svg
-        .selectAll("allPolylines")
-        .data(data_ready)
-        .join("polyline")
-        .attr("stroke", "black")
-        .style("fill", "none")
-        .attr("stroke-width", 1)
-        .attr("points", function (d) {
-          const posA = arc.centroid(d); // line insertion in the slice
-          const posB = outerArc.centroid(d); // line break: we use the other arc generator that has been built only for that
-          const posC = outerArc.centroid(d); // Label position = almost the same as posB
-          const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2; // we need the angle to see if the X position will be at the extreme right or extreme left
-          posC[0] = radius * 0.8 * (midangle < Math.PI ? 1 : -1); // multiply by 1 or -1 to put it on the right or on the left
-          return [posA, posB, posC];
-        });
-
-      svg
-        .selectAll("allLabels")
-        .data(data_ready)
-        .join("text")
-        .text((d) => d.data[0])
-        .attr("transform", function (d) {
-          const pos = outerArc.centroid(d);
-          const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2;
-          pos[0] = radius * 0.81 * (midangle < Math.PI ? 1 : -1);
-          return `translate(${pos})`;
-        })
-        .style("text-anchor", function (d) {
-          const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2;
-          return midangle < Math.PI ? "start" : "end";
-        })
-        .style("font-size", "1rem");
-
-      return () => {
-        // svg.remove();
-        d3.select("#percentage-pie-chart").selectAll("svg").remove();
-      };
-    }, [data]);
-  }
-
-  function CategoryPieChart({ data }) {
-    useEffect(() => {
-      d3.select("#category-pie-chart").selectAll("svg").remove();
-      const width = 650;
-      const height = 400;
-      const margin = 50;
-
-      const radius = Math.min(width, height) / 2 - margin;
-
-      const svg = d3
-        .select(categoryPieChartRef.current)
-        .append("svg")
-        .attr("width", width)
-        .attr("height", height)
-        .append("g")
-        .attr("transform", `translate(${width / 2},${height / 2})`);
-
-      const data = { ...getCategoryData };
-
-      const dataEntries = Object.entries(data);
-
-      const color = d3
-        .scaleOrdinal()
-        .domain(dataEntries.map((entry) => entry[0]))
-        .range(d3.schemeDark2);
-
-      const pie = d3
-        .pie()
-        .sort(null)
-        .value((d) => d[1]);
-
-      const data_ready = pie(Object.entries(data));
-
-      const arc = d3
-        .arc()
-        .innerRadius(radius * 0.5)
-        .outerRadius(radius * 0.8);
-
-      const outerArc = d3
-        .arc()
-        .innerRadius(radius * 0.8)
-        .outerRadius(radius * 0.8);
-
-      svg
-        .selectAll("allSlices")
-        .data(data_ready)
-        .join("path")
-        .attr("d", arc)
-        .attr("fill", (d) => color(d.data[0]))
-        .attr("stroke", "white")
-        .style("stroke-width", "2px")
-        .style("opacity", 0.7);
-
-      svg
-        .selectAll("allPolylines")
-        .data(data_ready)
-        .join("polyline")
-        .attr("stroke", "black")
-        .style("fill", "none")
-        .attr("stroke-width", 1)
-        .attr("points", function (d) {
-          const posA = arc.centroid(d);
-          const posB = outerArc.centroid(d);
-          const posC = outerArc.centroid(d);
-          const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2;
-          posC[0] = radius * 0.8 * (midangle < Math.PI ? 1 : -1);
-          return [posA, posB, posC];
-        });
-
-      svg
-        .selectAll("allLabels")
-        .data(data_ready)
-        .join("text")
-        .text((d) => d.data[0])
-        .attr("transform", function (d) {
-          const pos = outerArc.centroid(d);
-          const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2;
-          pos[0] = radius * 0.81 * (midangle < Math.PI ? 1 : -1);
-          return `translate(${pos})`;
-        })
-        .style("text-anchor", function (d) {
-          const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2;
-          return midangle < Math.PI ? "start" : "end";
-        })
-        .style("font-size", "1rem");
-
-      return () => {
-        d3.select("#category-pie-chart").selectAll("svg").remove();
-      };
-    }, [data]);
-  }
-
-  function calculateLandFillEdit() {
-    if (document.getElementById('quantity-edit')) {
-      var total = parseFloat(document.getElementById('quantity-edit').value);
-      total = total ? total : 0;
-      var num1 = parseFloat(document.getElementById('clients-edit').value);
-      num1 = num1 ? num1 : 0.0;
-      var num2 = parseFloat(document.getElementById('animalFeed-edit').value);
-      num2 = num2 ? num2 : 0.0;
-      var num3 = parseFloat(document.getElementById('compost-edit').value);
-      num3 = num3 ? num3 : 0;
-      var num4 = parseFloat(document.getElementById('partnerNetwork-edit').value);
-      num4 = num4 ? num4 : 0;
-      return (total - (num1 + num2 + num3 + num4));
-    }
-  }
-
-  const [editingRow, setEditingRow] = useState(null);
-  const [editable, setEditable] = useState(0);
-  async function handleEdit(id) {
-    setEditable(id);
-    setEditingRow(id);
-  }
-
-  function defaultValue() {
-    setEditable(0);
-    setEditingRow(null);
-  }
-
-  async function fetchData() {
-    const response = await fetch("http://127.0.0.1:8000/api/trackerPull/");
-    const data = await response.json();
-    return setData(data);
-  }
-
-  async function fetchPercentageChartData() {
-    const response = await fetch(
-      "http://localhost:8000/api/trackerPercentageSum/"
-    );
-    const data = await response.json();
-
-    let clientValue = data["percentClients__sum"].toFixed(2);
-    let compostValue = data["percentCompost__sum"].toFixed(2);
-    let feedValue = data["percentAFeed__sum"].toFixed(2);
-    let landFillValue = data["percentAFeed__sum"].toFixed(2);
-    let partnerNetworkValue = data["percentPartNet__sum"].toFixed(2);
-
-    let total =
-      parseFloat(clientValue) +
-      parseFloat(compostValue) +
-      parseFloat(feedValue) +
-      parseFloat(landFillValue) +
-      parseFloat(partnerNetworkValue);
-
-    let clientKey = `Clients: ${((clientValue * 100) / total).toFixed(1)} %`;
-    let compostKey = `Compost: ${((compostValue * 100) / total).toFixed(2)} %`;
-    let feedKey = `Feed: ${((feedValue * 100) / total).toFixed(2)} %`;
-    let landFillKey = `Landfill: ${((landFillValue * 100) / total).toFixed(
-      2
-    )} %`;
-    let partnerNetworkKey = `Partner Network: ${(
-      (partnerNetworkValue * 100) /
-      total
-    ).toFixed(2)} %`;
-
-    const data2 = {
-      [clientKey]: clientValue,
-      [compostKey]: compostValue,
-      [feedKey]: feedValue,
-      [landFillKey]: landFillValue,
-      [partnerNetworkKey]: partnerNetworkValue,
-    };
-
-    return setPercentageData(data2);
-  }
-
-  async function fetchCategoryChartData() {
-    const response = await fetch(
-      "http://localhost:8000/api/trackerCategorySum/"
-    );
-    const data = await response.json();
-
-    let data2 = {};
-
-    for (let i = 0; i < data.length; i++)
-      for (let key in data[i]) {
-        let value = data[i][key];
-        let newKey = `${key}: ${value}`;
-        if (value != null) {
-          data2[newKey] = value;
-        }
-      }
-
-    return setCategoryData(data2);
-  }
-
-  function calculateLandFillAndPercentsWrapper() {
-    calculateLandFill();
-    calculatePercent();
-    calculateLandFillPercent();
-  }
-
-  function calculateLandFill() {
-    const sum =
-      Number(clients.current.value) +
-      Number(animalFeed.current.value) +
-      Number(compost.current.value) +
-      Number(partnerNetwork.current.value);
-    const diff = Number(quantity.current.value) - Number(sum);
-
-    landFill.current.value = Number(diff);
-  }
-
-  function calculateLandFillPercent() {
-    const sum =
-      Number(percentClients.current.value) +
-      Number(percentAnimalFeed.current.value) +
-      Number(percentCompost.current.value) +
-      Number(percentPartnerNetwork.current.value);
-
-    const diff = 100 - Number(sum);
-
-    percentLandFill.current.value = Number(diff).toFixed(2);
-  }
-
-  function calculatePercent() {
-    percentClients.current.value = (
-      Number(Number(clients.current.value) / Number(quantity.current.value)) *
-      100
-    ).toFixed(2);
-    percentAnimalFeed.current.value = (
-      Number(
-        Number(animalFeed.current.value) / Number(quantity.current.value)
-      ) * 100
-    ).toFixed(2);
-    percentCompost.current.value = (
-      Number(Number(compost.current.value) / Number(quantity.current.value)) *
-      100
-    ).toFixed(2);
-    percentPartnerNetwork.current.value = (
-      Number(
-        Number(partnerNetwork.current.value) / Number(quantity.current.value)
-      ) * 100
-    ).toFixed(2);
-  }
-
-  // Downloading CSV
-  function downloadCSV(csv, filename) {
-    const csvFile = new Blob([csv], { type: "text/csv" });
-    const downloadLink = document.createElement("a");
-
-    downloadLink.download = filename;
-    downloadLink.href = window.URL.createObjectURL(csvFile);
-
-    downloadLink.style.display = "none";
-
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-  }
-
-  // Exporting Table to CSV
-  function exportTableToCSV(filename) {
-    let csv = [];
-    const rows = document.querySelectorAll("table tr");
-
-    for (let i = 0; i < rows.length; i++) {
-      let row = [];
-      const cols = rows[i].querySelectorAll("td, th");
-
-      for (let j = 0; j < cols.length - 1; j++) {
-        row.push(cols[j].innerText);
-      }
-
-      csv.push(row.join(","));
-    }
-
-    downloadCSV(csv.join("\n"), filename);
-  }
-
-  var trackerData = JSON.stringify(trackers);
   if (
-    new Date().getTime() > localStorage.getItem("expiry") &&
+    new Date().getTime() < localStorage.getItem("expiry") &&
     localStorage.roles
   ) {
-    const response = window.confirm(
-      "Your session has expired. Do you still want to be logged in?"
-    );
 
-    if (response) {
-      localStorage.removeItem("expiry");
-      const date = new Date().setHours(new Date().getHours() + 1);
-      localStorage.setItem("expiry", date);
+    const [getData, setData] = useState([]);
+    const [getPercentageData, setPercentageData] = useState([]);
+    const [getCategoryData, setCategoryData] = useState([]);
+    const [isSubmitted, setIsSubmitted] = useState(false);
+    const [completed, setCompleted] = useState(false);
+    const [isRunning, setIsRunning] = useState(true);
+
+    const onConfettiComplete = () => {
+      setIsRunning(false); // stop the animation
+    };
+    const [trackers, setTrackers] = useState({
+      Category: "Fresh Produce",
+      Description: "",
+      Quantity: "",
+      Qunits: "lb",
+      amountToClients: "",
+      amountToAFeed: "",
+      amountToCompost: "",
+      amountToPartnerNetwork: "",
+      Email: "",
+      Organization: "",
+    });
+    const [trackers_edit, setEditTrackers] = useState({
+      Category: "Fresh Produce",
+      Description: "",
+      Quantity: "",
+      Qunits: "lb",
+      amountToClients: "",
+      amountToAFeed: "",
+      amountToCompost: "",
+      amountToPartnerNetwork: "",
+      amountToLandfill: "",
+    });
+
+    const quantity = useRef();
+    const clients = useRef();
+    const animalFeed = useRef();
+    const compost = useRef();
+    const partnerNetwork = useRef();
+    const landFill = useRef();
+
+    const percentClients = useRef();
+    const percentAnimalFeed = useRef();
+    const percentCompost = useRef();
+    const percentPartnerNetwork = useRef();
+    const percentLandFill = useRef();
+
+    const percentagePieChartRef = useRef(null);
+    const categoryPieChartRef = useRef(null);
+
+    useEffect(() => {
+      fetchData();
+      fetchPercentageChartData();
+      fetchCategoryChartData();
+
+      // setInterval(calculateLandFillPercent(), 500);
+      const interval = setInterval(function () {
+        calculateLandFillAndPercentsWrapper();
+      }, 500);
+      return () => clearInterval(interval);
+    }, []);
+
+    function PercentagePieChart({ data }) {
+      // const labelOffset = 100;
+
+      useEffect(() => {
+        d3.select("#percentage-pie-chart").selectAll("svg").remove();
+        const width = 650;
+        const height = 400;
+        const margin = 50;
+
+        const radius = Math.min(width, height) / 2 - margin;
+
+        const svg = d3
+          .select(percentagePieChartRef.current)
+          .append("svg")
+          .attr("width", width)
+          .attr("height", height)
+          .append("g")
+          .attr("transform", `translate(${width / 2},${height / 2})`);
+
+        const data = { ...getPercentageData };
+
+        const dataEntries = Object.entries(data);
+
+        const color = d3
+          .scaleOrdinal()
+          // .domain(["a", "b", "c", "d", "e", "f", "g", "h"])
+          // .domain(Object.keys(data))
+          .domain(dataEntries.map((entry) => entry[0]))
+          .range(d3.schemeDark2);
+
+        const pie = d3
+          .pie()
+          .sort(null)
+          .value((d) => d[1]);
+
+        const data_ready = pie(Object.entries(data));
+
+        const arc = d3
+          .arc()
+          .innerRadius(radius * 0.5) // This is the size of the donut hole
+          .outerRadius(radius * 0.8);
+
+        const outerArc = d3
+          .arc()
+          .innerRadius(radius * 0.8)
+          .outerRadius(radius * 0.8);
+
+        svg
+          .selectAll("allSlices")
+          .data(data_ready)
+          .join("path")
+          .attr("d", arc)
+          .attr("fill", (d) => color(d.data[0]))
+          .attr("stroke", "white")
+          .style("stroke-width", "2px")
+          .style("opacity", 0.7);
+
+        svg
+          .selectAll("allPolylines")
+          .data(data_ready)
+          .join("polyline")
+          .attr("stroke", "black")
+          .style("fill", "none")
+          .attr("stroke-width", 1)
+          .attr("points", function (d) {
+            const posA = arc.centroid(d); // line insertion in the slice
+            const posB = outerArc.centroid(d); // line break: we use the other arc generator that has been built only for that
+            const posC = outerArc.centroid(d); // Label position = almost the same as posB
+            const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2; // we need the angle to see if the X position will be at the extreme right or extreme left
+            posC[0] = radius * 0.8 * (midangle < Math.PI ? 1 : -1); // multiply by 1 or -1 to put it on the right or on the left
+            return [posA, posB, posC];
+          });
+
+        svg
+          .selectAll("allLabels")
+          .data(data_ready)
+          .join("text")
+          .text((d) => d.data[0])
+          .attr("transform", function (d) {
+            const pos = outerArc.centroid(d);
+            const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2;
+            pos[0] = radius * 0.81 * (midangle < Math.PI ? 1 : -1);
+            return `translate(${pos})`;
+          })
+          .style("text-anchor", function (d) {
+            const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2;
+            return midangle < Math.PI ? "start" : "end";
+          })
+          .style("font-size", "1rem");
+
+        return () => {
+          // svg.remove();
+          d3.select("#percentage-pie-chart").selectAll("svg").remove();
+        };
+      }, [data]);
     }
-  }
 
-  {
+    function CategoryPieChart({ data }) {
+      useEffect(() => {
+        d3.select("#category-pie-chart").selectAll("svg").remove();
+        const width = 600;
+        const height = 400;
+        const margin = 50;
+
+        const radius = Math.min(width, height) / 2 - margin;
+
+        const svg = d3
+          .select(categoryPieChartRef.current)
+          .append("svg")
+          .attr("width", width)
+          .attr("height", height)
+          .append("g")
+          .attr("transform", `translate(${width / 2},${height / 2})`);
+
+        const data = { ...getCategoryData };
+
+        const dataEntries = Object.entries(data);
+
+        const color = d3
+          .scaleOrdinal()
+          .domain(dataEntries.map((entry) => entry[0]))
+          .range(d3.schemeDark2);
+
+        const pie = d3
+          .pie()
+          .sort(null)
+          .value((d) => d[1]);
+
+        const data_ready = pie(Object.entries(data));
+
+        const arc = d3
+          .arc()
+          .innerRadius(radius * 0.5)
+          .outerRadius(radius * 0.8);
+
+        const outerArc = d3
+          .arc()
+          .innerRadius(radius * 0.8)
+          .outerRadius(radius * 0.8);
+
+        svg
+          .selectAll("allSlices")
+          .data(data_ready)
+          .join("path")
+          .attr("d", arc)
+          .attr("fill", (d) => color(d.data[0]))
+          .attr("stroke", "white")
+          .style("stroke-width", "2px")
+          .style("opacity", 0.7);
+
+        svg
+          .selectAll("allPolylines")
+          .data(data_ready)
+          .join("polyline")
+          .attr("stroke", "black")
+          .style("fill", "none")
+          .attr("stroke-width", 1)
+          .attr("points", function (d) {
+            const posA = arc.centroid(d);
+            const posB = outerArc.centroid(d);
+            const posC = outerArc.centroid(d);
+            const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2;
+            posC[0] = radius * 0.8 * (midangle < Math.PI ? 1 : -1);
+            return [posA, posB, posC];
+          });
+
+        svg
+          .selectAll("allLabels")
+          .data(data_ready)
+          .join("text")
+          .text((d) => d.data[0])
+          .attr("transform", function (d) {
+            const pos = outerArc.centroid(d);
+            const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2;
+            pos[0] = radius * 0.81 * (midangle < Math.PI ? 1 : -1);
+            return `translate(${pos})`;
+          })
+          .style("text-anchor", function (d) {
+            const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2;
+            return midangle < Math.PI ? "start" : "end";
+          })
+          .style("font-size", "1rem");
+
+        return () => {
+          d3.select("#category-pie-chart").selectAll("svg").remove();
+        };
+      }, [data]);
+    }
+
+    function calculateLandFillEdit() {
+      if (document.getElementById('quantity-edit')) {
+        var total = parseFloat(document.getElementById('quantity-edit').value);
+        total = total ? total : 0;
+        var num1 = parseFloat(document.getElementById('clients-edit').value);
+        num1 = num1 ? num1 : 0.0;
+        var num2 = parseFloat(document.getElementById('animalFeed-edit').value);
+        num2 = num2 ? num2 : 0.0;
+        var num3 = parseFloat(document.getElementById('compost-edit').value);
+        num3 = num3 ? num3 : 0;
+        var num4 = parseFloat(document.getElementById('partnerNetwork-edit').value);
+        num4 = num4 ? num4 : 0;
+        return (total - (num1 + num2 + num3 + num4));
+      }
+    }
+
+    const [editingRow, setEditingRow] = useState(null);
+    const [editable, setEditable] = useState(0);
+    async function handleEdit(id) {
+      setEditable(id);
+      setEditingRow(id);
+    }
+
+    function defaultValue() {
+      setEditable(0);
+      setEditingRow(null);
+    }
+
+    async function fetchData() {
+      const response = await fetch("http://127.0.0.1:8000/api/trackerPull/");
+      const data = await response.json();
+      return setData(data);
+    }
+
+    async function fetchPercentageChartData() {
+      const response = await fetch(
+        "http://localhost:8000/api/trackerPercentageSum/"
+      );
+      const data = await response.json();
+
+      let clientValue = data["percentClients__sum"].toFixed(2);
+      let compostValue = data["percentCompost__sum"].toFixed(2);
+      let feedValue = data["percentAFeed__sum"].toFixed(2);
+      let landFillValue = data["percentAFeed__sum"].toFixed(2);
+      let partnerNetworkValue = data["percentPartNet__sum"].toFixed(2);
+
+      let total =
+        parseFloat(clientValue) +
+        parseFloat(compostValue) +
+        parseFloat(feedValue) +
+        parseFloat(landFillValue) +
+        parseFloat(partnerNetworkValue);
+
+      let clientKey = `Clients: ${((clientValue * 100) / total).toFixed(1)} %`;
+      let compostKey = `Compost: ${((compostValue * 100) / total).toFixed(2)} %`;
+      let feedKey = `Feed: ${((feedValue * 100) / total).toFixed(2)} %`;
+      let landFillKey = `Landfill: ${((landFillValue * 100) / total).toFixed(
+        2
+      )} %`;
+      let partnerNetworkKey = `Partner Network: ${(
+        (partnerNetworkValue * 100) /
+        total
+      ).toFixed(2)} %`;
+
+      const data2 = {
+        [clientKey]: clientValue,
+        [compostKey]: compostValue,
+        [feedKey]: feedValue,
+        [landFillKey]: landFillValue,
+        [partnerNetworkKey]: partnerNetworkValue,
+      };
+
+      return setPercentageData(data2);
+    }
+
+    async function fetchCategoryChartData() {
+      const response = await fetch(
+        "http://localhost:8000/api/trackerCategorySum/"
+      );
+      const data = await response.json();
+
+      let data2 = {};
+
+      for (let i = 0; i < data.length; i++)
+        for (let key in data[i]) {
+          let value = data[i][key];
+          let newKey = `${key}: ${value}`;
+          if (value != null) {
+            data2[newKey] = value;
+          }
+        }
+
+      return setCategoryData(data2);
+    }
+
+    function calculateLandFillAndPercentsWrapper() {
+      calculateLandFill();
+      calculatePercent();
+      calculateLandFillPercent();
+    }
+
+    function calculateLandFill() {
+      const sum =
+        Number(clients.current.value) +
+        Number(animalFeed.current.value) +
+        Number(compost.current.value) +
+        Number(partnerNetwork.current.value);
+      const diff = Number(quantity.current.value) - Number(sum);
+
+      landFill.current.value = Number(diff);
+    }
+
+    function calculateLandFillPercent() {
+      const sum =
+        Number(percentClients.current.value) +
+        Number(percentAnimalFeed.current.value) +
+        Number(percentCompost.current.value) +
+        Number(percentPartnerNetwork.current.value);
+
+      const diff = 100 - Number(sum);
+
+      percentLandFill.current.value = Number(diff).toFixed(2);
+    }
+
+    function calculatePercent() {
+      percentClients.current.value = (
+        Number(Number(clients.current.value) / Number(quantity.current.value)) *
+        100
+      ).toFixed(2);
+      percentAnimalFeed.current.value = (
+        Number(
+          Number(animalFeed.current.value) / Number(quantity.current.value)
+        ) * 100
+      ).toFixed(2);
+      percentCompost.current.value = (
+        Number(Number(compost.current.value) / Number(quantity.current.value)) *
+        100
+      ).toFixed(2);
+      percentPartnerNetwork.current.value = (
+        Number(
+          Number(partnerNetwork.current.value) / Number(quantity.current.value)
+        ) * 100
+      ).toFixed(2);
+    }
+
+    // Downloading CSV
+    function downloadCSV(csv, filename) {
+      const csvFile = new Blob([csv], { type: "text/csv" });
+      const downloadLink = document.createElement("a");
+
+      downloadLink.download = filename;
+      downloadLink.href = window.URL.createObjectURL(csvFile);
+
+      downloadLink.style.display = "none";
+
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+    }
+
+    // Exporting Table to CSV
+    function exportTableToCSV(filename) {
+      let csv = [];
+      const rows = document.querySelectorAll("table tr");
+
+      for (let i = 0; i < rows.length; i++) {
+        let row = [];
+        const cols = rows[i].querySelectorAll("td, th");
+
+        for (let j = 0; j < cols.length - 1; j++) {
+          row.push(cols[j].innerText);
+        }
+
+        csv.push(row.join(","));
+      }
+
+      downloadCSV(csv.join("\n"), filename);
+    }
+
+    var trackerData = JSON.stringify(trackers);
     if (
-      new Date().getTime() < localStorage.getItem("expiry") &&
+      new Date().getTime() > localStorage.getItem("expiry") &&
       localStorage.roles
     ) {
+      const response = window.confirm(
+        "Your session has expired. Do you still want to be logged in?"
+      );
+
+      if (response) {
+        localStorage.removeItem("expiry");
+        const date = new Date().setHours(new Date().getHours() + 1);
+        localStorage.setItem("expiry", date);
+      }
+    }
+
+    {
+
       return (
         <div className={isSubmitted ? "confetti-container" : ""}>
           <div className="container p-2" id="container">
@@ -575,7 +582,7 @@ function Tracker() {
                         <div className="col-auto">
                           <div className="row">
                             <div className="col-auto">
-                              <label htmlFor="amount">Amount</label>
+                              <label htmlFor="amount">Amount Diverted To</label>
                             </div>
                           </div>
                           <div className="row pb-2">
@@ -683,10 +690,10 @@ function Tracker() {
                             </div>
                           </div>
                         </div>
-                        <div className="col">
+                        <div className="col-auto">
                           <div className="row">
                             <div className="col-auto">
-                              <label htmlFor="percent">% Diverted to:</label>
+                              <label htmlFor="percent">% <small style={{color: "red"}}>(These values are auto-calculated)</small></label>
                               <br />
                             </div>
                           </div>
@@ -899,18 +906,17 @@ function Tracker() {
             </div>
 
             <br />
-            <br />
 
             <div className={`card ${trackerCSS["pie-chart-outer-div"]}`}>
               <div
-                className={`svg-container ${trackerCSS["pie-chart-inner-div"]}`}
+                className={`col-6 svg-container ${trackerCSS["pie-chart-inner-div"]}`}
                 id="percentage-pie-chart"
                 ref={percentagePieChartRef}
               >
                 <PercentagePieChart data={getPercentageData} />
               </div>
               <div
-                className={`svg-container ${trackerCSS["pie-chart-inner-div"]}`}
+                className={`col-6 svg-container ${trackerCSS["pie-chart-inner-div"]}`}
                 id="category-pie-chart"
                 ref={categoryPieChartRef}
               >
@@ -1190,7 +1196,7 @@ function Tracker() {
 
                                 {editingRow === userObj.id ? (
                                   <>
-                                    <button variant="success" className="btn btn-success" onClick={() => {
+                                    <button variant="success" className="btn btn-success" style={{width: "fit-content"}} onClick={() => {
 
                                       axios
                                         .put(
@@ -1230,9 +1236,9 @@ function Tracker() {
                                         })
                                         .catch((err) => console.warn(err));
 
-                                    }} >Save</button>
+                                    }} ><FontAwesomeIcon icon={faSquareCheck}/></button>
                                     <br />
-                                    <button variant="danger" className="btn btn-danger" onClick={() => {
+                                    <button variant="danger" className="btn btn-danger" style={{width: "fit-content"}} onClick={() => {
                                       defaultValue();
                                       fetchData();
                                       fetchPercentageChartData();
@@ -1240,12 +1246,14 @@ function Tracker() {
                                       defaultValue()
 
 
-                                    }}>Cancel</button>
+                                    }}><FontAwesomeIcon icon={faRectangleXmark}/></button>
                                   </>
                                 ) : (
-                                  <><Button variant="primary" className="btn btn-primary" onClick={() => handleEdit(userObj.id)}>Edit</Button><Button
+                                  <><Button variant="primary" className="btn" onClick={() => handleEdit(userObj.id)} style={{width: "fit-content"}}><FontAwesomeIcon icon={faPenToSquare}/></Button>
+                                  <Button
                                     variant="danger"
                                     className="btn btn-danger"
+                                    style={{width: "fit-content"}}
                                     name="field"
                                     onClick={(e) => {
                                       axios
@@ -1271,7 +1279,7 @@ function Tracker() {
                                         .catch((err) => console.warn(err));
                                     }}
                                   >
-                                    Delete
+                                  <FontAwesomeIcon icon={faTrash}/>
                                   </Button></>
                                 )}
                               </div>
@@ -1300,38 +1308,39 @@ function Tracker() {
           </div >
         </div >
       );
-    } else if (
-      new Date().getTime() > localStorage.getItem("expiry") &&
-      !localStorage.roles
-    ) {
-      return (
-        <section>
-          <div className="flex-container">
-            <div className="text-center">
-              <h1 className="heading1">
-                <span className="fade-in" id="digit1">
-                  4
-                </span>
-                <span className="fade-in" id="digit2">
-                  0
-                </span>
-                <span className="fade-in" id="digit3">
-                  4
-                </span>
-              </h1>
-              <h3 className=" heading3 fadeIn">
-                YOU MUST LOGIN TO VIEW THIS PAGE
-              </h3>
-              <a href="/login">
-                <Button type="button" class="btn btn-primary " name="button">
-                  Login
-                </Button>
-              </a>
-            </div>
-          </div>
-        </section>
-      );
     }
+  } else if (
+    new Date().getTime() > localStorage.getItem("expiry") &&
+    !localStorage.roles
+  ) {
+    return (
+      <section>
+        <div className="flex-container">
+          <div className="text-center">
+            <h1 className="heading1">
+              <span className="fade-in" id="digit1">
+                4
+              </span>
+              <span className="fade-in" id="digit2">
+                0
+              </span>
+              <span className="fade-in" id="digit3">
+                4
+              </span>
+            </h1>
+            <h3 className=" heading3 fadeIn">
+              YOU MUST LOGIN TO VIEW THIS PAGE
+            </h3>
+            <a href="/login">
+              <Button type="button" class="btn btn-primary " name="button">
+                Login
+              </Button>
+            </a>
+          </div>
+        </div>
+      </section>
+    );
   }
+
 }
 export default Tracker;

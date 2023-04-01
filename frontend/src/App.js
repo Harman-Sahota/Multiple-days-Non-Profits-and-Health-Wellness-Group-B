@@ -13,6 +13,7 @@ import Profile from "./pages/profile";
 import SearchBar from "./pages/network";
 import Tracker from "./pages/tracker";
 import Admin from "./pages/admin";
+import ChangePassword from "./pages/newpswd";
 import React, { Component } from 'react';
 
 import "./App.css";
@@ -126,6 +127,22 @@ function App() {
               <>
                 <NavbarOut />
                 <ResetPassword />
+                <Footer />
+              </>
+            }
+          />
+        </Routes>
+      </Router>
+
+      <Router>
+        <Routes>
+          <Route
+            exact
+            path="/newpswd"
+            element={
+              <>
+                <NavbarOut />
+                <ChangePassword />
                 <Footer />
               </>
             }

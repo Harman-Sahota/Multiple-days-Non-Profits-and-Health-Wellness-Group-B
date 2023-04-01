@@ -49,11 +49,12 @@ function Profile() {
             document.getElementById('unconsented').checked = true;
         }
 
-        console.log(localStorage.getItem('roles'));
+        console.log("onload: ", localStorage.getItem('roles'));
     }
 
     var role_str = [];
     var prevroles = "";
+    var saved_roles = "";
     if (new Date().getTime() > localStorage.getItem('expiry') && localStorage.roles) {
         const response = window.confirm("Your session has expired. Do you still want to be logged in?");
 
@@ -247,25 +248,28 @@ function Profile() {
 
                             <div className='row'>
                                 <Button className={`${profileCSS.save_btn} btn btn-outline-success`} id="saveBtn" variant="outline-sucess" onClick={() => {
+                                    
 
                                     if (role_str != "" || role_str != null) {
-                                        if (localStorage.getItem("roles")) {
-                                            localStorage.setItem("roles", role_str.toString());
-                                        } else {
-                                            localStorage.setItem("roles", role_str.toString());
-                                        }
-
+                                        localStorage.setItem("roles", role_str.toString());
+                                        saved_roles = localStorage.getItem('roles');
+                                        console.log("not null set ", saved_roles);
                                     } else {
-                                        localStorage.roles.setItem(prevroles);
+                                        localStorage.setItem("roles", prevroles);
+                                        saved_roles = localStorage.getItem('roles');
+                                        console.log("null set ", saved_roles);
                                     }
 
-                                    console.log(role_str);
+                                    //setAll({ ...all, Roles: localStorage.getItem('roles') });
+                                    console.log(all.Roles);
+
+
                                     axios.put(
                                         `http://127.0.0.1:8000/api/profileUpdate/${userId}`,
                                         {
                                             FirstName: all.FirstName,
                                             LastName: all.LastName,
-                                            Roles: all.Roles,
+                                            Roles: saved_roles,
                                             Consent: all.Consent,
                                             Organization: all.Organization
                                         },
@@ -287,16 +291,16 @@ function Profile() {
                                                     window.location.replace("http://localhost:3000");
                                                 }
 
-                                                if (role_str != "" || role_str != null) {
-                                                    if (localStorage.getItem("roles")) {
-                                                        localStorage.roles.setItem(role_str.toString());
-                                                    } else {
-                                                        localStorage.setItem("roles", role_str.toString());
-                                                    }
-
+                                                else if (role_str != "" || role_str != null) {
+                                                    localStorage.setItem("roles", role_str.toString());
+                                                    console.log("was set to new roles: ", role_str)
+            
                                                 } else {
-                                                    localStorage.roles.setItem(prevroles);
+                                                    localStorage.setItem("roles", prevroles);
+                                                    console.log("was set to prev roles: ", prevroles);
                                                 }
+                                                window.location.replace("http://localhost:3000/profile/");
+
                                             }
                                         })
                                         .catch(err => console.warn(err));

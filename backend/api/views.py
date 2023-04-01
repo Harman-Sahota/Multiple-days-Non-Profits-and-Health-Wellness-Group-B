@@ -1,4 +1,5 @@
 
+from django.core.signing import TimestampSigner
 import json
 from api.models import users
 from api.models import posts
@@ -9,7 +10,6 @@ import datetime
 from api.serialize import userSerialize
 from django.db.models import Sum
 from django.utils import timezone
-
 from api.serialize import passwordSerialize
 from api.serialize import adminInsertSerialize
 from api.serialize import adminPullSerialize
@@ -23,22 +23,27 @@ from api.serialize import profileSerialize
 from api.serialize import trackerInsertSerialize
 from api.serialize import trackerPullSerialize
 from api.serialize import trackerUpdateSerialize
-
+from django.core.mail import send_mail
+from django.core.signing import TimestampSigner, BadSignature
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
-
+from django.core import signing
+from django.http import HttpResponse
+from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth import login, authenticate
 
 
 @api_view(["POST"])
 def registerInsert(request):
     if request.method == "POST":
+        request.data['Password'] = make_password(request.data['Password'])
         saveserialize = userSerialize(data=request.data)
         email = request.data['Email']
+
         duplicated = users.objects.filter(Email=email).count()
         if duplicated != 0:
             return Response(status=status.HTTP_409_CONFLICT)
@@ -123,6 +128,39 @@ def postsPullShared(request):
 
 
 @api_view(["POST"])
+class Login(APIView):
+    def post(self, request):
+        if request.method == 'POST':
+            email = request.data.get("Email")
+            password = request.data.get("Password")
+        if not email or not password:
+            return Response({"error": "Please fill all fields"}, status=status.HTTP_400_BAD_REQUEST)
+
+        check_user = users.objects.filter(
+            Email=email).exists()
+        if check_user:
+            user = users.objects.filter(Email=email)
+            if check_password(password, user.Password):
+                results = users.objects.get(Email=email)
+                data = {
+                    "firstname": results.FirstName,
+                    "lastname": results.LastName,
+                    "email": email,
+                    "roles": results.Roles,
+                    "organization": results.Organization,
+                    "consent": results.Consent,
+                    "approve": results.Approve,
+                    "id": results.id,
+                }
+                token = jwt.encode(
+                    data, 'secret', algorithm='HS256').decode('utf-8')
+                return Response({"success": "success logged in", "data": data, "token": token}, status=status.HTTP_200_OK)
+            else:
+                return Response({"error": "invalid login credentials"}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response({"error": "user does not exist"}, status=status.HTTP_404_NOT_FOUND)
+
+
 def postsPullName(request):
     if request.method == 'POST':
         results = users.objects.filter(Email=request.data['Email'])
@@ -139,30 +177,28 @@ class Login(APIView):
             return Response({"error": "Please fill all fields"}, status=status.HTTP_400_BAD_REQUEST)
 
         check_user = users.objects.filter(
-            Email=email, Password=password).exists()
+            Email=email).exists()
         if check_user:
-            getdetails = users.objects.filter(Email=email, Password=password)
-        if check_user == False:
-            return Response({"error": "user does not exist"}, status=status.HTTP_404_NOT_FOUND)
-
-        if getdetails:
-
-            results = users.objects.get(Email=email)
-            data = {
-                "firstname": results.FirstName,
-                "lastname": results.LastName,
-                "email": email,
-                "roles": results.Roles,
-                "organization": results.Organization,
-                "consent": results.Consent,
-                "approve": results.Approve,
-                "id": results.id,
-            }
-            token = jwt.encode(
-                data, 'secret', algorithm='HS256').decode('utf-8')
-            return Response({"success": "success logged in", "data": data, "token": token}, status=status.HTTP_200_OK)
+            user = users.objects.get(Email=email)
+            if check_password(password, user.Password):
+                results = users.objects.get(Email=email)
+                data = {
+                    "firstname": results.FirstName,
+                    "lastname": results.LastName,
+                    "email": email,
+                    "roles": results.Roles,
+                    "organization": results.Organization,
+                    "consent": results.Consent,
+                    "approve": results.Approve,
+                    "id": results.id,
+                }
+                token = jwt.encode(
+                    data, 'secret', algorithm='HS256').decode('utf-8')
+                return Response({"success": "success logged in", "data": data, "token": token}, status=status.HTTP_200_OK)
+            else:
+                return Response({"error": "invalid login credentials"}, status=status.HTTP_400_BAD_REQUEST)
         else:
-            return Response({"error": "invalid login credentials"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"error": "user does not exist"}, status=status.HTTP_404_NOT_FOUND)
 
 
 @api_view(["POST"])
@@ -262,15 +298,48 @@ def resetPassword(request):
     if request.method == 'POST':
         try:
             user = users.objects.get(Email=request.data['Email'])
-        except users.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-        user.Password = request.data.get('Password')
-        user.save(update_fields=['Password'])
+        except:
+            return Response({"Email": ["User with this email does not exist."]}, status=status.HTTP_400_BAD_REQUEST)
+        subject = 'Password reset'
+        token = signing.dumps({'user_id': user.id})
+        link = link = 'http://localhost:3000/newpswd?token=' + str(token)
+        message = 'please press this link to set a new password ' + \
+            link + ' if this wasnt you please ignore this message'
+        from_email = 'noreply@example.com'
+        recipient_list = [user.Email]
+        send_mail(subject, message, from_email,
+                  recipient_list, fail_silently=False)
         return Response(status=status.HTTP_200_OK)
     return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-@api_view(['PUT'])
+@api_view(['POST'])
+def verifytoken(request):
+
+    if request.method == 'POST':
+        token = request.data['token']
+    try:
+        data = signing.loads(token)
+        user_id = data['user_id']
+        print(user_id)
+        user = users.objects.get(id=user_id)
+        # You can return any user information you need here
+        return Response({'email': user.Email}, status=status.HTTP_200_OK)
+    except signing.BadSignature:
+        # Handle the case where the token is invalid
+        return Response({'error': 'Invalid token'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+@ api_view(['POST'])
+def changePassword(request):
+    if request.method == 'POST':
+        users.objects.filter(Email=request.data['Email']).update(
+            Password=request.data['Password'])
+        return Response(status=status.HTTP_200_OK)
+    return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@ api_view(['PUT'])
 def trackerDelete(request, pk):
     if request.method == 'PUT':
         tracker.objects.filter(id=pk).delete()
@@ -278,7 +347,7 @@ def trackerDelete(request, pk):
     return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-@api_view(['POST'])
+@ api_view(['POST'])
 def trackerInsert(request):
     if request.method == 'POST':
         saveserialize = trackerInsertSerialize(data=request.data)
@@ -289,7 +358,7 @@ def trackerInsert(request):
         return Response(saveserialize.data, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-@api_view(['GET'])
+@ api_view(['GET'])
 def trackerPull(request):
     if request.method == 'GET':
         results = tracker.objects.all()
@@ -297,7 +366,7 @@ def trackerPull(request):
         return Response(serialize.data)
 
 
-@api_view(['PUT'])
+@ api_view(['PUT'])
 def trackerUpdate(request, pk):
     if request.method == 'PUT':
         saveserialize = trackerUpdateSerialize(
@@ -336,7 +405,7 @@ def trackerUpdate(request, pk):
         return Response(saveserialize.data, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-@api_view(['GET'])
+@ api_view(['GET'])
 def trackerPercentageSum(request):
     if request.method == 'GET':
         sum = tracker.objects.aggregate(Sum('percentClients'), Sum('percentAFeed'), Sum(
@@ -344,7 +413,7 @@ def trackerPercentageSum(request):
         return Response(sum, status=status.HTTP_200_OK)
 
 
-@api_view(['GET'])
+@ api_view(['GET'])
 def trackerCategorySum(request):
     if request.method == 'GET':
         sum = tracker.objects.filter(Category='Fresh Produce').aggregate(Produce=Sum('Quantity')), tracker.objects.filter(Category='Meat').aggregate(Meat=Sum('Quantity')), tracker.objects.filter(Category='Canned Food').aggregate(Canned_Food=Sum(
@@ -352,7 +421,7 @@ def trackerCategorySum(request):
         return Response(sum, status=status.HTTP_200_OK)
 
 
-@api_view(["POST"])
+@ api_view(["POST"])
 def NetworkGraphing(request):
     if request.method == 'POST':
         results = tracker.objects.filter(Email=request.data['user_email']).aggregate(Sum('percentClients'), Sum(
@@ -362,7 +431,7 @@ def NetworkGraphing(request):
         return Response({"user": results, "comparee": results2})
 
 
-@api_view(["GET"])
+@ api_view(["GET"])
 def Past_Hour(request):
     timer = datetime.datetime.now() - datetime.timedelta(hours=1)
     if request.method == 'GET':
@@ -373,7 +442,7 @@ def Past_Hour(request):
     return Response("error", status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-@api_view(["GET"])
+@ api_view(["GET"])
 def Past_Day(request):
     timer = datetime.datetime.now() - datetime.timedelta(days=1)
     if request.method == 'GET':
@@ -384,7 +453,7 @@ def Past_Day(request):
     return Response("error", status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-@api_view(["GET"])
+@ api_view(["GET"])
 def Past_Week(request):
     timer = datetime.datetime.now() - datetime.timedelta(days=7)
     if request.method == 'GET':
@@ -395,7 +464,7 @@ def Past_Week(request):
     return Response("error", status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-@api_view(["GET"])
+@ api_view(["GET"])
 def Past_Month(request):
     timer = datetime.datetime.now() - datetime.timedelta(days=30)
     if request.method == 'GET':
@@ -406,7 +475,7 @@ def Past_Month(request):
     return Response("error", status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-@api_view(["GET"])
+@ api_view(["GET"])
 def Past_6Months(request):
     timer = datetime.datetime.now() - datetime.timedelta(days=182)
     if request.method == 'GET':
