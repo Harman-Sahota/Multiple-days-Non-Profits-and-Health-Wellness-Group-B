@@ -139,7 +139,7 @@ class Login(APIView):
         check_user = users.objects.filter(
             Email=email).exists()
         if check_user:
-            user = users.objects.get(Email=email)
+            user = users.objects.filter(Email=email)
             if check_password(password, user.Password):
                 results = users.objects.get(Email=email)
                 data = {
@@ -159,6 +159,8 @@ class Login(APIView):
                 return Response({"error": "invalid login credentials"}, status=status.HTTP_400_BAD_REQUEST)
         else:
             return Response({"error": "user does not exist"}, status=status.HTTP_404_NOT_FOUND)
+
+
 def postsPullName(request):
     if request.method == 'POST':
         results = users.objects.filter(Email=request.data['Email'])
