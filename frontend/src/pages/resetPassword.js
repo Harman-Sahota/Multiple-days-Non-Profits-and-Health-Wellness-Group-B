@@ -34,14 +34,6 @@ function ResetPassword() {
                         ) : (
                             <div className={`form mx-auto bg-white ${resetCSS.form}`}>
                                 <h5 className={`form-title ${resetCSS.form_title}`}>Reset Password</h5>
-                                <div>
-                                    <span>
-                                        <p className={`form-title-text mb-0`}>
-                                            If the details entered ascribe to an account, your password will be
-                                            reset.
-                                        </p>
-                                    </span>
-                                </div>
 
                                 <div className={`form-floating email-form ${resetCSS.email_form}`}>
                                     <Form.Control type="email" id="exampleInputEmail1" className="form-control input-text" placeholder="jordan@gmail.com" name="email" onChange={(event) =>

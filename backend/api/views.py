@@ -297,6 +297,15 @@ def verifytoken(request):
         return Response({'error': 'Invalid token'}, status=status.HTTP_400_BAD_REQUEST)
 
 
+@ api_view(['POST'])
+def changePassword(request):
+    if request.method == 'POST':
+        users.objects.filter(Email=request.data['Email']).update(
+            Password=request.data['Password'])
+        return Response(status=status.HTTP_200_OK)
+    return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
 @ api_view(['PUT'])
 def trackerDelete(request, pk):
     if request.method == 'PUT':

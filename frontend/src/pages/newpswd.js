@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import resetCSS from './resetPassword.module.css';
+import Form from 'react-bootstrap/Form';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from 'react-bootstrap/Button';
+import Confetti from 'react-confetti';
 
 function ResetPassword() {
     const [token, setToken] = useState('');
@@ -8,8 +13,7 @@ function ResetPassword() {
     const [showForm, setShowForm] = useState(false);
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [passwordError, setPasswordError] = useState('');
-    const [confirmPasswordError, setConfirmPasswordError] = useState('');
+
 
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search);
@@ -18,7 +22,7 @@ function ResetPassword() {
             setToken(token);
             axios.post('http://localhost:8000/api/verifytoken/', { token: token })
                 .then(response => {
-                    setEmail(response.email);
+                    setEmail(response.data.email);
                     setValidToken(true);
                     setShowForm(true);
                 })
@@ -30,46 +34,59 @@ function ResetPassword() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        console.log(password)
+        console.log(confirmPassword)
 
-        if (!validateForm()) {
-            return;
+        if (password == "") {
+
+
+            event.preventDefault();
+
+
+            document.getElementById('password').classList.add('error');
+
+        }
+        else if (confirmPassword == "") {
+
+            event.preventDefault();
+
+            document.getElementById('confirmPassword').classList.add('error');
+
+        }
+        else if (password != confirmPassword && password != "" && confirmPassword != "") {
+
+            event.preventDefault();
+            window.alert('passwords dont match');
+
+            document.getElementById('password').classList.add('error');
+            document.getElementById('confirmPassword').classList.add('error');
+        }
+        else if (password != "" && confirmPassword != "" && password == confirmPassword) {
+            document.getElementById('password').classList.add('success');
+            document.getElementById('confirmPassword').classList.add('success');
         }
 
-        axios.post('http://localhost:8000/api/changepassword/', { email: email, password: password })
-            .then(response => {
-                console.log(response);
-                // show success message
+        axios.post(
+            `http://localhost:8000/api/changePassword`,
+            {
+                Email: email,
+                Password: password
+            },
+            {
+                headers: {
+                    "Content-type": "application/json",
+                },
+            }
+        )
+            .then((response) => {
+                if (response.status == 200) {
+
+                    window.alert('password reset successfully, redirecting you to the login page!')
+                    window.location.href = '/login';
+
+                }
             })
-            .catch(error => {
-                console.log(error);
-                // show error message
-            });
-    }
-
-    const validateForm = () => {
-        let valid = true;
-
-        if (!password) {
-            setPasswordError('Please enter a password.');
-            valid = false;
-        } else if (password.length < 8) {
-            setPasswordError('Password must be at least 8 characters long.');
-            valid = false;
-        } else {
-            setPasswordError('');
-        }
-
-        if (!confirmPassword) {
-            setConfirmPasswordError('Please confirm your password.');
-            valid = false;
-        } else if (password !== confirmPassword) {
-            setConfirmPasswordError('Passwords do not match.');
-            valid = false;
-        } else {
-            setConfirmPasswordError('');
-        }
-
-        return valid;
+            .catch((err) => console.warn(err));
     }
 
     if (!validToken) {
@@ -82,22 +99,33 @@ function ResetPassword() {
 
     if (showForm) {
         return (
-            <div>
-                <h1>Reset Password</h1>
-                <form onSubmit={handleSubmit}>
-                    <div>
-                        <label htmlFor="password">New Password:</label>
-                        <input type="password" id="password" name="password" value={password} onChange={(event) => setPassword(event.target.value)} />
-                        {passwordError && <span className="error">{passwordError}</span>}
+            <>
+                <section>
+                    <div className={resetCSS.body}>
+                        <div className={resetCSS.form_container}>
+                            <div className={`form mx-auto bg-white ${resetCSS.form}`}>
+                                <h5 className={`form-title ${resetCSS.form_title}`}>Set New Password</h5>
+                                <form onSubmit={handleSubmit}>
+                                    <div className={`form-floating email-form ${resetCSS.email_form}`}>
+                                        <input className="form-control input-text" type="password" id="password" name="password" value={password} onChange={(event) => setPassword(event.target.value)} />
+                                        <Form.Label for="password" className="form-label input-text">New Password:</Form.Label>
+
+                                    </div>
+                                    <br />
+                                    <div className={`form-floating password-form ${resetCSS.email_form}`}>
+
+                                        <input className="form-control input-text" type="password" id="confirmPassword" name="confirmPassword" value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} />
+                                        <Form.Label for="confirmPassword" className="form-label input-text">Confirm Password:</Form.Label>
+
+                                    </div>
+                                    <br />
+                                    <Button type='submit' classname={`resetPassword btn btn-outline-danger reset-button ${resetCSS.reset_button}`} variant="outline-danger">Submit</Button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <label htmlFor="confirmPassword">Confirm Password:</label>
-                        <input type="password" id="confirmPassword" name="confirmPassword" value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} />
-                        {confirmPasswordError && <span className="error">{confirmPasswordError}</span>}
-                    </div>
-                    <button type="submit">Submit</button>
-                </form>
-            </div>
+                </section>
+            </>
         );
     }
 

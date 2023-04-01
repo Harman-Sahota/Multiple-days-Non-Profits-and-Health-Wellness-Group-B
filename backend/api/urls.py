@@ -35,7 +35,8 @@ urlpatterns = [
     path('Past_6Months/', views.Past_6Months),
     path('resetPassword/', views.resetPassword),
     path('trackerDelete/<pk>', views.trackerDelete),
-    path('verifytoken/', views.verifytoken)
+    path('verifytoken/', views.verifytoken),
+    path('changePassword', views.changePassword)
     # path('token/', jwt_views.TokenObtainPairView.as_view(),name='token_obtain_pair'),
     # path('token/refresh/',  jwt_views.TokenRefreshView.as_view(),name='token_refresh')
 
