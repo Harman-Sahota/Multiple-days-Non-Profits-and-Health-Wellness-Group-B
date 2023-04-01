@@ -33,15 +33,17 @@ from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
 from django.core import signing
 from django.http import HttpResponse
-
+from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth import login, authenticate
 
 
 @api_view(["POST"])
 def registerInsert(request):
     if request.method == "POST":
+        request.data['Password'] = make_password(request.data['Password'])
         saveserialize = userSerialize(data=request.data)
         email = request.data['Email']
+
         duplicated = users.objects.filter(Email=email).count()
         if duplicated != 0:
             return Response(status=status.HTTP_409_CONFLICT)
@@ -126,6 +128,37 @@ def postsPullShared(request):
 
 
 @api_view(["POST"])
+class Login(APIView):
+    def post(self, request):
+        if request.method == 'POST':
+            email = request.data.get("Email")
+            password = request.data.get("Password")
+        if not email or not password:
+            return Response({"error": "Please fill all fields"}, status=status.HTTP_400_BAD_REQUEST)
+
+        check_user = users.objects.filter(
+            Email=email).exists()
+        if check_user:
+            user = users.objects.get(Email=email)
+            if check_password(password, user.Password):
+                results = users.objects.get(Email=email)
+                data = {
+                    "firstname": results.FirstName,
+                    "lastname": results.LastName,
+                    "email": email,
+                    "roles": results.Roles,
+                    "organization": results.Organization,
+                    "consent": results.Consent,
+                    "approve": results.Approve,
+                    "id": results.id,
+                }
+                token = jwt.encode(
+                    data, 'secret', algorithm='HS256').decode('utf-8')
+                return Response({"success": "success logged in", "data": data, "token": token}, status=status.HTTP_200_OK)
+            else:
+                return Response({"error": "invalid login credentials"}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response({"error": "user does not exist"}, status=status.HTTP_404_NOT_FOUND)
 def postsPullName(request):
     if request.method == 'POST':
         results = users.objects.filter(Email=request.data['Email'])
@@ -142,30 +175,28 @@ class Login(APIView):
             return Response({"error": "Please fill all fields"}, status=status.HTTP_400_BAD_REQUEST)
 
         check_user = users.objects.filter(
-            Email=email, Password=password).exists()
+            Email=email).exists()
         if check_user:
-            getdetails = users.objects.filter(Email=email, Password=password)
-        if check_user == False:
-            return Response({"error": "user does not exist"}, status=status.HTTP_404_NOT_FOUND)
-
-        if getdetails:
-
-            results = users.objects.get(Email=email)
-            data = {
-                "firstname": results.FirstName,
-                "lastname": results.LastName,
-                "email": email,
-                "roles": results.Roles,
-                "organization": results.Organization,
-                "consent": results.Consent,
-                "approve": results.Approve,
-                "id": results.id,
-            }
-            token = jwt.encode(
-                data, 'secret', algorithm='HS256').decode('utf-8')
-            return Response({"success": "success logged in", "data": data, "token": token}, status=status.HTTP_200_OK)
+            user = users.objects.get(Email=email)
+            if check_password(password, user.Password):
+                results = users.objects.get(Email=email)
+                data = {
+                    "firstname": results.FirstName,
+                    "lastname": results.LastName,
+                    "email": email,
+                    "roles": results.Roles,
+                    "organization": results.Organization,
+                    "consent": results.Consent,
+                    "approve": results.Approve,
+                    "id": results.id,
+                }
+                token = jwt.encode(
+                    data, 'secret', algorithm='HS256').decode('utf-8')
+                return Response({"success": "success logged in", "data": data, "token": token}, status=status.HTTP_200_OK)
+            else:
+                return Response({"error": "invalid login credentials"}, status=status.HTTP_400_BAD_REQUEST)
         else:
-            return Response({"error": "invalid login credentials"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"error": "user does not exist"}, status=status.HTTP_404_NOT_FOUND)
 
 
 @api_view(["POST"])
