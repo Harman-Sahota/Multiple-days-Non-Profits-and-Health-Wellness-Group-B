@@ -60,4 +60,9 @@
 
 ### QUESTION ANSWERS
 
+
+### Summary
+
+- Communicate with the professor through the repository and avoid interfering with the server. Use SSH keys for authentication and collaborate with IT support on virtual machine partitioning.
+
 >
