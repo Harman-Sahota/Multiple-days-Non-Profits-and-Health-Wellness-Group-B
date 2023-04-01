@@ -63,6 +63,6 @@
 
 ### Summary
 
-- Communicate with the professor through the repository and avoid interfering with the server. Use SSH keys for authentication and collaborate with IT support on virtual machine partitioning. Consider using Joomla with Django or FastAPI as alternatives for the project. Utilize Git Issues for project management and share research information in the group-wide repository. Learn SQL filter techniques and create a page for homeless people to access service provider contacts. Provide explicit instructions for Barbara, 
+- Communicate with the professor through the repository and avoid interfering with the server. Use SSH keys for authentication and collaborate with IT support on virtual machine partitioning. Consider using Joomla with Django or FastAPI as alternatives for the project. Utilize Git Issues for project management and share research information in the group-wide repository. Learn SQL filter techniques and create a page for homeless people to access service provider contacts. Provide explicit instructions for Barbara, as needed. Wait for website account creation and return with inquiries about front-end features after designing mockups
 
 >
