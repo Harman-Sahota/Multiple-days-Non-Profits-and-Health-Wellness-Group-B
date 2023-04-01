@@ -491,7 +491,7 @@ function Tracker() {
           <div className="container p-2" id="container">
             <p><strong>Welcome, {localStorage.getItem("firstname")}!</strong></p>
             <div className={`card ${trackerCSS["tracker-card-div"]} m-0`}>
-            <div className={`${trackerCSS["card-header"]} card-header`}>
+              <div className={`${trackerCSS["card-header"]} card-header`}>
                 <h3>Enter tracker data:</h3>
               </div>
               <div className="card-body">
@@ -687,15 +687,15 @@ function Tracker() {
                             </div>
                           </div>
                         </div>
-                        <div className="col-auto">
+                        <div className="col">
                           <div className="row">
-                            <div className="col-auto">
+                            <div className="col">
                               <label htmlFor="percent">% <small style={{ color: "red" }}>(These values are auto-calculated)</small></label>
                               <br />
                             </div>
                           </div>
                           <div className="row pb-2">
-                            <div className="col-auto">
+                            <div className="col">
                               <input
                                 type="number"
                                 step="any"
@@ -723,7 +723,7 @@ function Tracker() {
                             </div>
                           </div>
                           <div className="row pb-2">
-                            <div className="col-auto">
+                            <div className="col">
                               <input
                                 type="number"
                                 step="any"
@@ -751,7 +751,7 @@ function Tracker() {
                             </div>
                           </div>
                           <div className="row pb-2">
-                            <div className="col-auto">
+                            <div className="col">
                               <input
                                 type="number"
                                 step="any"
@@ -779,7 +779,7 @@ function Tracker() {
                             </div>
                           </div>
                           <div className="row pb-2">
-                            <div className="col-auto">
+                            <div className="col">
                               <input
                                 type="number"
                                 step="any"
@@ -807,7 +807,7 @@ function Tracker() {
                             </div>
                           </div>
                           <div className="row pb-2">
-                            <div className="col-auto">
+                            <div className="col">
                               <input
                                 type="number"
                                 step="any"
