@@ -489,11 +489,9 @@ function Tracker() {
       return (
         <div className={isSubmitted ? "confetti-container" : ""}>
           <div className="container p-2" id="container">
-            <p>
-              <strong>Welcome, {localStorage.getItem("firstname")}!</strong>
-            </p>
-            <div className={`card ${trackerCSS["tracker-card-div"]}`}>
-              <div className="card-header">
+            <p><strong>Welcome, {localStorage.getItem("firstname")}!</strong></p>
+            <div className={`card ${trackerCSS["tracker-card-div"]} m-0`}>
+            <div className={`${trackerCSS["card-header"]} card-header`}>
                 <h3>Enter tracker data:</h3>
               </div>
               <div className="card-body">
@@ -531,7 +529,7 @@ function Tracker() {
                             type="text"
                             id="description"
                             className={`form-control input-text ${trackerCSS["customised-input"]}`}
-                            placeholder="Description"
+                            placeholder=""
                             name="description"
                             onChange={(event) => {
                               setTrackers({
@@ -548,7 +546,7 @@ function Tracker() {
                             type={`text`}
                             id="quantity"
                             className={`form-control input-text ${trackerCSS["customised-input"]}`}
-                            placeholder="Quantity"
+                            placeholder=""
                             name="quantity"
                             ref={quantity}
                             onKeyUp={calculateLandFillAndPercentsWrapper}
@@ -834,8 +832,8 @@ function Tracker() {
                           </div>
                         </div>
                       </div>
-                      <div className="row p-2">
-                        <div className="d-flex justify-content-start">
+                      <div className="row">
+                        <div className="">
                           <Button
                             variant="outline-success"
                             className={`${trackerCSS["save"]} btn btn-outline-success`}
@@ -923,7 +921,6 @@ function Tracker() {
               </div>
             </div>
 
-            <br />
             <br />
             <section id="section" className={`${trackerCSS["database-table"]}`}>
               <div className="card">
