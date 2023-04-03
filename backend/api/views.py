@@ -35,6 +35,7 @@ from django.core import signing
 from django.http import HttpResponse
 from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth import login, authenticate
+from django.db.models import Q
 
 
 @api_view(["POST"])
@@ -334,7 +335,7 @@ def verifytoken(request):
 def changePassword(request):
     if request.method == 'POST':
         users.objects.filter(Email=request.data['Email']).update(
-            Password=request.data['Password'])
+            Password=make_password(request.data['Password']))
         return Response(status=status.HTTP_200_OK)
     return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
@@ -405,20 +406,82 @@ def trackerUpdate(request, pk):
         return Response(saveserialize.data, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-@ api_view(['GET'])
+@api_view(['GET'])
 def trackerPercentageSum(request):
     if request.method == 'GET':
-        sum = tracker.objects.aggregate(Sum('percentClients'), Sum('percentAFeed'), Sum(
+        email = request.GET.get('Email')
+        organization = request.GET.get('Organization')
+
+        queryset = tracker.objects.all()
+        if email or organization:
+            queryset = queryset.filter(
+                Q(Email=email) | Q(Organization=organization))
+        sum = queryset.aggregate(Sum('percentClients'), Sum('percentAFeed'), Sum(
             'percentCompost'), Sum('percentPartNet'), Sum('percentLandfill'))
+
         return Response(sum, status=status.HTTP_200_OK)
+    return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-@ api_view(['GET'])
+@api_view(['GET'])
 def trackerCategorySum(request):
     if request.method == 'GET':
-        sum = tracker.objects.filter(Category='Fresh Produce').aggregate(Produce=Sum('Quantity')), tracker.objects.filter(Category='Meat').aggregate(Meat=Sum('Quantity')), tracker.objects.filter(Category='Canned Food').aggregate(Canned_Food=Sum(
-            'Quantity')), tracker.objects.filter(Category='Bread').aggregate(Bread=Sum('Quantity')), tracker.objects.filter(Category='Dairy').aggregate(Dairy=Sum('Quantity')), tracker.objects.filter(Category='Reclaimed').aggregate(Reclaimed=Sum('Quantity'))
+        email = request.GET.get('Email')
+        organization = request.GET.get('Organization')
+
+        produce_sum = 0
+        meat_sum = 0
+        canned_food_sum = 0
+        bread_sum = 0
+        dairy_sum = 0
+        reclaimed_sum = 0
+
+        queryset = tracker.objects.all()
+        if email or organization:
+            queryset = queryset.filter(
+                Q(Email=email) | Q(Organization=organization))
+
+        produce_queryset = queryset.filter(Category='Fresh Produce')
+        if produce_queryset.exists():
+            produce_sum = produce_queryset.aggregate(Sum('Quantity'))[
+                'Quantity__sum']
+
+        meat_queryset = queryset.filter(Category='Meat')
+        if meat_queryset.exists():
+            meat_sum = meat_queryset.aggregate(Sum('Quantity'))[
+                'Quantity__sum']
+
+        canned_food_queryset = queryset.filter(Category='Canned Food')
+        if canned_food_queryset.exists():
+            canned_food_sum = canned_food_queryset.aggregate(Sum('Quantity'))[
+                'Quantity__sum']
+
+        bread_queryset = queryset.filter(Category='Bread')
+        if bread_queryset.exists():
+            bread_sum = bread_queryset.aggregate(
+                Sum('Quantity'))['Quantity__sum']
+
+        dairy_queryset = queryset.filter(Category='Dairy')
+        if dairy_queryset.exists():
+            dairy_sum = dairy_queryset.aggregate(
+                Sum('Quantity'))['Quantity__sum']
+
+        reclaimed_queryset = queryset.filter(Category='Reclaimed')
+        if reclaimed_queryset.exists():
+            reclaimed_sum = reclaimed_queryset.aggregate(Sum('Quantity'))[
+                'Quantity__sum']
+
+        sum = {
+            'Produce': produce_sum,
+            'Meat': meat_sum,
+            'Canned_Food': canned_food_sum,
+            'Bread': bread_sum,
+            'Dairy': dairy_sum,
+            'Reclaimed': reclaimed_sum
+        }
+
         return Response(sum, status=status.HTTP_200_OK)
+    return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 @ api_view(["POST"])

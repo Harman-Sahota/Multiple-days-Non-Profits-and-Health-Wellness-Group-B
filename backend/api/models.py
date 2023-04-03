@@ -1,29 +1,33 @@
 
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser,BaseUserManager
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import UserManager
+
 
 class users(models.Model):
     FirstName = models.CharField(max_length=255)
     LastName = models.CharField(max_length=255)
-    Email = models.EmailField(max_length=255,unique=True)
-    Password = models.CharField(max_length=255,default='Password')
+    Email = models.EmailField(max_length=255, unique=True)
+    Password = models.CharField(max_length=255, default='Password')
     Roles = models.CharField(max_length=255)
     Consent = models.CharField(max_length=50)
     Organization = models.CharField(max_length=255, null=True)
-    Approve = models.CharField(max_length=50,null=True)
-    class Meta: 
+    Approve = models.CharField(max_length=50, null=True)
+
+    class Meta:
         db_table = "users"
 
 
 class permissions(models.Model):
-    role = models.CharField(primary_key=True,max_length=255)
-    metrics = models.CharField(max_length=255,null=True,blank=True)
-    network = models.CharField(max_length=10,null=True,blank=True)
-    readwrite = models.CharField(max_length=10,null=True,blank=True)
-    
+    role = models.CharField(primary_key=True, max_length=255)
+    metrics = models.CharField(max_length=255, null=True, blank=True)
+    network = models.CharField(max_length=10, null=True, blank=True)
+    readwrite = models.CharField(max_length=10, null=True, blank=True)
+
     class Meta:
         db_table = "permissions"
+
+
 class posts(models.Model):
     product = models.CharField(max_length=255)
     Type = models.CharField(max_length=255)
@@ -32,13 +36,13 @@ class posts(models.Model):
     Description = models.CharField(max_length=255)
     Email = models.EmailField(max_length=255)
     date_time = models.DateTimeField(auto_now_add=True)
-    state = models.CharField(max_length=255,default='open')
-    shared_with = models.CharField(max_length=255,default='')
-    id = models.AutoField(primary_key=True);
-
+    state = models.CharField(max_length=255, default='open')
+    shared_with = models.CharField(max_length=255, default='')
+    id = models.AutoField(primary_key=True)
 
     class Meta:
         db_table = "posts"
+
 
 class tracker(models.Model):
     Category = models.CharField(max_length=255)
@@ -61,7 +65,5 @@ class tracker(models.Model):
 
     #Email = models.CharField(max_length=255)
 
-
     class Meta:
         db_table = "tracker"
-    

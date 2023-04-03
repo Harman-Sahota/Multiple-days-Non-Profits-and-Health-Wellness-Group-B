@@ -1,4 +1,6 @@
-h1,h2,h3 {
+h1,
+h2,
+h3 {
   margin: 0;
 }
 
@@ -44,10 +46,11 @@ thead,
 td {
   text-align: center;
   vertical-align: middle;
-  
+
 }
 
-th,td {
+th,
+td {
   max-width: 10em;
   white-space: pre-wrap;
 }
@@ -83,7 +86,7 @@ input[type="number"] {
 .pie-chart-inner-div {
   display: flex;
   flex-direction: row;
-  justify-content: center; 
+  justify-content: center;
 }
 
 /*.database-table {
@@ -125,3 +128,6 @@ td {
   padding: 0;
 }
 
+.export {
+  width: 10%;
+}

@@ -269,7 +269,7 @@ function Profile() {
                                         {
                                             FirstName: all.FirstName,
                                             LastName: all.LastName,
-                                            Roles: all.Roles,
+                                            Roles: saved_roles,
                                             Consent: all.Consent,
                                             Organization: all.Organization
                                         },
