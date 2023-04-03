@@ -316,14 +316,15 @@ function Tracker() {
       setEditable(0);
       setEditingRow(null);
     }
+    const Email = localStorage.getItem("email");
+    const Organization = localStorage.getItem("organization");
 
     async function fetchData() {
-      const response = await fetch("http://127.0.0.1:8000/api/trackerPull/");
+      const response = await fetch(`http://127.0.0.1:8000/api/trackerPull/?Email=${Email}&Organization=${Organization}`);
       const data = await response.json();
       return setData(data);
     }
-    const Email = localStorage.getItem("email");
-    const Organization = localStorage.getItem("organization");
+
 
     async function fetchPercentageChartData() {
       const response = await fetch(
@@ -975,252 +976,293 @@ function Tracker() {
                       {getData &&
                         getData.length > 0 &&
                         getData.map((userObj) => (
-                          userObj.Email === localStorage.getItem("email") || userObj.Organization === localStorage.getItem('organization') ? (
+
+                          <tr>
+                            <td>
+
+                              {editingRow === userObj.id ? (
+                                <select
+                                  className={`form-control input-text ${trackerCSS["customised-smaller-input"]}`}
+                                  id="category"
+
+                                  name="category"
+                                  onChange={(event) => {
+                                    setEditTrackers({
+                                      ...trackers_edit,
+                                      Category: event.target.value,
+                                    });
+                                  }}
+                                >
+                                  <option>Fresh Produce</option>
+                                  <option>Meat</option>
+                                  <option>Canned Food</option>
+                                  <option>Bread</option>
+                                  <option>Dairy</option>
+                                  <option>Reclaimed</option>
+                                </select>
+                              ) : (
+                                userObj.Category
+                              )}
+
+                            </td>
+                            <td>
+                              {editingRow === userObj.id ? (
+                                <textarea
+                                  type="text"
+                                  id="description-edit"
+                                  className={`form-control input-text ${trackerCSS["customised-smaller-input"]}`}
+                                  placeholder={userObj.Description}
+                                  name="description-edit"
+                                  onChange={(event) => {
+                                    setEditTrackers({
+                                      ...trackers_edit,
+                                      Description: event.target.value,
+                                    });
+                                  }}
+                                />) : (
+
+                                userObj.Description)}
+                            </td>
+                            <td>
+                              {editingRow === userObj.id ? (
+
+                                <input
+                                  type={`text`}
+                                  id="quantity-edit"
+                                  className={`form-control input-text ${trackerCSS["customised-smaller-input"]}`}
+                                  placeholder={userObj.Quantity}
+                                  name="quantity-edit"
+                                  onKeyUp={calculateLandFillAndPercentsWrapper}
+                                  onChange={(event) => {
+                                    setEditTrackers({
+                                      ...trackers_edit,
+                                      Quantity: event.target.value,
+
+                                    });
+                                    calculateLandFillEdit()
+                                  }}
+                                />
 
 
-                            <tr>
-                              <td>
+                              ) : (
+                                userObj.Quantity
+                              )}
+
+                            </td>
+                            <td>
+                              {editingRow === userObj.id ? (
+
+                                <select
+                                  className="form-select"
+                                  id="qunits-edit"
+                                  name="qunits-edit"
+                                  onChange={(event) => {
+                                    setEditTrackers({
+                                      ...trackers_edit,
+                                      Qunits: event.target.value,
+                                    });
+                                  }}
+                                >
+                                  <option selected>lbs</option>
+                                  <option>kgs</option>
+                                </select>
+
+                              ) : (
+                                userObj.Qunits
+                              )}
+
+
+
+                            </td>
+                            <td>
+                              {editingRow === userObj.id ? (
+                                <input
+                                  type="number"
+                                  step="any"
+                                  className={`form-control ${trackerCSS["customised-smaller-input"]}`}
+                                  id="clients-edit"
+                                  name="clients-edit"
+                                  placeholder={userObj.amountToClients}
+                                  min={0}
+                                  onChange={(event) => {
+                                    setEditTrackers({
+                                      ...trackers_edit,
+                                      amountToClients: event.target.value,
+
+                                    });
+                                    calculateLandFillEdit()
+                                  }}
+                                />) : (userObj.amountToClients)
+
+                              }</td>
+                            <td>
+                              {editingRow === userObj.id ? (
+                                <input
+                                  type="number"
+                                  step="any"
+                                  className={`form-control ${trackerCSS["customised-smaller-input"]}`}
+                                  id="animalFeed-edit"
+                                  name="animalFeed-edit"
+                                  placeholder={userObj.amountToAFeed}
+                                  min={0}
+                                  onChange={(event) => {
+                                    setEditTrackers({
+                                      ...trackers_edit,
+                                      amountToAFeed: event.target.value,
+
+                                    });
+                                    calculateLandFillEdit()
+                                  }}
+                                />
+                              ) : (userObj.amountToAFeed)
+                              }</td>
+                            <td>
+                              {editingRow === userObj.id ? (
+                                <input
+                                  type="number"
+                                  step="any"
+                                  className={`form-control ${trackerCSS["customised-smaller-input"]}`}
+                                  id="compost-edit"
+                                  name="compost-edit"
+                                  placeholder={userObj.amountToCompost}
+                                  min={0}
+                                  onChange={(event) => {
+                                    setEditTrackers({
+                                      ...trackers_edit,
+                                      amountToCompost: event.target.value,
+
+                                    });
+                                    calculateLandFillEdit()
+                                  }}
+                                />
+
+                              ) : (
+                                userObj.amountToCompost
+                              )}
+
+
+                            </td>
+                            <td>
+                              {editingRow === userObj.id ? (
+
+                                <input
+                                  type="number"
+                                  step="any"
+                                  className={`form-control ${trackerCSS["customised-smaller-input"]}`}
+                                  id="partnerNetwork-edit"
+                                  name="partnerNetwork-edit"
+                                  placeholder={userObj.amountToPartNet}
+                                  min={0}
+                                  onChange={(event) => {
+                                    setEditTrackers({
+                                      ...trackers_edit,
+                                      amountToPartnerNetwork: event.target.value,
+
+                                    });
+                                    calculateLandFillEdit()
+                                  }}
+                                />
+
+                              ) : (
+                                userObj.amountToPartNet
+                              )}
+
+                            </td>
+                            <td>
+                              {editingRow === userObj.id ? (
+
+                                <input
+                                  type="number"
+                                  step="any"
+                                  id="landfill_edit"
+                                  className={`form-control ${trackerCSS["customised-smaller-input"]}`}
+                                  placeholder={calculateLandFillEdit()}
+                                  value={calculateLandFillEdit()}
+                                  min={0}
+                                  readonly="readonly"
+
+                                />
+
+                              ) : (
+                                userObj.amountToLandfill
+                              )}
+
+
+
+                            </td>
+                            <td>
+                              {dateFormat(userObj.date_time, "mmmm dS, yyyy")}
+                            </td>
+                            <td>
+                              <div>
 
                                 {editingRow === userObj.id ? (
-                                  <select
-                                    className={`form-control input-text ${trackerCSS["customised-smaller-input"]}`}
-                                    id="category"
+                                  <>
+                                    <button variant="success" className="btn btn-success" style={{ width: "fit-content" }} onClick={() => {
 
-                                    name="category"
-                                    onChange={(event) => {
-                                      setEditTrackers({
-                                        ...trackers_edit,
-                                        Category: event.target.value,
-                                      });
-                                    }}
-                                  >
-                                    <option>Fresh Produce</option>
-                                    <option>Meat</option>
-                                    <option>Canned Food</option>
-                                    <option>Bread</option>
-                                    <option>Dairy</option>
-                                    <option>Reclaimed</option>
-                                  </select>
+                                      axios
+                                        .put(
+                                          `http://localhost:8000/api/trackerUpdate/${userObj.id}`,
+                                          {
+                                            Category: trackers_edit.Category,
+                                            Description: trackers_edit.Description,
+                                            Quantity: trackers_edit.Quantity,
+                                            Qunits: trackers_edit.Qunits,
+                                            amountToClients: trackers_edit.amountToClients,
+                                            amountToAFeed: trackers_edit.amountToAFeed,
+                                            amountToCompost: trackers_edit.amountToClients,
+                                            amountToPartNet: trackers_edit.amountToPartnerNetwork,
+                                            amountToLandfill: parseFloat(document.getElementById('landfill_edit').value),
+                                            percentClients: parseFloat((trackers_edit.amountToClients / trackers_edit.Quantity) * 100),
+                                            percentAFeed: parseFloat((trackers_edit.amountToAFeed / trackers_edit.Quantity) * 100),
+                                            percentCompost: parseFloat((trackers_edit.amountToCompost / trackers_edit.Quantity) * 100),
+                                            percentPartNet: parseFloat((trackers_edit.amountToPartnerNetwork / trackers_edit.Quantity) * 100),
+                                            percentLandfill: parseFloat((document.getElementById('landfill_edit').value / trackers_edit.Quantity) * 100),
+                                            Email: userObj.Email,
+                                            Organization: userObj.Organization
+                                          },
+                                          {
+                                            headers: {
+                                              "Content-type": "application/json",
+                                            },
+                                          }
+                                        )
+                                        .then((response) => {
+                                          if (response.status == 201) {
+                                            setIsSubmitted(true);
+                                            fetchData();
+                                            fetchPercentageChartData();
+                                            fetchCategoryChartData();
+                                            defaultValue();
+                                          }
+                                        })
+                                        .catch((err) => console.warn(err));
+
+                                    }} ><FontAwesomeIcon icon={faSquareCheck} /></button>
+                                    <br />
+                                    <button variant="danger" className="btn btn-danger" style={{ width: "fit-content" }} onClick={() => {
+                                      defaultValue();
+                                      fetchData();
+                                      fetchPercentageChartData();
+                                      fetchCategoryChartData();
+                                      defaultValue()
+
+
+                                    }}><FontAwesomeIcon icon={faRectangleXmark} /></button>
+                                  </>
                                 ) : (
-                                  userObj.Category
-                                )}
-
-                              </td>
-                              <td>
-                                {editingRow === userObj.id ? (
-                                  <textarea
-                                    type="text"
-                                    id="description-edit"
-                                    className={`form-control input-text ${trackerCSS["customised-smaller-input"]}`}
-                                    placeholder={userObj.Description}
-                                    name="description-edit"
-                                    onChange={(event) => {
-                                      setEditTrackers({
-                                        ...trackers_edit,
-                                        Description: event.target.value,
-                                      });
-                                    }}
-                                  />) : (
-
-                                  userObj.Description)}
-                              </td>
-                              <td>
-                                {editingRow === userObj.id ? (
-
-                                  <input
-                                    type={`text`}
-                                    id="quantity-edit"
-                                    className={`form-control input-text ${trackerCSS["customised-smaller-input"]}`}
-                                    placeholder={userObj.Quantity}
-                                    name="quantity-edit"
-                                    onKeyUp={calculateLandFillAndPercentsWrapper}
-                                    onChange={(event) => {
-                                      setEditTrackers({
-                                        ...trackers_edit,
-                                        Quantity: event.target.value,
-
-                                      });
-                                      calculateLandFillEdit()
-                                    }}
-                                  />
-
-
-                                ) : (
-                                  userObj.Quantity
-                                )}
-
-                              </td>
-                              <td>
-                                {editingRow === userObj.id ? (
-
-                                  <select
-                                    className="form-select"
-                                    id="qunits-edit"
-                                    name="qunits-edit"
-                                    onChange={(event) => {
-                                      setEditTrackers({
-                                        ...trackers_edit,
-                                        Qunits: event.target.value,
-                                      });
-                                    }}
-                                  >
-                                    <option selected>lbs</option>
-                                    <option>kgs</option>
-                                  </select>
-
-                                ) : (
-                                  userObj.Qunits
-                                )}
-
-
-
-                              </td>
-                              <td>
-                                {editingRow === userObj.id ? (
-                                  <input
-                                    type="number"
-                                    step="any"
-                                    className={`form-control ${trackerCSS["customised-smaller-input"]}`}
-                                    id="clients-edit"
-                                    name="clients-edit"
-                                    placeholder={userObj.amountToClients}
-                                    min={0}
-                                    onChange={(event) => {
-                                      setEditTrackers({
-                                        ...trackers_edit,
-                                        amountToClients: event.target.value,
-
-                                      });
-                                      calculateLandFillEdit()
-                                    }}
-                                  />) : (userObj.amountToClients)
-
-                                }</td>
-                              <td>
-                                {editingRow === userObj.id ? (
-                                  <input
-                                    type="number"
-                                    step="any"
-                                    className={`form-control ${trackerCSS["customised-smaller-input"]}`}
-                                    id="animalFeed-edit"
-                                    name="animalFeed-edit"
-                                    placeholder={userObj.amountToAFeed}
-                                    min={0}
-                                    onChange={(event) => {
-                                      setEditTrackers({
-                                        ...trackers_edit,
-                                        amountToAFeed: event.target.value,
-
-                                      });
-                                      calculateLandFillEdit()
-                                    }}
-                                  />
-                                ) : (userObj.amountToAFeed)
-                                }</td>
-                              <td>
-                                {editingRow === userObj.id ? (
-                                  <input
-                                    type="number"
-                                    step="any"
-                                    className={`form-control ${trackerCSS["customised-smaller-input"]}`}
-                                    id="compost-edit"
-                                    name="compost-edit"
-                                    placeholder={userObj.amountToCompost}
-                                    min={0}
-                                    onChange={(event) => {
-                                      setEditTrackers({
-                                        ...trackers_edit,
-                                        amountToCompost: event.target.value,
-
-                                      });
-                                      calculateLandFillEdit()
-                                    }}
-                                  />
-
-                                ) : (
-                                  userObj.amountToCompost
-                                )}
-
-
-                              </td>
-                              <td>
-                                {editingRow === userObj.id ? (
-
-                                  <input
-                                    type="number"
-                                    step="any"
-                                    className={`form-control ${trackerCSS["customised-smaller-input"]}`}
-                                    id="partnerNetwork-edit"
-                                    name="partnerNetwork-edit"
-                                    placeholder={userObj.amountToPartNet}
-                                    min={0}
-                                    onChange={(event) => {
-                                      setEditTrackers({
-                                        ...trackers_edit,
-                                        amountToPartnerNetwork: event.target.value,
-
-                                      });
-                                      calculateLandFillEdit()
-                                    }}
-                                  />
-
-                                ) : (
-                                  userObj.amountToPartNet
-                                )}
-
-                              </td>
-                              <td>
-                                {editingRow === userObj.id ? (
-
-                                  <input
-                                    type="number"
-                                    step="any"
-                                    id="landfill_edit"
-                                    className={`form-control ${trackerCSS["customised-smaller-input"]}`}
-                                    placeholder={calculateLandFillEdit()}
-                                    value={calculateLandFillEdit()}
-                                    min={0}
-                                    readonly="readonly"
-
-                                  />
-
-                                ) : (
-                                  userObj.amountToLandfill
-                                )}
-
-
-
-                              </td>
-                              <td>
-                                {dateFormat(userObj.date_time, "mmmm dS, yyyy")}
-                              </td>
-                              <td>
-                                <div>
-
-                                  {editingRow === userObj.id ? (
-                                    <>
-                                      <button variant="success" className="btn btn-success" style={{ width: "fit-content" }} onClick={() => {
-
+                                  <><Button variant="primary" className="btn" onClick={() => handleEdit(userObj.id)} style={{ width: "fit-content" }}><FontAwesomeIcon icon={faPenToSquare} /></Button>
+                                    <Button
+                                      variant="danger"
+                                      className="btn btn-danger"
+                                      style={{ width: "fit-content" }}
+                                      name="field"
+                                      onClick={(e) => {
                                         axios
                                           .put(
-                                            `http://localhost:8000/api/trackerUpdate/${userObj.id}`,
+                                            `http://localhost:8000/api/trackerDelete/${userObj.id}`,
                                             {
-                                              Category: trackers_edit.Category,
-                                              Description: trackers_edit.Description,
-                                              Quantity: trackers_edit.Quantity,
-                                              Qunits: trackers_edit.Qunits,
-                                              amountToClients: trackers_edit.amountToClients,
-                                              amountToAFeed: trackers_edit.amountToAFeed,
-                                              amountToCompost: trackers_edit.amountToClients,
-                                              amountToPartNet: trackers_edit.amountToPartnerNetwork,
-                                              amountToLandfill: parseFloat(document.getElementById('landfill_edit').value),
-                                              percentClients: parseFloat((trackers_edit.amountToClients / trackers_edit.Quantity) * 100),
-                                              percentAFeed: parseFloat((trackers_edit.amountToAFeed / trackers_edit.Quantity) * 100),
-                                              percentCompost: parseFloat((trackers_edit.amountToCompost / trackers_edit.Quantity) * 100),
-                                              percentPartNet: parseFloat((trackers_edit.amountToPartnerNetwork / trackers_edit.Quantity) * 100),
-                                              percentLandfill: parseFloat((document.getElementById('landfill_edit').value / trackers_edit.Quantity) * 100),
-                                              Email: userObj.Email,
-                                              Organization: userObj.Organization
+
                                             },
                                             {
                                               headers: {
@@ -1229,66 +1271,23 @@ function Tracker() {
                                             }
                                           )
                                           .then((response) => {
-                                            if (response.status == 201) {
+                                            if (response.status == 200) {
                                               setIsSubmitted(true);
                                               fetchData();
                                               fetchPercentageChartData();
                                               fetchCategoryChartData();
-                                              defaultValue();
                                             }
                                           })
                                           .catch((err) => console.warn(err));
+                                      }}
+                                    >
+                                      <FontAwesomeIcon icon={faTrash} />
+                                    </Button></>
+                                )}
+                              </div>
+                            </td>
+                          </tr>
 
-                                      }} ><FontAwesomeIcon icon={faSquareCheck} /></button>
-                                      <br />
-                                      <button variant="danger" className="btn btn-danger" style={{ width: "fit-content" }} onClick={() => {
-                                        defaultValue();
-                                        fetchData();
-                                        fetchPercentageChartData();
-                                        fetchCategoryChartData();
-                                        defaultValue()
-
-
-                                      }}><FontAwesomeIcon icon={faRectangleXmark} /></button>
-                                    </>
-                                  ) : (
-                                    <><Button variant="primary" className="btn" onClick={() => handleEdit(userObj.id)} style={{ width: "fit-content" }}><FontAwesomeIcon icon={faPenToSquare} /></Button>
-                                      <Button
-                                        variant="danger"
-                                        className="btn btn-danger"
-                                        style={{ width: "fit-content" }}
-                                        name="field"
-                                        onClick={(e) => {
-                                          axios
-                                            .put(
-                                              `http://localhost:8000/api/trackerDelete/${userObj.id}`,
-                                              {
-
-                                              },
-                                              {
-                                                headers: {
-                                                  "Content-type": "application/json",
-                                                },
-                                              }
-                                            )
-                                            .then((response) => {
-                                              if (response.status == 200) {
-                                                setIsSubmitted(true);
-                                                fetchData();
-                                                fetchPercentageChartData();
-                                                fetchCategoryChartData();
-                                              }
-                                            })
-                                            .catch((err) => console.warn(err));
-                                        }}
-                                      >
-                                        <FontAwesomeIcon icon={faTrash} />
-                                      </Button></>
-                                  )}
-                                </div>
-                              </td>
-                            </tr>
-                          ) : null
                         ))}
 
                     </tbody>

@@ -359,11 +359,25 @@ def trackerInsert(request):
         return Response(saveserialize.data, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-@ api_view(['GET'])
+@api_view(['GET'])
 def trackerPull(request):
     if request.method == 'GET':
-        results = tracker.objects.all()
-        serialize = trackerPullSerialize(results, many=True)
+        email = request.GET.get('Email')
+        organization = request.GET.get('Organization')
+
+        # Retrieve user with given email
+        user = users.objects.filter(Email=email).first()
+
+        if user is not None and user.Approve == 'approve':
+            # If user has an approved account, get data that has their email or organization
+            queryset = tracker.objects.filter(
+                Q(Email=email) | Q(Organization=organization))
+        else:
+            # If user does not have an approved account, get data that has only their email
+            queryset = tracker.objects.filter(Email=email)
+
+        # Serialize and return data
+        serialize = trackerPullSerialize(queryset, many=True)
         return Response(serialize.data)
 
 
@@ -413,9 +427,17 @@ def trackerPercentageSum(request):
         organization = request.GET.get('Organization')
 
         queryset = tracker.objects.all()
-        if email or organization:
-            queryset = queryset.filter(
+        # Retrieve user with given email
+        user = users.objects.filter(Email=email).first()
+
+        if user is not None and user.Approve == 'approve':
+            # If user has an approved account, get data that has their email or organization
+            queryset = tracker.objects.filter(
                 Q(Email=email) | Q(Organization=organization))
+        else:
+            # If user does not have an approved account, get data that has only their email
+            queryset = tracker.objects.filter(Email=email)
+
         sum = queryset.aggregate(Sum('percentClients'), Sum('percentAFeed'), Sum(
             'percentCompost'), Sum('percentPartNet'), Sum('percentLandfill'))
 
@@ -437,9 +459,16 @@ def trackerCategorySum(request):
         reclaimed_sum = 0
 
         queryset = tracker.objects.all()
-        if email or organization:
-            queryset = queryset.filter(
+        # Retrieve user with given email
+        user = users.objects.filter(Email=email).first()
+
+        if user is not None and user.Approve == 'approve':
+            # If user has an approved account, get data that has their email or organization
+            queryset = tracker.objects.filter(
                 Q(Email=email) | Q(Organization=organization))
+        else:
+            # If user does not have an approved account, get data that has only their email
+            queryset = tracker.objects.filter(Email=email)
 
         produce_queryset = queryset.filter(Category='Fresh Produce')
         if produce_queryset.exists():
