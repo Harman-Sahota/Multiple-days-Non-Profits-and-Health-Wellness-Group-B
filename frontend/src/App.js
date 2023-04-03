@@ -20,6 +20,8 @@ import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
+
+
   return (
     <>
       <Router>
@@ -181,6 +183,8 @@ function App() {
           />
         </Routes>
       </Router>
+
+
 
       <Router>
         <Routes>

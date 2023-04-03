@@ -1032,7 +1032,8 @@ function Admin() {
 
                                 .then((response) => {
                                     if (response.status == 201) {
-                                        alert("form submitted successfully");
+                                        alert("form submitted successfully")
+                                        window.location = '/admin'
                                     }
                                 })
                                 .catch((err) => console.warn(err));

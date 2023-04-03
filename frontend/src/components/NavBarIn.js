@@ -5,8 +5,24 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLeaf } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
-
+import { useState, useEffect } from 'react';
 function NavbarIn() {
+
+    const Email = localStorage.getItem("email");
+    const Organization = localStorage.getItem("organization");
+    const role = localStorage.getItem("roles");
+    const [getPermissions, setPermissions] = useState([]);
+    async function fetchPermissionsData() {
+        const response = await fetch(`http://127.0.0.1:8000/api/PermissionsPull/?role=${role}&Organization=${Organization}&Email=${Email}`);
+        const data = await response.json();
+        return setPermissions(data);
+    }
+    useEffect(() => {
+
+        fetchPermissionsData();
+
+    }, []);
+
 
     return (
         <>
@@ -21,23 +37,18 @@ function NavbarIn() {
                 <div className="nav" id="desktop-menu">
                     <ul>
                         <li><a href="/tracker" className="nav-link px-3">Tracker</a></li>
-                        {/*{% if 'user non-profit managers/CEO' in request.session.Roles  %}*/}
-                        <li><a href="/network" className="nav-link px-3">Sharing</a></li>
-                        {/*{% elif 'user non-profit warehouse boss' in request.session.Roles %}*/}
-                        {/*<li><a href="/network" className="nav-link px-3">Network</a></li>*/}
-                        {/*{% elif 'admin' in request.session.Roles %}*/}
-                        {/*<li><a href="/network" className="nav-link px-3">Network</a></li>*/}
-                        {/*{% endif %}
+                        {getPermissions && getPermissions.permissions && getPermissions.permissions[0] && getPermissions.permissions[0].network === 'allow' ? (
+                            <li><a href="/network" className="nav-link px-3">Sharing</a></li>
+                        ) : null}
 
-                        {% if 'admin' in request.session.Roles %}*/}
                         <li><a href="/admin" className="nav-link px-3">Permissions</a></li>
                         {/*{% endif %}*/}
 
                         <li><a href="/profile" className="nav-link px-3"><FontAwesomeIcon icon={faUser} />
-                        &nbsp; Profile</a></li>
+                            &nbsp; Profile</a></li>
                         <li id="signup">
                             <a href="/">
-                                <Button className="register btn btn-outline-success" variant="outline-success" onClick={function(){
+                                <Button className="register btn btn-outline-success" variant="outline-success" onClick={function () {
                                     window.localStorage.clear();
                                 }}>
                                     Logout
@@ -54,16 +65,12 @@ function NavbarIn() {
                     <div className="nav">
                         <ul className="mobile-menu">
                             <li><a href="tracker/" className="nav-link px-3">Tracker</a></li>
-                            {/*{% if 'user non-profit managers/CEO' in request.session.Roles  %}*/}
-                            <li><a href="network/" className="nav-link px-3">Network</a></li>
-                            {/*{% elif 'user non-profit warehouse boss' in request.session.Roles %}*/}
-                            <li><a href="network/" className="nav-link px-3">Network</a></li>
-                            {/*{% elif 'admin' in request.session.Roles %}*/}
-                            <li><a href="network/" className="nav-link px-3">Network</a></li>
-                            {/*{% endif %}
-                            
-                            {% if 'admin' in request.session.Roles %}*/}
-                            <li><a href="admin/" className="nav-link px-3">Admin</a></li>
+
+                            <li><a href="network/" className="nav-link px-3">Sharing</a></li>
+
+
+
+                            <li><a href="admin/" className="nav-link px-3">Permissions</a></li>
                             {/*{% endif %}*/}
 
                             <li><a href="profile" className="nav-link px-3"><FontAwesomeIcon icon={faUser} />
