@@ -214,7 +214,7 @@ def networkInsert(request):
         if saveserialize.is_valid():
             saveserialize.save()
             return Response(saveserialize.data, status=status.HTTP_201_CREATED)
-        return Response(saveserialize.data, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        return Response(saveserialize.errors, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 @api_view(["GET"])

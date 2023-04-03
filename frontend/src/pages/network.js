@@ -182,6 +182,7 @@ function SearchBar() {
     Quantity: "",
     Description: "",
     Email: "",
+    public: ""
   });
 
   const [showModal, setShowModal] = useState(false);
@@ -628,6 +629,21 @@ function SearchBar() {
                       <option>Receiving</option>
                     </select>
                   </div>
+                  <div className="form-group">
+                    <label htmlFor="public">Share to Public: </label>
+                    <select
+                      className="form-control"
+                      id="units"
+                      onChange={(event) => {
+                        setPosts({ ...posts, public: event.target.value });
+                      }}
+                    >
+                      <option>Choose an option</option>
+                      <option>yes</option>
+                      <option>no</option>
+                    </select>
+                  </div>
+                  <br />
 
                   <Button
                     variant="primary"
@@ -643,6 +659,7 @@ function SearchBar() {
                             Units: posts.Units,
                             Description: posts.Description,
                             Email: localStorage.getItem("email"),
+                            public: posts.public
                           },
                           {
                             headers: {

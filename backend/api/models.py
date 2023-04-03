@@ -41,6 +41,7 @@ class posts(models.Model):
     state = models.CharField(max_length=255, default='open')
     shared_with = models.CharField(max_length=255, default='')
     id = models.AutoField(primary_key=True)
+    public = models.CharField(max_length=255)
 
     class Meta:
         db_table = "posts"

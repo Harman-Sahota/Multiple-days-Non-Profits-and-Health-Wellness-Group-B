@@ -1058,56 +1058,58 @@ function Admin() {
 
 
                                 {user && user.length > 0 && user.map((userObj, index) => (
+                                    userObj.Organization === localStorage.getItem('organization') ? (
+                                        <tr tr >
 
-                                    <tr>
-
-                                        <td>{userObj.FirstName}  {userObj.LastName} </td>
-                                        <td>{userObj.Email}</td>
-                                        <td id='roles'>{userObj.Roles}</td>
-                                        <td>
-                                            <div className="form-check ">
-                                                <div className="col-md-auto">
-                                                    <select className="form-select" id="approve_user" name="approve[]"
-
-
-                                                        onChange={async (e) => {
-
-                                                            axios.put(
-                                                                `http://127.0.0.1:8000/api/adminUpdate/${userObj.id}`,
+                                            <td>{userObj.FirstName}  {userObj.LastName} </td>
+                                            <td>{userObj.Email}</td>
+                                            <td id='roles'>{userObj.Roles}</td>
+                                            <td>
+                                                <div className="form-check ">
+                                                    <div className="col-md-auto">
+                                                        <select className="form-select" id="approve_user" name="approve[]"
 
 
-                                                                { "Approve": e.target.value },
-                                                                {
-                                                                    headers: {
-                                                                        "Content-type": "application/json",
+                                                            onChange={async (e) => {
+
+                                                                axios.put(
+                                                                    `http://127.0.0.1:8000/api/adminUpdate/${userObj.id}`,
+
+
+                                                                    { "Approve": e.target.value },
+                                                                    {
+                                                                        headers: {
+                                                                            "Content-type": "application/json",
+                                                                        }
                                                                     }
-                                                                }
-                                                            )
+                                                                )
 
-                                                            const response = await fetch("http://localhost:8000/api/adminPull/");
-                                                            const data = await response.json();
-                                                            setUser(data);
-                                                            fetchData();
+                                                                const response = await fetch("http://localhost:8000/api/adminPull/");
+                                                                const data = await response.json();
+                                                                setUser(data);
+                                                                fetchData();
 
-                                                            const response2 = await fetch("http://localhost:8000/api/adminPullApprove/");
-                                                            const data2 = await response2.json();
-                                                            setApprovedUser(data2);
-                                                            fetchApprovedData();
+                                                                const response2 = await fetch("http://localhost:8000/api/adminPullApprove/");
+                                                                const data2 = await response2.json();
+                                                                setApprovedUser(data2);
+                                                                fetchApprovedData();
 
-                                                            const response3 = await fetch("http://localhost:8000/api/adminPullDecline/");
-                                                            const data3 = await response3.json();
-                                                            setDeclinedUser(data3);
-                                                            fetchDeclinedData();
-                                                        }}
-                                                    >
+                                                                const response3 = await fetch("http://localhost:8000/api/adminPullDecline/");
+                                                                const data3 = await response3.json();
+                                                                setDeclinedUser(data3);
+                                                                fetchDeclinedData();
+                                                            }}
+                                                        >
 
-                                                        <option name='empty' value="empty">Choose an option</option>
-                                                        <option name='approve' value="approve">Accept</option>
-                                                        <option name='decline' value="decline">Decline</option>
-                                                    </select>
+                                                            <option name='empty' value="empty">Choose an option</option>
+                                                            <option name='approve' value="approve">Accept</option>
+                                                            <option name='decline' value="decline">Decline</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </td></tr>
+                                            </td>
+                                        </tr>
+                                    ) : null
                                 ))}
 
                             </tbody>
@@ -1132,48 +1134,49 @@ function Admin() {
                             <tbody>
 
                                 {approvedUser && approvedUser.length > 0 && approvedUser.map((userObj, index) => (
+                                    userObj.Organization === localStorage.getItem('organization') ? (
+                                        <tr>
 
-                                    <tr>
+                                            <td>{userObj.FirstName}  {userObj.LastName} </td>
+                                            <td>{userObj.Email}</td>
+                                            <td id='roles'>{userObj.Roles}</td>
+                                            <td><Button className='btn btn-outline-success' variant='btn-outline-sucess'
 
-                                        <td>{userObj.FirstName}  {userObj.LastName} </td>
-                                        <td>{userObj.Email}</td>
-                                        <td id='roles'>{userObj.Roles}</td>
-                                        <td><Button className='btn btn-outline-success' variant='btn-outline-sucess'
+                                                onClick={async (e) => {
 
-                                            onClick={async (e) => {
-
-                                                axios.put(
-                                                    `http://127.0.0.1:8000/api/adminUpdate/${userObj.id}`,
+                                                    axios.put(
+                                                        `http://127.0.0.1:8000/api/adminUpdate/${userObj.id}`,
 
 
-                                                    { "Approve": null },
-                                                    {
-                                                        headers: {
-                                                            "Content-type": "application/json",
+                                                        { "Approve": null },
+                                                        {
+                                                            headers: {
+                                                                "Content-type": "application/json",
+                                                            }
                                                         }
-                                                    }
-                                                )
+                                                    )
 
-                                                const response = await fetch("http://localhost:8000/api/adminPull/");
-                                                const data = await response.json();
-                                                setUser(data);
-                                                fetchData();
+                                                    const response = await fetch("http://localhost:8000/api/adminPull/");
+                                                    const data = await response.json();
+                                                    setUser(data);
+                                                    fetchData();
 
-                                                const response2 = await fetch("http://localhost:8000/api/adminPullApprove/");
-                                                const data2 = await response2.json();
-                                                setApprovedUser(data2);
-                                                fetchApprovedData();
+                                                    const response2 = await fetch("http://localhost:8000/api/adminPullApprove/");
+                                                    const data2 = await response2.json();
+                                                    setApprovedUser(data2);
+                                                    fetchApprovedData();
 
-                                                const response3 = await fetch("http://localhost:8000/api/adminPullDecline/");
-                                                const data3 = await response3.json();
-                                                setDeclinedUser(data3);
-                                                fetchDeclinedData();
-                                            }}
-
+                                                    const response3 = await fetch("http://localhost:8000/api/adminPullDecline/");
+                                                    const data3 = await response3.json();
+                                                    setDeclinedUser(data3);
+                                                    fetchDeclinedData();
+                                                }}
 
 
-                                        > Revert </Button></td>
-                                    </tr>
+
+                                            > Revert </Button></td>
+                                        </tr>
+                                    ) : null
                                 ))}
 
                             </tbody>
@@ -1196,46 +1199,47 @@ function Admin() {
                             <tbody>
 
                                 {declinedUser && declinedUser.length > 0 && declinedUser.map((userObj, index) => (
+                                    userObj.Organization === localStorage.getItem('organization') ? (
+                                        <tr>
 
-                                    <tr>
+                                            <td>{userObj.FirstName}  {userObj.LastName} </td>
+                                            <td>{userObj.Email}</td>
+                                            <td id='roles'>{userObj.Roles}</td>
+                                            <td><Button className='btn btn-outline-success' variant='btn-outline-sucess'
 
-                                        <td>{userObj.FirstName}  {userObj.LastName} </td>
-                                        <td>{userObj.Email}</td>
-                                        <td id='roles'>{userObj.Roles}</td>
-                                        <td><Button className='btn btn-outline-success' variant='btn-outline-sucess'
+                                                onClick={async (e) => {
 
-                                            onClick={async (e) => {
-
-                                                axios.put(
-                                                    `http://127.0.0.1:8000/api/adminUpdate/${userObj.id}`,
+                                                    axios.put(
+                                                        `http://127.0.0.1:8000/api/adminUpdate/${userObj.id}`,
 
 
-                                                    { "Approve": null },
-                                                    {
-                                                        headers: {
-                                                            "Content-type": "application/json",
+                                                        { "Approve": null },
+                                                        {
+                                                            headers: {
+                                                                "Content-type": "application/json",
+                                                            }
                                                         }
-                                                    }
-                                                )
+                                                    )
 
-                                                const response = await fetch("http://localhost:8000/api/adminPull/");
-                                                const data = await response.json();
-                                                setUser(data);
-                                                fetchData();
+                                                    const response = await fetch("http://localhost:8000/api/adminPull/");
+                                                    const data = await response.json();
+                                                    setUser(data);
+                                                    fetchData();
 
-                                                const response2 = await fetch("http://localhost:8000/api/adminPullApprove/");
-                                                const data2 = await response2.json();
-                                                setApprovedUser(data2);
-                                                fetchApprovedData();
+                                                    const response2 = await fetch("http://localhost:8000/api/adminPullApprove/");
+                                                    const data2 = await response2.json();
+                                                    setApprovedUser(data2);
+                                                    fetchApprovedData();
 
-                                                const response3 = await fetch("http://localhost:8000/api/adminPullDecline/");
-                                                const data3 = await response3.json();
-                                                setDeclinedUser(data3);
-                                                fetchDeclinedData();
-                                            }}
+                                                    const response3 = await fetch("http://localhost:8000/api/adminPullDecline/");
+                                                    const data3 = await response3.json();
+                                                    setDeclinedUser(data3);
+                                                    fetchDeclinedData();
+                                                }}
 
-                                        > Revert </Button></td>
-                                    </tr>
+                                            > Revert </Button></td>
+                                        </tr>
+                                    ) : null
                                 ))}
 
                             </tbody>

@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import React, { Component } from 'react';
 
 function FAQ() {
+   localStorage.clear();
    return (
 
       <section>
