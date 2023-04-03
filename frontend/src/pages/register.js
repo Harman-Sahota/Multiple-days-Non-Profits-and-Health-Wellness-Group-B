@@ -77,7 +77,7 @@ function Form() {
               onClick={(e) => {
                 if (page === FormTitles.length - 1) {
                   console.log(JSON.parse(JSON.stringify(formData)));
-                 
+
 
                   axios.post(
                     "http://127.0.0.1:8000/api/registerInsert/",
@@ -89,7 +89,7 @@ function Form() {
                       Roles: formData.Roles,
                       Consent: formData.Consent,
                       Organization: formData.Organization
-                     
+
                     },
                     {
                       headers: {
@@ -99,39 +99,40 @@ function Form() {
 
                   )
 
-                 
-                    .then(response => 
-                      {if(response.status == 201){
-                        const date = new Date().setHours(new Date().getHours() + 1 );
+
+                    .then(response => {
+                      if (response.status == 201) {
+                        const date = new Date().setHours(new Date().getHours() + 1);
                         localStorage.setItem('firstname', formData.FirstName);
                         localStorage.setItem('lastname', formData.LastName);
                         localStorage.setItem('email', formData.Email);
-                        localStorage.setItem( 'roles', formData.Roles);
-                        localStorage.setItem( 'organization', formData.Organization);
-                        localStorage.setItem( 'consent', formData.Consent);
-                        localStorage.setItem( 'approve', "");
-                        localStorage.setItem('id',response.data['data']['id']);
-                        localStorage.setItem('token',response.data['token'])
-                        localStorage.setItem('expiry',date)
+                        localStorage.setItem('roles', formData.Roles);
+                        localStorage.setItem('organization', formData.Organization);
+                        localStorage.setItem('consent', formData.Consent);
+                        localStorage.setItem('approve', "");
+                        localStorage.setItem('id', response.data['data']['id']);
+                        localStorage.setItem('token', response.data['token'])
+                        localStorage.setItem('expiry', date)
 
                         window.location.replace("http://localhost:3000/tracker/");
 
 
-                       
-                        }}
-                       
-                      )
-                      .catch(err => 
 
-                        {if(err.status="409" ){
-                          window.alert("An account with this email already exists, please use a different email.");
-                    
-                        }}
-                        
-                        )
-                      
+                      }
+                    }
 
-                   
+                    )
+                    .catch(err => {
+                      if (err.status = "409") {
+                        window.alert("An account with this email already exists, please use a different email.");
+
+                      }
+                    }
+
+                    )
+
+
+
 
                 } else {
                   var EmailValidRegex =
@@ -242,7 +243,7 @@ function Form() {
                         document
                           .getElementById("email")
                           .classList.remove("success");
-                      document.getElementById("Email").classList.add("error");
+                      document.getElementById("email").classList.add("error");
                       if (
                         !formData.Email.match(EmailValidRegex) &&
                         formData.Email != ""
@@ -250,7 +251,7 @@ function Form() {
                         window.alert("The email address entered is not valid.");
                       }
                     } else {
-                      if ( document.getElementById("email").hasAttribute("error") )
+                      if (document.getElementById("email").hasAttribute("error"))
                         document
                           .getElementById("email")
                           .classList.remove("error");

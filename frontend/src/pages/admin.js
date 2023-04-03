@@ -5,6 +5,7 @@ import React, { useReducer } from 'react';
 import { useState, useEffect } from 'react';
 import Button from "react-bootstrap/Button";
 import fourcss from './fourcss.css';
+import { local } from 'd3-selection';
 
 let temp = [];
 let temp_warehouse = [];
@@ -254,6 +255,7 @@ function Admin() {
                                                 setCEO({ ...CEO, network: event.target.value })
 
                                             }>
+                                                <option name='empty' value="empty">Choose an option</option>
                                                 <option value="allow">Allow</option>
                                                 <option value="dont allow">Dont Allow</option>
                                             </select>
@@ -267,10 +269,10 @@ function Admin() {
                                                 setCEO({ ...CEO, readwrite: event.target.value })
 
                                             }>
-                                                <option value="read">Read</option>
-                                                <option value="write">Write</option>
-                                                <option value="both">Both</option>
-                                                <option value="none">None</option>
+                                                <option name='empty' value="empty">Choose an option</option>
+                                                <option value="both">Full Access</option>
+                                                <option value="read">View</option>
+                                                <option value="none">No access</option>
                                             </select>
                                         </div>
                                     </div>
@@ -392,6 +394,7 @@ function Admin() {
                                                 }
 
                                             >
+                                                <option name='empty' value="empty">Choose an option</option>
                                                 <option value="allow">Allow</option>
                                                 <option value="dont allow">Dont Allow</option>
                                             </select>
@@ -407,10 +410,10 @@ function Admin() {
 
                                                 }
                                             >
-                                                <option value="read">Read</option>
-                                                <option value="write">Write</option>
-                                                <option value="both">Both</option>
-                                                <option value="none">None</option>
+                                                <option name='empty' value="empty">Choose an option</option>
+                                                <option value="both">Full Access</option>
+                                                <option value="read">View</option>
+                                                <option value="none">No Access</option>
                                             </select>
                                         </div>
                                     </div>
@@ -532,6 +535,7 @@ function Admin() {
                                                 }
 
                                             >
+                                                <option name='empty' value="empty">Choose an option</option>
                                                 <option value="allow">Allow</option>
                                                 <option value="dont allow">Dont Allow</option>
                                             </select>
@@ -548,10 +552,10 @@ function Admin() {
 
                                                 }
                                             >
-                                                <option value="read">Read</option>
-                                                <option value="write">Write</option>
-                                                <option value="both">Both</option>
-                                                <option value="none">None</option>
+                                                <option name='empty' value="empty">Choose an option</option>
+                                                <option value="both">Full Access</option>
+                                                <option value="read">View</option>
+                                                <option value="none">No Access</option>
                                             </select>
                                         </div>
                                     </div>
@@ -664,6 +668,7 @@ function Admin() {
                                             <select className="form-select" id="network" name="network-CEO" onChange={(event) =>
                                                 setVolunteer({ ...volunteer, network: event.target.value })
                                             }>
+                                                <option name='empty' value="empty">Choose an option</option>
                                                 <option value="allow">Allow</option>
                                                 <option value="dont allow">Dont Allow</option>
                                             </select>
@@ -677,10 +682,10 @@ function Admin() {
                                                 setVolunteer({ ...volunteer, readwrite: event.target.value })
 
                                             }>
-                                                <option value="read">Read</option>
-                                                <option value="write">Write</option>
-                                                <option value="both">Both</option>
-                                                <option value="none">None</option>
+                                                <option name='empty' value="empty">Choose an option</option>
+                                                <option value="both">Full Access</option>
+                                                <option value="read">View</option>
+                                                <option value="none">No Access</option>
                                             </select>
                                         </div>
                                     </div>
@@ -811,6 +816,7 @@ function Admin() {
                                                 setSponsors({ ...Sponsors, network: event.target.value })
 
                                             }>
+                                                <option name='empty' value="empty">Choose an option</option>
                                                 <option value="allow">Allow</option>
                                                 <option value="dont allow">Dont Allow</option>
                                             </select>
@@ -824,10 +830,10 @@ function Admin() {
                                                 setSponsors({ ...Sponsors, readwrite: event.target.value })
 
                                             }>
-                                                <option value="read">Read</option>
-                                                <option value="write">Write</option>
-                                                <option value="both">Both</option>
-                                                <option value="none">None</option>
+                                                <option name='empty' value="empty">Choose an option</option>
+                                                <option value="both">Full Access</option>
+                                                <option value="read">View</option>
+                                                <option value="none">No Access</option>
                                             </select>
                                         </div>
                                     </div>
@@ -940,6 +946,7 @@ function Admin() {
                                                 setExperts({ ...Experts, network: event.target.value })
 
                                             }>
+                                                <option name='empty' value="empty">Choose an option</option>
                                                 <option value="allow">Allow</option>
                                                 <option value="dont allow">Dont Allow</option>
                                             </select>
@@ -952,11 +959,10 @@ function Admin() {
                                             <select className="form-select" id="readwrite" name="readwrite-Experts" onChange={(event) =>
                                                 setExperts({ ...Experts, readwrite: event.target.value })
 
-                                            }>
-                                                <option value="read">Read</option>
-                                                <option value="write">Write</option>
-                                                <option value="both">Both</option>
-                                                <option value="none">None</option>
+                                            }> <option name='empty' value="empty">Choose an option</option>
+                                                <option value="both">Full Access</option>
+                                                <option value="read">View</option>
+                                                <option value="none">No Access</option>
                                             </select>
                                         </div>
                                     </div>
@@ -976,37 +982,43 @@ function Admin() {
                                         role: CEO.role,
                                         metrics: CEO.metrics,
                                         network: CEO.network,
-                                        readwrite: CEO.readwrite
+                                        readwrite: CEO.readwrite,
+                                        Organization: localStorage.getItem('organization')
                                     },
                                     {
                                         role: warehouse.role,
                                         metrics: warehouse.metrics,
                                         network: warehouse.network,
-                                        readwrite: warehouse.readwrite
+                                        readwrite: warehouse.readwrite,
+                                        Organization: localStorage.getItem('organization')
                                     },
                                     {
                                         role: admin.role,
                                         metrics: admin.metrics,
                                         network: admin.network,
-                                        readwrite: admin.readwrite
+                                        readwrite: admin.readwrite,
+                                        Organization: localStorage.getItem('organization')
                                     },
                                     {
                                         role: volunteer.role,
                                         metrics: volunteer.metrics,
                                         network: volunteer.network,
-                                        readwrite: volunteer.readwrite
+                                        readwrite: volunteer.readwrite,
+                                        Organization: localStorage.getItem('organization')
                                     },
                                     {
                                         role: Sponsors.role,
                                         metrics: Sponsors.metrics,
                                         network: Sponsors.network,
-                                        readwrite: Sponsors.readwrite
+                                        readwrite: Sponsors.readwrite,
+                                        Organization: localStorage.getItem('organization')
                                     },
                                     {
                                         role: Experts.role,
                                         metrics: Experts.metrics,
                                         network: Experts.network,
-                                        readwrite: Experts.readwrite
+                                        readwrite: Experts.readwrite,
+                                        Organization: localStorage.getItem('organization')
                                     }
                                 ],
                                 {
@@ -1087,6 +1099,7 @@ function Admin() {
                                                             fetchDeclinedData();
                                                         }}
                                                     >
+
                                                         <option name='empty' value="empty">Choose an option</option>
                                                         <option name='approve' value="approve">Accept</option>
                                                         <option name='decline' value="decline">Decline</option>

@@ -11,7 +11,7 @@ class users(models.Model):
     Password = models.CharField(max_length=255, default='Password')
     Roles = models.CharField(max_length=255)
     Consent = models.CharField(max_length=50)
-    Organization = models.CharField(max_length=255, null=True)
+    Organization = models.CharField(max_length=255, null=True, blank=True)
     Approve = models.CharField(max_length=50, null=True)
 
     class Meta:
@@ -19,10 +19,12 @@ class users(models.Model):
 
 
 class permissions(models.Model):
-    role = models.CharField(primary_key=True, max_length=255)
+    id = models.AutoField(primary_key=True, default=1)
+    role = models.CharField(max_length=255, null=True, blank=True)
     metrics = models.CharField(max_length=255, null=True, blank=True)
     network = models.CharField(max_length=10, null=True, blank=True)
     readwrite = models.CharField(max_length=10, null=True, blank=True)
+    Organization = models.CharField(max_length=255, null=True, blank=True)
 
     class Meta:
         db_table = "permissions"
