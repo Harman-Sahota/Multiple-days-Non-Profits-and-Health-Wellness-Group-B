@@ -406,7 +406,7 @@ function Admin() {
                                         <div className="col-md-auto">
                                             <select className="form-select" id="readwrite" name="readwrite-warehouse"
                                                 onChange={(event) =>
-                                                    setwarehouse({ ...warehouse, network: event.target.value })
+                                                    setwarehouse({ ...warehouse, readwrite: event.target.value })
 
                                                 }
                                             >
