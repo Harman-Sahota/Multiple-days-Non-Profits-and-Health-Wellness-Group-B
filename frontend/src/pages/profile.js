@@ -243,7 +243,7 @@ function Profile() {
                                             document.getElementById('consented').disabled = false;
                                             document.getElementById('unconsented').disabled = false;
                                         }}>
-                                            Edit <FontAwesomeIcon icon={faPenToSquare} style={{ color: "#DC143C	" }} />
+                                            Edit
                                         </Button>
                                     </div>
                                 </div>
