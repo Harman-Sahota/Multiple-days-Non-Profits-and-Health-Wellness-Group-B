@@ -12,85 +12,88 @@ import * as d3 from "d3";
 
 var filter = "Product";
 var time_filter = "http://localhost:8000/api/networkPull/";
-
-function LineChart({ data }) {
-  const chartRef = useRef(null);
-  const margin = { top: 20, right: 30, bottom: 10, left: 50 };
-  const width = 500;
-  const height = 400 - margin.top - margin.bottom;
+const PieChart = ({ data }) => {
+  const svgRef = useRef();
 
   useEffect(() => {
-    const svg = d3.select(chartRef.current).select("svg");
+    const svg = d3.select(svgRef.current);
+    const width = svg.node().getBoundingClientRect().width;
+    const height = svg.node().getBoundingClientRect().height;
+    const radius = Math.min(width, height) / 2;
+    const color = d3.scaleOrdinal()
+      .domain(Object.keys(data))
+      .range(d3.schemeCategory10);
 
-    if (data) {
-      const xScale = d3
-        .scalePoint()
-        .rangeRound([0, width])
-        .padding(0.2)
-        .domain(data.map((d) => d.category));
+    const pie = d3.pie()
+      .value((d) => d.value)
+      .sort(null);
 
-      const yScale = d3
-        .scaleLinear()
-        .range([height, 0])
-        .domain([0, d3.max(data, (d) => Math.max(d.ClientsA, d.ClientB)) + 20]);
+    const arc = d3.arc()
+      .innerRadius(0)
+      .outerRadius(radius);
 
-      const line = d3
-        .line()
-        .x((d) => xScale(d.category))
-        .y((d) => yScale(d.ClientsA));
+    const outerArc = d3.arc()
+      .outerRadius(radius * 0.9)
+      .innerRadius(radius * 0.9);
 
-      svg.select(".blue-line").remove(); // remove-existing-blue-line-- ls
-      svg.append("path")
-        .datum(data)
-        .attr("fill", "none")
-        .attr("stroke", "blue")
-        .attr("stroke-width", 1.5)
-        .attr("d", line)
-        .classed("blue-line", true);
+    const nonNullEntries = Object.entries(data).filter(([key, value]) => value != null);
+    const arcs = pie(nonNullEntries.map(([key, value]) => ({ key, value })));
 
-      const line2 = d3.line()
-        .x(d => xScale(d.category))
-        .y(d => yScale(d.ClientB));
 
-      svg.select(".red-line").remove(); // Remove existing red line
-      svg.append("path")
-        .datum(data)
-        .attr("fill", "none")
-        .attr("stroke", "red")
-        .attr("stroke-width", 1.5)
-        .attr("d", line2)
-        .classed("red-line", true);
+    svg.selectAll('*').remove();
 
-      const xAxis = d3.axisBottom(xScale);
+    const g = svg.append('g')
+      .attr('transform', `translate(${width / 2}, ${height / 2})`);
 
-      svg.select(".x-axis")
-        .attr("transform", `translate(0, ${height})`)
-        .call(xAxis);
+    const paths = g.selectAll('path')
+      .data(arcs)
+      .enter()
+      .append('path')
+      .attr('d', arc)
+      .attr('fill', (d) => color(d.data.key));
 
-      const yAxis = d3.axisLeft(yScale);
+    const labels = g.selectAll('text')
+      .data(arcs)
+      .enter()
+      .append('text')
+      .attr('transform', d => `translate(${outerArc.centroid(d)})`)
+      .attr('dy', '0.35em')
+      .text(d => `${d.data.key} (${d.data.value})`)
+      .style('font-size', '14px')
+      .style('text-anchor', d => getLabelAnchor(d));
 
-      svg
-        .select(".y-axis")
-        .attr("transform", `translate(${30}, 0)`)
-        .call(yAxis);
-    } else {
-      // Remove existing lines when data is null or undefined
-      svg.select(".blue-line").remove();
-      svg.select(".red-line").remove();
+    const labelLines = g.selectAll('polyline')
+      .data(arcs)
+      .enter()
+      .append('polyline')
+      .attr('points', d => {
+        const posA = outerArc.centroid(d);
+        const posB = arc.centroid(d);
+        const posC = [(posB[0] + posA[0]) / 2, (posB[1] + posA[1]) / 2];
+        return [posA, posC, posB];
+      })
+      .style('fill', 'none')
+      .style('stroke', '#000')
+      .style('stroke-width', '1px')
+      .style('stroke-opacity', 0.5);
+
+    function getLabelAnchor(d) {
+      // Position labels based on their location in the pie chart
+      if ((d.startAngle + d.endAngle) / 2 < Math.PI) {
+        return 'start';
+      } else {
+        return 'end';
+      }
     }
 
-  }, [data, height, width]);
-
+  }, [data]);
 
   return (
-    <div ref={chartRef}>
-      <svg width={width + margin.left + margin.right} height={height + margin.top + margin.bottom}>
-        <g className="x-axis" />
-        <g className="y-axis" />
-      </svg>
-    </div>
+    <svg ref={svgRef} width="250" height="250"></svg>
   );
-}
+};
+
+
 
 // searchBar function
 function SearchBar() {
@@ -100,9 +103,27 @@ function SearchBar() {
   const [getSharedData, setSharedData] = useState([]);
   const [getGraphData, setGraphData] = useState([]);
 
+
+
   //graph stuff Jordan's Work- 
   //more work will be implemented eventually
 
+  const [orgs, setorgs] = useState([]);
+  const [email, setemail] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:8000/api/distinctorg/')
+      .then(response => response.json())
+      .then(data => setorgs(data))
+      .catch(error => console.log(error));
+  }, []);
+
+  useEffect(() => {
+    fetch('http://localhost:8000/api/distinctemail/')
+      .then(response => response.json())
+      .then(data => setemail(data))
+      .catch(error => console.log(error));
+  }, []);
 
 
 
@@ -213,6 +234,121 @@ function SearchBar() {
           <div className="share_box container-md col-md-auto">
             <div className="row">
               <div className="col">
+                <h3>Combine by Organizations:</h3>
+                <br />
+                <div className="form-check ">
+                  <div className="col-md-auto">
+                    <select name="Organization" id="Organization" className="form-select" onChange={(event) => {
+                      axios
+                        .post(
+                          "http://localhost:8000/api/NetworkOrgGraphing/",
+                          {
+                            user_org: localStorage.getItem("organization"),
+                            compare_org: event.target.value,
+                          },
+                          {
+                            headers: {
+                              "Content-type": "application/json",
+                            },
+                          }
+                        )
+                        .then((response) => {
+                          if (response.status == 200) {
+                            if (
+                              response.data["comparee"][
+                              "percentClients__sum"
+                              ] == null
+                            ) {
+                              alert(
+                                "this user is a non registered user (or the user has no data and no data) is available to compare, only user data displayed in graph"
+                              );
+                            }
+                            const data = {
+                              Clients_user: response.data['user']['percentClients__sum'],
+                              Clients_comparee: response.data['comparee']['percentClients__sum'],
+                              Animal_Feed_user: response.data['user']['percentAFeed__sum'],
+                              Animal_Feed_comparee: response.data['comparee']['percentAFeed__sum'],
+                              Partner_Network_user: response.data['user']['percentPartNet__sum'],
+                              Partner_Network_comparee: response.data['comparee']['percentPartNet__sum'],
+                              Landfill_user: response.data['user']['percentLandfill__sum'],
+                              Landfill_comparee: response.data['comparee']['percentLandfill__sum'],
+                            };
+
+
+                            setGraphData(data);
+
+
+
+
+                          }
+                        })
+                        .catch((err) => console.warn(err));
+                    }}>
+                      <option>Choose</option>
+                      {orgs.map(category => (
+                        <option key={category} value={category}>{category}</option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+                <h3>Combine by Users:</h3>
+                <br />
+                <div className="form-check ">
+                  <div className="col-md-auto">
+                    <select name="email" id="email" className="form-select" onChange={(event) => {
+                      axios
+                        .post(
+                          "http://localhost:8000/api/NetworkGraphing/",
+                          {
+                            user_email: localStorage.getItem("email"),
+                            compare_email: event.target.value,
+                          },
+                          {
+                            headers: {
+                              "Content-type": "application/json",
+                            },
+                          }
+                        )
+                        .then((response) => {
+                          if (response.status == 200) {
+                            if (
+                              response.data["comparee"][
+                              "percentClients__sum"
+                              ] == null
+                            ) {
+                              alert(
+                                "this user is a non registered user (or the user has no data and no data) is available to compare, only user data displayed in graph"
+                              );
+                            }
+                            const data = {
+                              Clients_user: response.data['user']['percentClients__sum'],
+                              Clients_comparee: response.data['comparee']['percentClients__sum'],
+                              Animal_Feed_user: response.data['user']['percentAFeed__sum'],
+                              Animal_Feed_comparee: response.data['comparee']['percentAFeed__sum'],
+                              Partner_Network_user: response.data['user']['percentPartNet__sum'],
+                              Partner_Network_comparee: response.data['comparee']['percentPartNet__sum'],
+                              Landfill_user: response.data['user']['percentLandfill__sum'],
+                              Landfill_comparee: response.data['comparee']['percentLandfill__sum'],
+                            };
+
+
+                            setGraphData(data);
+
+
+
+
+                          }
+                        })
+                        .catch((err) => console.warn(err));
+                    }}
+                    >
+                      <option>Choose</option>
+                      {email.map(category => (
+                        <option key={category} value={category}>{category}</option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
                 <h3>Shared with:</h3>
                 <div className="row">
                   <div className="col-6">
@@ -261,17 +397,22 @@ function SearchBar() {
                                       "this user is a non registered user (or the user has no data and no data) is available to compare, only user data displayed in graph"
                                     );
                                   }
-                                  const data = [
-                                    { category: "Clients", ClientsA: response.data['user']['percentClients__sum'], ClientB: response.data['comparee']['percentClients__sum'] },
-                                    { category: "Animal_Feed", ClientsA: response.data['user']['percentAFeed__sum'], ClientB: response.data['comparee']['percentAFeed__sum'] },
-                                    { category: "Partner_Network", ClientsA: response.data['user']['percentPartNet__sum'], ClientB: response.data['comparee']['percentPartNet__sum'] },
-                                    { category: "Landfill", ClientsA: response.data['user']['percentLandfill__sum'], ClientB: response.data['comparee']['percentLandfill__sum'] },
-                                  ];
+                                  const data = {
+                                    Clients_user: response.data['user']['percentClients__sum'],
+                                    Clients_comparee: response.data['comparee']['percentClients__sum'],
+                                    Animal_Feed_user: response.data['user']['percentAFeed__sum'],
+                                    Animal_Feed_comparee: response.data['comparee']['percentAFeed__sum'],
+                                    Partner_Network_user: response.data['user']['percentPartNet__sum'],
+                                    Partner_Network_comparee: response.data['comparee']['percentPartNet__sum'],
+                                    Landfill_user: response.data['user']['percentLandfill__sum'],
+                                    Landfill_comparee: response.data['comparee']['percentLandfill__sum'],
+                                  };
 
 
                                   setGraphData(data);
-                                  console.log(getGraphData)
-                                  LineChart(getGraphData)
+                                  console.log(data);
+
+
 
                                 }
                               })
@@ -285,10 +426,10 @@ function SearchBar() {
                   ))}
               </div>
               <div className="col graph_box chart chart-container">
-                <LineChart data={getGraphData} />
+                <PieChart data={getGraphData} id='piechart' />
               </div>
             </div>
-          </div>
+          </div >
           <div className="container-lg col-md-auto">
             <div className="container-fluid">
               <div className="input-group">

@@ -503,6 +503,16 @@ def NetworkGraphing(request):
         return Response({"user": results, "comparee": results2})
 
 
+@ api_view(["POST"])
+def NetworkOrgGraphing(request):
+    if request.method == 'POST':
+        results = tracker.objects.filter(Organization=request.data['user_org']).aggregate(Sum('percentClients'), Sum(
+            'percentAFeed'), Sum('percentCompost'), Sum('percentPartNet'), Sum('percentLandfill'))
+        results2 = tracker.objects.filter(Organization=request.data['compare_org']).aggregate(Sum('percentClients'), Sum(
+            'percentAFeed'), Sum('percentCompost'), Sum('percentPartNet'), Sum('percentLandfill'))
+        return Response({"user": results, "comparee": results2})
+
+
 @ api_view(["GET"])
 def Past_Hour(request):
     timer = datetime.datetime.now() - datetime.timedelta(hours=1)
@@ -584,3 +594,21 @@ def PermissionsPull(request):
         }
 
         return Response(data)
+
+
+@ api_view(["GET"])
+def distinctorg(request):
+    if request.method == 'GET':
+        results = users.objects.order_by('Organization').values_list(
+            'Organization', flat=True).distinct()
+        return Response(results, status=status.HTTP_200_OK)
+    return Response("error", status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@ api_view(["GET"])
+def distinctemail(request):
+    if request.method == 'GET':
+        results = users.objects.order_by('Email').values_list(
+            'Email', flat=True).distinct()
+        return Response(results, status=status.HTTP_200_OK)
+    return Response("error", status=status.HTTP_500_INTERNAL_SERVER_ERROR)
