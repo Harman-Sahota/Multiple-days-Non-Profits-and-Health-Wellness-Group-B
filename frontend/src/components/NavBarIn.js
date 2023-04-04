@@ -37,9 +37,13 @@ function NavbarIn() {
                 <div className="nav" id="desktop-menu">
                     <ul>
                         <li><a href="/tracker" className="nav-link px-3">Tracker</a></li>
-                        {getPermissions && getPermissions.permissions && getPermissions.permissions[0] && getPermissions.permissions[0].network === 'allow' ? (
+
+                        {(getPermissions && getPermissions.user && (getPermissions.user.Approve === 'approved' && getPermissions.permissions[0] && getPermissions.permissions[0].network === 'allow')) || (getPermissions && getPermissions.user && (getPermissions.user.Approve === 'declined' || getPermissions.user.Approve === null)) ? (
                             <li><a href="/network" className="nav-link px-3">Sharing</a></li>
-                        ) : null}
+                        ) : (
+                            null
+                        )}
+
 
                         <li><a href="/admin" className="nav-link px-3">Permissions</a></li>
                         {/*{% endif %}*/}

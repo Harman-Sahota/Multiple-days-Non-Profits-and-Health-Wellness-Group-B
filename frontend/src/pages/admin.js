@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 import Button from "react-bootstrap/Button";
 import fourcss from './fourcss.css';
 import { local } from 'd3-selection';
-
+import NavbarIn from '../components/NavBarIn';
 let temp = [];
 let temp_warehouse = [];
 let temp_admin = [];
@@ -257,7 +257,7 @@ function Admin() {
                                             }>
                                                 <option name='empty' value="empty">Choose an option</option>
                                                 <option value="allow">Allow</option>
-                                                <option value="dont allow">Don't Allow</option>
+                                                <option value="dont allow">Dont Allow</option>
                                             </select>
                                         </div>
                                     </div>
@@ -396,7 +396,7 @@ function Admin() {
                                             >
                                                 <option name='empty' value="empty">Choose an option</option>
                                                 <option value="allow">Allow</option>
-                                                <option value="dont allow">Don't Allow</option>
+                                                <option value="dont allow">Dont Allow</option>
                                             </select>
                                         </div>
                                     </div>
@@ -537,7 +537,7 @@ function Admin() {
                                             >
                                                 <option name='empty' value="empty">Choose an option</option>
                                                 <option value="allow">Allow</option>
-                                                <option value="dont allow">Don't Allow</option>
+                                                <option value="dont allow">Dont Allow</option>
                                             </select>
                                         </div>
                                     </div>
@@ -670,7 +670,7 @@ function Admin() {
                                             }>
                                                 <option name='empty' value="empty">Choose an option</option>
                                                 <option value="allow">Allow</option>
-                                                <option value="dont allow">Don't Allow</option>
+                                                <option value="dont allow">Dont Allow</option>
                                             </select>
                                         </div>
                                     </div>
@@ -818,7 +818,7 @@ function Admin() {
                                             }>
                                                 <option name='empty' value="empty">Choose an option</option>
                                                 <option value="allow">Allow</option>
-                                                <option value="dont allow">Don't Allow</option>
+                                                <option value="dont allow">Dont Allow</option>
                                             </select>
                                         </div>
                                     </div>
@@ -948,7 +948,7 @@ function Admin() {
                                             }>
                                                 <option name='empty' value="empty">Choose an option</option>
                                                 <option value="allow">Allow</option>
-                                                <option value="dont allow">Don't Allow</option>
+                                                <option value="dont allow">Dont Allow</option>
                                             </select>
                                         </div>
                                     </div>
@@ -1032,7 +1032,7 @@ function Admin() {
 
                                 .then((response) => {
                                     if (response.status == 201) {
-                                        alert("Permissions have been updated successfully.")
+                                        alert("form submitted successfully")
                                         window.location = '/admin'
                                     }
                                 })
@@ -1071,6 +1071,11 @@ function Admin() {
 
 
                                                             onChange={async (e) => {
+                                                                const currentScrollPos = window.scrollY;
+
+                                                                window.location.reload();
+
+                                                                window.scrollTo(0, currentScrollPos);
 
                                                                 axios.put(
                                                                     `http://127.0.0.1:8000/api/adminUpdate/${userObj.id}`,
@@ -1144,6 +1149,12 @@ function Admin() {
 
                                                 onClick={async (e) => {
 
+                                                    const currentScrollPos = window.scrollY;
+
+                                                    window.location.reload();
+
+                                                    window.scrollTo(0, currentScrollPos);
+
                                                     axios.put(
                                                         `http://127.0.0.1:8000/api/adminUpdate/${userObj.id}`,
 
@@ -1208,6 +1219,13 @@ function Admin() {
                                             <td><Button className='btn btn-outline-success' variant='btn-outline-sucess'
 
                                                 onClick={async (e) => {
+
+                                                    const currentScrollPos = window.scrollY;
+
+                                                    window.location.reload();
+
+                                                    window.scrollTo(0, currentScrollPos);
+
 
                                                     axios.put(
                                                         `http://127.0.0.1:8000/api/adminUpdate/${userObj.id}`,
