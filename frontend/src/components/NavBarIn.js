@@ -38,7 +38,7 @@ function NavbarIn() {
                     <ul>
                         <li><a href="/tracker" className="nav-link px-3">Tracker</a></li>
 
-                        {(getPermissions && getPermissions.user && (getPermissions.user.Approve === 'approved' && getPermissions.permissions[0] && getPermissions.permissions[0].network === 'allow')) || (getPermissions && getPermissions.user && (getPermissions.user.Approve === 'decline' || getPermissions.user.Approve === null)) ? (
+                        {(getPermissions && getPermissions.user && (getPermissions.user.Approve === 'approve' && getPermissions.permissions[0] && getPermissions.permissions[0].network === 'allow')) || (getPermissions && getPermissions.user && (getPermissions.user.Approve === 'decline' || getPermissions.user.Approve === null)) ? (
                             <li><a href="/network" className="nav-link px-3">Sharing</a></li>
                         ) : (
                             null

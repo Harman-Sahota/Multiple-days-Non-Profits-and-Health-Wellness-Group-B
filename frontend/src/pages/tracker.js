@@ -911,7 +911,7 @@ function Tracker() {
               </div>
             </div><br />
 
-            {(getPermissions && getPermissions.user && (getPermissions.user.Approve === 'approved' && getPermissions.permissions[0] && getPermissions.permissions[0].readwrite != 'none')) || (getPermissions && getPermissions.user && (getPermissions.user.Approve === 'decline' || getPermissions.user.Approve === null)) ? (
+            {(getPermissions && getPermissions.user && (getPermissions.user.Approve === 'approve' && getPermissions.permissions[0] && getPermissions.permissions[0].readwrite != 'none')) || (getPermissions && getPermissions.user && (getPermissions.user.Approve === 'decline' || getPermissions.user.Approve === null)) ? (
               <><div className={`card ${trackerCSS["pie-chart-outer-div"]}`}>
                 <div
                   className={`col-6 svg-container ${trackerCSS["pie-chart-inner-div"]}`}
@@ -929,7 +929,7 @@ function Tracker() {
                 </div>
               </div><br /></>
             ) : null}
-            {(getPermissions && getPermissions.user && (getPermissions.user.Approve === 'approved' && getPermissions.permissions[0] && getPermissions.permissions[0].readwrite != 'none')) || (getPermissions && getPermissions.user && (getPermissions.user.Approve === 'decline' || getPermissions.user.Approve === null)) ? (
+            {(getPermissions && getPermissions.user && (getPermissions.user.Approve === 'approve' && getPermissions.permissions[0] && getPermissions.permissions[0].readwrite != 'none')) || (getPermissions && getPermissions.user && (getPermissions.user.Approve === 'decline' || getPermissions.user.Approve === null)) ? (
               <><section id="section" className={`${trackerCSS["database-table"]}`}>
                 <div className="card">
                   <div className={`${trackerCSS["card-header"]} card-header`}>
@@ -981,7 +981,7 @@ function Tracker() {
                           getData &&
                           getData.length > 0 &&
                           getData.map((userObj) => (
-                            (getPermissions && getPermissions.user && (getPermissions.user.Approve === 'approved' && getPermissions.permissions[0] && getPermissions.permissions[0].metrics.includes(userObj.Category))) || (getPermissions && getPermissions.user && (getPermissions.user.Approve === 'decline' || getPermissions.user.Approve === null)) ? (
+                            (getPermissions && getPermissions.user && (getPermissions.user.Approve === 'approve' && getPermissions.permissions[0] && getPermissions.permissions[0].metrics.includes(userObj.Category))) || (getPermissions && getPermissions.user && (getPermissions.user.Approve === 'decline' || getPermissions.user.Approve === null)) ? (
                               <tr>
                                 <td>
                                   {editingRow === userObj.id ? (

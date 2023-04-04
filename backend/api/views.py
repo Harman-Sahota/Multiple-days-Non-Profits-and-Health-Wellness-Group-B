@@ -469,14 +469,13 @@ def trackerCategorySum(request):
         organization = request.GET.get('Organization')
         role = request.GET.get('role')
 
-    try:
-        conditional = permissions.objects.get(
-            role=role, Organization=organization)
-        categories = conditional.metrics.split(",")
-
-    except ObjectDoesNotExist:
-        categories = ["Fresh Produce", "Meat",
-                      "Canned Food", "Bread", "Dairy", "Reclaimed"]
+        try:
+            conditional = permissions.objects.get(
+                role=role, Organization=organization)
+            categories = conditional.metrics.split(",")
+        except ObjectDoesNotExist:
+            categories = ["Fresh Produce", "Meat",
+                          "Canned Food", "Bread", "Dairy", "Reclaimed"]
 
         category_sum = {}
         for category in categories:
