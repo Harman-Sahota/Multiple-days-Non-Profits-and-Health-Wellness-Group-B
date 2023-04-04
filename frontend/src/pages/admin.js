@@ -257,7 +257,7 @@ function Admin() {
                                             }>
                                                 <option name='empty' value="empty">Choose an option</option>
                                                 <option value="allow">Allow</option>
-                                                <option value="dont allow">Dont Allow</option>
+                                                <option value="dont allow">Don't Allow</option>
                                             </select>
                                         </div>
                                     </div>
@@ -396,7 +396,7 @@ function Admin() {
                                             >
                                                 <option name='empty' value="empty">Choose an option</option>
                                                 <option value="allow">Allow</option>
-                                                <option value="dont allow">Dont Allow</option>
+                                                <option value="dont allow">Don't Allow</option>
                                             </select>
                                         </div>
                                     </div>
@@ -537,7 +537,7 @@ function Admin() {
                                             >
                                                 <option name='empty' value="empty">Choose an option</option>
                                                 <option value="allow">Allow</option>
-                                                <option value="dont allow">Dont Allow</option>
+                                                <option value="dont allow">Don't Allow</option>
                                             </select>
                                         </div>
                                     </div>
@@ -670,7 +670,7 @@ function Admin() {
                                             }>
                                                 <option name='empty' value="empty">Choose an option</option>
                                                 <option value="allow">Allow</option>
-                                                <option value="dont allow">Dont Allow</option>
+                                                <option value="dont allow">Don't Allow</option>
                                             </select>
                                         </div>
                                     </div>
@@ -818,7 +818,7 @@ function Admin() {
                                             }>
                                                 <option name='empty' value="empty">Choose an option</option>
                                                 <option value="allow">Allow</option>
-                                                <option value="dont allow">Dont Allow</option>
+                                                <option value="dont allow">Don't Allow</option>
                                             </select>
                                         </div>
                                     </div>
@@ -948,7 +948,7 @@ function Admin() {
                                             }>
                                                 <option name='empty' value="empty">Choose an option</option>
                                                 <option value="allow">Allow</option>
-                                                <option value="dont allow">Dont Allow</option>
+                                                <option value="dont allow">Don't Allow</option>
                                             </select>
                                         </div>
                                     </div>
@@ -1032,7 +1032,7 @@ function Admin() {
 
                                 .then((response) => {
                                     if (response.status == 201) {
-                                        alert("form submitted successfully")
+                                        alert("Permissions have been updated successfully.")
                                         window.location = '/admin'
                                     }
                                 })
