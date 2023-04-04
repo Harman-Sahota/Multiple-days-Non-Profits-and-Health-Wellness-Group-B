@@ -45,7 +45,7 @@ function Tracker() {
     const role = localStorage.getItem("roles");
     const [getPermissions, setPermissions] = useState([]);
     async function fetchPermissionsData() {
-      const response = await fetch(`http://127.0.0.1:8000/api/PermissionsPull/?role=${role}&Organization=${Organization}&Email=${Email}`);
+      const response = await fetch(`http://127.0.0.1:8000/api/PermissionsPull/?role=${encodeURIComponent(role)}&Organization=${encodeURIComponent(Organization)}&Email=${Email}`);
       const data = await response.json();
       return setPermissions(data);
     }
@@ -333,7 +333,7 @@ function Tracker() {
 
 
     async function fetchData() {
-      const response = await fetch(`http://127.0.0.1:8000/api/trackerPull/?Email=${Email}&Organization=${Organization}&role=${role}`);
+      const response = await fetch(`http://127.0.0.1:8000/api/trackerPull/?Email=${Email}&Organization=${encodeURIComponent(Organization)}&role=${encodeURIComponent(role)}`);
       const data = await response.json();
       return setData(data);
     }
@@ -341,7 +341,7 @@ function Tracker() {
 
     async function fetchPercentageChartData() {
       const response = await fetch(
-        `http://localhost:8000/api/trackerPercentageSum/?Email=${Email}&Organization=${Organization}&role=${role}`
+        `http://localhost:8000/api/trackerPercentageSum/?Email=${Email}&Organization=${encodeURIComponent(Organization)}&role=${encodeURIComponent(role)}`
       );
       const data = await response.json();
 
@@ -911,7 +911,7 @@ function Tracker() {
               </div>
             </div><br />
 
-            {getPermissions.permissions && getPermissions.permissions.length > 0 && getPermissions.permissions[0].readwrite != 'none' ? (
+            {(getPermissions && getPermissions.user && (getPermissions.user.Approve === 'approved' && getPermissions.permissions[0] && getPermissions.permissions[0].readwrite != 'none')) || (getPermissions && getPermissions.user && (getPermissions.user.Approve === 'decline' || getPermissions.user.Approve === null)) ? (
               <><div className={`card ${trackerCSS["pie-chart-outer-div"]}`}>
                 <div
                   className={`col-6 svg-container ${trackerCSS["pie-chart-inner-div"]}`}
@@ -929,7 +929,7 @@ function Tracker() {
                 </div>
               </div><br /></>
             ) : null}
-            {getPermissions.permissions && getPermissions.permissions.length > 0 && getPermissions.permissions[0].readwrite != 'none' ? (
+            {(getPermissions && getPermissions.user && (getPermissions.user.Approve === 'approved' && getPermissions.permissions[0] && getPermissions.permissions[0].readwrite != 'none')) || (getPermissions && getPermissions.user && (getPermissions.user.Approve === 'decline' || getPermissions.user.Approve === null)) ? (
               <><section id="section" className={`${trackerCSS["database-table"]}`}>
                 <div className="card">
                   <div className={`${trackerCSS["card-header"]} card-header`}>
@@ -981,7 +981,7 @@ function Tracker() {
                           getData &&
                           getData.length > 0 &&
                           getData.map((userObj) => (
-                            getPermissions.permissions[0].metrics.includes(userObj.Category) ? (
+                            (getPermissions && getPermissions.user && (getPermissions.user.Approve === 'approved' && getPermissions.permissions[0] && getPermissions.permissions[0].metrics.includes(userObj.Category))) || (getPermissions && getPermissions.user && (getPermissions.user.Approve === 'decline' || getPermissions.user.Approve === null)) ? (
                               <tr>
                                 <td>
                                   {editingRow === userObj.id ? (

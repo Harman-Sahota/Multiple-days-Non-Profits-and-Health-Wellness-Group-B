@@ -36,6 +36,7 @@ from django.http import HttpResponse
 from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth import login, authenticate
 from django.db.models import Q
+from django.core.exceptions import ObjectDoesNotExist
 
 
 @api_view(["POST"])
@@ -431,9 +432,12 @@ def trackerPercentageSum(request):
         organization = request.GET.get('Organization')
         role = request.GET.get('role')
 
-        conditional = permissions.objects.get(role=role)
-        # split metrics string into a list
-        metrics = conditional.metrics.split(",")
+        try:
+            conditional = permissions.objects.get(
+                role=role, Organization=organization)
+            metrics = conditional.metrics.split(",")
+        except ObjectDoesNotExist:
+            metrics = []
 
         queryset = tracker.objects.all()
         # Retrieve user with given email
@@ -448,7 +452,8 @@ def trackerPercentageSum(request):
             queryset = tracker.objects.filter(Email=email)
 
         # Filter queryset to include only rows where Category is in the list of metrics
-        queryset = queryset.filter(Category__in=metrics)
+        if metrics:
+            queryset = queryset.filter(Category__in=metrics)
 
         sum = queryset.aggregate(Sum('percentClients'), Sum('percentAFeed'), Sum(
             'percentCompost'), Sum('percentPartNet'), Sum('percentLandfill'))
@@ -464,8 +469,14 @@ def trackerCategorySum(request):
         organization = request.GET.get('Organization')
         role = request.GET.get('role')
 
-        conditional = permissions.objects.get(role=role)
-        categories = conditional.metrics.split(',')
+    try:
+        conditional = permissions.objects.get(
+            role=role, Organization=organization)
+        categories = conditional.metrics.split(",")
+
+    except ObjectDoesNotExist:
+        categories = ["Fresh Produce", "Meat",
+                      "Canned Food", "Bread", "Dairy", "Reclaimed"]
 
         category_sum = {}
         for category in categories:
