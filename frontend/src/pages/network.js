@@ -12,6 +12,8 @@ import * as d3 from "d3";
 
 var filter = "Product";
 var time_filter = "http://localhost:8000/api/networkPull/";
+
+
 const PieChart = ({ data }) => {
   const svgRef = useRef();
 
@@ -19,7 +21,7 @@ const PieChart = ({ data }) => {
     const svg = d3.select(svgRef.current);
     const width = svg.node().getBoundingClientRect().width;
     const height = svg.node().getBoundingClientRect().height;
-    const radius = Math.min(width, height) / 2;
+    const radius = Math.min(width, height) / 2 - 20; // Adjusted for the thickness of the donut
     const color = d3.scaleOrdinal()
       .domain(Object.keys(data))
       .range(d3.schemeCategory10);
@@ -29,7 +31,7 @@ const PieChart = ({ data }) => {
       .sort(null);
 
     const arc = d3.arc()
-      .innerRadius(0)
+      .innerRadius(radius * 0.6) // Inner radius adjusted for the thickness of the donut
       .outerRadius(radius);
 
     const outerArc = d3.arc()
@@ -60,7 +62,10 @@ const PieChart = ({ data }) => {
       .attr('dy', '0.35em')
       .text(d => `${d.data.key} (${d.data.value})`)
       .style('font-size', '14px')
-      .style('text-anchor', d => getLabelAnchor(d));
+      .style('text-anchor', d => getLabelAnchor(d))
+      .style('fill', '#333')
+      .style('font-weight', 'bold')
+      .style('text-shadow', '1px 1px #fff');
 
     const labelLines = g.selectAll('polyline')
       .data(arcs)
@@ -89,9 +94,12 @@ const PieChart = ({ data }) => {
   }, [data]);
 
   return (
-    <svg ref={svgRef} width="250" height="250"></svg>
+    <svg ref={svgRef} style={{ width: '80%', height: '80%' }}>
+    </svg>
   );
 };
+
+
 
 
 

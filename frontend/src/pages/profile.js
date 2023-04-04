@@ -252,19 +252,15 @@ function Profile() {
                             <div className='row'>
                                 <Button className={`${profileCSS.save_btn} btn btn-outline-success`} id="saveBtn" variant="outline-sucess" onClick={() => {
 
-
-                                    if (role_str != "" || role_str != null) {
+                                    let saved_roles;
+                                    if (role_str != "" && role_str != null) {
                                         localStorage.setItem("roles", role_str.toString());
                                         saved_roles = localStorage.getItem('roles');
                                         console.log("not null set ", saved_roles);
                                     } else {
-                                        localStorage.setItem("roles", prevroles);
-                                        saved_roles = localStorage.getItem('roles');
+                                        saved_roles = prevroles;
                                         console.log("null set ", saved_roles);
                                     }
-
-                                    //setAll({ ...all, Roles: localStorage.getItem('roles') });
-                                    console.log(all.Roles);
 
                                     axios.put(
                                         `http://127.0.0.1:8000/api/profileUpdate/${userId}`,
@@ -298,7 +294,8 @@ function Profile() {
                                                         if (pullResponse.status == 201) {
                                                             // Handle the response data from the pull request here, if necessary
                                                             localStorage.removeItem('roles');
-                                                            localStorage.setItem('roles', response.data['Roles'])
+                                                            localStorage.setItem('roles', pullResponse.data['Roles']);
+                                                            console.log("Saved roles to localStorage: ", localStorage.getItem('roles'));
                                                         }
                                                         else {
                                                             console.log(`Error pulling profile data: ${pullResponse.statusText}`);
@@ -317,13 +314,11 @@ function Profile() {
                                             console.warn(`Error updating profile data: ${updateError}`);
                                         });
 
-
-
-
-
                                 }}>
                                     Save
                                 </Button>
+
+
 
                                 <Modal show={showModal} onHide={handleClose}>
                                     <Modal.Header closeButton>
@@ -339,7 +334,7 @@ function Profile() {
                             </div>
                         </form>
                     </div>
-                </div>
+                </div >
             </section >
         );
     }
