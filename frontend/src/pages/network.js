@@ -271,12 +271,14 @@ function SearchBar() {
           <div className="share_box container-md col-md-auto">
             <div className="row">
               <div className="col">
+                <p id="category_error" style={{ color: "red", display: "none" }}>Please select a Category</p>
+                <p id="email_error" style={{ color: "red", display: "none" }}>Please select an Email</p>
                 <h3>Combine by Organizations:</h3>
                 <br />
                 <div className="form-check ">
                   <div className="col-md-auto">
                     <div className="select-container">
-
+                      <p id="category_error" style={{ color: "red", display: "none" }}>Please select a category</p>
                       <select name="category" id="category_org" className="form-select">
                         <option value={"choose"} selected>Select Category</option>
                         <option value={"Fresh Produce"}>Fresh Produce</option>
@@ -287,6 +289,15 @@ function SearchBar() {
                         <option value={"Reclaimed"}>Reclaimed</option>
                       </select>
                       <select name="Organization" id="Organization" className="form-select" onChange={(event) => {
+
+                        const selectedCategory = document.getElementById("category_org").value;
+
+                        if (selectedCategory === 'choose') {
+                          document.getElementById('category_error').style.display = "block";
+                          return;
+                        } else {
+                          document.getElementById('category_error').style.display = "none";
+                        }
                         axios
                           .post(
                             "http://localhost:8000/api/NetworkOrgGraphing/",
@@ -316,7 +327,8 @@ function SearchBar() {
                           })
                           .catch((err) => console.warn(err));
 
-                      }}>
+                      }
+                      }>
                         <option>Select Organization</option>
                         {orgs.map(category => (
                           <option key={category} value={category}>{category}</option>
@@ -325,6 +337,7 @@ function SearchBar() {
                     </div>
                   </div>
                 </div>
+                <br />
                 <h3>Combine by Users:</h3>
                 <br />
                 <div className="form-check ">
@@ -340,6 +353,14 @@ function SearchBar() {
                         <option value={"Reclaimed"}>Reclaimed</option>
                       </select>
                       <select name="email" id="email" className="form-select" onChange={(event) => {
+                        const selectedEmail = document.getElementById("category_email").value;
+
+                        if (selectedEmail === 'choose') {
+                          document.getElementById('email_error').style.display = "block";
+                          return;
+                        } else {
+                          document.getElementById('email_error').style.display = "none";
+                        }
                         axios.post(
                           "http://localhost:8000/api/NetworkGraphing/",
                           {
@@ -375,7 +396,9 @@ function SearchBar() {
                     </div>
                   </div>
                 </div>
+                <br />
                 <h3>Shared with:</h3>
+                <br />
                 <div className="row">
                   <div className="col-6">
                     <h6>
@@ -408,6 +431,15 @@ function SearchBar() {
                             type="button"
                             className="graph_btn btn btn-outline-primary"
                             onClick={(event) => {
+
+                              const selectedCategory = document.getElementById("category_btn").value;
+
+                              if (selectedCategory === 'choose') {
+                                document.getElementById('category_error').style.display = "block";
+                                return;
+                              } else {
+                                document.getElementById('category_error').style.display = "none";
+                              }
 
                               axios
                                 .post(
