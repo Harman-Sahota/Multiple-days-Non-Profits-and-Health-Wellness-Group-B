@@ -69,7 +69,7 @@ const PieChart = ({ data }) => {
       })
       .attr('dy', '0.35em')
       .text(d => `${d.data.key} - ${d.data.value}`)
-      .style('font-size', '14px')
+      .style('font-size', '16px')
       .style('text-anchor', d => getLabelAnchor(d))
       .style('fill', '#333')
       .style('font-weight', 'normal')
@@ -489,7 +489,7 @@ function SearchBar() {
                   ))}
               </div>
               <div className="col graph_box chart chart-container" id="graph_box">
-                <h4 className="legend">{getLegend}</h4>
+                <h2 className="legend">{getLegend}</h2>
                 <PieChart data={getGraphData} id='piechart' />
               </div>
             </div>

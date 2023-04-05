@@ -202,7 +202,11 @@ svg {
 }
 
 #percentage-pie-chart {
-  margin-left: 2%;
+  margin-left: 6%;
+}
+
+#category-pie-chart {
+  margin-left: -12%;
 }
 
 .select-container {
@@ -212,7 +216,7 @@ svg {
 }
 
 .legend {
-  font-size: 2vh;
+  font-size: 3vh;
   position: absolute;
   top: 0;
   right: 0;
