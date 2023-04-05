@@ -142,8 +142,7 @@ function SearchBar() {
 
 
 
-  //graph stuff Jordan's Work- 
-  //more work will be implemented eventually
+
 
   const [orgs, setorgs] = useState([]);
   const [email, setemail] = useState([]);
@@ -318,7 +317,11 @@ function SearchBar() {
                                 [localStorage.getItem('organization')]: response.data["user"]["data"],
                                 [event.target.value]: response.data["comparee"]["data"]
                               }
-                              console.log(data)
+                              if (!response.data['user']['data'] && !response.data['comparee']['data']) {
+                                console.log('No data');
+                                document.getElementById('graph_box').innerHTML = "No Data Found"
+                              }
+
 
                               setGraphData(data);
                               setLegend(document.getElementById('category_org').value)
@@ -380,7 +383,10 @@ function SearchBar() {
                                 [localStorage.getItem('email')]: response.data["user"]["data"],
                                 [event.target.value]: response.data["comparee"]["data"]
                               }
-
+                              if (!response.data['user']['data'] && !response.data['comparee']['data']) {
+                                console.log('No data');
+                                document.getElementById('graph_box').innerHTML = "No Data Found"
+                              }
                               setGraphData(data);
                               setLegend(document.getElementById('category_email').value)
 
@@ -461,6 +467,10 @@ function SearchBar() {
                                       [localStorage.getItem('email')]: response.data["user"]["data"],
                                       [sharedObj.shared_with]: response.data["comparee"]["data"]
                                     }
+                                    if (!response.data['user']['data'] && !response.data['comparee']['data']) {
+                                      console.log('No data');
+                                      document.getElementById('graph_box').innerHTML = "No Data Found"
+                                    }
 
                                     setGraphData(data);
                                     setLegend(document.getElementById('category_btn').value)
@@ -478,7 +488,7 @@ function SearchBar() {
                     </div>
                   ))}
               </div>
-              <div className="col graph_box chart chart-container">
+              <div className="col graph_box chart chart-container" id="graph_box">
                 <h4 className="legend">{getLegend}</h4>
                 <PieChart data={getGraphData} id='piechart' />
               </div>
@@ -512,6 +522,7 @@ function SearchBar() {
                         }
                       })
                       .catch((err) => console.warn(err));
+
                   }}
                 />
               </div>
