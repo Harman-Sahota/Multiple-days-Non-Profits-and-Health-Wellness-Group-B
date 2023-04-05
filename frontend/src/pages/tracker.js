@@ -204,7 +204,7 @@ function Tracker() {
             const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2;
             return midangle < Math.PI ? "start" : "end";
           })
-          .style("font-size", "1.5rem");
+          .style("font-size", "1rem");
 
         return () => {
           // svg.remove();
@@ -295,7 +295,7 @@ function Tracker() {
             const midangle = d.startAngle + (d.endAngle - d.startAngle) / 2;
             return midangle < Math.PI ? "start" : "end";
           })
-          .style("font-size", "1.5rem");
+          .style("font-size", "1rem");
 
         return () => {
           d3.select("#category-pie-chart").selectAll("svg").remove();

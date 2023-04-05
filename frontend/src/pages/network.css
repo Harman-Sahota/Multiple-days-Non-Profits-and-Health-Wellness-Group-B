@@ -132,7 +132,7 @@
 
 #disc {
   width: 40vw;
-  margin-left: 40vh;
+  margin-left: 30vh;
   margin-top: -30vh;
 }
 
@@ -202,11 +202,7 @@ svg {
 }
 
 #percentage-pie-chart {
-  margin-left: 6%;
-}
-
-#category-pie-chart {
-  margin-left: -12%;
+  margin-left: 2%;
 }
 
 .select-container {
