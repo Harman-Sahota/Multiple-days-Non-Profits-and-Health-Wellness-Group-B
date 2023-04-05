@@ -1,4 +1,6 @@
 
+from django.db.models import Count, Q
+from django.db.models import Sum, Q
 from django.core.signing import TimestampSigner
 import json
 from api.models import users
@@ -503,24 +505,102 @@ def trackerCategorySum(request):
     return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-@ api_view(["POST"])
+@api_view(["POST"])
 def NetworkGraphing(request):
     if request.method == 'POST':
-        results = tracker.objects.filter(Email=request.data['user_email']).aggregate(Sum('percentClients'), Sum(
-            'percentAFeed'), Sum('percentCompost'), Sum('percentPartNet'), Sum('percentLandfill'))
-        results2 = tracker.objects.filter(Email=request.data['compare_email']).aggregate(Sum('percentClients'), Sum(
-            'percentAFeed'), Sum('percentCompost'), Sum('percentPartNet'), Sum('percentLandfill'))
-        return Response({"user": results, "comparee": results2})
+        if request.data['category'] == 'Fresh Produce':
+            results = tracker.objects.filter(Email=request.data['user_email']).aggregate(
+                data=Sum('Quantity', filter=Q(
+                    Category__iexact='Fresh Produce')))
+            results2 = tracker.objects.filter(Email=request.data['compare_email']).aggregate(
+                data=Sum('Quantity', filter=Q(
+                    Category__iexact='Fresh Produce')))
+        if request.data['category'] == 'Meat':
+            results = tracker.objects.filter(Email=request.data['user_email']).aggregate(
+                data=Sum('Quantity', filter=Q(
+                    Category__iexact='Meat')))
+            results2 = tracker.objects.filter(Email=request.data['compare_email']).aggregate(
+                data=Sum('Quantity', filter=Q(
+                    Category__iexact='Meat')))
+        if request.data['category'] == 'Canned Food':
+            results = tracker.objects.filter(Email=request.data['user_email']).aggregate(
+                data=Sum('Quantity', filter=Q(
+                    Category__iexact='Canned Food')))
+            results2 = tracker.objects.filter(Email=request.data['compare_email']).aggregate(
+                data=Sum('Quantity', filter=Q(
+                    Category__iexact='Canned Food')))
+        if request.data['category'] == 'Bread':
+            results = tracker.objects.filter(Email=request.data['user_email']).aggregate(
+                data=Sum('Quantity', filter=Q(
+                    Category__iexact='Bread')))
+            results2 = tracker.objects.filter(Email=request.data['compare_email']).aggregate(
+                data=Sum('Quantity', filter=Q(
+                    Category__iexact='Bread')))
+        if request.data['category'] == 'Dairy':
+            results = tracker.objects.filter(Email=request.data['user_email']).aggregate(
+                data=Sum('Quantity', filter=Q(
+                    Category__iexact='Dairy')))
+            results2 = tracker.objects.filter(Email=request.data['compare_email']).aggregate(
+                data=Sum('Quantity', filter=Q(
+                    Category__iexact='Dairy')))
+        if request.data['category'] == 'Reclaimed':
+            results = tracker.objects.filter(Email=request.data['user_email']).aggregate(
+                data=Sum('Quantity', filter=Q(
+                    Category__iexact='Reclaimed')))
+            results2 = tracker.objects.filter(Email=request.data['compare_email']).aggregate(
+                data=Sum('Quantity', filter=Q(
+                    Category__iexact='Reclaimed')))
+
+        return Response({"user": results, "comparee": results2, "Category": request.data['category']}, status=status.HTTP_201_CREATED)
 
 
 @ api_view(["POST"])
 def NetworkOrgGraphing(request):
     if request.method == 'POST':
-        results = tracker.objects.filter(Organization=request.data['user_org']).aggregate(Sum('percentClients'), Sum(
-            'percentAFeed'), Sum('percentCompost'), Sum('percentPartNet'), Sum('percentLandfill'))
-        results2 = tracker.objects.filter(Organization=request.data['compare_org']).aggregate(Sum('percentClients'), Sum(
-            'percentAFeed'), Sum('percentCompost'), Sum('percentPartNet'), Sum('percentLandfill'))
-        return Response({"user": results, "comparee": results2})
+        if request.data['category'] == 'Fresh Produce':
+            results = tracker.objects.filter(Organization=request.data['user_org']).aggregate(
+                data=Sum('Quantity', filter=Q(
+                    Category__iexact='Fresh Produce')))
+            results2 = tracker.objects.filter(Organization=request.data['compare_org']).aggregate(
+                data=Sum('Quantity', filter=Q(
+                    Category__iexact='Fresh Produce')))
+        if request.data['category'] == 'Meat':
+            results = tracker.objects.filter(Organization=request.data['user_org']).aggregate(
+                data=Sum('Quantity', filter=Q(
+                    Category__iexact='Meat')))
+            results2 = tracker.objects.filter(Organization=request.data['compare_org']).aggregate(
+                data=Sum('Quantity', filter=Q(
+                    Category__iexact='Meat')))
+        if request.data['category'] == 'Canned Food':
+            results = tracker.objects.filter(Organization=request.data['user_org']).aggregate(
+                data=Sum('Quantity', filter=Q(
+                    Category__iexact='Canned Food')))
+            results2 = tracker.objects.filter(Organization=request.data['compare_org']).aggregate(
+                data=Sum('Quantity', filter=Q(
+                    Category__iexact='Canned Food')))
+        if request.data['category'] == 'Bread':
+            results = tracker.objects.filter(Organization=request.data['user_org']).aggregate(
+                data=Sum('Quantity', filter=Q(
+                    Category__iexact='Bread')))
+            results2 = tracker.objects.filter(Organization=request.data['compare_org']).aggregate(
+                data=Sum('Quantity', filter=Q(
+                    Category__iexact='Bread')))
+        if request.data['category'] == 'Dairy':
+            results = tracker.objects.filter(Organization=request.data['user_org']).aggregate(
+                data=Sum('Quantity', filter=Q(
+                    Category__iexact='Dairy')))
+            results2 = tracker.objects.filter(Organization=request.data['compare_org']).aggregate(
+                data=Sum('Quantity', filter=Q(
+                    Category__iexact='Dairy')))
+        if request.data['category'] == 'Reclaimed':
+            results = tracker.objects.filter(Organization=request.data['user_org']).aggregate(
+                data=Sum('Quantity', filter=Q(
+                    Category__iexact='Reclaimed')))
+            results2 = tracker.objects.filter(Organization=request.data['compare_org']).aggregate(
+                data=Sum('Quantity', filter=Q(
+                    Category__iexact='Reclaimed')))
+
+        return Response({"user": results, "comparee": results2, "Category": request.data['category']}, status=status.HTTP_201_CREATED)
 
 
 @ api_view(["GET"])
@@ -578,7 +658,7 @@ def Past_6Months(request):
     return Response("error", status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-@api_view(['GET'])
+@ api_view(['GET'])
 def PermissionsPull(request):
     if request.method == 'GET':
         role = request.GET.get('role')

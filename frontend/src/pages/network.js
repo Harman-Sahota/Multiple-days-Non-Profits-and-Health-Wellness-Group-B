@@ -1,6 +1,7 @@
 //Sharing page
 import React, { useState, useEffect, useRef } from "react";
-
+import { faChartPie } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -9,6 +10,7 @@ import fourcss from "./fourcss.css";
 import axios, { all } from "axios";
 import { local } from "d3-selection";
 import * as d3 from "d3";
+
 
 var filter = "Product";
 var time_filter = "http://localhost:8000/api/networkPull/";
@@ -35,7 +37,7 @@ const PieChart = ({ data }) => {
       .outerRadius(radius);
 
     const outerArc = d3.arc()
-      .outerRadius(radius * 0.9)
+      .outerRadius(radius * 0.8) // Increased to move labels farther from the graph
       .innerRadius(radius * 0.9);
 
     const nonNullEntries = Object.entries(data).filter(([key, value]) => value != null);
@@ -53,18 +55,24 @@ const PieChart = ({ data }) => {
       .append('path')
       .attr('d', arc)
       .attr('fill', (d) => color(d.data.key));
-
     const labels = g.selectAll('text')
       .data(arcs)
       .enter()
       .append('text')
-      .attr('transform', d => `translate(${outerArc.centroid(d)})`)
+      .attr('transform', d => {
+        const posA = outerArc.centroid(d);
+        const posB = arc.centroid(d);
+        const posC = [(posB[0] + posA[0]) / 2, (posB[1] + posA[1]) / 2];
+        const scaleFactor = -6.5;
+        const posD = [(posB[0] - posA[0]) * scaleFactor + posB[0], (posB[1] - posA[1]) * scaleFactor + posB[1]];
+        return `translate(${posD})`;
+      })
       .attr('dy', '0.35em')
-      .text(d => `${d.data.key} (${d.data.value})`)
+      .text(d => `${d.data.key} - ${d.data.value}`)
       .style('font-size', '14px')
       .style('text-anchor', d => getLabelAnchor(d))
       .style('fill', '#333')
-      .style('font-weight', 'bold')
+      .style('font-weight', 'normal')
       .style('text-shadow', '1px 1px #fff');
 
     const labelLines = g.selectAll('polyline')
@@ -75,12 +83,32 @@ const PieChart = ({ data }) => {
         const posA = outerArc.centroid(d);
         const posB = arc.centroid(d);
         const posC = [(posB[0] + posA[0]) / 2, (posB[1] + posA[1]) / 2];
-        return [posA, posC, posB];
+        const scaleFactor = -6.5;
+        const posD = [(posB[0] - posA[0]) * scaleFactor + posB[0], (posB[1] - posA[1]) * scaleFactor + posB[1]];
+        return [posA, posC, posD];
       })
       .style('fill', 'none')
       .style('stroke', '#000')
       .style('stroke-width', '1px')
       .style('stroke-opacity', 0.5);
+
+
+    const labelPaths = g.selectAll('path')
+      .data(arcs)
+      .enter()
+      .append('path')
+      .attr('d', d => {
+        const posA = outerArc.centroid(d);
+        const posB = arc.centroid(d);
+        const posC = [(posB[0] + posA[0]) / 2, (posB[1] + posA[1]) / 2];
+        return `M ${posA[0]} ${posA[1]} L ${posC[0]} ${posC[1]} L ${posB[0]} ${posB[1]}`;
+      })
+      .style('fill', 'none')
+      .style('stroke', '#000')
+      .style('stroke-width', '1px')
+      .style('stroke-opacity', 0.5);
+
+
 
     function getLabelAnchor(d) {
       // Position labels based on their location in the pie chart
@@ -106,8 +134,9 @@ const PieChart = ({ data }) => {
 // searchBar function
 function SearchBar() {
 
-
+  const data = {}
   const [getData, setData] = useState([]);
+  const [getLegend, setLegend] = useState([]);
   const [getSharedData, setSharedData] = useState([]);
   const [getGraphData, setGraphData] = useState([]);
 
@@ -246,70 +275,77 @@ function SearchBar() {
                 <br />
                 <div className="form-check ">
                   <div className="col-md-auto">
-                    <select name="Organization" id="Organization" className="form-select" onChange={(event) => {
-                      axios
-                        .post(
-                          "http://localhost:8000/api/NetworkOrgGraphing/",
-                          {
-                            user_org: localStorage.getItem("organization"),
-                            compare_org: event.target.value,
-                          },
-                          {
-                            headers: {
-                              "Content-type": "application/json",
+                    <div className="select-container">
+
+                      <select name="category" id="category_org" className="form-select">
+                        <option value={"choose"} selected>Select Category</option>
+                        <option value={"Fresh Produce"}>Fresh Produce</option>
+                        <option value={"Meat"}>Meat</option>
+                        <option value={"Canned Food"}>Canned Food</option>
+                        <option value={"Bread"}>Bread</option>
+                        <option value={"Dairy"}>Dairy</option>
+                        <option value={"Reclaimed"}>Reclaimed</option>
+                      </select>
+                      <select name="Organization" id="Organization" className="form-select" onChange={(event) => {
+                        axios
+                          .post(
+                            "http://localhost:8000/api/NetworkOrgGraphing/",
+                            {
+                              user_org: localStorage.getItem("organization"),
+                              compare_org: event.target.value,
+                              category: document.getElementById('category_org').value
                             },
-                          }
-                        )
-                        .then((response) => {
-                          if (response.status == 200) {
-                            if (
-                              response.data["comparee"][
-                              "percentClients__sum"
-                              ] == null
-                            ) {
-                              alert(
-                                "this user is a non registered user (or the user has no data and no data) is available to compare, only user data displayed in graph"
-                              );
+                            {
+                              headers: {
+                                "Content-type": "application/json",
+                              },
                             }
-                            const data = {
-                              Clients_user: response.data['user']['percentClients__sum'],
-                              Clients_comparee: response.data['comparee']['percentClients__sum'],
-                              Animal_Feed_user: response.data['user']['percentAFeed__sum'],
-                              Animal_Feed_comparee: response.data['comparee']['percentAFeed__sum'],
-                              Partner_Network_user: response.data['user']['percentPartNet__sum'],
-                              Partner_Network_comparee: response.data['comparee']['percentPartNet__sum'],
-                              Landfill_user: response.data['user']['percentLandfill__sum'],
-                              Landfill_comparee: response.data['comparee']['percentLandfill__sum'],
-                            };
+                          )
+                          .then((response) => {
+                            if (response.status == 201) {
+                              const data = {
+                                [localStorage.getItem('organization')]: response.data["user"]["data"],
+                                [event.target.value]: response.data["comparee"]["data"]
+                              }
+                              console.log(data)
 
+                              setGraphData(data);
+                              setLegend(document.getElementById('category_org').value)
 
-                            setGraphData(data);
+                            }
+                          })
+                          .catch((err) => console.warn(err));
 
-
-
-
-                          }
-                        })
-                        .catch((err) => console.warn(err));
-                    }}>
-                      <option>Choose</option>
-                      {orgs.map(category => (
-                        <option key={category} value={category}>{category}</option>
-                      ))}
-                    </select>
+                      }}>
+                        <option>Select Organization</option>
+                        {orgs.map(category => (
+                          <option key={category} value={category}>{category}</option>
+                        ))}
+                      </select>
+                    </div>
                   </div>
                 </div>
                 <h3>Combine by Users:</h3>
                 <br />
                 <div className="form-check ">
                   <div className="col-md-auto">
-                    <select name="email" id="email" className="form-select" onChange={(event) => {
-                      axios
-                        .post(
+                    <div className="select-container">
+                      <select name="category" id="category_email" className="form-select">
+                        <option value={"choose"} selected>Select Category</option>
+                        <option value={"Fresh Produce"}>Fresh Produce</option>
+                        <option value={"Meat"}>Meat</option>
+                        <option value={"Canned Food"}>Canned Food</option>
+                        <option value={"Bread"}>Bread</option>
+                        <option value={"Dairy"}>Dairy</option>
+                        <option value={"Reclaimed"}>Reclaimed</option>
+                      </select>
+                      <select name="email" id="email" className="form-select" onChange={(event) => {
+                        axios.post(
                           "http://localhost:8000/api/NetworkGraphing/",
                           {
                             user_email: localStorage.getItem("email"),
                             compare_email: event.target.value,
+                            category: document.getElementById('category_email').value
                           },
                           {
                             headers: {
@@ -317,44 +353,26 @@ function SearchBar() {
                             },
                           }
                         )
-                        .then((response) => {
-                          if (response.status == 200) {
-                            if (
-                              response.data["comparee"][
-                              "percentClients__sum"
-                              ] == null
-                            ) {
-                              alert(
-                                "this user is a non registered user (or the user has no data and no data) is available to compare, only user data displayed in graph"
-                              );
+                          .then((response) => {
+                            if (response.status == 201) {
+                              const data = {
+                                [localStorage.getItem('email')]: response.data["user"]["data"],
+                                [event.target.value]: response.data["comparee"]["data"]
+                              }
+
+                              setGraphData(data);
+                              setLegend(document.getElementById('category_email').value)
+
                             }
-                            const data = {
-                              Clients_user: response.data['user']['percentClients__sum'],
-                              Clients_comparee: response.data['comparee']['percentClients__sum'],
-                              Animal_Feed_user: response.data['user']['percentAFeed__sum'],
-                              Animal_Feed_comparee: response.data['comparee']['percentAFeed__sum'],
-                              Partner_Network_user: response.data['user']['percentPartNet__sum'],
-                              Partner_Network_comparee: response.data['comparee']['percentPartNet__sum'],
-                              Landfill_user: response.data['user']['percentLandfill__sum'],
-                              Landfill_comparee: response.data['comparee']['percentLandfill__sum'],
-                            };
-
-
-                            setGraphData(data);
-
-
-
-
-                          }
-                        })
-                        .catch((err) => console.warn(err));
-                    }}
-                    >
-                      <option>Choose</option>
-                      {email.map(category => (
-                        <option key={category} value={category}>{category}</option>
-                      ))}
-                    </select>
+                          })
+                          .catch((err) => console.warn(err));
+                      }}>
+                        <option>Select Email</option>
+                        {email.map(category => (
+                          <option key={category} value={category}>{category}</option>
+                        ))}
+                      </select>
+                    </div>
                   </div>
                 </div>
                 <h3>Shared with:</h3>
@@ -364,9 +382,9 @@ function SearchBar() {
                       <strong>Email</strong>
                     </h6>
                   </div>
-                  <div className="col-4">
+                  <div className="col-6">
                     <h6>
-                      <strong>Graph</strong>
+                      <strong>Category</strong>
                     </h6>
                   </div>
                 </div>
@@ -376,64 +394,60 @@ function SearchBar() {
                     <div className="row share_list">
                       <div className="col-6 email">{sharedObj.shared_with}</div>
                       <div className="col-4">
-                        <button
-                          type="button"
-                          className="graph_btn btn btn-outline-primary"
-                          onClick={(event) => {
+                        <div className="select-container">
+                          <select name="category" id="category_btn" className="form-select">
+                            <option value={"choose"} selected>Select Category</option>
+                            <option value={"Fresh Produce"}>Fresh Produce</option>
+                            <option value={"Meat"}>Meat</option>
+                            <option value={"Canned Food"}>Canned Food</option>
+                            <option value={"Bread"}>Bread</option>
+                            <option value={"Dairy"}>Dairy</option>
+                            <option value={"Reclaimed"}>Reclaimed</option>
+                          </select>
+                          <button
+                            type="button"
+                            className="graph_btn btn btn-outline-primary"
+                            onClick={(event) => {
 
-                            axios
-                              .post(
-                                "http://localhost:8000/api/NetworkGraphing/",
-                                {
-                                  user_email: localStorage.getItem("email"),
-                                  compare_email: sharedObj.shared_with,
-                                },
-                                {
-                                  headers: {
-                                    "Content-type": "application/json",
+                              axios
+                                .post(
+                                  "http://localhost:8000/api/NetworkGraphing/",
+                                  {
+                                    user_email: localStorage.getItem("email"),
+                                    compare_email: sharedObj.shared_with,
+                                    category: document.getElementById('category_btn').value
                                   },
-                                }
-                              )
-                              .then((response) => {
-                                if (response.status == 200) {
-                                  if (
-                                    response.data["comparee"][
-                                    "percentClients__sum"
-                                    ] == null
-                                  ) {
-                                    alert(
-                                      "this user is a non registered user (or the user has no data and no data) is available to compare, only user data displayed in graph"
-                                    );
+                                  {
+                                    headers: {
+                                      "Content-type": "application/json",
+                                    },
                                   }
-                                  const data = {
-                                    Clients_user: response.data['user']['percentClients__sum'],
-                                    Clients_comparee: response.data['comparee']['percentClients__sum'],
-                                    Animal_Feed_user: response.data['user']['percentAFeed__sum'],
-                                    Animal_Feed_comparee: response.data['comparee']['percentAFeed__sum'],
-                                    Partner_Network_user: response.data['user']['percentPartNet__sum'],
-                                    Partner_Network_comparee: response.data['comparee']['percentPartNet__sum'],
-                                    Landfill_user: response.data['user']['percentLandfill__sum'],
-                                    Landfill_comparee: response.data['comparee']['percentLandfill__sum'],
-                                  };
+                                )
+                                .then((response) => {
+                                  if (response.status == 201) {
+                                    const data = {
+                                      [localStorage.getItem('email')]: response.data["user"]["data"],
+                                      [sharedObj.shared_with]: response.data["comparee"]["data"]
+                                    }
 
+                                    setGraphData(data);
+                                    setLegend(document.getElementById('category_btn').value)
 
-                                  setGraphData(data);
-                                  console.log(data);
+                                  }
+                                })
+                                .catch((err) => console.warn(err));
 
-
-
-                                }
-                              })
-                              .catch((err) => console.warn(err));
-                          }}
-                        >
-                          Compare Data
-                        </button>
+                            }}
+                          >
+                            <FontAwesomeIcon icon={faChartPie} />
+                          </button>
+                        </div>
                       </div>
                     </div>
                   ))}
               </div>
               <div className="col graph_box chart chart-container">
+                <h4 className="legend">{getLegend}</h4>
                 <PieChart data={getGraphData} id='piechart' />
               </div>
             </div>
