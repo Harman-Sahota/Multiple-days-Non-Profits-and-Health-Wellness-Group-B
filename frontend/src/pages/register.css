@@ -2,7 +2,7 @@
 
   from {
     opacity: 0;
- 
+
   }
 
   to {
@@ -58,13 +58,14 @@ h1 {
 
 
 .progressbar {
-  width: 90%;
-  height: 40%;
+  width: 40vw;
+  /* 90% of the viewport width */
+  height: 0.5vh;
+  /* or any other fixed value */
   transition: 0.4s ease;
   background-color: #cee4cf;
   margin-bottom: 10%;
   border-radius: 16px;
-
 }
 
 .progressbar div {

@@ -47,7 +47,7 @@ function Form() {
             <h1>{FormTitles[page]}</h1>
           </div>
           <div className="progressbar">
-            <div
+            <div id="progress"
               style={{
                 width:
                   page === 0
