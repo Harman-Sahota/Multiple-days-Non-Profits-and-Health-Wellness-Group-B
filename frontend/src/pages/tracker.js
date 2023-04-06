@@ -118,6 +118,9 @@ function Tracker() {
 
     function PercentagePieChart({ data }) {
       // const labelOffset = 100;
+      if (!data || Object.keys(data).length === 0) {
+        return <h1>No Data Found</h1>;
+      }
 
       useEffect(() => {
         d3.select("#percentage-pie-chart").selectAll("svg").remove();
@@ -214,6 +217,9 @@ function Tracker() {
     }
 
     function CategoryPieChart({ data }) {
+      if (!data || Object.keys(data).length === 0) {
+        return <h1>No Data Found</h1>;
+      }
       useEffect(() => {
         d3.select("#category-pie-chart").selectAll("svg").remove();
         const width = 600;
