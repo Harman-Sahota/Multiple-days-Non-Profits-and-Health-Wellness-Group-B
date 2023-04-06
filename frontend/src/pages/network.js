@@ -34,7 +34,9 @@ const PieChart = ({ data }) => {
 
     const arc = d3.arc()
       .innerRadius(radius * 0.6) // Inner radius adjusted for the thickness of the donut
-      .outerRadius(radius);
+      .outerRadius(radius)
+      .padAngle(0.02);
+
 
     const outerArc = d3.arc()
       .outerRadius(radius * 0.8) // Increased to move labels farther from the graph
