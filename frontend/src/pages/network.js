@@ -642,8 +642,9 @@ function SearchBar() {
               </div>
 
               <div id="disc">
+
                 {getData &&
-                  getData.length > 0 &&
+                  getData.length > 0 ? (
                   getData
                     .map((userObj) => (
                       <div class="card">
@@ -762,7 +763,13 @@ function SearchBar() {
                         </div>
                       </div>
                     ))
-                    .reverse()}
+                    .reverse()) : (
+                  <div id="nposts">
+                    <h3 id="no_posts">No posts found</h3>
+                  </div>
+                )
+
+                }
               </div>
             </div>
 
@@ -890,7 +897,7 @@ function SearchBar() {
                 </div>
               </Modal.Body>
             </Modal>
-          </div>
+          </div >
         </>
       );
     } else if (
