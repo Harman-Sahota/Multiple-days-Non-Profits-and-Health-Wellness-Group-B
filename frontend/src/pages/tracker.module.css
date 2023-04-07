@@ -78,9 +78,9 @@ input[type="number"] {
   padding: 1rem;
   display: flex;
   flex-direction: row;
-  display: flex;
+  /* display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
   /*justify-content: space-evenly;*/
   width: 100%;
   /*width: 85rem; Commented out bcs this forces smaller screens to have horizontal scroll*/

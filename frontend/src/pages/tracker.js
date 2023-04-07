@@ -919,6 +919,9 @@ function Tracker() {
 
             {(getPermissions && getPermissions.user && (getPermissions.user.Approve === 'approve' && getPermissions.permissions[0] && getPermissions.permissions[0].readwrite != 'none')) || (getPermissions && getPermissions.user && (getPermissions.user.Approve === 'decline' || getPermissions.user.Approve === null)) ? (
               <><div className={`card ${trackerCSS["pie-chart-outer-div"]}`}>
+
+                <h3>Graphs</h3>
+
                 <div
                   className={`col-6 svg-container ${trackerCSS["pie-chart-inner-div"]}`}
                   id="percentage-pie-chart"
