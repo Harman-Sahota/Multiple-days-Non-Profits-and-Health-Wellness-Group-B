@@ -1,4 +1,4 @@
-## FRIDAY 23 SEPTEMBER 2022
+## FRIDAY 12 SEPTEMBER 2022
 
 ### [Heal The Now Website](https://www.healthenow.com/)
 
@@ -8,6 +8,7 @@
   - This is so we can remind her to get us on the GitHub repo to analyse the previous architecture.
   - Also such that we can remind her to add our UBC emails (@student.ubc.ca) to MS-Teams.
   - Also such that she can send us an article she had written on **some systems.**
+  - Things changed, we can contact her through Discord
 - [ ] Install the latest MySQL v8.0.3.
 - [ ] Install MySQL version of WorkBench.
 - [ ] Install Maria Databases.
@@ -45,6 +46,7 @@
 
 - Django, OR
 - Flask Architecture ([Flask Pallet Projects](https://flask.palletsprojects.com/en/2.2.x/))
+  - We went with Django over Flask
 - Terraform for Virtual machine
 
 ---
@@ -59,20 +61,22 @@
 ### MINUTES
 
 - Communities are on low budget.
+  - COVID has affected this to a great extent.
 - Aim is to re-architect to a long-lasting structure.
-- A museum is losing revenue cause trail is not connected to it.
-- There's a team of management students that is also working on the project.
-- On the website, there'll be dashboards, trackers, charts and professional websites for different kinds of members such doctors, nurses and so forth.
-- She's using v5.529 but we're advised to get the latest v8.0.3.
-- The course needs a commitment of a minimum of 10 hours.
-- We'll share our phone numbers with her to keep in close contact.
-- There are students that are ready to help with testing.
-- We'll work till exam time and then continue at the beginning of the next semester.
-- Teams will get broken up into different functionality for different groups.
-- Django's content management system can handle front-end too.
-- She would like to make room for people to maintain this project longer term.
-- There are MySQL free licenses for non-profits.
-- Running event in June 1st.
+  - To make something that is easily maintainable
+- The museum is experiencing a decrease in revenue due to an unconnected trail.
+- A group of management students is currently involved in the project.
+- The website will feature various tools such as dashboards, trackers, charts, and professional pages for different members, such as doctors and nurses.
+- She is currently using v5.529, but we have been advised to upgrade to the latest version, v8.0.3.
+- The course requires a minimum commitment of 10 hours.
+- We will exchange phone numbers with her to maintain close contact.
+- There are students available to assist with testing.
+- We will work until the exam period and resume at the beginning of the next semester.
+- Teams will be divided into various groups based on their functionalities.
+- Django's content management system can handle front-end development as well.
+- She aims to create space for individuals to sustain this project over a longer duration.
+- Non-profit organizations can obtain MySQL free licenses.
+- An event will take place on June 1st.
 
 ### QUESTION ANSWERS
 
