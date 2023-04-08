@@ -34,60 +34,49 @@ function ResetPassword() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(password)
-        console.log(confirmPassword)
+        console.log(password);
+        console.log(confirmPassword);
 
-        if (password == "") {
-
-
+        if (password === '') {
             event.preventDefault();
-
-
             document.getElementById('password').classList.add('error');
-
-        }
-        else if (confirmPassword == "") {
-
+        } else if (confirmPassword === '') {
             event.preventDefault();
-
             document.getElementById('confirmPassword').classList.add('error');
-
-        }
-        else if (password != confirmPassword && password != "" && confirmPassword != "") {
-
+        } else if (password !== confirmPassword) {
             event.preventDefault();
-            window.alert('passwords dont match');
-
+            window.alert('Passwords do not match');
             document.getElementById('password').classList.add('error');
             document.getElementById('confirmPassword').classList.add('error');
+        } else {
+            axios
+                .post(
+                    `http://localhost:8000/api/changePassword`,
+                    {
+                        Email: email,
+                        Password: password,
+                    },
+                    {
+                        headers: {
+                            'Content-type': 'application/json',
+                        },
+                    }
+                )
+                .then((response) => {
+                    if (response.status === 200) {
+                        window.alert(
+                            'Password reset successfully, redirecting you to the login page!'
+                        );
+                        window.location.href = '/login';
+                    }
+                })
+                .catch((err) => console.warn(err));
         }
-        else if (password != "" && confirmPassword != "" && password == confirmPassword) {
-            document.getElementById('password').classList.add('success');
-            document.getElementById('confirmPassword').classList.add('success');
-        }
+    };
 
-        axios.post(
-            `http://localhost:8000/api/changePassword`,
-            {
-                Email: email,
-                Password: password
-            },
-            {
-                headers: {
-                    "Content-type": "application/json",
-                },
-            }
-        )
-            .then((response) => {
-                if (response.status == 200) {
 
-                    window.alert('password reset successfully, redirecting you to the login page!')
-                    window.location.href = '/login';
 
-                }
-            })
-            .catch((err) => console.warn(err));
-    }
+
 
     if (!validToken) {
         return (

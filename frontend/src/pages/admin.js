@@ -5,7 +5,8 @@ import React, { useReducer } from 'react';
 import { useState, useEffect } from 'react';
 import Button from "react-bootstrap/Button";
 import fourcss from './fourcss.css';
-
+import { local } from 'd3-selection';
+import NavbarIn from '../components/NavBarIn';
 let temp = [];
 let temp_warehouse = [];
 let temp_admin = [];
@@ -254,6 +255,7 @@ function Admin() {
                                                 setCEO({ ...CEO, network: event.target.value })
 
                                             }>
+                                                <option name='empty' value="empty">Choose an option</option>
                                                 <option value="allow">Allow</option>
                                                 <option value="dont allow">Dont Allow</option>
                                             </select>
@@ -267,10 +269,10 @@ function Admin() {
                                                 setCEO({ ...CEO, readwrite: event.target.value })
 
                                             }>
-                                                <option value="read">Read</option>
-                                                <option value="write">Write</option>
-                                                <option value="both">Both</option>
-                                                <option value="none">None</option>
+                                                <option name='empty' value="empty">Choose an option</option>
+                                                <option value="both">Full Access</option>
+                                                <option value="read">View</option>
+                                                <option value="none">No access</option>
                                             </select>
                                         </div>
                                     </div>
@@ -392,6 +394,7 @@ function Admin() {
                                                 }
 
                                             >
+                                                <option name='empty' value="empty">Choose an option</option>
                                                 <option value="allow">Allow</option>
                                                 <option value="dont allow">Dont Allow</option>
                                             </select>
@@ -403,14 +406,14 @@ function Admin() {
                                         <div className="col-md-auto">
                                             <select className="form-select" id="readwrite" name="readwrite-warehouse"
                                                 onChange={(event) =>
-                                                    setwarehouse({ ...warehouse, network: event.target.value })
+                                                    setwarehouse({ ...warehouse, readwrite: event.target.value })
 
                                                 }
                                             >
-                                                <option value="read">Read</option>
-                                                <option value="write">Write</option>
-                                                <option value="both">Both</option>
-                                                <option value="none">None</option>
+                                                <option name='empty' value="empty">Choose an option</option>
+                                                <option value="both">Full Access</option>
+                                                <option value="read">View</option>
+                                                <option value="none">No Access</option>
                                             </select>
                                         </div>
                                     </div>
@@ -532,6 +535,7 @@ function Admin() {
                                                 }
 
                                             >
+                                                <option name='empty' value="empty">Choose an option</option>
                                                 <option value="allow">Allow</option>
                                                 <option value="dont allow">Dont Allow</option>
                                             </select>
@@ -548,10 +552,10 @@ function Admin() {
 
                                                 }
                                             >
-                                                <option value="read">Read</option>
-                                                <option value="write">Write</option>
-                                                <option value="both">Both</option>
-                                                <option value="none">None</option>
+                                                <option name='empty' value="empty">Choose an option</option>
+                                                <option value="both">Full Access</option>
+                                                <option value="read">View</option>
+                                                <option value="none">No Access</option>
                                             </select>
                                         </div>
                                     </div>
@@ -664,6 +668,7 @@ function Admin() {
                                             <select className="form-select" id="network" name="network-CEO" onChange={(event) =>
                                                 setVolunteer({ ...volunteer, network: event.target.value })
                                             }>
+                                                <option name='empty' value="empty">Choose an option</option>
                                                 <option value="allow">Allow</option>
                                                 <option value="dont allow">Dont Allow</option>
                                             </select>
@@ -677,10 +682,10 @@ function Admin() {
                                                 setVolunteer({ ...volunteer, readwrite: event.target.value })
 
                                             }>
-                                                <option value="read">Read</option>
-                                                <option value="write">Write</option>
-                                                <option value="both">Both</option>
-                                                <option value="none">None</option>
+                                                <option name='empty' value="empty">Choose an option</option>
+                                                <option value="both">Full Access</option>
+                                                <option value="read">View</option>
+                                                <option value="none">No Access</option>
                                             </select>
                                         </div>
                                     </div>
@@ -811,6 +816,7 @@ function Admin() {
                                                 setSponsors({ ...Sponsors, network: event.target.value })
 
                                             }>
+                                                <option name='empty' value="empty">Choose an option</option>
                                                 <option value="allow">Allow</option>
                                                 <option value="dont allow">Dont Allow</option>
                                             </select>
@@ -824,10 +830,10 @@ function Admin() {
                                                 setSponsors({ ...Sponsors, readwrite: event.target.value })
 
                                             }>
-                                                <option value="read">Read</option>
-                                                <option value="write">Write</option>
-                                                <option value="both">Both</option>
-                                                <option value="none">None</option>
+                                                <option name='empty' value="empty">Choose an option</option>
+                                                <option value="both">Full Access</option>
+                                                <option value="read">View</option>
+                                                <option value="none">No Access</option>
                                             </select>
                                         </div>
                                     </div>
@@ -940,6 +946,7 @@ function Admin() {
                                                 setExperts({ ...Experts, network: event.target.value })
 
                                             }>
+                                                <option name='empty' value="empty">Choose an option</option>
                                                 <option value="allow">Allow</option>
                                                 <option value="dont allow">Dont Allow</option>
                                             </select>
@@ -952,11 +959,10 @@ function Admin() {
                                             <select className="form-select" id="readwrite" name="readwrite-Experts" onChange={(event) =>
                                                 setExperts({ ...Experts, readwrite: event.target.value })
 
-                                            }>
-                                                <option value="read">Read</option>
-                                                <option value="write">Write</option>
-                                                <option value="both">Both</option>
-                                                <option value="none">None</option>
+                                            }> <option name='empty' value="empty">Choose an option</option>
+                                                <option value="both">Full Access</option>
+                                                <option value="read">View</option>
+                                                <option value="none">No Access</option>
                                             </select>
                                         </div>
                                     </div>
@@ -976,37 +982,43 @@ function Admin() {
                                         role: CEO.role,
                                         metrics: CEO.metrics,
                                         network: CEO.network,
-                                        readwrite: CEO.readwrite
+                                        readwrite: CEO.readwrite,
+                                        Organization: localStorage.getItem('organization')
                                     },
                                     {
                                         role: warehouse.role,
                                         metrics: warehouse.metrics,
                                         network: warehouse.network,
-                                        readwrite: warehouse.readwrite
+                                        readwrite: warehouse.readwrite,
+                                        Organization: localStorage.getItem('organization')
                                     },
                                     {
                                         role: admin.role,
                                         metrics: admin.metrics,
                                         network: admin.network,
-                                        readwrite: admin.readwrite
+                                        readwrite: admin.readwrite,
+                                        Organization: localStorage.getItem('organization')
                                     },
                                     {
                                         role: volunteer.role,
                                         metrics: volunteer.metrics,
                                         network: volunteer.network,
-                                        readwrite: volunteer.readwrite
+                                        readwrite: volunteer.readwrite,
+                                        Organization: localStorage.getItem('organization')
                                     },
                                     {
                                         role: Sponsors.role,
                                         metrics: Sponsors.metrics,
                                         network: Sponsors.network,
-                                        readwrite: Sponsors.readwrite
+                                        readwrite: Sponsors.readwrite,
+                                        Organization: localStorage.getItem('organization')
                                     },
                                     {
                                         role: Experts.role,
                                         metrics: Experts.metrics,
                                         network: Experts.network,
-                                        readwrite: Experts.readwrite
+                                        readwrite: Experts.readwrite,
+                                        Organization: localStorage.getItem('organization')
                                     }
                                 ],
                                 {
@@ -1020,7 +1032,8 @@ function Admin() {
 
                                 .then((response) => {
                                     if (response.status == 201) {
-                                        alert("form submitted successfully");
+                                        alert("form submitted successfully")
+                                        window.location = '/admin'
                                     }
                                 })
                                 .catch((err) => console.warn(err));
@@ -1045,55 +1058,63 @@ function Admin() {
 
 
                                 {user && user.length > 0 && user.map((userObj, index) => (
+                                    userObj.Organization === localStorage.getItem('organization') ? (
+                                        <tr tr >
 
-                                    <tr>
-
-                                        <td>{userObj.FirstName}  {userObj.LastName} </td>
-                                        <td>{userObj.Email}</td>
-                                        <td id='roles'>{userObj.Roles}</td>
-                                        <td>
-                                            <div className="form-check ">
-                                                <div className="col-md-auto">
-                                                    <select className="form-select" id="approve_user" name="approve[]"
-
-
-                                                        onChange={async (e) => {
-
-                                                            axios.put(
-                                                                `http://127.0.0.1:8000/api/adminUpdate/${userObj.id}`,
+                                            <td>{userObj.FirstName}  {userObj.LastName} </td>
+                                            <td>{userObj.Email}</td>
+                                            <td id='roles'>{userObj.Roles}</td>
+                                            <td>
+                                                <div className="form-check ">
+                                                    <div className="col-md-auto">
+                                                        <select className="form-select" id="approve_user" name="approve[]"
 
 
-                                                                { "Approve": e.target.value },
-                                                                {
-                                                                    headers: {
-                                                                        "Content-type": "application/json",
+                                                            onChange={async (e) => {
+                                                                const currentScrollPos = window.scrollY;
+
+                                                                window.location.reload();
+
+                                                                window.scrollTo(0, currentScrollPos);
+
+                                                                axios.put(
+                                                                    `http://127.0.0.1:8000/api/adminUpdate/${userObj.id}`,
+
+
+                                                                    { "Approve": e.target.value },
+                                                                    {
+                                                                        headers: {
+                                                                            "Content-type": "application/json",
+                                                                        }
                                                                     }
-                                                                }
-                                                            )
+                                                                )
 
-                                                            const response = await fetch("http://localhost:8000/api/adminPull/");
-                                                            const data = await response.json();
-                                                            setUser(data);
-                                                            fetchData();
+                                                                const response = await fetch("http://localhost:8000/api/adminPull/");
+                                                                const data = await response.json();
+                                                                setUser(data);
+                                                                fetchData();
 
-                                                            const response2 = await fetch("http://localhost:8000/api/adminPullApprove/");
-                                                            const data2 = await response2.json();
-                                                            setApprovedUser(data2);
-                                                            fetchApprovedData();
+                                                                const response2 = await fetch("http://localhost:8000/api/adminPullApprove/");
+                                                                const data2 = await response2.json();
+                                                                setApprovedUser(data2);
+                                                                fetchApprovedData();
 
-                                                            const response3 = await fetch("http://localhost:8000/api/adminPullDecline/");
-                                                            const data3 = await response3.json();
-                                                            setDeclinedUser(data3);
-                                                            fetchDeclinedData();
-                                                        }}
-                                                    >
-                                                        <option name='empty' value="empty">Choose an option</option>
-                                                        <option name='approve' value="approve">Accept</option>
-                                                        <option name='decline' value="decline">Decline</option>
-                                                    </select>
+                                                                const response3 = await fetch("http://localhost:8000/api/adminPullDecline/");
+                                                                const data3 = await response3.json();
+                                                                setDeclinedUser(data3);
+                                                                fetchDeclinedData();
+                                                            }}
+                                                        >
+
+                                                            <option name='empty' value="empty">Choose an option</option>
+                                                            <option name='approve' value="approve">Accept</option>
+                                                            <option name='decline' value="decline">Decline</option>
+                                                        </select>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </td></tr>
+                                            </td>
+                                        </tr>
+                                    ) : null
                                 ))}
 
                             </tbody>
@@ -1118,48 +1139,55 @@ function Admin() {
                             <tbody>
 
                                 {approvedUser && approvedUser.length > 0 && approvedUser.map((userObj, index) => (
+                                    userObj.Organization === localStorage.getItem('organization') ? (
+                                        <tr>
 
-                                    <tr>
+                                            <td>{userObj.FirstName}  {userObj.LastName} </td>
+                                            <td>{userObj.Email}</td>
+                                            <td id='roles'>{userObj.Roles}</td>
+                                            <td><Button className='btn btn-outline-success' variant='btn-outline-sucess'
 
-                                        <td>{userObj.FirstName}  {userObj.LastName} </td>
-                                        <td>{userObj.Email}</td>
-                                        <td id='roles'>{userObj.Roles}</td>
-                                        <td><Button className='btn btn-outline-success' variant='btn-outline-sucess'
+                                                onClick={async (e) => {
 
-                                            onClick={async (e) => {
+                                                    const currentScrollPos = window.scrollY;
 
-                                                axios.put(
-                                                    `http://127.0.0.1:8000/api/adminUpdate/${userObj.id}`,
+                                                    window.location.reload();
+
+                                                    window.scrollTo(0, currentScrollPos);
+
+                                                    axios.put(
+                                                        `http://127.0.0.1:8000/api/adminUpdate/${userObj.id}`,
 
 
-                                                    { "Approve": null },
-                                                    {
-                                                        headers: {
-                                                            "Content-type": "application/json",
+                                                        { "Approve": null },
+                                                        {
+                                                            headers: {
+                                                                "Content-type": "application/json",
+                                                            }
                                                         }
-                                                    }
-                                                )
+                                                    )
 
-                                                const response = await fetch("http://localhost:8000/api/adminPull/");
-                                                const data = await response.json();
-                                                setUser(data);
-                                                fetchData();
+                                                    const response = await fetch("http://localhost:8000/api/adminPull/");
+                                                    const data = await response.json();
+                                                    setUser(data);
+                                                    fetchData();
 
-                                                const response2 = await fetch("http://localhost:8000/api/adminPullApprove/");
-                                                const data2 = await response2.json();
-                                                setApprovedUser(data2);
-                                                fetchApprovedData();
+                                                    const response2 = await fetch("http://localhost:8000/api/adminPullApprove/");
+                                                    const data2 = await response2.json();
+                                                    setApprovedUser(data2);
+                                                    fetchApprovedData();
 
-                                                const response3 = await fetch("http://localhost:8000/api/adminPullDecline/");
-                                                const data3 = await response3.json();
-                                                setDeclinedUser(data3);
-                                                fetchDeclinedData();
-                                            }}
-
+                                                    const response3 = await fetch("http://localhost:8000/api/adminPullDecline/");
+                                                    const data3 = await response3.json();
+                                                    setDeclinedUser(data3);
+                                                    fetchDeclinedData();
+                                                }}
 
 
-                                        > Revert </Button></td>
-                                    </tr>
+
+                                            > Revert </Button></td>
+                                        </tr>
+                                    ) : null
                                 ))}
 
                             </tbody>
@@ -1182,46 +1210,54 @@ function Admin() {
                             <tbody>
 
                                 {declinedUser && declinedUser.length > 0 && declinedUser.map((userObj, index) => (
+                                    userObj.Organization === localStorage.getItem('organization') ? (
+                                        <tr>
 
-                                    <tr>
+                                            <td>{userObj.FirstName}  {userObj.LastName} </td>
+                                            <td>{userObj.Email}</td>
+                                            <td id='roles'>{userObj.Roles}</td>
+                                            <td><Button className='btn btn-outline-success' variant='btn-outline-sucess'
 
-                                        <td>{userObj.FirstName}  {userObj.LastName} </td>
-                                        <td>{userObj.Email}</td>
-                                        <td id='roles'>{userObj.Roles}</td>
-                                        <td><Button className='btn btn-outline-success' variant='btn-outline-sucess'
+                                                onClick={async (e) => {
 
-                                            onClick={async (e) => {
+                                                    const currentScrollPos = window.scrollY;
 
-                                                axios.put(
-                                                    `http://127.0.0.1:8000/api/adminUpdate/${userObj.id}`,
+                                                    window.location.reload();
+
+                                                    window.scrollTo(0, currentScrollPos);
 
 
-                                                    { "Approve": null },
-                                                    {
-                                                        headers: {
-                                                            "Content-type": "application/json",
+                                                    axios.put(
+                                                        `http://127.0.0.1:8000/api/adminUpdate/${userObj.id}`,
+
+
+                                                        { "Approve": null },
+                                                        {
+                                                            headers: {
+                                                                "Content-type": "application/json",
+                                                            }
                                                         }
-                                                    }
-                                                )
+                                                    )
 
-                                                const response = await fetch("http://localhost:8000/api/adminPull/");
-                                                const data = await response.json();
-                                                setUser(data);
-                                                fetchData();
+                                                    const response = await fetch("http://localhost:8000/api/adminPull/");
+                                                    const data = await response.json();
+                                                    setUser(data);
+                                                    fetchData();
 
-                                                const response2 = await fetch("http://localhost:8000/api/adminPullApprove/");
-                                                const data2 = await response2.json();
-                                                setApprovedUser(data2);
-                                                fetchApprovedData();
+                                                    const response2 = await fetch("http://localhost:8000/api/adminPullApprove/");
+                                                    const data2 = await response2.json();
+                                                    setApprovedUser(data2);
+                                                    fetchApprovedData();
 
-                                                const response3 = await fetch("http://localhost:8000/api/adminPullDecline/");
-                                                const data3 = await response3.json();
-                                                setDeclinedUser(data3);
-                                                fetchDeclinedData();
-                                            }}
+                                                    const response3 = await fetch("http://localhost:8000/api/adminPullDecline/");
+                                                    const data3 = await response3.json();
+                                                    setDeclinedUser(data3);
+                                                    fetchDeclinedData();
+                                                }}
 
-                                        > Revert </Button></td>
-                                    </tr>
+                                            > Revert </Button></td>
+                                        </tr>
+                                    ) : null
                                 ))}
 
                             </tbody>

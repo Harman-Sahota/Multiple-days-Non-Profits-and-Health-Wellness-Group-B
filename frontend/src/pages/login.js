@@ -7,7 +7,7 @@ import { Navigate } from "react-router-dom";
 function Login() {
   const [loginData, setLoginData] = useState([]);
   return (
-  
+
     <div className={loginCSS.body}>
       <div className={`form-container ${loginCSS.form_container}`}>
         <div className={`mx-auto bg-white ${loginCSS.form}`} id="login"   >
@@ -47,46 +47,46 @@ function Login() {
               axios.post(
                 "http://127.0.0.1:8000/api/login/",
                 {
-                    Email: loginData.Email,
-                    Password: loginData.Password
+                  Email: loginData.Email,
+                  Password: loginData.Password
                 },
                 {
-                    headers: {
-                        "Content-type": "application/json",
-                    }
+                  headers: {
+                    "Content-type": "application/json",
+                  }
                 }
-            )
+              )
                 .then(response => {
-                    if (response.status == 200) {
-                        console.log(response.data);
-                        const date = new Date().setHours(new Date().getHours() + 1 );
+                  if (response.status == 200) {
+                    console.log(response.data);
+                    const date = new Date().setHours(new Date().getHours() + 1);
 
-                        localStorage.setItem('firstname', response.data['data']['firstname']);
-                        localStorage.setItem('lastname', response.data['data']['lastname']);
-                        localStorage.setItem('email', response.data['data']['email']);
-                        localStorage.setItem( 'roles', response.data['data']['roles']);
-                        localStorage.setItem( 'organization', response.data['data']['organization']);
-                        localStorage.setItem( 'consent', response.data['data']['consent']);
-                        localStorage.setItem( 'approve', response.data['data']['approve']);
-                        localStorage.setItem( 'id', response.data['data']['id']);
-                       
-                        localStorage.setItem('token',response.data['token'])
-                        localStorage.setItem('expiry',date)
-                          window.location.replace("http://localhost:3000/tracker/");
-                    }
+                    localStorage.setItem('firstname', response.data['data']['firstname']);
+                    localStorage.setItem('lastname', response.data['data']['lastname']);
+                    localStorage.setItem('email', response.data['data']['email']);
+                    localStorage.setItem('roles', response.data['data']['roles']);
+                    localStorage.setItem('organization', response.data['data']['organization']);
+                    localStorage.setItem('consent', response.data['data']['consent']);
+                    localStorage.setItem('approve', response.data['data']['approve']);
+                    localStorage.setItem('id', response.data['data']['id']);
+
+                    localStorage.setItem('token', response.data['token'])
+                    localStorage.setItem('expiry', date)
+                    window.location.replace("http://localhost:3000/tracker/");
+                  }
                 })
-                .catch(err => 
-
-                  {if(err.status="404" && document.getElementById('exampleInputEmail1').value != "" && document.getElementById('exampleInputPassword1').value != ""){
+                .catch(err => {
+                  if (err.status = "404" && document.getElementById('exampleInputEmail1').value != "" && document.getElementById('exampleInputPassword1').value != "") {
                     window.alert("invalid username or password");
                     document.getElementById('exampleInputEmail1').classList.add('error');
                     document.getElementById('exampleInputPassword1').classList.add('error');
-                  }}
-                  
-                  
-                  );
-              
-              if (document.getElementById('exampleInputEmail1').value === "" || document.getElementById('exampleInputPassword1').value === "" ) {
+                  }
+                }
+
+
+                );
+
+              if (document.getElementById('exampleInputEmail1').value === "" || document.getElementById('exampleInputPassword1').value === "") {
 
                 window.alert('fields cannot be blank');
                 document.getElementById('exampleInputEmail1').classList.add('error');

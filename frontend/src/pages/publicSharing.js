@@ -49,7 +49,7 @@ function PublicSharing() {
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
 
-
+  localStorage.clear();
   return (
     <>
 
@@ -144,130 +144,133 @@ function PublicSharing() {
           </div>
 
           <div id="disc">
-                {getData &&
-                  getData.length > 0 &&
-                  getData
-                    .map((userObj) => (
-                      <div class="card">
-                        <h5 class="card-header m-0">
-                          <span>
-                            {userObj.product} - {userObj.Quantity}{" "}
-                            {userObj.Units}
-                          </span>
+            {getData &&
+              getData.length > 0 &&
+              getData
+                .map((userObj) => (
+                  userObj.public === 'yes' ? (
+                    <div class="card">
+                      <h5 class="card-header m-0">
+                        <span>
+                          {userObj.product} - {userObj.Quantity}{" "}
+                          {userObj.Units}
+                        </span>
 
-                          {(() => {
-                            if (
-                              userObj.Email == localStorage.getItem("email") &&
-                              userObj.Type == "Sharing"
-                            ) {
-                              return (
-                                <select
-                                  id="status"
-                                  onChange={(event) => {
-                                    if (event.target.value == "closed") {
-                                      var a = prompt(
-                                        "Enter the email address of the person you shared your products with:"
+                        {(() => {
+                          if (
+                            userObj.Email == localStorage.getItem("email") &&
+                            userObj.Type == "Sharing"
+                          ) {
+                            return (
+                              <select
+                                id="status"
+                                onChange={(event) => {
+                                  if (event.target.value == "closed") {
+                                    var a = prompt(
+                                      "Enter the email address of the person you shared your products with:"
+                                    );
+                                    if (a === "") {
+                                      alert(
+                                        "The email field cannot be empty, please try again."
                                       );
-                                      if (a === "") {
-                                        alert(
-                                          "The email field cannot be empty, please try again."
-                                        );
-                                        document.getElementById(
-                                          "status"
-                                        ).value = "open";
-                                      } else {
-                                        axios
-                                          .put(
-                                            `http://127.0.0.1:8000/api/networkUpdate/${userObj.id}`,
-
-                                            {
-                                              shared_with: a,
-                                              product: userObj.product,
-                                              Quantity: userObj.Quantity,
-                                              Units: userObj.Units,
-                                            },
-                                            {
-                                              headers: {
-                                                "Content-type":
-                                                  "application/json",
-                                              },
-                                            }
-                                          )
-                                          .then((response) => {
-                                            if (response.status == 201) {
-                                              window.alert(
-                                                "The post status has successfully been changed to CLOSED."
-                                              );
-                                            }
-
-                                          
-                                            fetchData();
-                                           
-                                            fetchDataReceiving();
-                                            fetchDataSharing();
-                                          })
-                                          .catch((err) => console.warn(err));
-                                      }
-                                    }
-                                  }}
-                                >
-                                  {(() => {
-                                    if (userObj.state == "open") {
-                                      // document.getElementById('status').style.borderColor = 'green';
-                                      return (
-                                        <>
-                                          <option selected> open </option>
-                                          <option> closed </option>
-                                        </>
-                                      );
+                                      document.getElementById(
+                                        "status"
+                                      ).value = "open";
                                     } else {
-                                      // document.getElementById('status').style.borderColor = 'red';
-                                      return (
-                                        <>
-                                          <option> open </option>
-                                          <option selected> closed </option>
-                                        </>
-                                      );
-                                    }
-                                  })()}
-                                </select>
-                              );
-                            } else {
-                            }
-                          })()}
-                        </h5>
-                        <div class="card-body">
-                          <h6 class="card-text">{userObj.Description}</h6>
-                          {/* <a href='"+ url_mask + "' id='postbutton' class='btn btn-outline-success'>Comment</a>*/}
-                          <p class="text-success"> {userObj.Type} </p>
+                                      axios
+                                        .put(
+                                          `http://127.0.0.1:8000/api/networkUpdate/${userObj.id}`,
 
-                          <div className="contact_me">
-                            <small>
-                              <strong>Contact email: </strong>
-                              {userObj.Email} <br />
-                              Posted on:{" "}
-                              {new Date(userObj.date_time).toLocaleString(
-                                "default",
-                                {
-                                  month: "long",
-                                  day: "numeric",
-                                  year: "numeric",
-                                }
-                              )}{" "}
-                              at{" "}
-                              {new Date(userObj.date_time).toLocaleTimeString(
-                                "default",
-                                { hour: "2-digit", minute: "2-digit" }
-                              )}
-                            </small>
-                          </div>
+                                          {
+                                            shared_with: a,
+                                            product: userObj.product,
+                                            Quantity: userObj.Quantity,
+                                            Units: userObj.Units,
+                                          },
+                                          {
+                                            headers: {
+                                              "Content-type":
+                                                "application/json",
+                                            },
+                                          }
+                                        )
+                                        .then((response) => {
+                                          if (response.status == 201) {
+                                            window.alert(
+                                              "The post status has successfully been changed to CLOSED."
+                                            );
+                                          }
+
+
+                                          fetchData();
+
+                                          fetchDataReceiving();
+                                          fetchDataSharing();
+                                        })
+                                        .catch((err) => console.warn(err));
+                                    }
+                                  }
+                                }}
+                              >
+                                {(() => {
+                                  if (userObj.state == "open") {
+                                    // document.getElementById('status').style.borderColor = 'green';
+                                    return (
+                                      <>
+                                        <option selected> open </option>
+                                        <option> closed </option>
+                                      </>
+                                    );
+                                  } else {
+                                    // document.getElementById('status').style.borderColor = 'red';
+                                    return (
+                                      <>
+                                        <option> open </option>
+                                        <option selected> closed </option>
+                                      </>
+                                    );
+                                  }
+                                })()}
+                              </select>
+                            );
+                          } else {
+                          }
+                        })()}
+                      </h5>
+                      <div class="card-body">
+                        <h6 class="card-text">{userObj.Description}</h6>
+                        {/* <a href='"+ url_mask + "' id='postbutton' class='btn btn-outline-success'>Comment</a>*/}
+                        <p class="text-success"> {userObj.Type} </p>
+
+                        <div className="contact_me">
+                          <small>
+                            <strong>Contact email: </strong>
+                            {userObj.Email} <br />
+                            Posted on:{" "}
+                            {new Date(userObj.date_time).toLocaleString(
+                              "default",
+                              {
+                                month: "long",
+                                day: "numeric",
+                                year: "numeric",
+                              }
+                            )}{" "}
+                            at{" "}
+                            {new Date(userObj.date_time).toLocaleTimeString(
+                              "default",
+                              { hour: "2-digit", minute: "2-digit" }
+                            )}
+                          </small>
                         </div>
                       </div>
-                    ))
-                    .reverse()}
-              </div>
-            </div>
-         
+                    </div>
+                  ) : null
+                ))
+                .reverse()}
+          </div>
+        </div>
+
+
         <Modal show={showModal} onHide={handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>Create Post</Modal.Title>
@@ -343,6 +346,7 @@ function PublicSharing() {
                       Units: posts.Units,
                       Description: posts.Description,
                       Email: posts.Email,
+                      public: "yes"
                     },
                     {
                       headers: {

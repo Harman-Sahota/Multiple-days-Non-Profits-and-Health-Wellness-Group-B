@@ -40,7 +40,7 @@ class adminInsertSerialize(serializers.ModelSerializer):
 class adminPullSerialize(serializers.ModelSerializer):
     class Meta:
         model = users
-        fields = '__all__'
+        exclude = ('Password',)
 
 
 class adminUpdateSerialize(serializers.ModelSerializer):

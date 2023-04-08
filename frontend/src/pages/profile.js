@@ -7,6 +7,7 @@ import axios from 'axios';
 import fourcss from './fourcss.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import { local } from 'd3-selection';
 
 function Profile() {
     const [all, setAll] = useState({
@@ -53,7 +54,9 @@ function Profile() {
     }
 
     var role_str = [];
-    var prevroles = localStorage.getItem('roles').toString();
+    if (localStorage.getItem('roles') != "") {
+        var prevroles = localStorage.getItem('roles').toString();
+    }
     var saved_roles = "";
     if (new Date().getTime() > localStorage.getItem('expiry') && localStorage.roles) {
         const response = window.confirm("Your session has expired. Do you still want to be logged in?");
@@ -83,7 +86,7 @@ function Profile() {
                                     <div className='col-6'>
                                         <div className='row'>
                                             <div className='col-auto'>
-                                                <input type="text" id="fname" name="fname" placeholder={localStorage.getItem('firstname')} size="20" disabled
+                                                <input type="text" id="fname" name="fname" value={localStorage.getItem('firstname')} size="20" disabled
                                                     onChange={(e) => {
                                                         localStorage.removeItem('firstname');
                                                         localStorage.setItem('firstname', e.target.value);
@@ -92,7 +95,7 @@ function Profile() {
                                                     }} />
                                             </div>
                                             <div className='col-auto'>
-                                                <input type="text" id="lname" name="lname" placeholder={localStorage.getItem('lastname')} size="20" disabled
+                                                <input type="text" id="lname" name="lname" value={localStorage.getItem('lastname')} size="20" disabled
                                                     onChange={(e) => {
                                                         localStorage.removeItem('lastname');
                                                         localStorage.setItem('lastname', e.target.value);
@@ -107,7 +110,7 @@ function Profile() {
                                             document.getElementById('fname').disabled = false;
                                             document.getElementById('lname').disabled = false;
                                         }} >
-                                            Edit <FontAwesomeIcon icon={faPenToSquare} style={{ color: "#DC143C	" }} />
+                                            Edit
                                         </Button>
                                     </div>
                                 </div>
@@ -120,7 +123,7 @@ function Profile() {
                                     </div>
 
                                     <div className='col-6'>
-                                        <input type="email" id="email" name="email" placeholder={localStorage.getItem('email')} size="50" disabled />
+                                        <input type="email" id="email" name="email" value={localStorage.getItem('email')} size="50" disabled />
                                     </div>
                                 </div>
 
@@ -132,7 +135,7 @@ function Profile() {
                                     </div>
 
                                     <div className='col-6'>
-                                        <input type="text" id="org" name="org" placeholder={localStorage.getItem('organization')} size="50" disabled onChange={(e) => {
+                                        <input type="text" id="org" name="org" value={localStorage.getItem('organization')} size="50" disabled onChange={(e) => {
                                             localStorage.removeItem('organization');
                                             localStorage.setItem('organization', e.target.value);
                                             setAll({ ...all, Organization: localStorage.getItem('organization') })
@@ -144,7 +147,7 @@ function Profile() {
                                         <Button className={`${profileCSS.edit_btn} btn btn-outline-danger`} variant="outline-danger" onClick={(e) => {
                                             document.getElementById('org').disabled = false;
                                         }}>
-                                            Edit <FontAwesomeIcon icon={faPenToSquare} style={{ color: "#DC143C	" }} />
+                                            Edit
                                         </Button>
                                     </div>
                                 </div>
@@ -207,7 +210,7 @@ function Profile() {
                                             document.getElementById('admin').checked = false;
                                             document.getElementById('expert').checked = false;
                                         }}>
-                                            Edit <FontAwesomeIcon icon={faPenToSquare} style={{ color: "#DC143C	" }} />
+                                            Edit
                                         </Button>
                                     </div>
                                 </div>
@@ -240,7 +243,7 @@ function Profile() {
                                             document.getElementById('consented').disabled = false;
                                             document.getElementById('unconsented').disabled = false;
                                         }}>
-                                            Edit <FontAwesomeIcon icon={faPenToSquare} style={{ color: "#DC143C	" }} />
+                                            Edit
                                         </Button>
                                     </div>
                                 </div>
@@ -249,20 +252,15 @@ function Profile() {
                             <div className='row'>
                                 <Button className={`${profileCSS.save_btn} btn btn-outline-success`} id="saveBtn" variant="outline-sucess" onClick={() => {
 
-
-                                    if (role_str != "" || role_str != null) {
+                                    let saved_roles;
+                                    if (role_str != "" && role_str != null) {
                                         localStorage.setItem("roles", role_str.toString());
                                         saved_roles = localStorage.getItem('roles');
                                         console.log("not null set ", saved_roles);
                                     } else {
-                                        localStorage.setItem("roles", prevroles);
-                                        saved_roles = localStorage.getItem('roles');
+                                        saved_roles = prevroles;
                                         console.log("null set ", saved_roles);
                                     }
-
-                                    //setAll({ ...all, Roles: localStorage.getItem('roles') });
-                                    console.log(all.Roles);
-
 
                                     axios.put(
                                         `http://127.0.0.1:8000/api/profileUpdate/${userId}`,
@@ -279,34 +277,48 @@ function Profile() {
                                             }
                                         }
                                     )
-                                        .then(response => {
-                                            if (response.status == 201) {
-                                                if (response.data["deleted"] == "deleted") {
-                                                    localStorage.clear();
-
-                                                    localStorage.removeItem('expiry');
-                                                    const date = new Date().setHours(new Date().getHours());
-                                                    localStorage.setItem('expiry', date);
-
-                                                    window.location.replace("http://localhost:3000");
-                                                }
-
-                                                else if (role_str != "" || role_str != null) {
-                                                    localStorage.setItem("roles", role_str.toString());
-                                                    console.log("was set to new roles: ", role_str)
-
-                                                } else {
-                                                    localStorage.setItem("roles", prevroles);
-                                                    console.log("was set to prev roles: ", prevroles);
-                                                }
-                                                window.location.replace("http://localhost:3000/profile/");
-
+                                        .then(updateResponse => {
+                                            if (updateResponse.status == 201) {
+                                                axios.post(
+                                                    `http://127.0.0.1:8000/api/profilePull`,
+                                                    {
+                                                        id: userId
+                                                    },
+                                                    {
+                                                        headers: {
+                                                            "Content-type": "application/json",
+                                                        }
+                                                    }
+                                                )
+                                                    .then(pullResponse => {
+                                                        if (pullResponse.status == 201) {
+                                                            // Handle the response data from the pull request here, if necessary
+                                                            localStorage.removeItem('roles');
+                                                            localStorage.setItem('roles', pullResponse.data['Roles']);
+                                                            console.log("Saved roles to localStorage: ", localStorage.getItem('roles'));
+                                                        }
+                                                        else {
+                                                            console.log(`Error pulling profile data: ${pullResponse.statusText}`);
+                                                        }
+                                                        window.location.replace("http://localhost:3000/profile/");
+                                                    })
+                                                    .catch(pullError => {
+                                                        console.warn(`Error pulling profile data: ${pullError}`);
+                                                    });
+                                            }
+                                            else {
+                                                console.log(`Error updating profile data: ${updateResponse.statusText}`);
                                             }
                                         })
-                                        .catch(err => console.warn(err));
+                                        .catch(updateError => {
+                                            console.warn(`Error updating profile data: ${updateError}`);
+                                        });
+
                                 }}>
                                     Save
                                 </Button>
+
+
 
                                 <Modal show={showModal} onHide={handleClose}>
                                     <Modal.Header closeButton>
@@ -322,7 +334,7 @@ function Profile() {
                             </div>
                         </form>
                     </div>
-                </div>
+                </div >
             </section >
         );
     }

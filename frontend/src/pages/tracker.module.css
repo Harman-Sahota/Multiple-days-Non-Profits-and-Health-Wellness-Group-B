@@ -1,4 +1,6 @@
-h1,h2,h3 {
+h1,
+h2,
+h3 {
   margin: 0;
 }
 
@@ -44,10 +46,11 @@ thead,
 td {
   text-align: center;
   vertical-align: middle;
-  
+
 }
 
-th,td {
+th,
+td {
   max-width: 10em;
   white-space: pre-wrap;
 }
@@ -75,6 +78,9 @@ input[type="number"] {
   padding: 1rem;
   display: flex;
   flex-direction: row;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
   /*justify-content: space-evenly;*/
   width: 100%;
   /*width: 85rem; Commented out bcs this forces smaller screens to have horizontal scroll*/
@@ -83,7 +89,7 @@ input[type="number"] {
 .pie-chart-inner-div {
   display: flex;
   flex-direction: row;
-  justify-content: center; 
+  justify-content: center;
 }
 
 /*.database-table {
@@ -125,3 +131,6 @@ td {
   padding: 0;
 }
 
+.export {
+  width: 10%;
+}

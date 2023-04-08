@@ -1,4 +1,6 @@
 
+from django.db.models import Count, Q
+from django.db.models import Sum, Q
 from django.core.signing import TimestampSigner
 import json
 from api.models import users
@@ -35,24 +37,26 @@ from django.core import signing
 from django.http import HttpResponse
 from django.contrib.auth.hashers import make_password, check_password
 from django.contrib.auth import login, authenticate
+from django.db.models import Q
+from django.core.exceptions import ObjectDoesNotExist
 
 
 @api_view(["POST"])
 def registerInsert(request):
     if request.method == "POST":
         request.data['Password'] = make_password(request.data['Password'])
-        saveserialize = userSerialize(data=request.data)
+        saveserialize = userSerialize(data=request.data, allow_null=True)
         email = request.data['Email']
 
-        duplicated = users.objects.filter(Email=email).count()
-        if duplicated != 0:
+        duplicated = users.objects.filter(Email=email).exists()
+        if duplicated:
             return Response(status=status.HTTP_409_CONFLICT)
         if saveserialize.is_valid() and duplicated == 0:
             saveserialize.save()
             token = jwt.encode(saveserialize.data, 'secret',
                                algorithm='HS256').decode('utf-8')
             return Response({"data": saveserialize.data, "token": token}, status=status.HTTP_201_CREATED)
-        return Response(saveserialize.data, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        return Response(saveserialize.errors, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 @api_view(["POST"])
@@ -60,10 +64,14 @@ def adminInsert(request):
     if request.method == 'POST':
         saveserialize = adminInsertSerialize(data=request.data, many=True)
         if saveserialize.is_valid():
-            permissions.objects.all().delete()
+            organization = saveserialize.validated_data[0]['Organization']
+            existing_permissions = permissions.objects.filter(
+                Organization=organization)
+            if existing_permissions:
+                existing_permissions.delete()
             saveserialize.save()
             return Response(saveserialize.data, status=status.HTTP_201_CREATED)
-        return Response(saveserialize.data, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        return Response(saveserialize.errors, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 @api_view(["GET"])
@@ -209,7 +217,7 @@ def networkInsert(request):
         if saveserialize.is_valid():
             saveserialize.save()
             return Response(saveserialize.data, status=status.HTTP_201_CREATED)
-        return Response(saveserialize.data, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        return Response(saveserialize.errors, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 @api_view(["GET"])
@@ -334,7 +342,7 @@ def verifytoken(request):
 def changePassword(request):
     if request.method == 'POST':
         users.objects.filter(Email=request.data['Email']).update(
-            Password=request.data['Password'])
+            Password=make_password(request.data['Password']))
         return Response(status=status.HTTP_200_OK)
     return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
@@ -358,11 +366,25 @@ def trackerInsert(request):
         return Response(saveserialize.data, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-@ api_view(['GET'])
+@api_view(['GET'])
 def trackerPull(request):
     if request.method == 'GET':
-        results = tracker.objects.all()
-        serialize = trackerPullSerialize(results, many=True)
+        email = request.GET.get('Email')
+        organization = request.GET.get('Organization')
+
+        # Retrieve user with given email
+        user = users.objects.filter(Email=email).first()
+
+        if user is not None and user.Approve == 'approve':
+            # If user has an approved account, get data that has their email or organization
+            queryset = tracker.objects.filter(
+                Q(Email=email) | Q(Organization=organization))
+        else:
+            # If user does not have an approved account, get data that has only their email
+            queryset = tracker.objects.filter(Email=email)
+
+        # Serialize and return data
+        serialize = trackerPullSerialize(queryset, many=True)
         return Response(serialize.data)
 
 
@@ -405,30 +427,180 @@ def trackerUpdate(request, pk):
         return Response(saveserialize.data, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-@ api_view(['GET'])
+@api_view(['GET'])
 def trackerPercentageSum(request):
     if request.method == 'GET':
-        sum = tracker.objects.aggregate(Sum('percentClients'), Sum('percentAFeed'), Sum(
+        email = request.GET.get('Email')
+        organization = request.GET.get('Organization')
+        role = request.GET.get('role')
+
+        try:
+            conditional = permissions.objects.get(
+                role=role, Organization=organization)
+            metrics = conditional.metrics.split(",")
+        except ObjectDoesNotExist:
+            metrics = []
+
+        queryset = tracker.objects.all()
+        # Retrieve user with given email
+        user = users.objects.filter(Email=email).first()
+
+        if user is not None and user.Approve == 'approve':
+            # If user has an approved account, get data that has their email or organization
+            queryset = tracker.objects.filter(
+                Q(Email=email) | Q(Organization=organization))
+        else:
+            # If user does not have an approved account, get data that has only their email
+            queryset = tracker.objects.filter(Email=email)
+
+        # Filter queryset to include only rows where Category is in the list of metrics
+        if metrics:
+            queryset = queryset.filter(Category__in=metrics)
+
+        sum = queryset.aggregate(Sum('percentClients'), Sum('percentAFeed'), Sum(
             'percentCompost'), Sum('percentPartNet'), Sum('percentLandfill'))
+
         return Response(sum, status=status.HTTP_200_OK)
+    return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-@ api_view(['GET'])
+@api_view(['GET'])
 def trackerCategorySum(request):
     if request.method == 'GET':
-        sum = tracker.objects.filter(Category='Fresh Produce').aggregate(Produce=Sum('Quantity')), tracker.objects.filter(Category='Meat').aggregate(Meat=Sum('Quantity')), tracker.objects.filter(Category='Canned Food').aggregate(Canned_Food=Sum(
-            'Quantity')), tracker.objects.filter(Category='Bread').aggregate(Bread=Sum('Quantity')), tracker.objects.filter(Category='Dairy').aggregate(Dairy=Sum('Quantity')), tracker.objects.filter(Category='Reclaimed').aggregate(Reclaimed=Sum('Quantity'))
-        return Response(sum, status=status.HTTP_200_OK)
+        email = request.GET.get('Email')
+        organization = request.GET.get('Organization')
+        role = request.GET.get('role')
+
+        try:
+            conditional = permissions.objects.get(
+                role=role, Organization=organization)
+            categories = conditional.metrics.split(",")
+        except ObjectDoesNotExist:
+            categories = ["Fresh Produce", "Meat",
+                          "Canned Food", "Bread", "Dairy", "Reclaimed"]
+
+        category_sum = {}
+        for category in categories:
+            category_sum[category] = 0
+
+        queryset = tracker.objects.all()
+        # Retrieve user with given email
+        user = users.objects.filter(Email=email).first()
+
+        if user is not None and user.Approve == 'approve':
+            # If user has an approved account, get data that has their email or organization
+            queryset = tracker.objects.filter(
+                Q(Email=email) | Q(Organization=organization))
+        else:
+            # If user does not have an approved account, get data that has only their email
+            queryset = tracker.objects.filter(Email=email)
+
+        for category in categories:
+            category_queryset = queryset.filter(Category=category)
+            if category_queryset.exists():
+                category_sum[category] = category_queryset.aggregate(
+                    Sum('Quantity'))['Quantity__sum']
+
+        return Response(category_sum, status=status.HTTP_200_OK)
+    return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@api_view(["POST"])
+def NetworkGraphing(request):
+    if request.method == 'POST':
+        if request.data['category'] == 'Fresh Produce':
+            results = tracker.objects.filter(Email=request.data['user_email']).aggregate(
+                data=Sum('Quantity', filter=Q(
+                    Category__iexact='Fresh Produce')))
+            results2 = tracker.objects.filter(Email=request.data['compare_email']).aggregate(
+                data=Sum('Quantity', filter=Q(
+                    Category__iexact='Fresh Produce')))
+        if request.data['category'] == 'Meat':
+            results = tracker.objects.filter(Email=request.data['user_email']).aggregate(
+                data=Sum('Quantity', filter=Q(
+                    Category__iexact='Meat')))
+            results2 = tracker.objects.filter(Email=request.data['compare_email']).aggregate(
+                data=Sum('Quantity', filter=Q(
+                    Category__iexact='Meat')))
+        if request.data['category'] == 'Canned Food':
+            results = tracker.objects.filter(Email=request.data['user_email']).aggregate(
+                data=Sum('Quantity', filter=Q(
+                    Category__iexact='Canned Food')))
+            results2 = tracker.objects.filter(Email=request.data['compare_email']).aggregate(
+                data=Sum('Quantity', filter=Q(
+                    Category__iexact='Canned Food')))
+        if request.data['category'] == 'Bread':
+            results = tracker.objects.filter(Email=request.data['user_email']).aggregate(
+                data=Sum('Quantity', filter=Q(
+                    Category__iexact='Bread')))
+            results2 = tracker.objects.filter(Email=request.data['compare_email']).aggregate(
+                data=Sum('Quantity', filter=Q(
+                    Category__iexact='Bread')))
+        if request.data['category'] == 'Dairy':
+            results = tracker.objects.filter(Email=request.data['user_email']).aggregate(
+                data=Sum('Quantity', filter=Q(
+                    Category__iexact='Dairy')))
+            results2 = tracker.objects.filter(Email=request.data['compare_email']).aggregate(
+                data=Sum('Quantity', filter=Q(
+                    Category__iexact='Dairy')))
+        if request.data['category'] == 'Reclaimed':
+            results = tracker.objects.filter(Email=request.data['user_email']).aggregate(
+                data=Sum('Quantity', filter=Q(
+                    Category__iexact='Reclaimed')))
+            results2 = tracker.objects.filter(Email=request.data['compare_email']).aggregate(
+                data=Sum('Quantity', filter=Q(
+                    Category__iexact='Reclaimed')))
+
+        return Response({"user": results, "comparee": results2, "Category": request.data['category']}, status=status.HTTP_201_CREATED)
 
 
 @ api_view(["POST"])
-def NetworkGraphing(request):
+def NetworkOrgGraphing(request):
     if request.method == 'POST':
-        results = tracker.objects.filter(Email=request.data['user_email']).aggregate(Sum('percentClients'), Sum(
-            'percentAFeed'), Sum('percentCompost'), Sum('percentPartNet'), Sum('percentLandfill'))
-        results2 = tracker.objects.filter(Email=request.data['compare_email']).aggregate(Sum('percentClients'), Sum(
-            'percentAFeed'), Sum('percentCompost'), Sum('percentPartNet'), Sum('percentLandfill'))
-        return Response({"user": results, "comparee": results2})
+        if request.data['category'] == 'Fresh Produce':
+            results = tracker.objects.filter(Organization=request.data['user_org']).aggregate(
+                data=Sum('Quantity', filter=Q(
+                    Category__iexact='Fresh Produce')))
+            results2 = tracker.objects.filter(Organization=request.data['compare_org']).aggregate(
+                data=Sum('Quantity', filter=Q(
+                    Category__iexact='Fresh Produce')))
+        if request.data['category'] == 'Meat':
+            results = tracker.objects.filter(Organization=request.data['user_org']).aggregate(
+                data=Sum('Quantity', filter=Q(
+                    Category__iexact='Meat')))
+            results2 = tracker.objects.filter(Organization=request.data['compare_org']).aggregate(
+                data=Sum('Quantity', filter=Q(
+                    Category__iexact='Meat')))
+        if request.data['category'] == 'Canned Food':
+            results = tracker.objects.filter(Organization=request.data['user_org']).aggregate(
+                data=Sum('Quantity', filter=Q(
+                    Category__iexact='Canned Food')))
+            results2 = tracker.objects.filter(Organization=request.data['compare_org']).aggregate(
+                data=Sum('Quantity', filter=Q(
+                    Category__iexact='Canned Food')))
+        if request.data['category'] == 'Bread':
+            results = tracker.objects.filter(Organization=request.data['user_org']).aggregate(
+                data=Sum('Quantity', filter=Q(
+                    Category__iexact='Bread')))
+            results2 = tracker.objects.filter(Organization=request.data['compare_org']).aggregate(
+                data=Sum('Quantity', filter=Q(
+                    Category__iexact='Bread')))
+        if request.data['category'] == 'Dairy':
+            results = tracker.objects.filter(Organization=request.data['user_org']).aggregate(
+                data=Sum('Quantity', filter=Q(
+                    Category__iexact='Dairy')))
+            results2 = tracker.objects.filter(Organization=request.data['compare_org']).aggregate(
+                data=Sum('Quantity', filter=Q(
+                    Category__iexact='Dairy')))
+        if request.data['category'] == 'Reclaimed':
+            results = tracker.objects.filter(Organization=request.data['user_org']).aggregate(
+                data=Sum('Quantity', filter=Q(
+                    Category__iexact='Reclaimed')))
+            results2 = tracker.objects.filter(Organization=request.data['compare_org']).aggregate(
+                data=Sum('Quantity', filter=Q(
+                    Category__iexact='Reclaimed')))
+
+        return Response({"user": results, "comparee": results2, "Category": request.data['category']}, status=status.HTTP_201_CREATED)
 
 
 @ api_view(["GET"])
@@ -483,4 +655,50 @@ def Past_6Months(request):
             date_time__lt=timer).exclude(state='closed')
         serialize = networkPullSerialize(results, many=True)
         return Response(serialize.data, status=status.HTTP_200_OK)
+    return Response("error", status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@ api_view(['GET'])
+def PermissionsPull(request):
+    if request.method == 'GET':
+        role = request.GET.get('role')
+        organization = request.GET.get('Organization')
+        email = request.GET.get('Email')
+
+        queryset = permissions.objects.all()
+        userset = users.objects.get(Email=email)
+
+        if role:
+            queryset = queryset.filter(role=role)
+        if organization:
+            queryset = queryset.filter(Organization=organization)
+
+        # Serialize and return data
+        user = adminPullSerialize(userset)
+        serialize = adminInsertSerialize(queryset, many=True)
+
+        # Combine data
+        data = {
+            'user': user.data,
+            'permissions': serialize.data
+        }
+
+        return Response(data)
+
+
+@ api_view(["GET"])
+def distinctorg(request):
+    if request.method == 'GET':
+        results = users.objects.order_by('Organization').values_list(
+            'Organization', flat=True).distinct()
+        return Response(results, status=status.HTTP_200_OK)
+    return Response("error", status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@ api_view(["GET"])
+def distinctemail(request):
+    if request.method == 'GET':
+        results = users.objects.order_by('Email').values_list(
+            'Email', flat=True).distinct()
+        return Response(results, status=status.HTTP_200_OK)
     return Response("error", status=status.HTTP_500_INTERNAL_SERVER_ERROR)

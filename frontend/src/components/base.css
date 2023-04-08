@@ -7,16 +7,16 @@
 }
 
 
-html{
+html {
 
-    scroll-behavior: smooth;
-  
+  scroll-behavior: smooth;
+
 }
 
 body {
   color: rgb(0, 0, 0);
   font-family: "Poppins", sans-serif;
-  padding-bottom: 70px; 
+  padding-bottom: 70px;
   min-height: 100vh;
   margin: 0;
   display: flex;
@@ -60,26 +60,23 @@ header {
   color: rgb(0, 0, 0);
 }
 
-.nav ul li {
-  /* padding: 5px; */
-  /* margin-left: 10px; */
-}
 
-.nav ul li a:hover
- {
+.nav ul li a:hover {
   color: #a1c298;
   transition: 0.2s ease;
 }
 
-.nav #login{
+.nav #login {
   border-radius: 5px;
   padding: 5px 8px;
 }
-.register{
+
+.register {
   color: #415d34 !important;
-  border-color: #415d34 !important ;
+  border-color: #415d34 !important;
 }
-.register:hover{
+
+.register:hover {
   background-color: #415d34 !important;
   color: white !important;
 }
