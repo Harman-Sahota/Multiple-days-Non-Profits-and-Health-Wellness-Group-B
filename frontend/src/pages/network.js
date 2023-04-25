@@ -10,7 +10,7 @@ import fourcss from "./fourcss.css";
 import axios, { all } from "axios";
 import { local } from "d3-selection";
 import * as d3 from "d3";
-
+import saveSvgAsPng from 'save-svg-as-png';
 
 var filter = "Product";
 var time_filter = "http://localhost:8000/api/networkPull/";
@@ -123,19 +123,32 @@ const PieChart = ({ data }) => {
 
   }, [data]);
 
+  function exportChart() {
+    // Get the SVG element
+    const svg = svgRef.current;
+
+    // Set the filename and options for saving
+    const filename = 'piechart.png';
+    const options = {
+      backgroundColor: 'white', // Set a white background color
+    };
+
+    // Call the saveSvgAsPng library to export the SVG as PNG
+    saveSvgAsPng.saveSvgAsPng(svg, filename, options);
+  }
+
+
+
+
   return (
-    <svg ref={svgRef} style={{ width: '80%', height: '80%' }}>
-    </svg>
+
+    <svg ref={svgRef} onClick={exportChart} style={{ width: '80%', height: '80%' }}></svg>
+
+
   );
 };
-
-
-
-
-
 // searchBar function
 function SearchBar() {
-
   const data = {}
   const [getData, setData] = useState([]);
   const [getLegend, setLegend] = useState([]);
@@ -493,6 +506,7 @@ function SearchBar() {
               <div className="col graph_box chart chart-container" id="graph_box">
                 <h2 className="legend">{getLegend}</h2>
                 <PieChart data={getGraphData} id='piechart' />
+
               </div>
             </div>
           </div >
