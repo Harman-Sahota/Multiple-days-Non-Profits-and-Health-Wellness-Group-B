@@ -98,6 +98,21 @@ DATABASES = {
     }
 }
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'foodsaviour',
+        'USER': 'admin',
+        'PASSWORD': 'groupb@2022!',
+        'HOST': 'localhost',
+        'PORT': '3306',
+        'TEST': {
+            'NAME': 'foodsaviour_test'
+        }
+    }
+}
+
+
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 

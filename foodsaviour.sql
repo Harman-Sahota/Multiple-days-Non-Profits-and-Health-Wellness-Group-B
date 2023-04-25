@@ -53,6 +53,9 @@ CREATE TABLE `permissions` (
   `role` varchar(255) DEFAULT NULL,
   `metrics` varchar(255) DEFAULT NULL,
   `network` varchar(255) DEFAULT NULL,
-  `readwrite` varchar(255) DEFAULT NULL
+  `readwrite` varchar(255) DEFAULT NULL,
+  `Organization` varchar(255) DEFAULT NULL,
+  `id` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
 
